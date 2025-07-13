@@ -63,46 +63,46 @@ const ContactSection = () => {
     <section 
       id="contact" 
       ref={sectionRef}
-      className="py-20 bg-gradient-to-b from-black to-gray-900 relative overflow-hidden"
+      className="py-20 bg-gradient-to-b from-background to-muted/10 relative overflow-hidden"
     >
-      {/* Background decoration */}
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-50"></div>
+      {/* Subtle decoration */}
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border to-transparent"></div>
       
       <div className="container mx-auto px-6 max-w-7xl">
         {/* Section Header */}
-        <div className={`text-center mb-16 transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+        <div className={`text-center mb-16 transform transition-all duration-500 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
             Prenons{' '}
-            <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+            <span className="text-muted-foreground">
               contact
             </span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full mx-auto mb-6"></div>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <div className="w-24 h-0.5 bg-foreground rounded-full mx-auto mb-6"></div>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Transformons ensemble votre vision en réalité. Discutons de votre projet.
           </p>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-12">
           {/* Quick Contact Options */}
-          <div className={`space-y-6 transform transition-all duration-1000 delay-300 ${isVisible ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'}`}>
-            <h3 className="text-2xl font-bold text-white mb-6">Contact rapide</h3>
+          <div className={`space-y-6 transform transition-all duration-500 delay-200 ${isVisible ? 'translate-x-0 opacity-100' : '-translate-x-4 opacity-0'}`}>
+            <h3 className="text-2xl font-bold text-foreground mb-6">Contact rapide</h3>
             
             {/* Telegram */}
-            <Card className="group bg-gray-800/50 backdrop-blur-sm border-gray-700 hover:border-cyan-500 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/25">
+            <Card className="group bg-card border-border hover:border-foreground transition-all duration-200 hover:scale-102">
               <CardContent className="p-6">
                 <div className="flex items-center space-x-4">
-                  <div className="p-3 bg-cyan-500/20 rounded-full">
-                    <Send className="w-6 h-6 text-cyan-400" />
+                  <div className="p-3 bg-muted rounded-full">
+                    <Send className="w-5 h-5 text-foreground" />
                   </div>
                   <div className="flex-1">
-                    <h4 className="text-white font-semibold">Telegram</h4>
-                    <p className="text-gray-400 text-sm">Message instantané</p>
+                    <h4 className="text-foreground font-semibold">Telegram</h4>
+                    <p className="text-muted-foreground text-sm">Message instantané</p>
                   </div>
                   <Button 
                     variant="outline" 
                     size="sm"
-                    className="border-cyan-500 text-cyan-400 hover:bg-cyan-500 hover:text-white"
+                    className="border-border hover:bg-foreground hover:text-background"
                     onClick={() => window.open('https://t.me/investwithaissa', '_blank')}
                   >
                     Contacter
@@ -112,20 +112,20 @@ const ContactSection = () => {
             </Card>
 
             {/* Calendly */}
-            <Card className="group bg-gray-800/50 backdrop-blur-sm border-gray-700 hover:border-blue-500 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25">
+            <Card className="group bg-card border-border hover:border-foreground transition-all duration-200 hover:scale-102">
               <CardContent className="p-6">
                 <div className="flex items-center space-x-4">
-                  <div className="p-3 bg-blue-500/20 rounded-full">
-                    <Calendar className="w-6 h-6 text-blue-400" />
+                  <div className="p-3 bg-muted rounded-full">
+                    <Calendar className="w-5 h-5 text-foreground" />
                   </div>
                   <div className="flex-1">
-                    <h4 className="text-white font-semibold">Calendly</h4>
-                    <p className="text-gray-400 text-sm">Planifier un appel</p>
+                    <h4 className="text-foreground font-semibold">Calendly</h4>
+                    <p className="text-muted-foreground text-sm">Planifier un appel</p>
                   </div>
                   <Button 
                     variant="outline" 
                     size="sm"
-                    className="border-blue-500 text-blue-400 hover:bg-blue-500 hover:text-white"
+                    className="border-border hover:bg-foreground hover:text-background"
                     onClick={() => window.open('#', '_blank')}
                   >
                     Planifier
@@ -135,20 +135,20 @@ const ContactSection = () => {
             </Card>
 
             {/* Notion */}
-            <Card className="group bg-gray-800/50 backdrop-blur-sm border-gray-700 hover:border-purple-500 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25">
+            <Card className="group bg-card border-border hover:border-foreground transition-all duration-200 hover:scale-102">
               <CardContent className="p-6">
                 <div className="flex items-center space-x-4">
-                  <div className="p-3 bg-purple-500/20 rounded-full">
-                    <FileText className="w-6 h-6 text-purple-400" />
+                  <div className="p-3 bg-muted rounded-full">
+                    <FileText className="w-5 h-5 text-foreground" />
                   </div>
                   <div className="flex-1">
-                    <h4 className="text-white font-semibold">Notion</h4>
-                    <p className="text-gray-400 text-sm">Dossier public</p>
+                    <h4 className="text-foreground font-semibold">Notion</h4>
+                    <p className="text-muted-foreground text-sm">Dossier public</p>
                   </div>
                   <Button 
                     variant="outline" 
                     size="sm"
-                    className="border-purple-500 text-purple-400 hover:bg-purple-500 hover:text-white"
+                    className="border-border hover:bg-foreground hover:text-background"
                     onClick={() => window.open('#', '_blank')}
                   >
                     Consulter
@@ -159,11 +159,11 @@ const ContactSection = () => {
           </div>
 
           {/* Contact Form */}
-          <div className={`lg:col-span-2 transform transition-all duration-1000 delay-500 ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'}`}>
-            <Card className="bg-gray-800/50 backdrop-blur-sm border-gray-700">
+          <div className={`lg:col-span-2 transform transition-all duration-500 delay-300 ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-4 opacity-0'}`}>
+            <Card className="bg-card border-border">
               <CardHeader>
-                <CardTitle className="text-2xl text-white flex items-center space-x-3">
-                  <Mail className="w-6 h-6 text-cyan-400" />
+                <CardTitle className="text-2xl text-foreground flex items-center space-x-3">
+                  <Mail className="w-6 h-6 text-foreground" />
                   <span>Envoyez-moi un message</span>
                 </CardTitle>
               </CardHeader>
@@ -171,19 +171,19 @@ const ContactSection = () => {
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <Label htmlFor="name" className="text-gray-300">Nom complet</Label>
+                      <Label htmlFor="name" className="text-foreground">Nom complet</Label>
                       <Input
                         id="name"
                         name="name"
                         value={formData.name}
                         onChange={handleInputChange}
                         required
-                        className="bg-gray-700/50 border-gray-600 text-white placeholder-gray-400 focus:border-cyan-500"
+                        className="bg-muted border-border text-foreground placeholder-muted-foreground focus:border-foreground"
                         placeholder="Votre nom"
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="email" className="text-gray-300">Email</Label>
+                      <Label htmlFor="email" className="text-foreground">Email</Label>
                       <Input
                         id="email"
                         name="email"
@@ -191,27 +191,27 @@ const ContactSection = () => {
                         value={formData.email}
                         onChange={handleInputChange}
                         required
-                        className="bg-gray-700/50 border-gray-600 text-white placeholder-gray-400 focus:border-cyan-500"
+                        className="bg-muted border-border text-foreground placeholder-muted-foreground focus:border-foreground"
                         placeholder="votre@email.com"
                       />
                     </div>
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="subject" className="text-gray-300">Objet</Label>
+                    <Label htmlFor="subject" className="text-foreground">Objet</Label>
                     <Input
                       id="subject"
                       name="subject"
                       value={formData.subject}
                       onChange={handleInputChange}
                       required
-                      className="bg-gray-700/50 border-gray-600 text-white placeholder-gray-400 focus:border-cyan-500"
+                      className="bg-muted border-border text-foreground placeholder-muted-foreground focus:border-foreground"
                       placeholder="Sujet de votre message"
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="message" className="text-gray-300">Message</Label>
+                    <Label htmlFor="message" className="text-foreground">Message</Label>
                     <Textarea
                       id="message"
                       name="message"
@@ -219,7 +219,7 @@ const ContactSection = () => {
                       onChange={handleInputChange}
                       required
                       rows={6}
-                      className="bg-gray-700/50 border-gray-600 text-white placeholder-gray-400 focus:border-cyan-500 resize-none"
+                      className="bg-muted border-border text-foreground placeholder-muted-foreground focus:border-foreground resize-none"
                       placeholder="Décrivez votre projet, vos objectifs et comment je peux vous aider..."
                     />
                   </div>
@@ -227,11 +227,11 @@ const ContactSection = () => {
                   <Button 
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white py-3 rounded-lg font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/25"
+                    className="w-full bg-foreground text-background hover:bg-foreground/90 py-3 rounded-lg font-medium transition-all duration-200 hover:scale-102"
                   >
                     {isSubmitting ? (
                       <div className="flex items-center space-x-2">
-                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                        <div className="w-4 h-4 border-2 border-background border-t-transparent rounded-full animate-spin"></div>
                         <span>Envoi en cours...</span>
                       </div>
                     ) : (
