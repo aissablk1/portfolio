@@ -88,7 +88,41 @@ const ContactSection = () => {
           <div className={`space-y-6 transform transition-all duration-500 delay-200 ${isVisible ? 'translate-x-0 opacity-100' : '-translate-x-4 opacity-0'}`}>
             <h3 className="text-2xl font-bold text-foreground mb-6">Contact rapide</h3>
             
-            {/* Telegram */}
+            {/* Info Note */}
+            <div className="bg-muted/30 border border-border rounded-lg p-4 mb-6">
+              <div className="flex items-start space-x-3">
+                <Info className="w-5 h-5 text-muted-foreground mt-0.5 flex-shrink-0" />
+                <div className="text-sm text-muted-foreground">
+                  <p><strong>🔔 Pour suivre mon actualité :</strong> Abonnez-vous à mon canal Telegram</p>
+                  <p><strong>💬 Pour me contacter directement :</strong> Privilégiez WhatsApp</p>
+                </div>
+              </div>
+            </div>
+            
+            {/* WhatsApp */}
+            <Card className="group bg-card border-border hover:border-foreground transition-all duration-200 hover:scale-102">
+              <CardContent className="p-6">
+                <div className="flex items-center space-x-4">
+                  <div className="p-3 bg-muted rounded-full">
+                    <MessageCircle className="w-5 h-5 text-foreground" />
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="text-foreground font-semibold">WhatsApp</h4>
+                    <p className="text-muted-foreground text-sm">Contact direct</p>
+                  </div>
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    className="border-border hover:bg-foreground hover:text-background"
+                    onClick={() => window.open('https://wa.me/33782721406', '_blank')}
+                  >
+                    Contacter
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Telegram - for news */}
             <Card className="group bg-card border-border hover:border-foreground transition-all duration-200 hover:scale-102">
               <CardContent className="p-6">
                 <div className="flex items-center space-x-4">
@@ -97,7 +131,7 @@ const ContactSection = () => {
                   </div>
                   <div className="flex-1">
                     <h4 className="text-foreground font-semibold">Telegram</h4>
-                    <p className="text-muted-foreground text-sm">Message instantané</p>
+                    <p className="text-muted-foreground text-sm">Canal d'actualités</p>
                   </div>
                   <Button 
                     variant="outline" 
@@ -105,7 +139,7 @@ const ContactSection = () => {
                     className="border-border hover:bg-foreground hover:text-background"
                     onClick={() => window.open('https://t.me/investwithaissa', '_blank')}
                   >
-                    Contacter
+                    S'abonner
                   </Button>
                 </div>
               </CardContent>
