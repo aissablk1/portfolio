@@ -48,15 +48,41 @@ const ContactSection = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission (replace with actual API call later)
-    setTimeout(() => {
-      toast({
-        title: "Message envoyé !",
-        description: "Je vous répondrai dans les plus brefs délais.",
+    try {
+      const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
+      const response = await fetch(`${API}/contact`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
       });
-      setFormData({ name: '', email: '', subject: '', message: '' });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        toast({
+          title: "Message envoyé !",
+          description: result.message,
+        });
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } else {
+        toast({
+          title: "Erreur",
+          description: result.detail || "Une erreur est survenue lors de l'envoi.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      console.error('Contact form error:', error);
+      toast({
+        title: "Erreur de connexion",
+        description: "Impossible d'envoyer le message. Veuillez réessayer ou me contacter directement sur WhatsApp.",
+        variant: "destructive",
+      });
+    } finally {
       setIsSubmitting(false);
-    }, 1000);
+    }
   };
 
   return (
