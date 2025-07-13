@@ -4,7 +4,7 @@ import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { Label } from './ui/label';
-import { Mail, Calendar, FileText, Send } from 'lucide-react';
+import { Mail, Calendar, FileText, Send, MessageCircle, Info } from 'lucide-react';
 import { useToast } from '../hooks/use-toast';
 
 const ContactSection = () => {
