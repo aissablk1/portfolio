@@ -28,22 +28,22 @@ const ServicesSection = () => {
     <section 
       id="services" 
       ref={sectionRef}
-      className="py-20 bg-gradient-to-b from-gray-900 to-black relative overflow-hidden"
+      className="py-20 bg-gradient-to-b from-muted/10 to-background relative overflow-hidden"
     >
-      {/* Background decoration */}
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-50"></div>
+      {/* Subtle decoration */}
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border to-transparent"></div>
       
       <div className="container mx-auto px-6 max-w-7xl">
         {/* Section Header */}
-        <div className={`text-center mb-16 transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+        <div className={`text-center mb-16 transform transition-all duration-500 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
             Mes{' '}
-            <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+            <span className="text-muted-foreground">
               Services
             </span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mx-auto mb-6"></div>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <div className="w-24 h-0.5 bg-foreground rounded-full mx-auto mb-6"></div>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Des solutions sur mesure pour transformer vos idées en succès concrets
           </p>
         </div>
@@ -53,30 +53,30 @@ const ServicesSection = () => {
           {services.map((service, index) => (
             <Card 
               key={service.id}
-              className={`group bg-gray-800/50 backdrop-blur-sm border-gray-700 hover:border-purple-500 transition-all duration-500 transform hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/25 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
-              style={{ transitionDelay: `${index * 150}ms` }}
+              className={`group bg-card border-border hover:border-foreground transition-all duration-300 hover:scale-102 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}
+              style={{ transitionDelay: `${index * 100}ms` }}
             >
               <CardHeader className="pb-4">
                 <div className="flex items-center space-x-4 mb-4">
-                  <div className="text-4xl group-hover:scale-110 transition-transform duration-300">
+                  <div className="text-3xl group-hover:scale-105 transition-transform duration-200">
                     {service.icon}
                   </div>
-                  <div className="w-2 h-2 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full group-hover:scale-150 transition-transform duration-300"></div>
+                  <div className="w-1.5 h-1.5 bg-foreground rounded-full group-hover:scale-125 transition-transform duration-200"></div>
                 </div>
-                <CardTitle className="text-xl text-white group-hover:text-purple-300 transition-colors duration-300">
+                <CardTitle className="text-xl text-foreground">
                   {service.title}
                 </CardTitle>
-                <CardDescription className="text-purple-400 font-medium italic">
+                <CardDescription className="text-muted-foreground font-medium italic">
                   {service.subtitle}
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <p className="text-gray-300 leading-relaxed">
+                <p className="text-muted-foreground leading-relaxed">
                   {service.description}
                 </p>
                 
                 <div className="space-y-3">
-                  <h4 className="text-sm font-semibold text-gray-400 uppercase tracking-wider">
+                  <h4 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
                     Expertise
                   </h4>
                   <div className="flex flex-wrap gap-2">
@@ -84,31 +84,28 @@ const ServicesSection = () => {
                       <Badge 
                         key={featureIndex}
                         variant="secondary"
-                        className="bg-gray-700/50 text-gray-300 hover:bg-purple-500/20 hover:text-purple-300 transition-colors duration-300"
+                        className="bg-muted text-muted-foreground hover:bg-foreground hover:text-background transition-colors duration-200"
                       >
                         {feature}
                       </Badge>
                     ))}
                   </div>
                 </div>
-
-                {/* Hover effect overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-blue-500/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
               </CardContent>
             </Card>
           ))}
         </div>
 
         {/* Call to Action */}
-        <div className={`text-center mt-16 transform transition-all duration-1000 delay-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-          <div className="bg-gradient-to-r from-gray-800 to-gray-900 p-8 rounded-2xl border border-gray-700 max-w-4xl mx-auto">
-            <h3 className="text-2xl font-bold text-white mb-4">
+        <div className={`text-center mt-16 transform transition-all duration-500 delay-500 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+          <div className="bg-card border border-border p-8 rounded-xl max-w-4xl mx-auto">
+            <h3 className="text-2xl font-bold text-foreground mb-4">
               Prêt à transformer votre vision en réalité ?
             </h3>
-            <p className="text-gray-300 mb-6">
+            <p className="text-muted-foreground mb-6">
               Discutons de votre projet et découvrons ensemble comment je peux vous aider à atteindre vos objectifs.
             </p>
-            <button className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-3 rounded-full font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25">
+            <button className="bg-foreground text-background hover:bg-foreground/90 px-8 py-3 rounded-lg font-medium transition-all duration-200 hover:scale-102">
               Discutons de votre projet
             </button>
           </div>

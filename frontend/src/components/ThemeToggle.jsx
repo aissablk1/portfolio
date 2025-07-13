@@ -1,31 +1,48 @@
 import React, { useState, useEffect } from 'react';
-import { Sun, Moon } from 'lucide-react';
+import { Sun, Moon, Monitor } from 'lucide-react';
 import { Button } from './ui/button';
 
 const ThemeToggle = () => {
-  const [isDark, setIsDark] = useState(true); // Default to dark theme
+  const [theme, setTheme] = useState('system'); // 'light', 'dark', 'system'
 
   useEffect(() => {
-    // Check for saved theme preference or default to dark
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      setIsDark(savedTheme === 'dark');
-    }
+    // Check for saved theme preference or default to system
+    const savedTheme = localStorage.getItem('theme') || 'system';
+    setTheme(savedTheme);
+    applyTheme(savedTheme);
   }, []);
 
-  useEffect(() => {
-    // Update document class and save preference
-    if (isDark) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
+  const applyTheme = (newTheme) => {
+    const root = document.documentElement;
+    
+    if (newTheme === 'system') {
+      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      root.classList.toggle('dark', systemTheme === 'dark');
     } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
+      root.classList.toggle('dark', newTheme === 'dark');
     }
-  }, [isDark]);
+    
+    localStorage.setItem('theme', newTheme);
+  };
 
   const toggleTheme = () => {
-    setIsDark(!isDark);
+    const themes = ['system', 'light', 'dark'];
+    const currentIndex = themes.indexOf(theme);
+    const nextTheme = themes[(currentIndex + 1) % themes.length];
+    
+    setTheme(nextTheme);
+    applyTheme(nextTheme);
+  };
+
+  const getIcon = () => {
+    switch (theme) {
+      case 'light':
+        return <Sun className="h-4 w-4" />;
+      case 'dark':
+        return <Moon className="h-4 w-4" />;
+      default:
+        return <Monitor className="h-4 w-4" />;
+    }
   };
 
   return (
@@ -33,13 +50,9 @@ const ThemeToggle = () => {
       onClick={toggleTheme}
       variant="outline"
       size="icon"
-      className="fixed top-6 right-6 z-50 bg-gray-800/80 backdrop-blur-sm border-gray-700 hover:border-purple-500 transition-all duration-300 hover:scale-110"
+      className="fixed top-6 right-6 z-50 bg-background/80 backdrop-blur-sm border-border hover:bg-accent transition-all duration-200"
     >
-      {isDark ? (
-        <Sun className="h-4 w-4 text-yellow-400" />
-      ) : (
-        <Moon className="h-4 w-4 text-blue-400" />
-      )}
+      {getIcon()}
       <span className="sr-only">Toggle theme</span>
     </Button>
   );
