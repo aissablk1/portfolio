@@ -8,16 +8,38 @@ import { cn } from "@/utils/cn";
 import { Plus } from "lucide-react";
 
 const letterVariants: Variants = {
-  initial: { opacity: 0.8, y: 0 },
-  hover: (i: number) => ({
-    opacity: 1,
-    y: -2,
-    transition: {
-      duration: 0.4,
-      delay: i * 0.012,
-      ease: [0.23, 1, 0.32, 1] as any
+  initial: { 
+    opacity: 0.8, 
+    y: 0, 
+    fontStyle: "normal",
+    color: "var(--site-text-color)" // Fallback to current text color
+  },
+  hover: (i: number) => {
+    // Custom sequential delay with acceleration and deceleration
+    // Sequential: one after the other
+    let totalDelay = 0;
+    for (let j = 0; j < i; j++) {
+      // Delta between delays
+      // If j < 10: slow (0.04)
+      // If 10 <= j < 25: fast (0.015)
+      // If j >= 25: slow again (0.03)
+      if (j < 12) totalDelay += 0.04;
+      else if (j < 28) totalDelay += 0.015;
+      else totalDelay += 0.03;
     }
-  })
+    
+    return {
+      opacity: 1,
+      y: -4,
+      fontStyle: "italic",
+      color: "#ff3366", // Use exact accent color for perfect visual
+      transition: {
+        duration: 0.4,
+        delay: totalDelay,
+        ease: "easeOut"
+      }
+    };
+  }
 };
 
 const Expertises = () => {
@@ -56,8 +78,8 @@ const Expertises = () => {
                     </span>
                     <motion.h3 
                       className={cn(
-                        "text-3xl md:text-5xl lg:text-6xl tracking-tighter font-medium uppercase flex flex-wrap gap-x-[0.25em]",
-                        openIndex === idx ? "text-site-accent italic md:translate-x-4" : "group-hover:text-site-accent group-hover:italic group-hover:translate-x-4 transition-all duration-700"
+                        "text-3xl md:text-5xl lg:text-6xl tracking-tighter font-medium uppercase flex flex-wrap gap-x-[0.25em] transition-transform duration-700",
+                        openIndex === idx ? "text-site-accent italic md:translate-x-4" : "group-hover:translate-x-4"
                       )}
                     >
                       {item.title.split(" ").map((word, wordIdx, wordsArr) => {
