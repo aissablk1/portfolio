@@ -36,7 +36,7 @@ const Offers = () => {
             >
               <Link
                 href="/contact"
-                className="block h-full bg-site-bg p-8 md:p-12 flex flex-col justify-between hover:bg-site-bg/50 transition-colors group"
+                className="h-full bg-site-bg p-8 md:p-12 flex flex-col justify-between hover:bg-site-bg/50 transition-colors group"
               >
                 <div>
                   <h3 className="text-2xl md:text-3xl mb-4 leading-tight font-medium uppercase tracking-tighter">
