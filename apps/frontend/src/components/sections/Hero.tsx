@@ -107,6 +107,27 @@ const Hero = () => {
            {/* Subtle glow behind globe */}
            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-site-accent/5 blur-[120px] -z-10 rounded-full" />
         </div>
+
+        scroll to bottom
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1.5 }}
+          className="mt-12"
+        >
+          <p className="max-w-xl text-lg md:text-xl text-site-text-light leading-relaxed mb-12">
+            {dict.hero.subtitle}
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4">
+            <Link href="/contact" className="bg-site-accent text-white px-8 py-4 rounded-full text-sm font-medium hover:scale-105 transition-transform text-center">
+              {dict.hero.ctaPrimary}
+            </Link>
+            <button className="border border-site-border px-8 py-4 rounded-full text-sm font-medium hover:bg-site-border/20 transition-colors">
+              {dict.hero.ctaSecondary}
+            </button>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
