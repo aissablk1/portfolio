@@ -121,9 +121,28 @@ const Expertises = () => {
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
-                    className="overflow-hidden"
+                    className="overflow-hidden relative"
                   >
-                    <div className="pb-14 md:pb-20 max-w-2xl md:pl-4">
+                    {/* Background Scrolling Text */}
+                    <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10 select-none">
+                      <motion.div
+                        initial={{ y: "0%" }}
+                        animate={{ y: "-50%" }}
+                        transition={{ duration: 20, ease: "linear", repeat: Infinity }}
+                        className="flex flex-col gap-10 whitespace-nowrap opacity-[0.03]"
+                      >
+                        {[...Array(10)].map((_, i) => (
+                          <span 
+                            key={i} 
+                            className="text-[15rem] md:text-[25rem] font-display font-black uppercase leading-none"
+                          >
+                            {item.title}
+                          </span>
+                        ))}
+                      </motion.div>
+                    </div>
+
+                    <div className="pb-14 md:pb-20 max-w-2xl md:pl-4 relative z-10">
                       <p className="text-lg md:text-2xl text-site-text-light leading-relaxed mb-10">
                         {item.description}
                       </p>

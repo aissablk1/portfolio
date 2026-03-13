@@ -19,7 +19,7 @@ const GLOBE_CONFIG: COBEOptions = {
   mapSamples: 16000,
   mapBrightness: 1.2,
   baseColor: [1, 1, 1],
-  markerColor: [0, 0, 0], // Changed to black for site's accent
+  markerColor: [255, 0, 0], // Changed to black for site's accent
   glowColor: [0.9, 0.9, 0.9],
   markers: [
     { location: [43.6047, 1.4442], size: 0.1 }, // Toulouse
