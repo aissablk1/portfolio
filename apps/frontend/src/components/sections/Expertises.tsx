@@ -7,6 +7,23 @@ import Link from "next/link";
 import { cn } from "@/utils/cn";
 import { Plus } from "lucide-react";
 
+const titleVariants = {
+  hover: {}
+};
+
+const letterVariants = {
+  initial: { opacity: 0.8, y: 0 },
+  hover: (i: number) => ({
+    opacity: 1,
+    y: -2,
+    transition: {
+      duration: 0.4,
+      delay: i * 0.015,
+      ease: [0.23, 1, 0.32, 1]
+    }
+  })
+};
+
 const Expertises = () => {
   const { dict } = useLanguage();
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -31,20 +48,34 @@ const Expertises = () => {
               transition={{ duration: 0.8, delay: idx * 0.05 }}
               className="border-b border-site-border"
             >
-              <button
+              <motion.button
                 onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
+                whileHover="hover"
+                initial="initial"
                 className="w-full py-10 md:py-14 flex items-center justify-between group text-left cursor-pointer outline-none"
               >
                 <div className="max-w-[70%]">
-                    <span className="block text-[10px] font-bold uppercase tracking-[0.3em] text-site-accent mb-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <span className="block text-[10px] font-bold uppercase tracking-[0.3em] text-site-accent mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                         {item.microcopy}
                     </span>
-                    <h3 className={cn(
-                        "text-3xl md:text-5xl lg:text-6xl tracking-tighter transition-all duration-500 font-medium uppercase",
-                        openIndex === idx ? "text-site-accent italic md:translate-x-4" : "opacity-80 group-hover:opacity-100 group-hover:translate-x-4"
-                    )}>
-                      {item.title}
-                    </h3>
+                    <motion.h3 
+                      className={cn(
+                        "text-3xl md:text-5xl lg:text-6xl tracking-tighter transition-all duration-700 font-medium uppercase flex flex-wrap",
+                        openIndex === idx ? "text-site-accent italic md:translate-x-4" : "group-hover:text-site-accent group-hover:italic group-hover:translate-x-4"
+                      )}
+                    >
+                      {item.title.split("").map((char, i) => (
+                        <motion.span
+                          key={i}
+                          variants={letterVariants}
+                          custom={i}
+                          className="inline-block"
+                          style={{ whiteSpace: char === " " ? "pre" : "normal" }}
+                        >
+                          {char}
+                        </motion.span>
+                      ))}
+                    </motion.h3>
                 </div>
                 
                 <div className={cn(
