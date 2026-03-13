@@ -7,10 +7,6 @@ import Link from "next/link";
 import { cn } from "@/utils/cn";
 import { Plus } from "lucide-react";
 
-const titleVariants = {
-  hover: {}
-};
-
 const letterVariants = {
   initial: { opacity: 0.8, y: 0 },
   hover: (i: number) => ({
@@ -19,7 +15,8 @@ const letterVariants = {
     transition: {
       duration: 0.4,
       delay: i * 0.012,
-      ease: "easeOut"
+      type: "spring",
+      ease: [0.23, 1, 0.32, 1]
     }
   })
 };
@@ -60,12 +57,12 @@ const Expertises = () => {
                     </span>
                     <motion.h3 
                       className={cn(
-                        "text-3xl md:text-5xl lg:text-6xl tracking-tighter transition-all duration-700 font-medium uppercase flex flex-wrap gap-x-[0.15em]",
-                        openIndex === idx ? "text-site-accent italic md:translate-x-4" : "group-hover:text-site-accent group-hover:italic group-hover:translate-x-4"
+                        "text-2xl md:text-5xl lg:text-6xl tracking-tighter font-medium uppercase flex flex-wrap gap-x-[0.25em]",
+                        openIndex === idx ? "text-site-accent italic md:translate-x-4" : "group-hover:text-site-accent group-hover:italic group-hover:translate-x-4 transition-all duration-700"
                       )}
                     >
                       {item.title.split(" ").map((word, wordIdx) => (
-                        <span key={wordIdx} className="flex whitespace-nowrap">
+                        <motion.span key={wordIdx} className="flex whitespace-nowrap">
                           {word.split("").map((char, charIdx) => (
                             <motion.span
                               key={charIdx}
@@ -76,16 +73,16 @@ const Expertises = () => {
                               {char}
                             </motion.span>
                           ))}
-                        </span>
+                        </motion.span>
                       ))}
                     </motion.h3>
                 </div>
                 
                 <div className={cn(
-                    "w-12 h-12 md:w-16 md:h-16 rounded-full border border-site-border flex items-center justify-center transition-all duration-500 shrink-0 ml-4",
+                    "w-10 h-10 md:w-16 md:h-16 rounded-full border border-site-border flex items-center justify-center transition-all duration-500 shrink-0 ml-4",
                     openIndex === idx ? "bg-site-accent border-site-accent text-white rotate-45" : "group-hover:border-site-accent group-hover:text-site-accent"
                 )}>
-                  <Plus size={window?.innerWidth < 768 ? 20 : 28} strokeWidth={1.5} />
+                  <Plus className="w-5 h-5 md:w-8 md:h-8" strokeWidth={1.5} />
                 </div>
               </motion.button>
 
