@@ -33,7 +33,11 @@ interface Dictionary {
     pillars: Array<{ title: string; content: string }>;
   };
   expertises: {
-    items: string[];
+    items: Array<{
+      title: string;
+      description: string;
+      microcopy: string;
+    }>;
   };
   systems: {
     title: string;
@@ -124,14 +128,46 @@ const dictionaries: Record<Language, Dictionary> = {
     },
     expertises: {
       items: [
-        "Systèmes d’automatisation sur-mesure",
-        "Architecture d’IA et d’agents",
-        "Stratégie data & monitoring temps réel",
-        "Systèmes de workflow algorithmique & quantitatifs",
-        "Dashboards & cockpits décisionnels",
-        "Sites vitrines systémiques & expériences digitales",
-        "Plateformes internes & outils métiers",
-        "Programmes CRM & funnels automatisés",
+        {
+          title: "Systèmes d’automatisation sur-mesure",
+          description: "Libérez votre potentiel humain en déléguant la répétition à des machines. Je conçois des flux autonomes qui connectent vos outils et fiabilisent vos opérations 24/7.",
+          microcopy: "Industrialiser l'efficience"
+        },
+        {
+          title: "Architecture d’IA et d’agents",
+          description: "Intégrez l'intelligence artificielle au cœur de votre métier. Du LLM spécialisé aux agents autonomes, je bâtis des systèmes capables de raisonner et d'agir sur vos données.",
+          microcopy: "Déployer l'intelligence"
+        },
+        {
+          title: "Stratégie data & monitoring temps réel",
+          description: "Ne pilotez plus à vue. J'installe des cockpits de données qui transforment le bruit numérique en indicateurs décisionnels clairs et exploitables instantanément.",
+          microcopy: "Maîtriser le flux"
+        },
+        {
+          title: "Systèmes de workflow algorithmique",
+          description: "Performance et précision pour les environnements à haute fréquence. J'optimise vos algorithmes et vos chaînes de traitement pour une exécution sans faille.",
+          microcopy: "Exécuter avec précision"
+        },
+        {
+          title: "Dashboards & cockpits décisionnels",
+          description: "Le design au service de la décision. Des interfaces immersives conçues pour une lecture rapide et une gestion intuitive de systèmes complexes.",
+          microcopy: "Visualiser l'essentiel"
+        },
+        {
+          title: "Sites vitrines systémiques",
+          description: "Votre présence digitale n'est pas qu'une image, c'est un actif. Je crée des expériences immersives qui captent l'attention et convertissent par leur clarté.",
+          microcopy: "Captiver l'audience"
+        },
+        {
+          title: "Plateformes internes & outils métiers",
+          description: "Des outils que vos équipes aimeront utiliser. Je simplifie vos processus internes avec des solutions sur-mesure qui s'adaptent à vos méthodes, pas l'inverse.",
+          microcopy: "Simplifier l'usage"
+        },
+        {
+          title: "Programmes CRM & funnels automatisés",
+          description: "La conversion comme un système. J'automatise vos tunnels de vente et la nutrition de vos leads pour garantir une croissance prévisible et scalable.",
+          microcopy: "Scaler la croissance"
+        }
       ],
     },
     systems: {
@@ -252,14 +288,46 @@ const dictionaries: Record<Language, Dictionary> = {
     },
     expertises: {
       items: [
-        "Custom automation systems",
-        "AI & agent architectures",
-        "Real-time data & monitoring strategy",
-        "Algorithmic workflow systems & prop firms",
-        "Dashboards & decision cockpits",
-        "Systemic showcase websites & digital experiences",
-        "Internal platforms & tools",
-        "CRM programs & automated funnels",
+        {
+          title: "Custom automation systems",
+          description: "Free up human potential by delegating repetition to machines. I design autonomous flows that connect your tools and secure your operations 24/7.",
+          microcopy: "Industrialize efficiency"
+        },
+        {
+          title: "AI & agent architectures",
+          description: "Integrate artificial intelligence into the heart of your business. From specialized LLMs to autonomous agents, I build systems capable of reasoning and acting on your data.",
+          microcopy: "Deploy intelligence"
+        },
+        {
+          title: "Real-time data & monitoring strategy",
+          description: "Stop flying blind. I install data cockpits that transform digital noise into clear, instantly actionable decision indicators.",
+          microcopy: "Master the flow"
+        },
+        {
+          title: "Algorithmic workflow systems",
+          description: "Performance and precision for high-frequency environments. I optimize your algorithms and processing chains for flawless execution.",
+          microcopy: "Execute with precision"
+        },
+        {
+          title: "Dashboards & decision cockpits",
+          description: "Design at the service of decision. Immersive interfaces designed for quick reading and intuitive management of complex systems.",
+          microcopy: "Visualize the essential"
+        },
+        {
+          title: "Systemic showcase websites",
+          description: "Your digital presence is not just an image, it's an asset. I create immersive experiences that capture attention and convert through clarity.",
+          microcopy: "Captivate the audience"
+        },
+        {
+          title: "Internal platforms & tools",
+          description: "Tools your teams will love to use. I simplify your internal processes with bespoke solutions that adapt to your methods, not the other way around.",
+          microcopy: "Simplify usage"
+        },
+        {
+          title: "CRM programs & automated funnels",
+          description: "Conversion as a system. I automate your sales funnels and lead nurturing to guarantee predictable and scalable growth.",
+          microcopy: "Scale growth"
+        }
       ],
     },
     systems: {
