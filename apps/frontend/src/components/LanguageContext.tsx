@@ -187,9 +187,9 @@ const dictionaries: Record<Language, Dictionary> = {
         identity: { 
           title: "Qui êtes-vous ?", 
           nameLabel: "Nom complet", 
-          namePlaceholder: "John Doe",
+          namePlaceholder: "Jean Dupont",
           contextLabel: "Entreprise ou Projet",
-          contextPlaceholder: "Stark Industries"
+          contextPlaceholder: "Dassault Systèmes"
         },
         needs: { 
           title: "De quoi avez-vous besoin ?", 
