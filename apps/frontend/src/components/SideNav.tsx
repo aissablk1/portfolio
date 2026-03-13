@@ -71,13 +71,6 @@ const SideNav = () => {
             )}>
               {item.name}
             </span>
-            
-            <div className={cn(
-              "h-0.5 mix-blend-difference transition-all duration-500 origin-right rounded-full",
-              activeSection === item.id 
-                ? "w-12 bg-white" 
-                : "w-4 bg-white/40 group-hover:w-8 group-hover:bg-white"
-            )} />
           </button>
         ))}
       </div>
