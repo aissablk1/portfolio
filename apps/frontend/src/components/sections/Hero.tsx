@@ -4,7 +4,6 @@ import React from "react";
 import { useLanguage } from "../LanguageContext";
 import { motion } from "framer-motion";
 import { Globe } from "@/components/ui/globe";
-
 import Link from "next/link";
 
 const Hero = () => {
@@ -55,8 +54,8 @@ const Hero = () => {
              animate={{ 
                opacity: 1, 
                scale: 1,
-               y: [0, -10, 0],
-               x: [0, 5, 0]
+               y: [0, -20, 0],
+               x: [0, 50, 0]
              }}
              transition={{ 
                opacity: { duration: 1, delay: 1.5 },
@@ -64,9 +63,9 @@ const Hero = () => {
                y: { duration: 4, repeat: Infinity, ease: "easeInOut" },
                x: { duration: 6, repeat: Infinity, ease: "easeInOut" }
              }}
-             className="absolute top-[20%] right-[10%] z-20 pointer-events-none"
+             className="absolute bottom-[20%] right-[10%] z-20 pointer-events-none"
            >
-             <svg width="42" height="42" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="drop-shadow-2xl">
+             <svg width="250" height="250" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="drop-shadow-2xl">
               <g filter="url(#filter0_d_273_3983)">
               <path fill-rule="evenodd" clip-rule="evenodd" d="M16.4308 23.9996L18.1958 23.0586L15.4215 17.857H19.025L11 9.81396V21.002L13.5298 18.5599L16.4308 23.9996Z" fill="black"/>
               <path d="M15.9896 24.2348L16.2249 24.676L16.666 24.4408L18.431 23.4998L18.8723 23.2645L18.637 22.8233L16.2548 18.357H19.025H20.2302L19.3789 17.5038L11.3539 9.46081L10.5 8.60494V9.81396V21.002V22.1796L11.3473 21.3617L13.4004 19.3798L15.9896 24.2348Z" stroke="white"/>
@@ -85,6 +84,25 @@ const Hero = () => {
               </defs>
               </svg>
            </motion.div>
+
+            {/* Figma Selection Box */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, delay: 1 }}
+              className="absolute inset-0 z-10 pointer-events-none border border-[#18A0FB]/40 bg-[#18A0FB]/[0.02]"
+            >
+              {/* Corner Handles */}
+              <div className="absolute -top-1.5 -left-1.5 w-3 h-3 bg-white border-2 border-[#18A0FB] rounded-sm" />
+              <div className="absolute -top-1.5 -right-1.5 w-3 h-3 bg-white border-2 border-[#18A0FB] rounded-sm" />
+              <div className="absolute -bottom-1.5 -left-1.5 w-3 h-3 bg-white border-2 border-[#18A0FB] rounded-sm" />
+              <div className="absolute -bottom-1.5 -right-1.5 w-3 h-3 bg-white border-2 border-[#18A0FB] rounded-sm" />
+              
+              {/* Selection Label (Optional but very Figma-esque) */}
+              <div className="absolute -top-8 left-0 bg-[#18A0FB] text-white text-[10px] px-1.5 py-0.5 rounded-sm font-bold uppercase tracking-tighter">
+                Globe_Component
+              </div>
+            </motion.div>
 
            {/* Subtle glow behind globe */}
            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-site-accent/5 blur-[120px] -z-10 rounded-full" />
