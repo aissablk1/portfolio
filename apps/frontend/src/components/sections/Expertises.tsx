@@ -1,9 +1,15 @@
+"use client";
+
+import React, { useState } from "react";
+import { useLanguage } from "../LanguageContext";
+import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
+import { cn } from "@/utils/cn";
 import { Plus } from "lucide-react";
-import { AnimatePresence } from "framer-motion";
 
 const Expertises = () => {
   const { dict } = useLanguage();
-  const [openIndex, setOpenIndex] = React.useState<number | null>(null);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
     <section id="expertise" className="px-container section-padding">
