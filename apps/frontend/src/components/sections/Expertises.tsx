@@ -124,7 +124,7 @@ const Expertises = () => {
                     className="overflow-hidden relative"
                   >
                     {/* Background Scrolling Text */}
-                    <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10 select-none flex items-center">
+                    <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-screen pointer-events-none -z-10 select-none flex items-center overflow-hidden">
                       <motion.div
                         initial={{ x: "0%" }}
                         animate={{ x: "-50%" }}
