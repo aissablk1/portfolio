@@ -12,7 +12,6 @@ const letterVariants: Variants = {
     opacity: 0.8, 
     y: 0, 
     fontStyle: "normal",
-    color: "var(--site-text-color)" // Fallback to current text color
   },
   hover: (i: number) => {
     // Custom sequential delay with acceleration and deceleration
