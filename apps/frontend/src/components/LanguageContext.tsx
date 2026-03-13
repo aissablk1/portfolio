@@ -59,6 +59,9 @@ interface Dictionary {
     cta: string;
   };
   footer: {
+    jobTitle: string;
+    industry: string;
+    systemsStrategy: string;
     title: string;
     baseline: string;
     credits: string;
@@ -200,7 +203,7 @@ const dictionaries: Record<Language, Dictionary> = {
       ]
     },
     about: {
-      content: "Entrepreneur & système builder basé dans le sud de 🇫🇷. Autodidacte, obsédé par les architectures qui durent et les systèmes qui travaillent en arrière-plan. Je conçois des environnements numériques qui unifient automatisation, IA, workflow, design et stratégie.",
+      content: "Entrepreneur & système builder basé dans le sud de 🇫🇷.\nAutodidacte, obsédé par les architectures qui durent et les systèmes qui travaillent en arrière-plan. Je conçois des environnements numériques qui unifient automatisation, IA, workflow, design et stratégie.",
       location: "Basé dans le sud de 🇫🇷. Travaillant dans le monde entier.",
     },
     contact: {
@@ -208,6 +211,9 @@ const dictionaries: Record<Language, Dictionary> = {
       cta: "Initier un projet",
     },
     footer: {
+      jobTitle: "Developpeur Creatif",
+      industry: "Architecture Industrielle",
+      systemsStrategy: "Strategie des Systemes",
       title: "Construire l'avenir du progrès numérique.",
       baseline: "Architecture de systèmes, automation et innovation digitale.",
       credits: "© 2026 Portfolio par AÏSSA BELKOUSSA",
@@ -360,7 +366,7 @@ const dictionaries: Record<Language, Dictionary> = {
       ]
     },
     about: {
-      content: "Entrepreneur & system builder based in the South of 🇫🇷. Self-taught, obsessed with architectures that last and systems that work in the background. I design digital environments that unify automation, AI, workflow, design, and strategy.",
+      content: "Entrepreneur & system builder based in the South of 🇫🇷.\nSelf-taught, obsessed with architectures that last and systems that work in the background. I design digital environments that unify automation, AI, workflow, design, and strategy.",
       location: "Based in the South of 🇫🇷. Working worldwide.",
     },
     contact: {
@@ -368,6 +374,9 @@ const dictionaries: Record<Language, Dictionary> = {
       cta: "Start a project",
     },
     footer: {
+      jobTitle: "Creative Developer",
+      industry: "Industrial Architecture",
+      systemsStrategy: "Systems Strategy",
       title: "Building the future of digital progress.",
       baseline: "System architectures, automation and digital innovation.",
       credits: "© 2026 Portfolio by AÏSSA BELKOUSSA",
