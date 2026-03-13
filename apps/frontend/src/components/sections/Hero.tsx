@@ -44,10 +44,48 @@ const Hero = () => {
           </motion.div>
         </div>
 
-        <div className="hidden md:block lg:block lg:col-span-4 relative h-[500px]">
+        <div className="hidden md:block lg:block lg:col-span-4 relative h-[600px] -mr-20">
            <div className="absolute inset-0 bg-size-[32px_32px] bg-[radial-gradient(var(--color-site-border)_1px,transparent_1px)] mask-[radial-gradient(ellipse_at_center,black,transparent_80%)]">
               <Globe />
            </div>
+           
+           {/* Custom SVG Cursor */}
+           <motion.div
+             initial={{ opacity: 0, scale: 0.5 }}
+             animate={{ 
+               opacity: 1, 
+               scale: 1,
+               y: [0, -10, 0],
+               x: [0, 5, 0]
+             }}
+             transition={{ 
+               opacity: { duration: 1, delay: 1.5 },
+               scale: { duration: 1, delay: 1.5 },
+               y: { duration: 4, repeat: Infinity, ease: "easeInOut" },
+               x: { duration: 6, repeat: Infinity, ease: "easeInOut" }
+             }}
+             className="absolute top-[20%] right-[10%] z-20 pointer-events-none"
+           >
+             <svg width="42" height="42" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="drop-shadow-2xl">
+              <g filter="url(#filter0_d_273_3983)">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M16.4308 23.9996L18.1958 23.0586L15.4215 17.857H19.025L11 9.81396V21.002L13.5298 18.5599L16.4308 23.9996Z" fill="black"/>
+              <path d="M15.9896 24.2348L16.2249 24.676L16.666 24.4408L18.431 23.4998L18.8723 23.2645L18.637 22.8233L16.2548 18.357H19.025H20.2302L19.3789 17.5038L11.3539 9.46081L10.5 8.60494V9.81396V21.002V22.1796L11.3473 21.3617L13.4004 19.3798L15.9896 24.2348Z" stroke="white"/>
+              </g>
+              <defs>
+              <filter id="filter0_d_273_3983" x="8" y="6.39594" width="15.4355" height="21.9565" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+              <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+              <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+              <feOffset dy="1"/>
+              <feGaussianBlur stdDeviation="1"/>
+              <feComposite in2="hardAlpha" operator="out"/>
+              <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.4049 0"/>
+              <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_273_3983"/>
+              <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_273_3983" result="shape"/>
+              </filter>
+              </defs>
+              </svg>
+           </motion.div>
+
            {/* Subtle glow behind globe */}
            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-site-accent/5 blur-[120px] -z-10 rounded-full" />
         </div>
