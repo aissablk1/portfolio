@@ -56,24 +56,31 @@ const Expertises = () => {
                     </span>
                     <motion.h3 
                       className={cn(
-                        "text-2xl md:text-5xl lg:text-6xl tracking-tighter font-medium uppercase flex flex-wrap gap-x-[0.25em]",
+                        "text-3xl md:text-5xl lg:text-6xl tracking-tighter font-medium uppercase flex flex-wrap gap-x-[0.25em]",
                         openIndex === idx ? "text-site-accent italic md:translate-x-4" : "group-hover:text-site-accent group-hover:italic group-hover:translate-x-4 transition-all duration-700"
                       )}
                     >
-                      {item.title.split(" ").map((word, wordIdx) => (
-                        <motion.span key={wordIdx} className="flex whitespace-nowrap">
-                          {word.split("").map((char, charIdx) => (
-                            <motion.span
-                              key={charIdx}
-                              variants={letterVariants}
-                              custom={charIdx + (wordIdx * 5)}
-                              className="inline-block"
-                            >
-                              {char}
-                            </motion.span>
-                          ))}
-                        </motion.span>
-                      ))}
+                      {item.title.split(" ").map((word, wordIdx, wordsArr) => {
+                        // Calculate cumulative index to maintain linear stagger across words
+                        const cumulativeIndex = wordsArr
+                          .slice(0, wordIdx)
+                          .reduce((acc, w) => acc + w.length + 1, 0);
+                        
+                        return (
+                          <motion.span key={wordIdx} className="flex whitespace-nowrap">
+                            {word.split("").map((char, charIdx) => (
+                              <motion.span
+                                key={charIdx}
+                                variants={letterVariants}
+                                custom={cumulativeIndex + charIdx}
+                                className="inline-block"
+                              >
+                                {char}
+                              </motion.span>
+                            ))}
+                          </motion.span>
+                        );
+                      })}
                     </motion.h3>
                 </div>
                 
