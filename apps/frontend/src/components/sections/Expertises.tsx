@@ -124,18 +124,18 @@ const Expertises = () => {
                   transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
                   className="overflow-hidden relative"
                 >
-                  {/* Background Scrolling Text - BLEED TO EDGE */}
-                  <div className="absolute inset-0 pointer-events-none -z-10 select-none flex items-center">
+                  {/* Background Scrolling Text - BLEED TO EDGE & FULL HEIGHT */}
+                  <div className="absolute inset-0 pointer-events-none -z-10 select-none overflow-hidden flex justify-center">
                     <motion.div
-                      initial={{ x: "0%" }}
-                      animate={{ x: "-50%" }}
+                      initial={{ y: "0%" }}
+                      animate={{ y: "-50%" }}
                       transition={{ duration: 30, ease: "linear", repeat: Infinity }}
-                      className="flex flex-row gap-20 whitespace-nowrap opacity-[0.03]"
+                      className="flex flex-col gap-10 whitespace-nowrap opacity-[0.03] text-center"
                     >
-                      {[...Array(4)].map((_, i) => (
+                      {[...Array(6)].map((_, i) => (
                         <span 
                           key={i} 
-                          className="text-[18rem] md:text-[35rem] font-display font-black uppercase leading-none"
+                          className="text-[18rem] md:text-[35rem] font-display font-black uppercase leading-[0.8] tracking-tighter"
                         >
                           {item.title}
                         </span>
