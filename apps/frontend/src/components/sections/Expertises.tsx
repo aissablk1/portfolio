@@ -18,8 +18,8 @@ const letterVariants = {
     y: -2,
     transition: {
       duration: 0.4,
-      delay: i * 0.015,
-      ease: [0.23, 1, 0.32, 1]
+      delay: i * 0.012,
+      ease: "easeOut"
     }
   })
 };
@@ -54,37 +54,40 @@ const Expertises = () => {
                 initial="initial"
                 className="w-full py-10 md:py-14 flex items-center justify-between group text-left cursor-pointer outline-none"
               >
-                <div className="max-w-[70%]">
+                <div className="max-w-[80%]">
                     <span className="block text-[10px] font-bold uppercase tracking-[0.3em] text-site-accent mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                         {item.microcopy}
                     </span>
                     <motion.h3 
                       className={cn(
-                        "text-3xl md:text-5xl lg:text-6xl tracking-tighter transition-all duration-700 font-medium uppercase flex flex-wrap",
+                        "text-3xl md:text-5xl lg:text-6xl tracking-tighter transition-all duration-700 font-medium uppercase flex flex-wrap gap-x-[0.15em]",
                         openIndex === idx ? "text-site-accent italic md:translate-x-4" : "group-hover:text-site-accent group-hover:italic group-hover:translate-x-4"
                       )}
                     >
-                      {item.title.split("").map((char, i) => (
-                        <motion.span
-                          key={i}
-                          variants={letterVariants}
-                          custom={i}
-                          className="inline-block"
-                          style={{ whiteSpace: char === " " ? "pre" : "normal" }}
-                        >
-                          {char}
-                        </motion.span>
+                      {item.title.split(" ").map((word, wordIdx) => (
+                        <span key={wordIdx} className="flex whitespace-nowrap">
+                          {word.split("").map((char, charIdx) => (
+                            <motion.span
+                              key={charIdx}
+                              variants={letterVariants}
+                              custom={charIdx + (wordIdx * 5)}
+                              className="inline-block"
+                            >
+                              {char}
+                            </motion.span>
+                          ))}
+                        </span>
                       ))}
                     </motion.h3>
                 </div>
                 
                 <div className={cn(
-                    "w-12 h-12 md:w-16 md:h-16 rounded-full border border-site-border flex items-center justify-center transition-all duration-500",
+                    "w-12 h-12 md:w-16 md:h-16 rounded-full border border-site-border flex items-center justify-center transition-all duration-500 shrink-0 ml-4",
                     openIndex === idx ? "bg-site-accent border-site-accent text-white rotate-45" : "group-hover:border-site-accent group-hover:text-site-accent"
                 )}>
                   <Plus size={window?.innerWidth < 768 ? 20 : 28} strokeWidth={1.5} />
                 </div>
-              </button>
+              </motion.button>
 
               <AnimatePresence>
                 {openIndex === idx && (
