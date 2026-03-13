@@ -67,7 +67,13 @@ interface Dictionary {
   };
   funnel: {
     steps: {
-      identity: { title: string; nameLabel: string; contextLabel: string };
+      identity: { 
+        title: string; 
+        nameLabel: string; 
+        namePlaceholder: string;
+        contextLabel: string; 
+        contextPlaceholder: string;
+      };
       needs: { title: string; options: { id: string; label: string; template: string }[] };
       details: { 
         title: string; 
@@ -181,7 +187,9 @@ const dictionaries: Record<Language, Dictionary> = {
         identity: { 
           title: "Qui êtes-vous ?", 
           nameLabel: "Nom complet", 
-          contextLabel: "Entreprise ou Projet" 
+          namePlaceholder: "John Doe",
+          contextLabel: "Entreprise ou Projet",
+          contextPlaceholder: "Stark Industries"
         },
         needs: { 
           title: "De quoi avez-vous besoin ?", 
@@ -307,7 +315,9 @@ const dictionaries: Record<Language, Dictionary> = {
         identity: { 
           title: "Who are you?", 
           nameLabel: "Full Name", 
-          contextLabel: "Company or Project" 
+          namePlaceholder: "John Doe",
+          contextLabel: "Company or Project",
+          contextPlaceholder: "Wayne Enterprises"
         },
         needs: { 
           title: "What do you need?", 

@@ -60,7 +60,7 @@ const ContactForm = () => {
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               className="w-full bg-transparent border-b border-site-border py-4 text-2xl font-display focus:border-site-accent outline-none transition-colors"
-              placeholder="Aïssa B."
+              placeholder={dict.funnel.steps.identity.namePlaceholder}
               autoFocus
             />
           </div>
@@ -73,7 +73,7 @@ const ContactForm = () => {
               value={formData.context}
               onChange={(e) => setFormData({ ...formData, context: e.target.value })}
               className="w-full bg-transparent border-b border-site-border py-4 text-2xl font-display focus:border-site-accent outline-none transition-colors"
-              placeholder="Antigravity Studio"
+              placeholder={dict.funnel.steps.identity.contextPlaceholder}
             />
           </div>
         </div>
