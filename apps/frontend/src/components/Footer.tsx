@@ -32,7 +32,7 @@ const Footer = () => {
                 <span className="text-xs font-bold uppercase tracking-widest opacity-30">Architecture</span>
                 <Link href="#systems" className="text-sm hover:underline">{dict.nav.systems}</Link>
                 <Link href="#about" className="text-sm hover:underline">{dict.nav.about}</Link>
-                <Link href="#contact" className="text-sm hover:underline">{dict.nav.contact}</Link>
+                <Link href="/contact" className="text-sm hover:underline">{dict.nav.contact}</Link>
             </div>
             <div className="flex flex-col gap-4 col-span-2 md:col-span-1">
                 <span className="text-xs font-bold uppercase tracking-widest opacity-30">Legal</span>

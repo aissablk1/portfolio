@@ -5,6 +5,8 @@ import { useLanguage } from "../LanguageContext";
 import { motion } from "framer-motion";
 import { Globe } from "@/components/ui/globe";
 
+import Link from "next/link";
+
 const Hero = () => {
   const { dict } = useLanguage();
 
@@ -32,9 +34,9 @@ const Hero = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="bg-site-accent text-white px-8 py-4 rounded-full text-sm font-medium hover:scale-105 transition-transform">
+              <Link href="/contact" className="bg-site-accent text-white px-8 py-4 rounded-full text-sm font-medium hover:scale-105 transition-transform text-center">
                 {dict.hero.ctaPrimary}
-              </button>
+              </Link>
               <button className="border border-site-border px-8 py-4 rounded-full text-sm font-medium hover:bg-site-border/20 transition-colors">
                 {dict.hero.ctaSecondary}
               </button>

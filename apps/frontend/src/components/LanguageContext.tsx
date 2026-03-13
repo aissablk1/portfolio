@@ -65,6 +65,15 @@ interface Dictionary {
     termsOfService: string;
     termsAndConditions: string;
   };
+  funnel: {
+    steps: {
+      identity: { title: string; nameLabel: string; contextLabel: string };
+      needs: { title: string; options: string[] };
+      details: { title: string; messageLabel: string; budgetLabel: string };
+    };
+    cta: { next: string; prev: string; submit: string };
+    success: { title: string; message: string };
+  };
 }
 
 const dictionaries: Record<Language, Dictionary> = {
@@ -161,6 +170,34 @@ const dictionaries: Record<Language, Dictionary> = {
       termsOfService: "Conditions générales d'utilisation",
       termsAndConditions: "Conditions générales de vente",
     },
+    funnel: {
+      steps: {
+        identity: { 
+          title: "Qui êtes-vous ?", 
+          nameLabel: "Nom complet", 
+          contextLabel: "Entreprise ou Projet" 
+        },
+        needs: { 
+          title: "De quoi avez-vous besoin ?", 
+          options: [
+            "Architecture & Automation Systems",
+            "Design d'expériences & Écosystèmes",
+            "Workflow Algorithmique & Data",
+            "Audit & Stratégie"
+          ] 
+        },
+        details: { 
+          title: "Dites-m'en plus", 
+          messageLabel: "Votre message", 
+          budgetLabel: "Budget estimé" 
+        },
+      },
+      cta: { next: "Continuer", prev: "Retour", submit: "Envoyer ma demande" },
+      success: { 
+        title: "Demande reçue", 
+        message: "Je reviens vers vous sous 48h pour analyser votre système." 
+      },
+    },
   },
   en: {
     warning: "aissabelkoussa.com is a phishing domain, make sure you are on aissabelkoussa.fr",
@@ -254,6 +291,34 @@ const dictionaries: Record<Language, Dictionary> = {
       privacyPolicy: "Privacy policy",
       termsOfService: "Terms of service",
       termsAndConditions: "Terms and conditions",
+    },
+    funnel: {
+      steps: {
+        identity: { 
+          title: "Who are you?", 
+          nameLabel: "Full Name", 
+          contextLabel: "Company or Project" 
+        },
+        needs: { 
+          title: "What do you need?", 
+          options: [
+            "Architecture & Automation Systems",
+            "Experience Design & Ecosystems",
+            "Algorithmic Workflow & Data",
+            "Audit & Strategy"
+          ] 
+        },
+        details: { 
+          title: "Tell me more", 
+          messageLabel: "Your message", 
+          budgetLabel: "Estimated Budget" 
+        },
+      },
+      cta: { next: "Continue", prev: "Back", submit: "Send my request" },
+      success: { 
+        title: "Request received", 
+        message: "I'll get back to you within 48h to analyze your system." 
+      },
     },
   },
 };

@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useLanguage } from "./LanguageContext";
 import { cn } from "@/utils/cn";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const SideNav = () => {
   const { dict } = useLanguage();
@@ -15,7 +16,7 @@ const SideNav = () => {
     { id: "expertise", name: dict.nav.expertise },
     { id: "systems", name: dict.nav.systems },
     { id: "about", name: dict.nav.about },
-    { id: "contact", name: dict.nav.contact },
+    { id: "/contact", name: dict.nav.contact },
   ];
 
   useEffect(() => {
@@ -58,20 +59,35 @@ const SideNav = () => {
     <nav className="hidden lg:flex fixed right-10 top-0 bottom-0 items-center z-9999 pointer-events-none">
       <div className="flex flex-col gap-8 items-end pointer-events-auto">
         {items.map((item) => (
-          <button
-            key={item.id}
-            onClick={() => scrollToSection(item.id)}
-            className="flex items-center gap-6 transition-all duration-300 outline-none group"
-          >
-            <span className={cn(
-                "text-[10px] uppercase tracking-[0.4em] transition-all duration-300 mix-blend-difference",
-                activeSection === item.id 
-                  ? "text-white font-black" 
-                  : "text-white/40 font-bold hover:text-white"
-            )}>
-              {item.name}
-            </span>
-          </button>
+          item.id.startsWith("/") ? (
+            <Link
+              key={item.id}
+              href={item.id}
+              className="flex items-center gap-6 transition-all duration-300 outline-none group"
+            >
+              <span className={cn(
+                  "text-[10px] uppercase tracking-[0.4em] transition-all duration-300 mix-blend-difference",
+                  "text-white/40 font-bold hover:text-white"
+              )}>
+                {item.name}
+              </span>
+            </Link>
+          ) : (
+            <button
+              key={item.id}
+              onClick={() => scrollToSection(item.id)}
+              className="flex items-center gap-6 transition-all duration-300 outline-none group"
+            >
+              <span className={cn(
+                  "text-[10px] uppercase tracking-[0.4em] transition-all duration-300 mix-blend-difference",
+                  activeSection === item.id 
+                    ? "text-white font-black" 
+                    : "text-white/40 font-bold hover:text-white"
+              )}>
+                {item.name}
+              </span>
+            </button>
+          )
         ))}
       </div>
     </nav>

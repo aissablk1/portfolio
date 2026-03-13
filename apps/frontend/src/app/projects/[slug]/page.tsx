@@ -171,7 +171,7 @@ const ProjectPage = () => {
                     Start a system<br/>like this?
                 </h2>
                 <Link 
-                    href="/#contact" 
+                    href="/contact" 
                     className="inline-block px-12 py-5 bg-white text-site-accent font-bold uppercase tracking-[0.2em] text-sm rounded-full hover:scale-105 transition-transform"
                 >
                     Initier un projet
