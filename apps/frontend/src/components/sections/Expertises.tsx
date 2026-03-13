@@ -2,12 +2,12 @@
 
 import React, { useState } from "react";
 import { useLanguage } from "../LanguageContext";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 import Link from "next/link";
 import { cn } from "@/utils/cn";
 import { Plus } from "lucide-react";
 
-const letterVariants = {
+const letterVariants: Variants = {
   initial: { opacity: 0.8, y: 0 },
   hover: (i: number) => ({
     opacity: 1,
@@ -15,8 +15,7 @@ const letterVariants = {
     transition: {
       duration: 0.4,
       delay: i * 0.012,
-      type: "spring",
-      ease: [0.23, 1, 0.32, 1]
+      ease: [0.23, 1, 0.32, 1] as any
     }
   })
 };
