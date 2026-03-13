@@ -68,8 +68,14 @@ interface Dictionary {
   funnel: {
     steps: {
       identity: { title: string; nameLabel: string; contextLabel: string };
-      needs: { title: string; options: string[] };
-      details: { title: string; messageLabel: string; budgetLabel: string };
+      needs: { title: string; options: { id: string; label: string; template: string }[] };
+      details: { 
+        title: string; 
+        messageLabel: string; 
+        budgetLabel: string;
+        customMessage: string;
+        useTemplate: string;
+      };
     };
     cta: { next: string; prev: string; submit: string };
     success: { title: string; message: string };
@@ -180,16 +186,20 @@ const dictionaries: Record<Language, Dictionary> = {
         needs: { 
           title: "De quoi avez-vous besoin ?", 
           options: [
-            "Architecture & Automation Systems",
-            "Design d'expériences & Écosystèmes",
-            "Workflow Algorithmique & Data",
-            "Audit & Stratégie"
+            { id: "design", label: "Design & Expériences", template: "Je souhaite refondre mon interface avec une approche systémique et immersive. Mon objectif est de..." },
+            { id: "app", label: "Apps Large Scale", template: "J'ai besoin de construire une application SaaS robuste et scalable capable de gérer..." },
+            { id: "chatbot", label: "Chatbots IA", template: "Je cherche à intégrer un agent conversationnel intelligent pour automatiser..." },
+            { id: "phone", label: "IA Téléphonique", template: "Je souhaite déployer un agent IA vocal capable de gérer mes appels et..." },
+            { id: "workflow", label: "Workflows Autonomes", template: "Je veux automatiser mon processus de [domaine] via des workflows indépendants et performants." },
+            { id: "full", label: "Système Complet", template: "Je souhaite créer un écosystème sur-mesure combinant architecture, design et IA de bout en bout." }
           ] 
         },
         details: { 
           title: "Dites-m'en plus", 
           messageLabel: "Votre message", 
-          budgetLabel: "Budget estimé" 
+          budgetLabel: "Budget estimé",
+          customMessage: "Message personnalisé",
+          useTemplate: "Utiliser un template"
         },
       },
       cta: { next: "Continuer", prev: "Retour", submit: "Envoyer ma demande" },
@@ -302,16 +312,20 @@ const dictionaries: Record<Language, Dictionary> = {
         needs: { 
           title: "What do you need?", 
           options: [
-            "Architecture & Automation Systems",
-            "Experience Design & Ecosystems",
-            "Algorithmic Workflow & Data",
-            "Audit & Strategy"
+            { id: "design", label: "Design & Experiences", template: "I want to redesign my interface with a systemic and immersive approach. My goal is to..." },
+            { id: "app", label: "Large Scale Apps", template: "I need to build a robust and scalable SaaS application capable of handling..." },
+            { id: "chatbot", label: "AI Chatbots", template: "I'm looking to integrate an intelligent conversational agent to automate..." },
+            { id: "phone", label: "AI Phone Agents", template: "I wish to deploy a vocal AI agent capable of handling my calls and..." },
+            { id: "workflow", label: "Autonomous Workflows", template: "I want to automate my [domain] process via independent and high-performance workflows." },
+            { id: "full", label: "Full System", template: "I want to create a bespoke ecosystem combining architecture, design, and AI from end to end." }
           ] 
         },
         details: { 
           title: "Tell me more", 
           messageLabel: "Your message", 
-          budgetLabel: "Estimated Budget" 
+          budgetLabel: "Estimated Budget",
+          customMessage: "Custom message",
+          useTemplate: "Use template"
         },
       },
       cta: { next: "Continue", prev: "Back", submit: "Send my request" },

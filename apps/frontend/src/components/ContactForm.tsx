@@ -18,6 +18,7 @@ const ContactForm = () => {
   const { dict } = useLanguage();
   const [step, setStep] = useState(0);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [useTemplate, setUseTemplate] = useState(true);
   const [formData, setFormData] = useState<FormState>({
     name: "",
     context: "",
@@ -26,12 +27,21 @@ const ContactForm = () => {
     budget: "",
   });
 
-  const nextStep = () => setStep((s) => s + 1);
+  const nextStep = () => {
+    // When moving to step 2 (details), if using template, pre-fill message
+    if (step === 1 && useTemplate) {
+        const selectedNeed = dict.funnel.steps.needs.options.find(o => o.label === formData.need);
+        if (selectedNeed) {
+            setFormData(prev => ({ ...prev, message: selectedNeed.template }));
+        }
+    }
+    setStep((s) => s + 1);
+  };
+
   const prevStep = () => setStep((s) => s - 1);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate submission
     setIsSubmitted(true);
   };
 
@@ -77,28 +87,28 @@ const ContactForm = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {dict.funnel.steps.needs.options.map((option) => (
             <button
-              key={option}
+              key={option.id}
               type="button"
-              onClick={() => setFormData({ ...formData, need: option })}
+              onClick={() => setFormData({ ...formData, need: option.label })}
               className={cn(
                 "p-6 rounded-2xl border text-left transition-all duration-300 group relative overflow-hidden",
-                formData.need === option
+                formData.need === option.label
                   ? "border-site-accent bg-site-accent text-white"
                   : "border-site-border bg-white hover:border-site-accent/30"
               )}
             >
-              <span className="text-sm font-bold uppercase tracking-wider relative z-10">{option}</span>
-              {formData.need === option && (
+              <span className="text-sm font-bold uppercase tracking-wider relative z-10">{option.label}</span>
+              {formData.need === option.label && (
                 <motion.div
                   layoutId="activeNeed"
                   className="absolute inset-0 bg-site-accent"
                 />
               )}
               <div className={cn(
-                "absolute top-4 right-4 w-5 h-5 rounded-full border flex items-center justify-center transition-colors",
-                formData.need === option ? "bg-white border-white text-site-accent" : "border-site-border"
+                "absolute top-4 right-4 w-5 h-5 rounded-full border flex items-center justify-center transition-colors shadow-sm",
+                formData.need === option.label ? "bg-white border-white text-site-accent" : "border-site-border bg-white/50"
               )}>
-                {formData.need === option && <Check size={12} strokeWidth={4} />}
+                {formData.need === option.label && <Check size={12} strokeWidth={4} />}
               </div>
             </button>
           ))}
@@ -111,15 +121,41 @@ const ContactForm = () => {
       title: dict.funnel.steps.details.title,
       content: (
         <div className="space-y-8">
+          <div className="flex bg-site-border/20 p-1 rounded-full w-fit mb-6">
+              <button 
+                type="button"
+                onClick={() => setUseTemplate(true)}
+                className={cn(
+                    "px-4 py-2 text-[10px] uppercase font-bold tracking-widest rounded-full transition-all",
+                    useTemplate ? "bg-site-accent text-white shadow-lg" : "text-site-text-light/60 hover:text-site-text"
+                )}
+              >
+                  {dict.funnel.steps.details.useTemplate}
+              </button>
+              <button 
+                type="button"
+                onClick={() => setUseTemplate(false)}
+                className={cn(
+                    "px-4 py-2 text-[10px] uppercase font-bold tracking-widest rounded-full transition-all",
+                    !useTemplate ? "bg-site-accent text-white shadow-lg" : "text-site-text-light/60 hover:text-site-text"
+                )}
+              >
+                  {dict.funnel.steps.details.customMessage}
+              </button>
+          </div>
+
           <div className="space-y-2">
             <label className="text-[10px] font-bold uppercase tracking-widest text-site-text-light/60">
               {dict.funnel.steps.details.messageLabel}
             </label>
             <textarea
               value={formData.message}
-              onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-              className="w-full bg-transparent border border-site-border p-6 rounded-2xl text-lg min-h-[150px] focus:border-site-accent outline-none transition-colors resize-none"
-              placeholder="Tell me about your vision..."
+              onChange={(e) => {
+                  setFormData({ ...formData, message: e.target.value });
+                  if (useTemplate) setUseTemplate(false); // If user types, switch to custom mode
+              }}
+              className="w-full bg-transparent border border-site-border p-6 rounded-2xl text-lg min-h-[150px] focus:border-site-accent outline-none transition-colors resize-none leading-relaxed"
+              placeholder="Dites-moi tout sur votre vision..."
             />
           </div>
           <div className="space-y-2">
@@ -127,14 +163,14 @@ const ContactForm = () => {
               {dict.funnel.steps.details.budgetLabel}
             </label>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-               {["< 5k", "5k - 15k", "15k - 50k", "50k+"].map((range) => (
+               {["< 10k", "10k - 30k", "30k - 100k", "100k+"].map((range) => (
                  <button
                     key={range}
                     type="button"
                     onClick={() => setFormData({ ...formData, budget: range })}
                     className={cn(
                         "py-3 px-4 rounded-xl border text-xs font-bold transition-all",
-                        formData.budget === range ? "bg-site-accent text-white border-site-accent" : "border-site-border text-site-text-light hover:border-site-accent/30"
+                        formData.budget === range ? "bg-site-accent text-white border-site-accent shadow-md shadow-site-accent/10" : "border-site-border text-site-text-light/60 hover:border-site-accent/30 hover:text-site-accent"
                     )}
                  >
                     {range}
