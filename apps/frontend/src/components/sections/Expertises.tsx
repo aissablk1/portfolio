@@ -47,43 +47,44 @@ const Expertises = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section id="expertise" className="px-container section-padding">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex items-center gap-4 mb-24">
+    <section id="expertise" className="section-padding overflow-x-hidden">
+      <div className="max-w-7xl mx-auto px-container mb-24">
+        <div className="flex items-center gap-4">
           <div className="w-2 h-2 rounded-full bg-site-accent" />
           <span className="text-xs font-bold uppercase tracking-widest text-site-text-light/60">
             {dict.nav.expertise}
           </span>
         </div>
+      </div>
 
-        <div className="grid grid-cols-1 border-t border-site-border">
-          {dict.expertises.items.map((item, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: idx * 0.05 }}
-              className="border-b border-site-border"
-            >
+      <div className="border-t border-site-border">
+        {dict.expertises.items.map((item, idx) => (
+          <motion.div
+            key={idx}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: idx * 0.05 }}
+            className="border-b border-site-border relative group"
+          >
+            <div className="max-w-7xl mx-auto px-container">
               <motion.button
                 onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
                 whileHover="hover"
                 initial="initial"
                 className="w-full py-10 md:py-14 flex items-center justify-between group text-left cursor-pointer outline-none"
               >
-                <div className="max-w-[80%]">
+                <div className="max-w-[85%]">
                     <span className="block text-[10px] font-bold uppercase tracking-[0.3em] text-site-accent mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                         {item.microcopy}
                     </span>
                     <motion.h3 
                       className={cn(
-                        "text-3xl md:text-5xl lg:text-6xl tracking-tighter font-medium uppercase flex flex-wrap gap-x-[0.25em] transition-transform duration-700",
+                        "text-3xl md:text-5xl lg:text-7xl tracking-tighter font-medium uppercase flex flex-wrap gap-x-[0.25em] transition-transform duration-700",
                         openIndex === idx ? "text-site-accent italic md:translate-x-4" : "group-hover:translate-x-4"
                       )}
                     >
                       {item.title.split(" ").map((word, wordIdx, wordsArr) => {
-                        // Calculate cumulative index to maintain linear stagger across words
                         const cumulativeIndex = wordsArr
                           .slice(0, wordIdx)
                           .reduce((acc, w) => acc + w.length + 1, 0);
@@ -113,36 +114,38 @@ const Expertises = () => {
                   <Plus className="w-5 h-5 md:w-8 md:h-8" strokeWidth={1.5} />
                 </div>
               </motion.button>
+            </div>
 
-              <AnimatePresence>
-                {openIndex === idx && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
-                    className="overflow-hidden relative"
-                  >
-                    {/* Background Scrolling Text */}
-                    <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-screen pointer-events-none -z-10 select-none flex items-center overflow-hidden">
-                      <motion.div
-                        initial={{ x: "0%" }}
-                        animate={{ x: "-50%" }}
-                        transition={{ duration: 25, ease: "linear", repeat: Infinity }}
-                        className="flex flex-row gap-20 whitespace-nowrap opacity-[0.03]"
-                      >
-                        {[...Array(4)].map((_, i) => (
-                          <span 
-                            key={i} 
-                            className="text-[15rem] md:text-[25rem] font-display font-black uppercase leading-none"
-                          >
-                            {item.title}
-                          </span>
-                        ))}
-                      </motion.div>
-                    </div>
+            <AnimatePresence>
+              {openIndex === idx && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
+                  className="overflow-hidden relative"
+                >
+                  {/* Background Scrolling Text - BLEED TO EDGE */}
+                  <div className="absolute inset-0 pointer-events-none -z-10 select-none flex items-center">
+                    <motion.div
+                      initial={{ x: "0%" }}
+                      animate={{ x: "-50%" }}
+                      transition={{ duration: 30, ease: "linear", repeat: Infinity }}
+                      className="flex flex-row gap-20 whitespace-nowrap opacity-[0.03]"
+                    >
+                      {[...Array(4)].map((_, i) => (
+                        <span 
+                          key={i} 
+                          className="text-[18rem] md:text-[35rem] font-display font-black uppercase leading-none"
+                        >
+                          {item.title}
+                        </span>
+                      ))}
+                    </motion.div>
+                  </div>
 
-                    <div className="pb-14 md:pb-20 max-w-2xl md:pl-4 relative z-10">
+                  <div className="max-w-7xl mx-auto px-container relative z-10 pb-14 md:pb-20">
+                    <div className="max-w-2xl md:pl-4">
                       <p className="text-lg md:text-2xl text-site-text-light leading-relaxed mb-10">
                         {item.description}
                       </p>
@@ -156,12 +159,12 @@ const Expertises = () => {
                          <Plus size={14} className="rotate-0 group-hover/link:rotate-90 transition-transform" />
                       </Link>
                     </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
-          ))}
-        </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+        ))}
       </div>
     </section>
   );
