@@ -31,7 +31,7 @@ const letterVariants: Variants = {
       opacity: 1,
       y: -4,
       fontStyle: "italic",
-      color: "#ff3366", // Use exact accent color for perfect visual
+      color: "grey",
       transition: {
         duration: 0.4,
         delay: totalDelay,
@@ -124,26 +124,23 @@ const Expertises = () => {
                   transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
                   className="overflow-hidden relative"
                 >
-                  {/* Background Scrolling Text - BLEED TO EDGE - FULL HEIGHT WALL */}
-                  <div className="absolute inset-0 pointer-events-none -z-10 select-none flex flex-col justify-around py-2 overflow-hidden">
-                    {[...Array(3)].map((_, rowIndex) => (
-                      <motion.div
-                        key={rowIndex}
-                        initial={{ x: rowIndex % 2 === 0 ? "0%" : "-50%" }}
-                        animate={{ x: rowIndex % 2 === 0 ? "-50%" : "0%" }}
-                        transition={{ duration: 30 + (rowIndex * 5), ease: "linear", repeat: Infinity }}
-                        className="flex flex-row gap-20 whitespace-nowrap opacity-[0.02] flex-1 items-center"
-                      >
-                        {[...Array(4)].map((_, i) => (
-                          <span 
-                            key={i} 
-                            className="text-[10rem] md:text-[22rem] font-display font-black uppercase leading-none"
-                          >
-                            {item.title}
-                          </span>
-                        ))}
-                      </motion.div>
-                    ))}
+                  {/* Background Scrolling Text - BLEED TO EDGE */}
+                  <div className="absolute inset-0 pointer-events-none translate-y-[-75%] h-full -z-10 select-none flex items-center">
+                    <motion.div
+                      initial={{ x: "0%" }}
+                      animate={{ x: "-50%" }}
+                      transition={{ duration: 30, ease: "linear", repeat: Infinity }}
+                      className="flex flex-row gap-20 whitespace-nowrap opacity-[0.03]"
+                    >
+                      {[...Array(4)].map((_, i) => (
+                        <span 
+                          key={i} 
+                          className="text-[18rem] md:text-[35rem] font-display font-black uppercase leading-none"
+                        >
+                          {item.title}
+                        </span>
+                      ))}
+                    </motion.div>
                   </div>
 
                   <div className="max-w-7xl mx-auto px-container relative z-10 pb-14 md:pb-20">

@@ -23,7 +23,7 @@ const Approach = () => {
             </h2>
           </div>
           <div className="lg:pt-12">
-            <p className="text-xl md:text-2xl opacity-60 leading-relaxed italic border-l border-white/20 pl-8">
+            <p className="text-2xl md:text-4xl opacity-80 leading-relaxed italic border-l border-white/30 pl-8">
               "{dict.approach.subtitle}"
             </p>
           </div>
