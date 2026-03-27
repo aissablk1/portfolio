@@ -181,9 +181,9 @@ export default function MaintenanceGate({
                 : "Check back shortly."}
             </p>
 
-            {/* Mobile password input — visible on mobile, hidden on desktop */}
+            {/* Mobile password input — visible on mobile portrait only, hidden on desktop and landscape */}
             <div className={cn(
-              "mt-12 w-full md:hidden",
+              "mt-12 w-full md:hidden landscape:hidden",
               shake && "animate-[shake_0.5s_ease-in-out]"
             )}>
               <div className="flex items-center gap-3 bg-site-border/30 border border-site-border rounded-xl px-4 py-3">
