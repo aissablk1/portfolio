@@ -1,0 +1,366 @@
+import { NextResponse } from "next/server";
+
+const RESEND_API_KEY = process.env.RESEND_API_KEY;
+const CONTACT_EMAIL = "contact@aissabelkoussa.fr";
+const FROM_EMAIL = `Aissa Belkoussa <contact@aissabelkoussa.fr>`;
+
+// --- Rate limiting (in-memory, per-IP, resets on deploy) ---
+const rateMap = new Map<string, { count: number; resetAt: number }>();
+const RATE_LIMIT = 3;
+const RATE_WINDOW_MS = 15 * 60 * 1000; // 15 minutes
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const entry = rateMap.get(ip);
+  if (!entry || now > entry.resetAt) {
+    rateMap.set(ip, { count: 1, resetAt: now + RATE_WINDOW_MS });
+    return false;
+  }
+  entry.count++;
+  return entry.count > RATE_LIMIT;
+}
+
+// --- Types ---
+interface ContactPayload {
+  name: string;
+  email: string;
+  context: string;
+  need: string;
+  message: string;
+  budget: string;
+  lang: "fr" | "en";
+  _honey?: string; // honeypot
+}
+
+function validatePayload(body: unknown): body is ContactPayload {
+  if (!body || typeof body !== "object") return false;
+  const b = body as Record<string, unknown>;
+  return (
+    typeof b.name === "string" &&
+    b.name.length > 2 &&
+    typeof b.email === "string" &&
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(b.email) &&
+    typeof b.context === "string" &&
+    typeof b.need === "string" &&
+    typeof b.message === "string" &&
+    b.message.length > 5 &&
+    typeof b.budget === "string" &&
+    (b.lang === "fr" || b.lang === "en")
+  );
+}
+
+// --- Bilingual labels ---
+const labels = {
+  fr: {
+    // Admin email
+    subject: "Nouvelle demande de projet",
+    via: "via aissabelkoussa.fr",
+    name: "Nom",
+    email: "Email",
+    company: "Entreprise / Projet",
+    need: "Besoin",
+    budget: "Budget",
+    message: "Message",
+    notProvided: "Non renseigne",
+    submittedAt: "Soumis le",
+    language: "Langue du visiteur",
+    replyNow: "Repondre maintenant",
+    footer: "Aissa Belkoussa &bull; Architecte de systemes",
+    // Confirmation email
+    confirmSubject: "Bien recu — je reviens vers vous rapidement",
+    confirmGreeting: "Bonjour",
+    confirmBody:
+      "Merci pour votre message. J'ai bien recu votre demande et je l'analyse attentivement.",
+    confirmPromise: "Je reviens vers vous sous 48h maximum.",
+    confirmDetail: "Voici un recapitulatif de votre demande :",
+    confirmClosing: "A tres bientot,",
+    confirmSignature: "Aissa Belkoussa",
+    confirmRole: "Architecte de systemes & Developpeur",
+    confirmSite: "www.aissabelkoussa.fr",
+  },
+  en: {
+    subject: "New project request",
+    via: "via aissabelkoussa.fr",
+    name: "Name",
+    email: "Email",
+    company: "Company / Project",
+    need: "Need",
+    budget: "Budget",
+    message: "Message",
+    notProvided: "Not provided",
+    submittedAt: "Submitted on",
+    language: "Visitor language",
+    replyNow: "Reply now",
+    footer: "Aissa Belkoussa &bull; Systems Architect",
+    confirmSubject: "Received — I'll get back to you shortly",
+    confirmGreeting: "Hi",
+    confirmBody:
+      "Thank you for reaching out. I've received your request and I'm reviewing it carefully.",
+    confirmPromise: "I'll get back to you within 48 hours.",
+    confirmDetail: "Here's a summary of your request:",
+    confirmClosing: "Talk soon,",
+    confirmSignature: "Aissa Belkoussa",
+    confirmRole: "Systems Architect & Developer",
+    confirmSite: "www.aissabelkoussa.fr",
+  },
+};
+
+// --- Escape ---
+function esc(str: string): string {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+// --- Admin notification email ---
+function buildAdminEmail(data: ContactPayload): string {
+  const t = labels[data.lang] || labels.fr;
+  const now = new Date().toLocaleString(data.lang === "fr" ? "fr-FR" : "en-US", {
+    dateStyle: "full",
+    timeStyle: "short",
+    timeZone: "Europe/Paris",
+  });
+  const langBadge = data.lang === "fr" ? "Francais" : "English";
+
+  return `<!DOCTYPE html>
+<html lang="${data.lang}">
+<head><meta charset="utf-8"></head>
+<body style="margin:0;padding:0;background:#0a0a0a;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
+  <div style="max-width:600px;margin:0 auto;padding:40px 24px;">
+
+    <div style="border-bottom:2px solid #222;padding-bottom:24px;margin-bottom:32px;">
+      <h1 style="color:#fff;font-size:20px;margin:0;letter-spacing:0.1em;text-transform:uppercase;">
+        ${t.subject}
+      </h1>
+      <p style="color:#666;font-size:12px;margin:8px 0 0;text-transform:uppercase;letter-spacing:0.15em;">
+        ${t.via} &bull; ${now}
+      </p>
+    </div>
+
+    <!-- Reply button -->
+    <div style="margin-bottom:32px;">
+      <a href="mailto:${esc(data.email)}?subject=Re: ${esc(data.need)}" style="display:inline-block;background:#6366f1;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;">
+        ${t.replyNow} &rarr;
+      </a>
+    </div>
+
+    <table style="width:100%;border-collapse:collapse;">
+      <tr>
+        <td style="padding:16px 0;border-bottom:1px solid #1a1a1a;vertical-align:top;width:50%;">
+          <span style="color:#666;font-size:10px;text-transform:uppercase;letter-spacing:0.15em;">${t.name}</span>
+          <p style="color:#fff;font-size:16px;margin:6px 0 0;font-weight:600;">${esc(data.name)}</p>
+        </td>
+        <td style="padding:16px 0;border-bottom:1px solid #1a1a1a;vertical-align:top;width:50%;">
+          <span style="color:#666;font-size:10px;text-transform:uppercase;letter-spacing:0.15em;">${t.email}</span>
+          <p style="color:#fff;font-size:16px;margin:6px 0 0;">
+            <a href="mailto:${esc(data.email)}" style="color:#6366f1;text-decoration:none;">${esc(data.email)}</a>
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding:16px 0;border-bottom:1px solid #1a1a1a;vertical-align:top;">
+          <span style="color:#666;font-size:10px;text-transform:uppercase;letter-spacing:0.15em;">${t.company}</span>
+          <p style="color:#fff;font-size:16px;margin:6px 0 0;">${esc(data.context) || t.notProvided}</p>
+        </td>
+        <td style="padding:16px 0;border-bottom:1px solid #1a1a1a;vertical-align:top;">
+          <span style="color:#666;font-size:10px;text-transform:uppercase;letter-spacing:0.15em;">${t.language}</span>
+          <p style="color:#fff;font-size:16px;margin:6px 0 0;">
+            <span style="display:inline-block;background:#1a1a1a;border:1px solid #333;border-radius:20px;padding:2px 10px;font-size:11px;">${langBadge}</span>
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding:16px 0;border-bottom:1px solid #1a1a1a;vertical-align:top;">
+          <span style="color:#666;font-size:10px;text-transform:uppercase;letter-spacing:0.15em;">${t.need}</span>
+          <p style="color:#fff;font-size:16px;margin:6px 0 0;">
+            <span style="display:inline-block;background:#1a1a1a;border:1px solid #333;border-radius:20px;padding:4px 14px;font-size:13px;">
+              ${esc(data.need)}
+            </span>
+          </p>
+        </td>
+        <td style="padding:16px 0;border-bottom:1px solid #1a1a1a;vertical-align:top;">
+          <span style="color:#666;font-size:10px;text-transform:uppercase;letter-spacing:0.15em;">${t.budget}</span>
+          <p style="color:#fff;font-size:16px;margin:6px 0 0;font-weight:600;">${esc(data.budget)}</p>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" style="padding:16px 0;vertical-align:top;">
+          <span style="color:#666;font-size:10px;text-transform:uppercase;letter-spacing:0.15em;">${t.message}</span>
+          <div style="color:#ccc;font-size:15px;margin:10px 0 0;line-height:1.7;background:#111;border:1px solid #1a1a1a;border-radius:12px;padding:20px;">
+            ${esc(data.message).replace(/\n/g, "<br>")}
+          </div>
+        </td>
+      </tr>
+    </table>
+
+    <div style="margin-top:40px;padding-top:24px;border-top:2px solid #222;text-align:center;">
+      <p style="color:#444;font-size:11px;text-transform:uppercase;letter-spacing:0.15em;margin:0;">
+        ${t.footer}
+      </p>
+    </div>
+  </div>
+</body>
+</html>`;
+}
+
+// --- Confirmation email to prospect ---
+function buildConfirmationEmail(data: ContactPayload): string {
+  const t = labels[data.lang] || labels.fr;
+
+  return `<!DOCTYPE html>
+<html lang="${data.lang}">
+<head><meta charset="utf-8"></head>
+<body style="margin:0;padding:0;background:#fafafa;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
+  <div style="max-width:600px;margin:0 auto;padding:40px 24px;">
+
+    <div style="margin-bottom:32px;">
+      <h1 style="color:#111;font-size:18px;margin:0;font-weight:700;">
+        ${t.confirmGreeting} ${esc(data.name.split(" ")[0])},
+      </h1>
+    </div>
+
+    <div style="color:#333;font-size:15px;line-height:1.8;margin-bottom:24px;">
+      <p style="margin:0 0 16px;">${t.confirmBody}</p>
+      <p style="margin:0 0 24px;font-weight:600;">${t.confirmPromise}</p>
+    </div>
+
+    <div style="background:#f0f0f0;border-radius:12px;padding:24px;margin-bottom:32px;">
+      <p style="color:#888;font-size:11px;text-transform:uppercase;letter-spacing:0.15em;margin:0 0 16px;">${t.confirmDetail}</p>
+      <table style="width:100%;border-collapse:collapse;">
+        <tr>
+          <td style="padding:8px 0;color:#888;font-size:13px;width:100px;">${t.need}</td>
+          <td style="padding:8px 0;color:#111;font-size:13px;font-weight:600;">${esc(data.need)}</td>
+        </tr>
+        <tr>
+          <td style="padding:8px 0;color:#888;font-size:13px;">${t.budget}</td>
+          <td style="padding:8px 0;color:#111;font-size:13px;font-weight:600;">${esc(data.budget)}</td>
+        </tr>
+        ${data.context ? `<tr>
+          <td style="padding:8px 0;color:#888;font-size:13px;">${t.company}</td>
+          <td style="padding:8px 0;color:#111;font-size:13px;">${esc(data.context)}</td>
+        </tr>` : ""}
+      </table>
+    </div>
+
+    <div style="margin-bottom:32px;">
+      <p style="color:#333;font-size:15px;margin:0 0 4px;">${t.confirmClosing}</p>
+      <p style="color:#111;font-size:15px;font-weight:700;margin:0;">${t.confirmSignature}</p>
+      <p style="color:#888;font-size:13px;margin:4px 0 0;">${t.confirmRole}</p>
+    </div>
+
+    <div style="border-top:1px solid #e5e5e5;padding-top:20px;text-align:center;">
+      <a href="https://www.aissabelkoussa.fr" style="color:#6366f1;font-size:12px;text-decoration:none;font-weight:600;">${t.confirmSite}</a>
+      <span style="color:#ccc;margin:0 8px;">&bull;</span>
+      <a href="https://www.linkedin.com/in/aissabelkoussa" style="color:#6366f1;font-size:12px;text-decoration:none;">LinkedIn</a>
+      <span style="color:#ccc;margin:0 8px;">&bull;</span>
+      <a href="https://github.com/aissablk1" style="color:#6366f1;font-size:12px;text-decoration:none;">GitHub</a>
+    </div>
+  </div>
+</body>
+</html>`;
+}
+
+// --- Send email helper ---
+async function sendEmail(payload: {
+  to: string;
+  subject: string;
+  html: string;
+  reply_to?: string;
+}): Promise<boolean> {
+  const res = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${RESEND_API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ from: FROM_EMAIL, ...payload }),
+  });
+  if (!res.ok) {
+    console.error("Resend error:", await res.text());
+    return false;
+  }
+  return true;
+}
+
+// --- Route handler ---
+export async function POST(request: Request) {
+  if (!RESEND_API_KEY) {
+    return NextResponse.json(
+      { error: "Email service not configured" },
+      { status: 500 }
+    );
+  }
+
+  // Rate limiting
+  const ip =
+    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    request.headers.get("x-real-ip") ||
+    "unknown";
+
+  if (isRateLimited(ip)) {
+    return NextResponse.json(
+      { error: "Too many requests" },
+      { status: 429 }
+    );
+  }
+
+  // Parse body
+  let body: unknown;
+  try {
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
+  }
+
+  // Honeypot check — if the hidden field is filled, it's a bot
+  if (
+    body &&
+    typeof body === "object" &&
+    "_honey" in body &&
+    (body as Record<string, unknown>)._honey
+  ) {
+    // Silently accept to not tip off bots
+    return NextResponse.json({ success: true });
+  }
+
+  // Validate
+  if (!validatePayload(body)) {
+    return NextResponse.json({ error: "Invalid payload" }, { status: 400 });
+  }
+
+  const t = labels[body.lang] || labels.fr;
+
+  // Send both emails in parallel
+  const [adminSent, confirmSent] = await Promise.all([
+    // 1. Admin notification
+    sendEmail({
+      to: CONTACT_EMAIL,
+      subject: `${t.subject} — ${body.need} — ${body.name}`,
+      html: buildAdminEmail(body),
+      reply_to: body.email,
+    }),
+    // 2. Confirmation to prospect
+    sendEmail({
+      to: body.email,
+      subject: t.confirmSubject,
+      html: buildConfirmationEmail(body),
+    }),
+  ]);
+
+  if (!adminSent) {
+    return NextResponse.json(
+      { error: "Failed to send email" },
+      { status: 500 }
+    );
+  }
+
+  // Log if confirmation failed but don't block the user
+  if (!confirmSent) {
+    console.warn("Confirmation email failed for:", body.email);
+  }
+
+  return NextResponse.json({ success: true });
+}

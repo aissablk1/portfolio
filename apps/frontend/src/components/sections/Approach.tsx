@@ -18,9 +18,12 @@ const Approach = () => {
                 {dict.nav.approach}
               </span>
             </div>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl leading-tight text-balance">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl leading-tight text-balance mb-8">
               {dict.approach.bio}
             </h2>
+            <p className="text-lg opacity-60 max-w-md">
+              {dict.approach.intro}
+            </p>
           </div>
           <div className="lg:pt-12">
             <p className="text-2xl md:text-4xl opacity-80 leading-relaxed italic border-l border-white/30 pl-8">

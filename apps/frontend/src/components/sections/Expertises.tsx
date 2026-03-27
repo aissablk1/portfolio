@@ -51,7 +51,7 @@ const Expertises = () => {
         <div className="flex items-center gap-4">
           <div className="w-2 h-2 rounded-full bg-site-accent" />
           <span className="text-xs font-bold uppercase tracking-widest text-site-text-light/60">
-            {dict.nav.expertise}
+            {dict.expertises.title}
           </span>
         </div>
       </div>

@@ -11,14 +11,17 @@ const Systems = () => {
   return (
     <section id="systems" className="px-container section-padding">
       <div className="max-w-7xl mx-auto">
-        <div className="flex items-center justify-between mb-16">
-          <div className="flex items-center gap-4">
-            <div className="w-2 h-2 rounded-full bg-site-accent" />
-            <span className="text-xs font-bold uppercase tracking-widest text-site-text-light">
-              {dict.systems.title}
-            </span>
+          <div className="flex flex-col gap-6">
+            <div className="flex items-center gap-4">
+              <div className="w-2 h-2 rounded-full bg-site-accent" />
+              <span className="text-xs font-bold uppercase tracking-widest text-site-text-light">
+                {dict.systems.title}
+              </span>
+            </div>
+            <p className="text-lg md:text-xl text-site-text-light/60 max-w-xl">
+              {dict.systems.intro}
+            </p>
           </div>
-        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {dict.systems.items.map((system, idx) => (
@@ -43,9 +46,19 @@ const Systems = () => {
                 </div>
                 <h3 className="text-xl font-bold mb-2 uppercase tracking-tight">{system.title}</h3>
                 <p className="text-sm font-medium mb-3">{system.sub}</p>
-                <p className="text-xs text-site-text-light leading-relaxed">
+                <p className="text-xs text-site-text-light leading-relaxed mb-4">
                   {system.desc}
                 </p>
+                <div className="flex flex-wrap gap-2">
+                  {system.stack.map((tech) => (
+                    <span
+                      key={tech}
+                      className="text-[10px] font-mono px-2 py-1 rounded-full border border-site-border/50 text-site-text-light/60"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
               </motion.div>
             </Link>
           ))}

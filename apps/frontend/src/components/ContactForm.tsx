@@ -8,23 +8,29 @@ import { Check, ChevronRight, ChevronLeft, Send } from "lucide-react";
 
 type FormState = {
   name: string;
+  email: string;
   context: string;
   need: string;
   message: string;
   budget: string;
+  _honey: string;
 };
 
 const ContactForm = () => {
-  const { dict } = useLanguage();
+  const { dict, language } = useLanguage();
   const [step, setStep] = useState(0);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
   const [useTemplate, setUseTemplate] = useState(true);
   const [formData, setFormData] = useState<FormState>({
     name: "",
+    email: "",
     context: "",
     need: "",
     message: "",
     budget: "",
+    _honey: "",
   });
 
   const nextStep = () => {
@@ -40,9 +46,23 @@ const ContactForm = () => {
 
   const prevStep = () => setStep((s) => s - 1);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitted(true);
+    setIsSubmitting(true);
+    setSubmitError(false);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...formData, lang: language }),
+      });
+      if (!res.ok) throw new Error("Send failed");
+      setIsSubmitted(true);
+    } catch {
+      setSubmitError(true);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const steps = [
@@ -51,6 +71,17 @@ const ContactForm = () => {
       title: dict.funnel.steps.identity.title,
       content: (
         <div className="space-y-6">
+          {/* Honeypot — invisible to humans, filled by bots */}
+          <input
+            type="text"
+            name="_honey"
+            value={formData._honey}
+            onChange={(e) => setFormData({ ...formData, _honey: e.target.value })}
+            className="absolute opacity-0 h-0 w-0 pointer-events-none"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+          />
           <div className="space-y-2">
             <label className="text-[10px] font-bold uppercase tracking-widest text-site-text-light/60">
               {dict.funnel.steps.identity.nameLabel}
@@ -62,6 +93,18 @@ const ContactForm = () => {
               className="w-full bg-transparent border-b border-site-border py-4 text-2xl font-display focus:border-site-accent outline-none transition-colors"
               placeholder={dict.funnel.steps.identity.namePlaceholder}
               autoFocus
+            />
+          </div>
+          <div className="space-y-2">
+            <label className="text-[10px] font-bold uppercase tracking-widest text-site-text-light/60">
+              {dict.funnel.steps.identity.emailLabel}
+            </label>
+            <input
+              type="email"
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              className="w-full bg-transparent border-b border-site-border py-4 text-2xl font-display focus:border-site-accent outline-none transition-colors"
+              placeholder={dict.funnel.steps.identity.emailPlaceholder}
             />
           </div>
           <div className="space-y-2">
@@ -78,7 +121,7 @@ const ContactForm = () => {
           </div>
         </div>
       ),
-      isValid: formData.name.length > 2,
+      isValid: formData.name.length > 2 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email),
     },
     // Step 1: Needs
     {
@@ -244,6 +287,14 @@ const ContactForm = () => {
         </motion.div>
       </AnimatePresence>
 
+      {submitError && (
+        <p className="mt-8 text-sm text-red-500 text-center">
+          {language === "fr"
+            ? "Une erreur est survenue. Réessayez ou contactez-moi sur LinkedIn."
+            : "Something went wrong. Please try again or reach out on LinkedIn."}
+        </p>
+      )}
+
       {/* Navigation Buttons */}
       <div className="mt-16 flex items-center justify-between">
         <button
@@ -275,16 +326,16 @@ const ContactForm = () => {
         ) : (
           <button
             onClick={handleSubmit}
-            disabled={!steps[step].isValid}
+            disabled={!steps[step].isValid || isSubmitting}
             className={cn(
               "flex items-center gap-3 px-10 py-5 rounded-full font-bold uppercase tracking-widest text-xs transition-all shadow-lg",
-              steps[step].isValid 
-                ? "bg-site-accent text-white hover:scale-105 active:scale-95" 
+              steps[step].isValid && !isSubmitting
+                ? "bg-site-accent text-white hover:scale-105 active:scale-95"
                 : "bg-site-border text-site-text-light/50 cursor-not-allowed"
             )}
           >
-            {dict.funnel.cta.submit}
-            <Send size={16} />
+            {isSubmitting ? (language === "fr" ? "Envoi..." : "Sending...") : dict.funnel.cta.submit}
+            {!isSubmitting && <Send size={16} />}
           </button>
         )}
       </div>

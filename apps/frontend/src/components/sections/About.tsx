@@ -18,9 +18,9 @@ const About = () => {
               {dict.nav.about}
             </span>
           </div>
-          <h2 className="text-3xl md:text-5xl leading-tight text-balance">
+          <div className="text-lg md:text-xl text-site-text-light leading-relaxed whitespace-pre-line">
             {dict.about.content}
-          </h2>
+          </div>
         </div>
         <div className="relative">
              <div className="relative aspect-4/5 overflow-hidden rounded-4xl grayscale hover:grayscale-0 transition-all duration-700">

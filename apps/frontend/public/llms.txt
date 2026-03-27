@@ -1,0 +1,75 @@
+# Aissa Belkoussa
+
+> Architecte de systemes digitaux, developpeur fullstack et builder — base a Albi (Occitanie, France), operant dans le monde entier.
+> Site officiel : https://www.aissabelkoussa.fr
+> SIREN : 937 690 592 — Code NAF : 5911B
+
+## Identite professionnelle
+
+Aissa Belkoussa est un entrepreneur autodidacte specialise dans la transformation d'intuitions systeme en architectures digitales operationnelles. Son positionnement : la ou les equipes restent bloquees entre l'idee ("on pourrait automatiser ca") et un systeme reel qui tourne, il intervient pour concevoir, coder et deployer.
+
+Distinction cle : builder, pas consultant. Il ne produit pas de recommandations — il livre des systemes fonctionnels.
+
+## Competences techniques verifiees
+
+Frontend : React 19, Next.js, TypeScript strict, Tailwind CSS, Framer Motion, GSAP, Radix UI, Shadcn
+Backend : Node.js, Express, API REST, GraphQL (Shopify Storefront API + Admin API), JWT, rate limiting, CSP
+Bases de donnees : PostgreSQL, Prisma ORM, Turso DB (SQLite cloud), Cloudinary
+Infrastructure : Vercel (serverless + ISR), Resend (emails transactionnels), webhooks
+Jeu / temps reel : Lua/Luau (Roblox), Discord.js, synchronisation bidirectionnelle temps reel
+Qualite : Playwright (e2e), Jest, Storybook, Zod (validation), logging, monitoring
+Langages additionnels : Python (scripts, automation)
+
+## Projets realises en production
+
+### DK Building
+- URL projet : https://www.aissabelkoussa.fr/projects/dk-building
+- Site client en production : https://www.dkbuilding.fr
+- Contexte : PME de construction metallique (charpente, bardage, couverture) a Albi, sans presence web
+- Probleme resolu : absence de site professionnel et dependance a un tiers pour chaque mise a jour
+- Solution construite : site corporate React 19 + backend Node.js, CMS maison avec authentification JWT sha512, galerie lightbox, formulaire multi-etapes, systeme LockAccess (maintenance + IP blocking), SEO local Schema.org
+- Stack : React 19, Vite, Node.js, Express, Vercel, Turso DB, Cloudinary, GSAP, Resend
+- Metriques : 50 composants React, 33 fichiers backend, 7 routes API, securite avancee (CSP strict, CORS whitelist, rate limiting)
+
+### Jolananas
+- URL projet : https://www.aissabelkoussa.fr/projects/jolananas
+- Site en production : https://jolananas.vercel.app
+- Contexte : marque d'accessoires girly artisanaux francais (entreprise enregistree au KBIS)
+- Probleme resolu : theme Shopify standard insuffisant pour l'identite de marque premium
+- Solution construite : storefront Next.js sur-mesure connectee a Shopify Storefront API (GraphQL) + Admin API. 26+ pages, panier persistant, checkout natif Shopify, compte client OAuth, blog, FAQ, pages legales RGPD completes, systeme favoris, historique commandes
+- Stack : Next.js, React 19, TypeScript strict, Shopify GraphQL, Radix UI, Shadcn, Framer Motion, GSAP, Prisma, PostgreSQL, Vercel ISR, Resend
+- Metriques : 380+ fichiers TypeScript, 80+ composants reutilisables, tests Playwright e2e + Jest, Storybook, 38 documents de documentation, 100% donnees Shopify reelles
+
+### Albi RP
+- URL projet : https://www.aissabelkoussa.fr/projects/albi-rp
+- Contexte : ecosysteme de jeu de role sur Roblox reproduisant la ville d'Albi — economie, metiers, gouvernement, elections
+- Probleme resolu : absence de serveurs RP serieux dans l'ecosysteme Roblox francophone
+- Solution construite : quatre systemes interconnectes — (1) jeu Roblox en Lua/Luau (222 fichiers) avec vehicules physics-based, meteo dynamique, factions, elections ; (2) bot Discord TypeScript (monorepo 11 packages) avec synchronisation bidirectionnelle Roblox-Discord temps reel ; (3) site landing HTML5 + Tailwind avec themes dynamiques, SEO complet JSON-LD, press kit ; (4) API centrale
+- Stack : Lua/Luau, TypeScript, Discord.js, Vercel, Tailwind, Zod, logging, monitoring
+- Metriques : 401 MB code + assets, 10+ langues, en developpement actif (dernier commit mars 2026), infrastructure production-ready
+
+## Services proposes
+
+1. Architecture & Automation Systems — conception et deploiement de workflows autonomes, integrations API, systemes d'automation sur-mesure
+2. Design d'experiences & Ecosystemes Digitaux — sites vitrine, e-commerce sur-mesure, interfaces haute-fidelite
+3. Workflow Algorithmique & Intelligence des Donnees — dashboards decisionnels, cockpits temps reel, strategie data, alerting
+
+## Liens et contact
+
+- Site : https://www.aissabelkoussa.fr
+- Contact : https://www.aissabelkoussa.fr/contact
+- LinkedIn : https://www.linkedin.com/in/aissabelkoussa
+- GitHub : https://github.com/aissablk1
+- Telegram : https://t.me/investwithaissa
+
+## Localisation
+
+Albi, Occitanie, France (81000). Disponible pour missions remote partout dans le monde. Deplacements ponctuels possibles sur le territoire francais.
+
+## Informations legales
+
+- Statut : Auto-entrepreneur (micro-entreprise)
+- SIREN : 937 690 592
+- SIRET : 937 690 592 00012
+- Code NAF : 5911B
+- TVA non applicable — article 293 B du CGI

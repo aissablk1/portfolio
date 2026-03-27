@@ -23,19 +23,23 @@ const Header = () => {
   return (
     <>
       {/* Warning Banner */}
-      <div 
+      <Link
+        href="/aissabelkoussa.com"
         className={cn(
-          "fixed top-0 left-0 right-0 z-60 py-1.5 bg-red-600/5 backdrop-blur-xl flex justify-center items-center transition-all duration-300",
+          "group fixed top-0 left-0 right-0 z-60 py-1.5 bg-red-600/5 backdrop-blur-xl flex justify-center items-center transition-all duration-300 hover:bg-red-600/10",
           isScrolled ? "top-[-28px]" : "top-0"
         )}
       >
         <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-red-600 flex items-center gap-2">
           <AlertTriangle size={12} className="animate-pulse" strokeWidth={3} />
           {dict.warning}
+          <span className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200 ml-1 underline underline-offset-2">
+            {language === "fr" ? "En savoir +" : "Learn more +"}
+          </span>
         </p>
         {/* Gradient Border 0% - 100% - 0% */}
         <div className="absolute bottom-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-red-600/30 to-transparent" />
-      </div>
+      </Link>
       
       <header
         className={cn(
