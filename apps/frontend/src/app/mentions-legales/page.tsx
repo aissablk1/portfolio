@@ -89,6 +89,16 @@ export default function MentionsLegalesPage() {
                 2 rue Kellermann, 59100 Roubaix, France
                 <br />
                 RCS Lille Metropole 424 761 419
+                <br />
+                Site :{" "}
+                <a
+                  href="https://www.ovhcloud.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-site-accent hover:underline"
+                >
+                  ovhcloud.com
+                </a>
               </p>
             </>
           ),
