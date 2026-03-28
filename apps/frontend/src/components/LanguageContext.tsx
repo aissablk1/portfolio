@@ -413,7 +413,7 @@ const dictionaries: Record<Language, Dictionary> = {
       ownership: {
         title: "Propriete du domaine",
         domain: "aissabelkoussa.fr",
-        holder: "Aissa Belkoussa (personne physique)",
+        holder: "Aïssa Belkoussa (personne physique)",
         registrar: "OVHcloud",
         createdOn: "2025",
       },
@@ -688,7 +688,7 @@ const dictionaries: Record<Language, Dictionary> = {
       ownership: {
         title: "Domain ownership",
         domain: "aissabelkoussa.fr",
-        holder: "Aissa Belkoussa (individual)",
+        holder: "Aïssa Belkoussa (individual)",
         registrar: "OVHcloud",
         createdOn: "2025",
       },
