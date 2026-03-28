@@ -360,13 +360,13 @@ const dictionaries: Record<Language, Dictionary> = {
       subtitle: "Ce domaine est détenu par un tiers inconnu et utilise mon identité sans mon consentement. Si vous êtes arrivé ici, c'est que vous cherchiez probablement le bon site.",
       whatHappened: {
         title: "Ce qui se passe",
-        description: "Le nom de domaine aissabelkoussa.com a été enregistré par une entité tierce appelée « Team AG Internet » le 26 mai 2025, sans aucune autorisation de ma part. Ce domaine affiche des informations personnelles me concernant — notamment mon SIRET, mon adresse professionnelle et mon nom complet — sans mon consentement. C'est une usurpation d'identité numérique.",
+        description: "Le nom de domaine aissabelkoussa.com a été enregistré par une entité tierce le 26 mai 2025, sans aucune autorisation de ma part. Initialement identifié sous le nom « Team AG Internet », le détenteur a depuis activé la protection WHOIS (Whois Privacy Protection Foundation) pour masquer son identité. Ce domaine a été utilisé pour afficher des informations personnelles me concernant sans consentement — constituant une usurpation d'identité numérique.",
       },
       facts: {
         title: "Les faits",
         domain: "aissabelkoussa.com",
-        holder: "Team AG Internet",
-        registrar: "Openprovider (Registrar.eu)",
+        holder: "Masqué (Whois Privacy Protection Foundation) — initialement Team AG Internet",
+        registrar: "Hosting Concepts B.V. d/b/a Registrar.eu (Openprovider)",
         registeredOn: "26 mai 2025",
         ip: "15.197.130.221",
       },
@@ -432,7 +432,7 @@ const dictionaries: Record<Language, Dictionary> = {
       },
       usurpation: {
         title: "Alerte sur aissabelkoussa.com",
-        description: "Le domaine aissabelkoussa.com a ete enregistre par « Team AG Internet » le 26 mai 2025 sans mon consentement. Il constitue une usurpation d'identite numerique. Des signalements ont ete deposes.",
+        description: "Le domaine aissabelkoussa.com a été enregistré par un tiers le 26 mai 2025 sans mon consentement. Le détenteur, initialement identifié comme « Team AG Internet », a depuis masqué son identité via WHOIS privacy. Des signalements ont été déposés.",
         cta: "Voir le detail de l'usurpation",
       },
     },
@@ -635,13 +635,13 @@ const dictionaries: Record<Language, Dictionary> = {
       subtitle: "This domain is held by an unknown third party and uses my identity without my consent. If you landed here, you were probably looking for the right website.",
       whatHappened: {
         title: "What is happening",
-        description: "The domain name aissabelkoussa.com was registered by a third-party entity called 'Team AG Internet' on May 26, 2025, without any authorization from me. This domain displays personal information about me — including my SIRET number, business address, and full name — without my consent. This constitutes digital identity theft.",
+        description: "The domain name aissabelkoussa.com was registered by a third-party entity on May 26, 2025, without any authorization from me. Initially identified as 'Team AG Internet', the registrant has since enabled WHOIS privacy (Whois Privacy Protection Foundation) to hide their identity. This domain was used to display personal information about me without consent — constituting digital identity theft.",
       },
       facts: {
         title: "The facts",
         domain: "aissabelkoussa.com",
-        holder: "Team AG Internet",
-        registrar: "Openprovider (Registrar.eu)",
+        holder: "Hidden (Whois Privacy Protection Foundation) — initially Team AG Internet",
+        registrar: "Hosting Concepts B.V. d/b/a Registrar.eu (Openprovider)",
         registeredOn: "May 26, 2025",
         ip: "15.197.130.221",
       },
@@ -707,7 +707,7 @@ const dictionaries: Record<Language, Dictionary> = {
       },
       usurpation: {
         title: "Alert about aissabelkoussa.com",
-        description: "The domain aissabelkoussa.com was registered by 'Team AG Internet' on May 26, 2025 without my consent. It constitutes digital identity theft. Reports have been filed.",
+        description: "The domain aissabelkoussa.com was registered by a third party on May 26, 2025 without my consent. The registrant, initially identified as 'Team AG Internet', has since hidden their identity via WHOIS privacy. Reports have been filed.",
         cta: "View usurpation details",
       },
     },
