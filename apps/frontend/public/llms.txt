@@ -1,4 +1,4 @@
-# Aissa Belkoussa
+# Aïssa Belkoussa
 
 > Architecte de systemes digitaux, developpeur fullstack et builder — base a Albi (Occitanie, France), operant dans le monde entier.
 > Site officiel : https://www.aissabelkoussa.fr
@@ -6,7 +6,7 @@
 
 ## Identite professionnelle
 
-Aissa Belkoussa est un entrepreneur autodidacte specialise dans la transformation d'intuitions systeme en architectures digitales operationnelles. Son positionnement : la ou les equipes restent bloquees entre l'idee ("on pourrait automatiser ca") et un systeme reel qui tourne, il intervient pour concevoir, coder et deployer.
+Aïssa Belkoussa est un entrepreneur autodidacte specialise dans la transformation d'intuitions systeme en architectures digitales operationnelles. Son positionnement : la ou les equipes restent bloquees entre l'idee ("on pourrait automatiser ca") et un systeme reel qui tourne, il intervient pour concevoir, coder et deployer.
 
 Distinction cle : builder, pas consultant. Il ne produit pas de recommandations — il livre des systemes fonctionnels.
 

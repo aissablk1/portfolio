@@ -4,8 +4,8 @@ export const personSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
   "@id": `${siteUrl}/#person`,
-  name: "Aissa Belkoussa",
-  givenName: "Aissa",
+  name: "Aïssa Belkoussa",
+  givenName: "Aïssa",
   familyName: "Belkoussa",
   url: siteUrl,
   image: {
@@ -43,7 +43,7 @@ export const personSchema = {
   worksFor: {
     "@type": "Organization",
     "@id": `${siteUrl}/#organization`,
-    name: "Aissa Belkoussa",
+    name: "Aïssa Belkoussa",
   },
 };
 
@@ -51,8 +51,8 @@ export const organizationSchema = {
   "@context": "https://schema.org",
   "@type": ["Organization", "ProfessionalService", "LocalBusiness"],
   "@id": `${siteUrl}/#organization`,
-  name: "Aissa Belkoussa",
-  legalName: "Aissa Belkoussa",
+  name: "Aïssa Belkoussa",
+  legalName: "Aïssa Belkoussa",
   url: siteUrl,
   logo: {
     "@type": "ImageObject",
@@ -111,7 +111,7 @@ export const organizationSchema = {
 export const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  name: "Aissa Belkoussa",
+  name: "Aïssa Belkoussa",
   url: siteUrl,
   description:
     "Portfolio & services — Architecture de systemes, automation et developpement digital",

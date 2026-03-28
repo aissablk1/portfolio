@@ -52,7 +52,7 @@ CNAME   www             → f1f0ec239b0fc4a4.vercel-dns-017.com
 
 ### Resend
 - Domaine verifie : aissabelkoussa.fr
-- From : `Aissa Belkoussa <contact@aissabelkoussa.fr>`
+- From : `Aïssa Belkoussa <contact@aissabelkoussa.fr>`
 - Free tier : 100 emails/jour, 3 000/mois
 - Region : Ireland (eu-west-1)
 - Pas de SDK installe — utilisation directe de l'API REST via fetch()

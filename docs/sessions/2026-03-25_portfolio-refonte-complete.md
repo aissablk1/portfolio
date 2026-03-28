@@ -143,7 +143,7 @@ Fiche d'identite pour les LLMs (ChatGPT, Perplexity, Claude) :
 
 ### Configuration Resend
 - **Domaine verifie** : aissabelkoussa.fr (DKIM via resend._domainkey TXT)
-- **From** : `Aissa Belkoussa <contact@aissabelkoussa.fr>`
+- **From** : `Aïssa Belkoussa <contact@aissabelkoussa.fr>`
 - **Cle API** dans `.env.local` (gitignore)
 
 ### DNS (OVHcloud) — Etat actuel

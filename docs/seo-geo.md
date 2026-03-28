@@ -11,10 +11,10 @@ Le site est optimise pour le referencement classique (Google) et le referencemen
 **Fichier :** `src/app/layout.tsx`
 
 ### Champs configures
-- `title` : template `%s — Aissa Belkoussa` pour les pages enfants
+- `title` : template `%s — Aïssa Belkoussa` pour les pages enfants
 - `description` : pitch court orientation systemes/automation
 - `keywords` : 10 mots-cles longue traine cibles
-- `authors`, `creator`, `publisher` : Aissa Belkoussa
+- `authors`, `creator`, `publisher` : Aïssa Belkoussa
 - `alternates.canonical` : URL canonique
 - `category` : technology
 

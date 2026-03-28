@@ -134,6 +134,31 @@ interface Dictionary {
       articles: string[];
     };
   };
+  domainLegit: {
+    badge: string;
+    title: string;
+    subtitle: string;
+    ownership: {
+      title: string;
+      domain: string;
+      holder: string;
+      registrar: string;
+      createdOn: string;
+    };
+    whyThisPage: {
+      title: string;
+      description: string;
+    };
+    verification: {
+      title: string;
+      items: string[];
+    };
+    usurpation: {
+      title: string;
+      description: string;
+      cta: string;
+    };
+  };
 }
 
 const dictionaries: Record<Language, Dictionary> = {
@@ -381,6 +406,36 @@ const dictionaries: Record<Language, Dictionary> = {
         ],
       },
     },
+    domainLegit: {
+      badge: "Domaine officiel verifie",
+      title: "aissabelkoussa.fr — vous etes au bon endroit.",
+      subtitle: "Ce domaine est le seul que je possede et controle. C'est mon espace officiel sur le web.",
+      ownership: {
+        title: "Propriete du domaine",
+        domain: "aissabelkoussa.fr",
+        holder: "Aissa Belkoussa (personne physique)",
+        registrar: "OVHcloud",
+        createdOn: "2025",
+      },
+      whyThisPage: {
+        title: "Pourquoi cette page existe",
+        description: "Un tiers a enregistre le domaine aissabelkoussa.com sans mon autorisation, affichant mes informations personnelles sans consentement. Cette page existe pour dissiper toute confusion : aissabelkoussa.fr est le seul domaine legitime lie a mon identite professionnelle.",
+      },
+      verification: {
+        title: "Comment verifier",
+        items: [
+          "L'URL dans votre barre d'adresse affiche bien aissabelkoussa.fr",
+          "Le certificat SSL est emis pour aissabelkoussa.fr (cadenas dans le navigateur)",
+          "Le WHOIS du domaine .fr est enregistre aupres d'OVHcloud par le titulaire legitime",
+          "Ce site est deploye via Vercel et le DNS est gere par OVHcloud",
+        ],
+      },
+      usurpation: {
+        title: "Alerte sur aissabelkoussa.com",
+        description: "Le domaine aissabelkoussa.com a ete enregistre par « Team AG Internet » le 26 mai 2025 sans mon consentement. Il constitue une usurpation d'identite numerique. Des signalements ont ete deposes.",
+        cta: "Voir le detail de l'usurpation",
+      },
+    },
   },
   en: {
     warning: "aissabelkoussa.com is a phishing domain, make sure you are on aissabelkoussa.fr",
@@ -624,6 +679,36 @@ const dictionaries: Record<Language, Dictionary> = {
           "GDPR — Articles 5, 6, 7 and 9 (lawfulness of processing, consent, sensitive data)",
           "ICANN UDRP Policy — Domain name dispute resolution",
         ],
+      },
+    },
+    domainLegit: {
+      badge: "Verified official domain",
+      title: "aissabelkoussa.fr — you are in the right place.",
+      subtitle: "This domain is the only one I own and control. This is my official space on the web.",
+      ownership: {
+        title: "Domain ownership",
+        domain: "aissabelkoussa.fr",
+        holder: "Aissa Belkoussa (individual)",
+        registrar: "OVHcloud",
+        createdOn: "2025",
+      },
+      whyThisPage: {
+        title: "Why this page exists",
+        description: "A third party registered the domain aissabelkoussa.com without my authorization, displaying my personal information without consent. This page exists to clear any confusion: aissabelkoussa.fr is the only legitimate domain tied to my professional identity.",
+      },
+      verification: {
+        title: "How to verify",
+        items: [
+          "The URL in your address bar shows aissabelkoussa.fr",
+          "The SSL certificate is issued for aissabelkoussa.fr (padlock icon in your browser)",
+          "The WHOIS record for the .fr domain is registered with OVHcloud by the legitimate owner",
+          "This site is deployed via Vercel and DNS is managed by OVHcloud",
+        ],
+      },
+      usurpation: {
+        title: "Alert about aissabelkoussa.com",
+        description: "The domain aissabelkoussa.com was registered by 'Team AG Internet' on May 26, 2025 without my consent. It constitutes digital identity theft. Reports have been filed.",
+        cta: "View usurpation details",
       },
     },
   },

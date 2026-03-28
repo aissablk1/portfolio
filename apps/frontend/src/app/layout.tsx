@@ -21,7 +21,7 @@ const outfit = Outfit({
 });
 
 const siteUrl = "https://www.aissabelkoussa.fr";
-const siteTitle = "Aissa Belkoussa — Architecte de systemes & Automation";
+const siteTitle = "Aïssa Belkoussa — Architecte de systemes & Automation";
 const siteDescription =
   "Je transforme vos intuitions systeme en architectures digitales concretes, coherentes et fiables. Automation, IA, dashboards, e-commerce sur-mesure. Base en France, operant partout.";
 
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
 
   title: {
     default: siteTitle,
-    template: "%s — Aissa Belkoussa",
+    template: "%s — Aïssa Belkoussa",
   },
 
   description: siteDescription,
@@ -57,9 +57,9 @@ export const metadata: Metadata = {
     "systeme automation PME",
   ],
 
-  authors: [{ name: "Aissa Belkoussa", url: siteUrl }],
-  creator: "Aissa Belkoussa",
-  publisher: "Aissa Belkoussa",
+  authors: [{ name: "Aïssa Belkoussa", url: siteUrl }],
+  creator: "Aïssa Belkoussa",
+  publisher: "Aïssa Belkoussa",
 
   alternates: {
     canonical: siteUrl,
@@ -69,7 +69,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "fr_FR",
     url: siteUrl,
-    siteName: "Aissa Belkoussa",
+    siteName: "Aïssa Belkoussa",
     title: siteTitle,
     description: siteDescription,
     images: [
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
         url: "/assets/images/AISSABELKOUSSA.png",
         width: 1242,
         height: 2208,
-        alt: "Aissa Belkoussa — Architecte de systemes & Automation",
+        alt: "Aïssa Belkoussa — Architecte de systemes & Automation",
       },
     ],
   },

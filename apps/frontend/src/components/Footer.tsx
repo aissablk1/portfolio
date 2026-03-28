@@ -18,7 +18,7 @@ const Footer = () => {
             <source data-src="/assets/videos/glitch-red.mp4" type="video/mp4" src="/assets/videos/glitch-red.mp4" />
           </video>
           <ScrollVelocityRow baseVelocity={3} direction={1}>
-            <span className="mr-[2vw]">Aissa Belkoussa</span>
+            <span className="mr-[2vw]">Aïssa Belkoussa</span>
             <span className="mr-[2vw] opacity-50">&bull;</span>
             <span className="mr-[2vw]">{dict.footer.jobTitle}</span>
             <span className="mr-[2vw] opacity-50">&bull;</span>

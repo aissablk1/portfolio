@@ -99,5 +99,5 @@ RESEND_API_KEY=re_XXXXXXXXX  (.env.local, gitignore)
 
 ### Resend
 - Domaine : aissabelkoussa.fr (verifie)
-- From : `Aissa Belkoussa <contact@aissabelkoussa.fr>`
+- From : `Aïssa Belkoussa <contact@aissabelkoussa.fr>`
 - Free tier : 100 emails/jour, 3000/mois
