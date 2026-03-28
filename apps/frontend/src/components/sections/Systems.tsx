@@ -11,26 +11,26 @@ const Systems = () => {
   return (
     <section id="systems" className="px-container section-padding">
       <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col gap-6">
-            <div className="flex items-center gap-4">
+          <div className="mb-20 md:mb-28">
+            <div className="flex items-center gap-4 mb-6">
               <div className="w-2 h-2 rounded-full bg-site-accent" />
               <span className="text-xs font-bold uppercase tracking-widest text-site-text-light">
                 {dict.systems.title}
               </span>
             </div>
-            <p className="text-lg md:text-xl text-site-text-light/60 max-w-xl">
+            <p className="text-xl md:text-2xl text-site-text-light/60 max-w-2xl leading-relaxed">
               {dict.systems.intro}
             </p>
           </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
           {dict.systems.items.map((system, idx) => (
             <Link key={system.id} href={`/projects/${system.slug}`}>
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: idx * 0.1 }}
+                transition={{ duration: 0.8, delay: idx * 0.15, ease: [0.25, 1, 0.5, 1] }}
                 className="group cursor-pointer"
               >
                 <div className="aspect-4/3 bg-site-border/30 rounded-2xl mb-6 overflow-hidden border border-site-border relative">
@@ -44,9 +44,9 @@ const Systems = () => {
                       </div>
                   </div>
                 </div>
-                <h3 className="text-xl font-bold mb-2 uppercase tracking-tight">{system.title}</h3>
-                <p className="text-sm font-medium mb-3">{system.sub}</p>
-                <p className="text-xs text-site-text-light leading-relaxed mb-4">
+                <h3 className="text-2xl font-bold mb-2 uppercase tracking-tight">{system.title}</h3>
+                <p className="text-sm font-medium mb-3 text-site-text-light">{system.sub}</p>
+                <p className="text-sm text-site-text-light/60 leading-relaxed mb-4">
                   {system.desc}
                 </p>
                 <div className="flex flex-wrap gap-2">

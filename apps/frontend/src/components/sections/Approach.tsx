@@ -39,7 +39,7 @@ const Approach = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: idx * 0.1 }}
+              transition={{ duration: 0.8, delay: idx * 0.12, ease: [0.25, 1, 0.5, 1] }}
             >
               <div className="text-xl mb-4 font-medium">{idx + 1}. {pillar.title}</div>
               <p className="text-sm opacity-60 leading-relaxed">

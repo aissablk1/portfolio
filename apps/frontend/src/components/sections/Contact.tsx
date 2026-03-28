@@ -12,10 +12,10 @@ const Contact = () => {
     <section id="contact" className="px-container section-padding">
       <div className="max-w-7xl mx-auto text-center">
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 1, ease: [0.25, 1, 0.5, 1] }}
         >
           <div className="w-16 h-16 bg-site-accent text-white rounded-full flex items-center justify-center mx-auto mb-12 shadow-xl shadow-site-accent/20">
             <span className="text-3xl">👋</span>

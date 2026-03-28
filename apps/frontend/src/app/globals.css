@@ -50,7 +50,7 @@
   }
 
   .section-padding {
-    padding-block: clamp(4rem, 10vw, 10rem);
+    padding-block: clamp(6rem, 12vw, 14rem);
   }
 }
 

@@ -47,8 +47,8 @@ const Expertises = () => {
 
   return (
     <section id="expertise" className="section-padding overflow-x-hidden">
-      <div className="max-w-7xl mx-auto px-container mb-24">
-        <div className="flex items-center gap-4">
+      <div className="max-w-7xl mx-auto px-container mb-20 md:mb-32">
+        <div className="flex items-center gap-4 mb-6">
           <div className="w-2 h-2 rounded-full bg-site-accent" />
           <span className="text-xs font-bold uppercase tracking-widest text-site-text-light/60">
             {dict.expertises.title}
@@ -71,7 +71,7 @@ const Expertises = () => {
                 onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
                 whileHover="hover"
                 initial="initial"
-                className="w-full py-10 md:py-14 flex items-center justify-between group text-left cursor-pointer outline-none"
+                className="w-full py-12 md:py-16 flex items-center justify-between group text-left cursor-pointer outline-none"
               >
                 <div className="max-w-[85%]">
                     <span className="block text-[10px] font-bold uppercase tracking-[0.3em] text-site-accent mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
@@ -143,9 +143,9 @@ const Expertises = () => {
                     </motion.div>
                   </div>
 
-                  <div className="max-w-7xl mx-auto px-container relative z-10 pb-14 md:pb-20">
-                    <div className="max-w-2xl md:pl-4">
-                      <p className="text-lg md:text-2xl text-site-text-light leading-relaxed mb-10">
+                  <div className="max-w-7xl mx-auto px-container relative z-10 pb-16 md:pb-24">
+                    <div className="max-w-3xl md:pl-4">
+                      <p className="text-xl md:text-2xl lg:text-3xl text-site-text-light leading-relaxed mb-12">
                         {item.description}
                       </p>
                       <Link 

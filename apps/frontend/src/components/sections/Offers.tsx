@@ -18,11 +18,13 @@ const Offers = () => {
   return (
     <section id="offers" className="px-container section-padding border-t border-site-border">
       <div className="max-w-7xl mx-auto">
-        <div className="flex items-center gap-4 mb-16">
-          <div className="w-2 h-2 rounded-full bg-site-accent" />
-          <span className="text-xs font-bold uppercase tracking-widest text-site-text-light">
-            {dict.offers.title}
-          </span>
+        <div className="mb-20 md:mb-28">
+          <div className="flex items-center gap-4 mb-6">
+            <div className="w-2 h-2 rounded-full bg-site-accent" />
+            <span className="text-xs font-bold uppercase tracking-widest text-site-text-light">
+              {dict.offers.title}
+            </span>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-site-border border border-site-border rounded-2xl overflow-hidden">
@@ -32,17 +34,17 @@ const Offers = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: idx * 0.1 }}
+              transition={{ duration: 0.8, delay: idx * 0.15, ease: [0.25, 1, 0.5, 1] }}
             >
               <Link
                 href="/contact"
                 className="h-full bg-site-bg p-8 md:p-12 flex flex-col justify-between hover:bg-site-bg/50 transition-colors group"
               >
                 <div>
-                  <h3 className="text-2xl md:text-3xl mb-4 leading-tight font-medium uppercase tracking-tighter">
+                  <h3 className="text-2xl md:text-4xl mb-6 leading-[1.1] font-medium uppercase tracking-tighter">
                     {pillar.title}
                   </h3>
-                  <p className="text-site-text-light leading-relaxed text-sm opacity-80">
+                  <p className="text-site-text-light leading-relaxed text-[15px]">
                     {pillar.sub}
                   </p>
                 </div>
