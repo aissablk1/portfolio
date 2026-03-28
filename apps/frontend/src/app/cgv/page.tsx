@@ -6,33 +6,33 @@ export default function CGVPage() {
   return (
     <LegalPage
       badge="CGV"
-      title="Conditions generales de vente"
+      title="Conditions générales de vente"
       lastUpdated="28 mars 2026"
       sections={[
         {
-          title: "Conditions de reglement",
+          title: "Conditions de règlement",
           content: (
             <p>
-              Reglement a reception de facture, par cheque ou virement bancaire.
-              Lorsque le devis prevoit un acompte, celui-ci est exigible a la
-              commande. La commande n'est consideree comme ferme et definitive
-              qu'apres encaissement de l'acompte. Le solde est du a la mise en
-              ligne du site ou a la livraison des livrables convenus. En cas
-              d'annulation de la commande a l'initiative du client apres
-              versement de l'acompte, celui-ci reste acquis au prestataire a
-              titre d'indemnisation forfaitaire, sauf accord contraire ecrit des
+              Règlement à réception de facture, par chèque ou virement bancaire.
+              Lorsque le devis prévoit un acompte, celui‑ci est exigible à la
+              commande. La commande n'est considérée comme ferme et définitive
+              qu'après encaissement de l'acompte. Le solde est dû à la mise en
+              ligne du site ou à la livraison des livrables convenus. En cas
+              d'annulation de la commande à l'initiative du client après
+              versement de l'acompte, celui‑ci reste acquis au prestataire à
+              titre d'indemnisation forfaitaire, sauf accord contraire écrit des
               parties.
             </p>
           ),
         },
         {
-          title: "Penalites de retard",
+          title: "Pénalités de retard",
           content: (
             <p>
-              En cas de retard de paiement, des penalites seront appliquees de
-              plein droit, sans mise en demeure prealable, au taux de 3 fois le
-              taux d'interet legal en vigueur, ainsi qu'une indemnite
-              forfaitaire pour frais de recouvrement de 40 € (art. L441-10 du
+              En cas de retard de paiement, des pénalités seront appliquées de
+              plein droit, sans mise en demeure préalable, au taux de 3 fois le
+              taux d'intérêt légal en vigueur, ainsi qu'une indemnité
+              forfaitaire pour frais de recouvrement de 40 € (art. L441‑10 du
               Code de commerce).
             </p>
           ),
@@ -46,122 +46,123 @@ export default function CGVPage() {
           ),
         },
         {
-          title: "Validite du devis",
+          title: "Validité des propositions",
           content: (
             <p>
-              Le devis est valable 30 jours a compter de sa date d'emission.
-              Passe ce delai, les tarifs et conditions pourront etre revises.
+              Sauf mention contraire, tout devis ou proposition commerciale est
+              valable 30 jours à compter de sa date d'émission. Passé ce délai,
+              les tarifs et conditions pourront être révisés.
             </p>
           ),
         },
         {
-          title: "Propriete intellectuelle",
+          title: "Propriété intellectuelle",
           content: (
             <>
               <p>
-                Les droits de propriete intellectuelle sur l'ensemble des
+                Les droits de propriété intellectuelle sur l'ensemble des
                 livrables (maquettes, code, algorithmes, visuels, contenus,
-                etc.) demeurent la propriete exclusive du prestataire. Le client
-                beneficie, apres paiement integral des sommes dues, d'un droit
-                d'utilisation personnel, non exclusif et non transferable, dans
-                les limites strictement necessaires a l'exploitation du projet
-                tel que defini au devis.
+                etc.) demeurent la propriété exclusive du prestataire. Le client
+                bénéficie, après paiement intégral des sommes dues, d'un droit
+                d'utilisation personnel, non exclusif et non transférable, dans
+                les limites strictement nécessaires à l'exploitation du projet
+                tel que défini au devis.
               </p>
               <p>
-                Avant complet reglement, le prestataire reste plein et entier
-                proprietaire des creations et se reserve le droit de suspendre
-                le service en cas d'impaye. Cette titularite des droits du
-                prestataire est valable sans limitation de duree, conformement
-                au droit de la propriete intellectuelle.
+                Avant complet règlement, le prestataire reste plein et entier
+                propriétaire des créations et se réserve le droit de suspendre
+                le service en cas d'impayé. Cette titularité des droits du
+                prestataire est valable sans limitation de durée, conformément
+                au droit de la propriété intellectuelle.
               </p>
               <p>
-                Le client ne peut en aucun cas ceder, conceder ou sous-licencier
-                ces droits a un tiers sans l'accord ecrit prealable du
+                Le client ne peut en aucun cas céder, concéder ou sous‑licencier
+                ces droits à un tiers sans l'accord écrit préalable du
                 prestataire. Toute reproduction, modification, adaptation ou
-                reutilisation du projet, en tout ou partie, sans l'accord ecrit
-                prealable du prestataire, constitue une atteinte aux droits de
-                propriete intellectuelle et est susceptible de caracteriser un
-                delit de contrefacon.
+                réutilisation du projet, en tout ou partie, sans l'accord écrit
+                préalable du prestataire, constitue une atteinte aux droits de
+                propriété intellectuelle et est susceptible de caractériser un
+                délit de contrefaçon.
               </p>
               <p>
-                Le prestataire se reserve la possibilite d'apporter des
-                ajustements techniques ou esthetiques mineurs au projet, sans
-                accord prealable du client, lorsque ces ajustements sont
-                necessaires pour des raisons de securite, de performance, de
-                compatibilite ou d'amelioration continue du service. Ces
-                ajustements ne remettent pas en cause l'economie generale de la
+                Le prestataire se réserve la possibilité d'apporter des
+                ajustements techniques ou esthétiques mineurs au projet, sans
+                accord préalable du client, lorsque ces ajustements sont
+                nécessaires pour des raisons de sécurité, de performance, de
+                compatibilité ou d'amélioration continue du service. Ces
+                ajustements ne remettent pas en cause l'économie générale de la
                 prestation.
               </p>
               <p>
-                Sauf opposition expresse du client, le prestataire est autorise
-                a mentionner le nom et le logo du client ainsi qu'a presenter le
-                projet realise au titre de ses references commerciales
-                (portfolio, site internet, reseaux sociaux, documents de
-                presentation, etc.).
+                Sauf opposition expresse du client, le prestataire est autorisé
+                à mentionner le nom et le logo du client ainsi qu'à présenter le
+                projet réalisé au titre de ses références commerciales
+                (portfolio, site internet, réseaux sociaux, documents de
+                présentation, etc.).
               </p>
             </>
           ),
         },
         {
-          title: "Responsabilite et perimetre de la prestation",
+          title: "Responsabilité et périmètre de la prestation",
           content: (
             <>
               <p>
-                Les delais sont donnes a titre indicatif et peuvent varier en
-                fonction de la reactivite du client (remise des contenus,
-                validations, etc.), de la complexite du chantier/projet et de
-                tout alea technique ou organisationnel raisonnable.
+                Les délais sont donnés à titre indicatif et peuvent varier en
+                fonction de la réactivité du client (remise des contenus,
+                validations, etc.), de la complexité du chantier/projet et de
+                tout aléa technique ou organisationnel raisonnable.
               </p>
               <p>
-                A compter de la mise a disposition du projet (recette), le
-                client dispose d'un delai de 10 jours calendaires pour formuler
-                ses reserves par ecrit. Passe ce delai, les livrables seront
-                reputes conformes et acceptes.
+                À compter de la mise à disposition du projet (recette), le
+                client dispose d'un délai de 10 jours calendaires pour formuler
+                ses réserves par écrit. Passé ce délai, les livrables seront
+                réputés conformes et acceptés.
               </p>
               <p>
-                Ces variations de delai ne sauraient, sauf faute grave du
-                prestataire, constituer un motif de resiliation ni ouvrir droit
-                a indemnisation. En cas de survenance d'un evenement de force
-                majeure au sens du droit francais, l'execution des obligations
-                du prestataire pourra etre suspendue sans que sa responsabilite
-                ne puisse etre engagee.
+                Ces variations de délai ne sauraient, sauf faute grave du
+                prestataire, constituer un motif de résiliation ni ouvrir droit
+                à indemnisation. En cas de survenance d'un événement de force
+                majeure au sens du droit français, l'exécution des obligations
+                du prestataire pourra être suspendue sans que sa responsabilité
+                ne puisse être engagée.
               </p>
               <p>
-                La responsabilite du prestataire, toutes causes confondues, est
-                strictement limitee au montant HT effectivement paye par le
-                client au titre du devis. En aucun cas le prestataire ne pourra
-                etre tenu responsable des prejudices indirects (perte de chiffre
-                d'affaires, perte de donnees, atteinte a l'image, etc.).
+                La responsabilité du prestataire, toutes causes confondues, est
+                strictement limitée au montant HT effectivement payé par le
+                client au titre de la prestation concernée. En aucun cas le prestataire ne
+                pourra être tenu responsable des préjudices indirects (perte de
+                chiffre d'affaires, perte de données, atteinte à l'image, etc.).
               </p>
             </>
           ),
         },
         {
-          title: "Donnees personnelles (RGPD)",
+          title: "Données personnelles (RGPD)",
           content: (
             <>
               <p>
-                Dans le cadre de la mission, des donnees personnelles (nom,
-                telephone, e-mail, informations relatives au projet, etc.)
-                peuvent etre collectees via le site, les formulaires en ligne,
+                Dans le cadre de la mission, des données personnelles (nom,
+                téléphone, e‑mail, informations relatives au projet, etc.)
+                peuvent être collectées via le site, les formulaires en ligne,
                 les demandes de devis, ainsi que par tout autre moyen de
-                communication utilise avec le prestataire (e-mail, telephone,
+                communication utilisé avec le prestataire (e‑mail, téléphone,
                 messagerie, etc.) pour le compte du client.
               </p>
               <p>
-                Le client est responsable du respect de la reglementation
-                applicable (notamment le RGPD) vis-a-vis de ses propres
-                clients. Le prestataire agit en qualite de sous-traitant
-                technique et s'engage a mettre en oeuvre des mesures de securite
-                adaptees pour la gestion de ces donnees.
+                Le client est responsable du respect de la réglementation
+                applicable (notamment le RGPD) vis‑à‑vis de ses propres
+                clients. Le prestataire agit en qualité de sous‑traitant
+                technique et s'engage à mettre en œuvre des mesures de sécurité
+                adaptées pour la gestion de ces données.
               </p>
               <p>
-                Pour plus de details, consultez la{" "}
+                Pour plus de détails, consultez la{" "}
                 <a
                   href="/confidentialite"
                   className="text-site-accent hover:underline"
                 >
-                  politique de confidentialite
+                  politique de confidentialité
                 </a>
                 .
               </p>
@@ -169,12 +170,14 @@ export default function CGVPage() {
           ),
         },
         {
-          title: "Acceptation du devis",
+          title: "Acceptation des conditions",
           content: (
             <p>
-              Le devis signe avec la mention « Bon pour accord » ou « Lu et
-              approuve » vaut bon de commande et emporte acceptation pleine et
-              entiere des presentes conditions.
+              Tout document contractuel (devis, contrat, bon de commande,
+              proposition commerciale) signé avec la mention « Bon pour
+              accord » ou « Lu et approuvé » vaut engagement ferme et emporte
+              acceptation pleine et entière des présentes conditions générales
+              de vente.
             </p>
           ),
         },

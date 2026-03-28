@@ -5,16 +5,16 @@ import LegalPage from "@/components/LegalPage";
 export default function MentionsLegalesPage() {
   return (
     <LegalPage
-      badge="Mentions legales"
-      title="Mentions legales"
+      badge="Mentions légales"
+      title="Mentions légales"
       lastUpdated="28 mars 2026"
       sections={[
         {
-          title: "Editeur du site",
+          title: "Éditeur du site",
           content: (
             <>
               <p>
-                Le site <strong>aissabelkoussa.fr</strong> est edite par :
+                Le site <strong>aissabelkoussa.fr</strong> est édité par :
               </p>
               <p>
                 <strong>Aïssa Belkoussa</strong>
@@ -46,21 +46,21 @@ export default function MentionsLegalesPage() {
           content: (
             <p>
               Le directeur de la publication est <strong>Aïssa Belkoussa</strong>
-              , en sa qualite d'editeur du site.
+              , en sa qualité d'éditeur du site.
             </p>
           ),
         },
         {
-          title: "Hebergement",
+          title: "Hébergement",
           content: (
             <>
-              <p>Le site est heberge par :</p>
+              <p>Le site est hébergé par :</p>
               <p>
                 <strong>Vercel Inc.</strong>
                 <br />
                 440 N Barranca Ave #4133
                 <br />
-                Covina, CA 91723, Etats-Unis
+                Covina, CA 91723, États-Unis
                 <br />
                 Site :{" "}
                 <a
@@ -81,14 +81,14 @@ export default function MentionsLegalesPage() {
             <>
               <p>
                 Le nom de domaine <strong>aissabelkoussa.fr</strong> est
-                enregistre aupres de :
+                enregistré auprès de :
               </p>
               <p>
                 <strong>OVHcloud</strong>
                 <br />
                 2 rue Kellermann, 59100 Roubaix, France
                 <br />
-                RCS Lille Metropole 424 761 419
+                RCS Lille Métropole 424 761 419
                 <br />
                 Site :{" "}
                 <a
@@ -104,42 +104,42 @@ export default function MentionsLegalesPage() {
           ),
         },
         {
-          title: "Propriete intellectuelle",
+          title: "Propriété intellectuelle",
           content: (
             <>
               <p>
                 L'ensemble du contenu du site (textes, images, code source,
-                maquettes, logos, animations, videos, architecture) est protege
-                par le droit de la propriete intellectuelle et demeure la
-                propriete exclusive d'Aïssa Belkoussa, sauf mention contraire.
+                maquettes, logos, animations, vidéos, architecture) est protégé
+                par le droit de la propriété intellectuelle et demeure la
+                propriété exclusive d'Aïssa Belkoussa, sauf mention contraire.
               </p>
               <p>
-                Toute reproduction, representation, modification, publication,
-                adaptation de tout ou partie des elements du site, quel que soit
-                le moyen ou le procede utilise, est interdite sans
-                l'autorisation ecrite prealable d'Aïssa Belkoussa.
+                Toute reproduction, représentation, modification, publication,
+                adaptation de tout ou partie des éléments du site, quel que soit
+                le moyen ou le procédé utilisé, est interdite sans
+                l'autorisation écrite préalable d'Aïssa Belkoussa.
               </p>
               <p>
-                Toute exploitation non autorisee du site ou de l'un quelconque
-                des elements qu'il contient sera consideree comme constitutive
-                d'une contrefacon et poursuivie conformement aux articles
-                L.335-2 et suivants du Code de la Propriete Intellectuelle.
+                Toute exploitation non autorisée du site ou de l'un quelconque
+                des éléments qu'il contient sera considérée comme constitutive
+                d'une contrefaçon et poursuivie conformément aux articles
+                L.335-2 et suivants du Code de la Propriété Intellectuelle.
               </p>
             </>
           ),
         },
         {
-          title: "Donnees personnelles",
+          title: "Données personnelles",
           content: (
             <p>
-              Les donnees personnelles collectees via le formulaire de contact
-              sont traitees conformement au Reglement General sur la Protection
-              des Donnees (RGPD). Pour en savoir plus, consultez la{" "}
+              Les données personnelles collectées via le formulaire de contact
+              sont traitées conformément au Règlement Général sur la Protection
+              des Données (RGPD). Pour en savoir plus, consultez la{" "}
               <a
                 href="/confidentialite"
                 className="text-site-accent hover:underline"
               >
-                politique de confidentialite
+                politique de confidentialité
               </a>
               .
             </p>
@@ -150,13 +150,13 @@ export default function MentionsLegalesPage() {
           content: (
             <>
               <p>
-                Le site n'utilise aucun cookie de tracking, de publicite ni
-                d'analyse. Aucun outil de mesure d'audience tiers n'est integre.
+                Le site n'utilise aucun cookie de tracking, de publicité ni
+                d'analyse. Aucun outil de mesure d'audience tiers n'est intégré.
               </p>
               <p>
-                Seul un stockage local (localStorage) est utilise pour
-                memoriser la preference de langue de l'utilisateur (francais ou
-                anglais). Ce stockage est strictement necessaire au
+                Seul un stockage local (localStorage) est utilisé pour
+                mémoriser la préférence de langue de l'utilisateur (français ou
+                anglais). Ce stockage est strictement nécessaire au
                 fonctionnement du site et ne constitue pas un cookie au sens de
                 la directive ePrivacy.
               </p>
@@ -164,22 +164,22 @@ export default function MentionsLegalesPage() {
           ),
         },
         {
-          title: "Responsabilite",
+          title: "Responsabilité",
           content: (
             <>
               <p>
-                L'editeur s'efforce de fournir des informations aussi precises
-                que possible sur le site. Toutefois, il ne pourra etre tenu
+                L'éditeur s'efforce de fournir des informations aussi précises
+                que possible sur le site. Toutefois, il ne pourra être tenu
                 responsable des omissions, des inexactitudes et des carences
-                dans la mise a jour, qu'elles soient de son fait ou du fait des
+                dans la mise à jour, qu'elles soient de son fait ou du fait des
                 tiers partenaires qui lui fournissent ces informations.
               </p>
               <p>
-                L'editeur ne pourra etre tenu responsable des dommages directs
-                et indirects causes au materiel de l'utilisateur lors de l'acces
-                au site, resultant soit de l'utilisation d'un materiel ne
-                repondant pas aux specifications techniques requises, soit de
-                l'apparition d'un bug ou d'une incompatibilite.
+                L'éditeur ne pourra être tenu responsable des dommages directs
+                et indirects causés au matériel de l'utilisateur lors de l'accès
+                au site, résultant soit de l'utilisation d'un matériel ne
+                répondant pas aux spécifications techniques requises, soit de
+                l'apparition d'un bug ou d'une incompatibilité.
               </p>
             </>
           ),
@@ -189,9 +189,9 @@ export default function MentionsLegalesPage() {
           content: (
             <p>
               Le site peut contenir des liens hypertextes vers d'autres sites.
-              L'editeur n'exerce aucun controle sur le contenu de ces sites
-              tiers et decline toute responsabilite quant a leur contenu ou aux
-              eventuels dommages pouvant resulter de leur utilisation.
+              L'éditeur n'exerce aucun contrôle sur le contenu de ces sites
+              tiers et décline toute responsabilité quant à leur contenu ou aux
+              éventuels dommages pouvant résulter de leur utilisation.
             </p>
           ),
         },
@@ -199,8 +199,8 @@ export default function MentionsLegalesPage() {
           title: "Droit applicable",
           content: (
             <p>
-              Les presentes mentions legales sont regies par le droit francais.
-              En cas de litige, les tribunaux francais seront seuls competents.
+              Les présentes mentions légales sont régies par le droit français.
+              En cas de litige, les tribunaux français seront seuls compétents.
             </p>
           ),
         },

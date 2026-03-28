@@ -61,7 +61,7 @@ export default function LegalPage({
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-sm text-site-text-light mb-16"
           >
-            Derniere mise a jour : {lastUpdated}
+            Dernière mise à jour : {lastUpdated}
           </motion.p>
 
           {/* Sections */}

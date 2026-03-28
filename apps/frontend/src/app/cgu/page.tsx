@@ -6,58 +6,58 @@ export default function CGUPage() {
   return (
     <LegalPage
       badge="CGU"
-      title="Conditions generales d'utilisation"
+      title="Conditions générales d'utilisation"
       lastUpdated="28 mars 2026"
       sections={[
         {
           title: "Objet",
           content: (
             <p>
-              Les presentes conditions generales d'utilisation (CGU) ont pour
-              objet de definir les modalites d'acces et d'utilisation du site
+              Les présentes conditions générales d'utilisation (CGU) ont pour
+              objet de définir les modalités d'accès et d'utilisation du site
               internet{" "}
-              <strong>aissabelkoussa.fr</strong> (ci-apres « le Site »), edite
-              par Aïssa Belkoussa. L'acces et l'utilisation du Site impliquent
-              l'acceptation pleine et entiere des presentes CGU.
+              <strong>aissabelkoussa.fr</strong> (ci-après « le Site »), édité
+              par Aïssa Belkoussa. L'accès et l'utilisation du Site impliquent
+              l'acceptation pleine et entière des présentes CGU.
             </p>
           ),
         },
         {
-          title: "Acces au site",
+          title: "Accès au site",
           content: (
             <>
               <p>
-                Le Site est accessible gratuitement a tout utilisateur disposant
-                d'un acces a Internet. L'editeur met en oeuvre les moyens
-                raisonnables pour assurer un acces continu au Site, mais ne
-                saurait garantir une disponibilite permanente.
+                Le Site est accessible gratuitement à tout utilisateur disposant
+                d'un accès à Internet. L'éditeur met en œuvre les moyens
+                raisonnables pour assurer un accès continu au Site, mais ne
+                saurait garantir une disponibilité permanente.
               </p>
               <p>
-                L'acces au Site peut etre interrompu a tout moment, sans preavis
-                ni indemnite, notamment pour des raisons de maintenance, de mise
-                a jour, de securite ou en cas de force majeure.
+                L'accès au Site peut être interrompu à tout moment, sans préavis
+                ni indemnité, notamment pour des raisons de maintenance, de mise
+                à jour, de sécurité ou en cas de force majeure.
               </p>
             </>
           ),
         },
         {
-          title: "Propriete intellectuelle",
+          title: "Propriété intellectuelle",
           content: (
             <>
               <p>
-                L'ensemble des elements composant le Site (textes, images,
-                videos, code source, maquettes, logos, animations, architecture,
-                design) sont proteges par le droit de la propriete
-                intellectuelle et restent la propriete exclusive d'Aïssa
+                L'ensemble des éléments composant le Site (textes, images,
+                vidéos, code source, maquettes, logos, animations, architecture,
+                design) sont protégés par le droit de la propriété
+                intellectuelle et restent la propriété exclusive d'Aïssa
                 Belkoussa, sauf mention contraire.
               </p>
               <p>
-                Toute reproduction, representation, modification, distribution
+                Toute reproduction, représentation, modification, distribution
                 ou exploitation de tout ou partie du contenu du Site, par
-                quelque procede que ce soit, sans l'autorisation ecrite
-                prealable de l'editeur, est strictement interdite et constitue
-                un delit de contrefacon sanctionne par les articles L.335-2 et
-                suivants du Code de la Propriete Intellectuelle.
+                quelque procédé que ce soit, sans l'autorisation écrite
+                préalable de l'éditeur, est strictement interdite et constitue
+                un délit de contrefaçon sanctionné par les articles L.335-2 et
+                suivants du Code de la Propriété Intellectuelle.
               </p>
             </>
           ),
@@ -67,21 +67,21 @@ export default function CGUPage() {
           content: (
             <>
               <p>
-                Le Site met a disposition un formulaire de contact permettant
+                Le Site met à disposition un formulaire de contact permettant
                 aux utilisateurs d'adresser des demandes de renseignement ou de
-                devis. En utilisant ce formulaire, l'utilisateur s'engage a :
+                devis. En utilisant ce formulaire, l'utilisateur s'engage à :
               </p>
               <ul className="list-disc pl-5 space-y-1">
                 <li>
-                  Fournir des informations exactes, completes et a jour
+                  Fournir des informations exactes, complètes et à jour
                 </li>
                 <li>
-                  Ne pas utiliser le formulaire a des fins abusives, frauduleuses
+                  Ne pas utiliser le formulaire à des fins abusives, frauduleuses
                   ou illicites
                 </li>
                 <li>
                   Ne pas transmettre de contenu injurieux, diffamatoire,
-                  discriminatoire ou contraire a l'ordre public
+                  discriminatoire ou contraire à l'ordre public
                 </li>
                 <li>
                   Ne pas tenter de perturber le fonctionnement du Site
@@ -89,24 +89,24 @@ export default function CGUPage() {
                 </li>
               </ul>
               <p className="mt-3">
-                L'editeur se reserve le droit de ne pas donner suite a toute
-                demande qu'il estimerait abusive ou contraire aux presentes CGU.
+                L'éditeur se réserve le droit de ne pas donner suite à toute
+                demande qu'il estimerait abusive ou contraire aux présentes CGU.
               </p>
             </>
           ),
         },
         {
-          title: "Donnees personnelles",
+          title: "Données personnelles",
           content: (
             <p>
-              Les donnees personnelles collectees sur le Site sont traitees
-              conformement au Reglement General sur la Protection des Donnees
+              Les données personnelles collectées sur le Site sont traitées
+              conformément au Règlement Général sur la Protection des Données
               (RGPD). Pour plus d'informations, consultez la{" "}
               <a
                 href="/confidentialite"
                 className="text-site-accent hover:underline"
               >
-                politique de confidentialite
+                politique de confidentialité
               </a>
               .
             </p>
@@ -117,30 +117,30 @@ export default function CGUPage() {
           content: (
             <p>
               Le Site peut contenir des liens vers des sites tiers (LinkedIn,
-              GitHub, Telegram, etc.). Ces liens sont fournis a titre
-              informatif. L'editeur n'exerce aucun controle sur ces sites et
-              decline toute responsabilite quant a leur contenu, leur
-              disponibilite ou les dommages pouvant resulter de leur
+              GitHub, Telegram, etc.). Ces liens sont fournis à titre
+              informatif. L'éditeur n'exerce aucun contrôle sur ces sites et
+              décline toute responsabilité quant à leur contenu, leur
+              disponibilité ou les dommages pouvant résulter de leur
               utilisation.
             </p>
           ),
         },
         {
-          title: "Limitation de responsabilite",
+          title: "Limitation de responsabilité",
           content: (
             <>
               <p>
-                L'editeur s'efforce de fournir des informations fiables et a
+                L'éditeur s'efforce de fournir des informations fiables et à
                 jour sur le Site, mais ne garantit pas l'exactitude, la
-                completude ou l'exhaustivite des informations publiees.
+                complétude ou l'exhaustivité des informations publiées.
               </p>
               <p>
-                L'editeur ne pourra en aucun cas etre tenu responsable :
+                L'éditeur ne pourra en aucun cas être tenu responsable :
               </p>
               <ul className="list-disc pl-5 space-y-1">
                 <li>
-                  Des dommages directs ou indirects resultant de l'utilisation
-                  ou de l'impossibilite d'utiliser le Site
+                  Des dommages directs ou indirects résultant de l'utilisation
+                  ou de l'impossibilité d'utiliser le Site
                 </li>
                 <li>
                   Des interruptions ou dysfonctionnements du Site, quelle qu'en
@@ -148,11 +148,11 @@ export default function CGUPage() {
                 </li>
                 <li>
                   De l'utilisation faite par des tiers des informations
-                  presentes sur le Site
+                  présentes sur le Site
                 </li>
                 <li>
-                  Des virus ou elements nuisibles qui pourraient infecter
-                  l'equipement informatique de l'utilisateur
+                  Des virus ou éléments nuisibles qui pourraient infecter
+                  l'équipement informatique de l'utilisateur
                 </li>
               </ul>
             </>
@@ -162,11 +162,11 @@ export default function CGUPage() {
           title: "Modification des CGU",
           content: (
             <p>
-              L'editeur se reserve le droit de modifier les presentes CGU a
-              tout moment. Les modifications prennent effet des leur
-              publication sur cette page. L'utilisateur est invite a consulter
-              regulierement cette page. La date de derniere mise a jour est
-              indiquee en haut de ce document.
+              L'éditeur se réserve le droit de modifier les présentes CGU à
+              tout moment. Les modifications prennent effet dès leur
+              publication sur cette page. L'utilisateur est invité à consulter
+              régulièrement cette page. La date de dernière mise à jour est
+              indiquée en haut de ce document.
             </p>
           ),
         },
@@ -174,10 +174,10 @@ export default function CGUPage() {
           title: "Droit applicable et juridiction",
           content: (
             <p>
-              Les presentes CGU sont regies par le droit francais. En cas de
-              litige relatif a l'interpretation ou a l'execution des presentes,
-              et a defaut de resolution amiable, les tribunaux francais seront
-              seuls competents.
+              Les présentes CGU sont régies par le droit français. En cas de
+              litige relatif à l'interprétation ou à l'exécution des présentes,
+              et à défaut de résolution amiable, les tribunaux français seront
+              seuls compétents.
             </p>
           ),
         },

@@ -5,15 +5,15 @@ import LegalPage from "@/components/LegalPage";
 export default function ConfidentialitePage() {
   return (
     <LegalPage
-      badge="Confidentialite"
-      title="Politique de confidentialite"
+      badge="Confidentialité"
+      title="Politique de confidentialité"
       lastUpdated="28 mars 2026"
       sections={[
         {
           title: "Responsable du traitement",
           content: (
             <>
-              <p>Le responsable du traitement des donnees personnelles est :</p>
+              <p>Le responsable du traitement des données personnelles est :</p>
               <p>
                 <strong>Aïssa Belkoussa</strong>
                 <br />
@@ -35,50 +35,50 @@ export default function ConfidentialitePage() {
           ),
         },
         {
-          title: "Donnees collectees",
+          title: "Données collectées",
           content: (
             <>
               <p>
-                Dans le cadre de l'utilisation du site, les donnees suivantes
-                peuvent etre collectees via le formulaire de contact :
+                Dans le cadre de l'utilisation du site, les données suivantes
+                peuvent être collectées via le formulaire de contact :
               </p>
               <ul className="list-disc pl-5 space-y-1">
                 <li>Nom complet</li>
                 <li>Adresse email</li>
                 <li>Nom d'entreprise ou de projet (optionnel)</li>
-                <li>Type de besoin selectionne</li>
+                <li>Type de besoin sélectionné</li>
                 <li>Message libre</li>
-                <li>Fourchette de budget selectionnee</li>
-                <li>Langue de navigation (francais ou anglais)</li>
+                <li>Fourchette de budget sélectionnée</li>
+                <li>Langue de navigation (français ou anglais)</li>
               </ul>
               <p className="mt-3">
-                Aucune donnee de navigation, aucun cookie de tracking et aucun
-                outil d'analyse tiers ne sont utilises sur le site.
+                Aucune donnée de navigation, aucun cookie de tracking et aucun
+                outil d'analyse tiers ne sont utilisés sur le site.
               </p>
             </>
           ),
         },
         {
-          title: "Finalites du traitement",
+          title: "Finalités du traitement",
           content: (
             <>
               <p>
-                Les donnees collectees sont utilisees exclusivement pour les
-                finalites suivantes :
+                Les données collectées sont utilisées exclusivement pour les
+                finalités suivantes :
               </p>
               <ul className="list-disc pl-5 space-y-1">
                 <li>
-                  Repondre aux demandes de contact et de devis (base legale :
-                  mesures precontractuelles, art. 6.1.b RGPD)
+                  Répondre aux demandes de contact et de devis (base légale :
+                  mesures précontractuelles, art. 6.1.b RGPD)
                 </li>
                 <li>
                   Envoyer un email de confirmation automatique au demandeur
-                  (base legale : interet legitime, art. 6.1.f RGPD)
+                  (base légale : intérêt légitime, art. 6.1.f RGPD)
                 </li>
               </ul>
               <p className="mt-3">
-                Les donnees ne sont jamais utilisees a des fins de prospection
-                commerciale, de profilage ou de revente a des tiers.
+                Les données ne sont jamais utilisées à des fins de prospection
+                commerciale, de profilage ou de revente à des tiers.
               </p>
             </>
           ),
@@ -88,70 +88,71 @@ export default function ConfidentialitePage() {
           content: (
             <>
               <p>
-                Les donnees sont transmises uniquement aux sous-traitants
+                Les données sont transmises uniquement aux sous-traitants
                 techniques suivants, dans le strict cadre de leur mission :
               </p>
               <ul className="list-disc pl-5 space-y-1">
                 <li>
                   <strong>Resend</strong> (envoi d'emails transactionnels) —
-                  serveurs en Union Europeenne (Irlande). Les donnees transitent
+                  serveurs en Union Européenne (Irlande). Les données transitent
                   par Resend pour l'envoi des emails de notification et de
                   confirmation, sans stockage durable.
                 </li>
                 <li>
-                  <strong>Vercel Inc.</strong> (hebergement du site) — conforme
+                  <strong>Vercel Inc.</strong> (hébergement du site) — conforme
                   aux clauses contractuelles types UE-US (Data Privacy
                   Framework).
                 </li>
               </ul>
               <p className="mt-3">
-                Aucune donnee n'est vendue, louee ou cedee a un tiers a des
+                Aucune donnée n'est vendue, louée ou cédée à un tiers à des
                 fins commerciales.
               </p>
             </>
           ),
         },
         {
-          title: "Duree de conservation",
+          title: "Durée de conservation",
           content: (
             <p>
-              Les donnees collectees via le formulaire de contact sont
-              conservees dans la boite email du responsable du traitement pour
-              la duree necessaire au traitement de la demande, puis archivees
-              pendant une duree maximale de 3 ans a compter du dernier contact,
-              conformement aux recommandations de la CNIL. Passe ce delai, les
-              donnees sont supprimees.
+              Les données collectées via le formulaire de contact sont
+              conservées dans la boîte email du responsable du traitement pour
+              la durée nécessaire au traitement de la demande, puis archivées
+              pendant une durée maximale de 3 ans à compter du dernier contact,
+              conformément aux recommandations de la CNIL. Passé ce délai, les
+              données sont supprimées.
             </p>
           ),
         },
         {
-          title: "Securite des donnees",
+          title: "Sécurité des données",
           content: (
             <>
               <p>
-                Des mesures techniques et organisationnelles appropriees sont
-                mises en oeuvre pour proteger les donnees personnelles :
+                Des mesures techniques et organisationnelles appropriées sont
+                mises en œuvre pour protéger les données personnelles :
               </p>
               <ul className="list-disc pl-5 space-y-1">
                 <li>
                   Chiffrement des communications via HTTPS (certificat SSL/TLS)
                 </li>
                 <li>
-                  Cle API Resend stockee exclusivement cote serveur (jamais
-                  exposee cote client)
+                  Clé API Resend stockée exclusivement côté serveur (jamais
+                  exposée côté client)
                 </li>
                 <li>
-                  Rate limiting sur le formulaire de contact (3 requetes par
+                  Rate limiting sur le formulaire de contact (3 requêtes par
                   IP toutes les 15 minutes)
                 </li>
                 <li>Protection anti-spam par champ honeypot</li>
                 <li>
-                  Validation et echappement (escaping) de toutes les donnees
+                  Validation et échappement (escaping) de toutes les données
                   avant traitement
                 </li>
                 <li>
-                  En-tetes de securite HTTP : X-Content-Type-Options,
-                  X-Frame-Options, Referrer-Policy, Permissions-Policy
+                  En-têtes de sécurité HTTP : X-Content-Type-Options,
+                  X-Frame-Options, Referrer-Policy, Permissions-Policy,
+                  Content-Security-Policy
                 </li>
               </ul>
             </>
@@ -162,34 +163,34 @@ export default function ConfidentialitePage() {
           content: (
             <>
               <p>
-                Conformement au RGPD (articles 15 a 22) et a la loi
-                Informatique et Libertes, vous disposez des droits suivants
-                concernant vos donnees personnelles :
+                Conformément au RGPD (articles 15 à 22) et à la loi
+                Informatique et Libertés, vous disposez des droits suivants
+                concernant vos données personnelles :
               </p>
               <ul className="list-disc pl-5 space-y-1">
                 <li>
-                  <strong>Droit d'acces</strong> : obtenir la confirmation que
-                  vos donnees sont traitees et en obtenir une copie
+                  <strong>Droit d'accès</strong> : obtenir la confirmation que
+                  vos données sont traitées et en obtenir une copie
                 </li>
                 <li>
                   <strong>Droit de rectification</strong> : faire corriger des
-                  donnees inexactes ou incompletes
+                  données inexactes ou incomplètes
                 </li>
                 <li>
-                  <strong>Droit a l'effacement</strong> : demander la
-                  suppression de vos donnees
+                  <strong>Droit à l'effacement</strong> : demander la
+                  suppression de vos données
                 </li>
                 <li>
-                  <strong>Droit a la limitation</strong> : demander la
+                  <strong>Droit à la limitation</strong> : demander la
                   suspension du traitement
                 </li>
                 <li>
-                  <strong>Droit a la portabilite</strong> : recevoir vos
-                  donnees dans un format structure et lisible
+                  <strong>Droit à la portabilité</strong> : recevoir vos
+                  données dans un format structuré et lisible
                 </li>
                 <li>
                   <strong>Droit d'opposition</strong> : vous opposer au
-                  traitement de vos donnees
+                  traitement de vos données
                 </li>
               </ul>
               <p className="mt-3">
@@ -200,20 +201,20 @@ export default function ConfidentialitePage() {
                 >
                   contact@aissabelkoussa.fr
                 </a>
-                . Une reponse vous sera apportee dans un delai d'un mois
-                conformement a l'article 12 du RGPD.
+                . Une réponse vous sera apportée dans un délai d'un mois
+                conformément à l'article 12 du RGPD.
               </p>
             </>
           ),
         },
         {
-          title: "Reclamation",
+          title: "Réclamation",
           content: (
             <p>
-              Si vous estimez que le traitement de vos donnees personnelles
+              Si vous estimez que le traitement de vos données personnelles
               constitue une violation du RGPD, vous avez le droit d'introduire
-              une reclamation aupres de la CNIL (Commission Nationale de
-              l'Informatique et des Libertes) :{" "}
+              une réclamation auprès de la CNIL (Commission Nationale de
+              l'Informatique et des Libertés) :{" "}
               <a
                 href="https://www.cnil.fr"
                 target="_blank"
@@ -231,10 +232,10 @@ export default function ConfidentialitePage() {
           content: (
             <p>
               Le site utilise le localStorage du navigateur uniquement pour
-              enregistrer la preference de langue de l'utilisateur (francais ou
-              anglais). Ce stockage est strictement necessaire au
+              enregistrer la préférence de langue de l'utilisateur (français ou
+              anglais). Ce stockage est strictement nécessaire au
               fonctionnement du site (exemption au consentement selon la
-              directive ePrivacy, art. 5.3). Aucun cookie n'est depose.
+              directive ePrivacy, art. 5.3). Aucun cookie n'est déposé.
             </p>
           ),
         },
@@ -242,9 +243,9 @@ export default function ConfidentialitePage() {
           title: "Modifications",
           content: (
             <p>
-              La presente politique de confidentialite peut etre modifiee a tout
-              moment. Les modifications prennent effet des leur publication sur
-              cette page. La date de derniere mise a jour est indiquee en haut
+              La présente politique de confidentialité peut être modifiée à tout
+              moment. Les modifications prennent effet dès leur publication sur
+              cette page. La date de dernière mise à jour est indiquée en haut
               de ce document.
             </p>
           ),
