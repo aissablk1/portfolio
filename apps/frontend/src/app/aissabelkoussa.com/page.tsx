@@ -19,6 +19,9 @@ import {
   Calendar,
   User,
   CheckCircle2,
+  Clock,
+  Lock,
+  Wifi,
 } from "lucide-react";
 
 export default function DomainAlertPage() {
@@ -131,6 +134,21 @@ export default function DomainAlertPage() {
                   icon: Calendar,
                   label: "Enregistre le",
                   value: d.facts.registeredOn,
+                },
+                {
+                  icon: Clock,
+                  label: "Expire le",
+                  value: d.facts.expiresOn,
+                },
+                {
+                  icon: Lock,
+                  label: "Statut",
+                  value: d.facts.status,
+                },
+                {
+                  icon: Wifi,
+                  label: "DNS",
+                  value: d.facts.dns,
                 },
               ].map((fact) => (
                 <div

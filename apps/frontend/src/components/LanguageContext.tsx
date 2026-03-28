@@ -114,6 +114,9 @@ interface Dictionary {
       holder: string;
       registrar: string;
       registeredOn: string;
+      expiresOn: string;
+      status: string;
+      dns: string;
       ip: string;
     };
     violations: {
@@ -368,6 +371,9 @@ const dictionaries: Record<Language, Dictionary> = {
         holder: "Team AG Internet — masqué depuis via Whois Privacy Protection Foundation",
         registrar: "Hosting Concepts B.V. d/b/a Registrar.eu (Openprovider)",
         registeredOn: "26 mai 2025",
+        expiresOn: "26 mai 2026",
+        status: "Parking — verrouillé (client transfer prohibited)",
+        dns: "verify1/2/3.registrar.eu (serveurs de vérification, aucun site actif)",
         ip: "15.197.130.221",
       },
       violations: {
@@ -643,6 +649,9 @@ const dictionaries: Record<Language, Dictionary> = {
         holder: "Team AG Internet — since hidden via Whois Privacy Protection Foundation",
         registrar: "Hosting Concepts B.V. d/b/a Registrar.eu (Openprovider)",
         registeredOn: "May 26, 2025",
+        expiresOn: "May 26, 2026",
+        status: "Parked — locked (client transfer prohibited)",
+        dns: "verify1/2/3.registrar.eu (verification servers, no active website)",
         ip: "15.197.130.221",
       },
       violations: {
