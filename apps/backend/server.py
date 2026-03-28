@@ -10,6 +10,8 @@ from services.email_service import EmailService
 from services.spam_protection import SpamProtection
 from services.notification_service import NotificationService
 from services.storage_service import StorageService
+from admin_routes import admin_router
+from services.auth_service import create_admin_user, load_blacklisted_tokens
 import asyncio
 from datetime import datetime
 
@@ -210,16 +212,49 @@ async def get_contact_stats():
         logger.error(f"Error getting contact stats: {str(e)}")
         raise HTTPException(status_code=500, detail="Error retrieving statistics")
 
-# Include the router in the main app
+# Include the routers in the main app
 app.include_router(api_router)
+app.include_router(admin_router)
 
 app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,
-    allow_origins=["*"],
+    allow_origins=[
+        "http://localhost:3000",
+        "http://localhost:3001",
+        "https://aissabelkoussa.fr",
+        "https://admin.aissabelkoussa.fr",
+    ],
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.on_event("startup")
+async def startup_event():
+    """Crée l'administrateur par défaut s'il n'en existe aucun et charge les tokens blacklistés."""
+    try:
+        # Charger les tokens blacklistés depuis la DB
+        await load_blacklisted_tokens(db)
+
+        # Vérifier si un admin existe déjà
+        admin_count = await db.admin_users.count_documents({})
+        if admin_count == 0:
+            default_password = os.getenv("ADMIN_PASSWORD", "admin2026")
+            result = await create_admin_user(
+                db,
+                username="aissa",
+                email="contact@aissabelkoussa.fr",
+                password=default_password,
+            )
+            if result:
+                logger.info("Administrateur par défaut 'aissa' créé avec succès.")
+            else:
+                logger.error("Échec de la création de l'administrateur par défaut.")
+        else:
+            logger.info(f"{admin_count} administrateur(s) trouvé(s) en base.")
+    except Exception as e:
+        logger.error(f"Erreur lors de l'initialisation au démarrage : {str(e)}")
+
 
 @app.on_event("shutdown")
 async def shutdown_db_client():
