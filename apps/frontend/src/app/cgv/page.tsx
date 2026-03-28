@@ -174,7 +174,8 @@ export default function CGVPage() {
           content: (
             <p>
               Tout document contractuel (devis, contrat, bon de commande,
-              proposition commerciale) signé avec la mention « Bon pour
+              proposition commerciale, avenant, lettre de mission, et tout
+              autre document émis par le prestataire) signé avec la mention « Bon pour
               accord » ou « Lu et approuvé » vaut engagement ferme et emporte
               acceptation pleine et entière des présentes conditions générales
               de vente.
