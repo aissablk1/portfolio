@@ -22,6 +22,10 @@ import {
   Clock,
   Lock,
   Wifi,
+  Cloud,
+  ShieldX,
+  History,
+  Network,
 } from "lucide-react";
 
 export default function DomainAlertPage() {
@@ -149,6 +153,26 @@ export default function DomainAlertPage() {
                   icon: Wifi,
                   label: "DNS",
                   value: d.facts.dns,
+                },
+                {
+                  icon: Cloud,
+                  label: "Hebergement",
+                  value: d.facts.hosting,
+                },
+                {
+                  icon: ShieldX,
+                  label: "Certificat SSL",
+                  value: d.facts.ssl,
+                },
+                {
+                  icon: History,
+                  label: "Historique du contenu",
+                  value: d.facts.contentHistory,
+                },
+                {
+                  icon: Network,
+                  label: "Infrastructure suspecte",
+                  value: d.facts.suspiciousInfra,
                 },
               ].map((fact) => (
                 <div

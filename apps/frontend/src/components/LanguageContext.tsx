@@ -118,6 +118,10 @@ interface Dictionary {
       status: string;
       dns: string;
       ip: string;
+      hosting: string;
+      ssl: string;
+      contentHistory: string;
+      suspiciousInfra: string;
     };
     violations: {
       title: string;
@@ -374,7 +378,11 @@ const dictionaries: Record<Language, Dictionary> = {
         expiresOn: "26 mai 2026",
         status: "Parking — verrouillé (client transfer prohibited)",
         dns: "verify1/2/3.registrar.eu (serveurs de vérification, aucun site actif)",
-        ip: "15.197.130.221",
+        ip: "15.197.130.221 — AWS Global Accelerator (ASN16509 AMAZON-02, US)",
+        hosting: "Amazon Web Services (AWS) — infrastructure CDN via Global Accelerator + CloudFront",
+        ssl: "Certificat émis par R11 (Let's Encrypt) le 9 juin 2025, validité 3 mois",
+        contentHistory: "Évolution : infos personnelles usurpées → site fictif de production vidéo → page parking liens art/galeries → serveurs de vérification (état actuel)",
+        suspiciousInfra: "Connexions détectées vers euob.youseasky.com, d38psrni17bvxu.cloudfront.net, obseu.youseasky.com — infrastructure tierce suspecte",
       },
       violations: {
         title: "Violations constatées",
@@ -652,7 +660,11 @@ const dictionaries: Record<Language, Dictionary> = {
         expiresOn: "May 26, 2026",
         status: "Parked — locked (client transfer prohibited)",
         dns: "verify1/2/3.registrar.eu (verification servers, no active website)",
-        ip: "15.197.130.221",
+        ip: "15.197.130.221 — AWS Global Accelerator (ASN16509 AMAZON-02, US)",
+        hosting: "Amazon Web Services (AWS) — CDN infrastructure via Global Accelerator + CloudFront",
+        ssl: "Certificate issued by R11 (Let's Encrypt) on June 9, 2025, valid for 3 months",
+        contentHistory: "Evolution: stolen personal info → fake video production site → art/gallery parking page → verification servers (current state)",
+        suspiciousInfra: "Connections detected to euob.youseasky.com, d38psrni17bvxu.cloudfront.net, obseu.youseasky.com — suspicious third-party infrastructure",
       },
       violations: {
         title: "Documented violations",
