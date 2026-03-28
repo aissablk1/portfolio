@@ -33,7 +33,7 @@ export function Providers({ children }: { children: ReactNode }) {
               fontFamily: "var(--font-sans)",
             },
           }}
-          theme="dark"
+          theme="light"
         />
       </AuthProvider>
     </QueryClientProvider>
