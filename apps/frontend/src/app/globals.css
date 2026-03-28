@@ -52,6 +52,28 @@
   .section-padding {
     padding-block: clamp(6rem, 12vw, 14rem);
   }
+
+  /* Fluid typography — smooth viewport scaling, no breakpoint jumps */
+  .text-fluid-hero {
+    font-size: clamp(2.75rem, 7.5vw, 7.5rem);
+    line-height: 1.05;
+  }
+  .text-fluid-display {
+    font-size: clamp(2.25rem, 5vw, 5.5rem);
+    line-height: 1.1;
+  }
+  .text-fluid-title {
+    font-size: clamp(1.75rem, 3.5vw, 4rem);
+    line-height: 1.15;
+  }
+  .text-fluid-subtitle {
+    font-size: clamp(1.25rem, 2vw, 2rem);
+    line-height: 1.5;
+  }
+  .text-fluid-body {
+    font-size: clamp(1rem, 1.2vw, 1.375rem);
+    line-height: 1.7;
+  }
 }
 
 @keyframes shake {

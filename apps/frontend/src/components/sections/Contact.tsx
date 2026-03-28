@@ -20,10 +20,10 @@ const Contact = () => {
           <div className="w-16 h-16 bg-site-accent text-white rounded-full flex items-center justify-center mx-auto mb-12 shadow-xl shadow-site-accent/20">
             <span className="text-3xl">👋</span>
           </div>
-          <h2 className="text-4xl md:text-6xl lg:text-7xl leading-tight mb-8 whitespace-pre-line text-balance font-medium tracking-tighter">
+          <h2 className="text-fluid-display mb-8 whitespace-pre-line text-balance font-medium tracking-tighter">
             {dict.contact.title}
           </h2>
-          <p className="text-xl md:text-2xl text-site-text-light/60 mb-16 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-fluid-subtitle text-site-text-light/60 mb-16 max-w-3xl mx-auto">
             {dict.contact.subtitle}
           </p>
           <Link 

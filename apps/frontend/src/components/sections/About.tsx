@@ -23,7 +23,7 @@ const About = () => {
               {dict.nav.about}
             </span>
           </div>
-          <div className="text-lg md:text-xl lg:text-2xl text-site-text-light leading-relaxed whitespace-pre-line">
+          <div className="text-fluid-body text-site-text-light whitespace-pre-line">
             {dict.about.content}
           </div>
         </motion.div>

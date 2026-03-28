@@ -77,9 +77,10 @@ const Expertises = () => {
                     <span className="block text-[10px] font-bold uppercase tracking-[0.3em] text-site-accent mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                         {item.microcopy}
                     </span>
-                    <motion.h3 
+                    <motion.h3
+                      style={{ fontSize: "clamp(1.75rem, 5vw, 5rem)", lineHeight: 1.1 }}
                       className={cn(
-                        "text-3xl md:text-5xl lg:text-7xl tracking-tighter font-medium uppercase flex flex-wrap gap-x-[0.25em] transition-transform duration-700",
+                        "tracking-tighter font-medium uppercase flex flex-wrap gap-x-[0.25em] transition-transform duration-700",
                         openIndex === idx ? "text-site-accent italic md:translate-x-4" : "group-hover:translate-x-4"
                       )}
                     >
@@ -145,7 +146,7 @@ const Expertises = () => {
 
                   <div className="max-w-7xl mx-auto px-container relative z-10 pb-16 md:pb-24">
                     <div className="max-w-3xl md:pl-4">
-                      <p className="text-xl md:text-2xl lg:text-3xl text-site-text-light leading-relaxed mb-12">
+                      <p className="text-fluid-subtitle text-site-text-light mb-12">
                         {item.description}
                       </p>
                       <Link 

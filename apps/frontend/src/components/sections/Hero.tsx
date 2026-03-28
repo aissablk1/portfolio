@@ -35,7 +35,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
-            className="text-5xl md:text-7xl lg:text-8xl tracking-tight text-balance whitespace-pre-line"
+            className="text-fluid-hero tracking-tight text-balance whitespace-pre-line"
           >
             {dict.hero.title}
           </motion.h1>
@@ -46,7 +46,7 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 1, 0.5, 1] }}
             className="mt-12"
           >
-            <p className="max-w-xl text-lg md:text-xl text-site-text-light leading-relaxed mb-12">
+            <p className="max-w-xl text-fluid-body text-site-text-light mb-12">
               {dict.hero.subtitle}
             </p>
 

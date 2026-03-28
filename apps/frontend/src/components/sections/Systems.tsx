@@ -18,7 +18,7 @@ const Systems = () => {
                 {dict.systems.title}
               </span>
             </div>
-            <p className="text-xl md:text-2xl text-site-text-light/60 max-w-2xl leading-relaxed">
+            <p className="text-fluid-subtitle text-site-text-light/60 max-w-2xl">
               {dict.systems.intro}
             </p>
           </div>
