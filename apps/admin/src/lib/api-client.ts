@@ -63,9 +63,35 @@ class ApiClient {
     }
   }
 
+  /**
+   * Requête directe sans interception 401 (pour login/getMe).
+   * Évite la boucle: 401 → refresh → 401 → redirect → 401...
+   */
+  private async requestDirect<T>(
+    endpoint: string,
+    options: RequestInit = {}
+  ): Promise<T> {
+    const url = `${this.baseUrl}${endpoint}`;
+    const response = await fetch(url, {
+      ...options,
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        ...options.headers,
+      },
+    });
+
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({ detail: "Erreur inconnue" }));
+      throw new ApiError(response.status, error.detail ?? error.message ?? "Erreur serveur");
+    }
+
+    return response.json();
+  }
+
   // ─── Auth ───────────────────────────────────────
   async login(username: string, password: string) {
-    return this.request<ApiResponse<{ user: { id: string; username: string; email: string } }>>("/api/admin/login", {
+    return this.requestDirect<ApiResponse<{ user: { id: string; username: string; email: string } }>>("/api/admin/login", {
       method: "POST",
       body: JSON.stringify({ username, password }),
     });
@@ -78,7 +104,7 @@ class ApiClient {
   }
 
   async getMe() {
-    return this.request<ApiResponse<{ user: { id: string; username: string; email: string; last_login: string } }>>("/api/admin/me");
+    return this.requestDirect<ApiResponse<{ user: { id: string; username: string; email: string; last_login: string } }>>("/api/admin/me");
   }
 
   // ─── Dashboard ──────────────────────────────────
