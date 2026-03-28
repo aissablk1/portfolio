@@ -151,6 +151,12 @@ interface Dictionary {
       holder: string;
       registrar: string;
       createdOn: string;
+      dns: string;
+      hosting: string;
+      ssl: string;
+      ip: string;
+      email: string;
+      status: string;
     };
     whyThisPage: {
       title: string;
@@ -425,15 +431,21 @@ const dictionaries: Record<Language, Dictionary> = {
       title: "aissabelkoussa.fr — vous etes au bon endroit.",
       subtitle: "Ce domaine est le seul que je possede et controle. C'est mon espace officiel sur le web.",
       ownership: {
-        title: "Propriete du domaine",
+        title: "Propriété du domaine",
         domain: "aissabelkoussa.fr",
         holder: "Aïssa Belkoussa (personne physique)",
-        registrar: "OVHcloud",
+        registrar: "OVHcloud (Roubaix, France)",
         createdOn: "2025",
+        dns: "OVHcloud — CNAME vers Vercel (f1f0ec239b0fc4a4.vercel-dns-017.com)",
+        hosting: "Vercel Inc. (Edge Network mondial, serverless)",
+        ssl: "Certificat automatique Vercel — émis pour aissabelkoussa.fr et www.aissabelkoussa.fr",
+        ip: "216.198.79.1 (Vercel)",
+        email: "contact@aissabelkoussa.fr — iCloud Mail (MX) + Resend (transactionnel, DKIM vérifié)",
+        status: "Actif — déployé automatiquement via GitHub → Vercel",
       },
       whyThisPage: {
         title: "Pourquoi cette page existe",
-        description: "Un tiers a enregistre le domaine aissabelkoussa.com sans mon autorisation, affichant mes informations personnelles sans consentement. Cette page existe pour dissiper toute confusion : aissabelkoussa.fr est le seul domaine legitime lie a mon identite professionnelle.",
+        description: "Un tiers a enregistré le domaine aissabelkoussa.com sans mon autorisation, affichant mes informations personnelles sans consentement. Cette page existe pour dissiper toute confusion : aissabelkoussa.fr est le seul domaine légitime lié à mon identité professionnelle.",
       },
       verification: {
         title: "Comment verifier",
@@ -710,8 +722,14 @@ const dictionaries: Record<Language, Dictionary> = {
         title: "Domain ownership",
         domain: "aissabelkoussa.fr",
         holder: "Aïssa Belkoussa (individual)",
-        registrar: "OVHcloud",
+        registrar: "OVHcloud (Roubaix, France)",
         createdOn: "2025",
+        dns: "OVHcloud — CNAME to Vercel (f1f0ec239b0fc4a4.vercel-dns-017.com)",
+        hosting: "Vercel Inc. (Global Edge Network, serverless)",
+        ssl: "Automatic Vercel certificate — issued for aissabelkoussa.fr and www.aissabelkoussa.fr",
+        ip: "216.198.79.1 (Vercel)",
+        email: "contact@aissabelkoussa.fr — iCloud Mail (MX) + Resend (transactional, DKIM verified)",
+        status: "Active — auto-deployed via GitHub → Vercel",
       },
       whyThisPage: {
         title: "Why this page exists",

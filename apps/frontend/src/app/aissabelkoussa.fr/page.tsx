@@ -18,6 +18,11 @@ import {
   Lock,
   Eye,
   FileCheck,
+  Wifi,
+  Cloud,
+  ShieldX,
+  Mail,
+  Activity,
 } from "lucide-react";
 
 export default function DomainLegitPage() {
@@ -104,6 +109,36 @@ export default function DomainLegitPage() {
                   icon: Calendar,
                   label: "Enregistre en",
                   value: d.ownership.createdOn,
+                },
+                {
+                  icon: Wifi,
+                  label: "DNS",
+                  value: d.ownership.dns,
+                },
+                {
+                  icon: Cloud,
+                  label: "Hebergement",
+                  value: d.ownership.hosting,
+                },
+                {
+                  icon: ShieldX,
+                  label: "SSL",
+                  value: d.ownership.ssl,
+                },
+                {
+                  icon: Globe,
+                  label: "IP",
+                  value: d.ownership.ip,
+                },
+                {
+                  icon: Mail,
+                  label: "Email",
+                  value: d.ownership.email,
+                },
+                {
+                  icon: Activity,
+                  label: "Statut",
+                  value: d.ownership.status,
                 },
               ].map((fact) => (
                 <div
