@@ -72,10 +72,10 @@ const Footer = () => {
               </div>
               <div className="flex flex-col gap-4 col-span-2 md:col-span-1">
                   <span className="text-xs font-bold uppercase tracking-widest opacity-30">Legal</span>
-                  <Link href="#" className="text-sm hover:underline">{dict.footer.legalNotice}</Link>
-                  <Link href="#" className="text-sm hover:underline">{dict.footer.privacyPolicy}</Link>
-                  <Link href="#" className="text-sm hover:underline">{dict.footer.termsOfService}</Link>
-                  <Link href="#" className="text-sm hover:underline">{dict.footer.termsAndConditions}</Link>
+                  <Link href="/mentions-legales" className="text-sm hover:underline">{dict.footer.legalNotice}</Link>
+                  <Link href="/confidentialite" className="text-sm hover:underline">{dict.footer.privacyPolicy}</Link>
+                  <Link href="/cgu" className="text-sm hover:underline">{dict.footer.termsOfService}</Link>
+                  <Link href="/cgv" className="text-sm hover:underline">{dict.footer.termsAndConditions}</Link>
               </div>
           </div>
         </div>
