@@ -105,14 +105,13 @@ def _is_production() -> bool:
 
 
 def _set_auth_cookies(response: Response, access_token: str, refresh_token: str):
-    """Configure les cookies httpOnly pour les tokens JWT."""
-    is_prod = _is_production()
+    """Configure les cookies httpOnly pour les tokens JWT (cross-origin compatible)."""
     response.set_cookie(
         key="access_token",
         value=access_token,
         httponly=True,
-        secure=is_prod,
-        samesite="lax",
+        secure=True,
+        samesite="none",
         max_age=30 * 60,  # 30 min
         path="/",
     )
@@ -120,8 +119,8 @@ def _set_auth_cookies(response: Response, access_token: str, refresh_token: str)
         key="refresh_token",
         value=refresh_token,
         httponly=True,
-        secure=is_prod,
-        samesite="lax",
+        secure=True,
+        samesite="none",
         max_age=7 * 24 * 60 * 60,  # 7 jours
         path="/api/admin/refresh",
     )
@@ -129,8 +128,8 @@ def _set_auth_cookies(response: Response, access_token: str, refresh_token: str)
 
 def _clear_auth_cookies(response: Response):
     """Supprime les cookies d'authentification."""
-    response.delete_cookie("access_token", path="/")
-    response.delete_cookie("refresh_token", path="/api/admin/refresh")
+    response.delete_cookie("access_token", path="/", samesite="none", secure=True)
+    response.delete_cookie("refresh_token", path="/api/admin/refresh", samesite="none", secure=True)
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
