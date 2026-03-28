@@ -6,10 +6,12 @@ import { useLanguage } from "./LanguageContext";
 import { cn } from "@/utils/cn";
 import { AlertTriangle } from "lucide-react";
 import { usePathname } from "next/navigation";
+import { AnimatePresence, motion } from "framer-motion";
 
 const Header = () => {
   const { language, setLanguage, dict } = useLanguage();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -19,6 +21,34 @@ const Header = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Lock body scroll when menu is open
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [menuOpen]);
+
+  const navItems = [
+    { id: "offers", label: dict.nav.offers },
+    { id: "approach", label: dict.nav.approach },
+    { id: "expertise", label: dict.nav.expertise },
+    { id: "systems", label: dict.nav.systems },
+    { id: "about", label: dict.nav.about },
+  ];
+
+  const handleNavClick = (id: string) => {
+    setMenuOpen(false);
+    if (pathname !== "/") {
+      window.location.href = `/#${id}`;
+      return;
+    }
+    const el = document.getElementById(id);
+    if (el) {
+      const offset = 100;
+      const top = el.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
+  };
 
   return (
     <>
@@ -37,10 +67,9 @@ const Header = () => {
             {language === "fr" ? "En savoir +" : "Learn more +"}
           </span>
         </p>
-        {/* Gradient Border 0% - 100% - 0% */}
         <div className="absolute bottom-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-red-600/30 to-transparent" />
       </Link>
-      
+
       <header
         className={cn(
           "fixed top-[28px] left-0 right-0 z-50 transition-all duration-300 px-container py-6",
@@ -49,45 +78,111 @@ const Header = () => {
       >
         {/* Background Grid Pattern */}
         <div className="absolute inset-0 bg-size-8 bg-[radial-gradient(var(--color-site-border)_1px,transparent_1px)] mask-[radial-gradient(ellipse_at_center,black,transparent_80%)] -z-10" />
-    
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <Link 
-          href="/" 
-          onClick={(e) => {
-            if (pathname === "/") {
-              e.preventDefault();
-              window.scrollTo({ top: 0, behavior: "smooth" });
-            }
-          }}
-          className="font-display text-xl font-semibold tracking-tighter"
-        >
-          AÏSSA BELKOUSSA
-        </Link>
 
-        <div className="flex items-center gap-4">
-          <div className="flex items-center bg-site-border/50 rounded-full p-1">
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
+          <Link
+            href="/"
+            onClick={(e) => {
+              if (pathname === "/") {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }
+              setMenuOpen(false);
+            }}
+            className="font-display text-xl font-semibold tracking-tighter"
+          >
+            AÏSSA BELKOUSSA
+          </Link>
+
+          <div className="flex items-center gap-4">
+            {/* Language toggle */}
+            <div className="flex items-center bg-site-border/50 rounded-full p-1">
+              <button
+                onClick={() => setLanguage("fr")}
+                className={cn(
+                  "px-3 py-1 text-xs font-bold rounded-full transition-all",
+                  language === "fr" ? "bg-site-accent text-white" : "text-site-text-light hover:text-site-text"
+                )}
+              >
+                FR
+              </button>
+              <button
+                onClick={() => setLanguage("en")}
+                className={cn(
+                  "px-3 py-1 text-xs font-bold rounded-full transition-all",
+                  language === "en" ? "bg-site-accent text-white" : "text-site-text-light hover:text-site-text"
+                )}
+              >
+                EN
+              </button>
+            </div>
+
+            {/* Hamburger — mobile only */}
             <button
-              onClick={() => setLanguage("fr")}
-              className={cn(
-                "px-3 py-1 text-xs font-bold rounded-full transition-all",
-                language === "fr" ? "bg-site-accent text-white" : "text-site-text-light hover:text-site-text"
-              )}
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="lg:hidden flex flex-col justify-center items-center w-8 h-8 gap-1.5"
+              aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
+              aria-expanded={menuOpen}
             >
-              FR
-            </button>
-            <button
-              onClick={() => setLanguage("en")}
-              className={cn(
-                "px-3 py-1 text-xs font-bold rounded-full transition-all",
-                language === "en" ? "bg-site-accent text-white" : "text-site-text-light hover:text-site-text"
-              )}
-            >
-              EN
+              <span
+                className={cn(
+                  "block w-5 h-0.5 bg-site-text transition-all duration-300 origin-center",
+                  menuOpen && "rotate-45 translate-y-1"
+                )}
+              />
+              <span
+                className={cn(
+                  "block w-5 h-0.5 bg-site-text transition-all duration-300 origin-center",
+                  menuOpen && "-rotate-45 -translate-y-1"
+                )}
+              />
             </button>
           </div>
         </div>
-      </div>
-    </header>
+      </header>
+
+      {/* Mobile Drawer */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-40 bg-site-bg/95 backdrop-blur-xl lg:hidden"
+          >
+            <nav className="flex flex-col items-center justify-center h-full gap-8">
+              {navItems.map((item, i) => (
+                <motion.button
+                  key={item.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 10 }}
+                  transition={{ duration: 0.3, delay: i * 0.05 }}
+                  onClick={() => handleNavClick(item.id)}
+                  className="text-2xl font-display font-medium tracking-tight text-site-text hover:text-site-accent transition-colors"
+                >
+                  {item.label}
+                </motion.button>
+              ))}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                transition={{ duration: 0.3, delay: navItems.length * 0.05 }}
+              >
+                <Link
+                  href="/contact"
+                  onClick={() => setMenuOpen(false)}
+                  className="text-2xl font-display font-medium tracking-tight bg-site-accent text-white px-8 py-3 rounded-full hover:bg-site-accent/90 transition-colors"
+                >
+                  {dict.nav.contact}
+                </Link>
+              </motion.div>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };

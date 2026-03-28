@@ -1,12 +1,13 @@
 "use client";
 
-import React, { use } from "react";
+import React from "react";
 import { useLanguage } from "@/components/LanguageContext";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { createProjectSchema } from "@/lib/schemas";
 
 const ProjectPage = () => {
   const { slug } = useParams();
@@ -30,6 +31,20 @@ const ProjectPage = () => {
 
   return (
     <div className="bg-site-bg min-h-screen selection:bg-black selection:text-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            createProjectSchema({
+              name: project.title,
+              slug: project.slug,
+              description: project.desc,
+              stack: project.stack,
+              datePublished: "2025",
+            })
+          ),
+        }}
+      />
       <Header />
       
       <main className="pt-32 pb-20 px-container">

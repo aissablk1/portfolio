@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { useLanguage } from "./LanguageContext";
 import { ScrollVelocityContainer, ScrollVelocityRow } from "./ui/scroll-based-velocity";
-import Image from "next/image";
+
 
 const Footer = () => {
   const { dict } = useLanguage();
