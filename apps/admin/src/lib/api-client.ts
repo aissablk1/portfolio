@@ -1,6 +1,7 @@
 import type { ApiResponse } from "./types";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8001";
+// Requêtes via le proxy Next.js (rewrites) → même domaine → cookies same-origin
+const API_BASE = "";
 
 class ApiClient {
   private baseUrl: string;
