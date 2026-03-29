@@ -30,10 +30,19 @@ async function proxy(request: NextRequest) {
     body,
   });
 
-  // Forward response with all headers (including Set-Cookie)
+  // Forward response headers (including Set-Cookie).
+  // Strip encoding/length — Node fetch auto-decompresses, so forwarding
+  // content-encoding would make the browser try to decompress again.
+  const hopByHop = new Set([
+    "content-encoding",
+    "content-length",
+    "transfer-encoding",
+  ]);
   const responseHeaders = new Headers();
   upstream.headers.forEach((value, key) => {
-    responseHeaders.append(key, value);
+    if (!hopByHop.has(key)) {
+      responseHeaders.append(key, value);
+    }
   });
 
   return new Response(upstream.body, {
