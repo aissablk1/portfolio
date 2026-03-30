@@ -235,28 +235,28 @@ const dictionaries: Record<Language, Dictionary> = {
       tiers: [
         {
           name: "Sprint",
-          description: "Un livrable précis, rapide, opérationnel. Idéal pour une première collaboration ou un besoin ciblé.",
-          price: "À partir de 3 000 €",
-          priceNote: "Forfait projet — paiement en 2 fois",
-          duration: "2 à 4 semaines",
+          description: "Un livrable précis, rapide, opérationnel. Idéal pour tester une collaboration ou résoudre un problème ciblé.",
+          price: "1 490 €",
+          priceNote: "Forfait fixe — sans surprise, paiement en 2 fois possible",
+          duration: "1 à 3 semaines",
           features: [
             "1 système livré clé en main (site, automation ou dashboard)",
-            "Brief stratégique + maquette validée",
-            "Code source propriétaire — vous êtes propriétaire",
+            "Brief stratégique + maquette validée avant dev",
+            "Code source propriétaire — c'est à vous, pour toujours",
             "Déploiement en production inclus",
             "Support 15 jours post-livraison",
           ],
         },
         {
           name: "Build",
-          description: "Architecture complète avec plusieurs briques connectées. Le format pour passer à l'échelle.",
-          price: "À partir de 8 000 €",
-          priceNote: "Forfait projet — paiement en 3 fois",
-          duration: "1 à 3 mois",
+          description: "Votre système complet, multi-briques, connecté. Le format pour transformer votre business.",
+          price: "4 900 €",
+          priceNote: "Forfait fixe — paiement en 3 fois, début dès validation",
+          duration: "1 à 2 mois",
           features: [
             "Système multi-briques (site + automations + data)",
             "Intégration IA sur-mesure (agents, LLM, workflows)",
-            "Architecture scalable documentée",
+            "Architecture scalable et documentée",
             "Formation à l'utilisation de vos outils",
             "1 mois de support post-livraison inclus",
             "Accès prioritaire pour évolutions futures",
@@ -265,12 +265,12 @@ const dictionaries: Record<Language, Dictionary> = {
         {
           name: "Écosystème",
           description: "Votre infrastructure digitale complète. Pour les entreprises qui veulent un partenaire technique de long terme.",
-          price: "Sur devis",
-          priceNote: "Engagement 3 mois minimum — paiement mensuel",
-          duration: "3 à 6 mois",
+          price: "Sur mesure",
+          priceNote: "Engagement 3 mois minimum — paiement mensuel, ROI garanti",
+          duration: "2 à 6 mois",
           features: [
             "Architecture complète de A à Z (IA + web + data + ops)",
-            "Agents IA autonomes intégrés à vos process",
+            "Agents IA autonomes intégrés à vos process métier",
             "Dashboards temps réel et cockpits décisionnels",
             "Tunnels de conversion automatisés",
             "Documentation technique et formation équipe",
@@ -286,7 +286,7 @@ const dictionaries: Record<Language, Dictionary> = {
         plans: [
           {
             name: "Essentiel",
-            price: "800 €",
+            price: "490 €",
             features: [
               "Monitoring et alertes 24/7",
               "Corrections de bugs sous 48h",
@@ -297,7 +297,7 @@ const dictionaries: Record<Language, Dictionary> = {
           },
           {
             name: "Pro",
-            price: "2 000 €",
+            price: "1 490 €",
             features: [
               "Tout Essentiel +",
               "Évolutions et nouvelles fonctionnalités (jusqu'à 10h/mois)",
@@ -637,7 +637,7 @@ const dictionaries: Record<Language, Dictionary> = {
         {
           name: "Sprint",
           description: "One precise, fast, operational deliverable. Ideal for a first collaboration or a targeted need.",
-          price: "From €3,000",
+          price: "€1,490",
           priceNote: "Fixed project fee — 2 installments",
           duration: "2 to 4 weeks",
           features: [
@@ -651,7 +651,7 @@ const dictionaries: Record<Language, Dictionary> = {
         {
           name: "Build",
           description: "Complete architecture with multiple connected modules. The format to scale up.",
-          price: "From €8,000",
+          price: "€4,900",
           priceNote: "Fixed project fee — 3 installments",
           duration: "1 to 3 months",
           features: [
@@ -687,7 +687,7 @@ const dictionaries: Record<Language, Dictionary> = {
         plans: [
           {
             name: "Essential",
-            price: "€800",
+            price: "€490",
             features: [
               "24/7 monitoring and alerts",
               "Bug fixes within 48h",
@@ -698,7 +698,7 @@ const dictionaries: Record<Language, Dictionary> = {
           },
           {
             name: "Pro",
-            price: "€2,000",
+            price: "€1,490",
             features: [
               "Everything in Essential +",
               "Evolutions and new features (up to 10h/month)",

@@ -2,6 +2,7 @@
 
 import Header from "@/components/Header";
 import SideNav from "@/components/SideNav";
+import FloatingCta from "@/components/FloatingCta";
 import Hero from "@/components/sections/Hero";
 import Offers from "@/components/sections/Offers";
 import Approach from "@/components/sections/Approach";
@@ -17,6 +18,7 @@ export default function Home() {
     <div className="bg-site-bg min-h-screen">
       <Header />
       <SideNav />
+      <FloatingCta />
       
       <div className="grid grid-cols-1 relative">
         {/* Left Column (Empty Spacer) */}

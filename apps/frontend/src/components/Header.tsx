@@ -100,12 +100,12 @@ const Header = () => {
           </Link>
 
           <div className="flex items-center gap-4">
-            {/* Services CTA — always visible */}
+            {/* Services CTA — always visible, filled */}
             <Link
               href="/services"
-              className="hidden md:inline-flex items-center px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest border border-site-accent/40 text-site-accent rounded-full hover:bg-site-accent hover:text-white transition-all"
+              className="hidden md:inline-flex items-center px-5 py-2 text-[10px] font-bold uppercase tracking-widest bg-site-accent text-white rounded-full hover:bg-site-accent/85 transition-all"
             >
-              {dict.nav.services}
+              {language === "fr" ? "Tarifs" : "Pricing"}
             </Link>
 
             {/* Language toggle */}

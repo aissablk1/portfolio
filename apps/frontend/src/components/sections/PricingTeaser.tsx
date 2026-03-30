@@ -9,73 +9,131 @@ import Link from "next/link";
 const icons = [Zap, Layers, Building2];
 
 const PricingTeaser = () => {
-  const { dict } = useLanguage();
+  const { language, dict } = useLanguage();
   const s = dict.services;
 
+  const stats = language === "fr"
+    ? [
+        { value: "100%", label: "Code livré en votre nom" },
+        { value: "48h", label: "Temps de réponse max" },
+        { value: "0", label: "Intermédiaire" },
+      ]
+    : [
+        { value: "100%", label: "Code delivered under your name" },
+        { value: "48h", label: "Max response time" },
+        { value: "0", label: "Middlemen" },
+      ];
+
   return (
-    <section className="px-container section-padding border-t border-site-border">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex items-center gap-4 mb-6">
-          <div className="w-2 h-2 rounded-full bg-site-accent" />
-          <span className="text-xs font-bold uppercase tracking-widest text-site-text-light">
-            {s.badge}
-          </span>
-        </div>
+    <section id="pricing" className="relative overflow-hidden">
+      {/* Fond accent subtil pour casser le scroll */}
+      <div className="absolute inset-0 bg-site-accent/[0.03]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,var(--color-site-accent)_0%,transparent_70%)] opacity-[0.04]" />
 
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-20">
-          <h2
-            style={{ fontSize: "clamp(1.5rem, 3.5vw, 3rem)", lineHeight: 1.1 }}
-            className="font-medium tracking-tighter uppercase max-w-2xl whitespace-pre-line"
-          >
-            {s.title}
-          </h2>
-          <Link
-            href="/services"
-            className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-site-accent hover:underline underline-offset-4 shrink-0"
-          >
-            {s.cta} <ArrowUpRight size={14} />
-          </Link>
-        </div>
+      <div className="relative px-container section-padding border-t border-b border-site-accent/10">
+        <div className="max-w-7xl mx-auto">
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-site-border border border-site-border rounded-2xl overflow-hidden">
-          {s.tiers.map((tier, idx) => {
-            const Icon = icons[idx];
-            return (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: idx * 0.12, ease: [0.25, 1, 0.5, 1] }}
+          {/* Header + stats */}
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-12 mb-20">
+            <div>
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-2 h-2 rounded-full bg-site-accent" />
+                <span className="text-xs font-bold uppercase tracking-widest text-site-accent">
+                  {s.badge}
+                </span>
+              </div>
+              <h2
+                style={{ fontSize: "clamp(1.75rem, 4vw, 3.5rem)", lineHeight: 1.05 }}
+                className="font-medium tracking-tighter uppercase max-w-2xl whitespace-pre-line"
               >
-                <Link
-                  href="/services"
-                  className="h-full bg-site-bg p-8 md:p-12 flex flex-col justify-between hover:bg-site-bg/50 transition-colors group"
+                {s.title}
+              </h2>
+            </div>
+
+            {/* Social proof stats */}
+            <div className="flex gap-12">
+              {stats.map((stat, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: idx * 0.1 }}
+                  className="text-center"
                 >
-                  <div>
-                    <div className="flex items-center gap-4 mb-6">
-                      <Icon size={18} className="text-site-text-light" strokeWidth={1.5} />
-                      <span className="text-[10px] font-bold uppercase tracking-widest text-site-text-light/40">
-                        {tier.duration}
-                      </span>
+                  <div className="text-3xl md:text-4xl font-medium tracking-tighter text-site-accent">{stat.value}</div>
+                  <div className="text-[10px] font-bold uppercase tracking-widest text-site-text-light/50 mt-1">{stat.label}</div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-site-border border border-site-border rounded-2xl overflow-hidden">
+            {s.tiers.map((tier, idx) => {
+              const Icon = icons[idx];
+              const isMiddle = idx === 1;
+              return (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: idx * 0.12, ease: [0.25, 1, 0.5, 1] }}
+                >
+                  <Link
+                    href="/services"
+                    className={`h-full bg-site-bg p-8 md:p-12 flex flex-col justify-between transition-colors group ${isMiddle ? "bg-site-accent/[0.04] hover:bg-site-accent/[0.08]" : "hover:bg-site-bg/50"}`}
+                  >
+                    <div>
+                      <div className="flex items-center justify-between mb-6">
+                        <div className="flex items-center gap-4">
+                          <Icon size={18} className={isMiddle ? "text-site-accent" : "text-site-text-light"} strokeWidth={1.5} />
+                          <span className="text-[10px] font-bold uppercase tracking-widest text-site-text-light/40">
+                            {tier.duration}
+                          </span>
+                        </div>
+                        {isMiddle && (
+                          <span className="text-[9px] font-bold uppercase tracking-widest text-site-accent bg-site-accent/10 px-2 py-0.5 rounded-full">
+                            {s.popularBadge}
+                          </span>
+                        )}
+                      </div>
+                      <h3 className="text-2xl md:text-3xl font-medium uppercase tracking-tighter mb-4">
+                        {tier.name}
+                      </h3>
+                      <p className="text-site-text-light text-sm leading-relaxed mb-8">
+                        {tier.description}
+                      </p>
+                      <p className="text-2xl font-medium tracking-tight">
+                        {tier.price}
+                      </p>
                     </div>
-                    <h3 className="text-2xl md:text-3xl font-medium uppercase tracking-tighter mb-4">
-                      {tier.name}
-                    </h3>
-                    <p className="text-site-text-light text-sm leading-relaxed mb-6">
-                      {tier.description}
-                    </p>
-                    <p className="text-lg font-medium tracking-tight">
-                      {tier.price}
-                    </p>
-                  </div>
-                  <div className="mt-10 flex items-center gap-2 text-xs font-bold uppercase tracking-widest opacity-40 group-hover:opacity-100 group-hover:text-site-accent transition-all">
-                    {s.cta} <ArrowUpRight size={14} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                  </div>
-                </Link>
-              </motion.div>
-            );
-          })}
+                    <div className="mt-10 flex items-center gap-2 text-xs font-bold uppercase tracking-widest opacity-40 group-hover:opacity-100 group-hover:text-site-accent transition-all">
+                      {s.cta} <ArrowUpRight size={14} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                    </div>
+                  </Link>
+                </motion.div>
+              );
+            })}
+          </div>
+
+          {/* Bottom CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="mt-10 text-center"
+          >
+            <Link
+              href="/services"
+              className="inline-flex items-center gap-3 bg-site-accent text-white px-8 py-4 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-site-accent/85 transition-all hover:scale-105"
+            >
+              {language === "fr" ? "Tous les détails et abonnements" : "All details and subscriptions"}
+              <ArrowUpRight size={14} />
+            </Link>
+          </motion.div>
         </div>
       </div>
     </section>

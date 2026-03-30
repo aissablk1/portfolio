@@ -54,7 +54,7 @@ const Hero = () => {
               <Link href="/contact" className="bg-site-accent text-white px-8 py-4 rounded-full text-sm font-medium hover:scale-105 transition-transform text-center">
                 {dict.hero.ctaPrimary}
               </Link>
-              <Link href="/services" className="border border-site-border px-8 py-4 rounded-full text-sm font-medium hover:bg-site-border/20 transition-colors text-center">
+              <Link href="/services" className="border border-site-accent/40 text-site-accent px-8 py-4 rounded-full text-sm font-medium hover:bg-site-accent hover:text-white transition-all text-center">
                 {dict.hero.ctaSecondary}
               </Link>
             </div>
