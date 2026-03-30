@@ -1,13 +1,10 @@
 /**
- * /api/p — Page view tracking proxy (p = ping)
+ * /api/ping — Page view tracking proxy
  *
- * Proxie les page views vers le backend (POST /api/t) en same-origin
+ * Proxie les page views vers le backend (POST /api/tracker) en same-origin
  * pour éviter le blocage par les ad blockers (uBlock, etc.).
  *
- * Flux : navigateur → /api/p (Vercel, même domaine) → /api/t (Render) → MongoDB
- *
- * Les noms courts "p" et "t" sont volontairement anodins pour ne pas
- * déclencher les filtres anti-tracking des extensions navigateur.
+ * Flux : navigateur → /api/ping (Vercel, même domaine) → /api/tracker (Render) → MongoDB
  */
 import { NextRequest, NextResponse } from "next/server";
 
@@ -25,7 +22,7 @@ export async function POST(request: NextRequest) {
       request.headers.get("x-real-ip") ||
       "";
 
-    await fetch(`${BACKEND_URL}/api/t`, {
+    await fetch(`${BACKEND_URL}/api/tracker`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

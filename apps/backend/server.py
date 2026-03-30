@@ -229,12 +229,11 @@ async def get_contact_stats():
 _track_rate_limit: dict = {}  # IP → timestamp du dernier track
 
 
-@api_router.post("/t")
+@api_router.post("/tracker")
 async def track_pageview(request: Request):
-    """POST /api/t — Page view tracking (t = track).
+    """POST /api/tracker — Page view tracking.
 
-    Reçoit les page views depuis le proxy /api/p du portfolio.
-    Nom court "t" pour éviter les filtres anti-tracking des ad blockers.
+    Reçoit les page views depuis le proxy /api/ping du portfolio.
     Stocke dans la collection MongoDB `page_views`.
     Rate-limité à 1 requête par IP par 5 secondes.
     """
@@ -282,7 +281,12 @@ app.include_router(api_router)
 app.include_router(admin_router)
 
 
-# ─── CSRF Origin Verification (before CORS middleware) ──────────────────────
+# ─── Middlewares ──────────────────────────────────────────────────────────────
+
+# CSRF : ajouté via add_middleware APRÈS CORS (CORS est outermost, CSRF est inner)
+from starlette.middleware.base import BaseHTTPMiddleware
+from starlette.responses import JSONResponse as StarletteJSONResponse
+
 _CSRF_ALLOWED_ORIGINS = {
     "https://admin.aissabelkoussa.fr",
     "https://aissabelkoussa.fr",
@@ -292,18 +296,17 @@ _CSRF_ALLOWED_ORIGINS = {
 }
 
 
-@app.middleware("http")
-async def verify_origin(request: Request, call_next):
-    """Bloque les requêtes mutatives vers /api/admin/ dont l'Origin n'est pas autorisée."""
-    if request.method in ("POST", "PUT", "PATCH", "DELETE"):
-        origin = request.headers.get("origin", "")
-        # Only check admin routes — public /api/contact and /api/t don't need it
-        if request.url.path.startswith("/api/admin/") and origin and origin not in _CSRF_ALLOWED_ORIGINS:
-            from fastapi.responses import JSONResponse
-            return JSONResponse(status_code=403, content={"detail": "Origin non autorisee"})
-    return await call_next(request)
+class CSRFMiddleware(BaseHTTPMiddleware):
+    async def dispatch(self, request: Request, call_next):
+        if request.method in ("POST", "PUT", "PATCH", "DELETE"):
+            origin = request.headers.get("origin", "")
+            if request.url.path.startswith("/api/admin/") and origin and origin not in _CSRF_ALLOWED_ORIGINS:
+                return StarletteJSONResponse(status_code=403, content={"detail": "Origin non autorisee"})
+        return await call_next(request)
 
 
+# Order matters: CORS is outermost, CSRF is inner
+app.add_middleware(CSRFMiddleware)
 app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,

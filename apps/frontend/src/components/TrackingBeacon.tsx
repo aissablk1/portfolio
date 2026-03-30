@@ -1,8 +1,8 @@
 /**
  * TrackingBeacon — Enregistre les page views dans le dashboard admin.
  *
- * Envoie un POST à /api/p (proxy same-origin) à chaque changement de page.
- * Le proxy forward vers le backend /api/t qui stocke dans MongoDB.
+ * Envoie un POST à /api/ping (proxy same-origin) à chaque changement de page.
+ * Le proxy forward vers le backend /api/tracker qui stocke dans MongoDB.
  * Respecte Do Not Track. Fire-and-forget (ne bloque jamais le rendu).
  */
 "use client";
@@ -31,9 +31,9 @@ export function TrackingBeacon() {
 
     // Route through same-origin API route to avoid ad blockers
     if (navigator.sendBeacon) {
-      navigator.sendBeacon("/api/p", payload);
+      navigator.sendBeacon("/api/ping", payload);
     } else {
-      fetch("/api/p", {
+      fetch("/api/ping", {
         method: "POST",
         body: payload,
         headers: { "Content-Type": "application/json" },
