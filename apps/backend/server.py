@@ -11,7 +11,7 @@ from services.spam_protection import SpamProtection
 from services.notification_service import NotificationService
 from services.storage_service import StorageService
 from admin_routes import admin_router
-from services.auth_service import create_admin_user, load_blacklisted_tokens
+from services.auth_service import create_admin_user, load_blacklisted_tokens, hash_password
 import asyncio
 from datetime import datetime
 
@@ -236,22 +236,27 @@ async def startup_event():
         # Charger les tokens blacklistés depuis la DB
         await load_blacklisted_tokens(db)
 
-        # Vérifier si un admin existe déjà
-        admin_count = await db.admin_users.count_documents({})
-        if admin_count == 0:
-            default_password = os.getenv("ADMIN_PASSWORD", "admin2026")
+        # Synchroniser l'admin avec ADMIN_PASSWORD (créer ou mettre à jour)
+        admin_password = os.getenv("ADMIN_PASSWORD", "admin2026")
+        existing_admin = await db.admin_users.find_one({"username": "aissa"})
+        if not existing_admin:
             result = await create_admin_user(
                 db,
                 username="aissa",
                 email="contact@aissabelkoussa.fr",
-                password=default_password,
+                password=admin_password,
             )
             if result:
                 logger.info("Administrateur par défaut 'aissa' créé avec succès.")
             else:
                 logger.error("Échec de la création de l'administrateur par défaut.")
         else:
-            logger.info(f"{admin_count} administrateur(s) trouvé(s) en base.")
+            # Toujours synchroniser le mot de passe avec la variable d'environnement
+            await db.admin_users.update_one(
+                {"username": "aissa"},
+                {"$set": {"hashed_password": hash_password(admin_password)}},
+            )
+            logger.info("Mot de passe de l'administrateur 'aissa' synchronisé.")
     except Exception as e:
         logger.error(f"Erreur lors de l'initialisation au démarrage : {str(e)}")
 
