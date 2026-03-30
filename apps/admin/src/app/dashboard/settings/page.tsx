@@ -445,6 +445,7 @@ export default function SettingsPage() {
                 </label>
                 <input
                   type={showPasswords ? "text" : "password"}
+                  autoComplete="current-password"
                   {...passwordForm.register("current_password")}
                   className="w-full rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-bg-secondary)] px-3 py-2 text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-muted)] focus:border-[var(--color-border-focus)] focus:outline-none transition-colors"
                 />
@@ -460,6 +461,7 @@ export default function SettingsPage() {
                 </label>
                 <input
                   type={showPasswords ? "text" : "password"}
+                  autoComplete="new-password"
                   {...passwordForm.register("new_password")}
                   className="w-full rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-bg-secondary)] px-3 py-2 text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-muted)] focus:border-[var(--color-border-focus)] focus:outline-none transition-colors"
                 />
@@ -475,6 +477,7 @@ export default function SettingsPage() {
                 </label>
                 <input
                   type={showPasswords ? "text" : "password"}
+                  autoComplete="new-password"
                   {...passwordForm.register("confirm_password")}
                   className="w-full rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-bg-secondary)] px-3 py-2 text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-muted)] focus:border-[var(--color-border-focus)] focus:outline-none transition-colors"
                 />

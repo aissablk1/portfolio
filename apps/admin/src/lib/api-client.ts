@@ -196,7 +196,7 @@ class ApiClient {
 
   // ─── Page Views ────────────────────────────────
   async getPageViews() {
-    return this.request<ApiResponse<import("./types").PageViewStats>>("/api/admin/analytics/pageviews");
+    return this.request<ApiResponse<import("./types").PageViewStats>>("/api/admin/stats/visits");
   }
 
   // ─── Security ───────────────────────────────────

@@ -217,7 +217,7 @@ async def get_contact_stats():
 _track_rate_limit: dict = {}  # IP → timestamp du dernier track
 
 
-@api_router.post("/track")
+@api_router.post("/t")
 async def track_pageview(request: Request):
     """Enregistre une page vue — fire-and-forget depuis le portfolio."""
     try:
@@ -264,7 +264,7 @@ async def track_pageview(request: Request):
 from admin_routes import admin_router as _admin_router_ref
 
 
-@_admin_router_ref.get("/analytics/pageviews")
+@_admin_router_ref.get("/stats/visits")
 async def get_pageviews_analytics(request: Request):
     """Analytics des page views — vues/jour, top pages, referrers."""
     _db = _get_db_ref()

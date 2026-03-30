@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 
 const TRACK_URL = process.env.NEXT_PUBLIC_BACKEND_URL
-  ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/track`
+  ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/t`
   : null;
 
 export function TrackingBeacon() {

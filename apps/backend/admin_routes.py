@@ -1532,7 +1532,29 @@ async def site_health(request: Request):
             "status": "configured" if wa_token else "not_configured"
         }
 
-        return _ok({"services": services, "checked_at": datetime.now(timezone.utc).isoformat()})
+        # Transformer le dict en array pour le frontend
+        checked_at = datetime.now(timezone.utc).isoformat()
+        service_names = {
+            "mongodb": "MongoDB",
+            "smtp": "SMTP",
+            "telegram": "Telegram",
+            "notion": "Notion",
+            "google_sheets": "Google Sheets",
+            "whatsapp": "WhatsApp",
+        }
+        services_list = [
+            {
+                "name": service_names.get(key, key),
+                "status": "healthy" if info.get("status") in ("healthy", "configured") else "down",
+                "last_checked": checked_at,
+                "details": info.get("error"),
+                "latency": info.get("latency_ms"),
+            }
+            for key, info in services.items()
+            if info.get("status") != "not_configured"
+        ]
+
+        return _ok({"services": services_list, "checked_at": checked_at})
 
     except Exception as e:
         logger.error(f"Erreur site health : {str(e)}")
