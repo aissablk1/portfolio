@@ -1,3 +1,10 @@
+/**
+ * TrackingBeacon — Enregistre les page views dans le dashboard admin.
+ *
+ * Envoie un POST à /api/p (proxy same-origin) à chaque changement de page.
+ * Le proxy forward vers le backend /api/t qui stocke dans MongoDB.
+ * Respecte Do Not Track. Fire-and-forget (ne bloque jamais le rendu).
+ */
 "use client";
 
 import { useEffect, useRef } from "react";

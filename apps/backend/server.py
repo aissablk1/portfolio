@@ -231,7 +231,13 @@ _track_rate_limit: dict = {}  # IP → timestamp du dernier track
 
 @api_router.post("/t")
 async def track_pageview(request: Request):
-    """Enregistre une page vue — fire-and-forget depuis le portfolio."""
+    """POST /api/t — Page view tracking (t = track).
+
+    Reçoit les page views depuis le proxy /api/p du portfolio.
+    Nom court "t" pour éviter les filtres anti-tracking des ad blockers.
+    Stocke dans la collection MongoDB `page_views`.
+    Rate-limité à 1 requête par IP par 5 secondes.
+    """
     try:
         body = await request.json()
         page = body.get("page", "/")

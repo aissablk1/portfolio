@@ -1,3 +1,14 @@
+/**
+ * /api/p — Page view tracking proxy (p = ping)
+ *
+ * Proxie les page views vers le backend (POST /api/t) en same-origin
+ * pour éviter le blocage par les ad blockers (uBlock, etc.).
+ *
+ * Flux : navigateur → /api/p (Vercel, même domaine) → /api/t (Render) → MongoDB
+ *
+ * Les noms courts "p" et "t" sont volontairement anodins pour ne pas
+ * déclencher les filtres anti-tracking des extensions navigateur.
+ */
 import { NextRequest, NextResponse } from "next/server";
 
 const BACKEND_URL = process.env.BACKEND_API_URL || process.env.NEXT_PUBLIC_BACKEND_URL;
