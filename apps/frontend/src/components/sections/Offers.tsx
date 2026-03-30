@@ -55,6 +55,21 @@ const Offers = () => {
             </motion.div>
           ))}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="mt-8 text-center"
+        >
+          <Link
+            href="/services"
+            className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-site-text-light hover:text-site-accent transition-colors"
+          >
+            {dict.nav.services} & Tarifs <ArrowUpRight size={14} />
+          </Link>
+        </motion.div>
       </div>
     </section>
   );
