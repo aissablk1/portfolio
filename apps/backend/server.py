@@ -275,6 +275,28 @@ async def track_pageview(request: Request):
 app.include_router(api_router)
 app.include_router(admin_router)
 
+
+# ─── CSRF Origin Verification (before CORS middleware) ──────────────────────
+_CSRF_ALLOWED_ORIGINS = {
+    "https://admin.aissabelkoussa.fr",
+    "https://aissabelkoussa.fr",
+    "http://localhost:3000",
+    "http://localhost:3001",
+}
+
+
+@app.middleware("http")
+async def verify_origin(request: Request, call_next):
+    """Bloque les requêtes mutatives vers /api/admin/ dont l'Origin n'est pas autorisée."""
+    if request.method in ("POST", "PUT", "PATCH", "DELETE"):
+        origin = request.headers.get("origin", "")
+        # Only check admin routes — public /api/contact and /api/t don't need it
+        if request.url.path.startswith("/api/admin/") and origin and origin not in _CSRF_ALLOWED_ORIGINS:
+            from fastapi.responses import JSONResponse
+            return JSONResponse(status_code=403, content={"detail": "Origin non autorisee"})
+    return await call_next(request)
+
+
 app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,

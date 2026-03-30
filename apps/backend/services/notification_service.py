@@ -33,7 +33,7 @@ class NotificationService:
 
 🚀 *Actions rapides:*
 • [Répondre par email](mailto:{submission_data['email']})
-• [WhatsApp](https://wa.me/33782721406)
+• [WhatsApp](https://wa.me/{os.getenv("ADMIN_WHATSAPP_NUMBER", "")})
             """
             
             url = f"https://api.telegram.org/bot{self.telegram_bot_token}/sendMessage"
@@ -75,7 +75,7 @@ class NotificationService:
 
 🚀 Actions rapides:
 • Répondre par email: {submission_data['email']}
-• Contacter sur WhatsApp: https://wa.me/33782721406"""
+• Contacter sur WhatsApp: https://wa.me/{os.getenv("ADMIN_WHATSAPP_NUMBER", "")}"""
                 
                 url = f"https://graph.facebook.com/v17.0/{self.whatsapp_phone_id}/messages"
                 headers = {
@@ -85,7 +85,7 @@ class NotificationService:
                 
                 payload = {
                     'messaging_product': 'whatsapp',
-                    'to': '33782721406',  # Your WhatsApp number
+                    'to': os.getenv("ADMIN_WHATSAPP_NUMBER", ""),
                     'type': 'text',
                     'text': {
                         'body': message
@@ -107,7 +107,7 @@ class NotificationService:
                     'type': 'contact_form',
                     'data': submission_data,
                     'timestamp': datetime.now().isoformat(),
-                    'action_url': f"https://wa.me/33782721406?text=Bonjour {submission_data['name']}, merci pour votre message via mon portfolio."
+                    'action_url': f"https://wa.me/{os.getenv('ADMIN_WHATSAPP_NUMBER', '')}?text=Bonjour {submission_data['name']}, merci pour votre message via mon portfolio."
                 }
                 
                 response = requests.post(webhook_url, json=payload, timeout=10)

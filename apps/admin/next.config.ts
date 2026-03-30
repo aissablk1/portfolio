@@ -22,6 +22,11 @@ const nextConfig: NextConfig = {
           key: "Permissions-Policy",
           value: "camera=(), microphone=(), geolocation=()",
         },
+        {
+          key: "Content-Security-Policy",
+          value:
+            "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://avatars.githubusercontent.com https://*.githubusercontent.com; connect-src 'self' https://portfolio-api-72tq.onrender.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'",
+        },
       ],
     },
   ],

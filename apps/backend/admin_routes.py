@@ -686,7 +686,7 @@ async def reply_to_contact(request: Request, contact_id: str, reply: ContactRepl
         <html>
         <body style="font-family: Arial, sans-serif; line-height: 1.6;">
             <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
-                <div style="white-space: pre-wrap;">{reply.message}</div>
+                <div style="white-space: pre-wrap;">{_safe_html(reply.message)}</div>
                 <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; color: #666;">
                     <p>Cordialement,<br><strong>AÏSSA BELKOUSSA</strong></p>
                 </div>
@@ -818,7 +818,7 @@ async def send_email(request: Request, email_data: EmailCompose):
         <html>
         <body style="font-family: Arial, sans-serif; line-height: 1.6;">
             <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
-                <div style="white-space: pre-wrap;">{email_data.body}</div>
+                <div style="white-space: pre-wrap;">{_safe_html(email_data.body)}</div>
                 <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; color: #666;">
                     <p>Cordialement,<br><strong>AÏSSA BELKOUSSA</strong></p>
                 </div>
@@ -1495,7 +1495,7 @@ async def send_test_notification(request: Request, payload: TestNotification):
                     url,
                     json={
                         "messaging_product": "whatsapp",
-                        "to": "33782721406",
+                        "to": os.getenv("ADMIN_WHATSAPP_NUMBER", ""),
                         "type": "text",
                         "text": {"body": f"🧪 Test Admin: {test_message}"},
                     },

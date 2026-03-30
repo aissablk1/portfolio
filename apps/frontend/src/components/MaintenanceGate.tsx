@@ -7,8 +7,6 @@ import { Construction, Lock } from "lucide-react";
 
 const ENV_MAINTENANCE =
   process.env.NEXT_PUBLIC_MAINTENANCE_ENABLED !== "false";
-const MAINTENANCE_PASSWORD =
-  process.env.NEXT_PUBLIC_MAINTENANCE_PASSWORD || "aissa2026";
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 export default function MaintenanceGate({
@@ -24,7 +22,26 @@ export default function MaintenanceGate({
   const [mobileValue, setMobileValue] = useState("");
   const [shake, setShake] = useState(false);
 
+  // Try to unlock via the server-side API route
+  const tryUnlock = useCallback(async (password: string) => {
+    try {
+      const res = await fetch("/api/maintenance/unlock", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password }),
+      });
+      if (res.ok) {
+        setIsUnlocked(true);
+        return true;
+      }
+    } catch {
+      // Silently fail
+    }
+    return false;
+  }, []);
+
   // Check backend for maintenance status, fallback to env var
+  // Also check if the maintenance_unlocked cookie is already set (via server response)
   useEffect(() => {
     let cancelled = false;
 
@@ -49,17 +66,30 @@ export default function MaintenanceGate({
       }
 
       if (!cancelled) {
-        setIsUnlocked(!enabled);
-        setIsChecking(false);
+        // If maintenance is enabled, check if already unlocked via cookie
+        if (enabled) {
+          // The cookie is httpOnly so we can't read it in JS.
+          // Instead, we probe the unlock endpoint with an empty password —
+          // but that won't work. Instead, we check by reading document.cookie
+          // for a non-httpOnly marker, OR simply require re-authentication.
+          // Since the cookie is httpOnly, we rely on the server setting it.
+          // We'll check by making a lightweight request.
+          // Actually, the simplest approach: if the page was reloaded and the
+          // cookie exists, Next.js middleware could handle this. But to keep it
+          // simple without middleware, we accept that refreshing the page
+          // requires re-entering the password (the cookie is still useful for
+          // any server-side checks).
+          setIsUnlocked(false);
+          setIsChecking(false);
+        } else {
+          setIsUnlocked(true);
+          setIsChecking(false);
+        }
       }
     }
 
     checkMaintenance();
     return () => { cancelled = true; };
-  }, []);
-
-  const unlock = useCallback(() => {
-    setIsUnlocked(true);
   }, []);
 
   // Desktop: invisible keydown listener
@@ -79,8 +109,14 @@ export default function MaintenanceGate({
           bufferRef.current = "";
         }, 3000);
 
-        if (bufferRef.current.endsWith(MAINTENANCE_PASSWORD)) {
-          unlock();
+        // Try to unlock with the current buffer
+        // We check if the buffer ends with a potential password (min 4 chars)
+        if (bufferRef.current.length >= 4) {
+          tryUnlock(bufferRef.current).then((success) => {
+            if (success) {
+              bufferRef.current = "";
+            }
+          });
         }
       }
     };
@@ -90,7 +126,7 @@ export default function MaintenanceGate({
       window.removeEventListener("keydown", handleKeyDown);
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
-  }, [isUnlocked, isChecking, unlock]);
+  }, [isUnlocked, isChecking, tryUnlock]);
 
   // Block interactions + scroll when locked
   useEffect(() => {
@@ -115,16 +151,16 @@ export default function MaintenanceGate({
   // Mobile input handler
   const handleMobileInput = (value: string) => {
     setMobileValue(value);
-    if (value === MAINTENANCE_PASSWORD) {
-      unlock();
-    }
   };
 
-  // Handle mobile input "Enter" — trigger shake if wrong
-  const handleMobileKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter" && mobileValue !== MAINTENANCE_PASSWORD) {
-      setShake(true);
-      setTimeout(() => setShake(false), 500);
+  // Handle mobile input "Enter" — try to unlock via API
+  const handleMobileKeyDown = async (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      const success = await tryUnlock(mobileValue);
+      if (!success) {
+        setShake(true);
+        setTimeout(() => setShake(false), 500);
+      }
     }
   };
 
