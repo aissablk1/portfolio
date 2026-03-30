@@ -237,7 +237,10 @@ async def startup_event():
         await load_blacklisted_tokens(db)
 
         # Synchroniser l'admin avec ADMIN_PASSWORD (créer ou mettre à jour)
-        admin_password = os.getenv("ADMIN_PASSWORD", "admin2026")
+        admin_password = os.getenv("ADMIN_PASSWORD")
+        if not admin_password:
+            logger.warning("ADMIN_PASSWORD non défini — création/synchronisation de l'admin ignorée.")
+            return
         existing_admin = await db.admin_users.find_one({"username": "aissa"})
         if not existing_admin:
             result = await create_admin_user(
