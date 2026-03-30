@@ -10,6 +10,7 @@ import {
   websiteSchema,
 } from "@/lib/schemas";
 import { Analytics } from "@vercel/analytics/next";
+import { TrackingBeacon } from "@/components/TrackingBeacon";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -132,6 +133,7 @@ export default function RootLayout({
           </MaintenanceGate>
         </LanguageProvider>
         <Analytics />
+        <TrackingBeacon />
       </body>
     </html>
   );

@@ -212,6 +212,135 @@ async def get_contact_stats():
         logger.error(f"Error getting contact stats: {str(e)}")
         raise HTTPException(status_code=500, detail="Error retrieving statistics")
 
+# ─── Page View Tracking (public, pas d'auth) ────────────────────────────────
+
+_track_rate_limit: dict = {}  # IP → timestamp du dernier track
+
+
+@api_router.post("/track")
+async def track_pageview(request: Request):
+    """Enregistre une page vue — fire-and-forget depuis le portfolio."""
+    try:
+        body = await request.json()
+        page = body.get("page", "/")
+        referrer = body.get("referrer", "")
+        screen_w = body.get("screen_width", 0)
+        lang = body.get("language", "")
+
+        ip = request.headers.get("x-forwarded-for", "").split(",")[0].strip()
+        if not ip and request.client:
+            ip = request.client.host
+
+        # Rate limit : max 1 track par IP par 5 secondes
+        now_ts = datetime.now(timezone.utc).timestamp()
+        last = _track_rate_limit.get(ip, 0)
+        if now_ts - last < 5:
+            return {"ok": True}
+        _track_rate_limit[ip] = now_ts
+
+        # Nettoyage périodique du rate limiter en mémoire
+        if len(_track_rate_limit) > 10000:
+            cutoff = now_ts - 60
+            for k in [k for k, v in _track_rate_limit.items() if v < cutoff]:
+                del _track_rate_limit[k]
+
+        await db.page_views.insert_one({
+            "page": str(page)[:500],
+            "referrer": str(referrer)[:500],
+            "screen_w": int(screen_w) if screen_w else 0,
+            "lang": str(lang)[:10],
+            "ip": ip,
+            "ua": str(request.headers.get("user-agent", ""))[:300],
+            "ts": datetime.now(timezone.utc),
+        })
+
+        return {"ok": True}
+    except Exception:
+        return {"ok": True}  # Ne jamais échouer côté client
+
+
+# ─── Page Views Analytics (admin, auth) ──────────────────────────────────────
+
+from admin_routes import admin_router as _admin_router_ref
+
+
+@_admin_router_ref.get("/analytics/pageviews")
+async def get_pageviews_analytics(request: Request):
+    """Analytics des page views — vues/jour, top pages, referrers."""
+    _db = _get_db_ref()
+    from services.auth_service import get_current_admin as _get_admin
+    await _get_admin(request, _db)
+
+    try:
+        now = datetime.now(timezone.utc)
+        today_start = now.replace(hour=0, minute=0, second=0, microsecond=0)
+        week_start = today_start - timedelta(days=7)
+        month_start = today_start - timedelta(days=30)
+
+        views_today = await db.page_views.count_documents({"ts": {"$gte": today_start}})
+        views_week = await db.page_views.count_documents({"ts": {"$gte": week_start}})
+        views_month = await db.page_views.count_documents({"ts": {"$gte": month_start}})
+
+        # Timeline 30 jours
+        timeline_pipeline = [
+            {"$match": {"ts": {"$gte": month_start}}},
+            {"$group": {
+                "_id": {"$dateToString": {"format": "%Y-%m-%d", "date": "$ts"}},
+                "count": {"$sum": 1},
+            }},
+            {"$sort": {"_id": 1}},
+        ]
+        timeline = [
+            {"date": d["_id"], "count": d["count"]}
+            async for d in db.page_views.aggregate(timeline_pipeline)
+        ]
+
+        # Top pages
+        top_pages_pipeline = [
+            {"$match": {"ts": {"$gte": month_start}}},
+            {"$group": {"_id": "$page", "count": {"$sum": 1}}},
+            {"$sort": {"count": -1}},
+            {"$limit": 10},
+        ]
+        top_pages = [
+            {"page": d["_id"], "count": d["count"]}
+            async for d in db.page_views.aggregate(top_pages_pipeline)
+        ]
+
+        # Top referrers
+        referrer_pipeline = [
+            {"$match": {"ts": {"$gte": month_start}, "referrer": {"$ne": ""}}},
+            {"$group": {"_id": "$referrer", "count": {"$sum": 1}}},
+            {"$sort": {"count": -1}},
+            {"$limit": 10},
+        ]
+        top_referrers = [
+            {"referrer": d["_id"], "count": d["count"]}
+            async for d in db.page_views.aggregate(referrer_pipeline)
+        ]
+
+        return {
+            "success": True,
+            "data": {
+                "today": views_today,
+                "this_week": views_week,
+                "this_month": views_month,
+                "timeline": timeline,
+                "top_pages": top_pages,
+                "top_referrers": top_referrers,
+            },
+        }
+
+    except Exception as e:
+        logger.error(f"Erreur analytics pageviews : {str(e)}")
+        raise HTTPException(status_code=500, detail="Erreur analytics")
+
+
+def _get_db_ref():
+    """Alias pour accéder à la DB depuis les routes ajoutées ici."""
+    return db
+
+
 # Include the routers in the main app
 app.include_router(api_router)
 app.include_router(admin_router)

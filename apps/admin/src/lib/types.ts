@@ -237,3 +237,48 @@ export interface DashboardOverview {
   notifications_today: number;
   spam_today: number;
 }
+
+// ─── GitHub ─────────────────────────────────────────
+export interface GitHubRepo {
+  name: string;
+  description: string | null;
+  language: string | null;
+  stargazers_count: number;
+  forks_count: number;
+  updated_at: string;
+  html_url: string;
+}
+
+export interface GitHubActivity {
+  type: string;
+  repo: string;
+  message: string;
+  created_at: string;
+}
+
+export interface GitHubProfile {
+  profile: {
+    login: string;
+    name: string | null;
+    bio: string | null;
+    public_repos: number;
+    followers: number;
+    avatar_url: string;
+    html_url: string;
+  };
+  repos: GitHubRepo[];
+  languages: Record<string, number>;
+  total_stars: number;
+  recent_activity: GitHubActivity[];
+  cached_at: string;
+}
+
+// ─── Page Views ─────────────────────────────────────
+export interface PageViewStats {
+  today: number;
+  this_week: number;
+  this_month: number;
+  timeline: { date: string; count: number }[];
+  top_pages: { page: string; count: number }[];
+  top_referrers: { referrer: string; count: number }[];
+}

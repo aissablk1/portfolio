@@ -256,7 +256,7 @@ async def get_me(request: Request):
 
 @admin_router.get("/dashboard")
 async def get_dashboard(request: Request):
-    """Vue d'ensemble du tableau de bord — stats, contacts récents, santé des services."""
+    """Vue d'ensemble du tableau de bord — stats, contacts récents, santé des services, GitHub."""
     db = _get_db()
     await get_current_admin(request, db)
 
@@ -277,33 +277,65 @@ async def get_dashboard(request: Request):
         month_count = await db.contact_submissions.count_documents(
             {"timestamp": {"$gte": month_start}}
         )
-        pending = await db.contact_submissions.count_documents({"status": "pending"})
-        processed = await db.contact_submissions.count_documents({"status": "processed"})
-        replied = await db.contact_submissions.count_documents({"status": "replied"})
         spam_count = await db.contact_submissions.count_documents({"status": "spam"})
+        spam_today = await db.contact_submissions.count_documents(
+            {"status": "spam", "timestamp": {"$gte": today_start}}
+        )
+        replied = await db.contact_submissions.count_documents({"status": "replied"})
+        non_spam = max(total - spam_count, 1)
+        response_rate = round((replied / non_spam) * 100, 1) if non_spam > 0 else 0
 
-        # Contacts récents (5 derniers)
+        # Temps de réponse moyen (en minutes)
+        avg_pipeline = [
+            {"$match": {"status": "replied", "replied_at": {"$exists": True}}},
+            {"$project": {"diff": {"$subtract": ["$replied_at", "$timestamp"]}}},
+            {"$group": {"_id": None, "avg": {"$avg": "$diff"}}},
+        ]
+        avg_cursor = db.contact_submissions.aggregate(avg_pipeline)
+        avg_doc = await avg_cursor.to_list(length=1)
+        avg_response_minutes = round(avg_doc[0]["avg"] / 60000, 0) if avg_doc and avg_doc[0].get("avg") else 0
+
+        # Taux de délivrabilité email
+        total_emails = await db.email_logs.count_documents({})
+        sent_emails = await db.email_logs.count_documents({"status": "sent"})
+        email_delivery_rate = round((sent_emails / max(total_emails, 1)) * 100, 1)
+
+        # Notifications aujourd'hui
+        notifications_today = await db.notification_logs.count_documents(
+            {"timestamp": {"$gte": today_start}}
+        )
+
+        # Contacts récents (10 derniers)
         recent_cursor = db.contact_submissions.find(
             {"status": {"$ne": "spam"}},
             {"_id": 0, "ip_address": 0, "user_agent": 0}
-        ).sort("timestamp", -1).limit(5)
+        ).sort("timestamp", -1).limit(10)
         recent = [_serialize_doc(doc) async for doc in recent_cursor]
 
         # Santé des services
-        services = {
-            "mongodb": True,
-            "smtp": bool(os.getenv("EMAIL_USER") and os.getenv("EMAIL_PASSWORD")),
-            "telegram": bool(os.getenv("TELEGRAM_BOT_TOKEN") and os.getenv("TELEGRAM_CHAT_ID")),
-            "notion": bool(os.getenv("NOTION_TOKEN")),
-            "google_sheets": bool(os.getenv("GOOGLE_SHEETS_WEBHOOK_URL")),
+        checked_at = now.isoformat()
+        service_checks = {
+            "MongoDB": True,
+            "SMTP": bool(os.getenv("EMAIL_USER") and os.getenv("EMAIL_PASSWORD")),
+            "Telegram": bool(os.getenv("TELEGRAM_BOT_TOKEN") and os.getenv("TELEGRAM_CHAT_ID")),
+            "Notion": bool(os.getenv("NOTION_TOKEN")),
+            "Google Sheets": bool(os.getenv("GOOGLE_SHEETS_WEBHOOK_URL")),
         }
-
         try:
             await db.command("ping")
         except Exception:
-            services["mongodb"] = False
+            service_checks["MongoDB"] = False
 
-        # Timeline 7 derniers jours
+        service_health = [
+            {
+                "name": name,
+                "status": "healthy" if ok else "down",
+                "last_checked": checked_at,
+            }
+            for name, ok in service_checks.items()
+        ]
+
+        # Timeline 7 derniers jours (avec spam)
         pipeline = [
             {"$match": {"timestamp": {"$gte": today_start - timedelta(days=7)}}},
             {
@@ -312,27 +344,35 @@ async def get_dashboard(request: Request):
                         "$dateToString": {"format": "%Y-%m-%d", "date": "$timestamp"}
                     },
                     "count": {"$sum": 1},
+                    "spam": {
+                        "$sum": {"$cond": [{"$eq": ["$status", "spam"]}, 1, 0]}
+                    },
                 }
             },
             {"$sort": {"_id": 1}},
         ]
         timeline_cursor = db.contact_submissions.aggregate(pipeline)
-        timeline = [{"date": doc["_id"], "count": doc["count"]} async for doc in timeline_cursor]
+        timeline = [
+            {"date": doc["_id"], "count": doc["count"], "spam": doc["spam"]}
+            async for doc in timeline_cursor
+        ]
 
         return _ok({
             "stats": {
-                "total": total,
-                "today": today_count,
-                "this_week": week_count,
-                "this_month": month_count,
-                "pending": pending,
-                "processed": processed,
-                "replied": replied,
-                "spam": spam_count,
+                "total_contacts": total,
+                "contacts_today": today_count,
+                "contacts_this_week": week_count,
+                "contacts_this_month": month_count,
+                "spam_blocked": spam_count,
+                "response_rate": response_rate,
+                "avg_response_time": avg_response_minutes,
+                "email_delivery_rate": email_delivery_rate,
             },
             "recent_contacts": recent,
-            "services": services,
+            "service_health": service_health,
             "timeline": timeline,
+            "notifications_today": notifications_today,
+            "spam_today": spam_today,
         })
 
     except Exception as e:
@@ -1635,3 +1675,126 @@ async def backup_database(request: Request):
     except Exception as e:
         logger.error(f"Erreur backup : {str(e)}")
         raise HTTPException(status_code=500, detail="Erreur lors du backup de la base de données.")
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+#  GITHUB INTEGRATION
+# ═══════════════════════════════════════════════════════════════════════════════
+
+GITHUB_USERNAME = os.getenv("GITHUB_USERNAME", "aissablk1")
+GITHUB_CACHE_TTL = 900  # 15 minutes
+
+
+@admin_router.get("/github/profile")
+async def get_github_profile(request: Request):
+    """Profil GitHub avec cache MongoDB (15 min TTL)."""
+    db = _get_db()
+    await get_current_admin(request, db)
+
+    try:
+        # Vérifier le cache
+        cached = await db.github_cache.find_one({"_id": "profile"})
+        if cached:
+            fetched_at = cached.get("fetched_at")
+            if fetched_at and (datetime.now(timezone.utc) - fetched_at).total_seconds() < GITHUB_CACHE_TTL:
+                del cached["_id"]
+                del cached["fetched_at"]
+                return _ok(cached)
+
+        import requests as http_requests
+
+        headers = {"Accept": "application/vnd.github.v3+json"}
+        gh_token = os.getenv("GITHUB_TOKEN")
+        if gh_token:
+            headers["Authorization"] = f"token {gh_token}"
+
+        # Fetch profile + repos + events en parallèle (sync mais rapide)
+        profile_resp = http_requests.get(
+            f"https://api.github.com/users/{GITHUB_USERNAME}", headers=headers, timeout=10
+        )
+        repos_resp = http_requests.get(
+            f"https://api.github.com/users/{GITHUB_USERNAME}/repos?sort=updated&per_page=20",
+            headers=headers, timeout=10,
+        )
+        events_resp = http_requests.get(
+            f"https://api.github.com/users/{GITHUB_USERNAME}/events/public?per_page=30",
+            headers=headers, timeout=10,
+        )
+
+        if profile_resp.status_code != 200:
+            raise HTTPException(status_code=502, detail="GitHub API indisponible")
+
+        profile_data = profile_resp.json()
+        repos_data = repos_resp.json() if repos_resp.status_code == 200 else []
+        events_data = events_resp.json() if events_resp.status_code == 200 else []
+
+        # Agréger les langages
+        languages = {}
+        for repo in repos_data:
+            lang = repo.get("language")
+            if lang:
+                languages[lang] = languages.get(lang, 0) + 1
+
+        # Extraire les commits récents des PushEvents
+        recent_activity = []
+        for event in events_data[:30]:
+            if event.get("type") == "PushEvent":
+                for commit in event.get("payload", {}).get("commits", [])[:1]:
+                    recent_activity.append({
+                        "type": "commit",
+                        "repo": event["repo"]["name"].replace(f"{GITHUB_USERNAME}/", ""),
+                        "message": commit.get("message", "")[:120],
+                        "created_at": event["created_at"],
+                    })
+            elif event.get("type") == "CreateEvent":
+                recent_activity.append({
+                    "type": "create",
+                    "repo": event["repo"]["name"].replace(f"{GITHUB_USERNAME}/", ""),
+                    "message": f"Nouveau {event.get('payload', {}).get('ref_type', 'repo')}",
+                    "created_at": event["created_at"],
+                })
+
+        total_stars = sum(r.get("stargazers_count", 0) for r in repos_data)
+
+        result = {
+            "profile": {
+                "login": profile_data.get("login"),
+                "name": profile_data.get("name"),
+                "bio": profile_data.get("bio"),
+                "public_repos": profile_data.get("public_repos", 0),
+                "followers": profile_data.get("followers", 0),
+                "avatar_url": profile_data.get("avatar_url"),
+                "html_url": profile_data.get("html_url"),
+            },
+            "repos": [
+                {
+                    "name": r["name"],
+                    "description": r.get("description"),
+                    "language": r.get("language"),
+                    "stargazers_count": r.get("stargazers_count", 0),
+                    "forks_count": r.get("forks_count", 0),
+                    "updated_at": r.get("updated_at"),
+                    "html_url": r.get("html_url"),
+                }
+                for r in repos_data[:10]
+            ],
+            "languages": languages,
+            "total_stars": total_stars,
+            "recent_activity": recent_activity[:10],
+            "cached_at": datetime.now(timezone.utc).isoformat(),
+        }
+
+        # Sauvegarder dans le cache
+        await db.github_cache.replace_one(
+            {"_id": "profile"},
+            {**result, "_id": "profile", "fetched_at": datetime.now(timezone.utc)},
+            upsert=True,
+        )
+
+        return _ok(result)
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Erreur GitHub : {str(e)}")
+        raise HTTPException(status_code=500, detail="Erreur lors de la récupération des données GitHub.")

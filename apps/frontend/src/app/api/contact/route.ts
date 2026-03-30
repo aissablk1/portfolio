@@ -362,5 +362,30 @@ export async function POST(request: Request) {
     console.warn("Confirmation email failed for:", body.email);
   }
 
+  // Dual-send vers le backend FastAPI (fire-and-forget, ne bloque pas la réponse)
+  const backendUrl = process.env.BACKEND_API_URL;
+  if (backendUrl) {
+    fetch(`${backendUrl}/api/contact`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Forwarded-For": ip,
+      },
+      body: JSON.stringify({
+        name: body.name,
+        email: body.email,
+        subject: body.need || "Contact",
+        message: [
+          body.message,
+          body.context ? `\n\n--- Contexte ---\n${body.context}` : "",
+          body.budget ? `\nBudget : ${body.budget}` : "",
+          body.lang ? `\nLangue : ${body.lang}` : "",
+        ].join(""),
+      }),
+    }).catch((err) => {
+      console.warn("Backend dual-send failed:", err.message);
+    });
+  }
+
   return NextResponse.json({ success: true });
 }

@@ -189,6 +189,16 @@ class ApiClient {
     return this.request<ApiResponse<{ subjects: Record<string, unknown>[] }>>("/api/admin/analytics/subjects");
   }
 
+  // ─── GitHub ─────────────────────────────────────
+  async getGitHubProfile() {
+    return this.request<ApiResponse<import("./types").GitHubProfile>>("/api/admin/github/profile");
+  }
+
+  // ─── Page Views ────────────────────────────────
+  async getPageViews() {
+    return this.request<ApiResponse<import("./types").PageViewStats>>("/api/admin/analytics/pageviews");
+  }
+
   // ─── Security ───────────────────────────────────
   async getSpamLog(params?: Record<string, string | number>) {
     const searchParams = new URLSearchParams();
