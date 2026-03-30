@@ -5,6 +5,9 @@ import { motion } from "framer-motion";
 import {
   Users,
   UserPlus,
+  Eye,
+  GitBranch,
+  Star,
   ShieldCheck,
   ShieldAlert,
   Activity,
@@ -16,10 +19,14 @@ import {
   FileSpreadsheet,
   Bell as BellIcon,
   RefreshCw,
+  ExternalLink,
+  Code2,
 } from "lucide-react";
 import {
   AreaChart,
   Area,
+  BarChart,
+  Bar,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -36,6 +43,8 @@ import type {
   Contact,
   ServiceHealth,
   TimelinePoint,
+  GitHubProfile,
+  PageViewStats,
 } from "@/lib/types";
 
 // ─── Animation variants ──────────────────────────────────
@@ -52,7 +61,10 @@ const itemVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
+    transition: {
+      duration: 0.4,
+      ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
+    },
   },
 };
 
@@ -153,9 +165,6 @@ function ServiceHealthCard({ service }: { service: ServiceHealth }) {
         <p className="text-sm font-medium text-[var(--color-text-primary)]">
           {service.name}
         </p>
-        <p className="text-xs text-[var(--color-text-muted)]">
-          {formatRelativeTime(service.last_checked)}
-        </p>
       </div>
       <div className="flex items-center gap-2">
         <span className="text-xs text-[var(--color-text-tertiary)]">
@@ -184,6 +193,12 @@ function ChartTooltip({
 }) {
   if (!active || !payload?.length) return null;
 
+  const labels: Record<string, string> = {
+    count: "Contacts",
+    spam: "Spam",
+    views: "Visiteurs",
+  };
+
   return (
     <div className="rounded-[var(--radius-md)] bg-[var(--color-bg-elevated)] border border-[var(--color-border)] px-3 py-2 shadow-lg">
       <p className="text-xs text-[var(--color-text-tertiary)] mb-1">{label}</p>
@@ -192,26 +207,52 @@ function ChartTooltip({
           key={i}
           className="text-sm font-medium text-[var(--color-text-primary)]"
         >
-          {entry.dataKey === "count" ? "Contacts" : "Spam"} : {entry.value}
+          {labels[entry.dataKey] ?? entry.dataKey} : {entry.value}
         </p>
       ))}
     </div>
   );
 }
 
+// ─── Language Bar ────────────────────────────────────────
+const langColors: Record<string, string> = {
+  TypeScript: "#3178c6",
+  JavaScript: "#f7df1e",
+  Python: "#3776ab",
+  HTML: "#e34c26",
+  CSS: "#1572b6",
+  Shell: "#89e051",
+  Rust: "#dea584",
+  Go: "#00add8",
+};
+
 // ─── Main Dashboard Page ─────────────────────────────────
 export default function DashboardPage() {
   const [data, setData] = useState<DashboardOverview | null>(null);
+  const [github, setGithub] = useState<GitHubProfile | null>(null);
+  const [pageviews, setPageviews] = useState<PageViewStats | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchDashboard = useCallback(async () => {
+  const fetchAll = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
-      const response = await api.getDashboard();
-      if (response.success && response.data) {
-        setData(response.data as unknown as DashboardOverview);
+
+      const [dashRes, ghRes, pvRes] = await Promise.allSettled([
+        api.getDashboard(),
+        api.getGitHubProfile(),
+        api.getPageViews(),
+      ]);
+
+      if (dashRes.status === "fulfilled" && dashRes.value.data) {
+        setData(dashRes.value.data as unknown as DashboardOverview);
+      }
+      if (ghRes.status === "fulfilled" && ghRes.value.data) {
+        setGithub(ghRes.value.data as unknown as GitHubProfile);
+      }
+      if (pvRes.status === "fulfilled" && pvRes.value.data) {
+        setPageviews(pvRes.value.data as unknown as PageViewStats);
       }
     } catch (err) {
       setError(
@@ -225,8 +266,8 @@ export default function DashboardPage() {
   }, []);
 
   useEffect(() => {
-    fetchDashboard();
-  }, [fetchDashboard]);
+    fetchAll();
+  }, [fetchAll]);
 
   // Format timeline data for chart
   const chartData = (data?.timeline ?? []).map((point: TimelinePoint) => ({
@@ -235,30 +276,32 @@ export default function DashboardPage() {
     spam: point.spam,
   }));
 
-  // Calculate trends
-  const contactsTrend =
-    data?.stats
-      ? {
-          value:
-            data.stats.contacts_this_month > 0
-              ? Math.round(
-                  ((data.stats.contacts_this_month -
-                    data.stats.contacts_this_week * 4) /
-                    Math.max(data.stats.contacts_this_week * 4, 1)) *
-                    100
-                )
-              : 0,
-          label: "vs mois dernier",
-        }
-      : undefined;
+  // Merge pageview timeline into chart if available
+  const pvTimeline = (pageviews?.timeline ?? []).reduce<Record<string, number>>(
+    (acc, p) => {
+      const key = formatDate(p.date, { day: "numeric", month: "short" });
+      acc[key] = p.count;
+      return acc;
+    },
+    {}
+  );
+  const mergedChart = chartData.map((d) => ({
+    ...d,
+    views: pvTimeline[d.date] ?? 0,
+  }));
 
-  if (error) {
+  // Service count
+  const healthyCount = (data?.service_health ?? []).filter(
+    (s) => s.status === "healthy"
+  ).length;
+
+  if (error && !data) {
     return (
       <EmptyState
         icon={ShieldAlert}
         title="Erreur de chargement"
         description={error}
-        action={{ label: "Réessayer", onClick: fetchDashboard }}
+        action={{ label: "Réessayer", onClick: fetchAll }}
       />
     );
   }
@@ -276,7 +319,7 @@ export default function DashboardPage() {
           </p>
         </div>
         <button
-          onClick={fetchDashboard}
+          onClick={fetchAll}
           disabled={loading}
           className="flex items-center gap-2 bg-[var(--color-bg-hover)] hover:bg-[var(--color-bg-active)] text-[var(--color-text-secondary)] rounded-[var(--radius-md)] px-4 py-2 text-sm transition-colors disabled:opacity-50"
         >
@@ -285,60 +328,53 @@ export default function DashboardPage() {
         </button>
       </div>
 
-      {/* KPI Cards */}
+      {/* ───── Row 1: KPI Cards (6) ───── */}
       {loading ? (
-        <CardSkeleton count={4} />
+        <CardSkeleton count={6} />
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-6 gap-4">
+          <StatCard
+            icon={Eye}
+            label="Visiteurs aujourd'hui"
+            value={pageviews?.today ?? 0}
+            index={0}
+          />
           <StatCard
             icon={Users}
             label="Contacts ce mois"
             value={data?.stats.contacts_this_month ?? 0}
-            trend={contactsTrend}
-            index={0}
-          />
-          <StatCard
-            icon={UserPlus}
-            label="Nouveaux aujourd'hui"
-            value={data?.stats.contacts_today ?? 0}
             index={1}
           />
           <StatCard
-            icon={ShieldCheck}
-            label="Taux de délivrabilité"
-            value={`${data?.stats.email_delivery_rate ?? 0}%`}
-            trend={
-              data?.stats
-                ? {
-                    value:
-                      data.stats.email_delivery_rate >= 95 ? 2 : -3,
-                    label: "Objectif : 95%",
-                  }
-                : undefined
-            }
+            icon={GitBranch}
+            label="Repos GitHub"
+            value={github?.profile.public_repos ?? 0}
             index={2}
           />
           <StatCard
-            icon={ShieldAlert}
-            label="Spam bloqué"
-            value={data?.stats.spam_blocked ?? 0}
-            trend={
-              data?.spam_today !== undefined
-                ? {
-                    value:
-                      data.spam_today > 0 ? -data.spam_today : 0,
-                    label: `${data.spam_today} aujourd'hui`,
-                  }
-                : undefined
-            }
+            icon={Star}
+            label="Stars GitHub"
+            value={github?.total_stars ?? 0}
             index={3}
+          />
+          <StatCard
+            icon={ShieldCheck}
+            label="Taux de réponse"
+            value={`${data?.stats.response_rate ?? 0}%`}
+            index={4}
+          />
+          <StatCard
+            icon={Activity}
+            label="Services actifs"
+            value={`${healthyCount}/${(data?.service_health ?? []).length}`}
+            index={5}
           />
         </div>
       )}
 
-      {/* Main content grid */}
+      {/* ───── Row 2: Chart + Activity ───── */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Submissions Chart — 2 cols */}
+        {/* Combined Chart — 2 cols */}
         <motion.div
           variants={itemVariants}
           initial="hidden"
@@ -348,10 +384,10 @@ export default function DashboardPage() {
           <div className="flex items-center justify-between mb-6">
             <div>
               <h2 className="text-base font-semibold text-[var(--color-text-primary)]">
-                Soumissions — 7 derniers jours
+                Activité — 7 derniers jours
               </h2>
               <p className="text-xs text-[var(--color-text-tertiary)] mt-1">
-                Contacts reçus et spam bloqué
+                Visiteurs, contacts et spam
               </p>
             </div>
             <Activity className="h-4 w-4 text-[var(--color-text-muted)]" />
@@ -359,7 +395,7 @@ export default function DashboardPage() {
 
           {loading ? (
             <Skeleton className="h-[280px] w-full" />
-          ) : chartData.length === 0 ? (
+          ) : mergedChart.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-[280px] text-center">
               <Activity className="h-10 w-10 text-[var(--color-text-muted)] mb-3" />
               <p className="text-sm text-[var(--color-text-tertiary)]">
@@ -369,17 +405,15 @@ export default function DashboardPage() {
           ) : (
             <ResponsiveContainer width="100%" height={280}>
               <AreaChart
-                data={chartData}
+                data={mergedChart}
                 margin={{ top: 5, right: 5, left: -20, bottom: 0 }}
               >
                 <defs>
-                  <linearGradient
-                    id="gradientContacts"
-                    x1="0"
-                    y1="0"
-                    x2="0"
-                    y2="1"
-                  >
+                  <linearGradient id="gViews" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#8b5cf6" stopOpacity={0.3} />
+                    <stop offset="100%" stopColor="#8b5cf6" stopOpacity={0} />
+                  </linearGradient>
+                  <linearGradient id="gContacts" x1="0" y1="0" x2="0" y2="1">
                     <stop
                       offset="0%"
                       stopColor="var(--color-accent)"
@@ -391,13 +425,7 @@ export default function DashboardPage() {
                       stopOpacity={0}
                     />
                   </linearGradient>
-                  <linearGradient
-                    id="gradientSpam"
-                    x1="0"
-                    y1="0"
-                    x2="0"
-                    y2="1"
-                  >
+                  <linearGradient id="gSpam" x1="0" y1="0" x2="0" y2="1">
                     <stop
                       offset="0%"
                       stopColor="var(--color-error)"
@@ -430,17 +458,24 @@ export default function DashboardPage() {
                 <Tooltip content={<ChartTooltip />} />
                 <Area
                   type="monotone"
+                  dataKey="views"
+                  stroke="#8b5cf6"
+                  strokeWidth={2}
+                  fill="url(#gViews)"
+                />
+                <Area
+                  type="monotone"
                   dataKey="count"
                   stroke="var(--color-accent)"
                   strokeWidth={2}
-                  fill="url(#gradientContacts)"
+                  fill="url(#gContacts)"
                 />
                 <Area
                   type="monotone"
                   dataKey="spam"
                   stroke="var(--color-error)"
                   strokeWidth={1.5}
-                  fill="url(#gradientSpam)"
+                  fill="url(#gSpam)"
                   strokeDasharray="4 4"
                 />
               </AreaChart>
@@ -448,7 +483,7 @@ export default function DashboardPage() {
           )}
         </motion.div>
 
-        {/* Activity Timeline — 1 col */}
+        {/* Activity Feed — 1 col */}
         <motion.div
           variants={itemVariants}
           initial="hidden"
@@ -464,7 +499,7 @@ export default function DashboardPage() {
 
           {loading ? (
             <div className="space-y-4">
-              {Array.from({ length: 6 }).map((_, i) => (
+              {Array.from({ length: 5 }).map((_, i) => (
                 <div key={i} className="flex items-start gap-3">
                   <Skeleton className="h-2.5 w-2.5 rounded-full mt-1.5" />
                   <div className="flex-1 space-y-2">
@@ -474,7 +509,8 @@ export default function DashboardPage() {
                 </div>
               ))}
             </div>
-          ) : (data?.recent_contacts ?? []).length === 0 ? (
+          ) : (data?.recent_contacts ?? []).length === 0 &&
+            (github?.recent_activity ?? []).length === 0 ? (
             <EmptyState
               icon={Users}
               title="Aucune activité"
@@ -486,21 +522,186 @@ export default function DashboardPage() {
               variants={containerVariants}
               initial="hidden"
               animate="visible"
-              className="max-h-[400px] overflow-y-auto"
+              className="max-h-[380px] overflow-y-auto space-y-0"
             >
-              {(data?.recent_contacts ?? []).slice(0, 10).map((contact) => (
+              {/* Contacts */}
+              {(data?.recent_contacts ?? []).slice(0, 5).map((contact) => (
                 <ActivityItem
                   key={contact.id ?? contact._id}
                   contact={contact}
                 />
+              ))}
+              {/* GitHub commits */}
+              {(github?.recent_activity ?? []).slice(0, 5).map((act, i) => (
+                <motion.div
+                  key={`gh-${i}`}
+                  variants={itemVariants}
+                  className="flex items-start gap-3 py-3 border-b border-[var(--color-border)] last:border-0"
+                >
+                  <div className="relative mt-1.5">
+                    <div className="h-2.5 w-2.5 rounded-full bg-[#8b5cf6]" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm text-[var(--color-text-primary)] truncate">
+                      {act.message}
+                    </p>
+                    <p className="text-xs text-[var(--color-text-tertiary)] mt-0.5">
+                      {act.repo}
+                    </p>
+                  </div>
+                  <span className="text-xs text-[var(--color-text-muted)] whitespace-nowrap">
+                    {formatRelativeTime(act.created_at)}
+                  </span>
+                </motion.div>
               ))}
             </motion.div>
           )}
         </motion.div>
       </div>
 
-      {/* Bottom row */}
+      {/* ───── Row 3: GitHub + Services ───── */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* GitHub Card */}
+        <motion.div
+          variants={itemVariants}
+          initial="hidden"
+          animate="visible"
+          className="card-elevated p-6"
+        >
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-2">
+              <GitBranch className="h-4 w-4 text-[var(--color-text-secondary)]" />
+              <h2 className="text-base font-semibold text-[var(--color-text-primary)]">
+                GitHub
+              </h2>
+            </div>
+            {github?.profile.html_url && (
+              <a
+                href={github.profile.html_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors flex items-center gap-1"
+              >
+                @{github.profile.login}
+                <ExternalLink className="h-3 w-3" />
+              </a>
+            )}
+          </div>
+
+          {loading ? (
+            <div className="space-y-3">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Skeleton key={i} className="h-12" />
+              ))}
+            </div>
+          ) : !github ? (
+            <EmptyState
+              icon={GitBranch}
+              title="GitHub indisponible"
+              description="Impossible de charger les données GitHub"
+              className="py-8"
+            />
+          ) : (
+            <div className="space-y-4">
+              {/* Language distribution */}
+              {Object.keys(github.languages).length > 0 && (
+                <div>
+                  <div className="flex h-2.5 rounded-full overflow-hidden bg-[var(--color-bg-hover)]">
+                    {Object.entries(github.languages)
+                      .sort((a, b) => b[1] - a[1])
+                      .slice(0, 6)
+                      .map(([lang, count]) => {
+                        const total = Object.values(github.languages).reduce(
+                          (a, b) => a + b,
+                          0
+                        );
+                        return (
+                          <div
+                            key={lang}
+                            className="h-full transition-all duration-500"
+                            style={{
+                              width: `${(count / total) * 100}%`,
+                              backgroundColor:
+                                langColors[lang] ?? "var(--color-text-muted)",
+                            }}
+                            title={`${lang}: ${count} repos`}
+                          />
+                        );
+                      })}
+                  </div>
+                  <div className="flex flex-wrap gap-x-4 gap-y-1 mt-2">
+                    {Object.entries(github.languages)
+                      .sort((a, b) => b[1] - a[1])
+                      .slice(0, 6)
+                      .map(([lang, count]) => (
+                        <div
+                          key={lang}
+                          className="flex items-center gap-1.5 text-xs text-[var(--color-text-tertiary)]"
+                        >
+                          <div
+                            className="h-2 w-2 rounded-full"
+                            style={{
+                              backgroundColor:
+                                langColors[lang] ?? "var(--color-text-muted)",
+                            }}
+                          />
+                          {lang}{" "}
+                          <span className="text-[var(--color-text-muted)]">
+                            {count}
+                          </span>
+                        </div>
+                      ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Top repos */}
+              <div className="space-y-2">
+                {github.repos.slice(0, 5).map((repo) => (
+                  <a
+                    key={repo.name}
+                    href={repo.html_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 p-2.5 rounded-[var(--radius-md)] hover:bg-[var(--color-bg-hover)] transition-colors group"
+                  >
+                    <Code2 className="h-4 w-4 text-[var(--color-text-muted)] shrink-0" />
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-medium text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] truncate">
+                        {repo.name}
+                      </p>
+                      {repo.description && (
+                        <p className="text-xs text-[var(--color-text-muted)] truncate">
+                          {repo.description}
+                        </p>
+                      )}
+                    </div>
+                    <div className="flex items-center gap-3 shrink-0">
+                      {repo.language && (
+                        <span
+                          className="text-xs px-1.5 py-0.5 rounded-full"
+                          style={{
+                            backgroundColor: `${langColors[repo.language] ?? "#666"}20`,
+                            color: langColors[repo.language] ?? "var(--color-text-muted)",
+                          }}
+                        >
+                          {repo.language}
+                        </span>
+                      )}
+                      {repo.stargazers_count > 0 && (
+                        <span className="flex items-center gap-0.5 text-xs text-[var(--color-text-muted)]">
+                          <Star className="h-3 w-3" />
+                          {repo.stargazers_count}
+                        </span>
+                      )}
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+        </motion.div>
+
         {/* Service Health */}
         <motion.div
           variants={itemVariants}
@@ -517,7 +718,7 @@ export default function DashboardPage() {
 
           {loading ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {Array.from({ length: 6 }).map((_, i) => (
+              {Array.from({ length: 5 }).map((_, i) => (
                 <Skeleton key={i} className="h-16" />
               ))}
             </div>
@@ -540,9 +741,83 @@ export default function DashboardPage() {
               ))}
             </motion.div>
           )}
-        </motion.div>
 
-        {/* Quick Stats */}
+          {/* Quick stats below services */}
+          {!loading && data && (
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+              className="mt-6 space-y-3"
+            >
+              <div className="flex items-center gap-4 p-3 rounded-[var(--radius-md)] bg-[var(--color-bg-tertiary)] border border-[var(--color-border)]">
+                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--color-success-soft)]">
+                  <ShieldCheck className="h-4 w-4 text-[var(--color-success)]" />
+                </div>
+                <div className="flex-1">
+                  <p className="text-xs text-[var(--color-text-tertiary)]">
+                    Taux de réponse
+                  </p>
+                  <p className="text-lg font-bold text-[var(--color-text-primary)]">
+                    {data.stats.response_rate}%
+                  </p>
+                </div>
+                <div className="w-16 h-2 rounded-full bg-[var(--color-bg-hover)] overflow-hidden">
+                  <div
+                    className="h-full rounded-full bg-[var(--color-success)] transition-all duration-1000"
+                    style={{
+                      width: `${data.stats.response_rate}%`,
+                    }}
+                  />
+                </div>
+              </div>
+
+              <div className="flex items-center gap-4 p-3 rounded-[var(--radius-md)] bg-[var(--color-bg-tertiary)] border border-[var(--color-border)]">
+                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--color-info-soft)]">
+                  <Clock className="h-4 w-4 text-[var(--color-info)]" />
+                </div>
+                <div className="flex-1">
+                  <p className="text-xs text-[var(--color-text-tertiary)]">
+                    Temps de réponse moyen
+                  </p>
+                  <p className="text-lg font-bold text-[var(--color-text-primary)]">
+                    {data.stats.avg_response_time
+                      ? data.stats.avg_response_time < 60
+                        ? `${data.stats.avg_response_time} min`
+                        : `${Math.round(data.stats.avg_response_time / 60)}h`
+                      : "N/A"}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-4 p-3 rounded-[var(--radius-md)] bg-[var(--color-bg-tertiary)] border border-[var(--color-border)]">
+                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--color-accent-soft)]">
+                  <TrendingUp className="h-4 w-4 text-[var(--color-accent)]" />
+                </div>
+                <div className="flex-1">
+                  <p className="text-xs text-[var(--color-text-tertiary)]">
+                    Cette semaine
+                  </p>
+                  <p className="text-lg font-bold text-[var(--color-text-primary)]">
+                    {data.stats.contacts_this_week} contacts
+                  </p>
+                </div>
+                <div className="text-right">
+                  <p className="text-xs text-[var(--color-text-muted)]">
+                    Notifications
+                  </p>
+                  <p className="text-sm font-semibold text-[var(--color-text-secondary)]">
+                    {data.notifications_today} aujourd&apos;hui
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </motion.div>
+      </div>
+
+      {/* ───── Row 4: Top pages ───── */}
+      {pageviews && (pageviews.top_pages?.length ?? 0) > 0 && (
         <motion.div
           variants={itemVariants}
           initial="hidden"
@@ -551,103 +826,48 @@ export default function DashboardPage() {
         >
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-base font-semibold text-[var(--color-text-primary)]">
-              Statistiques rapides
+              Pages les plus visitées
             </h2>
-            <TrendingUp className="h-4 w-4 text-[var(--color-text-muted)]" />
+            <Eye className="h-4 w-4 text-[var(--color-text-muted)]" />
           </div>
-
-          {loading ? (
-            <div className="space-y-4">
-              {Array.from({ length: 3 }).map((_, i) => (
-                <Skeleton key={i} className="h-20" />
-              ))}
-            </div>
-          ) : (
-            <motion.div
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-              className="space-y-4"
-            >
-              {/* Response Rate */}
-              <motion.div
-                variants={itemVariants}
-                className="flex items-center gap-4 p-4 rounded-[var(--radius-md)] bg-[var(--color-bg-tertiary)] border border-[var(--color-border)]"
-              >
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-success-soft)]">
-                  <ShieldCheck className="h-5 w-5 text-[var(--color-success)]" />
-                </div>
-                <div className="flex-1">
-                  <p className="text-sm text-[var(--color-text-tertiary)]">
-                    Taux de réponse
-                  </p>
-                  <p className="text-xl font-bold text-[var(--color-text-primary)]">
-                    {data?.stats.response_rate ?? 0}%
-                  </p>
-                </div>
-                <div className="text-right">
-                  <div className="w-20 h-2 rounded-full bg-[var(--color-bg-hover)] overflow-hidden">
-                    <div
-                      className="h-full rounded-full bg-[var(--color-success)] transition-all duration-1000"
-                      style={{
-                        width: `${data?.stats.response_rate ?? 0}%`,
-                      }}
-                    />
+          <div className="space-y-2">
+            {pageviews.top_pages.slice(0, 8).map((p, i) => {
+              const maxCount = pageviews.top_pages[0]?.count ?? 1;
+              return (
+                <div key={p.page} className="flex items-center gap-3">
+                  <span className="text-xs text-[var(--color-text-muted)] w-5 text-right">
+                    {i + 1}
+                  </span>
+                  <div className="flex-1">
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="text-sm text-[var(--color-text-primary)] truncate">
+                        {p.page}
+                      </span>
+                      <span className="text-xs text-[var(--color-text-muted)] ml-2">
+                        {p.count}
+                      </span>
+                    </div>
+                    <div className="h-1.5 rounded-full bg-[var(--color-bg-hover)] overflow-hidden">
+                      <motion.div
+                        initial={{ width: 0 }}
+                        animate={{
+                          width: `${(p.count / maxCount) * 100}%`,
+                        }}
+                        transition={{
+                          duration: 0.6,
+                          delay: i * 0.05,
+                          ease: [0.22, 1, 0.36, 1],
+                        }}
+                        className="h-full rounded-full bg-[#8b5cf6]"
+                      />
+                    </div>
                   </div>
                 </div>
-              </motion.div>
-
-              {/* Average Response Time */}
-              <motion.div
-                variants={itemVariants}
-                className="flex items-center gap-4 p-4 rounded-[var(--radius-md)] bg-[var(--color-bg-tertiary)] border border-[var(--color-border)]"
-              >
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-info-soft)]">
-                  <Clock className="h-5 w-5 text-[var(--color-info)]" />
-                </div>
-                <div className="flex-1">
-                  <p className="text-sm text-[var(--color-text-tertiary)]">
-                    Temps de réponse moyen
-                  </p>
-                  <p className="text-xl font-bold text-[var(--color-text-primary)]">
-                    {data?.stats.avg_response_time
-                      ? data.stats.avg_response_time < 60
-                        ? `${data.stats.avg_response_time} min`
-                        : `${Math.round(data.stats.avg_response_time / 60)}h`
-                      : "Non disponible (N/A)"}
-                  </p>
-                </div>
-              </motion.div>
-
-              {/* Weekly comparison */}
-              <motion.div
-                variants={itemVariants}
-                className="flex items-center gap-4 p-4 rounded-[var(--radius-md)] bg-[var(--color-bg-tertiary)] border border-[var(--color-border)]"
-              >
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-accent-soft)]">
-                  <TrendingUp className="h-5 w-5 text-[var(--color-accent)]" />
-                </div>
-                <div className="flex-1">
-                  <p className="text-sm text-[var(--color-text-tertiary)]">
-                    Cette semaine
-                  </p>
-                  <p className="text-xl font-bold text-[var(--color-text-primary)]">
-                    {data?.stats.contacts_this_week ?? 0}
-                  </p>
-                </div>
-                <div className="text-right">
-                  <p className="text-xs text-[var(--color-text-muted)]">
-                    Notifications
-                  </p>
-                  <p className="text-sm font-semibold text-[var(--color-text-secondary)]">
-                    {data?.notifications_today ?? 0} aujourd&apos;hui
-                  </p>
-                </div>
-              </motion.div>
-            </motion.div>
-          )}
+              );
+            })}
+          </div>
         </motion.div>
-      </div>
+      )}
     </div>
   );
 }
