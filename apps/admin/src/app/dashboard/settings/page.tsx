@@ -211,37 +211,45 @@ export default function SettingsPage() {
     try {
       const res = await api.getSettings();
       if (res.data) {
-        const s = res.data as unknown as AppSettings & {
+        const raw = res.data as Record<string, unknown>;
+        const s: AppSettings & {
+          admin_email?: string;
+          last_backup?: string;
+          backup_url?: string;
+        } = raw as unknown as AppSettings & {
           admin_email?: string;
           last_backup?: string;
           backup_url?: string;
         };
         setSettings(s);
 
-        // Email
-        setEmailProvider(s.email?.provider ?? "smtp");
-        setSmtpServer(s.email?.smtp_server ?? "");
-        setSmtpPort(s.email?.smtp_port ?? 587);
-        setFromEmail(s.email?.from_email ?? "");
-        setAutoReply(s.email?.auto_reply_enabled ?? false);
+        // Email (defensive: s.email may be undefined)
+        const email = (raw.email ?? {}) as Record<string, unknown>;
+        setEmailProvider(typeof email.provider === "string" ? email.provider : "smtp");
+        setSmtpServer(typeof email.smtp_server === "string" ? email.smtp_server : "");
+        setSmtpPort(typeof email.smtp_port === "number" ? email.smtp_port : 587);
+        setFromEmail(typeof email.from_email === "string" ? email.from_email : "");
+        setAutoReply(typeof email.auto_reply_enabled === "boolean" ? email.auto_reply_enabled : false);
 
-        // Notifications
-        setTelegramEnabled(s.notifications?.telegram_enabled ?? false);
-        setWhatsappEnabled(s.notifications?.whatsapp_enabled ?? false);
-        setNotionEnabled(s.notifications?.notion_enabled ?? false);
-        setSheetsEnabled(s.notifications?.google_sheets_enabled ?? false);
+        // Notifications (defensive: s.notifications may be undefined)
+        const notif = (raw.notifications ?? {}) as Record<string, unknown>;
+        setTelegramEnabled(!!notif.telegram_enabled);
+        setWhatsappEnabled(!!notif.whatsapp_enabled);
+        setNotionEnabled(!!notif.notion_enabled);
+        setSheetsEnabled(!!notif.google_sheets_enabled);
 
-        // Security
-        setRateLimit(s.security?.rate_limit_per_hour ?? 60);
-        setSpamThreshold(s.security?.spam_threshold ?? 0.5);
-        setAutoBlacklist(s.security?.auto_blacklist ?? false);
+        // Security (defensive: s.security may be undefined)
+        const security = (raw.security ?? {}) as Record<string, unknown>;
+        setRateLimit(typeof security.rate_limit_per_hour === "number" ? security.rate_limit_per_hour : 60);
+        setSpamThreshold(typeof security.spam_threshold === "number" ? security.spam_threshold : 0.5);
+        setAutoBlacklist(typeof security.auto_blacklist === "boolean" ? security.auto_blacklist : false);
 
         // Admin
-        setAdminEmail(s.admin_email ?? user?.email ?? "");
+        setAdminEmail(typeof raw.admin_email === "string" ? raw.admin_email : (user?.email ?? ""));
 
         // Backup
-        setLastBackup(s.last_backup ?? null);
-        setBackupUrl(s.backup_url ?? null);
+        setLastBackup(typeof raw.last_backup === "string" ? raw.last_backup : null);
+        setBackupUrl(typeof raw.backup_url === "string" ? raw.backup_url : null);
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Erreur lors du chargement");
@@ -325,7 +333,8 @@ export default function SettingsPage() {
     try {
       const res = await api.triggerBackup();
       if (res.data) {
-        setBackupUrl(res.data.download_url);
+        const backupData = res.data as Record<string, unknown>;
+        setBackupUrl(typeof backupData.download_url === "string" ? backupData.download_url : null);
         setLastBackup(new Date().toISOString());
         toast.success("Backup cree avec succes");
       }

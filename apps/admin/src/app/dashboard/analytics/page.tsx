@@ -187,22 +187,31 @@ export default function AnalyticsPage() {
       if (overviewRes.data) {
         setOverview(overviewRes.data as unknown as AnalyticsOverview);
       }
-      if (timelineRes.data?.timeline) {
-        setTimeline(timelineRes.data.timeline as unknown as TimelinePoint[]);
+
+      const timelineData = timelineRes.data as Record<string, unknown> | undefined;
+      const rawTimeline = timelineData?.timeline;
+      if (Array.isArray(rawTimeline)) {
+        setTimeline(rawTimeline as unknown as TimelinePoint[]);
       }
-      if (subjectsRes.data?.subjects) {
+
+      const subjectsData = subjectsRes.data as Record<string, unknown> | undefined;
+      const rawSubjects = subjectsData?.subjects;
+      if (Array.isArray(rawSubjects)) {
         setSubjects(
-          (subjectsRes.data.subjects as unknown as SubjectDistribution[]).slice(0, 5)
+          (rawSubjects as unknown as SubjectDistribution[]).slice(0, 5)
         );
       }
-      if (geoRes.data?.geo) {
-        setGeo(geoRes.data.geo as unknown as GeoData[]);
+
+      const geoData = geoRes.data as Record<string, unknown> | undefined;
+      const rawGeo = geoData?.geo;
+      if (Array.isArray(rawGeo)) {
+        setGeo(rawGeo as unknown as GeoData[]);
       }
 
       // Derive hourly from timeline if API returns it, or generate from timeline dates
-      if (timelineRes.data?.timeline) {
-        const tl = timelineRes.data.timeline as unknown as (TimelinePoint & { hourly?: HourlyDistribution[] })[];
-        if (tl.length > 0 && "hourly" in (tl[0] as unknown as Record<string, unknown>)) {
+      if (Array.isArray(rawTimeline) && rawTimeline.length > 0) {
+        const tl = rawTimeline as unknown as (TimelinePoint & { hourly?: HourlyDistribution[] })[];
+        if ("hourly" in (tl[0] as unknown as Record<string, unknown>)) {
           // API returns hourly data
         } else {
           // Generate hourly distribution from timeline data
@@ -237,7 +246,7 @@ export default function AnalyticsPage() {
     dateFormatted: formatDate(point.date, { day: "numeric", month: "short" }),
   }));
 
-  const maxHourlyCount = Math.max(...hourly.map((h) => h.count), 1);
+  const maxHourlyCount = hourly.length > 0 ? Math.max(...hourly.map((h) => h.count), 1) : 1;
 
   // ─── Loading state ──────────────────────────────
   if (loading && !overview) {

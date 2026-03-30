@@ -130,9 +130,11 @@ export default function NotificationsPage() {
       ]);
 
       if (logsRes.data) {
-        const fetchedLogs = (logsRes.data.logs ?? []) as unknown as NotificationLog[];
+        const logsData = logsRes.data as Record<string, unknown>;
+        const rawLogs = logsData.logs;
+        const fetchedLogs = Array.isArray(rawLogs) ? rawLogs as unknown as NotificationLog[] : [];
         setLogs(fetchedLogs);
-        setLogsTotal((logsRes.data as unknown as { total: number }).total ?? 0);
+        setLogsTotal(typeof logsData.total === "number" ? logsData.total : 0);
 
         // Derive channel stats from all logs
         const stats: Record<NotificationChannel, { total: number; success: number; lastSent: string | null; enabled: boolean }> = {
@@ -154,8 +156,9 @@ export default function NotificationsPage() {
 
         // Apply enabled status from settings
         if (settingsRes.data) {
-          const notif = (settingsRes.data as unknown as { notifications?: Record<string, boolean> }).notifications;
-          if (notif) {
+          const settingsData = settingsRes.data as Record<string, unknown>;
+          const notif = settingsData.notifications as Record<string, boolean> | undefined;
+          if (notif && typeof notif === "object") {
             stats.telegram.enabled = !!notif.telegram_enabled;
             stats.whatsapp.enabled = !!notif.whatsapp_enabled;
             stats.email.enabled = true; // Email always enabled

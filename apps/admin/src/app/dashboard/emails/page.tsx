@@ -512,8 +512,9 @@ export default function EmailsPage() {
       const response = await api.getEmails(params);
 
       if (response.success && response.data) {
-        setEmails(response.data.emails as unknown as Email[]);
-        setTotal(response.data.total);
+        const data = response.data as Record<string, unknown>;
+        setEmails(Array.isArray(data.emails) ? data.emails as unknown as Email[] : []);
+        setTotal(typeof data.total === "number" ? data.total : 0);
       }
     } catch (err) {
       setError(

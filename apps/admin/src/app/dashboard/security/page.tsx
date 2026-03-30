@@ -139,23 +139,34 @@ export default function SecurityPage() {
       ]);
 
       if (spamRes.data) {
-        setSpamLogs((spamRes.data.logs ?? []) as unknown as SpamLogEntry[]);
-        setSpamTotal((spamRes.data as unknown as { total: number }).total ?? 0);
+        const spamData = spamRes.data as Record<string, unknown>;
+        const rawSpamLogs = spamData.logs;
+        setSpamLogs(Array.isArray(rawSpamLogs) ? rawSpamLogs as unknown as SpamLogEntry[] : []);
+        setSpamTotal(typeof spamData.total === "number" ? spamData.total : 0);
       }
       if (rateRes.data) {
-        setRateLimits((rateRes.data.limits ?? []) as unknown as RateLimitEntry[]);
+        const rateData = rateRes.data as Record<string, unknown>;
+        const rawLimits = rateData.limits;
+        setRateLimits(Array.isArray(rawLimits) ? rawLimits as unknown as RateLimitEntry[] : []);
       }
       if (blRes.data) {
-        setBlacklist((blRes.data.entries ?? []) as unknown as BlacklistEntry[]);
+        const blData = blRes.data as Record<string, unknown>;
+        const rawEntries = blData.entries;
+        setBlacklist(Array.isArray(rawEntries) ? rawEntries as unknown as BlacklistEntry[] : []);
       }
       if (auditRes.data) {
-        setAuditLogs((auditRes.data.logs ?? []) as unknown as AuditLogEntry[]);
-        setAuditTotal((auditRes.data as unknown as { total: number }).total ?? 0);
+        const auditData = auditRes.data as Record<string, unknown>;
+        const rawAuditLogs = auditData.logs;
+        setAuditLogs(Array.isArray(rawAuditLogs) ? rawAuditLogs as unknown as AuditLogEntry[] : []);
+        setAuditTotal(typeof auditData.total === "number" ? auditData.total : 0);
       }
 
       // Calculate today spam
       const today = new Date().toISOString().slice(0, 10);
-      const todayCount = ((spamRes.data?.logs ?? []) as unknown as SpamLogEntry[]).filter(
+      const spamDataForToday = spamRes.data as Record<string, unknown> | undefined;
+      const rawSpamLogsForToday = spamDataForToday?.logs;
+      const spamLogsArray = Array.isArray(rawSpamLogsForToday) ? rawSpamLogsForToday as unknown as SpamLogEntry[] : [];
+      const todayCount = spamLogsArray.filter(
         (l) => l.timestamp?.startsWith(today)
       ).length;
       setTodaySpam(todayCount);

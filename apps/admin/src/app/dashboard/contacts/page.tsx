@@ -516,9 +516,10 @@ export default function ContactsPage() {
       const response = await api.getContacts(params);
 
       if (response.success && response.data) {
-        setContacts(response.data.contacts as unknown as Contact[]);
-        setTotal(response.data.total);
-        setTotalPages(response.data.total_pages);
+        const data = response.data as Record<string, unknown>;
+        setContacts(Array.isArray(data.contacts) ? data.contacts as unknown as Contact[] : []);
+        setTotal(typeof data.total === "number" ? data.total : 0);
+        setTotalPages(typeof data.total_pages === "number" ? data.total_pages : 0);
       }
     } catch (err) {
       setError(
