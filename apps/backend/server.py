@@ -192,6 +192,18 @@ async def submit_contact_form(
             detail="Une erreur est survenue lors de l'envoi de votre message. Veuillez réessayer ou me contacter directement via WhatsApp."
         )
 
+@api_router.get("/maintenance")
+async def get_maintenance_status():
+    """Statut de maintenance public — consulté par le portfolio."""
+    try:
+        config = await db.site_config.find_one({"key": "maintenance"})
+        if config and config.get("value", {}).get("enabled"):
+            return {"enabled": True, "message": config["value"].get("message", "")}
+        return {"enabled": False}
+    except Exception:
+        return {"enabled": False}
+
+
 @api_router.get("/contact/stats")
 async def get_contact_stats():
     """Get contact form statistics (for admin use)"""

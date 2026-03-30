@@ -5,10 +5,11 @@ import { useLanguage } from "./LanguageContext";
 import { cn } from "@/utils/cn";
 import { Construction, Lock } from "lucide-react";
 
-const MAINTENANCE_ENABLED =
+const ENV_MAINTENANCE =
   process.env.NEXT_PUBLIC_MAINTENANCE_ENABLED !== "false";
 const MAINTENANCE_PASSWORD =
   process.env.NEXT_PUBLIC_MAINTENANCE_PASSWORD || "aissa2026";
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 export default function MaintenanceGate({
   children,
@@ -16,19 +17,45 @@ export default function MaintenanceGate({
   children: React.ReactNode;
 }) {
   const { language, setLanguage } = useLanguage();
-  const [isUnlocked, setIsUnlocked] = useState(!MAINTENANCE_ENABLED);
-  const [isChecking, setIsChecking] = useState(MAINTENANCE_ENABLED);
+  const [isUnlocked, setIsUnlocked] = useState(false);
+  const [isChecking, setIsChecking] = useState(true);
   const bufferRef = useRef("");
   const timeoutRef = useRef<ReturnType<typeof setTimeout>>(undefined);
   const [mobileValue, setMobileValue] = useState("");
   const [shake, setShake] = useState(false);
 
-  // Hydration sync — no persistent bypass
+  // Check backend for maintenance status, fallback to env var
   useEffect(() => {
-    if (!MAINTENANCE_ENABLED) {
-      setIsUnlocked(true);
+    let cancelled = false;
+
+    async function checkMaintenance() {
+      let enabled = ENV_MAINTENANCE;
+
+      if (BACKEND_URL) {
+        try {
+          const controller = new AbortController();
+          const timeout = setTimeout(() => controller.abort(), 3000);
+          const res = await fetch(`${BACKEND_URL}/api/maintenance`, {
+            signal: controller.signal,
+          });
+          clearTimeout(timeout);
+          if (res.ok) {
+            const data = await res.json();
+            enabled = !!data.enabled;
+          }
+        } catch {
+          // Backend unreachable — use env var fallback
+        }
+      }
+
+      if (!cancelled) {
+        setIsUnlocked(!enabled);
+        setIsChecking(false);
+      }
     }
-    setIsChecking(false);
+
+    checkMaintenance();
+    return () => { cancelled = true; };
   }, []);
 
   const unlock = useCallback(() => {
