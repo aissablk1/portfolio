@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { Bell } from "lucide-react";
 import { useAuth } from "@/hooks/use-auth";
 import { cn, getInitials, formatDate } from "@/lib/utils";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 const pageTitles: Record<string, string> = {
   "/dashboard": "Vue d'ensemble",
@@ -59,6 +60,9 @@ export function Header() {
         <span className="hidden text-xs text-[var(--color-text-tertiary)] capitalize md:block">
           {currentDate}
         </span>
+
+        {/* Theme toggle */}
+        <ThemeToggle />
 
         {/* Notifications */}
         <motion.button
