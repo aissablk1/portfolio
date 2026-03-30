@@ -560,14 +560,7 @@ export default function ContactsPage() {
   async function handleExport(format: "csv" | "json") {
     try {
       setExportLoading(format);
-      const response = await api.exportContacts(format);
-      const blob =
-        response instanceof Blob
-          ? response
-          : new Blob([JSON.stringify(response)], {
-              type:
-                format === "csv" ? "text/csv" : "application/json",
-            });
+      const blob = await api.exportContacts(format);
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
@@ -576,7 +569,7 @@ export default function ContactsPage() {
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
-      toast.success(`Export ${format.toUpperCase()} téléchargé`);
+      toast.success(`Export ${format.toUpperCase()} telecharge`);
     } catch (err) {
       toast.error(
         err instanceof Error ? err.message : "Erreur lors de l'export"

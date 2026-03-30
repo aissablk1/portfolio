@@ -1,7 +1,18 @@
+import { toast } from "sonner";
 import type { ApiResponse } from "./types";
 
 // Requêtes via le proxy Next.js (rewrites) → même domaine → cookies same-origin
 const API_BASE = "";
+
+// Render free tier cold start: timeout + auto-retry
+const REQUEST_TIMEOUT_MS = 15_000;
+const COLD_START_RETRY_DELAY_MS = 5_000;
+
+function isNetworkError(err: unknown): boolean {
+  if (err instanceof TypeError) return true; // Failed to fetch, network error, CORS error
+  if (err instanceof DOMException && err.name === "AbortError") return true;
+  return false;
+}
 
 class ApiClient {
   private baseUrl: string;
@@ -16,22 +27,50 @@ class ApiClient {
   ): Promise<T> {
     const url = `${this.baseUrl}${endpoint}`;
 
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+
     const config: RequestInit = {
       ...options,
       credentials: "include",
+      signal: controller.signal,
       headers: {
         "Content-Type": "application/json",
         ...options.headers,
       },
     };
 
-    const response = await fetch(url, config);
+    let response: Response;
+    try {
+      response = await fetch(url, config);
+    } catch (err) {
+      clearTimeout(timeout);
+      // Network error or timeout → cold start scenario → auto-retry once
+      if (isNetworkError(err)) {
+        toast.info("Le serveur demarre, veuillez patienter...", { id: "cold-start", duration: 6000 });
+        await new Promise((r) => setTimeout(r, COLD_START_RETRY_DELAY_MS));
+        const retryController = new AbortController();
+        const retryTimeout = setTimeout(() => retryController.abort(), REQUEST_TIMEOUT_MS);
+        try {
+          response = await fetch(url, { ...config, signal: retryController.signal });
+        } catch {
+          clearTimeout(retryTimeout);
+          throw new ApiError(0, "Le serveur est indisponible. Veuillez reessayer dans quelques instants.");
+        } finally {
+          clearTimeout(retryTimeout);
+        }
+      } else {
+        throw err;
+      }
+    } finally {
+      clearTimeout(timeout);
+    }
 
     if (response.status === 401) {
       // Token expired — try refresh
       const refreshed = await this.refreshToken();
       if (refreshed) {
-        const retryResponse = await fetch(url, config);
+        const retryResponse = await fetch(url, { ...config, signal: undefined });
         if (!retryResponse.ok) {
           throw new ApiError(retryResponse.status, "Request failed after token refresh");
         }
@@ -41,7 +80,7 @@ class ApiClient {
       if (typeof window !== "undefined" && !window.location.pathname.startsWith("/login")) {
         window.location.href = "/login";
       }
-      throw new ApiError(401, "Session expirée");
+      throw new ApiError(401, "Session expiree");
     }
 
     if (!response.ok) {
@@ -53,34 +92,72 @@ class ApiClient {
   }
 
   private async refreshToken(): Promise<boolean> {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
     try {
       const response = await fetch(`${this.baseUrl}/api/admin/refresh`, {
         method: "POST",
         credentials: "include",
+        signal: controller.signal,
       });
       return response.ok;
     } catch {
       return false;
+    } finally {
+      clearTimeout(timeout);
     }
   }
 
   /**
-   * Requête directe sans interception 401 (pour login/getMe).
-   * Évite la boucle: 401 → refresh → 401 → redirect → 401...
+   * Requete directe sans interception 401 (pour login/getMe).
+   * Evite la boucle: 401 -> refresh -> 401 -> redirect -> 401...
+   * Inclut le timeout pour gerer le cold start Render.
    */
   private async requestDirect<T>(
     endpoint: string,
     options: RequestInit = {}
   ): Promise<T> {
     const url = `${this.baseUrl}${endpoint}`;
-    const response = await fetch(url, {
-      ...options,
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-        ...options.headers,
-      },
-    });
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+
+    let response: Response;
+    try {
+      response = await fetch(url, {
+        ...options,
+        credentials: "include",
+        signal: controller.signal,
+        headers: {
+          "Content-Type": "application/json",
+          ...options.headers,
+        },
+      });
+    } catch (err) {
+      clearTimeout(timeout);
+      if (isNetworkError(err)) {
+        toast.info("Le serveur demarre, veuillez patienter...", { id: "cold-start", duration: 6000 });
+        await new Promise((r) => setTimeout(r, COLD_START_RETRY_DELAY_MS));
+        const retryController = new AbortController();
+        const retryTimeout = setTimeout(() => retryController.abort(), REQUEST_TIMEOUT_MS);
+        try {
+          response = await fetch(url, {
+            ...options,
+            credentials: "include",
+            signal: retryController.signal,
+            headers: { "Content-Type": "application/json", ...options.headers },
+          });
+        } catch {
+          clearTimeout(retryTimeout);
+          throw new ApiError(0, "Le serveur est indisponible. Veuillez reessayer dans quelques instants.");
+        } finally {
+          clearTimeout(retryTimeout);
+        }
+      } else {
+        throw err;
+      }
+    } finally {
+      clearTimeout(timeout);
+    }
 
     if (!response.ok) {
       const error = await response.json().catch(() => ({ detail: "Erreur inconnue" }));
@@ -162,8 +239,24 @@ class ApiClient {
     });
   }
 
-  async exportContacts(format: "csv" | "json") {
-    return this.request<Blob>(`/api/admin/contacts/export?format=${format}`);
+  async exportContacts(format: "csv" | "json"): Promise<Blob> {
+    const url = `${this.baseUrl}/api/admin/contacts/export?format=${format}`;
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+    try {
+      const response = await fetch(url, {
+        credentials: "include",
+        signal: controller.signal,
+        headers: { Accept: format === "csv" ? "text/csv" : "application/json" },
+      });
+      if (!response.ok) {
+        const error = await response.json().catch(() => ({ detail: "Erreur inconnue" }));
+        throw new ApiError(response.status, error.detail ?? "Erreur lors de l'export");
+      }
+      return await response.blob();
+    } finally {
+      clearTimeout(timeout);
+    }
   }
 
   // ─── Emails ─────────────────────────────────────
@@ -309,22 +402,29 @@ class ApiClient {
 
   async triggerBackup(): Promise<{ success: boolean; blob: Blob; filename: string }> {
     const url = `${this.baseUrl}/api/admin/settings/backup`;
-    const response = await fetch(url, {
-      method: "POST",
-      credentials: "include",
-      headers: { "Content-Type": "application/json" },
-    });
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS * 2); // backup can be slow
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        credentials: "include",
+        signal: controller.signal,
+        headers: { "Content-Type": "application/json" },
+      });
 
-    if (!response.ok) {
-      const error = await response.json().catch(() => ({ detail: "Erreur inconnue" }));
-      throw new ApiError(response.status, error.detail ?? "Erreur lors du backup");
+      if (!response.ok) {
+        const error = await response.json().catch(() => ({ detail: "Erreur inconnue" }));
+        throw new ApiError(response.status, error.detail ?? "Erreur lors du backup");
+      }
+
+      const disposition = response.headers.get("Content-Disposition") ?? "";
+      const filenameMatch = disposition.match(/filename=(.+)/);
+      const filename = filenameMatch ? filenameMatch[1] : `backup_${new Date().toISOString().slice(0, 10)}.json`;
+      const blob = await response.blob();
+      return { success: true, blob, filename };
+    } finally {
+      clearTimeout(timeout);
     }
-
-    const disposition = response.headers.get("Content-Disposition") ?? "";
-    const filenameMatch = disposition.match(/filename=(.+)/);
-    const filename = filenameMatch ? filenameMatch[1] : `backup_${new Date().toISOString().slice(0, 10)}.json`;
-    const blob = await response.blob();
-    return { success: true, blob, filename };
   }
 }
 

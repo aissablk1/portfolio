@@ -1,10 +1,9 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { motion } from "framer-motion";
 import {
   Users,
-  UserPlus,
   Eye,
   GitBranch,
   Star,
@@ -25,8 +24,6 @@ import {
 import {
   AreaChart,
   Area,
-  BarChart,
-  Bar,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -234,16 +231,37 @@ export default function DashboardPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  const [refreshing, setRefreshing] = useState(false);
+  const [allFailed, setAllFailed] = useState(false);
+  const hasLoadedOnce = useRef(false);
+
   const fetchAll = useCallback(async () => {
     try {
-      setLoading(true);
+      if (hasLoadedOnce.current) {
+        setRefreshing(true);
+      } else {
+        setLoading(true);
+      }
       setError(null);
+      setAllFailed(false);
 
       const [dashRes, ghRes, pvRes] = await Promise.allSettled([
         api.getDashboard(),
         api.getGitHubProfile(),
         api.getPageViews(),
       ]);
+
+      // Check if ALL calls failed (cold start scenario)
+      const allRejected =
+        dashRes.status === "rejected" &&
+        ghRes.status === "rejected" &&
+        pvRes.status === "rejected";
+
+      if (allRejected) {
+        setAllFailed(true);
+        setError("Le serveur est en cours de demarrage. Veuillez patienter quelques instants.");
+        return;
+      }
 
       if (dashRes.status === "fulfilled" && dashRes.value.data) {
         const raw = dashRes.value.data as Record<string, unknown>;
@@ -302,6 +320,8 @@ export default function DashboardPage() {
       );
     } finally {
       setLoading(false);
+      setRefreshing(false);
+      hasLoadedOnce.current = true;
     }
   }, []);
 
@@ -338,10 +358,10 @@ export default function DashboardPage() {
   if (error && !data) {
     return (
       <EmptyState
-        icon={ShieldAlert}
-        title="Erreur de chargement"
+        icon={allFailed ? Activity : ShieldAlert}
+        title={allFailed ? "Serveur en cours de demarrage" : "Erreur de chargement"}
         description={error}
-        action={{ label: "Réessayer", onClick: fetchAll }}
+        action={{ label: "Reessayer", onClick: fetchAll }}
       />
     );
   }
@@ -360,11 +380,11 @@ export default function DashboardPage() {
         </div>
         <button
           onClick={fetchAll}
-          disabled={loading}
+          disabled={loading || refreshing}
           className="flex items-center gap-2 bg-[var(--color-bg-hover)] hover:bg-[var(--color-bg-active)] text-[var(--color-text-secondary)] rounded-[var(--radius-md)] px-4 py-2 text-sm transition-colors disabled:opacity-50"
         >
-          <RefreshCw className={cn("h-4 w-4", loading && "animate-spin")} />
-          Actualiser
+          <RefreshCw className={cn("h-4 w-4", (loading || refreshing) && "animate-spin")} />
+          {refreshing ? "Mise a jour..." : "Actualiser"}
         </button>
       </div>
 
