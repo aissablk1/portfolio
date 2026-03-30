@@ -6,6 +6,7 @@ import Hero from "@/components/sections/Hero";
 import Offers from "@/components/sections/Offers";
 import Approach from "@/components/sections/Approach";
 import Expertises from "@/components/sections/Expertises";
+import PricingTeaser from "@/components/sections/PricingTeaser";
 import Systems from "@/components/sections/Systems";
 import About from "@/components/sections/About";
 import Contact from "@/components/sections/Contact";
@@ -27,6 +28,7 @@ export default function Home() {
           <Offers />
           <Approach />
           <Expertises />
+          <PricingTeaser />
           <Systems />
           <About />
           <Contact />

@@ -100,6 +100,14 @@ const Header = () => {
           </Link>
 
           <div className="flex items-center gap-4">
+            {/* Services CTA — always visible */}
+            <Link
+              href="/services"
+              className="hidden md:inline-flex items-center px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest border border-site-accent/40 text-site-accent rounded-full hover:bg-site-accent hover:text-white transition-all"
+            >
+              {dict.nav.services}
+            </Link>
+
             {/* Language toggle */}
             <div className="flex items-center bg-site-border/50 rounded-full p-1">
               <button
