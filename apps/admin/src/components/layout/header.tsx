@@ -76,12 +76,20 @@ export function Header() {
         </motion.button>
 
         {/* Avatar */}
-        <div className={cn(
-          "flex h-8 w-8 items-center justify-center rounded-full text-xs font-medium",
-          "bg-[var(--color-accent-soft)] text-[var(--color-accent)] ring-1 ring-[var(--color-accent)]/20"
-        )}>
-          {user ? getInitials(user.username) : "—"}
-        </div>
+        {user?.avatar_url ? (
+          <img
+            src={user.avatar_url}
+            alt={user.display_name || user.username}
+            className="h-8 w-8 rounded-full object-cover ring-1 ring-[var(--color-border)]"
+          />
+        ) : (
+          <div className={cn(
+            "flex h-8 w-8 items-center justify-center rounded-full text-xs font-medium",
+            "bg-[var(--color-accent-soft)] text-[var(--color-accent)] ring-1 ring-[var(--color-accent)]/20"
+          )}>
+            {user ? getInitials(user.display_name || user.username) : "—"}
+          </div>
+        )}
       </div>
     </header>
   );

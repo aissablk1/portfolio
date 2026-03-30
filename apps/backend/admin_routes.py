@@ -244,10 +244,43 @@ async def get_me(request: Request):
         "id": admin["id"],
         "username": admin["username"],
         "email": admin["email"],
+        "display_name": admin.get("display_name", ""),
+        "avatar_url": admin.get("avatar_url", ""),
+        "sigle": admin.get("sigle", ""),
         "created_at": admin["created_at"].isoformat() if isinstance(admin["created_at"], datetime) else admin["created_at"],
         "last_login": admin["last_login"].isoformat() if isinstance(admin.get("last_login"), datetime) else admin.get("last_login"),
         "is_active": admin["is_active"],
     })
+
+
+@admin_router.patch("/profile")
+async def update_profile(request: Request):
+    """Met à jour le profil de l'administrateur connecté."""
+    db = _get_db()
+    admin = await get_current_admin(request, db)
+
+    try:
+        body = await request.json()
+        allowed = {"display_name", "avatar_url", "sigle"}
+        updates = {k: str(v)[:200] for k, v in body.items() if k in allowed and v is not None}
+
+        if not updates:
+            raise HTTPException(status_code=400, detail="Aucun champ à mettre à jour.")
+
+        await db.admin_users.update_one(
+            {"id": admin["id"]},
+            {"$set": updates},
+        )
+
+        await log_admin_action(db, admin["id"], "profile_updated", updates, _get_client_ip(request))
+
+        return _ok({"message": "Profil mis à jour.", **updates})
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Erreur mise à jour profil : {str(e)}")
+        raise HTTPException(status_code=500, detail="Erreur lors de la mise à jour du profil.")
 
 
 # ═══════════════════════════════════════════════════════════════════════════════

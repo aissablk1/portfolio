@@ -265,7 +265,7 @@ export default function AnalyticsPage() {
         <p className="text-[var(--color-text-secondary)]">{error}</p>
         <button
           onClick={loadData}
-          className="rounded-[var(--radius-md)] bg-[var(--color-accent)] px-4 py-2 text-sm font-medium text-white hover:bg-[var(--color-accent-hover)] transition-colors"
+          className="rounded-[var(--radius-md)] bg-[var(--color-accent)] px-4 py-2 text-sm font-medium text-[var(--color-accent-fg)] hover:bg-[var(--color-accent-hover)] transition-colors"
         >
           Recessayer
         </button>
@@ -303,7 +303,7 @@ export default function AnalyticsPage() {
               className={cn(
                 "rounded-[var(--radius-sm)] px-3 py-1.5 text-xs font-medium transition-colors",
                 period === p.key
-                  ? "bg-[var(--color-accent)] text-white"
+                  ? "bg-[var(--color-accent)] text-[var(--color-accent-fg)]"
                   : "text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
               )}
             >

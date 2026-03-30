@@ -309,7 +309,7 @@ function ContactDetailPanel({
           <div className="grid grid-cols-2 gap-2">
             <button
               onClick={() => setShowReply(!showReply)}
-              className="flex items-center justify-center gap-2 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white rounded-[var(--radius-md)] px-4 py-2.5 text-sm font-medium transition-colors"
+              className="flex items-center justify-center gap-2 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-[var(--color-accent-fg)] rounded-[var(--radius-md)] px-4 py-2.5 text-sm font-medium transition-colors"
             >
               <Reply className="h-4 w-4" />
               Répondre
@@ -428,7 +428,7 @@ function ContactDetailPanel({
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="flex items-center gap-2 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white rounded-[var(--radius-md)] px-4 py-2 text-sm font-medium transition-colors disabled:opacity-50"
+                  className="flex items-center gap-2 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-[var(--color-accent-fg)] rounded-[var(--radius-md)] px-4 py-2 text-sm font-medium transition-colors disabled:opacity-50"
                 >
                   {isSubmitting ? (
                     <Loader2 className="h-4 w-4 animate-spin" />
@@ -706,7 +706,7 @@ export default function ContactsPage() {
             <Filter className="h-4 w-4" />
             Filtres
             {hasActiveFilters && (
-              <span className="flex h-4 w-4 items-center justify-center rounded-full bg-[var(--color-accent)] text-[10px] text-white">
+              <span className="flex h-4 w-4 items-center justify-center rounded-full bg-[var(--color-accent)] text-[10px] text-[var(--color-accent-fg)]">
                 !
               </span>
             )}
@@ -904,7 +904,7 @@ export default function ContactsPage() {
                     className={cn(
                       "h-7 w-7 rounded-[var(--radius-sm)] text-xs font-medium transition-colors",
                       p === page
-                        ? "bg-[var(--color-accent)] text-white"
+                        ? "bg-[var(--color-accent)] text-[var(--color-accent-fg)]"
                         : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-hover)]"
                     )}
                   >

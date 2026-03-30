@@ -213,7 +213,7 @@ export default function NotificationsPage() {
         <p className="text-[var(--color-text-secondary)]">{error}</p>
         <button
           onClick={loadData}
-          className="rounded-[var(--radius-md)] bg-[var(--color-accent)] px-4 py-2 text-sm font-medium text-white hover:bg-[var(--color-accent-hover)] transition-colors"
+          className="rounded-[var(--radius-md)] bg-[var(--color-accent)] px-4 py-2 text-sm font-medium text-[var(--color-accent-fg)] hover:bg-[var(--color-accent-hover)] transition-colors"
         >
           Reessayer
         </button>

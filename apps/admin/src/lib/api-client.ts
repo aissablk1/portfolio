@@ -108,6 +108,14 @@ class ApiClient {
     return this.requestDirect<ApiResponse<{ user: { id: string; username: string; email: string; last_login: string } }>>("/api/admin/me");
   }
 
+  // ─── Profile ────────────────────────────────────
+  async updateProfile(data: { display_name?: string; avatar_url?: string; sigle?: string }) {
+    return this.request<ApiResponse<Record<string, unknown>>>("/api/admin/profile", {
+      method: "PATCH",
+      body: JSON.stringify(data),
+    });
+  }
+
   // ─── Dashboard ──────────────────────────────────
   async getDashboard() {
     return this.request<ApiResponse<Record<string, unknown>>>("/api/admin/dashboard");

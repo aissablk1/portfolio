@@ -228,7 +228,7 @@ export default function SecurityPage() {
         <p className="text-[var(--color-text-secondary)]">{error}</p>
         <button
           onClick={loadData}
-          className="rounded-[var(--radius-md)] bg-[var(--color-accent)] px-4 py-2 text-sm font-medium text-white hover:bg-[var(--color-accent-hover)] transition-colors"
+          className="rounded-[var(--radius-md)] bg-[var(--color-accent)] px-4 py-2 text-sm font-medium text-[var(--color-accent-fg)] hover:bg-[var(--color-accent-hover)] transition-colors"
         >
           Reessayer
         </button>
@@ -504,7 +504,7 @@ export default function SecurityPage() {
           </div>
           <button
             onClick={() => setShowAddBlacklist(!showAddBlacklist)}
-            className="flex items-center gap-1.5 rounded-[var(--radius-md)] bg-[var(--color-accent)] px-3 py-1.5 text-sm font-medium text-white hover:bg-[var(--color-accent-hover)] transition-colors"
+            className="flex items-center gap-1.5 rounded-[var(--radius-md)] bg-[var(--color-accent)] px-3 py-1.5 text-sm font-medium text-[var(--color-accent-fg)] hover:bg-[var(--color-accent-hover)] transition-colors"
           >
             {showAddBlacklist ? <X className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
             {showAddBlacklist ? "Annuler" : "Ajouter"}
@@ -532,7 +532,7 @@ export default function SecurityPage() {
                         className={cn(
                           "rounded-[var(--radius-sm)] px-3 py-1 text-xs font-medium transition-colors",
                           blacklistForm.watch("type") === t
-                            ? "bg-[var(--color-accent)] text-white"
+                            ? "bg-[var(--color-accent)] text-[var(--color-accent-fg)]"
                             : "text-[var(--color-text-secondary)]"
                         )}
                       >
@@ -566,7 +566,7 @@ export default function SecurityPage() {
                 <button
                   type="submit"
                   disabled={blacklistForm.formState.isSubmitting}
-                  className="rounded-[var(--radius-md)] bg-[var(--color-error)] px-4 py-2 text-sm font-medium text-white hover:bg-red-600 disabled:opacity-50 transition-colors"
+                  className="rounded-[var(--radius-md)] bg-[var(--color-error)] px-4 py-2 text-sm font-medium text-[var(--color-accent-fg)] hover:bg-red-600 disabled:opacity-50 transition-colors"
                 >
                   {blacklistForm.formState.isSubmitting ? (
                     <Loader2 className="inline h-4 w-4 animate-spin" />

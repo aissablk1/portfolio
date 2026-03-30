@@ -3,6 +3,9 @@ export interface AdminUser {
   id: string;
   username: string;
   email: string;
+  display_name?: string;
+  avatar_url?: string;
+  sigle?: string;
   created_at: string;
   last_login: string | null;
 }

@@ -14,6 +14,9 @@ interface AuthUser {
   id: string;
   username: string;
   email: string;
+  display_name?: string;
+  avatar_url?: string;
+  sigle?: string;
   last_login?: string;
 }
 

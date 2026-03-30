@@ -51,13 +51,13 @@ export function Sidebar() {
 
   const sidebarContent = (
     <div className="flex h-full flex-col">
-      {/* Logo */}
+      {/* Logo / Sigle */}
       <div className="flex h-16 items-center gap-3 border-b border-[var(--color-border-light)] px-5">
-        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[var(--color-accent)] text-xs font-bold text-white">
-          AB
+        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[var(--color-accent)] text-xs font-bold text-[var(--color-bg-primary)]">
+          {user?.sigle || getInitials(user?.display_name || user?.username || "A")}
         </div>
         <span className="text-sm font-semibold text-[var(--color-text-primary)] tracking-tight">
-          Admin
+          {user?.display_name || "Admin"}
         </span>
       </div>
 
@@ -96,12 +96,20 @@ export function Sidebar() {
       {/* Utilisateur + Logout */}
       <div className="border-t border-[var(--color-border-light)] p-3">
         <div className="flex items-center gap-3 rounded-[var(--radius-md)] px-3 py-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--color-bg-hover)] text-xs font-medium text-[var(--color-text-secondary)]">
-            {user ? getInitials(user.username) : "—"}
-          </div>
+          {user?.avatar_url ? (
+            <img
+              src={user.avatar_url}
+              alt={user.display_name || user.username}
+              className="h-8 w-8 rounded-full object-cover"
+            />
+          ) : (
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--color-bg-hover)] text-xs font-medium text-[var(--color-text-secondary)]">
+              {user ? getInitials(user.display_name || user.username) : "—"}
+            </div>
+          )}
           <div className="flex-1 min-w-0">
             <p className="truncate text-sm font-medium text-[var(--color-text-primary)]">
-              {user?.username ?? "—"}
+              {user?.display_name || user?.username || "—"}
             </p>
             <p className="truncate text-xs text-[var(--color-text-muted)]">
               {user?.email ?? "—"}

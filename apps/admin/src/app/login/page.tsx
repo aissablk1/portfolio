@@ -175,7 +175,7 @@ export default function LoginPage() {
             whileTap={{ scale: 0.98 }}
             className={cn(
               "flex w-full items-center justify-center gap-2 rounded-full px-8 py-4 text-sm font-medium transition-all",
-              "bg-[var(--color-accent)] text-white shadow-lg shadow-[var(--color-accent)]/20",
+              "bg-[var(--color-accent)] text-[var(--color-accent-fg)] shadow-lg shadow-[var(--color-accent)]/20",
               "hover:shadow-xl hover:shadow-[var(--color-accent)]/25",
               "disabled:cursor-not-allowed disabled:opacity-50"
             )}

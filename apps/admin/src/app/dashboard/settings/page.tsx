@@ -376,7 +376,7 @@ export default function SettingsPage() {
         <p className="text-[var(--color-text-secondary)]">{error}</p>
         <button
           onClick={loadData}
-          className="rounded-[var(--radius-md)] bg-[var(--color-accent)] px-4 py-2 text-sm font-medium text-white hover:bg-[var(--color-accent-hover)] transition-colors"
+          className="rounded-[var(--radius-md)] bg-[var(--color-accent)] px-4 py-2 text-sm font-medium text-[var(--color-accent-fg)] hover:bg-[var(--color-accent-hover)] transition-colors"
         >
           Reessayer
         </button>
@@ -424,7 +424,7 @@ export default function SettingsPage() {
           <button
             onClick={() => saveSection("profile", { admin_email: adminEmail })}
             disabled={savingSection === "profile"}
-            className="flex items-center gap-2 rounded-[var(--radius-md)] bg-[var(--color-accent)] px-4 py-2 text-sm font-medium text-white hover:bg-[var(--color-accent-hover)] disabled:opacity-50 transition-colors"
+            className="flex items-center gap-2 rounded-[var(--radius-md)] bg-[var(--color-accent)] px-4 py-2 text-sm font-medium text-[var(--color-accent-fg)] hover:bg-[var(--color-accent-hover)] disabled:opacity-50 transition-colors"
           >
             {savingSection === "profile" ? (
               <Loader2 className="h-4 w-4 animate-spin" />
@@ -501,7 +501,7 @@ export default function SettingsPage() {
               <button
                 type="submit"
                 disabled={savingSection === "password"}
-                className="flex items-center gap-2 rounded-[var(--radius-md)] bg-[var(--color-accent)] px-4 py-2 text-sm font-medium text-white hover:bg-[var(--color-accent-hover)] disabled:opacity-50 transition-colors"
+                className="flex items-center gap-2 rounded-[var(--radius-md)] bg-[var(--color-accent)] px-4 py-2 text-sm font-medium text-[var(--color-accent-fg)] hover:bg-[var(--color-accent-hover)] disabled:opacity-50 transition-colors"
               >
                 {savingSection === "password" ? (
                   <Loader2 className="h-4 w-4 animate-spin" />
@@ -544,7 +544,7 @@ export default function SettingsPage() {
                   className={cn(
                     "rounded-[var(--radius-sm)] px-3 py-1.5 text-xs font-medium transition-colors capitalize",
                     emailProvider === p
-                      ? "bg-[var(--color-accent)] text-white"
+                      ? "bg-[var(--color-accent)] text-[var(--color-accent-fg)]"
                       : "text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
                   )}
                 >
@@ -597,7 +597,7 @@ export default function SettingsPage() {
           <button
             onClick={handleSaveEmail}
             disabled={savingSection === "email"}
-            className="flex items-center gap-2 rounded-[var(--radius-md)] bg-[var(--color-accent)] px-4 py-2 text-sm font-medium text-white hover:bg-[var(--color-accent-hover)] disabled:opacity-50 transition-colors"
+            className="flex items-center gap-2 rounded-[var(--radius-md)] bg-[var(--color-accent)] px-4 py-2 text-sm font-medium text-[var(--color-accent-fg)] hover:bg-[var(--color-accent-hover)] disabled:opacity-50 transition-colors"
           >
             {savingSection === "email" ? (
               <Loader2 className="h-4 w-4 animate-spin" />
@@ -668,7 +668,7 @@ export default function SettingsPage() {
           <button
             onClick={handleSaveNotifications}
             disabled={savingSection === "notifications"}
-            className="flex items-center gap-2 rounded-[var(--radius-md)] bg-[var(--color-accent)] px-4 py-2 text-sm font-medium text-white hover:bg-[var(--color-accent-hover)] disabled:opacity-50 transition-colors"
+            className="flex items-center gap-2 rounded-[var(--radius-md)] bg-[var(--color-accent)] px-4 py-2 text-sm font-medium text-[var(--color-accent-fg)] hover:bg-[var(--color-accent-hover)] disabled:opacity-50 transition-colors"
           >
             {savingSection === "notifications" ? (
               <Loader2 className="h-4 w-4 animate-spin" />
@@ -740,7 +740,7 @@ export default function SettingsPage() {
           <button
             onClick={handleSaveSecurity}
             disabled={savingSection === "security"}
-            className="flex items-center gap-2 rounded-[var(--radius-md)] bg-[var(--color-accent)] px-4 py-2 text-sm font-medium text-white hover:bg-[var(--color-accent-hover)] disabled:opacity-50 transition-colors"
+            className="flex items-center gap-2 rounded-[var(--radius-md)] bg-[var(--color-accent)] px-4 py-2 text-sm font-medium text-[var(--color-accent-fg)] hover:bg-[var(--color-accent-hover)] disabled:opacity-50 transition-colors"
           >
             {savingSection === "security" ? (
               <Loader2 className="h-4 w-4 animate-spin" />
@@ -765,7 +765,7 @@ export default function SettingsPage() {
             <button
               onClick={handleBackup}
               disabled={backingUp}
-              className="flex items-center gap-2 rounded-[var(--radius-md)] bg-[var(--color-accent)] px-4 py-2 text-sm font-medium text-white hover:bg-[var(--color-accent-hover)] disabled:opacity-50 transition-colors"
+              className="flex items-center gap-2 rounded-[var(--radius-md)] bg-[var(--color-accent)] px-4 py-2 text-sm font-medium text-[var(--color-accent-fg)] hover:bg-[var(--color-accent-hover)] disabled:opacity-50 transition-colors"
             >
               {backingUp ? (
                 <Loader2 className="h-4 w-4 animate-spin" />
@@ -818,7 +818,7 @@ export default function SettingsPage() {
             </div>
             <button
               onClick={() => setShowResetConfirm(true)}
-              className="shrink-0 rounded-[var(--radius-md)] border border-[var(--color-error)]/50 px-4 py-2 text-sm font-medium text-[var(--color-error)] hover:bg-[var(--color-error)] hover:text-white transition-colors"
+              className="shrink-0 rounded-[var(--radius-md)] border border-[var(--color-error)]/50 px-4 py-2 text-sm font-medium text-[var(--color-error)] hover:bg-[var(--color-error)] hover:text-[var(--color-accent-fg)] transition-colors"
             >
               Reinitialiser
             </button>
@@ -843,7 +843,7 @@ export default function SettingsPage() {
                   toast.error(err instanceof Error ? err.message : "Erreur");
                 }
               }}
-              className="shrink-0 rounded-[var(--radius-md)] border border-[var(--color-error)]/50 px-4 py-2 text-sm font-medium text-[var(--color-error)] hover:bg-[var(--color-error)] hover:text-white transition-colors"
+              className="shrink-0 rounded-[var(--radius-md)] border border-[var(--color-error)]/50 px-4 py-2 text-sm font-medium text-[var(--color-error)] hover:bg-[var(--color-error)] hover:text-[var(--color-accent-fg)] transition-colors"
             >
               <span className="flex items-center gap-2">
                 <Trash2 className="h-4 w-4" />
@@ -892,7 +892,7 @@ export default function SettingsPage() {
                   <button
                     onClick={handleResetSettings}
                     disabled={savingSection === "reset"}
-                    className="rounded-[var(--radius-md)] bg-[var(--color-error)] px-4 py-2 text-sm font-medium text-white hover:bg-red-600 disabled:opacity-50 transition-colors"
+                    className="rounded-[var(--radius-md)] bg-[var(--color-error)] px-4 py-2 text-sm font-medium text-[var(--color-accent-fg)] hover:bg-red-600 disabled:opacity-50 transition-colors"
                   >
                     {savingSection === "reset" ? (
                       <Loader2 className="inline h-4 w-4 animate-spin" />
