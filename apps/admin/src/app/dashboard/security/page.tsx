@@ -65,6 +65,47 @@ function getAuditIcon(action: string): React.ElementType {
   return auditIcons[key ?? "default"];
 }
 
+// ─── Audit action color dots ─────────────────────────
+function getAuditDotColor(action: string): string {
+  const a = action.toLowerCase();
+  if (a.includes("login") || a.includes("logout")) return "bg-blue-500";
+  if (a.includes("contact")) return "bg-green-500";
+  if (a.includes("email")) return "bg-purple-500";
+  if (a.includes("settings") || a.includes("setting")) return "bg-orange-500";
+  if (a.includes("security") || a.includes("blacklist") || a.includes("block")) return "bg-red-500";
+  if (a.includes("maintenance")) return "bg-yellow-500";
+  return "bg-[var(--color-text-muted)]";
+}
+
+// ─── Date grouping helpers ───────────────────────────
+function getDateGroupLabel(dateStr: string): string {
+  const d = new Date(dateStr);
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const entryDate = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+  const diffDays = Math.floor((today.getTime() - entryDate.getTime()) / (1000 * 60 * 60 * 24));
+
+  if (diffDays === 0) return "Aujourd'hui";
+  if (diffDays === 1) return "Hier";
+  return d.toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" });
+}
+
+function groupAuditByDate(entries: AuditLogEntry[]): { label: string; entries: AuditLogEntry[] }[] {
+  const groups: { label: string; entries: AuditLogEntry[] }[] = [];
+  let currentLabel = "";
+
+  for (const entry of entries) {
+    const label = getDateGroupLabel(entry.timestamp);
+    if (label !== currentLabel) {
+      currentLabel = label;
+      groups.push({ label, entries: [entry] });
+    } else {
+      groups[groups.length - 1].entries.push(entry);
+    }
+  }
+  return groups;
+}
+
 // ─── Spam score bar ──────────────────────────────────
 function SpamScoreBar({ score }: { score: number }) {
   const color =
@@ -653,37 +694,54 @@ export default function SecurityPage() {
 
         {auditLogs.length > 0 ? (
           <>
-            <div className="space-y-2">
-              {auditLogs.map((entry) => {
-                const ActionIcon = getAuditIcon(entry.action);
-                return (
-                  <div
-                    key={entry.id}
-                    className="flex items-start gap-3 rounded-[var(--radius-md)] border border-[var(--color-border-light)] bg-[var(--color-bg-secondary)] px-4 py-3"
-                  >
-                    <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[var(--color-bg-hover)]">
-                      <ActionIcon className="h-4 w-4 text-[var(--color-text-secondary)]" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2">
-                        <span className="text-sm font-medium text-[var(--color-text-primary)]">
-                          {entry.action}
-                        </span>
-                        <span className="text-xs text-[var(--color-text-muted)]">
-                          par {entry.user}
-                        </span>
-                      </div>
-                      <p className="mt-0.5 text-xs text-[var(--color-text-secondary)] truncate">
-                        {entry.details}
-                      </p>
-                      <div className="mt-1 flex items-center gap-3 text-xs text-[var(--color-text-tertiary)]">
-                        <span>{formatRelativeTime(entry.timestamp)}</span>
-                        <span className="font-mono">{entry.ip_address}</span>
-                      </div>
-                    </div>
+            <div className="space-y-4">
+              {groupAuditByDate(auditLogs).map((group) => (
+                <div key={group.label}>
+                  {/* Date header */}
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-tertiary)]">
+                      {group.label}
+                    </span>
+                    <div className="flex-1 h-px bg-[var(--color-border)]" />
                   </div>
-                );
-              })}
+                  {/* Timeline entries */}
+                  <div className="relative ml-3 border-l border-[var(--color-border)] pl-6 space-y-3">
+                    {group.entries.map((entry) => {
+                      const ActionIcon = getAuditIcon(entry.action);
+                      const dotColor = getAuditDotColor(entry.action);
+                      return (
+                        <div
+                          key={entry.id}
+                          className="relative flex items-start gap-3 rounded-[var(--radius-md)] border border-[var(--color-border-light)] bg-[var(--color-bg-secondary)] px-4 py-3"
+                        >
+                          {/* Color-coded timeline dot */}
+                          <div className={cn("absolute -left-[31px] top-4 h-2.5 w-2.5 rounded-full ring-2 ring-[var(--color-bg-primary)]", dotColor)} />
+                          <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[var(--color-bg-hover)]">
+                            <ActionIcon className="h-4 w-4 text-[var(--color-text-secondary)]" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-2">
+                              <span className="text-sm font-medium text-[var(--color-text-primary)]">
+                                {entry.action}
+                              </span>
+                              <span className="text-xs text-[var(--color-text-muted)]">
+                                par {entry.user}
+                              </span>
+                            </div>
+                            <p className="mt-0.5 text-xs text-[var(--color-text-secondary)] truncate">
+                              {entry.details}
+                            </p>
+                            <div className="mt-1 flex items-center gap-3 text-xs text-[var(--color-text-tertiary)]">
+                              <span>{formatRelativeTime(entry.timestamp)}</span>
+                              <span className="font-mono">{entry.ip_address}</span>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
             </div>
             {/* Pagination */}
             {auditTotalPages > 1 && (

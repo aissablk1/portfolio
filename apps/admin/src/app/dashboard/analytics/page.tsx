@@ -10,6 +10,7 @@ import type {
   SubjectDistribution,
   GeoData,
   HourlyDistribution,
+  PageViewStats,
 } from "@/lib/types";
 import {
   BarChart3,
@@ -23,6 +24,8 @@ import {
   AlertCircle,
   Users,
   Target,
+  Eye,
+  ExternalLink,
 } from "lucide-react";
 import {
   AreaChart,
@@ -170,6 +173,7 @@ export default function AnalyticsPage() {
   const [subjects, setSubjects] = useState<SubjectDistribution[]>([]);
   const [geo, setGeo] = useState<GeoData[]>([]);
   const [hourly, setHourly] = useState<HourlyDistribution[]>([]);
+  const [pageviews, setPageviews] = useState<PageViewStats | null>(null);
 
   const selectedPeriod = periods.find((p) => p.key === period)!;
 
@@ -177,11 +181,12 @@ export default function AnalyticsPage() {
     setLoading(true);
     setError(null);
     try {
-      const [overviewRes, timelineRes, subjectsRes, geoRes] = await Promise.all([
+      const [overviewRes, timelineRes, subjectsRes, geoRes, pvRes] = await Promise.all([
         api.getAnalyticsOverview(period),
         api.getAnalyticsTimeline(selectedPeriod.days),
         api.getAnalyticsSubjects(),
         api.getAnalyticsGeo(),
+        api.getPageViews(),
       ]);
 
       if (overviewRes.data) {
@@ -206,6 +211,10 @@ export default function AnalyticsPage() {
       const rawGeo = geoData?.geo;
       if (Array.isArray(rawGeo)) {
         setGeo(rawGeo as unknown as GeoData[]);
+      }
+
+      if (pvRes.data) {
+        setPageviews(pvRes.data as unknown as PageViewStats);
       }
 
       // Derive hourly from timeline if API returns it, or generate from timeline dates
@@ -320,6 +329,177 @@ export default function AnalyticsPage() {
           Mise a jour...
         </div>
       )}
+
+      {/* ═══ VISITEURS SECTION ═══ */}
+      <div className="flex items-center gap-2">
+        <Eye className="h-5 w-5 text-[#8b5cf6]" />
+        <h2 className="text-lg font-semibold text-[var(--color-text-primary)]">Visiteurs</h2>
+      </div>
+
+      {/* Page views stat cards */}
+      {pageviews && (
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+          <KpiCard icon={Eye} label="Vues aujourd'hui" value={pageviews.today} delay={0} />
+          <KpiCard icon={Eye} label="Cette semaine" value={pageviews.this_week} delay={0.05} />
+          <KpiCard icon={Eye} label="Ce mois" value={pageviews.this_month} delay={0.1} />
+        </div>
+      )}
+
+      {/* Page views timeline chart */}
+      {pageviews && pageviews.timeline.length > 0 && (
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.15 }}
+          className="rounded-[var(--radius-lg)] border border-[var(--color-glass-border)] bg-[var(--color-glass)] p-6 backdrop-blur-xl"
+        >
+          <h2 className="mb-4 text-lg font-semibold text-[var(--color-text-primary)]">
+            Visites dans le temps
+          </h2>
+          <ResponsiveContainer width="100%" height={280}>
+            <AreaChart
+              data={pageviews.timeline.map((p) => ({
+                ...p,
+                dateFormatted: formatDate(p.date, { day: "numeric", month: "short" }),
+              }))}
+              margin={{ top: 8, right: 8, bottom: 0, left: -16 }}
+            >
+              <defs>
+                <linearGradient id="fillViews" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="#8b5cf6" stopOpacity={0.3} />
+                  <stop offset="100%" stopColor="#8b5cf6" stopOpacity={0} />
+                </linearGradient>
+              </defs>
+              <CartesianGrid strokeDasharray="3 3" stroke={chartColors.grid} />
+              <XAxis
+                dataKey="dateFormatted"
+                tick={{ fill: chartColors.text, fontSize: 12 }}
+                tickLine={false}
+                axisLine={{ stroke: chartColors.grid }}
+              />
+              <YAxis
+                tick={{ fill: chartColors.text, fontSize: 12 }}
+                tickLine={false}
+                axisLine={false}
+                allowDecimals={false}
+              />
+              <RechartsTooltip content={<ChartTooltip />} />
+              <Area
+                type="monotone"
+                dataKey="count"
+                name="Visiteurs"
+                stroke="#8b5cf6"
+                fill="url(#fillViews)"
+                strokeWidth={2}
+              />
+            </AreaChart>
+          </ResponsiveContainer>
+        </motion.div>
+      )}
+
+      {/* Top pages + Top referrers */}
+      {pageviews && ((pageviews.top_pages?.length ?? 0) > 0 || (pageviews.top_referrers?.length ?? 0) > 0) && (
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+          {/* Top pages */}
+          {pageviews.top_pages.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+              className="rounded-[var(--radius-lg)] border border-[var(--color-glass-border)] bg-[var(--color-glass)] p-6 backdrop-blur-xl"
+            >
+              <h2 className="mb-4 text-lg font-semibold text-[var(--color-text-primary)]">
+                Pages les plus visitees
+              </h2>
+              <div className="space-y-3">
+                {pageviews.top_pages.slice(0, 8).map((p, i) => {
+                  const maxCount = pageviews.top_pages[0]?.count ?? 1;
+                  const pct = Math.round((p.count / maxCount) * 100);
+                  return (
+                    <div key={p.page} className="flex items-center gap-3">
+                      <span className="text-xs text-[var(--color-text-muted)] w-5 text-right">
+                        {i + 1}
+                      </span>
+                      <div className="flex-1">
+                        <div className="flex items-center justify-between mb-1">
+                          <span className="text-sm text-[var(--color-text-primary)] truncate">
+                            {p.page}
+                          </span>
+                          <span className="text-xs text-[var(--color-text-muted)] ml-2">
+                            {p.count}
+                          </span>
+                        </div>
+                        <div className="h-1.5 rounded-full bg-[var(--color-bg-hover)] overflow-hidden">
+                          <motion.div
+                            initial={{ width: 0 }}
+                            animate={{ width: `${pct}%` }}
+                            transition={{ duration: 0.6, delay: i * 0.05 }}
+                            className="h-full rounded-full bg-[#8b5cf6]"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </motion.div>
+          )}
+
+          {/* Top referrers */}
+          {pageviews.top_referrers.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.25 }}
+              className="rounded-[var(--radius-lg)] border border-[var(--color-glass-border)] bg-[var(--color-glass)] p-6 backdrop-blur-xl"
+            >
+              <div className="mb-4 flex items-center gap-2">
+                <ExternalLink className="h-5 w-5 text-[var(--color-text-tertiary)]" />
+                <h2 className="text-lg font-semibold text-[var(--color-text-primary)]">
+                  Sources de trafic
+                </h2>
+              </div>
+              <div className="space-y-3">
+                {pageviews.top_referrers.slice(0, 8).map((r, i) => {
+                  const maxCount = pageviews.top_referrers[0]?.count ?? 1;
+                  const pct = Math.round((r.count / maxCount) * 100);
+                  return (
+                    <div key={r.referrer} className="flex items-center gap-3">
+                      <span className="text-xs text-[var(--color-text-muted)] w-5 text-right">
+                        {i + 1}
+                      </span>
+                      <div className="flex-1">
+                        <div className="flex items-center justify-between mb-1">
+                          <span className="text-sm text-[var(--color-text-primary)] truncate">
+                            {r.referrer}
+                          </span>
+                          <span className="text-xs text-[var(--color-text-muted)] ml-2">
+                            {r.count}
+                          </span>
+                        </div>
+                        <div className="h-1.5 rounded-full bg-[var(--color-bg-hover)] overflow-hidden">
+                          <motion.div
+                            initial={{ width: 0 }}
+                            animate={{ width: `${pct}%` }}
+                            transition={{ duration: 0.6, delay: i * 0.05 }}
+                            className="h-full rounded-full bg-[var(--color-accent)]"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </motion.div>
+          )}
+        </div>
+      )}
+
+      {/* ═══ CONTACTS SECTION ═══ */}
+      <div className="flex items-center gap-2">
+        <Users className="h-5 w-5 text-[var(--color-accent)]" />
+        <h2 className="text-lg font-semibold text-[var(--color-text-primary)]">Contacts</h2>
+      </div>
 
       {/* KPI Row */}
       {overview && (

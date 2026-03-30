@@ -9,6 +9,32 @@ import requests
 
 logger = logging.getLogger(__name__)
 
+def _branded_email(subject: str, body_html: str) -> str:
+    """Encapsule un body HTML dans le template email brande."""
+    return f'''<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>{html_escape(subject)}</title></head>
+<body style="margin:0;padding:0;background:#0a0a0a;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
+<div style="max-width:600px;margin:0 auto;padding:40px 20px;">
+  <div style="text-align:center;padding-bottom:32px;border-bottom:1px solid #222;">
+    <h1 style="color:#fff;font-size:14px;letter-spacing:0.3em;margin:0;font-weight:700;">A\u00cfSSA BELKOUSSA</h1>
+  </div>
+  <div style="padding:32px 0;color:#e0e0e0;font-size:15px;line-height:1.7;">
+    {body_html}
+  </div>
+  <div style="border-top:1px solid #222;padding-top:24px;text-align:center;color:#666;font-size:12px;">
+    <p style="margin:0 0 8px;">
+      <a href="https://linkedin.com/in/aissabelkoussa" style="color:#888;text-decoration:none;">LinkedIn</a>
+      &nbsp;&middot;&nbsp;
+      <a href="https://github.com/aissablk1" style="color:#888;text-decoration:none;">GitHub</a>
+      &nbsp;&middot;&nbsp;
+      <a href="https://aissabelkoussa.fr" style="color:#888;text-decoration:none;">Portfolio</a>
+    </p>
+    <p style="margin:0;color:#444;">&copy; 2026 A\u00efssa Belkoussa</p>
+  </div>
+</div>
+</body></html>'''
+
+
 class EmailService:
     def __init__(self):
         self.smtp_server = os.getenv('SMTP_SERVER', 'smtp.gmail.com')
@@ -17,7 +43,7 @@ class EmailService:
         self.email_password = os.getenv('EMAIL_PASSWORD')
         self.recipient_email = os.getenv('RECIPIENT_EMAIL')
         self.fallback_provider = os.getenv('EMAIL_FALLBACK_PROVIDER', 'formsubmit').lower()
-        
+
     def _render_html_body(self, submission_data: dict) -> str:
         safe_name = html_escape(str(submission_data['name']))
         safe_email = html_escape(str(submission_data['email']))
@@ -26,43 +52,35 @@ class EmailService:
         safe_id = html_escape(str(submission_data.get('id', 'Non disponible (N/A)')))
         safe_ip = html_escape(str(submission_data.get('ip_address', 'Non disponible (N/A)')))
         whatsapp_number = os.getenv("ADMIN_WHATSAPP_NUMBER", "")
-        return f"""
-            <html>
-            <body style="font-family: Arial, sans-serif; line-height: 1.6;">
-                <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
-                    <h2 style="color: #333; border-bottom: 2px solid #eee; padding-bottom: 10px;">
-                        📬 Nouveau message depuis votre portfolio
-                    </h2>
+        inner_body = f"""
+<h2 style="color:#fff;font-size:18px;margin:0 0 24px;">Nouveau message depuis votre portfolio</h2>
 
-                    <div style="background: #f9f9f9; padding: 20px; border-radius: 8px; margin: 20px 0;">
-                        <h3 style="color: #555; margin-top: 0;">Informations du contact</h3>
-                        <p><strong>Nom :</strong> {safe_name}</p>
-                        <p><strong>Email :</strong> <a href="mailto:{safe_email}">{safe_email}</a></p>
-                        <p><strong>Sujet :</strong> {safe_subject}</p>
-                        <p><strong>Date :</strong> {datetime.now().strftime('%d/%m/%Y à %H:%M')}</p>
-                    </div>
+<div style="background:#161616;padding:20px;border-radius:8px;margin:0 0 24px;border:1px solid #222;">
+  <p style="color:#999;font-size:12px;text-transform:uppercase;letter-spacing:0.1em;margin:0 0 12px;">Informations du contact</p>
+  <p style="margin:4px 0;"><strong style="color:#fff;">Nom :</strong> {safe_name}</p>
+  <p style="margin:4px 0;"><strong style="color:#fff;">Email :</strong> <a href="mailto:{safe_email}" style="color:#8b5cf6;text-decoration:none;">{safe_email}</a></p>
+  <p style="margin:4px 0;"><strong style="color:#fff;">Sujet :</strong> {safe_subject}</p>
+  <p style="margin:4px 0;"><strong style="color:#fff;">Date :</strong> {datetime.now().strftime('%d/%m/%Y a %H:%M')}</p>
+</div>
 
-                    <div style="background: #fff; padding: 20px; border-left: 4px solid #007cba; margin: 20px 0;">
-                        <h3 style="color: #555; margin-top: 0;">Message</h3>
-                        <p style="white-space: pre-wrap;">{safe_message}</p>
-                    </div>
+<div style="background:#161616;padding:20px;border-radius:8px;margin:0 0 24px;border-left:3px solid #8b5cf6;">
+  <p style="color:#999;font-size:12px;text-transform:uppercase;letter-spacing:0.1em;margin:0 0 12px;">Message</p>
+  <p style="white-space:pre-wrap;margin:0;color:#e0e0e0;">{safe_message}</p>
+</div>
 
-                    <div style="margin-top: 30px; padding: 15px; background: #e8f4fd; border-radius: 8px;">
-                        <p style="margin: 0;">
-                            <strong>Actions rapides :</strong><br>
-                            • <a href="mailto:{safe_email}?subject=Re: {safe_subject}" style="color: #007cba;">Répondre par email</a><br>
-                            • <a href="https://wa.me/{whatsapp_number}?text=Bonjour {safe_name}, merci pour votre message via mon portfolio." style="color: #25d366;">Contacter sur WhatsApp</a>
-                        </p>
-                    </div>
+<div style="background:#161616;padding:16px;border-radius:8px;margin:0 0 24px;border:1px solid #222;">
+  <p style="margin:0;color:#999;">
+    <strong style="color:#fff;">Actions rapides :</strong><br>
+    <a href="mailto:{safe_email}?subject=Re: {safe_subject}" style="color:#8b5cf6;text-decoration:none;">Repondre par email</a><br>
+    <a href="https://wa.me/{whatsapp_number}?text=Bonjour {safe_name}, merci pour votre message via mon portfolio." style="color:#25d366;text-decoration:none;">Contacter sur WhatsApp</a>
+  </p>
+</div>
 
-                    <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 12px;">
-                        <p>ID de soumission : {safe_id}</p>
-                        <p>IP : {safe_ip}</p>
-                    </div>
-                </div>
-            </body>
-            </html>
-            """
+<div style="color:#555;font-size:11px;">
+  <p style="margin:4px 0;">ID : {safe_id}</p>
+  <p style="margin:4px 0;">IP : {safe_ip}</p>
+</div>"""
+        return _branded_email(f"Nouveau contact - {submission_data['subject']}", inner_body)
 
     def _send_via_smtp(self, submission_data: dict) -> bool:
         try:
@@ -163,50 +181,34 @@ class EmailService:
             safe_name = html_escape(str(submission_data['name']))
             safe_subject = html_escape(str(submission_data['subject']))
             whatsapp_number = os.getenv("ADMIN_WHATSAPP_NUMBER", "")
-            body = f"""
-            <html>
-            <body style="font-family: Arial, sans-serif; line-height: 1.6;">
-                <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
-                    <h2 style="color: #333; border-bottom: 2px solid #eee; padding-bottom: 10px;">
-                        Merci pour votre message, {safe_name} !
-                    </h2>
+            inner_body = f"""
+<h2 style="color:#fff;font-size:20px;margin:0 0 24px;">Merci pour votre message, {safe_name} !</h2>
 
-                    <div style="background: #f9f9f9; padding: 20px; border-radius: 8px; margin: 20px 0;">
-                        <p>Bonjour <strong>{safe_name}</strong>,</p>
-                        <p>Merci d'avoir pris le temps de me contacter via mon portfolio. J'ai bien reçu votre message concernant "<em>{safe_subject}</em>".</p>
-                    </div>
+<p>Bonjour <strong style="color:#fff;">{safe_name}</strong>,</p>
+<p>Merci d'avoir pris le temps de me contacter via mon portfolio. J'ai bien re&ccedil;u votre message concernant &laquo;&nbsp;<em style="color:#8b5cf6;">{safe_subject}</em>&nbsp;&raquo;.</p>
 
-                    <div style="background: #e8f4fd; padding: 20px; border-radius: 8px; margin: 20px 0;">
-                        <h3 style="color: #555; margin-top: 0;">📞 Prochaines étapes</h3>
-                        <p>Je reviendrai vers vous dans les <strong>24-48h</strong> pour étudier votre demande en détail.</p>
-                        <p>Pour une réponse plus rapide, n'hésitez pas à me contacter directement sur WhatsApp :</p>
-                        <p style="text-align: center; margin: 20px 0;">
-                            <a href="https://wa.me/{whatsapp_number}"
-                               style="background: #25d366; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; display: inline-block;">
-                                💬 Discuter sur WhatsApp
-                            </a>
-                        </p>
-                    </div>
-                    
-                    <div style="background: #fff; padding: 20px; border-left: 4px solid #007cba; margin: 20px 0;">
-                        <h3 style="color: #555; margin-top: 0;">🚀 En attendant</h3>
-                        <p>N'hésitez pas à :</p>
-                        <ul>
-                            <li>Consulter mes réalisations sur <a href="https://github.com/aissablk1" style="color: #007cba;">GitHub</a></li>
-                            <li>Suivre mon actualité sur <a href="https://t.me/investwithaissa" style="color: #007cba;">Telegram</a></li>
-                            <li>Me retrouver sur <a href="https://linkedin.com/in/aissabelkoussa" style="color: #007cba;">LinkedIn</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; color: #666; text-align: center;">
-                        <p>À très bientôt,<br><strong>AÏSSA BELKOUSSA</strong></p>
-                        <p style="font-style: italic; font-size: 14px;">Entrepreneur • Développeur • Créateur</p>
-                    </div>
-                </div>
-            </body>
-            </html>
-            """
-            
+<div style="background:#161616;padding:20px;border-radius:8px;margin:24px 0;border:1px solid #222;">
+  <p style="color:#fff;font-size:16px;margin:0 0 12px;font-weight:600;">Prochaines &eacute;tapes</p>
+  <p style="margin:0 0 12px;">Je reviendrai vers vous dans les <strong style="color:#fff;">24-48h</strong> pour &eacute;tudier votre demande en d&eacute;tail.</p>
+  <p style="margin:0 0 16px;">Pour une r&eacute;ponse plus rapide, n'h&eacute;sitez pas &agrave; me contacter directement sur WhatsApp :</p>
+  <p style="text-align:center;margin:0;">
+    <a href="https://wa.me/{whatsapp_number}" style="background:#25d366;color:#fff;padding:12px 24px;text-decoration:none;border-radius:8px;display:inline-block;font-weight:600;">Discuter sur WhatsApp</a>
+  </p>
+</div>
+
+<div style="background:#161616;padding:20px;border-radius:8px;margin:24px 0;border-left:3px solid #8b5cf6;">
+  <p style="color:#fff;font-size:16px;margin:0 0 12px;font-weight:600;">En attendant</p>
+  <p style="margin:0;">N'h&eacute;sitez pas &agrave; :</p>
+  <ul style="padding-left:20px;margin:8px 0 0;">
+    <li style="margin:4px 0;"><a href="https://github.com/aissablk1" style="color:#8b5cf6;text-decoration:none;">Consulter mes r&eacute;alisations sur GitHub</a></li>
+    <li style="margin:4px 0;"><a href="https://t.me/investwithaissa" style="color:#8b5cf6;text-decoration:none;">Suivre mon actualit&eacute; sur Telegram</a></li>
+    <li style="margin:4px 0;"><a href="https://linkedin.com/in/aissabelkoussa" style="color:#8b5cf6;text-decoration:none;">Me retrouver sur LinkedIn</a></li>
+  </ul>
+</div>
+
+<p style="text-align:center;color:#999;margin-top:24px;">&Agrave; tr&egrave;s bient&ocirc;t,<br><strong style="color:#fff;">A&Iuml;SSA BELKOUSSA</strong><br><span style="font-style:italic;font-size:13px;">Entrepreneur &bull; D&eacute;veloppeur &bull; Cr&eacute;ateur</span></p>"""
+            body = _branded_email(f"Message recu - {submission_data['subject']}", inner_body)
+
             msg.attach(MIMEText(body, 'html'))
             
             # Send auto-reply

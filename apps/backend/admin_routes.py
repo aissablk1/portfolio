@@ -117,6 +117,32 @@ def _safe_html(text: str) -> str:
     return html_escape(str(text))
 
 
+def _branded_email(subject: str, body_html: str) -> str:
+    """Encapsule un body HTML dans le template email brande."""
+    return f'''<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>{html_escape(subject)}</title></head>
+<body style="margin:0;padding:0;background:#0a0a0a;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
+<div style="max-width:600px;margin:0 auto;padding:40px 20px;">
+  <div style="text-align:center;padding-bottom:32px;border-bottom:1px solid #222;">
+    <h1 style="color:#fff;font-size:14px;letter-spacing:0.3em;margin:0;font-weight:700;">A\u00cfSSA BELKOUSSA</h1>
+  </div>
+  <div style="padding:32px 0;color:#e0e0e0;font-size:15px;line-height:1.7;">
+    {body_html}
+  </div>
+  <div style="border-top:1px solid #222;padding-top:24px;text-align:center;color:#666;font-size:12px;">
+    <p style="margin:0 0 8px;">
+      <a href="https://linkedin.com/in/aissabelkoussa" style="color:#888;text-decoration:none;">LinkedIn</a>
+      &nbsp;&middot;&nbsp;
+      <a href="https://github.com/aissablk1" style="color:#888;text-decoration:none;">GitHub</a>
+      &nbsp;&middot;&nbsp;
+      <a href="https://aissabelkoussa.fr" style="color:#888;text-decoration:none;">Portfolio</a>
+    </p>
+    <p style="margin:0;color:#444;">&copy; 2026 A\u00efssa Belkoussa</p>
+  </div>
+</div>
+</body></html>'''
+
+
 # ─── Brute Force Protection ──────────────────────────────────────────────────
 
 _login_attempts: dict[str, list[float]] = defaultdict(list)
@@ -682,18 +708,11 @@ async def reply_to_contact(request: Request, contact_id: str, reply: ContactRepl
         msg["To"] = recipient_email
         msg["Subject"] = reply.subject
 
-        html_body = f"""
-        <html>
-        <body style="font-family: Arial, sans-serif; line-height: 1.6;">
-            <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
-                <div style="white-space: pre-wrap;">{_safe_html(reply.message)}</div>
-                <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; color: #666;">
-                    <p>Cordialement,<br><strong>AÏSSA BELKOUSSA</strong></p>
-                </div>
-            </div>
-        </body>
-        </html>
-        """
+        reply_body = f'''<div style="white-space:pre-wrap;">{_safe_html(reply.message)}</div>
+<div style="margin-top:24px;color:#999;font-size:13px;">
+  <p>Cordialement,<br><strong style="color:#fff;">A\u00cfSSA BELKOUSSA</strong></p>
+</div>'''
+        html_body = _branded_email(reply.subject, reply_body)
         msg.attach(MIMEText(html_body, "html"))
 
         with smtplib.SMTP(smtp_server, smtp_port) as server:
@@ -814,18 +833,11 @@ async def send_email(request: Request, email_data: EmailCompose):
         msg["To"] = email_data.to
         msg["Subject"] = email_data.subject
 
-        html_body = f"""
-        <html>
-        <body style="font-family: Arial, sans-serif; line-height: 1.6;">
-            <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
-                <div style="white-space: pre-wrap;">{_safe_html(email_data.body)}</div>
-                <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; color: #666;">
-                    <p>Cordialement,<br><strong>AÏSSA BELKOUSSA</strong></p>
-                </div>
-            </div>
-        </body>
-        </html>
-        """
+        compose_body = f'''<div style="white-space:pre-wrap;">{_safe_html(email_data.body)}</div>
+<div style="margin-top:24px;color:#999;font-size:13px;">
+  <p>Cordialement,<br><strong style="color:#fff;">A\u00cfSSA BELKOUSSA</strong></p>
+</div>'''
+        html_body = _branded_email(email_data.subject, compose_body)
         msg.attach(MIMEText(html_body, "html"))
 
         with smtplib.SMTP(smtp_server, smtp_port) as server:

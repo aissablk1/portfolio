@@ -235,6 +235,13 @@ export default function DashboardPage() {
   const [allFailed, setAllFailed] = useState(false);
   const hasLoadedOnce = useRef(false);
 
+  // Auto-refresh state
+  const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
+  const [secondsAgo, setSecondsAgo] = useState(0);
+  const [autoRefreshing, setAutoRefreshing] = useState(false);
+  const autoRefreshInterval = useRef<ReturnType<typeof setInterval> | null>(null);
+  const tickInterval = useRef<ReturnType<typeof setInterval> | null>(null);
+
   const fetchAll = useCallback(async () => {
     try {
       if (hasLoadedOnce.current) {
@@ -321,13 +328,41 @@ export default function DashboardPage() {
     } finally {
       setLoading(false);
       setRefreshing(false);
+      setAutoRefreshing(false);
       hasLoadedOnce.current = true;
+      setLastUpdated(new Date());
+      setSecondsAgo(0);
     }
   }, []);
 
   useEffect(() => {
     fetchAll();
   }, [fetchAll]);
+
+  // Auto-refresh every 60 seconds (silent)
+  useEffect(() => {
+    autoRefreshInterval.current = setInterval(() => {
+      if (hasLoadedOnce.current) {
+        setAutoRefreshing(true);
+        fetchAll();
+      }
+    }, 60_000);
+    return () => {
+      if (autoRefreshInterval.current) clearInterval(autoRefreshInterval.current);
+    };
+  }, [fetchAll]);
+
+  // Tick the "seconds ago" counter every second
+  useEffect(() => {
+    tickInterval.current = setInterval(() => {
+      if (lastUpdated) {
+        setSecondsAgo(Math.floor((Date.now() - lastUpdated.getTime()) / 1000));
+      }
+    }, 1_000);
+    return () => {
+      if (tickInterval.current) clearInterval(tickInterval.current);
+    };
+  }, [lastUpdated]);
 
   // Format timeline data for chart
   const chartData = (data?.timeline ?? []).map((point: TimelinePoint) => ({
@@ -377,13 +412,23 @@ export default function DashboardPage() {
           <p className="text-sm text-[var(--color-text-tertiary)] mt-1">
             Vue d&apos;ensemble de l&apos;activité
           </p>
+          {lastUpdated && (
+            <p className="text-xs text-[var(--color-text-muted)] mt-1">
+              Derniere mise a jour : il y a{" "}
+              {secondsAgo < 60
+                ? `${secondsAgo}s`
+                : secondsAgo < 3600
+                  ? `${Math.floor(secondsAgo / 60)} min`
+                  : `${Math.floor(secondsAgo / 3600)}h`}
+            </p>
+          )}
         </div>
         <button
           onClick={fetchAll}
           disabled={loading || refreshing}
           className="flex items-center gap-2 bg-[var(--color-bg-hover)] hover:bg-[var(--color-bg-active)] text-[var(--color-text-secondary)] rounded-[var(--radius-md)] px-4 py-2 text-sm transition-colors disabled:opacity-50"
         >
-          <RefreshCw className={cn("h-4 w-4", (loading || refreshing) && "animate-spin")} />
+          <RefreshCw className={cn("h-4 w-4", (loading || refreshing) && "animate-spin", autoRefreshing && "animate-pulse")} />
           {refreshing ? "Mise a jour..." : "Actualiser"}
         </button>
       </div>
