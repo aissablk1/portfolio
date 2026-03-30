@@ -18,10 +18,9 @@ logger = logging.getLogger(__name__)
 
 # ─── Configuration ────────────────────────────────────────────────────────────
 
-JWT_SECRET_KEY = os.getenv(
-    "JWT_SECRET_KEY",
-    "dev-secret-key-change-in-production-aissa-portfolio-2026"
-)
+JWT_SECRET_KEY = os.environ.get("JWT_SECRET_KEY")
+if not JWT_SECRET_KEY:
+    raise RuntimeError("FATAL: JWT_SECRET_KEY non defini. Le serveur refuse de demarrer sans cle secrete.")
 JWT_ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 REFRESH_TOKEN_EXPIRE_DAYS = 7

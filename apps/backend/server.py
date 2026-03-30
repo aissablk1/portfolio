@@ -13,7 +13,7 @@ from services.storage_service import StorageService
 from admin_routes import admin_router
 from services.auth_service import create_admin_user, load_blacklisted_tokens, hash_password
 import asyncio
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 
 ROOT_DIR = Path(__file__).parent
 # Charger d'abord le .env à la racine du projet (Portfolio/.env), puis fallback sur backend/.env

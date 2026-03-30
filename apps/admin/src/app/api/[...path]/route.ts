@@ -5,6 +5,12 @@ const API_URL =
 
 async function proxy(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
+
+  // Security: restrict proxy to admin API routes only
+  if (!pathname.startsWith("/api/admin/")) {
+    return new Response("Not found", { status: 404 });
+  }
+
   const url = `${API_URL}${pathname}${search}`;
 
   const headers: Record<string, string> = {

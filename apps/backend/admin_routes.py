@@ -6,6 +6,7 @@ Toutes les routes sont protégées par JWT (sauf /login).
 import os
 import io
 import csv
+import re
 import uuid
 import math
 import smtplib
@@ -13,6 +14,8 @@ import logging
 import requests as http_requests
 from datetime import datetime, timedelta, timezone
 from typing import Optional
+from collections import defaultdict
+from html import escape as html_escape
 
 from fastapi import APIRouter, HTTPException, Request, Response, Query
 from fastapi.responses import StreamingResponse
@@ -104,6 +107,34 @@ def _is_production() -> bool:
     return os.getenv("ENVIRONMENT", "development") == "production"
 
 
+def _escape_regex(value: str) -> str:
+    """Echappe les caracteres speciaux regex pour eviter ReDoS."""
+    return re.escape(value)
+
+
+def _safe_html(text: str) -> str:
+    """Echappe le HTML pour les templates email."""
+    return html_escape(str(text))
+
+
+# ─── Brute Force Protection ──────────────────────────────────────────────────
+
+_login_attempts: dict[str, list[float]] = defaultdict(list)
+_LOGIN_MAX_ATTEMPTS = 5
+_LOGIN_LOCKOUT_SECONDS = 300
+
+
+def _check_login_rate(ip: str) -> bool:
+    """Retourne False si l'IP est en lockout (trop de tentatives)."""
+    from time import time as _time
+    now = _time()
+    _login_attempts[ip] = [t for t in _login_attempts[ip] if now - t < _LOGIN_LOCKOUT_SECONDS]
+    if len(_login_attempts[ip]) >= _LOGIN_MAX_ATTEMPTS:
+        return False
+    _login_attempts[ip].append(now)
+    return True
+
+
 def _set_auth_cookies(response: Response, access_token: str, refresh_token: str):
     """Configure les cookies httpOnly pour les tokens JWT (cross-origin compatible)."""
     response.set_cookie(
@@ -141,6 +172,15 @@ def _clear_auth_cookies(response: Response):
 async def login(credentials: AdminLogin, request: Request, response: Response):
     """Authentification administrateur — retourne JWT dans des cookies httpOnly."""
     db = _get_db()
+    ip = _get_client_ip(request)
+
+    # Brute force protection
+    if not _check_login_rate(ip):
+        raise HTTPException(
+            status_code=429,
+            detail="Trop de tentatives de connexion. Reessayez dans 5 minutes.",
+        )
+
     try:
         admin = await authenticate_admin(db, credentials.username, credentials.password)
         if not admin:
@@ -173,7 +213,6 @@ async def login(credentials: AdminLogin, request: Request, response: Response):
                 "email": admin["email"],
                 "last_login": admin.get("last_login"),
             },
-            "access_token": access_token,
         })
 
     except HTTPException:
@@ -491,10 +530,10 @@ async def list_contacts(
 
         if search:
             query["$or"] = [
-                {"name": {"$regex": search, "$options": "i"}},
-                {"email": {"$regex": search, "$options": "i"}},
-                {"subject": {"$regex": search, "$options": "i"}},
-                {"message": {"$regex": search, "$options": "i"}},
+                {"name": {"$regex": _escape_regex(search), "$options": "i"}},
+                {"email": {"$regex": _escape_regex(search), "$options": "i"}},
+                {"subject": {"$regex": _escape_regex(search), "$options": "i"}},
+                {"message": {"$regex": _escape_regex(search), "$options": "i"}},
             ]
 
         if date_from:
