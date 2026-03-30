@@ -10,6 +10,7 @@ import uuid
 import math
 import smtplib
 import logging
+import requests as http_requests
 from datetime import datetime, timedelta, timezone
 from typing import Optional
 
@@ -1723,8 +1724,6 @@ async def get_github_profile(request: Request):
                 del cached["fetched_at"]
                 return _ok(cached)
 
-        import requests as http_requests
-
         headers = {"Accept": "application/vnd.github.v3+json"}
         gh_token = os.getenv("GITHUB_TOKEN")
         if gh_token:
@@ -1820,3 +1819,76 @@ async def get_github_profile(request: Request):
     except Exception as e:
         logger.error(f"Erreur GitHub : {str(e)}")
         raise HTTPException(status_code=500, detail="Erreur lors de la récupération des données GitHub.")
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+#  PAGE VIEWS ANALYTICS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+
+@admin_router.get("/stats/visits")
+async def get_pageviews_stats(request: Request):
+    """Analytics des page views — vues/jour, top pages, referrers."""
+    db = _get_db()
+    await get_current_admin(request, db)
+
+    try:
+        now = datetime.now(timezone.utc)
+        today_start = now.replace(hour=0, minute=0, second=0, microsecond=0)
+        week_start = today_start - timedelta(days=7)
+        month_start = today_start - timedelta(days=30)
+
+        views_today = await db.page_views.count_documents({"ts": {"$gte": today_start}})
+        views_week = await db.page_views.count_documents({"ts": {"$gte": week_start}})
+        views_month = await db.page_views.count_documents({"ts": {"$gte": month_start}})
+
+        # Timeline 30 jours
+        timeline_pipeline = [
+            {"$match": {"ts": {"$gte": month_start}}},
+            {"$group": {
+                "_id": {"$dateToString": {"format": "%Y-%m-%d", "date": "$ts"}},
+                "count": {"$sum": 1},
+            }},
+            {"$sort": {"_id": 1}},
+        ]
+        timeline = [
+            {"date": d["_id"], "count": d["count"]}
+            async for d in db.page_views.aggregate(timeline_pipeline)
+        ]
+
+        # Top pages
+        top_pages_pipeline = [
+            {"$match": {"ts": {"$gte": month_start}}},
+            {"$group": {"_id": "$page", "count": {"$sum": 1}}},
+            {"$sort": {"count": -1}},
+            {"$limit": 10},
+        ]
+        top_pages = [
+            {"page": d["_id"], "count": d["count"]}
+            async for d in db.page_views.aggregate(top_pages_pipeline)
+        ]
+
+        # Top referrers
+        referrer_pipeline = [
+            {"$match": {"ts": {"$gte": month_start}, "referrer": {"$ne": ""}}},
+            {"$group": {"_id": "$referrer", "count": {"$sum": 1}}},
+            {"$sort": {"count": -1}},
+            {"$limit": 10},
+        ]
+        top_referrers = [
+            {"referrer": d["_id"], "count": d["count"]}
+            async for d in db.page_views.aggregate(referrer_pipeline)
+        ]
+
+        return _ok({
+            "today": views_today,
+            "this_week": views_week,
+            "this_month": views_month,
+            "timeline": timeline,
+            "top_pages": top_pages,
+            "top_referrers": top_referrers,
+        })
+
+    except Exception as e:
+        logger.error(f"Erreur stats visits : {str(e)}")
+        raise HTTPException(status_code=500, detail="Erreur lors du chargement des statistiques de visite.")
