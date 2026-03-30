@@ -33,11 +33,16 @@ const Header = () => {
     { id: "approach", label: dict.nav.approach },
     { id: "expertise", label: dict.nav.expertise },
     { id: "systems", label: dict.nav.systems },
+    { id: "services", label: dict.nav.services, href: "/services" },
     { id: "about", label: dict.nav.about },
   ];
 
-  const handleNavClick = (id: string) => {
+  const handleNavClick = (id: string, href?: string) => {
     setMenuOpen(false);
+    if (href) {
+      window.location.href = href;
+      return;
+    }
     if (pathname !== "/") {
       window.location.href = `/#${id}`;
       return;
@@ -159,7 +164,7 @@ const Header = () => {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 10 }}
                   transition={{ duration: 0.3, delay: i * 0.05 }}
-                  onClick={() => handleNavClick(item.id)}
+                  onClick={() => handleNavClick(item.id, (item as any).href)}
                   className="text-2xl font-display font-medium tracking-tight text-site-text hover:text-site-accent transition-colors"
                 >
                   {item.label}

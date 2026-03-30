@@ -13,6 +13,44 @@ interface Dictionary {
     systems: string;
     about: string;
     contact: string;
+    services: string;
+  };
+  services: {
+    badge: string;
+    title: string;
+    subtitle: string;
+    popularBadge: string;
+    includesLabel: string;
+    durationLabel: string;
+    cta: string;
+    tiers: Array<{
+      name: string;
+      description: string;
+      price: string;
+      priceNote: string;
+      duration: string;
+      features: string[];
+    }>;
+    recurring: {
+      badge: string;
+      title: string;
+      subtitle: string;
+      plans: Array<{
+        name: string;
+        price: string;
+        features: string[];
+      }>;
+    };
+    process: {
+      badge: string;
+      title: string;
+      steps: Array<{ title: string; description: string }>;
+    };
+    finalCta: {
+      title: string;
+      subtitle: string;
+      button: string;
+    };
   };
   hero: {
     title: string;
@@ -184,6 +222,119 @@ const dictionaries: Record<Language, Dictionary> = {
       systems: "Systèmes",
       about: "À propos",
       contact: "Contact",
+      services: "Services",
+    },
+    services: {
+      badge: "Services & Tarifs",
+      title: "Des systèmes qui tournent.\nPas des devis qui traînent.",
+      subtitle: "Trois formats clairs selon votre besoin. Chaque projet commence par un échange — gratuit, sans engagement, en visio ou par écrit.",
+      popularBadge: "Le plus demandé",
+      includesLabel: "Ce qui est inclus",
+      durationLabel: "Durée estimée",
+      cta: "Démarrer",
+      tiers: [
+        {
+          name: "Sprint",
+          description: "Un livrable précis, rapide, opérationnel. Idéal pour une première collaboration ou un besoin ciblé.",
+          price: "À partir de 3 000 €",
+          priceNote: "Forfait projet — paiement en 2 fois",
+          duration: "2 à 4 semaines",
+          features: [
+            "1 système livré clé en main (site, automation ou dashboard)",
+            "Brief stratégique + maquette validée",
+            "Code source propriétaire — vous êtes propriétaire",
+            "Déploiement en production inclus",
+            "Support 15 jours post-livraison",
+          ],
+        },
+        {
+          name: "Build",
+          description: "Architecture complète avec plusieurs briques connectées. Le format pour passer à l'échelle.",
+          price: "À partir de 8 000 €",
+          priceNote: "Forfait projet — paiement en 3 fois",
+          duration: "1 à 3 mois",
+          features: [
+            "Système multi-briques (site + automations + data)",
+            "Intégration IA sur-mesure (agents, LLM, workflows)",
+            "Architecture scalable documentée",
+            "Formation à l'utilisation de vos outils",
+            "1 mois de support post-livraison inclus",
+            "Accès prioritaire pour évolutions futures",
+          ],
+        },
+        {
+          name: "Écosystème",
+          description: "Votre infrastructure digitale complète. Pour les entreprises qui veulent un partenaire technique de long terme.",
+          price: "Sur devis",
+          priceNote: "Engagement 3 mois minimum — paiement mensuel",
+          duration: "3 à 6 mois",
+          features: [
+            "Architecture complète de A à Z (IA + web + data + ops)",
+            "Agents IA autonomes intégrés à vos process",
+            "Dashboards temps réel et cockpits décisionnels",
+            "Tunnels de conversion automatisés",
+            "Documentation technique et formation équipe",
+            "Maintenance et évolution en continu",
+            "Interlocuteur unique — zéro intermédiaire",
+          ],
+        },
+      ],
+      recurring: {
+        badge: "Abonnement continu",
+        title: "Un système ne se lance pas.\nIl se maintient.",
+        subtitle: "Après la livraison, votre système a besoin de surveillance, de mises à jour et d'évolutions. Je reste à vos côtés avec un abonnement mensuel adapté.",
+        plans: [
+          {
+            name: "Essentiel",
+            price: "800 €",
+            features: [
+              "Monitoring et alertes 24/7",
+              "Corrections de bugs sous 48h",
+              "Mises à jour de sécurité et dépendances",
+              "1h de support mensuel inclus",
+              "Rapport mensuel de performance",
+            ],
+          },
+          {
+            name: "Pro",
+            price: "2 000 €",
+            features: [
+              "Tout Essentiel +",
+              "Évolutions et nouvelles fonctionnalités (jusqu'à 10h/mois)",
+              "Support prioritaire sous 24h",
+              "Optimisation continue des performances",
+              "Réunion mensuelle de suivi stratégique",
+            ],
+          },
+          {
+            name: "Entreprise",
+            price: "Sur devis",
+            features: [
+              "Tout Pro +",
+              "Volume d'heures illimité négocié",
+              "Architecture conseil et veille technologique",
+              "Intégration IA continue (nouveaux agents, workflows)",
+              "SLA garanti avec temps de réponse contractuel",
+              "Interlocuteur dédié, disponibilité étendue",
+            ],
+          },
+        ],
+      },
+      process: {
+        badge: "Comment ça se passe",
+        title: "Du premier échange au système en production",
+        steps: [
+          { title: "Échange", description: "Un appel de 30 min pour comprendre votre besoin, vos contraintes et vos objectifs. Gratuit, sans engagement." },
+          { title: "Diagnostic", description: "J'analyse votre situation et je vous propose une architecture avec un devis clair, un planning et les livrables attendus." },
+          { title: "Construction", description: "Je conçois, je code, je teste. Vous suivez l'avancement en temps réel avec des démos régulières à chaque étape." },
+          { title: "Livraison", description: "Déploiement en production, formation, documentation. Votre système tourne — et je reste disponible pour la suite." },
+        ],
+      },
+      finalCta: {
+        title: "Prêt à transformer une idée en système ?",
+        subtitle: "Un échange de 30 minutes suffit pour cadrer votre projet. Gratuit, sans engagement.",
+        button: "Réserver un échange",
+      },
     },
     hero: {
       title: "Vous savez que vous devriez automatiser.\nVous ne savez pas par où commencer.",
@@ -472,6 +623,119 @@ const dictionaries: Record<Language, Dictionary> = {
       systems: "Systems",
       about: "About",
       contact: "Contact",
+      services: "Pricing",
+    },
+    services: {
+      badge: "Services & Pricing",
+      title: "Systems that run.\nNot quotes that stall.",
+      subtitle: "Three clear formats based on your needs. Every project starts with a conversation — free, no commitment, via video or email.",
+      popularBadge: "Most popular",
+      includesLabel: "What's included",
+      durationLabel: "Estimated timeline",
+      cta: "Get started",
+      tiers: [
+        {
+          name: "Sprint",
+          description: "One precise, fast, operational deliverable. Ideal for a first collaboration or a targeted need.",
+          price: "From €3,000",
+          priceNote: "Fixed project fee — 2 installments",
+          duration: "2 to 4 weeks",
+          features: [
+            "1 turnkey system (website, automation or dashboard)",
+            "Strategic brief + validated mockup",
+            "Proprietary source code — you own it",
+            "Production deployment included",
+            "15-day post-delivery support",
+          ],
+        },
+        {
+          name: "Build",
+          description: "Complete architecture with multiple connected modules. The format to scale up.",
+          price: "From €8,000",
+          priceNote: "Fixed project fee — 3 installments",
+          duration: "1 to 3 months",
+          features: [
+            "Multi-module system (site + automations + data)",
+            "Custom AI integration (agents, LLM, workflows)",
+            "Documented scalable architecture",
+            "Training on your tools",
+            "1 month post-delivery support included",
+            "Priority access for future evolutions",
+          ],
+        },
+        {
+          name: "Ecosystem",
+          description: "Your complete digital infrastructure. For companies who want a long-term technical partner.",
+          price: "Custom quote",
+          priceNote: "3-month minimum engagement — monthly billing",
+          duration: "3 to 6 months",
+          features: [
+            "End-to-end architecture (AI + web + data + ops)",
+            "Autonomous AI agents integrated into your processes",
+            "Real-time dashboards and decision cockpits",
+            "Automated conversion funnels",
+            "Technical documentation and team training",
+            "Continuous maintenance and evolution",
+            "Single point of contact — zero intermediaries",
+          ],
+        },
+      ],
+      recurring: {
+        badge: "Ongoing subscription",
+        title: "A system isn't just launched.\nIt's maintained.",
+        subtitle: "After delivery, your system needs monitoring, updates, and evolutions. I stay by your side with a monthly subscription tailored to your needs.",
+        plans: [
+          {
+            name: "Essential",
+            price: "€800",
+            features: [
+              "24/7 monitoring and alerts",
+              "Bug fixes within 48h",
+              "Security and dependency updates",
+              "1h monthly support included",
+              "Monthly performance report",
+            ],
+          },
+          {
+            name: "Pro",
+            price: "€2,000",
+            features: [
+              "Everything in Essential +",
+              "Evolutions and new features (up to 10h/month)",
+              "Priority support within 24h",
+              "Continuous performance optimization",
+              "Monthly strategic review meeting",
+            ],
+          },
+          {
+            name: "Enterprise",
+            price: "Custom quote",
+            features: [
+              "Everything in Pro +",
+              "Negotiated unlimited hours",
+              "Architecture consulting and tech watch",
+              "Continuous AI integration (new agents, workflows)",
+              "Guaranteed SLA with contractual response time",
+              "Dedicated contact, extended availability",
+            ],
+          },
+        ],
+      },
+      process: {
+        badge: "How it works",
+        title: "From first call to system in production",
+        steps: [
+          { title: "Call", description: "A 30-min call to understand your need, constraints and goals. Free, no commitment." },
+          { title: "Diagnosis", description: "I analyze your situation and propose an architecture with a clear quote, timeline and expected deliverables." },
+          { title: "Build", description: "I design, code, and test. You follow progress in real-time with regular demos at each stage." },
+          { title: "Delivery", description: "Production deployment, training, documentation. Your system runs — and I stay available for what comes next." },
+        ],
+      },
+      finalCta: {
+        title: "Ready to turn an idea into a system?",
+        subtitle: "A 30-minute call is all it takes to scope your project. Free, no strings attached.",
+        button: "Book a call",
+      },
     },
     hero: {
       title: "You know you should automate.\nYou don't know where to start.",
