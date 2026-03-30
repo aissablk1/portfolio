@@ -246,7 +246,47 @@ export default function DashboardPage() {
       ]);
 
       if (dashRes.status === "fulfilled" && dashRes.value.data) {
-        setData(dashRes.value.data as unknown as DashboardOverview);
+        const raw = dashRes.value.data as Record<string, unknown>;
+        // Normaliser: accepter ancien format (services dict) ou nouveau (service_health array)
+        const sh = raw.service_health ?? raw.services;
+        let serviceHealth: ServiceHealth[] = [];
+        if (Array.isArray(sh)) {
+          serviceHealth = sh;
+        } else if (sh && typeof sh === "object") {
+          const nameMap: Record<string, string> = {
+            mongodb: "MongoDB", smtp: "SMTP", telegram: "Telegram",
+            notion: "Notion", google_sheets: "Google Sheets", whatsapp: "WhatsApp",
+          };
+          serviceHealth = Object.entries(sh).map(([k, v]) => ({
+            name: nameMap[k] ?? k,
+            status: (v === true || (v && typeof v === "object" && (v as Record<string, unknown>).status === "healthy") ? "healthy" : "down") as ServiceHealth["status"],
+            last_checked: new Date().toISOString(),
+          }));
+        }
+        // Normaliser stats: accepter ancien format (today) ou nouveau (contacts_today)
+        const rawStats = (raw.stats ?? {}) as Record<string, unknown>;
+        const stats = {
+          total_contacts: rawStats.total_contacts ?? rawStats.total ?? 0,
+          contacts_today: rawStats.contacts_today ?? rawStats.today ?? 0,
+          contacts_this_week: rawStats.contacts_this_week ?? rawStats.this_week ?? 0,
+          contacts_this_month: rawStats.contacts_this_month ?? rawStats.this_month ?? 0,
+          spam_blocked: rawStats.spam_blocked ?? rawStats.spam ?? 0,
+          response_rate: rawStats.response_rate ?? 0,
+          avg_response_time: rawStats.avg_response_time ?? 0,
+          email_delivery_rate: rawStats.email_delivery_rate ?? 0,
+        };
+        setData({
+          stats: stats as DashboardOverview["stats"],
+          recent_contacts: (raw.recent_contacts ?? []) as Contact[],
+          service_health: serviceHealth,
+          timeline: ((raw.timeline ?? []) as TimelinePoint[]).map((t) => ({
+            date: t.date,
+            count: t.count ?? 0,
+            spam: t.spam ?? 0,
+          })),
+          notifications_today: (raw.notifications_today ?? 0) as number,
+          spam_today: (raw.spam_today ?? 0) as number,
+        });
       }
       if (ghRes.status === "fulfilled" && ghRes.value.data) {
         setGithub(ghRes.value.data as unknown as GitHubProfile);

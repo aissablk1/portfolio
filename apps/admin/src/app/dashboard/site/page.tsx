@@ -46,6 +46,26 @@ const serviceIcons: Record<string, React.ElementType> = {
   sheets: Table2,
 };
 
+// Normalise les services: accepte dict (ancien backend) ou array (nouveau)
+function normalizeServices(raw: unknown): ServiceHealth[] {
+  if (Array.isArray(raw)) return raw;
+  if (raw && typeof raw === "object") {
+    const nameMap: Record<string, string> = {
+      mongodb: "MongoDB", smtp: "SMTP", telegram: "Telegram",
+      notion: "Notion", google_sheets: "Google Sheets", whatsapp: "WhatsApp",
+    };
+    return Object.entries(raw).map(([key, val]) => {
+      const info = val as Record<string, unknown>;
+      return {
+        name: nameMap[key] ?? key,
+        status: (info?.status === "healthy" || info?.status === "configured" ? "healthy" : "down") as ServiceHealth["status"],
+        last_checked: new Date().toISOString(),
+      };
+    });
+  }
+  return [];
+}
+
 function getServiceIcon(name: string): React.ElementType {
   const lower = name.toLowerCase();
   for (const [key, icon] of Object.entries(serviceIcons)) {
@@ -111,7 +131,7 @@ export default function SiteControlPage() {
       }
 
       if (healthRes.data?.services) {
-        setServices(healthRes.data.services as unknown as ServiceHealth[]);
+        setServices(normalizeServices(healthRes.data.services));
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Erreur lors du chargement");
@@ -126,7 +146,7 @@ export default function SiteControlPage() {
     try {
       const healthRes = await api.getSiteHealth();
       if (healthRes.data?.services) {
-        setServices(healthRes.data.services as unknown as ServiceHealth[]);
+        setServices(normalizeServices(healthRes.data.services));
       }
     } catch {
       // Silent fail on auto-refresh
