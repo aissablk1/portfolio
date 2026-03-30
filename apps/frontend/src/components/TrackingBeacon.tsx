@@ -3,16 +3,12 @@
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 
-const TRACK_URL = process.env.NEXT_PUBLIC_BACKEND_URL
-  ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/t`
-  : null;
-
 export function TrackingBeacon() {
   const pathname = usePathname();
   const lastTracked = useRef("");
 
   useEffect(() => {
-    if (!TRACK_URL || pathname === lastTracked.current) return;
+    if (pathname === lastTracked.current) return;
 
     // Respecter Do Not Track
     if (navigator.doNotTrack === "1") return;
@@ -26,10 +22,11 @@ export function TrackingBeacon() {
       language: navigator.language,
     });
 
+    // Route through same-origin API route to avoid ad blockers
     if (navigator.sendBeacon) {
-      navigator.sendBeacon(TRACK_URL, payload);
+      navigator.sendBeacon("/api/p", payload);
     } else {
-      fetch(TRACK_URL, {
+      fetch("/api/p", {
         method: "POST",
         body: payload,
         headers: { "Content-Type": "application/json" },

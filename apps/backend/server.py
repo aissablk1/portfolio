@@ -280,6 +280,7 @@ app.include_router(admin_router)
 _CSRF_ALLOWED_ORIGINS = {
     "https://admin.aissabelkoussa.fr",
     "https://aissabelkoussa.fr",
+    "https://www.aissabelkoussa.fr",
     "http://localhost:3000",
     "http://localhost:3001",
 }
@@ -304,6 +305,7 @@ app.add_middleware(
         "http://localhost:3000",
         "http://localhost:3001",
         "https://aissabelkoussa.fr",
+        "https://www.aissabelkoussa.fr",
         "https://admin.aissabelkoussa.fr",
     ],
     allow_methods=["*"],

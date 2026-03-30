@@ -103,21 +103,15 @@ export default function MaintenanceGate({
       if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
         bufferRef.current += e.key;
 
-        // Reset buffer after 3s of inactivity
+        // Debounce: try unlock 1s after last keystroke, then reset buffer
         if (timeoutRef.current) clearTimeout(timeoutRef.current);
         timeoutRef.current = setTimeout(() => {
+          const attempt = bufferRef.current;
           bufferRef.current = "";
-        }, 3000);
-
-        // Try to unlock with the current buffer
-        // We check if the buffer ends with a potential password (min 4 chars)
-        if (bufferRef.current.length >= 4) {
-          tryUnlock(bufferRef.current).then((success) => {
-            if (success) {
-              bufferRef.current = "";
-            }
-          });
-        }
+          if (attempt.length >= 4) {
+            tryUnlock(attempt);
+          }
+        }, 1000);
       }
     };
 
