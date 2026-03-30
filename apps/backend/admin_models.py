@@ -117,7 +117,7 @@ class SettingsUpdate(BaseModel):
 # ─── Notification Models ─────────────────────────────────────────────────────
 
 class TestNotification(BaseModel):
-    channel: str = Field(..., pattern=r"^(telegram|email|whatsapp)$")
+    channel: str = Field(..., pattern=r"^(telegram|email|whatsapp|notion|google_sheets)$")
     message: Optional[str] = Field(None, max_length=1000)
 
 

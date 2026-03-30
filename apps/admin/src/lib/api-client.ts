@@ -105,7 +105,12 @@ class ApiClient {
   }
 
   async getMe() {
-    return this.requestDirect<ApiResponse<{ user: { id: string; username: string; email: string; last_login: string } }>>("/api/admin/me");
+    const res = await this.requestDirect<ApiResponse<Record<string, unknown>>>("/api/admin/me");
+    // Backend returns user fields directly in data; wrap in { user } for auth hook
+    if (res.data && !("user" in res.data)) {
+      return { ...res, data: { user: res.data } } as ApiResponse<{ user: { id: string; username: string; email: string; display_name?: string; avatar_url?: string; sigle?: string; last_login: string } }>;
+    }
+    return res as unknown as ApiResponse<{ user: { id: string; username: string; email: string; display_name?: string; avatar_url?: string; sigle?: string; last_login: string } }>;
   }
 
   // ─── Profile ────────────────────────────────────
@@ -228,9 +233,13 @@ class ApiClient {
   }
 
   async addToBlacklist(data: { ip_address?: string; email_domain?: string; reason: string }) {
+    // Backend expects { value, type, reason } format
+    const payload = data.ip_address
+      ? { value: data.ip_address, type: "ip", reason: data.reason }
+      : { value: data.email_domain ?? "", type: "domain", reason: data.reason };
     return this.request<ApiResponse<Record<string, unknown>>>("/api/admin/security/blacklist", {
       method: "POST",
-      body: JSON.stringify(data),
+      body: JSON.stringify(payload),
     });
   }
 
@@ -275,10 +284,10 @@ class ApiClient {
     return this.request<ApiResponse<Record<string, unknown>>>("/api/admin/site/status");
   }
 
-  async toggleMaintenance(enabled: boolean, password?: string, message?: string) {
+  async toggleMaintenance(enabled: boolean, _password?: string, message?: string) {
     return this.request<ApiResponse<Record<string, unknown>>>("/api/admin/site/maintenance", {
       method: "POST",
-      body: JSON.stringify({ enabled, password, message }),
+      body: JSON.stringify({ enabled, message }),
     });
   }
 
@@ -298,10 +307,24 @@ class ApiClient {
     });
   }
 
-  async triggerBackup() {
-    return this.request<ApiResponse<{ backup_id: string; download_url: string }>>("/api/admin/settings/backup", {
+  async triggerBackup(): Promise<{ success: boolean; blob: Blob; filename: string }> {
+    const url = `${this.baseUrl}/api/admin/settings/backup`;
+    const response = await fetch(url, {
       method: "POST",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
     });
+
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({ detail: "Erreur inconnue" }));
+      throw new ApiError(response.status, error.detail ?? "Erreur lors du backup");
+    }
+
+    const disposition = response.headers.get("Content-Disposition") ?? "";
+    const filenameMatch = disposition.match(/filename=(.+)/);
+    const filename = filenameMatch ? filenameMatch[1] : `backup_${new Date().toISOString().slice(0, 10)}.json`;
+    const blob = await response.blob();
+    return { success: true, blob, filename };
   }
 }
 

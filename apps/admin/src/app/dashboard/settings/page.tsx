@@ -14,7 +14,6 @@ import {
   Save,
   Loader2,
   AlertCircle,
-  Download,
   HardDrive,
   AlertTriangle,
   Trash2,
@@ -168,6 +167,11 @@ export default function SettingsPage() {
   const [settings, setSettings] = useState<AppSettings | null>(null);
   const [adminEmail, setAdminEmail] = useState("");
 
+  // Profile
+  const [displayName, setDisplayName] = useState("");
+  const [avatarUrl, setAvatarUrl] = useState("");
+  const [sigle, setSigle] = useState("");
+
   // Email config
   const [emailProvider, setEmailProvider] = useState("smtp");
   const [smtpServer, setSmtpServer] = useState("");
@@ -192,7 +196,6 @@ export default function SettingsPage() {
   // Backup
   const [backingUp, setBackingUp] = useState(false);
   const [lastBackup, setLastBackup] = useState<string | null>(null);
-  const [backupUrl, setBackupUrl] = useState<string | null>(null);
 
   // Danger
   const [showResetConfirm, setShowResetConfirm] = useState(false);
@@ -247,16 +250,20 @@ export default function SettingsPage() {
         // Admin
         setAdminEmail(typeof raw.admin_email === "string" ? raw.admin_email : (user?.email ?? ""));
 
+        // Profile from auth user
+        setDisplayName(user?.display_name ?? "");
+        setAvatarUrl(user?.avatar_url ?? "");
+        setSigle(user?.sigle ?? "");
+
         // Backup
         setLastBackup(typeof raw.last_backup === "string" ? raw.last_backup : null);
-        setBackupUrl(typeof raw.backup_url === "string" ? raw.backup_url : null);
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Erreur lors du chargement");
     } finally {
       setLoading(false);
     }
-  }, [user?.email]);
+  }, [user?.email, user?.display_name, user?.avatar_url, user?.sigle]);
 
   useEffect(() => {
     loadData();
@@ -270,6 +277,27 @@ export default function SettingsPage() {
       toast.success("Parametres enregistres");
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Erreur lors de la sauvegarde");
+    } finally {
+      setSavingSection(null);
+    }
+  };
+
+  // ─── Save profile ───────────────────────────────
+  const handleSaveProfile = async () => {
+    setSavingSection("profile");
+    try {
+      await api.updateProfile({
+        display_name: displayName,
+        avatar_url: avatarUrl,
+        sigle,
+      });
+      // Also save admin email via settings
+      if (adminEmail) {
+        await api.updateSettings({ admin_email: adminEmail });
+      }
+      toast.success("Profil enregistre");
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Erreur lors de la sauvegarde du profil");
     } finally {
       setSavingSection(null);
     }
@@ -332,11 +360,18 @@ export default function SettingsPage() {
     setBackingUp(true);
     try {
       const res = await api.triggerBackup();
-      if (res.data) {
-        const backupData = res.data as Record<string, unknown>;
-        setBackupUrl(typeof backupData.download_url === "string" ? backupData.download_url : null);
+      if (res.success && res.blob) {
+        // Trigger browser download
+        const url = URL.createObjectURL(res.blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = res.filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
         setLastBackup(new Date().toISOString());
-        toast.success("Backup cree avec succes");
+        toast.success("Backup cree et telecharge avec succes");
       }
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Erreur lors du backup");
@@ -421,8 +456,28 @@ export default function SettingsPage() {
               placeholder="admin@example.com"
             />
           </div>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+            <InputField
+              label="Nom d'affichage"
+              value={displayName}
+              onChange={setDisplayName}
+              placeholder="Aissa Belkoussa"
+            />
+            <InputField
+              label="URL de l'avatar"
+              value={avatarUrl}
+              onChange={setAvatarUrl}
+              placeholder="https://example.com/avatar.jpg"
+            />
+            <InputField
+              label="Sigle"
+              value={sigle}
+              onChange={setSigle}
+              placeholder="AB"
+            />
+          </div>
           <button
-            onClick={() => saveSection("profile", { admin_email: adminEmail })}
+            onClick={handleSaveProfile}
             disabled={savingSection === "profile"}
             className="flex items-center gap-2 rounded-[var(--radius-md)] bg-[var(--color-accent)] px-4 py-2 text-sm font-medium text-[var(--color-accent-fg)] hover:bg-[var(--color-accent-hover)] disabled:opacity-50 transition-colors"
           >
@@ -774,17 +829,7 @@ export default function SettingsPage() {
               )}
               Creer un backup
             </button>
-            {backupUrl && (
-              <a
-                href={backupUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-bg-elevated)] px-4 py-2 text-sm font-medium text-[var(--color-text-primary)] hover:bg-[var(--color-bg-hover)] transition-colors"
-              >
-                <Download className="h-4 w-4" />
-                Telecharger
-              </a>
-            )}
+            {/* Le backup se telecharge automatiquement */}
           </div>
           {lastBackup && (
             <p className="text-xs text-[var(--color-text-tertiary)]">
