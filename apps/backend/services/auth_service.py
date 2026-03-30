@@ -37,14 +37,19 @@ _blacklisted_tokens: Set[str] = set()
 
 # ─── Fonctions de hashing ────────────────────────────────────────────────────
 
+def _truncate_bcrypt(password: str) -> str:
+    """Bcrypt tronque silencieusement à 72 bytes — on le fait explicitement."""
+    return password.encode("utf-8")[:72].decode("utf-8", errors="ignore")
+
+
 def hash_password(password: str) -> str:
     """Hash un mot de passe avec bcrypt."""
-    return pwd_context.hash(password)
+    return pwd_context.hash(_truncate_bcrypt(password))
 
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     """Vérifie un mot de passe contre son hash."""
-    return pwd_context.verify(plain_password, hashed_password)
+    return pwd_context.verify(_truncate_bcrypt(plain_password), hashed_password)
 
 
 # ─── Fonctions JWT ───────────────────────────────────────────────────────────
