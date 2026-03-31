@@ -257,18 +257,19 @@ export default function GoPage() {
                 Exemple concret
               </p>
               <h2 className="text-fluid-title tracking-tighter uppercase mb-6">
-                Cabinet comptable, 12 collaborateurs
+                Entreprise de plomberie, 8 salariés
               </h2>
               <p className="text-site-bg/50 text-base md:text-lg max-w-2xl leading-relaxed mb-12">
-                Le cabinet perd 15 heures par semaine en relances manuelles et saisie de documents.
-                Sprint à 2 900 € : automatisation des relances + formulaire d'onboarding client.
+                Le patron perd 10 heures par semaine à répondre au téléphone, envoyer des devis
+                par mail et relancer les clients. Sprint à 2 900 € : site pro + prise de RDV
+                en ligne + devis automatisé. Le système tourne dès J+10.
               </p>
             </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
               {[
-                { value: "15h", label: "économisées chaque semaine" },
-                { value: "750 €", label: "de valeur récupérée par semaine" },
+                { value: "10h", label: "libérées chaque semaine" },
+                { value: "800 €", label: "de valeur récupérée par semaine" },
                 { value: "4 sem.", label: "pour rentabiliser le Sprint" },
               ].map((stat, i) => (
                 <motion.div key={i} {...fade(i * 0.1)} className="text-center md:text-left">
