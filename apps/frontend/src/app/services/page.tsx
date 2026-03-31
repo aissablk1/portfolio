@@ -137,10 +137,10 @@ export default function ServicesPage() {
                         )}
                       >
                         {idx === 0
-                          ? (language === "fr" ? "Commencer un sprint" : "Start a sprint")
+                          ? (language === "fr" ? "Réserver mon sprint" : "Book my sprint")
                           : idx === 1
-                          ? (language === "fr" ? "Lancer mon projet" : "Launch my project")
-                          : (language === "fr" ? "Discuter de mon besoin" : "Discuss my needs")
+                          ? (language === "fr" ? "Lancer mon système" : "Launch my system")
+                          : (language === "fr" ? "Échanger 30 min" : "Chat for 30 min")
                         }
                         <ArrowUpRight size={14} />
                       </Link>

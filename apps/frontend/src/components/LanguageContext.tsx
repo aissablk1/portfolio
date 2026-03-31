@@ -225,9 +225,9 @@ const dictionaries: Record<Language, Dictionary> = {
       services: "Services",
     },
     services: {
-      badge: "Services & Tarifs",
-      title: "Des systèmes qui tournent.\nPas des devis qui traînent.",
-      subtitle: "Trois formats clairs selon votre besoin. Chaque projet commence par un échange — gratuit, sans engagement, en visio ou par écrit.",
+      badge: "Offres & Résultats",
+      title: "Votre système digital.\nConçu, livré, opérationnel.",
+      subtitle: "Trois formats clairs. Un seul objectif : un système qui tourne dès la livraison. Premier échange gratuit, sans engagement.",
       popularBadge: "Le plus demandé",
       includesLabel: "Ce qui est inclus",
       durationLabel: "Durée estimée",
@@ -235,10 +235,10 @@ const dictionaries: Record<Language, Dictionary> = {
       tiers: [
         {
           name: "Sprint",
-          description: "Un livrable précis, rapide, opérationnel. Idéal pour tester une collaboration ou résoudre un problème ciblé.",
-          price: "1 490 €",
-          priceNote: "Forfait fixe — sans surprise, paiement en 2 fois possible",
-          duration: "1 à 3 semaines",
+          description: "En 5 jours, votre premier outil est en production. Site, automatisation ou dashboard — un résultat concret, immédiat.",
+          price: "2 900 €",
+          priceNote: "Prix final. Pas de devis surprise, pas de dépassement. Paiement en 2 fois possible.",
+          duration: "5 à 10 jours ouvrés",
           features: [
             "1 système livré clé en main (site, automation ou dashboard)",
             "Brief stratégique + maquette validée avant dev",
@@ -249,9 +249,9 @@ const dictionaries: Record<Language, Dictionary> = {
         },
         {
           name: "Build",
-          description: "Votre système complet, multi-briques, connecté. Le format pour transformer votre business.",
-          price: "4 900 €",
-          priceNote: "Forfait fixe — paiement en 3 fois, début dès validation",
+          description: "Votre infrastructure complète — site, automations IA, données — connectée et opérationnelle. Le format qui transforme votre activité.",
+          price: "6 900 €",
+          priceNote: "Prix final garanti. Paiement en 3 fois, démarrage dès validation du brief.",
           duration: "1 à 2 mois",
           features: [
             "Système multi-briques (site + automations + data)",
@@ -264,9 +264,9 @@ const dictionaries: Record<Language, Dictionary> = {
         },
         {
           name: "Écosystème",
-          description: "Votre infrastructure digitale complète. Pour les entreprises qui veulent un partenaire technique de long terme.",
+          description: "Votre partenaire technique intégré. Architecture, IA, données, ops — je deviens votre CTO externalisé.",
           price: "Sur mesure",
-          priceNote: "Engagement 3 mois minimum — paiement mensuel, ROI garanti",
+          priceNote: "Engagement 3 mois minimum. Paiement mensuel, ROI mesurable dès le premier mois.",
           duration: "2 à 6 mois",
           features: [
             "Architecture complète de A à Z (IA + web + data + ops)",
@@ -297,13 +297,14 @@ const dictionaries: Record<Language, Dictionary> = {
           },
           {
             name: "Pro",
-            price: "1 490 €",
+            price: "1 900 €",
             features: [
               "Tout Essentiel +",
               "Évolutions et nouvelles fonctionnalités (jusqu'à 10h/mois)",
               "Support prioritaire sous 24h",
               "Optimisation continue des performances",
               "Réunion mensuelle de suivi stratégique",
+              "Accès prioritaire aux nouvelles technologies IA",
             ],
           },
           {
@@ -331,8 +332,8 @@ const dictionaries: Record<Language, Dictionary> = {
         ],
       },
       finalCta: {
-        title: "Prêt à transformer une idée en système ?",
-        subtitle: "Un échange de 30 minutes suffit pour cadrer votre projet. Gratuit, sans engagement.",
+        title: "Prêt à lancer votre système ?",
+        subtitle: "30 minutes suffisent pour cadrer votre projet. Gratuit, zéro engagement.",
         button: "Réserver un échange",
       },
     },
@@ -626,9 +627,9 @@ const dictionaries: Record<Language, Dictionary> = {
       services: "Pricing",
     },
     services: {
-      badge: "Services & Pricing",
-      title: "Systems that run.\nNot quotes that stall.",
-      subtitle: "Three clear formats based on your needs. Every project starts with a conversation — free, no commitment, via video or email.",
+      badge: "Services & Results",
+      title: "Your digital system.\nDesigned, delivered, operational.",
+      subtitle: "Three clear formats. One goal: a system that runs from day one. First call free, no strings attached.",
       popularBadge: "Most popular",
       includesLabel: "What's included",
       durationLabel: "Estimated timeline",
@@ -636,10 +637,10 @@ const dictionaries: Record<Language, Dictionary> = {
       tiers: [
         {
           name: "Sprint",
-          description: "One precise, fast, operational deliverable. Ideal for a first collaboration or a targeted need.",
-          price: "€1,490",
-          priceNote: "Fixed project fee — 2 installments",
-          duration: "2 to 4 weeks",
+          description: "In 5 days, your first tool is live. Website, automation, or dashboard — a concrete, immediate result.",
+          price: "€2,900",
+          priceNote: "Final price. No surprise quotes, no overruns. 2 installments available.",
+          duration: "5 to 10 business days",
           features: [
             "1 turnkey system (website, automation or dashboard)",
             "Strategic brief + validated mockup",
@@ -650,9 +651,9 @@ const dictionaries: Record<Language, Dictionary> = {
         },
         {
           name: "Build",
-          description: "Complete architecture with multiple connected modules. The format to scale up.",
-          price: "€4,900",
-          priceNote: "Fixed project fee — 3 installments",
+          description: "Your complete infrastructure — site, AI automations, data — connected and operational. The format that transforms your business.",
+          price: "€6,900",
+          priceNote: "Guaranteed final price. 3 installments, kickoff upon brief validation.",
           duration: "1 to 3 months",
           features: [
             "Multi-module system (site + automations + data)",
@@ -665,9 +666,9 @@ const dictionaries: Record<Language, Dictionary> = {
         },
         {
           name: "Ecosystem",
-          description: "Your complete digital infrastructure. For companies who want a long-term technical partner.",
+          description: "Your integrated technical partner. Architecture, AI, data, ops — I become your outsourced CTO.",
           price: "Custom quote",
-          priceNote: "3-month minimum engagement — monthly billing",
+          priceNote: "3-month minimum. Monthly billing, measurable ROI from month one.",
           duration: "3 to 6 months",
           features: [
             "End-to-end architecture (AI + web + data + ops)",
@@ -698,13 +699,14 @@ const dictionaries: Record<Language, Dictionary> = {
           },
           {
             name: "Pro",
-            price: "€1,490",
+            price: "€1,900",
             features: [
               "Everything in Essential +",
               "Evolutions and new features (up to 10h/month)",
               "Priority support within 24h",
               "Continuous performance optimization",
               "Monthly strategic review meeting",
+              "Priority access to latest AI technologies",
             ],
           },
           {
@@ -732,8 +734,8 @@ const dictionaries: Record<Language, Dictionary> = {
         ],
       },
       finalCta: {
-        title: "Ready to turn an idea into a system?",
-        subtitle: "A 30-minute call is all it takes to scope your project. Free, no strings attached.",
+        title: "Ready to launch your system?",
+        subtitle: "30 minutes is all it takes to scope your project. Free, zero commitment.",
         button: "Book a call",
       },
     },

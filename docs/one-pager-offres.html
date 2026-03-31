@@ -1,0 +1,584 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aïssa Belkoussa — Offres & Résultats</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+    :root {
+      --black: #0a0a0a;
+      --white: #fafafa;
+      --gray-100: #f5f5f5;
+      --gray-200: #e5e5e5;
+      --gray-400: #a3a3a3;
+      --gray-500: #737373;
+      --gray-600: #525252;
+      --accent: #2563eb;
+      --accent-light: #3b82f6;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--white);
+      color: var(--black);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 48px 40px;
+    }
+
+    /* ── Header ─────────────────────────── */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 48px;
+      padding-bottom: 32px;
+      border-bottom: 2px solid var(--black);
+    }
+
+    .header-left h1 {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .header-left p {
+      font-size: 12px;
+      color: var(--gray-500);
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .header-right {
+      text-align: right;
+      font-size: 11px;
+      color: var(--gray-500);
+      line-height: 1.8;
+    }
+
+    .header-right a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    /* ── Proposition ────────────────────── */
+    .proposition {
+      margin-bottom: 40px;
+    }
+
+    .proposition h2 {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+
+    .proposition h2 span {
+      color: var(--accent);
+    }
+
+    .proposition p {
+      font-size: 14px;
+      color: var(--gray-600);
+      max-width: 560px;
+      line-height: 1.7;
+    }
+
+    /* ── Niches ─────────────────────────── */
+    .niches {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+
+    .niche {
+      background: var(--gray-100);
+      border-radius: 10px;
+      padding: 20px 24px;
+    }
+
+    .niche-label {
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .niche h3 {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      letter-spacing: -0.3px;
+    }
+
+    .niche p {
+      font-size: 12px;
+      color: var(--gray-500);
+      line-height: 1.6;
+    }
+
+    /* ── Offres ─────────────────────────── */
+    .offres-title {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--gray-400);
+      margin-bottom: 16px;
+    }
+
+    .offres {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 36px;
+    }
+
+    .offre {
+      border: 1.5px solid var(--gray-200);
+      border-radius: 12px;
+      padding: 24px 20px;
+      position: relative;
+      transition: border-color 0.2s;
+    }
+
+    .offre.highlight {
+      border-color: var(--accent);
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.02), rgba(37, 99, 235, 0.06));
+    }
+
+    .offre-badge {
+      position: absolute;
+      top: -9px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent);
+      color: white;
+      font-size: 8px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .offre h3 {
+      font-size: 16px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: -0.3px;
+      margin-bottom: 6px;
+    }
+
+    .offre-desc {
+      font-size: 11px;
+      color: var(--gray-500);
+      line-height: 1.5;
+      margin-bottom: 16px;
+      min-height: 34px;
+    }
+
+    .offre-price {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 2px;
+    }
+
+    .offre-note {
+      font-size: 10px;
+      color: var(--gray-400);
+      margin-bottom: 16px;
+    }
+
+    .offre-features {
+      list-style: none;
+      border-top: 1px solid var(--gray-200);
+      padding-top: 14px;
+    }
+
+    .offre-features li {
+      font-size: 11px;
+      color: var(--gray-600);
+      padding: 3px 0;
+      padding-left: 16px;
+      position: relative;
+      line-height: 1.5;
+    }
+
+    .offre-features li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 10px;
+    }
+
+    .offre-duration {
+      margin-top: 14px;
+      padding-top: 10px;
+      border-top: 1px solid var(--gray-200);
+      font-size: 10px;
+      color: var(--gray-400);
+    }
+
+    .offre-duration strong {
+      color: var(--gray-600);
+      font-weight: 600;
+    }
+
+    /* ── ROI ────────────────────────────── */
+    .roi {
+      background: var(--black);
+      color: var(--white);
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin-bottom: 36px;
+    }
+
+    .roi-label {
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--accent-light);
+      margin-bottom: 12px;
+    }
+
+    .roi h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: -0.3px;
+    }
+
+    .roi p {
+      font-size: 12px;
+      color: var(--gray-400);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .roi-numbers {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+    }
+
+    .roi-stat {
+      text-align: center;
+    }
+
+    .roi-stat .number {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--accent-light);
+      letter-spacing: -0.5px;
+    }
+
+    .roi-stat .label {
+      font-size: 10px;
+      color: var(--gray-400);
+      margin-top: 2px;
+    }
+
+    /* ── Abonnements ───────────────────── */
+    .abos {
+      margin-bottom: 36px;
+    }
+
+    .abos-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .abo {
+      border: 1.5px solid var(--gray-200);
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    .abo h4 {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: -0.2px;
+      margin-bottom: 4px;
+    }
+
+    .abo-price {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 2px;
+    }
+
+    .abo-price span {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--gray-400);
+    }
+
+    .abo-desc {
+      font-size: 11px;
+      color: var(--gray-500);
+      line-height: 1.5;
+    }
+
+    /* ── Garanties ─────────────────────── */
+    .garanties {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+
+    .garantie {
+      text-align: center;
+      padding: 16px;
+    }
+
+    .garantie-icon {
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+
+    .garantie h4 {
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .garantie p {
+      font-size: 10px;
+      color: var(--gray-500);
+      line-height: 1.5;
+    }
+
+    /* ── Footer ─────────────────────────── */
+    .footer {
+      border-top: 2px solid var(--black);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-cta {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .footer-contact {
+      text-align: right;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .footer-contact a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .footer-contact .big {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--black);
+    }
+
+    /* ── Print ──────────────────────────── */
+    @media print {
+      body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page { padding: 32px 28px; max-width: 100%; }
+      .offre.highlight { background: rgba(37, 99, 235, 0.04) !important; }
+      .roi { background: var(--black) !important; color: var(--white) !important; }
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- Header -->
+    <div class="header">
+      <div class="header-left">
+        <h1>Aïssa Belkoussa</h1>
+        <p>Systèmes digitaux & intelligence artificielle</p>
+      </div>
+      <div class="header-right">
+        aissabelkoussa.fr<br>
+        <a href="mailto:contact@aissabelkoussa.fr">contact@aissabelkoussa.fr</a><br>
+        Albi, France
+      </div>
+    </div>
+
+    <!-- Proposition -->
+    <div class="proposition">
+      <h2>Je construis des systèmes digitaux<br>pour les <span>entreprises qui grandissent</span></h2>
+      <p>Sites, automatisations IA, dashboards, tunnels de conversion — je conçois, je livre, ça tourne. Prix fixe, résultat garanti, code propriétaire.</p>
+    </div>
+
+    <!-- Niches cibles -->
+    <div class="niches">
+      <div class="niche">
+        <div class="niche-label">Niche prioritaire 1</div>
+        <h3>Cabinets & professions libérales</h3>
+        <p>Avocats, comptables, architectes, courtiers. Digitalisation des process clients, prise de RDV, portails sécurisés, automatisation des relances.</p>
+      </div>
+      <div class="niche">
+        <div class="niche-label">Niche prioritaire 2</div>
+        <h3>PME B2B en croissance</h3>
+        <p>Prestataires, agences, organismes de formation. Systèmes de vente, CRM automatisé, dashboards décisionnels, présence web professionnelle.</p>
+      </div>
+    </div>
+
+    <!-- Offres -->
+    <div class="offres-title">Trois formats, un seul standard : livré et opérationnel</div>
+    <div class="offres">
+      <div class="offre">
+        <h3>Sprint</h3>
+        <div class="offre-desc">Un outil en production en 5-10 jours. Site, automatisation ou dashboard.</div>
+        <div class="offre-price">2 900 €</div>
+        <div class="offre-note">Prix final garanti. Paiement en 2 fois.</div>
+        <ul class="offre-features">
+          <li>1 système livré clé en main</li>
+          <li>Brief + maquette validée</li>
+          <li>Code source propriétaire</li>
+          <li>Déploiement en production</li>
+          <li>Support 15 jours inclus</li>
+        </ul>
+        <div class="offre-duration">Livraison : <strong>5 à 10 jours ouvrés</strong></div>
+      </div>
+
+      <div class="offre highlight">
+        <div class="offre-badge">Le plus demandé</div>
+        <h3>Build</h3>
+        <div class="offre-desc">Votre infrastructure complète — site, IA, données — connectée et opérationnelle.</div>
+        <div class="offre-price">6 900 €</div>
+        <div class="offre-note">Prix final garanti. Paiement en 3 fois.</div>
+        <ul class="offre-features">
+          <li>Système multi-briques connecté</li>
+          <li>Intégration IA sur-mesure</li>
+          <li>Architecture scalable documentée</li>
+          <li>Formation à vos outils</li>
+          <li>1 mois de support inclus</li>
+          <li>Accès prioritaire évolutions</li>
+        </ul>
+        <div class="offre-duration">Livraison : <strong>1 à 2 mois</strong></div>
+      </div>
+
+      <div class="offre">
+        <h3>Écosystème</h3>
+        <div class="offre-desc">Votre CTO externalisé. Architecture, IA, données, ops — sur la durée.</div>
+        <div class="offre-price">Sur mesure</div>
+        <div class="offre-note">Engagement 3 mois min. Paiement mensuel.</div>
+        <ul class="offre-features">
+          <li>Architecture complète A à Z</li>
+          <li>Agents IA autonomes</li>
+          <li>Dashboards temps réel</li>
+          <li>Tunnels de conversion</li>
+          <li>Maintenance continue</li>
+          <li>Interlocuteur unique</li>
+        </ul>
+        <div class="offre-duration">Durée : <strong>3 à 6 mois</strong></div>
+      </div>
+    </div>
+
+    <!-- ROI -->
+    <div class="roi">
+      <div class="roi-label">Exemple concret — cabinet comptable, 12 collaborateurs</div>
+      <h3>Sprint à 2 900 € : automatisation des relances clients + formulaire d'onboarding</h3>
+      <p>Le cabinet perd 15h/semaine en relances manuelles et saisie de documents. Le Sprint automatise ces process. Le système tourne dès J+10.</p>
+      <div class="roi-numbers">
+        <div class="roi-stat">
+          <div class="number">15h</div>
+          <div class="label">économisées / semaine</div>
+        </div>
+        <div class="roi-stat">
+          <div class="number">750 €</div>
+          <div class="label">économisés / semaine</div>
+        </div>
+        <div class="roi-stat">
+          <div class="number">4 sem.</div>
+          <div class="label">pour rentabiliser le Sprint</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Abonnements -->
+    <div class="abos">
+      <div class="offres-title">Après la livraison — maintenance & évolutions</div>
+      <div class="abos-grid">
+        <div class="abo">
+          <h4>Essentiel</h4>
+          <div class="abo-price">490 € <span>/mois</span></div>
+          <div class="abo-desc">Monitoring 24/7, bugs sous 48h, mises à jour sécurité, rapport mensuel.</div>
+        </div>
+        <div class="abo">
+          <h4>Pro</h4>
+          <div class="abo-price">1 900 € <span>/mois</span></div>
+          <div class="abo-desc">Essentiel + évolutions (10h/mois), support prioritaire 24h, suivi stratégique.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Garanties -->
+    <div class="garanties">
+      <div class="garantie">
+        <div class="garantie-icon">&#9711;</div>
+        <h4>Prix final garanti</h4>
+        <p>Pas de devis surprise. Pas de dépassement. Le prix annoncé est le prix payé.</p>
+      </div>
+      <div class="garantie">
+        <div class="garantie-icon">&#9711;</div>
+        <h4>Satisfait ou retravaillé</h4>
+        <p>Si le livrable ne correspond pas au brief validé, je retravaille sans frais.</p>
+      </div>
+      <div class="garantie">
+        <div class="garantie-icon">&#9711;</div>
+        <h4>Vous êtes propriétaire</h4>
+        <p>Code source, accès, documentation — tout vous appartient. Zéro dépendance.</p>
+      </div>
+    </div>
+
+    <!-- Footer CTA -->
+    <div class="footer">
+      <div class="footer-cta">
+        Premier échange gratuit.<br>30 min. Zéro engagement.
+      </div>
+      <div class="footer-contact">
+        <div class="big">Réserver un échange</div>
+        <a href="https://aissabelkoussa.fr/contact">aissabelkoussa.fr/contact</a><br>
+        contact@aissabelkoussa.fr
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
