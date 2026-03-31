@@ -324,7 +324,18 @@ export default function CGVPage() {
                 action judiciaire. À défaut d'accord amiable dans un délai de
                 30 jours, le litige pourra être soumis à un médiateur de la
                 consommation conformément aux articles L611‑1 et suivants du
-                Code de la consommation.
+                Code de la consommation. Le médiateur désigné est le Centre de
+                la Médiation de la Consommation de Conciliateurs de Justice
+                (CM2C) — 14 rue Saint‑Jean, 75017 Paris —{" "}
+                <a
+                  href="https://www.cm2c.net"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-site-accent hover:underline"
+                >
+                  www.cm2c.net
+                </a>
+                .
               </p>
               <p>
                 À défaut de résolution par voie de médiation, le litige sera
