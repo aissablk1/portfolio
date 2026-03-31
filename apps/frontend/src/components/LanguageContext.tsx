@@ -242,7 +242,7 @@ const dictionaries: Record<Language, Dictionary> = {
           features: [
             "1 système livré clé en main (site, automation ou dashboard)",
             "Brief stratégique + maquette validée avant dev",
-            "Code source propriétaire — c'est à vous, pour toujours",
+            "Licence d'utilisation exclusive — vous exploitez librement",
             "Déploiement en production inclus",
             "Support 15 jours post-livraison",
           ],
@@ -644,7 +644,7 @@ const dictionaries: Record<Language, Dictionary> = {
           features: [
             "1 turnkey system (website, automation or dashboard)",
             "Strategic brief + validated mockup",
-            "Proprietary source code — you own it",
+            "Exclusive usage license — you operate freely",
             "Production deployment included",
             "15-day post-delivery support",
           ],

@@ -93,7 +93,7 @@ export default function GoPage() {
                         {[
                           "1 système livré clé en main",
                           "Brief + maquette validée avant dev",
-                          "Code source propriétaire",
+                          "Licence d'utilisation exclusive",
                           "Déploiement en production inclus",
                           "Support 15 jours post-livraison",
                         ].map((f, i) => (
@@ -340,8 +340,8 @@ export default function GoPage() {
                   desc: "Si le livrable ne correspond pas au brief validé, je retravaille sans frais supplémentaires.",
                 },
                 {
-                  title: "Vous êtes propriétaire",
-                  desc: "Code source, accès, documentation — tout vous appartient dès la livraison. Zéro dépendance.",
+                  title: "Licence exclusive incluse",
+                  desc: "Accès complet au code, documentation, déploiement — vous exploitez librement votre système. Zéro dépendance.",
                 },
               ].map((g, i) => (
                 <motion.div key={i} {...fade(i * 0.1)}>
