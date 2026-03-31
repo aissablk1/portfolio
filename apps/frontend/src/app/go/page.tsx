@@ -11,7 +11,7 @@ export default function GoPage() {
     initial: { opacity: 0, y: 24 },
     whileInView: { opacity: 1, y: 0 },
     viewport: { once: true },
-    transition: { duration: 0.7, delay, ease: [0.25, 1, 0.5, 1] },
+    transition: { duration: 0.7, delay, ease: [0.25, 1, 0.5, 1] as const },
   });
 
   return (
