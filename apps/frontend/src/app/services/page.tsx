@@ -19,13 +19,13 @@ export default function ServicesPage() {
 
   const faq = language === "fr" ? [
     { q: "Et si je ne sais pas exactement ce dont j'ai besoin ?", a: "C'est le cas de 80% de mes clients au premier appel. L'échange de 30 minutes sert exactement à ça : clarifier votre besoin, identifier la bonne approche, et vous proposer le format adapté. Aucun engagement." },
-    { q: "Est-ce que je suis propriétaire du code ?", a: "Oui, à 100%. Le code source, les accès, la documentation — tout vous appartient dès la livraison. Pas de lock-in, pas de dépendance." },
+    { q: "Est-ce que je suis propriétaire du code ?", a: "Vous bénéficiez d'une licence d'utilisation exclusive et illimitée dans le temps. Vous exploitez votre système en toute liberté, y compris en cas de revente de votre entreprise. La propriété intellectuelle reste au prestataire, ce qui garantit la maintenance et l'évolution continue de vos outils." },
     { q: "Que se passe-t-il si le projet prend plus de temps que prévu ?", a: "Les prix sont forfaitaires. Si le projet dépasse le cadre prévu pour des raisons de mon côté, je ne facture pas le surplus. Si le périmètre évolue de votre côté, on en discute et on ajuste ensemble." },
     { q: "Je peux commencer par un Sprint et passer au Build ensuite ?", a: "Absolument — c'est même le parcours le plus courant. Le Sprint permet de tester la collaboration avant de s'engager sur un projet plus large." },
     { q: "L'abonnement est-il obligatoire après livraison ?", a: "Non. L'abonnement est optionnel. Votre système est conçu pour tourner de manière autonome. L'abonnement est là si vous souhaitez des évolutions, du monitoring ou du support continu." },
   ] : [
     { q: "What if I don't know exactly what I need?", a: "That's the case for 80% of my clients on the first call. The 30-minute exchange is exactly for that: clarifying your need, identifying the right approach, and proposing the right format. No commitment." },
-    { q: "Do I own the code?", a: "Yes, 100%. Source code, access credentials, documentation — everything belongs to you upon delivery. No lock-in, no dependency." },
+    { q: "Do I own the code?", a: "You get an exclusive, unlimited usage license. You operate your system freely, including in case of a business sale. Intellectual property remains with the provider, ensuring ongoing maintenance and evolution of your tools." },
     { q: "What if the project takes longer than expected?", a: "Prices are fixed. If the project exceeds scope due to my side, I don't charge extra. If scope evolves from your side, we discuss and adjust together." },
     { q: "Can I start with Sprint and upgrade to Build later?", a: "Absolutely — that's actually the most common path. The Sprint lets you test the collaboration before committing to a larger project." },
     { q: "Is the subscription mandatory after delivery?", a: "No. The subscription is optional. Your system is designed to run autonomously. The subscription is there if you want evolutions, monitoring, or ongoing support." },

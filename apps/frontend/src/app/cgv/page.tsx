@@ -7,7 +7,7 @@ export default function CGVPage() {
     <LegalPage
       badge="CGV"
       title="Conditions générales de vente"
-      lastUpdated="28 mars 2026"
+      lastUpdated="31 mars 2026"
       sections={[
         {
           title: "Conditions de règlement",
@@ -64,7 +64,9 @@ export default function CGVPage() {
                 livrables (maquettes, code, algorithmes, visuels, contenus,
                 etc.) demeurent la propriété exclusive du prestataire. Le client
                 bénéficie, après paiement intégral des sommes dues, d'un droit
-                d'utilisation personnel, non exclusif et non transférable, dans
+                d'utilisation non exclusif, pour l'ensemble de son organisation
+                et ses collaborateurs, transférable dans le cadre d'une cession
+                ou transmission d'entreprise, sans limitation de durée, dans
                 les limites strictement nécessaires à l'exploitation du projet
                 tel que défini au devis.
               </p>
@@ -98,7 +100,11 @@ export default function CGVPage() {
                 à mentionner le nom et le logo du client ainsi qu'à présenter le
                 projet réalisé au titre de ses références commerciales
                 (portfolio, site internet, réseaux sociaux, documents de
-                présentation, etc.).
+                présentation, etc.). Le prestataire est également autorisé à
+                communiquer, à des fins commerciales, sur les résultats obtenus
+                et les métriques de performance du projet, sous forme anonymisée
+                ou nominative sauf opposition du client, dans le respect de la
+                confidentialité des données sensibles du client.
               </p>
             </>
           ),
