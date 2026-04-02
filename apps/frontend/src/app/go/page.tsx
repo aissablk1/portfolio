@@ -178,7 +178,7 @@ export default function GoPage() {
                         Paiement unique. Aucune maintenance incluse.
                       </p>
                       <Link
-                        href="/contact"
+                        href="/contact?plan=autonome"
                         className="inline-flex items-center gap-2 border border-site-border px-6 py-3 rounded-full text-[11px] font-bold uppercase tracking-widest hover:border-site-text hover:bg-site-text hover:text-site-bg transition-all duration-300"
                       >
                         Choisir l'autonomie
@@ -246,7 +246,7 @@ export default function GoPage() {
                         3 mois offerts (valeur 1 470 €)
                       </p>
                       <Link
-                        href="/contact"
+                        href="/contact?plan=accelerateur"
                         className="inline-flex items-center gap-2 bg-site-bg text-site-text px-6 py-3 rounded-full text-[11px] font-bold uppercase tracking-widest hover:scale-105 transition-all duration-300"
                       >
                         Lancer mon système
@@ -308,7 +308,7 @@ export default function GoPage() {
                         3 mois offerts (valeur 5 700 €)
                       </p>
                       <Link
-                        href="/contact"
+                        href="/contact?plan=partenaire"
                         className="inline-flex items-center gap-2 border border-site-border px-6 py-3 rounded-full text-[11px] font-bold uppercase tracking-widest hover:border-site-text hover:bg-site-text hover:text-site-bg transition-all duration-300"
                       >
                         Devenir partenaire
