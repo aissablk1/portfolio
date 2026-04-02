@@ -50,12 +50,19 @@ export default function NotFound() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
+            className="flex flex-wrap justify-center gap-4"
           >
             <Link
-              href="/"
+              href="/services"
               className="inline-flex items-center gap-3 bg-site-accent text-white px-8 py-4 rounded-full font-display font-medium text-sm hover:bg-site-accent/90 transition-colors"
             >
-              {language === "fr" ? "Retour a l'accueil" : "Back to home"}
+              {language === "fr" ? "Voir les offres" : "See our plans"}
+            </Link>
+            <Link
+              href="/"
+              className="inline-flex items-center gap-3 border border-site-border px-8 py-4 rounded-full font-display font-medium text-sm hover:border-site-accent hover:text-site-accent transition-colors"
+            >
+              {language === "fr" ? "Retour à l'accueil" : "Back to home"}
             </Link>
           </motion.div>
         </div>
