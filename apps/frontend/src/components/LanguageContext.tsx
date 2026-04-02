@@ -339,7 +339,7 @@ const dictionaries: Record<Language, Dictionary> = {
         },
       ],
       ecosystemCta: {
-        text: "Besoin d'une architecture sur mesure ? Le plan Écosystème s'adapte à vos ambitions — de 2 à 6 mois, CTO externalisé.",
+        text: "Besoin d'une architecture sur mesure ? Le plan Partenaire s'adapte à vos ambitions — de 2 à 6 mois, CTO externalisé.",
         button: "Échanger 30 min",
       },
       recurring: {
