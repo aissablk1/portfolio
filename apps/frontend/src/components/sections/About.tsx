@@ -23,8 +23,19 @@ const About = () => {
               {dict.nav.about}
             </span>
           </div>
-          <div className="text-fluid-body text-site-text-light whitespace-pre-line">
-            {dict.about.content}
+          <div className="space-y-6">
+            <p className="text-xl md:text-2xl font-semibold text-site-text leading-relaxed">
+              Je m&apos;appelle Aïssa. Je suis entrepreneur, builder, et architecte de systèmes — basé dans le sud de France, opérant partout.
+            </p>
+            <p className="text-xl md:text-2xl font-semibold text-site-text leading-relaxed">
+              Pas d&apos;héritage, pas de filet. Juste des années à apprendre, construire et tester — jusqu&apos;à maîtriser ce que beaucoup délèguent sans comprendre.
+            </p>
+            <p className="text-xl md:text-2xl font-semibold text-site-text leading-relaxed">
+              Ce qui me différencie ? Je vis dans les deux mondes à la fois : je comprends la stratégie business et je construis le système technique qui l&apos;exécute. Pas besoin de chef de projet entre vous et le code.
+            </p>
+            <p className="text-xl md:text-2xl font-semibold text-site-text leading-relaxed">
+              Si vous avez une idée de système — floue ou précise — je peux la transformer en quelque chose de réel.
+            </p>
           </div>
         </motion.div>
         <motion.div
