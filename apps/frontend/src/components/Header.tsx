@@ -100,6 +100,14 @@ const Header = () => {
           </Link>
 
           <div className="flex items-center gap-4">
+            {/* Diagnostic CTA — soft entry point */}
+            <Link
+              href="/diagnostic"
+              className="hidden md:inline-flex items-center px-5 py-2 text-[10px] font-bold uppercase tracking-widest border border-site-border text-site-text-light rounded-full hover:border-site-accent hover:text-site-accent transition-all"
+            >
+              {language === "fr" ? "Diagnostic gratuit" : "Free diagnostic"}
+            </Link>
+
             {/* Services CTA — always visible, filled */}
             <Link
               href="/services"
@@ -183,7 +191,15 @@ const Header = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 10 }}
                 transition={{ duration: 0.3, delay: navItems.length * 0.05 }}
+                className="flex flex-col items-center gap-4"
               >
+                <Link
+                  href="/diagnostic"
+                  onClick={() => setMenuOpen(false)}
+                  className="text-lg font-display font-medium tracking-tight border border-site-border text-site-text-light px-8 py-3 rounded-full hover:border-site-accent hover:text-site-accent transition-colors"
+                >
+                  {language === "fr" ? "Diagnostic gratuit" : "Free diagnostic"}
+                </Link>
                 <Link
                   href="/contact"
                   onClick={() => setMenuOpen(false)}

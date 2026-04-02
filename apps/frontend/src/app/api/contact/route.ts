@@ -254,9 +254,27 @@ function buildAdminEmail(data: ContactPayload): string {
 </html>`;
 }
 
-// --- Confirmation email to prospect ---
+// --- Confirmation email to prospect (smart, based on lead score) ---
 function buildConfirmationEmail(data: ContactPayload): string {
   const t = labels[data.lang] || labels.fr;
+  const lead = scorelead(data);
+  const isFr = data.lang === "fr";
+  const firstName = esc(data.name.split(" ")[0]);
+
+  // Smart intro based on lead temperature
+  const smartIntro = lead.label === "CHAUD"
+    ? (isFr
+      ? `Votre projet correspond exactement à ce que je fais. Je reviens vers vous <strong>dans les prochaines heures</strong> avec une proposition concrète.`
+      : `Your project is a perfect fit for what I do. I'll get back to you <strong>within the next few hours</strong> with a concrete proposal.`)
+    : lead.label === "TIEDE"
+    ? (isFr
+      ? `${t.confirmBody} Pour mieux préparer notre échange, vous pouvez aussi <a href="https://aissabelkoussa.fr/diagnostic" style="color:#6366f1;font-weight:600;">faire le diagnostic gratuit</a> — ça me permettra de vous proposer la meilleure approche.`
+      : `${t.confirmBody} To better prepare our exchange, you can also <a href="https://aissabelkoussa.fr/diagnostic" style="color:#6366f1;font-weight:600;">take the free diagnostic</a> — it will help me propose the best approach.`)
+    : t.confirmBody;
+
+  const smartPromise = lead.label === "CHAUD"
+    ? (isFr ? "Réponse sous 2h." : "Reply within 2 hours.")
+    : t.confirmPromise;
 
   return `<!DOCTYPE html>
 <html lang="${data.lang}">
@@ -266,13 +284,13 @@ function buildConfirmationEmail(data: ContactPayload): string {
 
     <div style="margin-bottom:32px;">
       <h1 style="color:#111;font-size:18px;margin:0;font-weight:700;">
-        ${t.confirmGreeting} ${esc(data.name.split(" ")[0])},
+        ${t.confirmGreeting} ${firstName},
       </h1>
     </div>
 
     <div style="color:#333;font-size:15px;line-height:1.8;margin-bottom:24px;">
-      <p style="margin:0 0 16px;">${t.confirmBody}</p>
-      <p style="margin:0 0 24px;font-weight:600;">${t.confirmPromise}</p>
+      <p style="margin:0 0 16px;">${smartIntro}</p>
+      <p style="margin:0 0 24px;font-weight:600;">${smartPromise}</p>
     </div>
 
     <div style="background:#f0f0f0;border-radius:12px;padding:24px;margin-bottom:32px;">

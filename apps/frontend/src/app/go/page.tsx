@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, Check, HardHat, Briefcase } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/utils/cn";
+import AvailabilityBanner from "@/components/AvailabilityBanner";
 
 type Niche = null | "btp" | "b2b";
 
@@ -58,10 +59,8 @@ export default function GoPage() {
       </header>
 
       {/* ── Urgency banner ─────────────────────────────────────── */}
-      <div className="fixed top-14 left-0 right-0 z-40 bg-site-text text-site-bg text-center py-2">
-        <p className="text-[11px] font-bold uppercase tracking-widest">
-          Avril 2026 — 2 créneaux projet disponibles
-        </p>
+      <div className="fixed top-14 left-0 right-0 z-40">
+        <AvailabilityBanner />
       </div>
 
       <main>

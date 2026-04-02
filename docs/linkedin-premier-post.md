@@ -110,8 +110,8 @@ Si un de ces 3 points vous parle → lien en commentaire.
 
 **Premier commentaire (poster immédiatement après) :**
 ```
-→ Tous les détails ici : aissabelkoussa.fr/go
-15 min d'échange gratuit pour voir si ça s'applique à votre situation.
+→ Faites le diagnostic gratuit en 2 min : aissabelkoussa.fr/diagnostic
+Vous verrez exactement ce qui manque et combien ça vous coûte chaque semaine.
 ```
 
 ---

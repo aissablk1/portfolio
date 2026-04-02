@@ -8,6 +8,8 @@ import { motion, AnimatePresence, useInView } from "framer-motion";
 import { ArrowUpRight, Check, X, Zap, Rocket, Handshake, RotateCcw, ChevronDown, Shield, Clock, MessageSquare, TrendingUp, Gift } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/utils/cn";
+import ROICalculator from "@/components/sections/ROICalculator";
+import AvailabilityBanner from "@/components/AvailabilityBanner";
 
 type SubBilling = "monthly" | "yearly";
 
@@ -93,12 +95,7 @@ export default function ServicesPage() {
     <div className="bg-site-bg min-h-screen">
       <Header />
 
-      {/* ── Urgency Banner ──────────────────────────────────────────── */}
-      <div className="bg-site-accent text-white text-center py-2.5 text-[11px] font-bold uppercase tracking-widest">
-        {language === "fr"
-          ? "Avril 2026 — 2 créneaux projet disponibles"
-          : "April 2026 — 2 project slots available"}
-      </div>
+      <AvailabilityBanner />
 
       <main className="pt-40 pb-0">
         {/* ── Hero ──────────────────────────────────────────────────────── */}
@@ -541,6 +538,9 @@ export default function ServicesPage() {
             </motion.div>
           </div>
         </section>
+
+        {/* ── ROI Calculator ──────────────────────────────────────────── */}
+        <ROICalculator />
 
         {/* ── Recurring / Subscriptions (for existing clients) ──────────── */}
         <section className="px-container section-padding">

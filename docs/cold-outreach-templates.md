@@ -19,7 +19,8 @@ Question directe : combien de temps vous passez chaque semaine à répondre au t
 
 Je pose la question parce que j'ai construit un système pour un plombier de 8 salariés qui perdait 10h/semaine là-dessus. En 10 jours, on a automatisé la prise de RDV et les devis — il a récupéré 800€/semaine de valeur.
 
-Si c'est un sujet pour vous, je peux vous montrer comment ça marche en 15 minutes.
+Si c'est un sujet pour vous, faites le diagnostic gratuit (2 min) — vous verrez tout de suite ce que vous pouvez automatiser :
+→ aissabelkoussa.fr/diagnostic
 
 Aïssa
 ```
@@ -77,7 +78,8 @@ Je demande parce que c'est le pattern que je vois chez la majorité des consulta
 
 J'ai construit des tunnels de conversion pour des prestataires B2B qui transforment des visiteurs en prospects qualifiés automatiquement — du premier clic au rendez-vous pris. Le système tourne 24/7.
 
-Si c'est un sujet, 15 minutes suffisent pour voir si ça s'applique à votre cas.
+Si c'est un sujet, faites le diagnostic gratuit (2 min) — ça vous donnera une idée claire de ce qui est automatisable :
+→ aissabelkoussa.fr/diagnostic
 
 Aïssa
 ```
