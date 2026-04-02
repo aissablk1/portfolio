@@ -23,28 +23,32 @@ function isRateLimited(ip: string): boolean {
 // --- Lead scoring ---
 type LeadScore = { score: number; label: "CHAUD" | "TIEDE" | "FROID"; color: string; action: string };
 
-function scorelead(data: { budget: string; need: string; context: string; message: string; plan?: string }): LeadScore {
+function scorelead(data: { budget?: string; need?: string; context?: string; message?: string; plan?: string }): LeadScore {
   let score = 0;
+  const budget = data.budget || "";
+  const need = data.need || "";
+  const context = data.context || "";
+  const message = data.message || "";
 
   // Budget signals (0-40 pts)
-  if (data.budget.includes("10 000") || data.budget.includes("10,000") || data.budget.includes("Sur mesure") || data.budget.includes("Custom")) score += 40;
-  else if (data.budget.includes("7 000") || data.budget.includes("7,000")) score += 30;
-  else if (data.budget.includes("3 000") || data.budget.includes("3,000")) score += 20;
+  if (budget.includes("10 000") || budget.includes("10,000") || budget.includes("Sur mesure") || budget.includes("Custom")) score += 40;
+  else if (budget.includes("7 000") || budget.includes("7,000")) score += 30;
+  else if (budget.includes("3 000") || budget.includes("3,000")) score += 20;
 
   // Need signals (0-25 pts)
-  if (data.need.includes("complet") || data.need.includes("complete")) score += 25;
-  else if (data.need.includes("Automatisation") || data.need.includes("Automation")) score += 20;
-  else if (data.need.includes("Dashboard") || data.need.includes("données")) score += 20;
-  else if (data.need.includes("Site") || data.need.includes("site")) score += 15;
-  else if (data.need.includes("Maintenance")) score += 10;
+  if (need.includes("complet") || need.includes("complete")) score += 25;
+  else if (need.includes("Automatisation") || need.includes("Automation")) score += 20;
+  else if (need.includes("Dashboard") || need.includes("données")) score += 20;
+  else if (need.includes("Site") || need.includes("site")) score += 15;
+  else if (need.includes("Maintenance")) score += 10;
 
   // Context signals (0-15 pts)
-  if (data.context.length > 3) score += 10;
-  if (data.context.length > 15) score += 5;
+  if (context.length > 3) score += 10;
+  if (context.length > 15) score += 5;
 
   // Message quality (0-10 pts)
-  if (data.message.length > 100) score += 5;
-  if (data.message.length > 250) score += 5;
+  if (message.length > 100) score += 5;
+  if (message.length > 250) score += 5;
 
   // Plan pre-selected from /go (0-10 pts)
   if (data.plan === "partenaire") score += 10;

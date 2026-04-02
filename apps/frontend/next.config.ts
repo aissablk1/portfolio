@@ -30,7 +30,7 @@ const nextConfig: NextConfig = {
         {
           key: "Content-Security-Policy",
           value:
-            "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://vercel.live; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://vercel.live; font-src 'self' https://fonts.gstatic.com https://vercel.live; img-src 'self' data: blob:; media-src 'self'; connect-src 'self' https://vercel.live https://vitals.vercel-insights.com https://portfolio-api-72tq.onrender.com https://api.resend.com; frame-src 'self' https://vercel.live; frame-ancestors 'none'; base-uri 'self'; form-action 'self'",
+            "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://vercel.live; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://vercel.live; font-src 'self' https://fonts.gstatic.com https://vercel.live; img-src 'self' data: blob: https://vercel.com https://vercel.live; media-src 'self'; connect-src 'self' https://vercel.live https://vitals.vercel-insights.com https://portfolio-api-72tq.onrender.com https://api.resend.com; frame-src 'self' https://vercel.live; frame-ancestors 'none'; base-uri 'self'; form-action 'self'",
         },
       ],
     },
