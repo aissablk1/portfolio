@@ -64,9 +64,9 @@ export default function GoPage() {
             </motion.p>
 
             <div className="space-y-4">
-              {/* ── Situation 1 : Sprint ───────────────────────────── */}
+              {/* ── Situation 1 : Autonome (decoy) ────────────────── */}
               <motion.div {...fade(0.1)}>
-                <div className="group border border-site-border rounded-2xl p-8 md:p-12 hover:border-site-text/20 transition-all duration-500">
+                <div className="group border border-site-border rounded-2xl p-8 md:p-12 opacity-90 hover:opacity-100 hover:border-site-text/20 transition-all duration-500">
                   <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-8 items-start">
                     <div>
                       <div className="flex items-center gap-4 mb-4">
@@ -74,28 +74,27 @@ export default function GoPage() {
                           01
                         </span>
                         <span className="text-[10px] font-bold uppercase tracking-widest text-site-text-light">
-                          Sprint
+                          Autonome — Projet seul
                         </span>
                       </div>
 
                       <h3 className="text-2xl md:text-3xl font-medium tracking-tighter uppercase mb-4">
-                        J'ai besoin d'un outil.<br className="hidden md:block" />
-                        Rapidement. Maintenant.
+                        J'ai une équipe technique.<br className="hidden md:block" />
+                        Je veux juste le livrable.
                       </h3>
 
                       <p className="text-site-text-light text-sm md:text-base leading-relaxed max-w-xl mb-6">
-                        Un site, un dashboard, une automatisation — un seul livrable, en production
-                        en 5 à 10 jours ouvrés. Idéal pour tester une collaboration ou débloquer
-                        un point précis.
+                        Votre système livré clé en main. Vous gérez la suite — documentation
+                        technique renforcée et formation autonomie incluses.
                       </p>
 
                       <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2">
                         {[
-                          "1 système livré clé en main",
-                          "Brief + maquette validée avant dev",
+                          "1 système livré (site, automation ou dashboard)",
+                          "Brief + maquette validée",
                           "Licence d'utilisation exclusive",
-                          "Déploiement en production inclus",
-                          "Support 15 jours post-livraison",
+                          "Documentation technique renforcée",
+                          "Formation autonomie (2h)",
                         ].map((f, i) => (
                           <li key={i} className="flex items-start gap-2 text-sm text-site-text-light">
                             <Check size={13} className="mt-0.5 shrink-0" strokeWidth={2.5} />
@@ -105,16 +104,16 @@ export default function GoPage() {
                       </ul>
                     </div>
 
-                    <div className="md:text-right md:min-w-[180px]">
-                      <div className="text-4xl md:text-5xl font-medium tracking-tighter">2 900 €</div>
+                    <div className="md:text-right md:min-w-[200px]">
+                      <div className="text-4xl md:text-5xl font-medium tracking-tighter">3 900 €</div>
                       <p className="text-xs text-site-text-light/50 mt-1 mb-6">
-                        Prix final. Paiement en 2 fois.
+                        Paiement unique. Aucune maintenance incluse.
                       </p>
                       <Link
                         href="/contact"
                         className="inline-flex items-center gap-2 border border-site-border px-6 py-3 rounded-full text-[11px] font-bold uppercase tracking-widest hover:border-site-text hover:bg-site-text hover:text-site-bg transition-all duration-300"
                       >
-                        Réserver mon sprint
+                        Choisir l'autonomie
                         <ArrowUpRight size={12} />
                       </Link>
                     </div>
@@ -122,12 +121,12 @@ export default function GoPage() {
                 </div>
               </motion.div>
 
-              {/* ── Situation 2 : Build (highlighted) ─────────────── */}
+              {/* ── Situation 2 : Accélérateur (recommended) ──────── */}
               <motion.div {...fade(0.2)}>
                 <div className="relative group border-2 border-site-text rounded-2xl p-8 md:p-12 bg-site-text text-site-bg">
                   <div className="absolute -top-3 left-8">
                     <span className="text-[9px] font-bold uppercase tracking-widest bg-site-bg text-site-text px-4 py-1 rounded-full">
-                      Le plus demandé
+                      Recommandé
                     </span>
                   </div>
 
@@ -138,29 +137,29 @@ export default function GoPage() {
                           02
                         </span>
                         <span className="text-[10px] font-bold uppercase tracking-widest text-site-bg/60">
-                          Build
+                          Accélérateur — Projet + maintenance
                         </span>
                       </div>
 
                       <h3 className="text-2xl md:text-3xl font-medium tracking-tighter uppercase mb-4">
-                        J'ai besoin d'un système complet.<br className="hidden md:block" />
-                        Pas juste un site.
+                        Je veux un système qui tourne.<br className="hidden md:block" />
+                        Sans m'en occuper.
                       </h3>
 
                       <p className="text-site-bg/60 text-sm md:text-base leading-relaxed max-w-xl mb-6">
-                        Votre infrastructure complète — site, automatisations IA, données —
-                        connectée et opérationnelle. Le format qui transforme votre activité,
-                        pas juste votre vitrine.
+                        Votre système livré et maintenu. 3 mois de maintenance offerts —
+                        monitoring 24/7, bugs sous 48h, mises à jour sécurité. Vous ne touchez
+                        à rien.
                       </p>
 
                       <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2">
                         {[
-                          "Système multi-briques connecté",
-                          "Intégration IA sur-mesure",
-                          "Architecture scalable documentée",
-                          "Formation à vos outils",
-                          "1 mois de support post-livraison",
-                          "Accès prioritaire évolutions futures",
+                          "1 système livré clé en main",
+                          "Licence d'utilisation exclusive",
+                          "3 mois monitoring + support offerts",
+                          "Corrections de bugs sous 48h",
+                          "Mises à jour sécurité continues",
+                          "Rapport mensuel de performance",
                         ].map((f, i) => (
                           <li key={i} className="flex items-start gap-2 text-sm text-site-bg/60">
                             <Check size={13} className="mt-0.5 shrink-0 text-site-bg" strokeWidth={2.5} />
@@ -170,10 +169,13 @@ export default function GoPage() {
                       </ul>
                     </div>
 
-                    <div className="md:text-right md:min-w-[180px]">
-                      <div className="text-4xl md:text-5xl font-medium tracking-tighter">6 900 €</div>
-                      <p className="text-xs text-site-bg/30 mt-1 mb-6">
-                        Prix final. Paiement en 3 fois.
+                    <div className="md:text-right md:min-w-[200px]">
+                      <div className="text-4xl md:text-5xl font-medium tracking-tighter">2 900 €</div>
+                      <p className="text-xs text-site-bg/50 mt-1">
+                        puis 490 €/mois après 3 mois offerts
+                      </p>
+                      <p className="inline-block mt-2 mb-6 text-[10px] font-bold bg-site-bg/10 text-site-bg px-3 py-1 rounded-full">
+                        3 mois offerts (valeur 1 470 €)
                       </p>
                       <Link
                         href="/contact"
@@ -187,7 +189,7 @@ export default function GoPage() {
                 </div>
               </motion.div>
 
-              {/* ── Situation 3 : Écosystème ──────────────────────── */}
+              {/* ── Situation 3 : Partenaire ──────────────────────── */}
               <motion.div {...fade(0.3)}>
                 <div className="group border border-site-border rounded-2xl p-8 md:p-12 hover:border-site-text/20 transition-all duration-500">
                   <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-8 items-start">
@@ -197,29 +199,29 @@ export default function GoPage() {
                           03
                         </span>
                         <span className="text-[10px] font-bold uppercase tracking-widest text-site-text-light">
-                          Écosystème
+                          Partenaire — Système + évolution continue
                         </span>
                       </div>
 
                       <h3 className="text-2xl md:text-3xl font-medium tracking-tighter uppercase mb-4">
                         J'ai besoin d'un partenaire technique.<br className="hidden md:block" />
-                        Sur la durée.
+                        Qui fait évoluer mon système.
                       </h3>
 
                       <p className="text-site-text-light text-sm md:text-base leading-relaxed max-w-xl mb-6">
-                        Votre CTO externalisé. Architecture, IA, données, ops — je deviens
-                        votre référent technique permanent. Engagement 3 mois minimum,
-                        ROI mesurable dès le premier mois.
+                        Votre infrastructure complète — site, IA, données — avec un partenaire
+                        technique dédié. Évolutions mensuelles, support prioritaire, stratégie
+                        digitale.
                       </p>
 
                       <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2">
                         {[
-                          "Architecture complète A à Z",
-                          "Agents IA autonomes intégrés",
-                          "Dashboards temps réel",
-                          "Tunnels de conversion automatisés",
-                          "Maintenance et évolution continues",
-                          "Interlocuteur unique, zéro intermédiaire",
+                          "Système multi-briques (site + IA + data)",
+                          "Intégration IA sur-mesure",
+                          "3 mois évolution + support Premium offerts",
+                          "Évolutions 10h/mois + support 24h",
+                          "Réunion stratégique mensuelle",
+                          "Accès prioritaire nouvelles technos IA",
                         ].map((f, i) => (
                           <li key={i} className="flex items-start gap-2 text-sm text-site-text-light">
                             <Check size={13} className="mt-0.5 shrink-0" strokeWidth={2.5} />
@@ -229,16 +231,19 @@ export default function GoPage() {
                       </ul>
                     </div>
 
-                    <div className="md:text-right md:min-w-[180px]">
-                      <div className="text-4xl md:text-5xl font-medium tracking-tighter">Sur mesure</div>
-                      <p className="text-xs text-site-text-light/50 mt-1 mb-6">
-                        3 mois min. Paiement mensuel.
+                    <div className="md:text-right md:min-w-[200px]">
+                      <div className="text-4xl md:text-5xl font-medium tracking-tighter">6 900 €</div>
+                      <p className="text-xs text-site-text-light/50 mt-1">
+                        puis 1 900 €/mois après 3 mois offerts
+                      </p>
+                      <p className="inline-block mt-2 mb-6 text-[10px] font-bold bg-green-50 text-green-700 px-3 py-1 rounded-full">
+                        3 mois offerts (valeur 5 700 €)
                       </p>
                       <Link
                         href="/contact"
                         className="inline-flex items-center gap-2 border border-site-border px-6 py-3 rounded-full text-[11px] font-bold uppercase tracking-widest hover:border-site-text hover:bg-site-text hover:text-site-bg transition-all duration-300"
                       >
-                        Échanger 30 min
+                        Devenir partenaire
                         <ArrowUpRight size={12} />
                       </Link>
                     </div>
@@ -261,8 +266,8 @@ export default function GoPage() {
               </h2>
               <p className="text-site-bg/50 text-base md:text-lg max-w-2xl leading-relaxed mb-12">
                 Le patron perd 10 heures par semaine à répondre au téléphone, envoyer des devis
-                par mail et relancer les clients. Sprint à 2 900 € : site pro + prise de RDV
-                en ligne + devis automatisé. Le système tourne dès J+10.
+                par mail et relancer les clients. Accélérateur à 2 900 € : site pro + prise de RDV
+                en ligne + devis automatisé + 3 mois de maintenance inclus. Le système tourne dès J+10.
               </p>
             </motion.div>
 
@@ -270,7 +275,7 @@ export default function GoPage() {
               {[
                 { value: "10h", label: "libérées chaque semaine" },
                 { value: "800 €", label: "de valeur récupérée par semaine" },
-                { value: "4 sem.", label: "pour rentabiliser le Sprint" },
+                { value: "4 sem.", label: "pour rentabiliser l'Accélérateur" },
               ].map((stat, i) => (
                 <motion.div key={i} {...fade(i * 0.1)} className="text-center md:text-left">
                   <div className="text-4xl md:text-5xl font-medium tracking-tighter mb-2">
@@ -295,17 +300,21 @@ export default function GoPage() {
               </h2>
             </motion.div>
 
+            <p className="text-site-text-light text-sm mb-8 max-w-2xl">
+              Les 3 premiers mois sont inclus dans votre projet (plans Accélérateur et
+              Partenaire). Ensuite, la maintenance continue sans engagement.
+            </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {[
                 {
                   name: "Essentiel",
                   price: "490 €",
-                  desc: "Monitoring 24/7, bugs sous 48h, mises à jour sécurité, rapport mensuel de performance.",
+                  desc: "Monitoring 24/7, bugs sous 48h, MAJ sécurité, rapport mensuel. Annuel : 368 €/mois (3 mois offerts).",
                 },
                 {
-                  name: "Pro",
+                  name: "Premium",
                   price: "1 900 €",
-                  desc: "Essentiel + évolutions mensuelles (10h), support prioritaire 24h, suivi stratégique, accès aux dernières technologies IA.",
+                  desc: "Essentiel + évolutions 10h/mois, support 24h, suivi stratégique mensuel. Annuel : 1 425 €/mois.",
                 },
               ].map((plan, i) => (
                 <motion.div
