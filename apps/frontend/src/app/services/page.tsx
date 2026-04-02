@@ -183,11 +183,38 @@ export default function ServicesPage() {
                   ? "Votre système complet :\nconstruction + évolution continue"
                   : "Your complete system:\nbuild + continuous evolution"}
               </h2>
-              <p className="text-site-text-light max-w-2xl mx-auto">
+              <p className="text-site-text-light max-w-2xl mx-auto mb-10">
                 {language === "fr"
                   ? "Un site sans maintenance, c'est comme une voiture sans entretien : ça roule… quelques mois."
                   : "A site without maintenance is like a car without servicing: it runs… for a few months."}
               </p>
+
+              {/* Social proof stats */}
+              <div className="flex flex-wrap justify-center gap-8 md:gap-14">
+                {(language === "fr" ? [
+                  { value: "100%", label: "projets livrés dans les délais" },
+                  { value: "48h", label: "temps de réponse max" },
+                  { value: "0", label: "intermédiaire" },
+                  { value: "3 mois", label: "de maintenance offerts" },
+                ] : [
+                  { value: "100%", label: "projects delivered on time" },
+                  { value: "48h", label: "max response time" },
+                  { value: "0", label: "middlemen" },
+                  { value: "3 months", label: "free maintenance" },
+                ]).map((stat, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: i * 0.08 }}
+                    className="text-center"
+                  >
+                    <div className="text-2xl md:text-3xl font-medium tracking-tighter text-site-accent">{stat.value}</div>
+                    <div className="text-[10px] font-bold uppercase tracking-widest text-site-text-light/50 mt-1">{stat.label}</div>
+                  </motion.div>
+                ))}
+              </div>
             </motion.div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-0 lg:items-end">
@@ -395,6 +422,87 @@ export default function ServicesPage() {
           </div>
         </section>
 
+        {/* ── Comparison table (Agence vs Freelance vs Aïssa) ──────────── */}
+        <section className="px-container section-padding">
+          <div className="max-w-7xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="mb-16"
+            >
+              <div className="flex items-center gap-4 mb-8">
+                <div className="w-2 h-2 rounded-full bg-site-accent" />
+                <span className="text-xs font-bold uppercase tracking-widest text-site-text-light">
+                  {s.comparison.badge}
+                </span>
+              </div>
+              <h2 className="text-fluid-title tracking-tighter uppercase max-w-3xl mb-6 whitespace-pre-line">
+                {s.comparison.title}
+              </h2>
+              <p className="text-site-text-light max-w-2xl leading-relaxed">
+                {s.comparison.subtitle}
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="overflow-x-auto -mx-container px-container"
+            >
+              <table className="w-full min-w-[640px] border-collapse">
+                <thead>
+                  <tr>
+                    {s.comparison.columns.map((col, i) => (
+                      <th
+                        key={i}
+                        className={cn(
+                          "text-left py-4 px-5 text-xs font-bold uppercase tracking-widest",
+                          i === 0
+                            ? "text-site-text-light/40 w-[22%]"
+                            : i === 3
+                            ? "text-site-accent bg-site-accent/[0.04] rounded-t-xl"
+                            : "text-site-text-light"
+                        )}
+                      >
+                        {col}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {s.comparison.rows.map((row, rIdx) => (
+                    <tr
+                      key={rIdx}
+                      className="border-t border-site-border/50"
+                    >
+                      <td className="py-4 px-5 text-sm font-medium">
+                        {row.label}
+                      </td>
+                      {row.values.map((val, vIdx) => (
+                        <td
+                          key={vIdx}
+                          className={cn(
+                            "py-4 px-5 text-sm",
+                            vIdx === 2
+                              ? "text-site-accent font-medium bg-site-accent/[0.04]"
+                              : "text-site-text-light"
+                          )}
+                        >
+                          {val}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </motion.div>
+          </div>
+        </section>
+
         {/* ── Recurring / Subscriptions (for existing clients) ──────────── */}
         <section className="px-container section-padding">
           <div className="max-w-7xl mx-auto">
@@ -419,10 +527,12 @@ export default function ServicesPage() {
               </p>
 
               {/* Subscription Billing Toggle */}
-              <div className="inline-flex items-center bg-[#f5f5f5] rounded-full p-1 gap-0.5">
+              <div role="tablist" aria-label={language === "fr" ? "Fréquence de facturation" : "Billing frequency"} className="inline-flex items-center bg-[#f5f5f5] rounded-full p-1 gap-0.5">
                 {(["monthly", "yearly"] as SubBilling[]).map((mode) => (
                   <button
                     key={mode}
+                    role="tab"
+                    aria-selected={subBilling === mode}
                     onClick={() => setSubBilling(mode)}
                     className={cn(
                       "relative px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 cursor-pointer",
@@ -621,6 +731,8 @@ export default function ServicesPage() {
                   >
                     <button
                       onClick={() => setOpenFaq(isOpen ? null : realIdx)}
+                      aria-expanded={isOpen}
+                      aria-controls={`faq-answer-${realIdx}`}
                       className="w-full p-6 md:p-8 flex items-start gap-5 text-left cursor-pointer"
                     >
                       <span className={cn(
@@ -651,7 +763,7 @@ export default function ServicesPage() {
                           transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
                           className="overflow-hidden"
                         >
-                          <div className="px-6 md:px-8 pb-6 md:pb-8 pl-[4.25rem] md:pl-[4.75rem]">
+                          <div id={`faq-answer-${realIdx}`} role="region" className="px-6 md:px-8 pb-6 md:pb-8 pl-[4.25rem] md:pl-[4.75rem]">
                             <p className="text-sm text-site-text-light leading-relaxed">
                               {item.a}
                             </p>

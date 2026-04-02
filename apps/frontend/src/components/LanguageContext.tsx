@@ -49,6 +49,13 @@ interface Dictionary {
       text: string;
       button: string;
     };
+    comparison: {
+      badge: string;
+      title: string;
+      subtitle: string;
+      columns: string[];
+      rows: Array<{ label: string; values: string[] }>;
+    };
     recurring: {
       badge: string;
       title: string;
@@ -339,8 +346,24 @@ const dictionaries: Record<Language, Dictionary> = {
         },
       ],
       ecosystemCta: {
-        text: "Besoin d'une architecture sur mesure ? Le plan Partenaire s'adapte à vos ambitions — de 2 à 6 mois, CTO externalisé.",
+        text: "Besoin d'une architecture sur mesure ? Le plan Écosystème s'adapte à vos ambitions — de 2 à 6 mois, CTO externalisé.",
         button: "Échanger 30 min",
+      },
+      comparison: {
+        badge: "Pourquoi moi",
+        title: "Agence, freelance Fiverr,\nou builder pro ?",
+        subtitle: "Comparez objectivement avant de choisir.",
+        columns: ["Critère", "Agence web", "Freelance low-cost", "Aïssa Belkoussa"],
+        rows: [
+          { label: "Délai de livraison", values: ["2 à 4 mois", "2 à 6 semaines", "5 à 10 jours"] },
+          { label: "Prix moyen", values: ["8 000 – 25 000 €", "500 – 2 000 €", "2 900 €"] },
+          { label: "Maintenance incluse", values: ["Rarement", "Jamais", "3 mois offerts"] },
+          { label: "IA & automatisations", values: ["En option (+)", "Non", "Intégré nativement"] },
+          { label: "Interlocuteur unique", values: ["Non (chef de projet + dev + designer)", "Oui (mais turnover)", "Oui, toujours"] },
+          { label: "Code source livré", values: ["Parfois", "Rarement", "Toujours — licence exclusive"] },
+          { label: "Prix final garanti", values: ["Rarement (devis évolutifs)", "Oui", "Oui — contractuel"] },
+          { label: "Support post-livraison", values: ["Payant dès J+1", "Néant", "3 mois inclus, puis 490 €/mois"] },
+        ],
       },
       recurring: {
         badge: "Abonnement continu",
@@ -792,6 +815,22 @@ const dictionaries: Record<Language, Dictionary> = {
       ecosystemCta: {
         text: "Need a custom architecture? The Ecosystem plan adapts to your ambitions — 2 to 6 months, outsourced CTO.",
         button: "Chat for 30 min",
+      },
+      comparison: {
+        badge: "Why me",
+        title: "Agency, cheap freelancer,\nor pro builder?",
+        subtitle: "Compare objectively before choosing.",
+        columns: ["Criteria", "Web agency", "Low-cost freelancer", "Aïssa Belkoussa"],
+        rows: [
+          { label: "Delivery time", values: ["2 to 4 months", "2 to 6 weeks", "5 to 10 days"] },
+          { label: "Average price", values: ["€8,000 – €25,000", "€500 – €2,000", "€2,900"] },
+          { label: "Maintenance included", values: ["Rarely", "Never", "3 months free"] },
+          { label: "AI & automations", values: ["Optional (+)", "No", "Built-in natively"] },
+          { label: "Single point of contact", values: ["No (PM + dev + designer)", "Yes (but high turnover)", "Yes, always"] },
+          { label: "Source code delivered", values: ["Sometimes", "Rarely", "Always — exclusive license"] },
+          { label: "Guaranteed final price", values: ["Rarely (evolving quotes)", "Yes", "Yes — contractual"] },
+          { label: "Post-delivery support", values: ["Paid from day 1", "None", "3 months included, then €490/mo"] },
+        ],
       },
       recurring: {
         badge: "Ongoing subscription",
