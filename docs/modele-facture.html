@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Facture — Aissa Belkoussa</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+    :root { --black:#0a0a0a; --white:#fafafa; --gray-100:#f5f5f5; --gray-200:#e5e5e5; --gray-400:#a3a3a3; --gray-500:#737373; --gray-600:#525252; --accent:#2563eb; }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif; background:var(--white); color:var(--black); line-height:1.5; -webkit-font-smoothing:antialiased; }
+    .page { max-width:800px; margin:0 auto; padding:48px 40px; }
+    [contenteditable] { outline:none; border-bottom:1px dashed var(--gray-200); padding:2px 4px; }
+    [contenteditable]:hover,[contenteditable]:focus { border-bottom-color:var(--accent); background:rgba(37,99,235,0.03); }
+    @media print { [contenteditable] { border-bottom:none; padding:0; background:none; } }
+    .header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:40px; padding-bottom:24px; border-bottom:2px solid var(--black); }
+    .header-left h1 { font-size:22px; font-weight:800; letter-spacing:-0.5px; text-transform:uppercase; margin-bottom:4px; }
+    .header-left p { font-size:11px; color:var(--gray-500); line-height:1.8; }
+    .header-right { text-align:right; font-size:11px; color:var(--gray-500); line-height:1.8; }
+    .header-right a { color:var(--accent); text-decoration:none; font-weight:600; }
+    .badge-paid { display:inline-block; background:#22c55e; color:white; font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:1px; padding:4px 14px; border-radius:20px; margin-top:8px; }
+    .badge-pending { display:inline-block; background:#f59e0b; color:white; font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:1px; padding:4px 14px; border-radius:20px; margin-top:8px; }
+    .doc-info { display:grid; grid-template-columns:1fr 1fr; gap:32px; margin-bottom:40px; }
+    .doc-block h2 { font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:1.2px; color:var(--accent); margin-bottom:10px; }
+    .doc-field { display:flex; justify-content:space-between; font-size:12px; padding:6px 0; border-bottom:1px solid var(--gray-100); }
+    .doc-field .label { color:var(--gray-500); font-weight:500; }
+    .doc-field .value { font-weight:600; text-align:right; }
+    .client-info { background:var(--gray-100); border-radius:8px; padding:16px 20px; }
+    .client-info p { font-size:12px; line-height:1.8; }
+    .section-title { font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:1.2px; color:var(--accent); margin-bottom:12px; }
+    table { width:100%; border-collapse:collapse; margin-bottom:24px; font-size:12px; }
+    thead th { text-align:left; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--gray-500); padding:10px 12px; border-bottom:2px solid var(--black); }
+    thead th:last-child, thead th:nth-child(3) { text-align:right; }
+    tbody td { padding:12px; border-bottom:1px solid var(--gray-100); vertical-align:top; }
+    tbody td:last-child, tbody td:nth-child(3) { text-align:right; white-space:nowrap; }
+    .item-name { font-weight:600; }
+    .item-desc { font-size:11px; color:var(--gray-500); margin-top:2px; }
+    .totals { display:flex; justify-content:flex-end; margin-bottom:32px; }
+    .totals-box { width:280px; }
+    .total-line { display:flex; justify-content:space-between; padding:8px 0; font-size:12px; border-bottom:1px solid var(--gray-100); }
+    .total-line .label { color:var(--gray-500); }
+    .total-line.final { border-bottom:2px solid var(--black); font-size:16px; font-weight:800; padding:12px 0; }
+    .total-line.final .label { color:var(--black); }
+    .payment-info { background:var(--gray-100); border-radius:10px; padding:20px 24px; margin-bottom:32px; }
+    .payment-info h3 { font-size:13px; font-weight:700; margin-bottom:12px; }
+    .payment-row { display:flex; justify-content:space-between; font-size:12px; padding:6px 0; border-bottom:1px solid var(--gray-200); }
+    .payment-row:last-child { border-bottom:none; }
+    .payment-row .label { color:var(--gray-600); }
+    .payment-row .value { font-weight:600; }
+    .footer-legal { margin-top:32px; padding-top:16px; border-top:1px solid var(--gray-200); font-size:9px; color:var(--gray-400); text-align:center; line-height:1.8; }
+    @media print { body { -webkit-print-color-adjust:exact; print-color-adjust:exact; } .page { padding:32px 28px; max-width:100%; } .badge-paid { background:#22c55e !important; } }
+    @page { size:A4; margin:0; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="header">
+      <div class="header-left">
+        <h1>Facture</h1>
+        <p>
+          Aissa Belkoussa<br>
+          Systemes digitaux & intelligence artificielle<br>
+          SIRET : 937 690 592 00012<br>
+          Albi, France
+        </p>
+      </div>
+      <div class="header-right">
+        aissabelkoussa.fr<br>
+        <a href="mailto:contact@aissabelkoussa.fr">contact@aissabelkoussa.fr</a><br>
+        <br>
+        Facture n&deg; <span contenteditable>F-2026-001</span><br>
+        Date : <span contenteditable>03/04/2026</span><br>
+        <span contenteditable class="badge-paid">PAYEE</span>
+      </div>
+    </div>
+
+    <div class="doc-info">
+      <div class="doc-block">
+        <h2>Prestation</h2>
+        <div class="doc-field">
+          <span class="label">Type</span>
+          <span class="value" contenteditable>Accelerateur</span>
+        </div>
+        <div class="doc-field">
+          <span class="label">Devis reference</span>
+          <span class="value" contenteditable>D-2026-001</span>
+        </div>
+        <div class="doc-field">
+          <span class="label">Date de livraison</span>
+          <span class="value" contenteditable>A definir</span>
+        </div>
+      </div>
+      <div class="doc-block">
+        <h2>Client</h2>
+        <div class="client-info">
+          <p>
+            <strong contenteditable>Nom de l'entreprise</strong><br>
+            <span contenteditable>Prenom Nom du dirigeant</span><br>
+            <span contenteditable>Adresse complete</span><br>
+            <span contenteditable>Code postal, Ville</span><br>
+            SIRET : <span contenteditable>XXX XXX XXX XXXXX</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-title">Detail de la prestation</div>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:50%">Designation</th>
+          <th>Qte</th>
+          <th>Prix unitaire</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="item-name" contenteditable>Accelerateur — Systeme digital cle en main + 3 mois maintenance</div>
+            <div class="item-desc" contenteditable>Site professionnel + prise de RDV en ligne + devis automatise. 3 mois monitoring, bugs sous 48h, MAJ securite inclus.</div>
+          </td>
+          <td contenteditable>1</td>
+          <td contenteditable>2 900,00 &euro;</td>
+          <td contenteditable>2 900,00 &euro;</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="totals">
+      <div class="totals-box">
+        <div class="total-line">
+          <span class="label">Total HT</span>
+          <span contenteditable>2 900,00 &euro;</span>
+        </div>
+        <div class="total-line">
+          <span class="label">TVA</span>
+          <span>Non applicable (art. 293 B CGI)</span>
+        </div>
+        <div class="total-line final">
+          <span class="label">Total TTC</span>
+          <span contenteditable>2 900,00 &euro;</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="payment-info">
+      <h3>Paiements</h3>
+      <div class="payment-row">
+        <span class="label"><strong>1/2</strong> &mdash; Acompte a la signature</span>
+        <span class="value" contenteditable>1 450,00 &euro;</span>
+      </div>
+      <div class="payment-row">
+        <span class="label">Date de reception</span>
+        <span class="value" contenteditable>__/__/2026</span>
+      </div>
+      <div class="payment-row">
+        <span class="label"><strong>2/2</strong> &mdash; Solde a la livraison</span>
+        <span class="value" contenteditable>1 450,00 &euro;</span>
+      </div>
+      <div class="payment-row">
+        <span class="label">Date de reception</span>
+        <span class="value" contenteditable>__/__/2026</span>
+      </div>
+    </div>
+
+    <div style="font-size:11px;color:var(--gray-500);line-height:1.7;margin-bottom:32px;">
+      <strong>Moyen de paiement :</strong> Virement bancaire<br>
+      <strong>IBAN :</strong> <span contenteditable>FR76 XXXX XXXX XXXX XXXX XXXX XXX</span><br>
+      <strong>BIC :</strong> <span contenteditable>XXXXXXXX</span><br>
+      <br>
+      <strong>Conditions :</strong> Paiement a reception de facture. Penalites de retard : 3 fois le taux d'interet legal + 40&euro; forfaitaire (art. L441-10 Code de commerce).<br>
+      CGV : <a href="https://aissabelkoussa.fr/cgv" style="color:var(--accent);text-decoration:none;">aissabelkoussa.fr/cgv</a>
+    </div>
+
+    <div class="footer-legal">
+      Aissa Belkoussa &mdash; Systemes digitaux & IA &mdash; SIREN : 937 690 592 &mdash; SIRET : 937 690 592 00012 &mdash; Albi, France<br>
+      TVA non applicable, art. 293 B du CGI &mdash; Code NAF : 5911B
+    </div>
+  </div>
+</body>
+</html>

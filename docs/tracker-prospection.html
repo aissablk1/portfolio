@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tracker Prospection — 14 jours</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    :root { --bg:#0a0a0a; --surface:#141414; --border:#222; --text:#fafafa; --muted:#666; --accent:#6366f1; --green:#22c55e; --amber:#f59e0b; --red:#ef4444; }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); line-height:1.5; }
+    .page { max-width:1200px; margin:0 auto; padding:32px 24px; }
+    h1 { font-size:24px; font-weight:800; letter-spacing:-0.5px; margin-bottom:4px; }
+    .subtitle { font-size:12px; color:var(--muted); margin-bottom:32px; }
+    .stats { display:grid; grid-template-columns:repeat(5,1fr); gap:12px; margin-bottom:32px; }
+    .stat { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:16px; text-align:center; }
+    .stat .number { font-size:28px; font-weight:800; }
+    .stat .label { font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin-top:4px; }
+    table { width:100%; border-collapse:collapse; font-size:13px; }
+    thead th { text-align:left; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--muted); padding:12px 10px; border-bottom:2px solid var(--border); }
+    tbody td { padding:10px; border-bottom:1px solid var(--border); }
+    tbody tr:hover { background:var(--surface); }
+    .tag { display:inline-block; font-size:9px; font-weight:700; text-transform:uppercase; padding:3px 8px; border-radius:12px; }
+    .tag-btp { background:#22c55e20; color:var(--green); }
+    .tag-b2b { background:#6366f120; color:var(--accent); }
+    select, input[type="date"] { background:var(--surface); border:1px solid var(--border); color:var(--text); padding:4px 8px; border-radius:6px; font-size:11px; font-family:inherit; }
+    input[type="text"] { background:transparent; border:none; color:var(--text); font-size:12px; width:100%; outline:none; }
+    input[type="text"]::placeholder { color:var(--border); }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <h1>Tracker Prospection</h1>
+    <div class="subtitle">Objectif : 1er client payant en 14 jours — 3 avril au 16 avril 2026</div>
+
+    <div class="stats">
+      <div class="stat"><div class="number" id="s-total">12</div><div class="label">Prospects</div></div>
+      <div class="stat"><div class="number" id="s-contacted" style="color:var(--amber)">0</div><div class="label">Contactes</div></div>
+      <div class="stat"><div class="number" id="s-replied" style="color:var(--green)">0</div><div class="label">Reponses</div></div>
+      <div class="stat"><div class="number" id="s-calls" style="color:var(--accent)">0</div><div class="label">Appels</div></div>
+      <div class="stat"><div class="number" id="s-signed" style="color:var(--green)">0</div><div class="label">Signes</div></div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Prospect</th>
+          <th>Entreprise</th>
+          <th>Niche</th>
+          <th>Canal</th>
+          <th>Date envoi</th>
+          <th>Statut</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+
+  <script>
+    const prospects = [
+      { name:"Stefan Vaysse", company:"Vaysse Stefan Plomberie", niche:"btp" },
+      { name:"Christophe Massiau", company:"Plomberie Massiau", niche:"btp" },
+      { name:"Dirigeant SOLESBAT", company:"SOLESBAT SAS", niche:"btp" },
+      { name:"Dirigeant SG ELEC", company:"SG ELEC", niche:"btp" },
+      { name:"Dirigeant LMA", company:"La Menuiserie Albigeoise", niche:"btp" },
+      { name:"Dirigeant Favero", company:"Favero Menuiserie", niche:"btp" },
+      { name:"Dirigeant Elhea", company:"Elhea", niche:"b2b" },
+      { name:"Dirigeant AF81", company:"Action Formation 81", niche:"b2b" },
+      { name:"Francoise Castel", company:"Altair Business", niche:"b2b" },
+      { name:"Dirigeant Consupting", company:"Consupting", niche:"b2b" },
+      { name:"Dirigeant Zenessor", company:"Zenessor", niche:"b2b" },
+      { name:"Alexandre BRIHIEZ", company:"Apporteur affaires", niche:"b2b" },
+    ];
+
+    const statusOptions = [
+      { value:"pending", label:"En attente" },
+      { value:"sent", label:"Envoye" },
+      { value:"replied", label:"Repondu" },
+      { value:"call", label:"Appel fait" },
+      { value:"signed", label:"Signe" },
+      { value:"lost", label:"Perdu" },
+    ];
+
+    const canalOptions = ["linkedin","email","teams","phone"];
+
+    function save() {
+      const rows = document.querySelectorAll('#tbody tr');
+      const data = Array.from(rows).map(function(row) {
+        return {
+          canal: row.querySelector('.c-canal').value,
+          date: row.querySelector('.c-date').value,
+          status: row.querySelector('.c-status').value,
+          notes: row.querySelector('.c-notes').value,
+        };
+      });
+      localStorage.setItem('tracker-v2', JSON.stringify(data));
+      updateStats();
+    }
+
+    function updateStats() {
+      const rows = document.querySelectorAll('#tbody .c-status');
+      let total=rows.length, contacted=0, replied=0, calls=0, signed=0;
+      rows.forEach(function(sel) {
+        var s = sel.value;
+        if (s==='sent'||s==='replied'||s==='call'||s==='signed') contacted++;
+        if (s==='replied'||s==='call'||s==='signed') replied++;
+        if (s==='call'||s==='signed') calls++;
+        if (s==='signed') signed++;
+      });
+      document.getElementById('s-total').textContent = total;
+      document.getElementById('s-contacted').textContent = contacted;
+      document.getElementById('s-replied').textContent = replied;
+      document.getElementById('s-calls').textContent = calls;
+      document.getElementById('s-signed').textContent = signed;
+    }
+
+    function render() {
+      var saved = JSON.parse(localStorage.getItem('tracker-v2') || '[]');
+      var tbody = document.getElementById('tbody');
+
+      prospects.forEach(function(p, i) {
+        var s = saved[i] || {};
+        var tr = document.createElement('tr');
+
+        var td0 = document.createElement('td');
+        td0.textContent = String(i + 1);
+        tr.appendChild(td0);
+
+        var td1 = document.createElement('td');
+        var strong = document.createElement('strong');
+        strong.textContent = p.name;
+        td1.appendChild(strong);
+        tr.appendChild(td1);
+
+        var td2 = document.createElement('td');
+        td2.style.color = 'var(--muted)';
+        td2.textContent = p.company;
+        tr.appendChild(td2);
+
+        var td3 = document.createElement('td');
+        var tag = document.createElement('span');
+        tag.className = 'tag tag-' + p.niche;
+        tag.textContent = p.niche.toUpperCase();
+        td3.appendChild(tag);
+        tr.appendChild(td3);
+
+        var td4 = document.createElement('td');
+        var selCanal = document.createElement('select');
+        selCanal.className = 'c-canal';
+        selCanal.onchange = save;
+        canalOptions.forEach(function(c) {
+          var opt = document.createElement('option');
+          opt.value = c;
+          opt.textContent = c;
+          if ((s.canal || 'linkedin') === c) opt.selected = true;
+          selCanal.appendChild(opt);
+        });
+        td4.appendChild(selCanal);
+        tr.appendChild(td4);
+
+        var td5 = document.createElement('td');
+        var dateInput = document.createElement('input');
+        dateInput.type = 'date';
+        dateInput.className = 'c-date';
+        dateInput.value = s.date || '';
+        dateInput.onchange = save;
+        td5.appendChild(dateInput);
+        tr.appendChild(td5);
+
+        var td6 = document.createElement('td');
+        var selStatus = document.createElement('select');
+        selStatus.className = 'c-status';
+        selStatus.onchange = save;
+        statusOptions.forEach(function(st) {
+          var opt = document.createElement('option');
+          opt.value = st.value;
+          opt.textContent = st.label;
+          if ((s.status || 'pending') === st.value) opt.selected = true;
+          selStatus.appendChild(opt);
+        });
+        td6.appendChild(selStatus);
+        tr.appendChild(td6);
+
+        var td7 = document.createElement('td');
+        var notesInput = document.createElement('input');
+        notesInput.type = 'text';
+        notesInput.className = 'c-notes';
+        notesInput.value = s.notes || '';
+        notesInput.placeholder = '...';
+        notesInput.oninput = save;
+        td7.appendChild(notesInput);
+        tr.appendChild(td7);
+
+        tbody.appendChild(tr);
+      });
+
+      updateStats();
+    }
+
+    render();
+  </script>
+</body>
+</html>
