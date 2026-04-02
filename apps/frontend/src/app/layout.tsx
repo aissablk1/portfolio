@@ -27,9 +27,9 @@ const outfit = Outfit({
 });
 
 const siteUrl = "https://www.aissabelkoussa.fr";
-const siteTitle = "Aïssa Belkoussa — Architecte de systemes & Automation";
+const siteTitle = "Creation site internet artisan & automatisation PME — Aissa Belkoussa, Albi";
 const siteDescription =
-  "Je transforme vos intuitions systeme en architectures digitales concretes, coherentes et fiables. Automation, IA, dashboards, e-commerce sur-mesure. Base en France, operant partout.";
+  "Freelance creation site internet a Albi. Sites pour artisans BTP, automatisation devis et relances, dashboards PME. Livre en 10 jours, prix fixe. Devis gratuit.";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -51,16 +51,18 @@ export const metadata: Metadata = {
   description: siteDescription,
 
   keywords: [
-    "architecte systemes digitaux",
-    "automation sur-mesure",
-    "developpeur freelance France",
-    "developpeur React Next.js",
-    "e-commerce Shopify sur-mesure",
-    "dashboard decisionnel",
-    "workflow algorithmique",
-    "developpeur Albi Occitanie",
-    "architecture IA agents",
-    "systeme automation PME",
+    "creation site internet artisan",
+    "site internet BTP",
+    "creation site web Albi",
+    "developpeur web freelance Tarn",
+    "site web professionnel artisan",
+    "automatisation devis artisan",
+    "site internet plombier",
+    "digitalisation PME",
+    "automatisation entreprise Toulouse",
+    "developpeur web Albi Occitanie",
+    "freelance site internet Tarn",
+    "site internet electricien",
   ],
 
   authors: [{ name: "Aïssa Belkoussa", url: siteUrl }],
@@ -80,10 +82,10 @@ export const metadata: Metadata = {
     description: siteDescription,
     images: [
       {
-        url: "/assets/images/AISSABELKOUSSA.png",
-        width: 1242,
-        height: 2208,
-        alt: "Aïssa Belkoussa — Architecte de systemes & Automation",
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Aissa Belkoussa — Sites et automatisations pour artisans et PME, Albi",
       },
     ],
   },
@@ -124,6 +126,12 @@ export default function RootLayout({
         <JsonLd data={schemas} />
       </head>
       <body className={`${inter.variable} ${outfit.variable} antialiased`}>
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:bg-site-accent focus:text-white focus:px-6 focus:py-3 focus:rounded-full focus:text-sm focus:font-bold"
+        >
+          Aller au contenu principal
+        </a>
         <LanguageProvider>
           <MaintenanceGate>
             <ScrollIndicator />

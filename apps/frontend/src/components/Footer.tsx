@@ -59,21 +59,21 @@ const Footer = () => {
 
           <div className="grid grid-cols-2 md:grid-cols-3 gap-12">
               <div className="flex flex-col gap-4">
-                  <span className="text-xs font-bold uppercase tracking-widest opacity-30">Explore</span>
-                  <Link href="#offers" className="text-sm hover:underline">{dict.nav.offers}</Link>
-                  <Link href="#approach" className="text-sm hover:underline">{dict.nav.approach}</Link>
-                  <Link href="#expertise" className="text-sm hover:underline">{dict.nav.expertise}</Link>
+                  <span className="text-xs font-bold uppercase tracking-widest text-site-text-light">Explore</span>
+                  <Link href="/#offers" className="text-sm hover:underline">{dict.nav.offers}</Link>
+                  <Link href="/#approach" className="text-sm hover:underline">{dict.nav.approach}</Link>
+                  <Link href="/#expertise" className="text-sm hover:underline">{dict.nav.expertise}</Link>
               </div>
               <div className="flex flex-col gap-4">
-                  <span className="text-xs font-bold uppercase tracking-widest opacity-30">Architecture</span>
-                  <Link href="#systems" className="text-sm hover:underline">{dict.nav.systems}</Link>
+                  <span className="text-xs font-bold uppercase tracking-widest text-site-text-light">Architecture</span>
+                  <Link href="/#systems" className="text-sm hover:underline">{dict.nav.systems}</Link>
                   <Link href="/services" className="text-sm hover:underline">{dict.nav.services}</Link>
                   <Link href="/diagnostic" className="text-sm hover:underline">{language === "fr" ? "Diagnostic gratuit" : "Free diagnostic"}</Link>
-                  <Link href="#about" className="text-sm hover:underline">{dict.nav.about}</Link>
+                  <Link href="/#about" className="text-sm hover:underline">{dict.nav.about}</Link>
                   <Link href="/contact" className="text-sm hover:underline">{dict.nav.contact}</Link>
               </div>
               <div className="flex flex-col gap-4 col-span-2 md:col-span-1">
-                  <span className="text-xs font-bold uppercase tracking-widest opacity-30">Legal</span>
+                  <span className="text-xs font-bold uppercase tracking-widest text-site-text-light">Legal</span>
                   <Link href="/mentions-legales" className="text-sm hover:underline">{dict.footer.legalNotice}</Link>
                   <Link href="/confidentialite" className="text-sm hover:underline">{dict.footer.privacyPolicy}</Link>
                   <Link href="/cgu" className="text-sm hover:underline">{dict.footer.termsOfService}</Link>
@@ -82,12 +82,12 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto mt-32 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] font-bold uppercase tracking-[0.2em] opacity-30">
+        <div className="max-w-7xl mx-auto mt-32 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] font-bold uppercase tracking-[0.2em] text-site-text-light">
           <p>{dict.footer.credits}</p>
           <p>{dict.footer.reserved}</p>
         </div>
 
-        <div className="max-w-7xl mx-auto mt-2 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] font-bold uppercase tracking-[0.2em] opacity-30">
+        <div className="max-w-7xl mx-auto mt-2 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] font-bold uppercase tracking-[0.2em] text-site-text-light">
           <p>SIREN: 937 690 592</p>
           <p>Code NAF: 5911B</p>
           <p>SIRET: 937 690 592 00012</p>

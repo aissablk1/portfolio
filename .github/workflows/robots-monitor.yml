@@ -1,0 +1,47 @@
+name: Robots.txt Monitor
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "apps/frontend/src/app/robots.ts"
+      - "apps/frontend/src/app/sitemap.ts"
+  schedule:
+    - cron: "0 5 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: robots-monitor
+  cancel-in-progress: true
+
+jobs:
+  monitor:
+    name: Monitor Robots and Indexation
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      SITE_URL: "https://www.aissabelkoussa.fr"
+
+    steps:
+      - name: Check go page is not indexed
+        run: |
+          echo "Checking /go noindex..."
+          HTML=$(curl -sL "$SITE_URL/go" --max-time 15)
+          if echo "$HTML" | grep -qi "noindex"; then
+            echo "OK: /go has noindex"
+          else
+            echo "ALERT: /go might be indexable"
+          fi
+
+          echo "Checking sitemap..."
+          SITEMAP=$(curl -s "$SITE_URL/sitemap.xml" --max-time 10)
+          if echo "$SITEMAP" | grep -q "aissabelkoussa.fr/go"; then
+            echo "ALERT: /go is in the sitemap"
+            exit 1
+          else
+            echo "OK: /go is not in the sitemap"
+          fi
+
+          echo "Checking robots.txt..."
+          curl -s "$SITE_URL/robots.txt" --max-time 10
+          echo "OK: robots.txt accessible"

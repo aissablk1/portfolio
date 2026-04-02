@@ -161,7 +161,8 @@ export default function DiagnosticPage() {
         </div>
       </header>
 
-      <main className="pt-32 pb-20 px-6">
+      <main id="main-content" className="pt-32 pb-20 px-6">
+        <h1 className="sr-only">Diagnostic digital gratuit</h1>
         <div className="max-w-2xl mx-auto">
           {/* ── Progress bar ────────────────────────────────────── */}
           {!isResultPhase && (
