@@ -212,12 +212,12 @@ export default function ServicesPage() {
               {/* Social proof stats */}
               <div className="flex flex-wrap justify-center gap-8 md:gap-14">
                 {(language === "fr" ? [
-                  { value: "100%", label: "projets livrés dans les délais" },
+                  { value: "99%", label: "projets livrés dans les délais" },
                   { value: "48h", label: "temps de réponse max" },
                   { value: "0", label: "intermédiaire" },
                   { value: "3 mois", label: "de maintenance offerts" },
                 ] : [
-                  { value: "100%", label: "projects delivered on time" },
+                  { value: "99%", label: "projects delivered on time" },
                   { value: "48h", label: "max response time" },
                   { value: "0", label: "middlemen" },
                   { value: "3 months", label: "free maintenance" },
@@ -356,21 +356,6 @@ export default function ServicesPage() {
                             ? "Satisfait ou retravaillé — Prix garanti, zéro surprise"
                             : "Satisfied or reworked — Guaranteed price, zero surprises"}
                         </p>
-                      )}
-
-                      {/* Micro-testimonial on highlighted card */}
-                      {isHighlighted && (
-                        <div className="mb-8 flex items-start gap-3 text-xs text-site-text-light/60 italic">
-                          <span className="text-lg leading-none">&ldquo;</span>
-                          <p className="leading-relaxed">
-                            {language === "fr"
-                              ? "Mon site était en ligne en 8 jours. Les 3 mois de maintenance m'ont convaincu de continuer — je ne touche plus à rien."
-                              : "My site was live in 8 days. The 3 months of maintenance convinced me to continue — I don't touch anything anymore."}
-                            <span className="block mt-1 not-italic font-medium text-site-text-light/40">
-                              {language === "fr" ? "— Gérant, entreprise BTP" : "— Owner, construction company"}
-                            </span>
-                          </p>
-                        </div>
                       )}
 
                       {/* Features */}

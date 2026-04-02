@@ -66,7 +66,8 @@ interface ContactPayload {
   budget: string;
   lang: "fr" | "en";
   plan?: string;
-  _honey?: string; // honeypot
+  _honey?: string;
+  [key: string]: unknown;
 }
 
 function validatePayload(body: unknown): body is ContactPayload {
@@ -77,11 +78,8 @@ function validatePayload(body: unknown): body is ContactPayload {
     b.name.length > 2 &&
     typeof b.email === "string" &&
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(b.email) &&
-    typeof b.context === "string" &&
     typeof b.need === "string" &&
-    typeof b.message === "string" &&
-    b.message.length > 5 &&
-    typeof b.budget === "string" &&
+    b.need.length > 0 &&
     (b.lang === "fr" || b.lang === "en")
   );
 }

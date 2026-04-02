@@ -78,20 +78,20 @@ const ContactForm = () => {
           {dict.funnel.success.message}
         </p>
 
-        {/* Calendly CTA — strike while the iron is hot */}
+        {/* Direct contact CTA — strike while the iron is hot */}
         <a
-          href="https://calendly.com/aissabelkoussa/30min"
+          href={`https://wa.me/33782721406?text=${encodeURIComponent(language === "fr" ? "Bonjour Aïssa, je viens d'envoyer ma demande via le site. Quand peut-on échanger ?" : "Hi Aïssa, I just submitted my request through the website. When can we chat?")}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-3 bg-site-accent text-white px-10 py-5 rounded-full text-xs font-bold uppercase tracking-widest hover:scale-105 transition-all shadow-lg mb-4"
+          className="inline-flex items-center gap-3 bg-[#25D366] text-white px-10 py-5 rounded-full text-xs font-bold uppercase tracking-widest hover:scale-105 transition-all shadow-lg mb-4"
         >
-          {language === "fr" ? "Réserver mon appel maintenant" : "Book my call now"}
+          {language === "fr" ? "M'écrire sur WhatsApp" : "Message me on WhatsApp"}
           <ArrowUpRight size={14} />
         </a>
         <p className="text-[10px] text-site-text-light/40 mb-10">
           {language === "fr"
-            ? "30 min, gratuit, sans engagement — créneaux limités"
-            : "30 min, free, no commitment — limited slots"}
+            ? "Réponse en quelques heures — créneaux limités"
+            : "Response in a few hours — limited slots"}
         </p>
 
         <button
