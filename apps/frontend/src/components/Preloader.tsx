@@ -36,7 +36,8 @@ export default function Preloader({ children }: { children: React.ReactNode }) {
             key="preloader"
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5, ease: [0.25, 1, 0.5, 1] }}
-            className="fixed inset-0 z-[9999] bg-[#0a0a0a] flex flex-col items-center justify-center"
+            className="fixed inset-0 z-[9999] bg-site-bg flex flex-col items-center justify-center"
+            style={{ backgroundImage: "linear-gradient(var(--color-site-border) 1px, transparent 1px), linear-gradient(90deg, var(--color-site-border) 1px, transparent 1px)", backgroundSize: "60px 60px" }}
           >
             {/* Letters animation */}
             <div className="relative flex items-center justify-center overflow-hidden">
@@ -76,7 +77,7 @@ export default function Preloader({ children }: { children: React.ReactNode }) {
                         delay: phase === "letters" ? i * 0.05 : phase === "exit" ? i * 0.02 : 0,
                         ease: [0.22, 1, 0.36, 1],
                       }}
-                      className="inline-block text-white font-display font-medium tracking-tighter"
+                      className="inline-block text-site-text font-display font-medium tracking-tighter"
                       style={{
                         fontSize: "clamp(1.8rem, 5vw, 4rem)",
                         width: isSpace ? "0.3em" : "auto",
