@@ -31,9 +31,16 @@ export default function GoPage() {
         </div>
       </header>
 
+      {/* ── Urgency banner ─────────────────────────────────────── */}
+      <div className="fixed top-14 left-0 right-0 z-40 bg-site-text text-site-bg text-center py-2">
+        <p className="text-[11px] font-bold uppercase tracking-widest">
+          Avril 2026 — 2 créneaux projet disponibles
+        </p>
+      </div>
+
       <main>
         {/* ── 1. Hook ──────────────────────────────────────────────── */}
-        <section className="pt-40 pb-32 px-container">
+        <section className="pt-48 pb-32 px-container">
           <div className="max-w-4xl mx-auto">
             <motion.div {...fade()}>
               <p className="text-xs font-bold uppercase tracking-widest text-site-text-light mb-8">
