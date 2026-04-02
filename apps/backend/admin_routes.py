@@ -34,6 +34,9 @@ from admin_models import (
     ContactStatus,
     SortOrder,
     ExportFormat,
+    PipelineStage,
+    PipelineDealCreate,
+    PipelineDealUpdate,
 )
 from services.auth_service import (
     create_access_token,
@@ -2157,3 +2160,205 @@ async def get_pageviews_stats(request: Request):
     except Exception as e:
         logger.error(f"Erreur stats visits : {str(e)}")
         raise HTTPException(status_code=500, detail="Erreur lors du chargement des statistiques de visite.")
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+#  PIPELINE — CRM / Lead tracking
+# ═══════════════════════════════════════════════════════════════════════════════
+
+
+@admin_router.get("/pipeline")
+async def get_pipeline(
+    request: Request,
+    stage: Optional[str] = Query(None),
+    niche: Optional[str] = Query(None),
+    label: Optional[str] = Query(None),
+):
+    """Liste de tous les deals pipeline, groupés par stage."""
+    db = _get_db()
+    await get_current_admin(request, db)
+
+    try:
+        query: dict = {}
+        if stage:
+            query["stage"] = stage
+        if niche:
+            query["niche"] = niche
+        if label:
+            query["lead_label"] = label
+
+        cursor = db.pipeline_deals.find(query, {"_id": 0}).sort("created_at", -1)
+        deals = [doc async for doc in cursor]
+
+        # Group by stage
+        stages_order = ["lead", "contacted", "call", "proposal", "signed", "delivered", "lost"]
+        grouped = {s: [] for s in stages_order}
+        for deal in deals:
+            s = deal.get("stage", "lead")
+            if s in grouped:
+                grouped[s].append(deal)
+
+        # Pipeline value
+        active_stages = ["lead", "contacted", "call", "proposal"]
+        total_value = sum(d.get("value", 0) for d in deals if d.get("stage") in active_stages)
+        signed_value = sum(d.get("value", 0) for d in deals if d.get("stage") == "signed")
+        delivered_value = sum(d.get("value", 0) for d in deals if d.get("stage") == "delivered")
+
+        # Lead temperature distribution
+        hot = sum(1 for d in deals if d.get("lead_label") == "hot")
+        warm = sum(1 for d in deals if d.get("lead_label") == "warm")
+        cold = sum(1 for d in deals if d.get("lead_label") == "cold")
+
+        return _ok({
+            "deals": grouped,
+            "total_deals": len(deals),
+            "stats": {
+                "pipeline_value": total_value,
+                "signed_value": signed_value,
+                "delivered_value": delivered_value,
+                "hot_leads": hot,
+                "warm_leads": warm,
+                "cold_leads": cold,
+                "conversion_rate": round((sum(1 for d in deals if d.get("stage") in ("signed", "delivered")) / max(len(deals), 1)) * 100, 1),
+            },
+        })
+
+    except Exception as e:
+        logger.error(f"Erreur pipeline : {str(e)}")
+        raise HTTPException(status_code=500, detail="Erreur pipeline.")
+
+
+@admin_router.post("/pipeline")
+async def create_deal(request: Request, deal: PipelineDealCreate):
+    """Créer un deal pipeline manuellement (prospect LinkedIn, réseau, etc.)."""
+    db = _get_db()
+    admin = await get_current_admin(request, db)
+
+    try:
+        now = datetime.now(timezone.utc)
+        deal_doc = {
+            "id": str(uuid.uuid4()),
+            **deal.dict(),
+            "lead_score": 0,
+            "lead_label": "warm",
+            "next_action": None,
+            "next_action_date": None,
+            "created_at": now,
+            "updated_at": now,
+            "history": [{"stage": deal.stage, "date": now.isoformat(), "note": "Deal créé manuellement"}],
+        }
+        await db.pipeline_deals.insert_one(deal_doc)
+        await log_admin_action(db, admin["id"], "pipeline_create", {"deal_id": deal_doc["id"], "name": deal.name}, _get_client_ip(request))
+
+        return _ok({"id": deal_doc["id"]})
+
+    except Exception as e:
+        logger.error(f"Erreur création deal : {str(e)}")
+        raise HTTPException(status_code=500, detail="Erreur création deal.")
+
+
+@admin_router.get("/pipeline/{deal_id}")
+async def get_deal(request: Request, deal_id: str):
+    """Détails d'un deal pipeline."""
+    db = _get_db()
+    await get_current_admin(request, db)
+
+    deal = await db.pipeline_deals.find_one({"id": deal_id}, {"_id": 0})
+    if not deal:
+        raise HTTPException(status_code=404, detail="Deal non trouvé.")
+    return _ok(deal)
+
+
+@admin_router.patch("/pipeline/{deal_id}")
+async def update_deal(request: Request, deal_id: str, update: PipelineDealUpdate):
+    """Mettre à jour un deal (stage, valeur, notes, next action)."""
+    db = _get_db()
+    admin = await get_current_admin(request, db)
+
+    try:
+        deal = await db.pipeline_deals.find_one({"id": deal_id})
+        if not deal:
+            raise HTTPException(status_code=404, detail="Deal non trouvé.")
+
+        changes: dict = {"updated_at": datetime.now(timezone.utc)}
+        update_data = update.dict(exclude_unset=True)
+        changes.update(update_data)
+
+        # Track stage changes in history
+        if "stage" in update_data and update_data["stage"] != deal.get("stage"):
+            history_entry = {
+                "stage": update_data["stage"],
+                "from_stage": deal.get("stage"),
+                "date": datetime.now(timezone.utc).isoformat(),
+                "note": update_data.get("notes", f"Déplacé vers {update_data['stage']}"),
+            }
+            await db.pipeline_deals.update_one(
+                {"id": deal_id},
+                {"$push": {"history": history_entry}}
+            )
+
+        await db.pipeline_deals.update_one({"id": deal_id}, {"$set": changes})
+        await log_admin_action(db, admin["id"], "pipeline_update", {"deal_id": deal_id, "changes": list(update_data.keys())}, _get_client_ip(request))
+
+        return _ok({"updated": True})
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Erreur mise à jour deal : {str(e)}")
+        raise HTTPException(status_code=500, detail="Erreur mise à jour deal.")
+
+
+@admin_router.delete("/pipeline/{deal_id}")
+async def delete_deal(request: Request, deal_id: str):
+    """Supprimer un deal pipeline."""
+    db = _get_db()
+    admin = await get_current_admin(request, db)
+
+    result = await db.pipeline_deals.delete_one({"id": deal_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Deal non trouvé.")
+
+    await log_admin_action(db, admin["id"], "pipeline_delete", {"deal_id": deal_id}, _get_client_ip(request))
+    return _ok({"deleted": True})
+
+
+@admin_router.get("/pipeline/stats/overview")
+async def pipeline_stats(request: Request):
+    """Stats pipeline pour le dashboard overview."""
+    db = _get_db()
+    await get_current_admin(request, db)
+
+    try:
+        all_deals = await db.pipeline_deals.find({}, {"_id": 0}).to_list(length=500)
+        active = [d for d in all_deals if d.get("stage") not in ("lost", "delivered")]
+        overdue = [
+            d for d in active
+            if d.get("next_action_date") and datetime.fromisoformat(str(d["next_action_date"])) < datetime.now(timezone.utc)
+        ]
+
+        return _ok({
+            "total_deals": len(all_deals),
+            "active_deals": len(active),
+            "overdue_actions": len(overdue),
+            "pipeline_value": sum(d.get("value", 0) for d in active),
+            "signed_revenue": sum(d.get("value", 0) for d in all_deals if d.get("stage") == "signed"),
+            "delivered_revenue": sum(d.get("value", 0) for d in all_deals if d.get("stage") == "delivered"),
+            "by_stage": {
+                stage: len([d for d in all_deals if d.get("stage") == stage])
+                for stage in ["lead", "contacted", "call", "proposal", "signed", "delivered", "lost"]
+            },
+            "by_temperature": {
+                "hot": len([d for d in all_deals if d.get("lead_label") == "hot"]),
+                "warm": len([d for d in all_deals if d.get("lead_label") == "warm"]),
+                "cold": len([d for d in all_deals if d.get("lead_label") == "cold"]),
+            },
+            "overdue_deals": [
+                {"id": d.get("id"), "name": d.get("name"), "next_action": d.get("next_action"), "next_action_date": d.get("next_action_date")}
+                for d in overdue[:5]
+            ],
+        })
+
+    except Exception as e:
+        logger.error(f"Erreur pipeline stats : {str(e)}")
+        raise HTTPException(status_code=500, detail="Erreur stats pipeline.")

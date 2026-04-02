@@ -388,6 +388,46 @@ class ApiClient {
     return this.request<ApiResponse<{ services: Record<string, unknown>[] }>>("/api/admin/site/health");
   }
 
+  // ─── Pipeline ──────────────────────────────────
+  async getPipeline(params?: Record<string, string>) {
+    const searchParams = new URLSearchParams();
+    if (params) {
+      Object.entries(params).forEach(([key, value]) => {
+        if (value) searchParams.set(key, value);
+      });
+    }
+    const query = searchParams.toString();
+    return this.request<ApiResponse<Record<string, unknown>>>(`/api/admin/pipeline${query ? `?${query}` : ""}`);
+  }
+
+  async createDeal(data: Record<string, unknown>) {
+    return this.request<ApiResponse<{ id: string }>>("/api/admin/pipeline", {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+  }
+
+  async getDeal(id: string) {
+    return this.request<ApiResponse<Record<string, unknown>>>(`/api/admin/pipeline/${id}`);
+  }
+
+  async updateDeal(id: string, data: Record<string, unknown>) {
+    return this.request<ApiResponse<Record<string, unknown>>>(`/api/admin/pipeline/${id}`, {
+      method: "PATCH",
+      body: JSON.stringify(data),
+    });
+  }
+
+  async deleteDeal(id: string) {
+    return this.request<ApiResponse<null>>(`/api/admin/pipeline/${id}`, {
+      method: "DELETE",
+    });
+  }
+
+  async getPipelineStats() {
+    return this.request<ApiResponse<Record<string, unknown>>>("/api/admin/pipeline/stats/overview");
+  }
+
   // ─── Settings ──────────────────────────────────
   async getSettings() {
     return this.request<ApiResponse<Record<string, unknown>>>("/api/admin/settings");

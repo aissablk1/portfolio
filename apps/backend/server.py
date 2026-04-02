@@ -13,6 +13,7 @@ from services.storage_service import StorageService
 from admin_routes import admin_router
 from services.auth_service import create_admin_user, load_blacklisted_tokens, hash_password
 import asyncio
+import uuid
 from datetime import datetime, timedelta, timezone
 
 ROOT_DIR = Path(__file__).parent
@@ -102,6 +103,68 @@ async def submit_contact_form(
                 detail="Trop de tentatives. Veuillez patienter avant de renvoyer un message."
             )
         
+        # Lead scoring — score the contact based on content signals
+        lead_score = 0
+        msg_lower = form_data.message.lower() if form_data.message else ""
+        subj_lower = form_data.subject.lower() if form_data.subject else ""
+
+        # Budget signals from message (0-40 pts)
+        if any(k in msg_lower for k in ["10 000", "10000", "sur mesure", "custom", "partenaire"]):
+            lead_score += 40
+        elif any(k in msg_lower for k in ["7 000", "7000", "6 900", "6900"]):
+            lead_score += 30
+        elif any(k in msg_lower for k in ["3 000", "3000", "2 900", "2900"]):
+            lead_score += 20
+        elif "budget" in msg_lower:
+            lead_score += 10
+
+        # Need signals from subject (0-25 pts)
+        if any(k in subj_lower for k in ["complet", "système", "system", "écosystème"]):
+            lead_score += 25
+        elif any(k in subj_lower for k in ["automatisation", "automation", "ia", "ai"]):
+            lead_score += 20
+        elif any(k in subj_lower for k in ["dashboard", "données", "data"]):
+            lead_score += 20
+        elif any(k in subj_lower for k in ["site", "web"]):
+            lead_score += 15
+        elif "diagnostic" in subj_lower:
+            lead_score += 15
+        elif "maintenance" in subj_lower:
+            lead_score += 10
+
+        # Message quality (0-15 pts)
+        if len(form_data.message) > 250:
+            lead_score += 10
+        elif len(form_data.message) > 100:
+            lead_score += 5
+        if any(k in msg_lower for k in ["chantier", "artisan", "btp", "plombier", "électricien", "consultant", "formateur", "agence"]):
+            lead_score += 5
+
+        # Plan selected (0-10 pts)
+        if "partenaire" in subj_lower or "partenaire" in msg_lower:
+            lead_score += 10
+        elif "accélérateur" in subj_lower or "accelerateur" in msg_lower:
+            lead_score += 8
+
+        lead_score = min(lead_score, 100)
+        lead_label = "CHAUD" if lead_score >= 55 else ("TIEDE" if lead_score >= 30 else "FROID")
+
+        # Detect niche from content
+        niche = None
+        if any(k in msg_lower for k in ["chantier", "artisan", "btp", "plombier", "électricien", "maçon", "menuisier", "couvreur"]):
+            niche = "btp"
+        elif any(k in msg_lower for k in ["consultant", "formateur", "agence", "b2b", "coaching", "cabinet"]):
+            niche = "b2b"
+
+        # Detect plan from content
+        plan = None
+        if "partenaire" in subj_lower or "partenaire" in msg_lower:
+            plan = "partenaire"
+        elif "accélérateur" in subj_lower or "accelerateur" in msg_lower:
+            plan = "accelerateur"
+        elif "autonome" in subj_lower or "autonome" in msg_lower:
+            plan = "autonome"
+
         # Create submission record
         submission = ContactSubmission(
             name=form_data.name,
@@ -109,9 +172,13 @@ async def submit_contact_form(
             subject=form_data.subject,
             message=form_data.message,
             ip_address=ip_address,
-            user_agent=user_agent
+            user_agent=user_agent,
+            lead_score=lead_score,
+            lead_label=lead_label,
+            plan=plan,
+            niche=niche,
         )
-        
+
         # Spam detection
         submission_dict = submission.dict()
         is_spam, spam_score, spam_reason = spam_protection.is_spam(submission_dict)
@@ -130,8 +197,33 @@ async def submit_contact_form(
         submission.status = "pending"
         result = await db.contact_submissions.insert_one(submission.dict())
         submission_id = str(result.inserted_id)
-        
-        logger.info(f"Contact submission saved with ID: {submission_id}")
+
+        logger.info(f"Contact submission saved with ID: {submission_id} — Lead: {lead_label} ({lead_score}/100)")
+
+        # Auto-create pipeline deal
+        deal_value = {"autonome": 3900, "accelerateur": 2900, "partenaire": 6900}.get(plan or "", 2900)
+        pipeline_deal = {
+            "id": str(uuid.uuid4()),
+            "contact_id": submission.id,
+            "name": form_data.name,
+            "email": form_data.email,
+            "company": "",
+            "niche": niche,
+            "stage": "lead",
+            "value": deal_value,
+            "plan": plan,
+            "source": "website",
+            "lead_score": lead_score,
+            "lead_label": lead_label.lower(),
+            "notes": f"Auto-créé depuis le formulaire de contact.\nBesoin : {form_data.subject}\nBudget détecté : {plan or 'non spécifié'}",
+            "next_action": "Répondre sous 2h" if lead_label == "CHAUD" else ("Qualifier par email sous 24h" if lead_label == "TIEDE" else "Évaluer sous 48h"),
+            "next_action_date": (datetime.utcnow() + timedelta(hours=2 if lead_label == "CHAUD" else 24 if lead_label == "TIEDE" else 48)).isoformat(),
+            "created_at": datetime.utcnow(),
+            "updated_at": datetime.utcnow(),
+            "history": [{"stage": "lead", "date": datetime.utcnow().isoformat(), "note": "Contact reçu via le site"}],
+        }
+        await db.pipeline_deals.insert_one(pipeline_deal)
+        logger.info(f"Pipeline deal created for {form_data.name} — {lead_label} ({lead_score}/100)")
         
         # Background tasks for notifications and external services
         async def send_notifications_and_save():
