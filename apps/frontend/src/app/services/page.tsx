@@ -93,6 +93,13 @@ export default function ServicesPage() {
     <div className="bg-site-bg min-h-screen">
       <Header />
 
+      {/* ── Urgency Banner ──────────────────────────────────────────── */}
+      <div className="bg-site-accent text-white text-center py-2.5 text-[11px] font-bold uppercase tracking-widest">
+        {language === "fr"
+          ? "Avril 2026 — 2 créneaux projet disponibles"
+          : "April 2026 — 2 project slots available"}
+      </div>
+
       <main className="pt-40 pb-0">
         {/* ── Hero ──────────────────────────────────────────────────────── */}
         <section className="px-container mb-32">
@@ -320,6 +327,21 @@ export default function ServicesPage() {
                         }
                         <ArrowUpRight size={14} />
                       </Link>
+
+                      {/* Micro-testimonial on highlighted card */}
+                      {isHighlighted && (
+                        <div className="mb-8 flex items-start gap-3 text-xs text-site-text-light/60 italic">
+                          <span className="text-lg leading-none">&ldquo;</span>
+                          <p className="leading-relaxed">
+                            {language === "fr"
+                              ? "Mon site était en ligne en 8 jours. Les 3 mois de maintenance m'ont convaincu de continuer — je ne touche plus à rien."
+                              : "My site was live in 8 days. The 3 months of maintenance convinced me to continue — I don't touch anything anymore."}
+                            <span className="block mt-1 not-italic font-medium text-site-text-light/40">
+                              {language === "fr" ? "— Gérant, entreprise BTP" : "— Owner, construction company"}
+                            </span>
+                          </p>
+                        </div>
+                      )}
 
                       {/* Features */}
                       <div className="border-t border-site-border pt-6 flex-1">
@@ -822,6 +844,17 @@ export default function ServicesPage() {
       </main>
 
       <Footer />
+
+      {/* ── Sticky CTA mobile ──────────────────────────────────────── */}
+      <div className="fixed bottom-0 left-0 right-0 z-50 lg:hidden bg-site-bg/90 backdrop-blur-xl border-t border-site-border px-4 py-3 safe-area-pb">
+        <Link
+          href="/contact?plan=accelerateur"
+          className="flex items-center justify-center gap-2 w-full bg-site-accent text-white py-3.5 rounded-full text-xs font-bold uppercase tracking-widest"
+        >
+          {language === "fr" ? "Lancer mon système — 2 900 €" : "Launch my system — €2,900"}
+          <ArrowUpRight size={14} />
+        </Link>
+      </div>
     </div>
   );
 }

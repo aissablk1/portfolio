@@ -20,6 +20,42 @@ function isRateLimited(ip: string): boolean {
   return entry.count > RATE_LIMIT;
 }
 
+// --- Lead scoring ---
+type LeadScore = { score: number; label: "CHAUD" | "TIEDE" | "FROID"; color: string; action: string };
+
+function scorelead(data: { budget: string; need: string; context: string; message: string; plan?: string }): LeadScore {
+  let score = 0;
+
+  // Budget signals (0-40 pts)
+  if (data.budget.includes("10 000") || data.budget.includes("10,000") || data.budget.includes("Sur mesure") || data.budget.includes("Custom")) score += 40;
+  else if (data.budget.includes("7 000") || data.budget.includes("7,000")) score += 30;
+  else if (data.budget.includes("3 000") || data.budget.includes("3,000")) score += 20;
+
+  // Need signals (0-25 pts)
+  if (data.need.includes("complet") || data.need.includes("complete")) score += 25;
+  else if (data.need.includes("Automatisation") || data.need.includes("Automation")) score += 20;
+  else if (data.need.includes("Dashboard") || data.need.includes("données")) score += 20;
+  else if (data.need.includes("Site") || data.need.includes("site")) score += 15;
+  else if (data.need.includes("Maintenance")) score += 10;
+
+  // Context signals (0-15 pts)
+  if (data.context.length > 3) score += 10;
+  if (data.context.length > 15) score += 5;
+
+  // Message quality (0-10 pts)
+  if (data.message.length > 100) score += 5;
+  if (data.message.length > 250) score += 5;
+
+  // Plan pre-selected from /go (0-10 pts)
+  if (data.plan === "partenaire") score += 10;
+  else if (data.plan === "accelerateur") score += 8;
+  else if (data.plan === "autonome") score += 5;
+
+  if (score >= 55) return { score, label: "CHAUD", color: "#22c55e", action: "Rappeler dans les 2h. Lead prioritaire." };
+  if (score >= 30) return { score, label: "TIEDE", color: "#f59e0b", action: "Répondre sous 24h. Qualifier par email." };
+  return { score, label: "FROID", color: "#ef4444", action: "Répondre sous 48h. Évaluer si pertinent." };
+}
+
 // --- Types ---
 interface ContactPayload {
   name: string;
@@ -29,6 +65,7 @@ interface ContactPayload {
   message: string;
   budget: string;
   lang: "fr" | "en";
+  plan?: string;
   _honey?: string; // honeypot
 }
 
@@ -118,6 +155,7 @@ function esc(str: string): string {
 // --- Admin notification email ---
 function buildAdminEmail(data: ContactPayload): string {
   const t = labels[data.lang] || labels.fr;
+  const lead = scorelead(data);
   const now = new Date().toLocaleString(data.lang === "fr" ? "fr-FR" : "en-US", {
     dateStyle: "full",
     timeStyle: "short",
@@ -130,6 +168,16 @@ function buildAdminEmail(data: ContactPayload): string {
 <head><meta charset="utf-8"></head>
 <body style="margin:0;padding:0;background:#0a0a0a;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
   <div style="max-width:600px;margin:0 auto;padding:40px 24px;">
+
+    <!-- Lead Score Banner -->
+    <div style="background:${lead.color}15;border:2px solid ${lead.color};border-radius:12px;padding:16px 20px;margin-bottom:24px;display:flex;align-items:center;gap:12px;">
+      <div style="background:${lead.color};color:#fff;font-size:12px;font-weight:800;padding:6px 14px;border-radius:20px;text-transform:uppercase;letter-spacing:0.1em;">
+        ${lead.label} (${lead.score}/100)
+      </div>
+      <span style="color:${lead.color};font-size:13px;font-weight:600;">
+        ${lead.action}
+      </span>
+    </div>
 
     <div style="border-bottom:2px solid #222;padding-bottom:24px;margin-bottom:32px;">
       <h1 style="color:#fff;font-size:20px;margin:0;letter-spacing:0.1em;text-transform:uppercase;">
@@ -332,13 +380,14 @@ export async function POST(request: Request) {
   }
 
   const t = labels[body.lang] || labels.fr;
+  const lead = scorelead(body);
 
   // Send both emails in parallel
   const [adminSent, confirmSent] = await Promise.all([
-    // 1. Admin notification
+    // 1. Admin notification (with lead score in subject)
     sendEmail({
       to: CONTACT_EMAIL,
-      subject: `${t.subject} — ${body.need} — ${body.name}`,
+      subject: `[${lead.label}] ${t.subject} — ${body.need} — ${body.name}`,
       html: buildAdminEmail(body),
       reply_to: body.email,
     }),

@@ -1,12 +1,38 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
-import { ArrowUpRight, Check } from "lucide-react";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowUpRight, Check, HardHat, Briefcase } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/utils/cn";
 
+type Niche = null | "btp" | "b2b";
+
+const nicheContent = {
+  btp: {
+    roiTitle: "Entreprise de plomberie, 8 salariés",
+    roiDesc: "Le patron perd 10 heures par semaine à répondre au téléphone, envoyer des devis par mail et relancer les clients. Accélérateur à 2 900 € : site pro + prise de RDV en ligne + devis automatisé + 3 mois de maintenance inclus. Le système tourne dès J+10.",
+    stats: [
+      { value: "10h", label: "libérées chaque semaine" },
+      { value: "800 €", label: "de valeur récupérée par semaine" },
+      { value: "4 sem.", label: "pour rentabiliser l'Accélérateur" },
+    ],
+  },
+  b2b: {
+    roiTitle: "Consultant indépendant, 400K€ CA",
+    roiDesc: "Le fondateur prospecte manuellement — LinkedIn + bouche-à-oreille. Aucun tunnel de conversion. Accélérateur à 2 900 € : landing page qui convertit + formulaire qualifié + séquence de relance automatique + 3 mois de maintenance. Le tunnel tourne 24/7.",
+    stats: [
+      { value: "1-3", label: "clients supplémentaires par mois" },
+      { value: "5 000 €", label: "de CA additionnel mensuel" },
+      { value: "1 client", label: "pour rentabiliser l'Accélérateur" },
+    ],
+  },
+};
+
 export default function GoPage() {
+  const [niche, setNiche] = useState<Niche>(null);
+  const roi = niche ? nicheContent[niche] : nicheContent.btp;
+
   const fade = (delay = 0) => ({
     initial: { opacity: 0, y: 24 },
     whileInView: { opacity: 1, y: 0 },
@@ -56,6 +82,41 @@ export default function GoPage() {
                 Votre site ne reflète pas la qualité de votre travail.
                 Vos process sont manuels, vos données dispersées.
               </p>
+            </motion.div>
+
+            {/* ── Niche selector ─────────────────────────────── */}
+            <motion.div {...fade(0.3)} className="mt-12 flex flex-col sm:flex-row gap-3">
+              <button
+                onClick={() => setNiche("btp")}
+                className={cn(
+                  "flex items-center gap-3 px-6 py-4 rounded-xl border text-sm font-medium transition-all duration-300",
+                  niche === "btp"
+                    ? "border-site-text bg-site-text text-site-bg"
+                    : "border-site-border hover:border-site-text/30"
+                )}
+              >
+                <HardHat size={18} />
+                Je suis artisan / BTP
+              </button>
+              <button
+                onClick={() => setNiche("b2b")}
+                className={cn(
+                  "flex items-center gap-3 px-6 py-4 rounded-xl border text-sm font-medium transition-all duration-300",
+                  niche === "b2b"
+                    ? "border-site-text bg-site-text text-site-bg"
+                    : "border-site-border hover:border-site-text/30"
+                )}
+              >
+                <Briefcase size={18} />
+                Je suis prestataire B2B
+              </button>
+              <Link
+                href="/diagnostic"
+                className="flex items-center gap-2 px-6 py-4 rounded-xl border border-dashed border-site-border text-sm text-site-text-light hover:border-site-text/30 hover:text-site-text transition-all duration-300"
+              >
+                Pas sûr ? Faites le diagnostic gratuit
+                <ArrowUpRight size={14} />
+              </Link>
             </motion.div>
           </div>
         </section>
@@ -261,37 +322,39 @@ export default function GoPage() {
           </div>
         </section>
 
-        {/* ── 3. ROI — preuve concrète ──────────────────────────────── */}
+        {/* ── 3. ROI — preuve concrète (dynamique selon niche) ────── */}
         <section className="bg-site-text text-site-bg rounded-3xl md:rounded-[3rem] mx-2 md:mx-4 px-container py-20 md:py-28">
           <div className="max-w-5xl mx-auto">
-            <motion.div {...fade()}>
-              <p className="text-[10px] font-bold uppercase tracking-widest text-site-bg/30 mb-8">
-                Exemple concret
-              </p>
-              <h2 className="text-fluid-title tracking-tighter uppercase mb-6">
-                Entreprise de plomberie, 8 salariés
-              </h2>
-              <p className="text-site-bg/50 text-base md:text-lg max-w-2xl leading-relaxed mb-12">
-                Le patron perd 10 heures par semaine à répondre au téléphone, envoyer des devis
-                par mail et relancer les clients. Accélérateur à 2 900 € : site pro + prise de RDV
-                en ligne + devis automatisé + 3 mois de maintenance inclus. Le système tourne dès J+10.
-              </p>
-            </motion.div>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={niche || "default"}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.4 }}
+              >
+                <p className="text-[10px] font-bold uppercase tracking-widest text-site-bg/30 mb-8">
+                  Exemple concret
+                </p>
+                <h2 className="text-fluid-title tracking-tighter uppercase mb-6">
+                  {roi.roiTitle}
+                </h2>
+                <p className="text-site-bg/50 text-base md:text-lg max-w-2xl leading-relaxed mb-12">
+                  {roi.roiDesc}
+                </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
-              {[
-                { value: "10h", label: "libérées chaque semaine" },
-                { value: "800 €", label: "de valeur récupérée par semaine" },
-                { value: "4 sem.", label: "pour rentabiliser l'Accélérateur" },
-              ].map((stat, i) => (
-                <motion.div key={i} {...fade(i * 0.1)} className="text-center md:text-left">
-                  <div className="text-4xl md:text-5xl font-medium tracking-tighter mb-2">
-                    {stat.value}
-                  </div>
-                  <div className="text-sm text-site-bg/40">{stat.label}</div>
-                </motion.div>
-              ))}
-            </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+                  {roi.stats.map((stat, i) => (
+                    <div key={i} className="text-center md:text-left">
+                      <div className="text-4xl md:text-5xl font-medium tracking-tighter mb-2">
+                        {stat.value}
+                      </div>
+                      <div className="text-sm text-site-bg/40">{stat.label}</div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
         </section>
 
