@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head><meta charset="utf-8"></head>
+<body style="margin:0;padding:0;background:#fafafa;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
+  <div style="max-width:560px;margin:0 auto;padding:40px 24px;">
+
+    <div style="margin-bottom:32px;">
+      <p style="color:#888;font-size:11px;text-transform:uppercase;letter-spacing:0.15em;margin:0 0 8px;">Bilan de vos 3 premiers mois</p>
+      <h1 style="color:#111;font-size:20px;margin:0;font-weight:700;">
+        {{PRENOM}}, votre système tourne — et la suite ?
+      </h1>
+    </div>
+
+    <!-- Bilan 3 mois -->
+    <div style="background:#111;color:#fff;border-radius:12px;padding:24px;margin-bottom:24px;">
+      <p style="color:#888;font-size:10px;text-transform:uppercase;letter-spacing:0.15em;margin:0 0 16px;">Bilan 3 mois</p>
+      <div style="display:flex;justify-content:space-between;text-align:center;">
+        <div>
+          <div style="font-size:28px;font-weight:800;letter-spacing:-1px;">{{BUGS_TOTAL}}</div>
+          <div style="font-size:10px;color:#888;margin-top:4px;">Bugs corrigés</div>
+        </div>
+        <div>
+          <div style="font-size:28px;font-weight:800;letter-spacing:-1px;">{{MAJ_TOTAL}}</div>
+          <div style="font-size:10px;color:#888;margin-top:4px;">MAJ sécurité</div>
+        </div>
+        <div>
+          <div style="font-size:28px;font-weight:800;letter-spacing:-1px;">{{UPTIME_AVG}}%</div>
+          <div style="font-size:10px;color:#888;margin-top:4px;">Uptime moyen</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="color:#333;font-size:15px;line-height:1.8;margin-bottom:24px;">
+      <p>Si vous aviez dû gérer ça seul, voici ce que ça représente :</p>
+      <ul style="padding-left:20px;">
+        <li>Monitoring : ~3h/mois de surveillance</li>
+        <li>MAJ sécurité : risque d'intrusion si non corrigé</li>
+        <li>Corrections : un dev freelance facture 70-120 €/h</li>
+      </ul>
+      <p><strong>Valeur totale de la maintenance offerte : 1 470 €</strong></p>
+    </div>
+
+    <!-- La suite -->
+    <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:20px;margin-bottom:24px;">
+      <p style="margin:0;font-size:14px;font-weight:700;color:#166534;">
+        La suite — rien ne change
+      </p>
+      <p style="margin:8px 0 0;font-size:14px;color:#333;line-height:1.7;">
+        Votre période de maintenance offerte se termine le <strong>{{DATE_FIN}}</strong>.
+        À partir du {{DATE_DEBUT_PAIEMENT}}, la maintenance continue au tarif Essentiel : <strong>490 €/mois, sans engagement</strong>.
+      </p>
+      <p style="margin:12px 0 0;font-size:14px;color:#333;line-height:1.7;">
+        Rien ne change dans le service : même monitoring, même réactivité, même rapport mensuel.
+        La facturation démarre automatiquement. Si vous préférez gérer en autonomie, dites-le-moi avant le {{DATE_FIN}}.
+      </p>
+    </div>
+
+    <div style="text-align:center;margin-bottom:32px;">
+      <a href="https://wa.me/33782721406?text=Bonjour%20A%C3%AFssa%2C%20je%20souhaite%20continuer%20la%20maintenance." style="display:inline-block;background:#111;color:#fff;padding:14px 32px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;">
+        Confirmer la continuation →
+      </a>
+    </div>
+
+    <div style="border-top:1px solid #e5e5e5;padding-top:20px;text-align:center;">
+      <p style="color:#111;font-size:14px;font-weight:700;margin:0;">Aïssa Belkoussa</p>
+      <p style="color:#888;font-size:12px;margin:4px 0 0;">Architecte de systèmes & Développeur</p>
+      <a href="https://www.aissabelkoussa.fr" style="color:#6366f1;font-size:12px;text-decoration:none;">www.aissabelkoussa.fr</a>
+    </div>
+  </div>
+</body>
+</html>
