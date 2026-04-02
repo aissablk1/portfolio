@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { Suspense } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
@@ -63,7 +63,9 @@ const ContactPage = () => {
                 transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
                 className="bg-white/40 backdrop-blur-3xl border border-site-border p-8 md:p-16 rounded-[3rem] shadow-2xl shadow-site-accent/5"
               >
-                <ContactForm />
+                <Suspense fallback={<div className="min-h-[400px]" />}>
+                  <ContactForm />
+                </Suspense>
               </motion.div>
             </div>
 
