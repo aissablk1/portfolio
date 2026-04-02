@@ -92,6 +92,15 @@ const Footer = () => {
           <p>Code NAF: 5911B</p>
           <p>SIRET: 937 690 592 00012</p>
         </div>
+
+        {/* Beta notice */}
+        <div className="max-w-7xl mx-auto mt-8 pt-6 border-t border-site-border/30">
+          <p className="text-[10px] text-site-text-light/30 text-center leading-relaxed">
+            {language === "fr"
+              ? "Ce site est en version beta. Le design, les fonctionnalités et le contenu sont susceptibles d'évoluer. Merci de votre compréhension."
+              : "This website is in beta. Design, features, and content are subject to change. Thank you for your understanding."}
+          </p>
+        </div>
       </div>
     </footer>
   );

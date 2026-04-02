@@ -3,7 +3,8 @@ import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/components/LanguageContext";
 import { ScrollIndicator } from "@/components/ScrollIndicator";
-import MaintenanceGate from "@/components/MaintenanceGate";
+// import MaintenanceGate from "@/components/MaintenanceGate";
+import Preloader from "@/components/Preloader";
 import {
   personSchema,
   organizationSchema,
@@ -133,11 +134,11 @@ export default function RootLayout({
           Aller au contenu principal
         </a>
         <LanguageProvider>
-          <MaintenanceGate>
+          <Preloader>
             <ScrollIndicator />
             {children}
             <WhatsAppButton />
-          </MaintenanceGate>
+          </Preloader>
         </LanguageProvider>
         <Analytics />
         <TrackingBeacon />
