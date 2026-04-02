@@ -283,6 +283,13 @@ export default function ServicesPage() {
 
                       {/* Price */}
                       <div className="mb-8">
+                        {isHighlighted && (
+                          <div className="mb-2">
+                            <span className="text-sm text-site-text-light/40 line-through">
+                              {language === "fr" ? "5 370 € sans maintenance" : "€5,370 without maintenance"}
+                            </span>
+                          </div>
+                        )}
                         <span className="text-4xl md:text-5xl font-medium tracking-tighter">
                           {tier.price}
                         </span>
@@ -322,8 +329,8 @@ export default function ServicesPage() {
                         {isDecoy
                           ? (language === "fr" ? "Choisir l'autonomie" : "Choose autonomy")
                           : isHighlighted
-                          ? (language === "fr" ? "Lancer mon système" : "Launch my system")
-                          : (language === "fr" ? "Devenir partenaire" : "Become a partner")
+                          ? (language === "fr" ? "Recevoir ma proposition en 48h" : "Get my proposal in 48h")
+                          : (language === "fr" ? "Recevoir mon diagnostic gratuit" : "Get my free diagnostic")
                         }
                         <ArrowUpRight size={14} />
                       </Link>
@@ -831,7 +838,7 @@ export default function ServicesPage() {
                   {s.finalCta.subtitle}
                 </p>
                 <Link
-                  href="/contact"
+                  href="/contact?plan=accelerateur"
                   className="inline-flex items-center gap-3 bg-site-accent text-white px-10 py-5 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-site-accent/85 hover:scale-105 transition-all"
                 >
                   {s.finalCta.button}
@@ -851,7 +858,7 @@ export default function ServicesPage() {
           href="/contact?plan=accelerateur"
           className="flex items-center justify-center gap-2 w-full bg-site-accent text-white py-3.5 rounded-full text-xs font-bold uppercase tracking-widest"
         >
-          {language === "fr" ? "Lancer mon système — 2 900 €" : "Launch my system — €2,900"}
+          {language === "fr" ? "Ma proposition en 48h — 2 900 €" : "My proposal in 48h — €2,900"}
           <ArrowUpRight size={14} />
         </Link>
       </div>
