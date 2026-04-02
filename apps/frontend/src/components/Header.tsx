@@ -65,10 +65,10 @@ const Header = () => {
           isScrolled ? "top-[-28px]" : "top-0"
         )}
       >
-        <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-red-600 flex items-center gap-2">
-          <AlertTriangle size={12} className="animate-pulse" strokeWidth={3} />
-          {dict.warning}
-          <span className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200 ml-1 underline underline-offset-2">
+        <p className="text-[8px] md:text-[10px] font-bold uppercase tracking-[0.08em] md:tracking-[0.2em] text-red-600 flex items-center gap-1.5 md:gap-2 px-4 text-center leading-tight">
+          <AlertTriangle size={10} className="animate-pulse shrink-0 md:w-3 md:h-3" strokeWidth={3} />
+          <span>{dict.warning}</span>
+          <span className="hidden md:inline invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200 ml-1 underline underline-offset-2">
             {language === "fr" ? "En savoir +" : "Learn more +"}
           </span>
         </p>
