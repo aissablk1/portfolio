@@ -33,7 +33,7 @@ const FloatingCta = () => {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 20, scale: 0.9 }}
           transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
-          className="fixed bottom-6 right-6 z-50 md:bottom-8 md:right-8"
+          className="fixed bottom-6 left-6 z-50 md:bottom-8 md:left-8"
         >
           <Link
             href="/services"
