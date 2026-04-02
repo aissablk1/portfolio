@@ -24,7 +24,7 @@ export default function AvailabilityBanner() {
     : `${month} ${year} — ${slots} project slot${slots > 1 ? "s" : ""} available`;
 
   return (
-    <div className="bg-site-accent text-white text-center py-2.5 text-[11px] font-bold uppercase tracking-widest">
+    <div className="fixed bottom-0 left-0 right-0 z-50 bg-site-text text-site-bg text-center py-3 text-[11px] font-bold uppercase tracking-widest safe-area-pb">
       {text}
     </div>
   );

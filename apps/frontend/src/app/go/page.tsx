@@ -48,7 +48,7 @@ export default function GoPage() {
       <Header />
       <AvailabilityBanner />
 
-      <main className="pt-40 pb-0">
+      <main className="pt-40 pb-16">
         {/* ── 1. Hook ──────────────────────────────────────────────── */}
         <section className="pb-32 px-container">
           <div className="max-w-4xl mx-auto">
