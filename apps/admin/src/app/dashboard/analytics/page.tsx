@@ -276,7 +276,7 @@ export default function AnalyticsPage() {
           onClick={loadData}
           className="rounded-[var(--radius-md)] bg-[var(--color-accent)] px-4 py-2 text-sm font-medium text-[var(--color-accent-fg)] hover:bg-[var(--color-accent-hover)] transition-colors"
         >
-          Reessayer
+          Réessayer
         </button>
       </div>
     );
@@ -326,7 +326,7 @@ export default function AnalyticsPage() {
       {loading && overview && (
         <div className="flex items-center gap-2 text-sm text-[var(--color-text-secondary)]">
           <Loader2 className="h-4 w-4 animate-spin" />
-          Mise a jour...
+          Mise à jour...
         </div>
       )}
 

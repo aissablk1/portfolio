@@ -15,13 +15,13 @@ const statusLabels: Record<string, string> = {
   error: "Erreur",
   archived: "Archive",
   sent: "Envoye",
-  delivered: "Delivre",
-  failed: "Echoue",
-  bounced: "Rejete",
+  delivered: "Délivré",
+  failed: "Échoué",
+  bounced: "Rejeté",
   healthy: "Fonctionnel",
-  degraded: "Degrade",
+  degraded: "Dégradé",
   down: "Hors service",
-  success: "Succes",
+  success: "Succès",
 };
 
 export function StatusBadge({ status, label, className }: StatusBadgeProps) {

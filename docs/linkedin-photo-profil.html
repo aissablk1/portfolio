@@ -224,22 +224,31 @@
         var posX = document.getElementById(posXId).value / 100;
         var posY = document.getElementById(posYId).value / 100;
 
+        // Simule CSS: object-fit:cover + object-position + clip-path + transform:scale(zoom) depuis le centre
+        ctx.save();
+
+        // 1. transform:scale(zoom) depuis le centre du canvas
+        ctx.translate(size/2, size/2);
+        ctx.scale(zoom, zoom);
+        ctx.translate(-size/2, -size/2);
+
+        // 2. clip-path:circle(50%) dans l'espace transforme
         if (clipCircle) {
-          ctx.save();
           ctx.beginPath();
           ctx.arc(size/2, size/2, size/2, 0, Math.PI*2);
           ctx.clip();
         }
 
-        var ratio = img.naturalWidth / img.naturalHeight;
-        var drawW, drawH;
-        if (ratio > 1) { drawH = size * zoom; drawW = drawH * ratio; }
-        else { drawW = size * zoom; drawH = drawW / ratio; }
-        var drawX = (size * posX) - (drawW * posX);
-        var drawY = (size * posY) - (drawH * posY);
-        ctx.drawImage(img, drawX, drawY, drawW, drawH);
+        // 3. object-fit:cover + object-position
+        var imgRatio = img.naturalWidth / img.naturalHeight;
+        var coverW, coverH;
+        if (imgRatio > 1) { coverH = size; coverW = size * imgRatio; }
+        else { coverW = size; coverH = size / imgRatio; }
+        var offX = (size - coverW) * posX;
+        var offY = (size - coverH) * posY;
+        ctx.drawImage(img, offX, offY, coverW, coverH);
 
-        if (clipCircle) ctx.restore();
+        ctx.restore();
 
         canvas.toBlob(function(blob) {
           var url = URL.createObjectURL(blob);

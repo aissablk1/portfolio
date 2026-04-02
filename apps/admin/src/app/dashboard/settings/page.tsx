@@ -413,7 +413,7 @@ export default function SettingsPage() {
           onClick={loadData}
           className="rounded-[var(--radius-md)] bg-[var(--color-accent)] px-4 py-2 text-sm font-medium text-[var(--color-accent-fg)] hover:bg-[var(--color-accent-hover)] transition-colors"
         >
-          Reessayer
+          Réessayer
         </button>
       </div>
     );
@@ -742,7 +742,7 @@ export default function SettingsPage() {
         transition={{ duration: 0.4, delay: 0.2 }}
         className="rounded-[var(--radius-lg)] border border-[var(--color-glass-border)] bg-[var(--color-glass)] p-6 backdrop-blur-xl"
       >
-        <SectionHeader icon={Shield} title="Securite" description="Limites de taux et detection du spam" />
+        <SectionHeader icon={Shield} title="Sécurité" description="Limites de taux et detection du spam" />
         <div className="space-y-4">
           <div>
             <label className="mb-1.5 block text-xs font-medium text-[var(--color-text-secondary)]">

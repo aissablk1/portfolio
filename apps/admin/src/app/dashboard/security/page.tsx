@@ -271,7 +271,7 @@ export default function SecurityPage() {
           onClick={loadData}
           className="rounded-[var(--radius-md)] bg-[var(--color-accent)] px-4 py-2 text-sm font-medium text-[var(--color-accent-fg)] hover:bg-[var(--color-accent-hover)] transition-colors"
         >
-          Reessayer
+          Réessayer
         </button>
       </div>
     );
@@ -288,7 +288,7 @@ export default function SecurityPage() {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.4 }}
       >
-        <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">Securite</h1>
+        <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">Sécurité</h1>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
           Surveillance du spam, des limites de taux et des acces
         </p>
@@ -469,7 +469,7 @@ export default function SecurityPage() {
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-[var(--color-border)]">
-                  {["IP", "Requetes", "Premiere requete", "Derniere requete", "Statut"].map((h) => (
+                  {["IP", "Requêtes", "Première requête", "Dernière requête", "Statut"].map((h) => (
                     <th
                       key={h}
                       className="px-3 py-2.5 text-left text-xs font-medium uppercase tracking-wider text-[var(--color-text-tertiary)]"

@@ -41,8 +41,8 @@ export function StatCard({
       )}
     >
       <div className="flex items-start justify-between">
-        <div className="flex h-9 w-9 items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-accent-soft)]">
-          <Icon className="h-4 w-4 text-[var(--color-accent)]" />
+        <div className="flex h-9 w-9 items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-info-soft)]">
+          <Icon className="h-4 w-4 text-[var(--color-info)]" />
         </div>
         {trend && (
           <div

@@ -34,9 +34,9 @@ const navItems: NavItem[] = [
   { label: "Emails", href: "/dashboard/emails", icon: Mail },
   { label: "Analytique", href: "/dashboard/analytics", icon: BarChart3 },
   { label: "Notifications", href: "/dashboard/notifications", icon: Bell },
-  { label: "Securite", href: "/dashboard/security", icon: Shield },
+  { label: "Sécurité", href: "/dashboard/security", icon: Shield },
   { label: "Site", href: "/dashboard/site", icon: Globe },
-  { label: "Parametres", href: "/dashboard/settings", icon: Settings },
+  { label: "Paramètres", href: "/dashboard/settings", icon: Settings },
 ];
 
 export function Sidebar() {

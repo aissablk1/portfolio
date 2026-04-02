@@ -14,9 +14,9 @@ const pageTitles: Record<string, string> = {
   "/dashboard/emails": "Emails",
   "/dashboard/analytics": "Analytique",
   "/dashboard/notifications": "Notifications",
-  "/dashboard/security": "Securite",
+  "/dashboard/security": "Sécurité",
   "/dashboard/site": "Site",
-  "/dashboard/settings": "Parametres",
+  "/dashboard/settings": "Paramètres",
 };
 
 export function Header() {

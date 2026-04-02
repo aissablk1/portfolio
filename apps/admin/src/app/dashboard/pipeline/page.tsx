@@ -159,43 +159,43 @@ export default function PipelinePage() {
             <div className="flex items-center gap-2 text-xs text-[var(--color-text-muted)] mb-1">
               <Euro size={12} /> Pipeline
             </div>
-            <div className="text-lg font-bold text-[var(--color-text-primary)]">{fmt(stats.pipeline_value)}</div>
+            <div className="text-lg font-bold text-[var(--color-text-primary)]">{fmt(stats.pipeline_value ?? 0)}</div>
           </div>
           <div className="rounded-xl border border-[var(--color-border-light)] bg-[var(--color-bg-elevated)] p-4">
             <div className="flex items-center gap-2 text-xs text-[var(--color-text-muted)] mb-1">
               <TrendingUp size={12} /> Signé
             </div>
-            <div className="text-lg font-bold text-green-500">{fmt(stats.signed_value)}</div>
+            <div className="text-lg font-bold text-green-500">{fmt(stats.signed_value ?? 0)}</div>
           </div>
           <div className="rounded-xl border border-[var(--color-border-light)] bg-[var(--color-bg-elevated)] p-4">
             <div className="flex items-center gap-2 text-xs text-[var(--color-text-muted)] mb-1">
               <Users size={12} /> Conversion
             </div>
-            <div className="text-lg font-bold text-[var(--color-text-primary)]">{stats.conversion_rate}%</div>
+            <div className="text-lg font-bold text-[var(--color-text-primary)]">{stats.conversion_rate ?? 0}%</div>
           </div>
           <div className="rounded-xl border border-[var(--color-border-light)] bg-[var(--color-bg-elevated)] p-4">
             <div className="flex items-center gap-2 text-xs text-[var(--color-text-muted)] mb-1">
               <Flame size={12} className="text-green-500" /> Chauds
             </div>
-            <div className="text-lg font-bold text-green-500">{stats.hot_leads}</div>
+            <div className="text-lg font-bold text-green-500">{stats.hot_leads ?? 0}</div>
           </div>
           <div className="rounded-xl border border-[var(--color-border-light)] bg-[var(--color-bg-elevated)] p-4">
             <div className="flex items-center gap-2 text-xs text-[var(--color-text-muted)] mb-1">
               <ThermometerSun size={12} className="text-amber-500" /> Tièdes
             </div>
-            <div className="text-lg font-bold text-amber-500">{stats.warm_leads}</div>
+            <div className="text-lg font-bold text-amber-500">{stats.warm_leads ?? 0}</div>
           </div>
           <div className="rounded-xl border border-[var(--color-border-light)] bg-[var(--color-bg-elevated)] p-4">
             <div className="flex items-center gap-2 text-xs text-[var(--color-text-muted)] mb-1">
               <Snowflake size={12} className="text-blue-500" /> Froids
             </div>
-            <div className="text-lg font-bold text-blue-500">{stats.cold_leads}</div>
+            <div className="text-lg font-bold text-blue-500">{stats.cold_leads ?? 0}</div>
           </div>
           <div className="rounded-xl border border-[var(--color-border-light)] bg-[var(--color-bg-elevated)] p-4">
             <div className="flex items-center gap-2 text-xs text-[var(--color-text-muted)] mb-1">
               <TrendingUp size={12} /> Livré
             </div>
-            <div className="text-lg font-bold text-teal-500">{fmt(stats.delivered_value)}</div>
+            <div className="text-lg font-bold text-teal-500">{fmt(stats.delivered_value ?? 0)}</div>
           </div>
         </div>
       )}

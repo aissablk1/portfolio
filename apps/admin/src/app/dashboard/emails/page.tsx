@@ -62,22 +62,12 @@ const PROVIDER_STATUS: {
   {
     name: "Resend",
     status: "healthy",
-    description: "Service principal d'envoi d'emails",
+    description: "Envoi transactionnel — confirmations, notifications admin",
   },
   {
-    name: "SMTP Gmail",
+    name: "iCloud Mail (OVH MX)",
     status: "healthy",
-    description: "Relais SMTP de secours",
-  },
-  {
-    name: "FormSubmit",
-    status: "healthy",
-    description: "Soumissions de formulaires",
-  },
-  {
-    name: "MailThis",
-    status: "healthy",
-    description: "Notifications alternatives",
+    description: "Boîte mail principale — contact@aissabelkoussa.fr",
   },
 ];
 

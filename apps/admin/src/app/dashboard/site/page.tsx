@@ -76,13 +76,13 @@ function getServiceIcon(name: string): React.ElementType {
 
 const statusConfig = {
   healthy: {
-    label: "Operationnel",
+    label: "Opérationnel",
     dot: "bg-[var(--color-success)]",
     text: "text-[var(--color-success)]",
     bg: "bg-[var(--color-success-soft)]",
   },
   degraded: {
-    label: "Degrade",
+    label: "Dégradé",
     dot: "bg-[var(--color-warning)]",
     text: "text-[var(--color-warning)]",
     bg: "bg-[var(--color-warning-soft)]",
@@ -205,7 +205,7 @@ export default function SiteControlPage() {
           onClick={loadData}
           className="rounded-[var(--radius-md)] bg-[var(--color-accent)] px-4 py-2 text-sm font-medium text-[var(--color-accent-fg)] hover:bg-[var(--color-accent-hover)] transition-colors"
         >
-          Reessayer
+          Réessayer
         </button>
       </div>
     );
@@ -517,7 +517,7 @@ export default function SiteControlPage() {
                     )}
                     <div className="flex justify-between text-xs">
                       <span className="text-[var(--color-text-tertiary)]">
-                        Derniere verif.
+                        Dernière vérif.
                       </span>
                       <span className="text-[var(--color-text-secondary)]">
                         {formatRelativeTime(service.last_checked)}

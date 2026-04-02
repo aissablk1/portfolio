@@ -215,7 +215,7 @@ export default function NotificationsPage() {
           onClick={loadData}
           className="rounded-[var(--radius-md)] bg-[var(--color-accent)] px-4 py-2 text-sm font-medium text-[var(--color-accent-fg)] hover:bg-[var(--color-accent-hover)] transition-colors"
         >
-          Reessayer
+          Réessayer
         </button>
       </div>
     );

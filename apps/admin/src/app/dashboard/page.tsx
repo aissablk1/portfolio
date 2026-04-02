@@ -266,7 +266,7 @@ export default function DashboardPage() {
 
       if (allRejected) {
         setAllFailed(true);
-        setError("Le serveur est en cours de demarrage. Veuillez patienter quelques instants.");
+        setError("Le serveur est en cours de démarrage. Veuillez patienter quelques instants.");
         return;
       }
 
@@ -394,9 +394,9 @@ export default function DashboardPage() {
     return (
       <EmptyState
         icon={allFailed ? Activity : ShieldAlert}
-        title={allFailed ? "Serveur en cours de demarrage" : "Erreur de chargement"}
+        title={allFailed ? "Serveur en cours de démarrage" : "Erreur de chargement"}
         description={error}
-        action={{ label: "Reessayer", onClick: fetchAll }}
+        action={{ label: "Réessayer", onClick: fetchAll }}
       />
     );
   }
@@ -410,11 +410,11 @@ export default function DashboardPage() {
             Tableau de bord
           </h1>
           <p className="text-sm text-[var(--color-text-tertiary)] mt-1">
-            Vue d&apos;ensemble de l&apos;activité
+            Vue d&apos;ensemble de l&apos;activit&eacute;
           </p>
           {lastUpdated && (
             <p className="text-xs text-[var(--color-text-muted)] mt-1">
-              Derniere mise a jour : il y a{" "}
+              Dernière mise à jour : il y a{" "}
               {secondsAgo < 60
                 ? `${secondsAgo}s`
                 : secondsAgo < 3600
@@ -429,7 +429,7 @@ export default function DashboardPage() {
           className="flex items-center gap-2 bg-[var(--color-bg-hover)] hover:bg-[var(--color-bg-active)] text-[var(--color-text-secondary)] rounded-[var(--radius-md)] px-4 py-2 text-sm transition-colors disabled:opacity-50"
         >
           <RefreshCw className={cn("h-4 w-4", (loading || refreshing) && "animate-spin", autoRefreshing && "animate-pulse")} />
-          {refreshing ? "Mise a jour..." : "Actualiser"}
+          {refreshing ? "Mise à jour..." : "Actualiser"}
         </button>
       </div>
 
