@@ -10,6 +10,7 @@ import Link from "next/link";
 import { cn } from "@/utils/cn";
 import ROICalculator from "@/components/sections/ROICalculator";
 import AvailabilityBanner from "@/components/AvailabilityBanner";
+import ExitIntentModal from "@/components/ExitIntentModal";
 
 type SubBilling = "monthly" | "yearly";
 
@@ -115,9 +116,24 @@ export default function ServicesPage() {
               <h1 className="text-fluid-display tracking-tighter uppercase max-w-4xl mb-8 whitespace-pre-line">
                 {s.title}
               </h1>
-              <p className="text-site-text-light text-lg md:text-xl max-w-2xl leading-relaxed">
+              <p className="text-site-text-light text-lg md:text-xl max-w-2xl leading-relaxed mb-10">
                 {s.subtitle}
               </p>
+              <div className="flex flex-wrap gap-4">
+                <Link
+                  href="/contact?plan=accelerateur"
+                  className="inline-flex items-center gap-3 bg-site-accent text-white px-8 py-4 rounded-full text-xs font-bold uppercase tracking-widest hover:scale-105 transition-all shadow-lg"
+                >
+                  {language === "fr" ? "Recevoir ma proposition" : "Get my proposal"}
+                  <ArrowUpRight size={14} />
+                </Link>
+                <Link
+                  href="#pricing"
+                  className="inline-flex items-center gap-2 px-6 py-4 rounded-full border border-site-border text-xs font-bold uppercase tracking-widest text-site-text-light hover:border-site-accent hover:text-site-accent transition-all"
+                >
+                  {language === "fr" ? "Voir les plans" : "See plans"}
+                </Link>
+              </div>
             </motion.div>
           </div>
         </section>
@@ -173,7 +189,7 @@ export default function ServicesPage() {
         </section>
 
         {/* ── Pricing Tiers (Autonome / Accélérateur / Partenaire) ──────── */}
-        <section className="px-container mb-20">
+        <section id="pricing" className="px-container mb-20 scroll-mt-20">
           <div className="max-w-7xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -861,6 +877,7 @@ export default function ServicesPage() {
       </main>
 
       <Footer />
+      <ExitIntentModal />
 
       {/* ── Sticky CTA mobile ──────────────────────────────────────── */}
       <div className="fixed bottom-0 left-0 right-0 z-50 lg:hidden bg-site-bg/90 backdrop-blur-xl border-t border-site-border px-4 py-3 safe-area-pb">

@@ -11,6 +11,7 @@ import {
 } from "@/lib/schemas";
 import { Analytics } from "@vercel/analytics/next";
 import { TrackingBeacon } from "@/components/TrackingBeacon";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -130,6 +131,7 @@ export default function RootLayout({
           <MaintenanceGate>
             <ScrollIndicator />
             {children}
+            <WhatsAppButton />
           </MaintenanceGate>
         </LanguageProvider>
         <Analytics />

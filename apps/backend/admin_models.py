@@ -121,6 +121,47 @@ class TestNotification(BaseModel):
     message: Optional[str] = Field(None, max_length=1000)
 
 
+# ─── Pipeline Models ─────────────────────────────────────────────────────────
+
+class PipelineStage(str, Enum):
+    lead = "lead"              # Nouveau contact / diagnostic
+    contacted = "contacted"    # DM ou email envoyé
+    call = "call"              # Appel de qualification fait
+    proposal = "proposal"      # Devis envoyé
+    signed = "signed"          # Acompte encaissé
+    delivered = "delivered"    # Projet livré
+    lost = "lost"              # Perdu / abandonné
+
+
+class LeadTemperature(str, Enum):
+    hot = "hot"       # CHAUD — score >= 55
+    warm = "warm"     # TIEDE — score 30-54
+    cold = "cold"     # FROID — score < 30
+
+
+class PipelineDealCreate(BaseModel):
+    contact_id: Optional[str] = None
+    name: str = Field(..., min_length=2, max_length=200)
+    email: Optional[EmailStr] = None
+    company: Optional[str] = Field(None, max_length=200)
+    niche: Optional[str] = Field(None, pattern=r"^(btp|b2b|other)$")
+    stage: PipelineStage = PipelineStage.lead
+    value: Optional[float] = Field(None, ge=0)
+    plan: Optional[str] = Field(None, pattern=r"^(autonome|accelerateur|partenaire)$")
+    source: Optional[str] = Field(None, max_length=100)  # linkedin, website, diagnostic, referral
+    notes: Optional[str] = Field(None, max_length=2000)
+
+
+class PipelineDealUpdate(BaseModel):
+    stage: Optional[PipelineStage] = None
+    value: Optional[float] = Field(None, ge=0)
+    plan: Optional[str] = None
+    niche: Optional[str] = None
+    notes: Optional[str] = Field(None, max_length=2000)
+    next_action: Optional[str] = Field(None, max_length=500)
+    next_action_date: Optional[datetime] = None
+
+
 # ─── Generic Response Models ─────────────────────────────────────────────────
 
 class PaginatedMeta(BaseModel):

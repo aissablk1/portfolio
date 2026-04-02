@@ -19,6 +19,12 @@ class ContactSubmission(BaseModel):
     user_agent: Optional[str] = None
     timestamp: datetime = Field(default_factory=datetime.utcnow)
     status: str = Field(default="pending")  # pending, processed, spam
+    # Lead scoring (enriched by frontend dual-send)
+    lead_score: Optional[int] = None          # 0-100
+    lead_label: Optional[str] = None          # CHAUD, TIEDE, FROID
+    plan: Optional[str] = None                # autonome, accelerateur, partenaire
+    budget: Optional[str] = None
+    niche: Optional[str] = None               # btp, b2b, other
     
 class ContactResponse(BaseModel):
     success: bool

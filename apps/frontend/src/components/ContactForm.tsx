@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { useLanguage } from "./LanguageContext";
 import { cn } from "@/utils/cn";
-import { Check, Send, Rocket, Zap, Handshake, Shield } from "lucide-react";
+import { Check, Send, Rocket, Zap, Handshake, Shield, ArrowUpRight } from "lucide-react";
 
 type FormState = {
   name: string;
@@ -74,12 +74,29 @@ const ContactForm = () => {
         <h2 className="text-4xl font-display font-bold mb-4 uppercase tracking-tighter">
           {dict.funnel.success.title}
         </h2>
-        <p className="text-site-text-light max-w-sm mx-auto mb-12">
+        <p className="text-site-text-light max-w-sm mx-auto mb-8">
           {dict.funnel.success.message}
         </p>
+
+        {/* Calendly CTA — strike while the iron is hot */}
+        <a
+          href="https://calendly.com/aissabelkoussa/30min"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-3 bg-site-accent text-white px-10 py-5 rounded-full text-xs font-bold uppercase tracking-widest hover:scale-105 transition-all shadow-lg mb-4"
+        >
+          {language === "fr" ? "Réserver mon appel maintenant" : "Book my call now"}
+          <ArrowUpRight size={14} />
+        </a>
+        <p className="text-[10px] text-site-text-light/40 mb-10">
+          {language === "fr"
+            ? "30 min, gratuit, sans engagement — créneaux limités"
+            : "30 min, free, no commitment — limited slots"}
+        </p>
+
         <button
           onClick={() => window.location.href = "/"}
-          className="px-8 py-4 bg-site-border/30 rounded-full font-bold uppercase tracking-widest text-xs hover:bg-site-accent hover:text-white transition-all shadow-sm"
+          className="px-6 py-3 bg-site-border/20 rounded-full font-bold uppercase tracking-widest text-[10px] text-site-text-light hover:text-site-text transition-all"
         >
           {language === "fr" ? "Retour à l'accueil" : "Back to home"}
         </button>
