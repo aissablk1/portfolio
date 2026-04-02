@@ -48,8 +48,7 @@ export default function Preloader({ children }: { children: React.ReactNode }) {
                       key={i}
                       initial={{
                         opacity: 0,
-                        y: 80 + Math.random() * 40,
-                        rotateX: -90,
+                        y: 60 + Math.random() * 30,
                         filter: "blur(8px)",
                       }}
                       animate={
@@ -57,20 +56,18 @@ export default function Preloader({ children }: { children: React.ReactNode }) {
                           ? {
                               opacity: 1,
                               y: 0,
-                              rotateX: 0,
                               filter: "blur(0px)",
                             }
                           : phase === "assemble"
                           ? {
                               opacity: 1,
                               y: 0,
-                              rotateX: 0,
                               filter: "blur(0px)",
                               letterSpacing: "0.02em",
                             }
                           : {
                               opacity: 0,
-                              y: -30,
+                              y: -20,
                               filter: "blur(4px)",
                             }
                       }
