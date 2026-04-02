@@ -7,7 +7,7 @@ import { ScrollVelocityContainer, ScrollVelocityRow } from "./ui/scroll-based-ve
 
 
 const Footer = () => {
-  const { dict } = useLanguage();
+  const { dict, language } = useLanguage();
 
   return (
     <footer className="pt-0 py-20 border-t border-site-border mt-20 overflow-hidden">
