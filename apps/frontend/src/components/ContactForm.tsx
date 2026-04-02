@@ -78,21 +78,30 @@ const ContactForm = () => {
           {dict.funnel.success.message}
         </p>
 
-        {/* Direct contact CTA — strike while the iron is hot */}
+        {/* Calendly CTA — strike while the iron is hot */}
         <a
-          href={`https://wa.me/33782721406?text=${encodeURIComponent(language === "fr" ? "Bonjour Aïssa, je viens d'envoyer ma demande via le site. Quand peut-on échanger ?" : "Hi Aïssa, I just submitted my request through the website. When can we chat?")}`}
+          href="https://calendly.com/aissabelkoussa/30min"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-3 bg-[#25D366] text-white px-10 py-5 rounded-full text-xs font-bold uppercase tracking-widest hover:scale-105 transition-all shadow-lg mb-4"
+          className="inline-flex items-center gap-3 bg-site-accent text-white px-10 py-5 rounded-full text-xs font-bold uppercase tracking-widest hover:scale-105 transition-all shadow-lg mb-4"
         >
-          {language === "fr" ? "M'écrire sur WhatsApp" : "Message me on WhatsApp"}
+          {language === "fr" ? "Réserver mon appel — 30 min" : "Book my call — 30 min"}
           <ArrowUpRight size={14} />
         </a>
-        <p className="text-[10px] text-site-text-light/40 mb-10">
+        <p className="text-[10px] text-site-text-light/40 mb-6">
           {language === "fr"
-            ? "Réponse en quelques heures — créneaux limités"
-            : "Response in a few hours — limited slots"}
+            ? "Gratuit, sans engagement — créneaux limités"
+            : "Free, no commitment — limited slots"}
         </p>
+        <a
+          href={`https://wa.me/33782721406?text=${encodeURIComponent(language === "fr" ? "Bonjour Aïssa, je viens d'envoyer ma demande via le site." : "Hi Aïssa, I just submitted my request through the website.")}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-[11px] font-bold uppercase tracking-widest text-site-text-light hover:text-site-accent transition-colors mb-10 inline-flex items-center gap-2"
+        >
+          {language === "fr" ? "Ou m'écrire sur WhatsApp" : "Or message me on WhatsApp"}
+          <ArrowUpRight size={10} />
+        </a>
 
         <button
           onClick={() => window.location.href = "/"}
