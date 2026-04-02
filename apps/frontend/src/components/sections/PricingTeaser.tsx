@@ -3,10 +3,10 @@
 import React from "react";
 import { useLanguage } from "../LanguageContext";
 import { motion } from "framer-motion";
-import { ArrowUpRight, Zap, Layers, Building2 } from "lucide-react";
+import { ArrowUpRight, Zap, Rocket, Handshake, Gift } from "lucide-react";
 import Link from "next/link";
 
-const icons = [Zap, Layers, Building2];
+const icons = [Zap, Rocket, Handshake];
 
 const PricingTeaser = () => {
   const { language, dict } = useLanguage();
@@ -90,7 +90,7 @@ const PricingTeaser = () => {
                         <div className="flex items-center gap-4">
                           <Icon size={18} className={isMiddle ? "text-site-accent" : "text-site-text-light"} strokeWidth={1.5} />
                           <span className="text-[10px] font-bold uppercase tracking-widest text-site-text-light/40">
-                            {tier.duration}
+                            {tier.tag}
                           </span>
                         </div>
                         {isMiddle && (
@@ -105,9 +105,22 @@ const PricingTeaser = () => {
                       <p className="text-site-text-light text-sm leading-relaxed mb-8">
                         {tier.description}
                       </p>
-                      <p className="text-2xl font-medium tracking-tight">
-                        {tier.price}
-                      </p>
+                      <div>
+                        <p className="text-2xl font-medium tracking-tight">
+                          {tier.price}
+                        </p>
+                        {tier.monthlyPrice && (
+                          <p className="text-xs text-site-text-light mt-1">
+                            {language === "fr" ? "puis" : "then"} {tier.monthlyPrice}/{language === "fr" ? "mois" : "mo"}
+                          </p>
+                        )}
+                        {tier.monthlyNote && (
+                          <span className="inline-flex items-center gap-1 mt-2 text-[10px] font-bold text-green-700 bg-green-50 px-2 py-0.5 rounded-full">
+                            <Gift size={10} />
+                            {tier.monthlyNote}
+                          </span>
+                        )}
+                      </div>
                     </div>
                     <div className="mt-10 flex items-center gap-2 text-xs font-bold uppercase tracking-widest opacity-40 group-hover:opacity-100 group-hover:text-site-accent transition-all">
                       {s.cta} <ArrowUpRight size={14} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />

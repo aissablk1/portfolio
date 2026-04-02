@@ -23,21 +23,46 @@ interface Dictionary {
     includesLabel: string;
     durationLabel: string;
     cta: string;
+    timeSavings: {
+      badge: string;
+      title: string;
+      subtitle: string;
+      items: Array<{
+        metric: string;
+        label: string;
+        detail: string;
+      }>;
+    };
     tiers: Array<{
       name: string;
+      tag: string;
       description: string;
       price: string;
       priceNote: string;
+      monthlyPrice: string;
+      monthlyNote: string;
       duration: string;
       features: string[];
+      excluded: string[];
     }>;
+    ecosystemCta: {
+      text: string;
+      button: string;
+    };
     recurring: {
       badge: string;
       title: string;
       subtitle: string;
+      billingToggle: {
+        monthly: string;
+        yearly: string;
+        saveBadge: string;
+      };
       plans: Array<{
         name: string;
         price: string;
+        priceYearly: string;
+        priceYearlyTotal: string;
         features: string[];
       }>;
     };
@@ -228,65 +253,110 @@ const dictionaries: Record<Language, Dictionary> = {
       badge: "Offres & Résultats",
       title: "Votre système digital.\nConçu, livré, opérationnel.",
       subtitle: "Trois formats clairs. Un seul objectif : un système qui tourne dès la livraison. Premier échange gratuit, sans engagement.",
-      popularBadge: "Le plus demandé",
+      popularBadge: "Recommandé",
       includesLabel: "Ce qui est inclus",
       durationLabel: "Durée estimée",
       cta: "Démarrer",
+      timeSavings: {
+        badge: "Pourquoi automatiser",
+        title: "Chaque semaine sans système,\nc'est du temps et de l'argent qui s'évaporent.",
+        subtitle: "Voici ce que gagnent concrètement mes clients dès la mise en production.",
+        items: [
+          { metric: "13h", label: "récupérées par semaine", detail: "Tâches admin de 15h réduites à 2h grâce aux automations" },
+          { metric: "×50", label: "plus rapide sur les devis", detail: "De 3h par devis à 5 minutes — envoi automatique" },
+          { metric: "5 min", label: "de délai de réponse", detail: "Contre 48h en moyenne — relance automatique 24/7" },
+          { metric: "-70%", label: "vs. coût d'une agence", detail: "Système complet dès 2 900 € — une agence facture 15 000 €+" },
+          { metric: "10 jours", label: "de délai de livraison", detail: "Contre 2-3 mois chez une agence classique" },
+          { metric: "24/7", label: "votre système travaille", detail: "Même quand vous êtes sur chantier ou en rendez-vous" },
+        ],
+      },
       tiers: [
         {
-          name: "Sprint",
-          description: "En 5 jours, votre premier outil est en production. Site, automatisation ou dashboard — un résultat concret, immédiat.",
+          name: "Autonome",
+          tag: "Projet seul",
+          description: "Votre système livré clé en main. Vous gérez la suite — idéal si vous avez une équipe technique en interne.",
+          price: "3 900 €",
+          priceNote: "Paiement unique. Aucune maintenance incluse.",
+          monthlyPrice: "",
+          monthlyNote: "",
+          duration: "5 à 10 jours ouvrés",
+          features: [
+            "1 système livré (site, automation ou dashboard)",
+            "Brief stratégique + maquette validée",
+            "Licence d'utilisation exclusive",
+            "Déploiement en production",
+            "Documentation technique renforcée",
+            "Formation autonomie (2h)",
+          ],
+          excluded: [
+            "Aucune maintenance post-livraison",
+            "Aucune mise à jour de sécurité",
+            "Aucun monitoring",
+            "Aucun support",
+          ],
+        },
+        {
+          name: "Accélérateur",
+          tag: "Projet + maintenance",
+          description: "Votre système livré et maintenu. 3 mois de maintenance offerts — vous ne touchez à rien.",
           price: "2 900 €",
-          priceNote: "Prix final. Pas de devis surprise, pas de dépassement. Paiement en 2 fois possible.",
+          priceNote: "Puis 490 €/mois après les 3 mois offerts. Sans engagement.",
+          monthlyPrice: "490 €",
+          monthlyNote: "3 mois offerts (valeur 1 470 €)",
           duration: "5 à 10 jours ouvrés",
           features: [
             "1 système livré clé en main (site, automation ou dashboard)",
             "Brief stratégique + maquette validée avant dev",
-            "Licence d'utilisation exclusive — vous exploitez librement",
+            "Licence d'utilisation exclusive",
             "Déploiement en production inclus",
-            "Support 15 jours post-livraison",
+            "3 mois de monitoring + support offerts",
+            "Corrections de bugs sous 48h",
+            "Mises à jour de sécurité continues",
+            "Rapport mensuel de performance",
           ],
+          excluded: [],
         },
         {
-          name: "Build",
-          description: "Votre infrastructure complète — site, automations IA, données — connectée et opérationnelle. Le format qui transforme votre activité.",
+          name: "Partenaire",
+          tag: "Système + évolution continue",
+          description: "Votre infrastructure complète — site, IA, données — avec un partenaire technique dédié qui fait évoluer votre système.",
           price: "6 900 €",
-          priceNote: "Prix final garanti. Paiement en 3 fois, démarrage dès validation du brief.",
+          priceNote: "Puis 1 900 €/mois après les 3 mois offerts. Sans engagement.",
+          monthlyPrice: "1 900 €",
+          monthlyNote: "3 mois offerts (valeur 5 700 €)",
           duration: "1 à 2 mois",
           features: [
             "Système multi-briques (site + automations + data)",
             "Intégration IA sur-mesure (agents, LLM, workflows)",
             "Architecture scalable et documentée",
-            "Formation à l'utilisation de vos outils",
-            "1 mois de support post-livraison inclus",
-            "Accès prioritaire pour évolutions futures",
+            "3 mois d'évolution + support Premium offerts",
+            "Évolutions et nouvelles fonctionnalités (10h/mois)",
+            "Support prioritaire sous 24h",
+            "Réunion mensuelle de suivi stratégique",
+            "Accès prioritaire aux nouvelles technologies IA",
           ],
-        },
-        {
-          name: "Écosystème",
-          description: "Votre partenaire technique intégré. Architecture, IA, données, ops — je deviens votre CTO externalisé.",
-          price: "Sur mesure",
-          priceNote: "Engagement 3 mois minimum. Paiement mensuel, ROI mesurable dès le premier mois.",
-          duration: "2 à 6 mois",
-          features: [
-            "Architecture complète de A à Z (IA + web + data + ops)",
-            "Agents IA autonomes intégrés à vos process métier",
-            "Dashboards temps réel et cockpits décisionnels",
-            "Tunnels de conversion automatisés",
-            "Documentation technique et formation équipe",
-            "Maintenance et évolution en continu",
-            "Interlocuteur unique — zéro intermédiaire",
-          ],
+          excluded: [],
         },
       ],
+      ecosystemCta: {
+        text: "Besoin d'une architecture sur mesure ? Le plan Écosystème s'adapte à vos ambitions — de 2 à 6 mois, CTO externalisé.",
+        button: "Échanger 30 min",
+      },
       recurring: {
         badge: "Abonnement continu",
         title: "Un système ne se lance pas.\nIl se maintient.",
-        subtitle: "Après la livraison, votre système a besoin de surveillance, de mises à jour et d'évolutions. Je reste à vos côtés avec un abonnement mensuel adapté.",
+        subtitle: "Après la livraison, votre système a besoin de surveillance, de mises à jour et d'évolutions. Je reste à vos côtés avec un abonnement adapté.",
+        billingToggle: {
+          monthly: "Mensuel",
+          yearly: "Annuel",
+          saveBadge: "3 mois offerts",
+        },
         plans: [
           {
             name: "Essentiel",
             price: "490 €",
+            priceYearly: "368 €",
+            priceYearlyTotal: "Facturé 4 410 €/an. Vous économisez 1 470 €/an.",
             features: [
               "Monitoring et alertes 24/7",
               "Corrections de bugs sous 48h",
@@ -298,6 +368,8 @@ const dictionaries: Record<Language, Dictionary> = {
           {
             name: "Pro",
             price: "1 900 €",
+            priceYearly: "1 425 €",
+            priceYearlyTotal: "Facturé 17 100 €/an. Vous économisez 5 700 €/an.",
             features: [
               "Tout Essentiel +",
               "Évolutions et nouvelles fonctionnalités (jusqu'à 10h/mois)",
@@ -310,6 +382,8 @@ const dictionaries: Record<Language, Dictionary> = {
           {
             name: "Entreprise",
             price: "Sur devis",
+            priceYearly: "Sur devis",
+            priceYearlyTotal: "Engagement annuel avec remise négociée.",
             features: [
               "Tout Pro +",
               "Volume d'heures illimité négocié",
@@ -630,65 +704,110 @@ const dictionaries: Record<Language, Dictionary> = {
       badge: "Services & Results",
       title: "Your digital system.\nDesigned, delivered, operational.",
       subtitle: "Three clear formats. One goal: a system that runs from day one. First call free, no strings attached.",
-      popularBadge: "Most popular",
+      popularBadge: "Recommended",
       includesLabel: "What's included",
       durationLabel: "Estimated timeline",
       cta: "Get started",
+      timeSavings: {
+        badge: "Why automate",
+        title: "Every week without a system,\ntime and money evaporate.",
+        subtitle: "Here's what my clients concretely gain from day one in production.",
+        items: [
+          { metric: "13h", label: "saved per week", detail: "Admin tasks cut from 15h to 2h with automations" },
+          { metric: "×50", label: "faster quotes", detail: "From 3h per quote to 5 minutes — auto-sent" },
+          { metric: "5 min", label: "client response time", detail: "Down from 48h average — 24/7 automatic follow-up" },
+          { metric: "-70%", label: "vs. agency cost", detail: "Full system from €2,900 — agencies charge €15,000+" },
+          { metric: "10 days", label: "delivery time", detail: "Vs. 2-3 months at a traditional agency" },
+          { metric: "24/7", label: "your system works", detail: "Even when you're on-site or in meetings" },
+        ],
+      },
       tiers: [
         {
-          name: "Sprint",
-          description: "In 5 days, your first tool is live. Website, automation, or dashboard — a concrete, immediate result.",
+          name: "Autonomous",
+          tag: "Project only",
+          description: "Your system delivered turnkey. You handle the rest — ideal if you have an in-house technical team.",
+          price: "€3,900",
+          priceNote: "One-time payment. No maintenance included.",
+          monthlyPrice: "",
+          monthlyNote: "",
+          duration: "5 to 10 business days",
+          features: [
+            "1 system delivered (website, automation or dashboard)",
+            "Strategic brief + validated mockup",
+            "Exclusive usage license",
+            "Production deployment",
+            "Enhanced technical documentation",
+            "Autonomy training (2h)",
+          ],
+          excluded: [
+            "No post-delivery maintenance",
+            "No security updates",
+            "No monitoring",
+            "No support",
+          ],
+        },
+        {
+          name: "Accelerator",
+          tag: "Project + maintenance",
+          description: "Your system delivered and maintained. 3 months free maintenance — you don't touch a thing.",
           price: "€2,900",
-          priceNote: "Final price. No surprise quotes, no overruns. 2 installments available.",
+          priceNote: "Then €490/month after 3 free months. No commitment.",
+          monthlyPrice: "€490",
+          monthlyNote: "3 months free (€1,470 value)",
           duration: "5 to 10 business days",
           features: [
             "1 turnkey system (website, automation or dashboard)",
             "Strategic brief + validated mockup",
-            "Exclusive usage license — you operate freely",
+            "Exclusive usage license",
             "Production deployment included",
-            "15-day post-delivery support",
+            "3 months monitoring + support included",
+            "Bug fixes within 48h",
+            "Continuous security updates",
+            "Monthly performance report",
           ],
+          excluded: [],
         },
         {
-          name: "Build",
-          description: "Your complete infrastructure — site, AI automations, data — connected and operational. The format that transforms your business.",
+          name: "Partner",
+          tag: "System + continuous evolution",
+          description: "Your complete infrastructure — site, AI, data — with a dedicated technical partner evolving your system.",
           price: "€6,900",
-          priceNote: "Guaranteed final price. 3 installments, kickoff upon brief validation.",
-          duration: "1 to 3 months",
+          priceNote: "Then €1,900/month after 3 free months. No commitment.",
+          monthlyPrice: "€1,900",
+          monthlyNote: "3 months free (€5,700 value)",
+          duration: "1 to 2 months",
           features: [
             "Multi-module system (site + automations + data)",
             "Custom AI integration (agents, LLM, workflows)",
             "Documented scalable architecture",
-            "Training on your tools",
-            "1 month post-delivery support included",
-            "Priority access for future evolutions",
+            "3 months evolution + Premium support included",
+            "New features and evolutions (10h/month)",
+            "Priority support within 24h",
+            "Monthly strategic review meeting",
+            "Priority access to latest AI technologies",
           ],
-        },
-        {
-          name: "Ecosystem",
-          description: "Your integrated technical partner. Architecture, AI, data, ops — I become your outsourced CTO.",
-          price: "Custom quote",
-          priceNote: "3-month minimum. Monthly billing, measurable ROI from month one.",
-          duration: "3 to 6 months",
-          features: [
-            "End-to-end architecture (AI + web + data + ops)",
-            "Autonomous AI agents integrated into your processes",
-            "Real-time dashboards and decision cockpits",
-            "Automated conversion funnels",
-            "Technical documentation and team training",
-            "Continuous maintenance and evolution",
-            "Single point of contact — zero intermediaries",
-          ],
+          excluded: [],
         },
       ],
+      ecosystemCta: {
+        text: "Need a custom architecture? The Ecosystem plan adapts to your ambitions — 2 to 6 months, outsourced CTO.",
+        button: "Chat for 30 min",
+      },
       recurring: {
         badge: "Ongoing subscription",
         title: "A system isn't just launched.\nIt's maintained.",
-        subtitle: "After delivery, your system needs monitoring, updates, and evolutions. I stay by your side with a monthly subscription tailored to your needs.",
+        subtitle: "After delivery, your system needs monitoring, updates, and evolutions. I stay by your side with a subscription tailored to your needs.",
+        billingToggle: {
+          monthly: "Monthly",
+          yearly: "Yearly",
+          saveBadge: "3 months free",
+        },
         plans: [
           {
             name: "Essential",
             price: "€490",
+            priceYearly: "€368",
+            priceYearlyTotal: "Billed €4,410/year. You save €1,470/year.",
             features: [
               "24/7 monitoring and alerts",
               "Bug fixes within 48h",
@@ -700,6 +819,8 @@ const dictionaries: Record<Language, Dictionary> = {
           {
             name: "Pro",
             price: "€1,900",
+            priceYearly: "€1,425",
+            priceYearlyTotal: "Billed €17,100/year. You save €5,700/year.",
             features: [
               "Everything in Essential +",
               "Evolutions and new features (up to 10h/month)",
@@ -712,6 +833,8 @@ const dictionaries: Record<Language, Dictionary> = {
           {
             name: "Enterprise",
             price: "Custom quote",
+            priceYearly: "Custom quote",
+            priceYearlyTotal: "Annual commitment with negotiated discount.",
             features: [
               "Everything in Pro +",
               "Negotiated unlimited hours",

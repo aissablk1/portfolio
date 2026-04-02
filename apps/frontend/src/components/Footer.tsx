@@ -11,12 +11,12 @@ const Footer = () => {
 
   return (
     <footer className="pt-0 py-20 border-t border-site-border mt-20 overflow-hidden">
-      <div className="mt-0 mb-32 overflow-hidden pointer-events-none select-none bg-black border-y border-site-border py-12 w-full">
-        <ScrollVelocityContainer className="text-[14vw] leading-[0.8] font-display font-bold uppercase tracking-tighter text-white flex flex-col gap-0">
-          <video className="background absolute w-full min-h-full h-fit" autoPlay muted loop playsInline>
-            <source data-src="/assets/videos/glitch-red.webm" type="video/webm" src="/assets/videos/glitch-red.webm" />
-            <source data-src="/assets/videos/glitch-red.mp4" type="video/mp4" src="/assets/videos/glitch-red.mp4" />
-          </video>
+      <div className="relative mt-0 mb-32 overflow-hidden pointer-events-none select-none bg-black border-y border-site-border py-12 w-full">
+        <video className="absolute inset-0 w-full h-full object-cover pointer-events-none z-0" autoPlay muted loop playsInline>
+          <source data-src="/assets/videos/glitch-red.webm" type="video/webm" src="/assets/videos/glitch-red.webm" />
+          <source data-src="/assets/videos/glitch-red.mp4" type="video/mp4" src="/assets/videos/glitch-red.mp4" />
+        </video>
+        <ScrollVelocityContainer className="relative z-10 text-[14vw] leading-[0.8] font-display font-bold uppercase tracking-tighter text-white flex flex-col gap-0">
           <ScrollVelocityRow baseVelocity={3} direction={1}>
             <span className="mr-[2vw]">Aïssa Belkoussa</span>
             <span className="mr-[2vw] opacity-50">&bull;</span>

@@ -7,7 +7,7 @@ export default function CGVPage() {
     <LegalPage
       badge="CGV"
       title="Conditions générales de vente"
-      lastUpdated="31 mars 2026"
+      lastUpdated="2 avril 2026"
       sections={[
         {
           title: "Conditions de règlement",
@@ -90,55 +90,81 @@ export default function CGVPage() {
           ),
         },
         {
-          title: "Propriété intellectuelle",
+          title: "Propriété intellectuelle et licence d'utilisation",
           content: (
             <>
               <p>
-                Les droits de propriété intellectuelle sur l'ensemble des
-                livrables (maquettes, code, algorithmes, visuels, contenus,
-                etc.) demeurent la propriété exclusive du prestataire. Le client
-                bénéficie, après paiement intégral des sommes dues, d'un droit
-                d'utilisation non exclusif, pour l'ensemble de son organisation
-                et ses collaborateurs, transférable dans le cadre d'une cession
-                ou transmission d'entreprise, sans limitation de durée, dans
-                les limites strictement nécessaires à l'exploitation du projet
-                tel que défini au devis.
+                <strong>Titularité.</strong> Les droits de propriété
+                intellectuelle sur l'ensemble des livrables (code source,
+                maquettes, algorithmes, configurations, visuels, contenus
+                originaux) demeurent la propriété exclusive du prestataire.
+              </p>
+              <p>
+                <strong>Licence d'utilisation.</strong> Après paiement intégral
+                du prix du projet, le client bénéficie d'une licence
+                d'utilisation :
+              </p>
+              <ul>
+                <li>
+                  <strong>Exclusive</strong> : le prestataire s'interdit de
+                  réutiliser les livrables spécifiques au client (code
+                  personnalisé, design sur mesure) pour un tiers concurrent
+                  direct sur le même marché géographique ;
+                </li>
+                <li>Illimitée dans le temps ;</li>
+                <li>
+                  Couvrant l'exploitation du projet tel que défini au devis ;
+                </li>
+                <li>
+                  Transférable dans le cadre d'une cession ou transmission
+                  d'entreprise.
+                </li>
+              </ul>
+              <p>
+                La licence ne couvre pas : la revente, la sous‑licence à des
+                tiers, ni la modification des briques logicielles propriétaires
+                du prestataire (frameworks, outils internes, bibliothèques
+                réutilisables).
+              </p>
+              <p>
+                <strong>Effet de l'arrêt de la maintenance.</strong> En cas de
+                résiliation de l'abonnement de maintenance : (a) le
+                site/système reste en ligne et fonctionnel ; (b) la licence
+                d'utilisation reste valide sans limitation de durée ; (c) le
+                client conserve l'accès au code source livré ; (d) le
+                prestataire n'est plus tenu aux mises à jour, corrections de
+                bugs, monitoring ni support ; (e) l'hébergement sur
+                l'infrastructure du prestataire est maintenu 90 jours après la
+                fin de l'abonnement (cf. article Hébergement).
+              </p>
+              <p>
+                <strong>Remise du code.</strong> Sur demande écrite, le
+                prestataire s'engage à remettre au client l'intégralité du code
+                source, de la documentation technique et des accès nécessaires
+                à la migration dans un délai de 15 jours ouvrés.
               </p>
               <p>
                 Avant complet règlement, le prestataire reste plein et entier
                 propriétaire des créations et se réserve le droit de suspendre
-                le service en cas d'impayé. Cette titularité des droits du
-                prestataire est valable sans limitation de durée, conformément
-                au droit de la propriété intellectuelle.
-              </p>
-              <p>
-                Le client ne peut en aucun cas céder, concéder ou sous‑licencier
-                ces droits à un tiers sans l'accord écrit préalable du
-                prestataire. Toute reproduction, modification, adaptation ou
-                réutilisation du projet, en tout ou partie, sans l'accord écrit
-                préalable du prestataire, constitue une atteinte aux droits de
-                propriété intellectuelle et est susceptible de caractériser un
-                délit de contrefaçon.
+                le service en cas d'impayé.
               </p>
               <p>
                 Le prestataire se réserve la possibilité d'apporter des
                 ajustements techniques ou esthétiques mineurs au projet, sans
                 accord préalable du client, lorsque ces ajustements sont
                 nécessaires pour des raisons de sécurité, de performance, de
-                compatibilité ou d'amélioration continue du service. Ces
-                ajustements ne remettent pas en cause l'économie générale de la
-                prestation.
+                compatibilité ou d'amélioration continue du service.
               </p>
               <p>
                 Sauf opposition expresse du client, le prestataire est autorisé
-                à mentionner le nom et le logo du client ainsi qu'à présenter le
-                projet réalisé au titre de ses références commerciales
+                à mentionner le nom et le logo du client ainsi qu'à présenter
+                le projet réalisé au titre de ses références commerciales
                 (portfolio, site internet, réseaux sociaux, documents de
-                présentation, etc.). Le prestataire est également autorisé à
+                présentation). Le prestataire est également autorisé à
                 communiquer, à des fins commerciales, sur les résultats obtenus
-                et les métriques de performance du projet, sous forme anonymisée
-                ou nominative sauf opposition du client, dans le respect de la
-                confidentialité des données sensibles du client.
+                et les métriques de performance du projet, sous forme
+                anonymisée ou nominative sauf opposition du client, dans le
+                respect de la confidentialité des données sensibles.
               </p>
             </>
           ),
@@ -184,6 +210,42 @@ export default function CGVPage() {
           ),
         },
         {
+          title: "Période de lancement incluse",
+          content: (
+            <>
+              <p>
+                Le prix du projet comprend une période de lancement de trois (3)
+                mois à compter de la date du procès‑verbal de recette ou, à
+                défaut de réserves formulées dans le délai de 10 jours, à
+                compter de la date de mise à disposition du projet.
+              </p>
+              <p>
+                Durant cette période, le client bénéficie des services de
+                maintenance correspondant à la formule souscrite (Essentiel ou
+                Premium), sans facturation supplémentaire. Cette période de
+                lancement fait partie intégrante de la prestation projet. Elle
+                n'est ni une période d'essai, ni un engagement de souscription
+                à l'abonnement de maintenance.
+              </p>
+              <p>
+                À l'issue de la période de lancement, le client peut :
+                (a) poursuivre l'abonnement de maintenance au tarif en vigueur,
+                sans engagement de durée — la facturation démarre
+                automatiquement sauf notification contraire du client ;
+                (b) ne pas poursuivre, auquel cas les services de maintenance
+                cessent automatiquement sans formalité. Le prestataire informe
+                le client par e‑mail quinze (15) jours avant la fin de la
+                période de lancement.
+              </p>
+              <p>
+                La période de lancement n'est applicable qu'aux plans
+                Accélérateur et Partenaire. Le plan Autonome ne comprend aucune
+                période de lancement ni service de maintenance.
+              </p>
+            </>
+          ),
+        },
+        {
           title: "Responsabilité",
           content: (
             <>
@@ -199,27 +261,37 @@ export default function CGVPage() {
           ),
         },
         {
-          title: "Résiliation",
+          title: "Résiliation du contrat",
           content: (
             <>
               <p>
-                Chacune des parties peut résilier le contrat en cas de
-                manquement grave de l'autre partie à ses obligations, après
-                mise en demeure restée sans effet pendant 15 jours calendaires
-                adressée par lettre recommandée avec accusé de réception ou par
-                e‑mail avec confirmation de lecture.
+                <strong>Résiliation pour manquement.</strong> Chacune des
+                parties peut résilier le contrat en cas de manquement grave de
+                l'autre partie à ses obligations, après mise en demeure restée
+                sans effet pendant 15 jours calendaires adressée par lettre
+                recommandée avec accusé de réception ou par e‑mail avec
+                confirmation de lecture.
               </p>
               <p>
-                En cas de résiliation à l'initiative du client en dehors d'un
-                manquement du prestataire, les sommes versées restent acquises
-                au prestataire au prorata du travail réalisé. Le prestataire
-                fournira un état d'avancement détaillé et remettra les
-                livrables produits jusqu'à la date de résiliation.
+                <strong>Résiliation du projet à l'initiative du
+                client.</strong> En cas de résiliation à l'initiative du client
+                en dehors d'un manquement du prestataire, les sommes versées
+                restent acquises au prestataire au prorata du travail réalisé.
+                Le prestataire fournira un état d'avancement détaillé et
+                remettra les livrables produits jusqu'à la date de résiliation.
               </p>
               <p>
-                En cas de résiliation à l'initiative du prestataire en dehors
-                d'un manquement du client, le prestataire remboursera les
-                sommes correspondant aux prestations non encore réalisées.
+                <strong>Résiliation du projet à l'initiative du
+                prestataire.</strong> En cas de résiliation à l'initiative du
+                prestataire en dehors d'un manquement du client, le prestataire
+                remboursera les sommes correspondant aux prestations non encore
+                réalisées.
+              </p>
+              <p>
+                <strong>Résiliation de l'abonnement de maintenance.</strong> Les
+                conditions de résiliation spécifiques à l'abonnement de
+                maintenance sont détaillées à l'article « Abonnements de
+                maintenance et évolution ».
               </p>
             </>
           ),
@@ -259,24 +331,96 @@ export default function CGVPage() {
           content: (
             <>
               <p>
-                Les abonnements de maintenance (Essentiel, Pro, Entreprise)
-                sont souscrits pour une durée mensuelle reconductible
-                tacitement. Le client peut résilier son abonnement à tout
-                moment avec un préavis de 30 jours avant la prochaine
-                échéance. La résiliation prend effet à la fin du mois en cours.
+                <strong>Souscription et durée.</strong> L'abonnement de
+                maintenance prend effet automatiquement à l'issue de la période
+                de lancement de trois (3) mois, soit le 91e jour suivant la
+                date de recette du projet. Le prestataire adresse une facture
+                mensuelle au client, payable par virement bancaire ou
+                prélèvement SEPA dans un délai de quinze (15) jours suivant la
+                date d'émission. L'abonnement est reconductible tacitement
+                chaque mois.
               </p>
               <p>
-                Le périmètre de chaque formule d'abonnement (volume d'heures,
-                temps de réponse, services inclus) est défini dans la
-                proposition commerciale acceptée par le client. Toute
+                <strong>Niveaux de service (SLA).</strong>
+              </p>
+              <p>
+                <em>Formule Essentiel (490 €/mois) :</em> monitoring 24/7
+                (disponibilité cible : 99,5 %) ; corrections bugs critiques :
+                48 h ouvrées ; corrections bugs mineurs : 10 jours ouvrés ;
+                mises à jour sécurité : appliquées sous 72 h ; 1 h de support
+                mensuel inclus ; rapport mensuel de performance.
+              </p>
+              <p>
+                <em>Formule Premium (1 900 €/mois) :</em> monitoring 24/7
+                (disponibilité cible : 99,9 %) ; corrections bugs critiques :
+                24 h ouvrées ; corrections bugs mineurs : 5 jours ouvrés ;
+                mises à jour sécurité : appliquées sous 24 h ; évolutions
+                jusqu'à 10 h/mois (non reportables) ; support prioritaire
+                24 h ; réunion de suivi stratégique mensuelle ; rapport mensuel
+                de performance.
+              </p>
+              <p>
+                Les niveaux de service s'appliquent aux jours ouvrés
+                (lundi‑vendredi, hors jours fériés français), sauf pour le
+                monitoring automatisé qui fonctionne en continu. Toute
                 prestation excédant le périmètre de l'abonnement fera l'objet
                 d'un devis complémentaire.
               </p>
               <p>
-                Le prestataire se réserve le droit de réviser les tarifs des
-                abonnements une fois par an, avec un préavis de 60 jours. En
-                cas de refus du nouveau tarif, le client pourra résilier son
-                abonnement sans pénalité.
+                <strong>Résiliation par le client.</strong> Le client peut
+                résilier son abonnement à tout moment, par e‑mail avec accusé
+                de réception ou lettre recommandée, moyennant un préavis de
+                trente (30) jours avant la prochaine échéance mensuelle. La
+                résiliation prend effet à la fin du mois civil suivant la
+                réception de la notification.
+              </p>
+              <p>
+                <strong>Résiliation par le prestataire.</strong> Le prestataire
+                peut résilier l'abonnement avec un préavis de soixante (60)
+                jours, notamment en cas de cessation d'activité ou
+                d'impossibilité technique de maintenir le service.
+              </p>
+              <p>
+                <strong>Résiliation pour impayé.</strong> En cas de
+                non‑paiement d'une échéance malgré une relance restée sans
+                effet pendant quinze (15) jours, le prestataire peut suspendre
+                les services de maintenance et résilier l'abonnement de plein
+                droit.
+              </p>
+              <p>
+                <strong>Travaux en cours.</strong> En cas de résiliation, les
+                travaux de maintenance en cours d'exécution au moment de la
+                notification sont menés à terme. Aucune prestation nouvelle ne
+                sera engagée.
+              </p>
+              <p>
+                <strong>Clause de réversibilité.</strong> Dans les trente (30)
+                jours suivant la date d'effet de la résiliation, le prestataire
+                s'engage à : (a) remettre au client l'intégralité du code
+                source à jour ; (b) fournir la documentation technique et les
+                accès nécessaires (hébergement, DNS, comptes tiers, base de
+                données) ; (c) assurer un transfert de compétences raisonnable
+                (1 heure de visioconférence) pour faciliter la reprise par un
+                autre prestataire ; (d) supprimer les données du client de ses
+                systèmes dans un délai de 60 jours, sauf obligation légale de
+                conservation.
+              </p>
+              <p>
+                <strong>Engagement annuel.</strong> Le client peut opter pour un
+                engagement annuel bénéficiant d'une remise de 25 % (soit
+                l'équivalent de 3 mois offerts sur 12). L'engagement annuel est
+                facturé en une seule fois à la date de souscription. En cas de
+                résiliation anticipée d'un engagement annuel, les mensualités
+                restantes ne sont pas remboursées.
+              </p>
+              <p>
+                <strong>Révision tarifaire.</strong> Les tarifs des abonnements
+                sont révisables une fois par an, à la date anniversaire du
+                contrat, dans la limite de l'indice Syntec ou de 5 %
+                (le plus bas des deux). Le prestataire notifie toute révision
+                tarifaire soixante (60) jours avant son entrée en vigueur. En
+                cas de refus, le client peut résilier sans pénalité dans les 30
+                jours suivant la notification.
               </p>
             </>
           ),
@@ -336,6 +480,40 @@ export default function CGVPage() {
                 Les présentes conditions sont régies par le droit français.
               </p>
             </>
+          ),
+        },
+        {
+          title: "Droit de rétractation",
+          content: (
+            <>
+              <p>
+                Conformément à l'article L221‑28 du Code de la consommation, le
+                droit de rétractation ne peut être exercé pour les contrats de
+                fourniture de contenu numérique non fourni sur support matériel
+                dont l'exécution a commencé avec l'accord préalable exprès du
+                consommateur et renoncement exprès à son droit de rétractation.
+              </p>
+              <p>
+                Le client reconnaît et accepte que l'exécution de la prestation
+                commence dès la signature du devis et le versement de l'acompte,
+                et renonce expressément à son droit de rétractation à compter de
+                ce moment.
+              </p>
+            </>
+          ),
+        },
+        {
+          title: "Non‑sollicitation",
+          content: (
+            <p>
+              Pendant la durée du contrat et les douze (12) mois suivant son
+              terme, le client s'engage à ne pas solliciter directement ou
+              indirectement les sous‑traitants, prestataires ou collaborateurs
+              mis en relation par le prestataire dans le cadre de la mission,
+              sauf accord écrit préalable. Cette clause ne fait pas obstacle au
+              droit du client de contracter librement avec tout prestataire de
+              son choix pour des besoins sans rapport avec la mission.
+            </p>
           ),
         },
         {
