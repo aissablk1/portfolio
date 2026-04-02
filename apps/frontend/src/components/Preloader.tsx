@@ -11,18 +11,9 @@ export default function Preloader({ children }: { children: React.ReactNode }) {
   const [phase, setPhase] = useState<"letters" | "assemble" | "exit">("letters");
 
   useEffect(() => {
-    // Check if already shown this session
-    if (sessionStorage.getItem("preloader_shown")) {
-      setIsLoading(false);
-      return;
-    }
-
     const t1 = setTimeout(() => setPhase("assemble"), 1200);
     const t2 = setTimeout(() => setPhase("exit"), 2200);
-    const t3 = setTimeout(() => {
-      setIsLoading(false);
-      sessionStorage.setItem("preloader_shown", "1");
-    }, DURATION);
+    const t3 = setTimeout(() => setIsLoading(false), DURATION);
 
     return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
   }, []);
@@ -102,32 +93,6 @@ export default function Preloader({ children }: { children: React.ReactNode }) {
               </div>
             </div>
 
-            {/* Subtitle line */}
-            <motion.div
-              initial={{ opacity: 0, width: 0 }}
-              animate={
-                phase === "assemble"
-                  ? { opacity: 1, width: "120px" }
-                  : phase === "exit"
-                  ? { opacity: 0, width: 0 }
-                  : { opacity: 0, width: 0 }
-              }
-              transition={{ duration: 0.5, delay: 0.1, ease: [0.25, 1, 0.5, 1] }}
-              className="h-px bg-white/20 mt-6"
-            />
-
-            <motion.p
-              initial={{ opacity: 0, y: 10 }}
-              animate={
-                phase === "assemble"
-                  ? { opacity: 0.4, y: 0 }
-                  : { opacity: 0, y: -10 }
-              }
-              transition={{ duration: 0.4, delay: 0.2, ease: [0.25, 1, 0.5, 1] }}
-              className="text-white/40 text-[10px] font-bold uppercase tracking-[0.4em] mt-4"
-            >
-              Architecte de systèmes
-            </motion.p>
           </motion.div>
         )}
       </AnimatePresence>
