@@ -46,7 +46,7 @@ const Footer = () => {
                 <source data-src="/assets/videos/glitch-red.webm" type="video/webm" src="/assets/videos/glitch-red.webm" />
                 <source data-src="/assets/videos/glitch-red.mp4" type="video/mp4" src="/assets/videos/glitch-red.mp4" />
               </video>
-              <span aria-hidden="true" className="z-10 bg-site-bg text-black mix-blend-screen align-left text-7xl md:text-6xl leading-tight text-balance">
+              <span aria-hidden="true" className="relative z-10 block bg-site-bg text-black mix-blend-screen text-7xl md:text-6xl leading-tight text-balance py-4">
                 {dict.footer.title}
               </span>
             </div>
