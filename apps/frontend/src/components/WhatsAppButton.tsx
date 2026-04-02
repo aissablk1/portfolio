@@ -2,7 +2,7 @@
 
 import { useLanguage } from "./LanguageContext";
 
-const PHONE = "33612345678"; // Replace with real number
+const PHONE = "33782721406";
 
 export default function WhatsAppButton() {
   const { language } = useLanguage();
