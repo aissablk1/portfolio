@@ -13,6 +13,7 @@ type Niche = null | "btp" | "b2b";
 
 const nicheContent = {
   btp: {
+    subtitle: "Vous passez 10h/semaine au téléphone, à envoyer des devis par mail et relancer les clients. Votre site ne vous rapporte aucun client. Vos concurrents, eux, reçoivent des demandes de devis à 23h.",
     roiTitle: "Entreprise de plomberie, 8 salariés",
     roiDesc: "Le patron perd 10 heures par semaine à répondre au téléphone, envoyer des devis par mail et relancer les clients. Accélérateur à 2 900 € : site pro + prise de RDV en ligne + devis automatisé + 3 mois de maintenance inclus. Le système tourne dès J+10.",
     stats: [
@@ -22,6 +23,7 @@ const nicheContent = {
     ],
   },
   b2b: {
+    subtitle: "Vous prospectez à la main — LinkedIn, bouche-à-oreille. Votre site ne capture aucun lead. Vos relances sont oubliées. Chaque semaine, des prospects disparaissent sans que vous le sachiez.",
     roiTitle: "Consultant indépendant, 400K€ CA",
     roiDesc: "Le fondateur prospecte manuellement — LinkedIn + bouche-à-oreille. Aucun tunnel de conversion. Accélérateur à 2 900 € : landing page qui convertit + formulaire qualifié + séquence de relance automatique + 3 mois de maintenance. Le tunnel tourne 24/7.",
     stats: [
@@ -48,7 +50,7 @@ export default function GoPage() {
       <Header />
       <AvailabilityBanner />
 
-      <main className="pt-40 pb-16">
+      <main className="pt-40 pb-0">
         {/* ── 1. Hook ──────────────────────────────────────────────── */}
         <section className="pb-32 px-container">
           <div className="max-w-4xl mx-auto">
@@ -61,17 +63,29 @@ export default function GoPage() {
                 <br />
                 déjà tourner.
               </h1>
-              <p className="text-site-text-light text-lg md:text-xl max-w-2xl leading-relaxed">
-                Vous perdez du temps sur des tâches qui devraient être automatisées.
-                Votre site ne reflète pas la qualité de votre travail.
-                Vos process sont manuels, vos données dispersées.
-              </p>
+              <AnimatePresence mode="wait">
+                <motion.p
+                  key={niche || "default"}
+                  initial={{ opacity: 0, y: 5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -5 }}
+                  transition={{ duration: 0.3 }}
+                  className="text-site-text-light text-lg md:text-xl max-w-2xl leading-relaxed"
+                >
+                  {niche
+                    ? nicheContent[niche].subtitle
+                    : "Vous perdez du temps sur des tâches qui devraient être automatisées. Votre site ne reflète pas la qualité de votre travail. Vos process sont manuels, vos données dispersées."}
+                </motion.p>
+              </AnimatePresence>
             </motion.div>
 
             {/* ── Niche selector ─────────────────────────────── */}
             <motion.div {...fade(0.3)} className="mt-12 flex flex-col sm:flex-row gap-3">
               <button
-                onClick={() => setNiche("btp")}
+                onClick={() => {
+                  setNiche("btp");
+                  setTimeout(() => document.getElementById("roi-section")?.scrollIntoView({ behavior: "smooth", block: "center" }), 200);
+                }}
                 className={cn(
                   "flex items-center gap-3 px-6 py-4 rounded-xl border text-sm font-medium transition-all duration-300",
                   niche === "btp"
@@ -83,7 +97,10 @@ export default function GoPage() {
                 Je suis artisan / BTP
               </button>
               <button
-                onClick={() => setNiche("b2b")}
+                onClick={() => {
+                  setNiche("b2b");
+                  setTimeout(() => document.getElementById("roi-section")?.scrollIntoView({ behavior: "smooth", block: "center" }), 200);
+                }}
                 className={cn(
                   "flex items-center gap-3 px-6 py-4 rounded-xl border text-sm font-medium transition-all duration-300",
                   niche === "b2b"
@@ -307,7 +324,7 @@ export default function GoPage() {
         </section>
 
         {/* ── 3. ROI — preuve concrète (dynamique selon niche) ────── */}
-        <section className="bg-site-text text-site-bg rounded-3xl md:rounded-[3rem] mx-2 md:mx-4 px-container py-20 md:py-28">
+        <section id="roi-section" className="bg-site-text text-site-bg rounded-3xl md:rounded-[3rem] mx-2 md:mx-4 px-container py-20 md:py-28">
           <div className="max-w-5xl mx-auto">
             <AnimatePresence mode="wait">
               <motion.div
