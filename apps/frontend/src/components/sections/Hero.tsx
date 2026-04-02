@@ -28,25 +28,25 @@ const Hero = () => {
   };
 
   return (
-    <section className="px-container pt-40 pb-20 md:pt-60 md:pb-32">
-      <div className="max-w-7xl mx-auto grid grid-cols-12 gap-12 items-center">
+    <section className="px-container pt-32 pb-16 md:pt-60 md:pb-32">
+      <div className="max-w-7xl mx-auto grid grid-cols-12 gap-6 md:gap-12 items-center">
         <div className="col-span-12 lg:col-span-7">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
-            className="text-fluid-hero tracking-tight text-balance whitespace-pre-line"
+            className="text-3xl md:text-fluid-hero tracking-tight text-balance whitespace-pre-line"
           >
             {dict.hero.title}
           </motion.h1>
-          
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 1, 0.5, 1] }}
-            className="mt-12"
+            className="mt-8 md:mt-12"
           >
-            <p className="max-w-xl text-fluid-body text-site-text-light mb-12">
+            <p className="max-w-xl text-base md:text-fluid-body text-site-text-light mb-8 md:mb-12">
               {dict.hero.subtitle}
             </p>
 
