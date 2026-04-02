@@ -142,6 +142,7 @@ interface Dictionary {
     credits: string;
     reserved: string;
     version: string;
+    betaNotice: string;
     legalNotice: string;
     privacyPolicy: string;
     termsOfService: string;
@@ -575,6 +576,7 @@ const dictionaries: Record<Language, Dictionary> = {
       credits: "© 2026 Portfolio par AÏSSA BELKOUSSA",
       reserved: "Tous droits réservés",
       version: "Version préliminaire",
+      betaNotice: "Ce site est en version beta. Le design, les fonctionnalités et le contenu sont susceptibles d'évoluer. Merci de votre compréhension.",
       legalNotice: "Mentions légales",
       privacyPolicy: "Politique de confidentialité",
       termsOfService: "Conditions générales d'utilisation",
@@ -1041,7 +1043,8 @@ const dictionaries: Record<Language, Dictionary> = {
       baseline: "System architectures, automation and digital innovation.",
       credits: "© 2026 Portfolio by AÏSSA BELKOUSSA",
       reserved: "All rights reserved",
-      version: "Version preliminary version",
+      version: "Preliminary version",
+      betaNotice: "This website is in beta. Design, features, and content are subject to change. Thank you for your understanding.",
       legalNotice: "Legal notice",
       privacyPolicy: "Privacy policy",
       termsOfService: "Terms of service",
