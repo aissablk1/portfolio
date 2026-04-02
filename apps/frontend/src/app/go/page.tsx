@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, Check, HardHat, Briefcase } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/utils/cn";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import AvailabilityBanner from "@/components/AvailabilityBanner";
 
 type Niche = null | "btp" | "b2b";
@@ -43,29 +45,12 @@ export default function GoPage() {
 
   return (
     <div className="bg-site-bg min-h-screen">
-      {/* ── Topbar minimal ─────────────────────────────────────────── */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-site-bg/80 backdrop-blur-xl border-b border-site-border">
-        <div className="max-w-6xl mx-auto px-container flex items-center justify-between h-14">
-          <Link href="/" className="text-sm font-medium tracking-tight">
-            Aïssa Belkoussa
-          </Link>
-          <Link
-            href="/contact"
-            className="text-[11px] font-bold uppercase tracking-widest text-site-text-light hover:text-site-text transition-colors"
-          >
-            Prendre contact
-          </Link>
-        </div>
-      </header>
+      <Header />
+      <AvailabilityBanner />
 
-      {/* ── Urgency banner ─────────────────────────────────────── */}
-      <div className="fixed top-14 left-0 right-0 z-40">
-        <AvailabilityBanner />
-      </div>
-
-      <main>
+      <main className="pt-40 pb-0">
         {/* ── 1. Hook ──────────────────────────────────────────────── */}
-        <section className="pt-48 pb-32 px-container">
+        <section className="pb-32 px-container">
           <div className="max-w-4xl mx-auto">
             <motion.div {...fade()}>
               <p className="text-xs font-bold uppercase tracking-widest text-site-text-light mb-8">
@@ -455,15 +440,7 @@ export default function GoPage() {
         </section>
       </main>
 
-      {/* ── Footer minimal ────────────────────────────────────────── */}
-      <footer className="border-t border-site-border py-8 px-container">
-        <div className="max-w-6xl mx-auto flex items-center justify-between text-xs text-site-text-light">
-          <span>Aïssa Belkoussa — Albi, France</span>
-          <Link href="/" className="hover:text-site-text transition-colors">
-            aissabelkoussa.fr
-          </Link>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

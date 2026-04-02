@@ -96,8 +96,6 @@ export default function ServicesPage() {
     <div className="bg-site-bg min-h-screen">
       <Header />
 
-      <AvailabilityBanner />
-
       <main className="pt-40 pb-0">
         {/* ── Hero ──────────────────────────────────────────────────────── */}
         <section className="px-container mb-32">

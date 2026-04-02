@@ -12,7 +12,7 @@ const Footer = () => {
   return (
     <footer className="pt-0 py-20 border-t border-site-border mt-20 overflow-hidden">
       <div className="relative mt-0 mb-32 overflow-hidden pointer-events-none select-none bg-black border-y border-site-border py-12 w-full">
-        <video className="absolute inset-0 w-full h-full object-cover pointer-events-none z-0" autoPlay muted loop playsInline>
+        <video aria-hidden="true" className="absolute inset-0 w-full h-full object-cover pointer-events-none z-0" autoPlay muted loop playsInline>
           <source data-src="/assets/videos/glitch-red.webm" type="video/webm" src="/assets/videos/glitch-red.webm" />
           <source data-src="/assets/videos/glitch-red.mp4" type="video/mp4" src="/assets/videos/glitch-red.mp4" />
         </video>
@@ -46,9 +46,9 @@ const Footer = () => {
                 <source data-src="/assets/videos/glitch-red.webm" type="video/webm" src="/assets/videos/glitch-red.webm" />
                 <source data-src="/assets/videos/glitch-red.mp4" type="video/mp4" src="/assets/videos/glitch-red.mp4" />
               </video>
-              <h1 className="z-10 bg-site-bg text-black mix-blend-screen align-left text-7xl md:text-6xl leading-tight text-balance">
+              <span aria-hidden="true" className="z-10 bg-site-bg text-black mix-blend-screen align-left text-7xl md:text-6xl leading-tight text-balance">
                 {dict.footer.title}
-              </h1>
+              </span>
             </div>
             <div className="flex gap-6">
               <a href="https://www.linkedin.com/in/aissabelkoussa" target="_blank" rel="noopener noreferrer" className="text-sm font-bold uppercase tracking-widest hover:text-site-text transition-colors">LinkedIn</a>

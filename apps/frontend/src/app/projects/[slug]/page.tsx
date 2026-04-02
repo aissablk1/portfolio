@@ -7,7 +7,8 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { createProjectSchema } from "@/lib/schemas";
+import { createProjectSchema, createProjectBreadcrumb } from "@/lib/schemas";
+import JsonLd from "@/components/JsonLd";
 
 const ProjectPage = () => {
   const { slug } = useParams();
@@ -31,19 +32,17 @@ const ProjectPage = () => {
 
   return (
     <div className="bg-site-bg min-h-screen selection:bg-black selection:text-white">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(
-            createProjectSchema({
-              name: project.title,
-              slug: project.slug,
-              description: project.desc,
-              stack: project.stack,
-              datePublished: "2025",
-            })
-          ),
-        }}
+      <JsonLd
+        data={[
+          ...createProjectSchema({
+            name: project.title,
+            slug: project.slug,
+            description: project.desc,
+            stack: project.stack,
+            datePublished: "2025",
+          }),
+          createProjectBreadcrumb(project.title, project.slug),
+        ]}
       />
       <Header />
       

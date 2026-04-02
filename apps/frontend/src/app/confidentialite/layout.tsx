@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import JsonLd from "@/components/JsonLd";
+import { legalPages, breadcrumbs } from "@/lib/schemas";
 
 export const metadata: Metadata = {
   title: "Politique de confidentialite",
@@ -12,5 +14,10 @@ export default function ConfidentialiteLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return children;
+  return (
+    <>
+      <JsonLd data={[legalPages.confidentialite, breadcrumbs.confidentialite]} />
+      {children}
+    </>
+  );
 }

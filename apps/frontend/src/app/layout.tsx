@@ -8,7 +8,10 @@ import {
   personSchema,
   organizationSchema,
   websiteSchema,
+  faqSchema,
+  breadcrumbs,
 } from "@/lib/schemas";
+import JsonLd from "@/components/JsonLd";
 import { Analytics } from "@vercel/analytics/next";
 import { TrackingBeacon } from "@/components/TrackingBeacon";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -108,7 +111,7 @@ export const metadata: Metadata = {
   category: "technology",
 };
 
-const schemas = [personSchema, organizationSchema, websiteSchema];
+const schemas = [personSchema, organizationSchema, websiteSchema, faqSchema, breadcrumbs.home];
 
 export default function RootLayout({
   children,
@@ -118,13 +121,7 @@ export default function RootLayout({
   return (
     <html lang="fr" className="scroll-smooth">
       <head>
-        {schemas.map((schema, i) => (
-          <script
-            key={i}
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-          />
-        ))}
+        <JsonLd data={schemas} />
       </head>
       <body className={`${inter.variable} ${outfit.variable} antialiased`}>
         <LanguageProvider>

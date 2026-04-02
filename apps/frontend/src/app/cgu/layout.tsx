@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import JsonLd from "@/components/JsonLd";
+import { legalPages, breadcrumbs } from "@/lib/schemas";
 
 export const metadata: Metadata = {
   title: "Conditions generales d'utilisation",
@@ -12,5 +14,10 @@ export default function CGULayout({
 }: {
   children: React.ReactNode;
 }) {
-  return children;
+  return (
+    <>
+      <JsonLd data={[legalPages.cgu, breadcrumbs.cgu]} />
+      {children}
+    </>
+  );
 }

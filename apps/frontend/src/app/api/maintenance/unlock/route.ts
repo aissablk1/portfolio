@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const MAINTENANCE_PASSWORD = process.env.MAINTENANCE_PASSWORD || process.env.NEXT_PUBLIC_MAINTENANCE_PASSWORD || "";
+const MAINTENANCE_PASSWORD = process.env.MAINTENANCE_PASSWORD || "";
 
 export async function POST(request: NextRequest) {
   try {
