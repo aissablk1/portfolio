@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plan Stratégique — Aïssa Belkoussa</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+    :root {
+      --bg: #fafaf9; --text: #1a1a1a; --muted: #737373; --border: #e5e5e5;
+      --accent: #2563eb; --red: #dc2626; --green: #16a34a; --amber: #d97706;
+      --surface: #ffffff; --surface-dark: #0a0a0a;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    .page { max-width: 860px; margin: 0 auto; padding: 60px 32px 120px; }
+    h1 { font-size: 36px; font-weight: 900; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 8px; }
+    h2 { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; margin: 56px 0 20px; padding-bottom: 12px; border-bottom: 2px solid var(--text); text-transform: uppercase; }
+    h3 { font-size: 16px; font-weight: 700; margin: 32px 0 12px; letter-spacing: -0.3px; }
+    h4 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); margin: 24px 0 8px; }
+    p, li { font-size: 14px; line-height: 1.7; }
+    p { margin-bottom: 12px; }
+    ul, ol { margin: 8px 0 16px 20px; }
+    li { margin-bottom: 6px; }
+    .subtitle { font-size: 14px; color: var(--muted); margin-bottom: 40px; }
+    .badge { display: inline-block; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 4px 10px; border-radius: 20px; }
+    .badge-red { background: #fef2f2; color: var(--red); }
+    .badge-green { background: #f0fdf4; color: var(--green); }
+    .badge-amber { background: #fffbeb; color: var(--amber); }
+    .badge-blue { background: #eff6ff; color: var(--accent); }
+    table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; font-size: 13px; }
+    th { text-align: left; font-weight: 700; padding: 10px 12px; border-bottom: 2px solid var(--text); font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+    td { padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin: 16px 0; }
+    .card-dark { background: var(--surface-dark); color: #fafafa; border: none; border-radius: 12px; padding: 28px; margin: 16px 0; }
+    .card-dark p, .card-dark li { color: #a3a3a3; }
+    .card-dark h3 { color: #fafafa; margin-top: 0; }
+    .card-dark .stat { font-size: 32px; font-weight: 800; letter-spacing: -1px; color: #fafafa; }
+    .card-dark .stat-label { font-size: 11px; color: #737373; margin-top: 2px; }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 16px 0; }
+    .stat-card { text-align: center; padding: 16px; border: 1px solid var(--border); border-radius: 10px; }
+    .stat-card .number { font-size: 28px; font-weight: 800; letter-spacing: -1px; }
+    .stat-card .label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+    .alert { padding: 16px 20px; border-radius: 10px; margin: 16px 0; font-size: 13px; }
+    .alert-red { background: #fef2f2; border-left: 4px solid var(--red); }
+    .alert-amber { background: #fffbeb; border-left: 4px solid var(--amber); }
+    .alert-green { background: #f0fdf4; border-left: 4px solid var(--green); }
+    .timeline { position: relative; margin: 24px 0; padding-left: 24px; border-left: 2px solid var(--border); }
+    .timeline-item { margin-bottom: 24px; position: relative; }
+    .timeline-item::before { content: ''; position: absolute; left: -29px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+    .timeline-item .date { font-size: 11px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.5px; }
+    .cols-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .cols-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+    .highlight { background: linear-gradient(135deg, rgba(37,99,235,0.05), rgba(37,99,235,0.1)); border: 1.5px solid var(--accent); }
+    .toc { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px 28px; margin: 32px 0; }
+    .toc ol { counter-reset: toc; list-style: none; margin: 0; padding: 0; }
+    .toc li { counter-increment: toc; padding: 6px 0; font-size: 13px; font-weight: 500; }
+    .toc li::before { content: counter(toc, decimal-leading-zero) " — "; font-weight: 700; color: var(--accent); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+    @media print {
+      body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page { padding: 24px; max-width: 100%; }
+      h2 { break-before: page; }
+    }
+    @page { size: A4; margin: 20mm; }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- COVER                                                          -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <p style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:var(--muted); margin-bottom:32px;">Analyse compl&egrave;te &mdash; 31 mars 2026</p>
+
+  <h1>Le Plan Aïssa Belkoussa</h1>
+  <p class="subtitle">Diagnostic de ta vie professionnelle, organis&eacute; en PARA.<br>G&eacute;n&eacute;r&eacute; par 10 agents d'analyse sur l'int&eacute;gralit&eacute; de ton MacBook Pro.</p>
+
+  <div class="stats-grid">
+    <div class="stat-card"><div class="number">93</div><div class="label">Dossiers pro*</div></div>
+    <div class="stat-card"><div class="number">96</div><div class="label">Concepts dev</div></div>
+    <div class="stat-card"><div class="number">2 772</div><div class="label">Skills IA</div></div>
+    <div class="stat-card"><div class="number">0</div><div class="label">Sprint pay&eacute;</div></div>
+  </div>
+  <p style="font-size:11px; color:var(--muted);">* La majorit&eacute; des 93 dossiers CRÉATIVE AÏSSA sont des projets personnels, pas des clients payants. Le nombre de clients r&eacute;ellement factur&eacute;s est tr&egrave;s faible.</p>
+
+  <div class="alert alert-amber">
+    <strong>Le constat :</strong> stack technique de senior, 2 772 skills, portfolio d&eacute;ploy&eacute;, CGV blind&eacute;es, prix repositionn&eacute;s &mdash; mais z&eacute;ro Sprint ou Build pay&eacute; au nouveau tarif. L'infrastructure est pr&ecirc;te. <strong>Il manque le premier client payant.</strong> Tout se joue maintenant.
+  </div>
+
+  <!-- TOC -->
+  <div class="toc">
+    <h4 style="margin-top:0">Sommaire</h4>
+    <ol>
+      <li>Qui tu es &mdash; Le diagnostic</li>
+      <li>PARA : Projects &mdash; Ce qui doit avancer maintenant</li>
+      <li>PARA : Areas &mdash; Tes domaines de responsabilit&eacute;</li>
+      <li>PARA : Resources &mdash; Ton capital inexploit&eacute;</li>
+      <li>PARA : Archives &mdash; Ce qu'il faut lâcher</li>
+      <li>Les 3 contradictions qui te bloquent</li>
+      <li>La roadmap &mdash; 90 jours</li>
+      <li>Actions imm&eacute;diates &mdash; Cette semaine</li>
+    </ol>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- 01 — DIAGNOSTIC                                                -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <h2>01 &mdash; Qui tu es</h2>
+
+  <h3>Profil</h3>
+  <p><strong>Aïssa Belkoussa</strong>, Albi (81), micro-entrepreneur. D&eacute;veloppeur fullstack React/Next.js/Python/Tailwind. Ex-graphiste (CRÉATIVE AÏSSA, 93 clients design). En transition vers "architecte de syst&egrave;mes digitaux & IA". &Eacute;tudiant L1 informatique en parall&egrave;le.</p>
+
+  <h3>Pattern de travail</h3>
+  <div class="card">
+    <div class="cols-3">
+      <div><strong>Cr&eacute;neau</strong><br><span style="font-size:13px; color:var(--muted);">Noctambule. 50% des commits entre 19h et 4h. Pic à 1h du matin. Quasi absent 7h-11h.</span></div>
+      <div><strong>Rythme</strong><br><span style="font-size:13px; color:var(--muted);">Sprints intenses (20-50 commits en 1 jour) puis silence. Pas de d&eacute;veloppement incr&eacute;mental.</span></div>
+      <div><strong>Jour</strong><br><span style="font-size:13px; color:var(--muted);">Lundi &eacute;crasant (144 commits). Mercredi quasi mort (6 commits). Weekends actifs.</span></div>
+    </div>
+  </div>
+
+  <h3>Stack technique</h3>
+  <table>
+    <tr><th>Cat&eacute;gorie</th><th>Technologies</th></tr>
+    <tr><td>Frontend</td><td>React 19, Next.js 16, Tailwind 4, Framer Motion, Three.js, GSAP, PixiJS</td></tr>
+    <tr><td>Backend</td><td>FastAPI, NestJS, Node.js, AdonisJS, Rust (Actix-web)</td></tr>
+    <tr><td>Data</td><td>PostgreSQL, MongoDB, Redis, SQLite, Prisma, Supabase</td></tr>
+    <tr><td>IA</td><td>Claude Code (32 subagents, 23 plugins, 11 hooks), XGBoost, Kalman, HMM, FinBERT</td></tr>
+    <tr><td>Infra</td><td>Docker, Vercel, Render, Cloudflare Tunnels, Railway, OrbStack</td></tr>
+    <tr><td>Langages</td><td>TypeScript, Python, Rust, Go, Lua, Java, C#, PHP</td></tr>
+  </table>
+
+  <h3>&Eacute;tat du syst&egrave;me</h3>
+  <div class="cols-2">
+    <div class="alert alert-red"><strong>RAM : 17.9 / 18 Go</strong><br>Swap permanent. 2 sessions Claude Code + Dia + Discord saturent la m&eacute;moire. Cause des crashs OOM document&eacute;s.</div>
+    <div class="alert alert-red"><strong>Disque Pro : 100% plein</strong><br>86 Mo libres sur 122 Go. Risque de corruption. Volume principal &agrave; 96% (14 Go libres).</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- 02 — PROJECTS                                                  -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <h2>02 &mdash; Projects <span class="badge badge-blue">PARA</span></h2>
+  <p>Projets actifs avec un objectif clair, une deadline, et un next action.</p>
+
+  <div class="card highlight">
+    <h3 style="margin-top:0">P1 &mdash; R&eacute;union Alexandre BRIHIEZ</h3>
+    <p><span class="badge badge-red">Vendredi 3 avril, 9h30</span></p>
+    <ul>
+      <li>Niches valid&eacute;es : <strong>BTP/Artisans</strong> + <strong>Prestataires B2B</strong></li>
+      <li>Offres : Sprint 2 900&euro;, Build 6 900&euro;, &Eacute;cosyst&egrave;me sur mesure</li>
+      <li>One-pager pr&ecirc;t &mdash; <code>docs/one-pager-offres.html</code></li>
+      <li>Page /go narrative (apr&egrave;s red&eacute;ploiement Vercel)</li>
+      <li>CGV 13 articles compl&egrave;tes</li>
+      <li>Proposition Alexandre : commission 20% si apporteur, mission ponctuelle sinon</li>
+    </ul>
+    <p><strong>Next action :</strong> Red&eacute;ployer Vercel (1er avril, rappel calendrier 9h00), puis r&eacute;p&eacute;ter le pitch.</p>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">P2 &mdash; Premier Sprint payant <span class="badge badge-red">Priorit&eacute; absolue</span></h3>
+    <p>Objectif : <strong>d&eacute;crocher et livrer ton premier Sprint &agrave; 2 900&euro;</strong> dans les 30 prochains jours. C'est la seule m&eacute;trique qui compte. Tout le reste (LAUNCHKIT, MYRALERT, nouveaux concepts) est une distraction tant que ce milestone n'est pas atteint.</p>
+    <p><strong>Canaux d'acquisition :</strong> Alexandre (si r&eacute;seau), LinkedIn (1 post/semaine), anciens contacts CRÉATIVE AÏSSA (&agrave; recontacter pour une offre digitale), bouche-&agrave;-oreille local Albi.</p>
+    <p><strong>Crit&egrave;re de succ&egrave;s :</strong> Facture &eacute;mise, acompte encaiss&eacute;, Sprint d&eacute;marr&eacute;.</p>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">P3 &mdash; Portfolio aissabelkoussa.fr</h3>
+    <p>Score : 7.5/10. Stack solide, fonctionnel, SEO correct. <strong>Lacunes :</strong></p>
+    <ul>
+      <li>Aucun t&eacute;moignage / preuve sociale (93 clients mais 0 affich&eacute;s !)</li>
+      <li>Image OG en portrait (1242x2208) &mdash; mauvais rendu LinkedIn/Twitter</li>
+      <li><code>/services</code> absent du sitemap</li>
+      <li>Visuels projets placeholder (maquettes grises)</li>
+      <li>Pas de blog / contenu &eacute;ditorial</li>
+    </ul>
+  </div>
+
+  <div class="cols-2">
+    <div class="card">
+      <h3 style="margin-top:0">P4 &mdash; DK BUILDING</h3>
+      <p><span class="badge badge-amber">Gratuit &mdash; actif portfolio</span></p>
+      <p>32 commits, monorepo, admin panel + media manager. Travail &agrave; titre gratuit &mdash; non facturable. <strong>Valeur :</strong> cas d'&eacute;tude concret pour le portfolio, preuve de livraison BTP, demander un t&eacute;moignage &eacute;crit.</p>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">P5 &mdash; Syna Events</h3>
+      <p><span class="badge badge-amber">Client actif</span></p>
+      <p>D&eacute;ploy&eacute; en production le 31 mars &agrave; 2h49. 2 commits. V&eacute;rifier si facturable ou gratuit. Si gratuit, m&ecirc;me logique que DK BUILDING : t&eacute;moignage + r&eacute;f&eacute;rence.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">P6 &mdash; Lib&eacute;rer de l'espace disque <span class="badge badge-red">Urgent</span></h3>
+    <p>Volume Professionnel : <strong>86 Mo libres</strong>. Volume principal : <strong>14 Go libres</strong>. Actions :</p>
+    <ul>
+      <li>Nettoyer les <code>node_modules</code> orphelins (Jolananas = 6.4 Go, Semalex = 6.2 Go)</li>
+      <li>Archiver les 80+ clients inactifs sur un disque externe</li>
+      <li>Supprimer les caches Docker (<code>docker system prune</code>)</li>
+      <li>Utiliser CleanMyMac 5 (d&eacute;j&agrave; install&eacute;)</li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- 03 — AREAS                                                     -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <h2>03 &mdash; Areas <span class="badge badge-blue">PARA</span></h2>
+  <p>Domaines de responsabilit&eacute; permanents &mdash; pas de deadline, mais des standards &agrave; maintenir.</p>
+
+  <table>
+    <tr><th>Domaine</th><th>&Eacute;tat actuel</th><th>Standard vis&eacute;</th></tr>
+    <tr>
+      <td><strong>Facturation</strong></td>
+      <td><span class="badge badge-red">Critique</span> 1 facture en 8 mois. App compta custom pr&ecirc;te mais quasi vide.</td>
+      <td>Facturer chaque prestation termin&eacute;e sous 48h. Objectif : 3+ factures/mois.</td>
+    </tr>
+    <tr>
+      <td><strong>Finances</strong></td>
+      <td><span class="badge badge-amber">Flou</span> Budget 2023 sur Excel. Aucun suivi 2024-2026 identifi&eacute;.</td>
+      <td>Suivi mensuel CA, charges, marge. Surveiller le seuil TVA (36 800&euro;).</td>
+    </tr>
+    <tr>
+      <td><strong>Marketing</strong></td>
+      <td><span class="badge badge-amber">Sous-exploit&eacute;</span> LinkedIn + GitHub r&eacute;f&eacute;renc&eacute;s. Instagram, YouTube inactifs. 80+ clients non montr&eacute;s.</td>
+      <td>1 post LinkedIn/semaine. Section r&eacute;f&eacute;rences clients sur le portfolio. Image OG corrig&eacute;e.</td>
+    </tr>
+    <tr>
+      <td><strong>Formation</strong></td>
+      <td><span class="badge badge-green">Actif</span> L1 informatique en cours. FORMASTEP (5 modules). 2 772 skills.</td>
+      <td>Continuer la L1. Les skills sont un atout massif &mdash; les exploiter commercialement.</td>
+    </tr>
+    <tr>
+      <td><strong>Infrastructure</strong></td>
+      <td><span class="badge badge-red">Critique</span> RAM satur&eacute;e, disque plein, 2 sessions Claude parall&egrave;les.</td>
+      <td>1 session Claude max. Fermer Dia/Discord quand dev. Lib&eacute;rer 30 Go minimum.</td>
+    </tr>
+    <tr>
+      <td><strong>Investissements</strong></td>
+      <td><span class="badge badge-amber">Actif</span> PropFirm (FTMO, Maven), crypto (Binance, MetaMask), MetaTrader 4/5. MYRALERT en dev.</td>
+      <td>S&eacute;parer clairement l'activit&eacute; trading de l'activit&eacute; prestation.</td>
+    </tr>
+  </table>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- 04 — RESOURCES                                                 -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <h2>04 &mdash; Resources <span class="badge badge-blue">PARA</span></h2>
+  <p>Ton capital intellectuel et professionnel &mdash; ce que tu poss&egrave;des et qui a de la valeur.</p>
+
+  <div class="card-dark">
+    <h3>Le paradoxe Aïssa Belkoussa</h3>
+    <p>Tu as accumul&eacute; un capital &eacute;norme &mdash; 93 clients, 2 772 skills, une stack de senior, un outil de trading ML, un boilerplate SaaS pr&ecirc;t &agrave; vendre, un portfolio d&eacute;ploy&eacute;, une app comptable custom. Mais tu n'as <strong>mon&eacute;tis&eacute; presque rien</strong>. Ton probl&egrave;me n'est pas "que faire" &mdash; c'est "arr&ecirc;ter de construire et commencer &agrave; vendre".</p>
+  </div>
+
+  <h3>Capital client (sous-exploit&eacute;)</h3>
+  <table>
+    <tr><th>Secteur</th><th>Clients</th><th>Potentiel Productized Service</th></tr>
+    <tr><td>Restauration / Food</td><td>7+ (EN CAS DE FAIM, La Frappe, MINI MARKET...)</td><td>Moyen &mdash; budgets faibles</td></tr>
+    <tr><td>BTP / D&eacute;coration</td><td>4 (DK BUILDING, ARC-D&Eacute;CO-SOL, Harizi, RPM)</td><td><strong>Fort &mdash; niche valid&eacute;e</strong></td></tr>
+    <tr><td>Auto / Moto</td><td>4 (IPOWER MOTORS, The Excellence Car...)</td><td>Fort &mdash; budgets &eacute;lev&eacute;s</td></tr>
+    <tr><td>Coiffure / Barbier</td><td>4 (AshHairCut, ML Barber, SADON...)</td><td>Moyen</td></tr>
+    <tr><td>Mode / Beaut&eacute;</td><td>5+ (NOXVAULT, ESSAÏ, GLOWMITY...)</td><td>Moyen</td></tr>
+    <tr><td>Tech / IA</td><td>3 (ADS, Patrice Massol, OFM IA)</td><td><strong>Fort &mdash; niche B2B valid&eacute;e</strong></td></tr>
+  </table>
+  <p><strong>Observation :</strong> La majorit&eacute; des 93 dossiers sont des projets perso, pas des clients payants. Mais tu as quand m&ecirc;me travaill&eacute; avec des entreprises r&eacute;elles (DK BUILDING, IPOWER MOTORS, ADS, Patrice Massol). M&ecirc;me gratuits, ce sont des r&eacute;f&eacute;rences utilisables.</p>
+
+  <h3>Capital technique</h3>
+  <div class="cols-2">
+    <div class="card">
+      <h4 style="margin-top:0">Skills les plus utiles pour BTP/B2B</h4>
+      <ol>
+        <li><strong>pricing-strategy</strong> &mdash; Van Westendorp, Good/Better/Best</li>
+        <li><strong>sales-automator</strong> &mdash; s&eacute;quences email froids B2B</li>
+        <li><strong>marketing-psychology</strong> &mdash; PLFS, social proof</li>
+        <li><strong>email-sequence</strong> &mdash; onboarding, nurture, win-back</li>
+        <li><strong>free-tool-strategy</strong> &mdash; calculateur devis = lead magnet</li>
+      </ol>
+    </div>
+    <div class="card">
+      <h4 style="margin-top:0">Transition A&rarr;B (pas avant 6 mois de revenus service)</h4>
+      <ol>
+        <li><strong>MYRALERT</strong> &mdash; Trading ML, SaaS potentiel si pipeline de signaux valid&eacute;</li>
+        <li><strong>ParleCitoyen</strong> &mdash; Civic-tech, 149 commits, mod&egrave;le freemium &agrave; d&eacute;finir</li>
+        <li><strong>VINSCOPE</strong> &mdash; Plaque &rarr; VIN &rarr; pi&egrave;ces, niche B2B garagistes</li>
+      </ol>
+      <p style="font-size:12px; color:var(--muted);">LAUNCHKIT retir&eacute; : march&eacute; des boilerplates SaaS satur&eacute; (ShipFast, Supastarter, Makerkit...), pas de distribution, pas de diff&eacute;renciation. L'effort est mieux investi sur les Sprints.</p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- 05 — ARCHIVES                                                  -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <h2>05 &mdash; Archives <span class="badge badge-blue">PARA</span></h2>
+  <p>Ce qui doit &ecirc;tre archiv&eacute;, supprim&eacute; ou class&eacute; pour lib&eacute;rer de l'espace (physique et mental).</p>
+
+  <h3>&Agrave; archiver sur disque externe</h3>
+  <table>
+    <tr><th>Dossier</th><th>Taille estim&eacute;e</th><th>Raison</th></tr>
+    <tr><td>80+ clients inactifs CRÉATIVE AÏSSA (avant 2025)</td><td>~40 Go</td><td>Aucune activit&eacute; r&eacute;cente, fichiers design finaux</td></tr>
+    <tr><td>Projets vid&eacute;o/musique (stocks, YouTube, Ableton)</td><td>~10 Go</td><td>Non li&eacute;s &agrave; l'activit&eacute; actuelle</td></tr>
+    <tr><td>Formations BAFA + FORMASTEP</td><td>~2 Go</td><td>Termin&eacute;es</td></tr>
+    <tr><td>Investissements (IM Academy, Futures Infinity docs)</td><td>~5 Go</td><td>Historique, non actif</td></tr>
+    <tr><td>SidecarPatcher, wineskin, libimobiledevice (clones)</td><td>~1 Go</td><td>Outils obsol&egrave;tes (2019-2020)</td></tr>
+  </table>
+
+  <h3>&Agrave; nettoyer</h3>
+  <ul>
+    <li><code>node_modules</code> orphelins dans les projets clients inactifs (Jolananas 6.4 Go, Semalex 6.2 Go)</li>
+    <li>Caches Docker : <code>docker system prune -a</code></li>
+    <li><code>creativeaissa.com</code> (Eleventy SSG) &mdash; site hors ligne, domaine expir&eacute;. Archiver le code.</li>
+    <li>Concepts dev sans code (NEXUUP GLOBAL MASTER, NEWSCRAFTTER, ULTIEASM) &mdash; supprimer les scaffolds vides</li>
+  </ul>
+
+  <h3>&Agrave; tuer (projets qui dispersent l'attention)</h3>
+  <div class="alert alert-amber">
+    <strong>Tu as 96 concepts en parall&egrave;le.</strong> C'est le sympt&ocirc;me num&eacute;ro 1 de la non-mon&eacute;tisation. Chaque heure pass&eacute;e sur un concept qui ne g&eacute;n&egrave;re pas de revenu est une heure vol&eacute;e &agrave; LAUNCHKIT, &agrave; DK BUILDING, &agrave; ton prochain Sprint &agrave; 2 900&euro;. <strong>R&egrave;gle : pas plus de 3 projets actifs simultan&eacute;ment.</strong>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- 06 — CONTRADICTIONS                                            -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <h2>06 &mdash; Les 3 contradictions qui te bloquent</h2>
+
+  <div class="card">
+    <h3 style="margin-top:0">Contradiction 1 &mdash; Builder vs Seller</h3>
+    <p>Tu passes 95% de ton temps &agrave; construire et 5% &agrave; vendre. Le ratio devrait &ecirc;tre <strong>60/40</strong>. LAUNCHKIT est pr&ecirc;t &agrave; vendre mais pas lanc&eacute;. DK BUILDING et Syna Events sont livr&eacute;s mais pas factur&eacute;s. Tu as une app comptable custom avec signature cryptographique HMAC-SHA256&hellip; pour 1 facture.</p>
+    <p><strong>Solution :</strong> Chaque vendredi = "jour de vente". Pas de code. Factures, relances, prospection, posts LinkedIn.</p>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">Contradiction 2 &mdash; Du travail livr&eacute; mais 0 preuve sociale</h3>
+    <p>Tu as travaill&eacute; sur des projets r&eacute;els (DK BUILDING, IPOWER MOTORS, Syna Events, Jolananas, ADS...) &mdash; certains pay&eacute;s, beaucoup gratuits. Ton portfolio en montre 3. Ta page d'accueil n'a aucune section r&eacute;f&eacute;rences, aucun t&eacute;moignage, aucun logo.</p>
+    <p><strong>Solution :</strong> S&eacute;lectionner les projets les plus visuels/impressionnants (m&ecirc;me gratuits), les afficher sur le portfolio. Demander des t&eacute;moignages aux vrais clients. <strong>Et surtout : arr&ecirc;ter de travailler gratuitement.</strong> Chaque projet gratuit est un Sprint &agrave; 2 900&euro; perdu.</p>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">Contradiction 3 &mdash; Triple identit&eacute; non r&eacute;solue</h3>
+    <p>Trois marques coexistent sans lien clair :</p>
+    <ul>
+      <li><strong>CRÉATIVE AÏSSA</strong> &mdash; ancienne marque design/graphisme (93 clients, hors ligne)</li>
+      <li><strong>Aïssa Belkoussa</strong> &mdash; nouvelle marque tech/syst&egrave;mes (portfolio actif)</li>
+      <li><strong>Invest With Aïssa</strong> &mdash; marque investissement (Telegram, identit&eacute; visuelle, inactif)</li>
+    </ul>
+    <p><strong>Solution :</strong> <strong>Aïssa Belkoussa</strong> est la marque unique. CRÉATIVE AÏSSA est l'historique (archiver). Invest With Aïssa est un hobby (s&eacute;parer compl&egrave;tement ou abandonner).</p>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- 07 — ROADMAP                                                   -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <h2>07 &mdash; La Roadmap &mdash; 90 jours</h2>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="date">Semaine 1 (31 mars &ndash; 6 avril)</div>
+      <p><strong>R&eacute;union Alexandre + premiers revenus</strong></p>
+      <ul>
+        <li>Red&eacute;ployer Vercel (1er avril)</li>
+        <li>R&eacute;union Alexandre (3 avril 9h30)</li>
+        <li>Facturer DK BUILDING + Syna Events</li>
+        <li>Lib&eacute;rer 30 Go sur le volume Professionnel</li>
+        <li>Corriger l'image OG (1200x630)</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="date">Semaines 2-4 (avril)</div>
+      <p><strong>Premier client payant + visibilit&eacute;</strong></p>
+      <ul>
+        <li><strong>D&eacute;crocher le premier Sprint payant &agrave; 2 900&euro;</strong> (canal : Alexandre, LinkedIn, r&eacute;seau local Albi)</li>
+        <li>Ajouter section "R&eacute;f&eacute;rences / projets" au portfolio (DK BUILDING, Syna Events, IPOWER MOTORS)</li>
+        <li>Mettre <code>/services</code> dans le sitemap</li>
+        <li>1 post LinkedIn par semaine (cas d'&eacute;tude, r&eacute;sultat concret, pas de th&eacute;orie)</li>
+        <li>Recontacter 5 anciens contacts CRÉATIVE AÏSSA avec la nouvelle offre digitale</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="date">Mois 2 (mai)</div>
+      <p><strong>Pipeline + r&eacute;current</strong></p>
+      <ul>
+        <li>2-3 Sprints livr&eacute;s (5 800-8 700&euro;)</li>
+        <li>Convertir 1 client Sprint en abo Essentiel (490&euro;/mois)</li>
+        <li>Cr&eacute;er 1 &eacute;tude de cas d&eacute;taill&eacute;e (ROI chiffr&eacute;)</li>
+        <li>Explorer le skill <code>free-tool-strategy</code> : calculateur de devis BTP gratuit = lead magnet</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="date">Mois 3 (juin)</div>
+      <p><strong>Consolider + pr&eacute;parer la transition A&rarr;B</strong></p>
+      <ul>
+        <li>Objectif : 15K&euro; de CA cumul&eacute; (services + abos)</li>
+        <li>3+ abonnements r&eacute;currents actifs</li>
+        <li>&Eacute;valuer : MYRALERT en SaaS ou pas ? D&eacute;cision bas&eacute;e sur les revenus services</li>
+        <li>Commencer &agrave; d&eacute;l&eacute;guer les t&acirc;ches r&eacute;p&eacute;titives (process document&eacute;s)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- 08 — ACTIONS IMMÉDIATES                                        -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <h2>08 &mdash; Actions imm&eacute;diates</h2>
+  <p>Ce que tu fais <strong>cette semaine</strong>. Pas la semaine prochaine.</p>
+
+  <div class="card-dark">
+    <h3>Mardi 1er avril</h3>
+    <ol>
+      <li>Red&eacute;ployer Vercel (rappel calendrier 9h00)</li>
+      <li>Lib&eacute;rer de l'espace disque &mdash; <code>node_modules</code> orphelins + caches Docker (objectif : 30 Go)</li>
+      <li>V&eacute;rifier quels projets r&eacute;cents sont facturables (Syna Events ?) &mdash; facturer si oui</li>
+    </ol>
+
+    <h3>Mercredi 2 avril</h3>
+    <ol>
+      <li>R&eacute;p&eacute;ter le pitch pour Alexandre (one-pager + page /go)</li>
+      <li>Corriger l'image OG du portfolio (1200x630 paysage)</li>
+      <li>Ajouter <code>/services</code> au sitemap</li>
+    </ol>
+
+    <h3>Vendredi 3 avril &mdash; 9h30</h3>
+    <ol>
+      <li>R&eacute;union Alexandre. One-pager imprim&eacute;. Page /go ouverte sur t&eacute;l&eacute;phone.</li>
+      <li>Question 1 : "Tu as des contacts BTP/prestataires ?"</li>
+      <li>Question 2 : "C'est quoi ta vision &agrave; 6 mois ?"</li>
+      <li>Question 3 : "Qu'est-ce qu'on fait lundi ?"</li>
+    </ol>
+
+    <h3>Weekend 4-5 avril</h3>
+    <ol>
+      <li>Ajouter les projets r&eacute;els au portfolio (DK BUILDING, IPOWER MOTORS, Syna Events &mdash; vrais screenshots, pas de maquettes grises)</li>
+      <li>Commencer la prospection : 5 messages LinkedIn cibl&eacute;s &agrave; des g&eacute;rants BTP/prestataires B2B</li>
+    </ol>
+  </div>
+
+  <hr>
+
+  <p style="text-align:center; color:var(--muted); font-size:12px; margin-top:40px;">
+    G&eacute;n&eacute;r&eacute; le 31 mars 2026 par 10 agents d'analyse autonomes.<br>
+    Donn&eacute;es : 26 repos git, 93 dossiers pro, 96 concepts, 2 772 skills, 374 commits analys&eacute;s.<br>
+    Corrig&eacute; avec les retours d'Aïssa : dossiers &ne; clients payants, DK BUILDING gratuit, LAUNCHKIT retir&eacute;.<br>
+    <strong>Le plan ne vaut rien. L'ex&eacute;cution vaut tout.</strong>
+  </p>
+
+</div>
+</body>
+</html>

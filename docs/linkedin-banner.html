@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>LinkedIn Bannieres — Aïssa Belkoussa</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700&display=swap');
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{background:#e5e5e5;font-family:'Inter',sans-serif;padding:40px 20px;color:#1a1a1a}
+    .page{max-width:1640px;margin:0 auto}
+    h1{font-size:28px;font-weight:800;text-align:center;letter-spacing:-1px;margin-bottom:6px}
+    .subtitle{text-align:center;font-size:13px;color:#666;margin-bottom:48px}
+    .version{margin-bottom:64px}
+    .version-header{display:flex;align-items:baseline;gap:16px;margin-bottom:8px;flex-wrap:wrap}
+    .version-num{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#999}
+    .version-title{font-size:18px;font-weight:700;letter-spacing:-.3px}
+    .version-rec{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#fff;background:#16a34a;padding:3px 10px;border-radius:20px}
+    .version-desc{font-size:13px;color:#666;line-height:1.7;margin-bottom:16px;max-width:800px}
+    .pros-cons{display:flex;gap:24px;margin-bottom:16px;font-size:12px}
+    .pros,.cons{flex:1;padding:12px 16px;border-radius:8px}
+    .pros{background:#f0fdf4;color:#166534}
+    .cons{background:#fef2f2;color:#991b1b}
+    .pros strong,.cons strong{display:block;font-size:10px;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+    .banner-wrap{position:relative;width:100%;overflow:hidden}
+    .banner-scaler{transform-origin:top left;width:1584px}
+    .dl-btn{
+      position:absolute;top:12px;right:12px;z-index:10;
+      padding:10px 24px;background:#1a1a1a;color:#fdfdfd;border:none;border-radius:6px;
+      font-family:'Inter',sans-serif;font-size:11px;font-weight:700;letter-spacing:.5px;
+      text-transform:uppercase;cursor:pointer;transition:opacity .2s;opacity:.85;
+    }
+    .dl-btn:hover{opacity:1}
+
+    @media(max-width:768px){
+      body{padding:20px 12px}
+      h1{font-size:22px}
+      .version-header{gap:8px}
+      .version-title{font-size:15px}
+      .pros-cons{flex-direction:column;gap:8px}
+    }
+
+    /* ═══════════════════════════════════
+       SHARED BANNER BASE
+       ═══════════════════════════════════ */
+    .banner{
+      width:1584px;height:396px;position:relative;overflow:hidden;
+      font-family:'Inter',sans-serif;
+    }
+    .banner .grid-bg{
+      position:absolute;inset:0;
+      background-image:
+        linear-gradient(rgba(0,0,0,0.015) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(0,0,0,0.015) 1px,transparent 1px);
+      background-size:48px 48px;
+    }
+
+    /* ═══ V1 — Commercial (originale) ═══ */
+    .v1{background:#fdfdfd;border:1px solid #eee}
+    .v1 .accent-line{position:absolute;bottom:0;left:38%;right:0;height:3px;background:#1a1a1a}
+    .v1 .corner-dot{position:absolute;top:24px;right:24px;width:8px;height:8px;border-radius:50%;background:#1a1a1a}
+    .v1 .content{position:relative;z-index:1;height:100%;display:flex;align-items:center;padding:0 64px}
+    .v1 .spacer{min-width:360px}
+    .v1 .main{flex:1;padding-left:48px}
+    .v1 .badge{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#666;display:flex;align-items:center;gap:8px;margin-bottom:16px}
+    .v1 .badge::before{content:'';width:6px;height:6px;border-radius:50%;background:#1a1a1a}
+    .v1 .headline{font-family:'Outfit',sans-serif;font-size:38px;font-weight:500;color:#1a1a1a;letter-spacing:-.03em;line-height:1.15;margin-bottom:16px}
+    .v1 .subline{font-size:14px;color:#666;line-height:1.6}
+    .v1 .zone-right{min-width:220px;display:flex;flex-direction:column;justify-content:center;padding:0 40px;border-left:1px solid #eee}
+    .v1 .offer{margin-bottom:20px}
+    .v1 .offer:last-of-type{margin-bottom:0}
+    .v1 .offer-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#999;margin-bottom:3px}
+    .v1 .offer-price{font-family:'Outfit',sans-serif;font-size:22px;font-weight:500;color:#1a1a1a;letter-spacing:-.02em}
+    .v1 .offer-note{font-size:10px;color:#999;margin-top:1px}
+    .v1 .url{font-size:12px;font-weight:500;color:#1a1a1a;margin-top:24px;padding-top:16px;border-top:1px solid #eee}
+
+    /* ═══ V2 — Minimale (consensus agents) ═══ */
+    .v2{background:#fdfdfd;border:1px solid #eee}
+    .v2 .accent-line{position:absolute;bottom:0;left:360px;right:0;height:2px;background:#1a1a1a}
+    .v2 .content{position:relative;z-index:1;height:100%;display:flex;align-items:center;padding:0 64px}
+    .v2 .spacer{min-width:360px}
+    .v2 .main{flex:1;padding-left:48px}
+    .v2 .headline{font-family:'Outfit',sans-serif;font-size:52px;font-weight:500;color:#1a1a1a;letter-spacing:-.03em;line-height:1.15;margin-bottom:14px}
+    .v2 .subline{font-size:16px;color:#666;letter-spacing:-.01em;line-height:1.5;margin-bottom:20px}
+    .v2 .stack{font-size:12px;font-weight:500;color:#999;letter-spacing:.02em}
+    .v2 .stack span{color:#ccc;margin:0 8px}
+    .v2 .meta{min-width:180px;text-align:right;padding-left:40px;border-left:1px solid #eee}
+    .v2 .location{font-size:12px;font-weight:500;color:#999;margin-bottom:8px}
+    .v2 .status{font-size:11px;font-weight:600;color:#1a1a1a}
+    .v2 .status::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:#1a1a1a;margin-right:6px;vertical-align:middle}
+
+    /* ═══ V3 — Ultra minimale (texte seul) ═══ */
+    .v3{background:#fdfdfd;border:1px solid #eee}
+    .v3 .accent-line{position:absolute;bottom:0;left:0;right:0;height:2px;background:#1a1a1a}
+    .v3 .content{position:relative;z-index:1;height:100%;display:flex;align-items:center;justify-content:center;padding:0 64px}
+    .v3 .center-text{text-align:center}
+    .v3 .headline{font-family:'Outfit',sans-serif;font-size:44px;font-weight:500;color:#1a1a1a;letter-spacing:-.03em;line-height:1.2;margin-bottom:12px}
+    .v3 .subline{font-size:14px;color:#999;letter-spacing:.02em}
+
+    /* ═══ V4 — Dark (inversion) ═══ */
+    .v4{background:#0a0a0a}
+    .v4 .grid-bg{background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:48px 48px}
+    .v4 .accent-line{position:absolute;bottom:0;left:360px;right:0;height:2px;background:#fdfdfd}
+    .v4 .content{position:relative;z-index:1;height:100%;display:flex;align-items:center;padding:0 64px}
+    .v4 .spacer{min-width:360px}
+    .v4 .main{flex:1;padding-left:48px}
+    .v4 .headline{font-family:'Outfit',sans-serif;font-size:52px;font-weight:500;color:#fdfdfd;letter-spacing:-.03em;line-height:1.15;margin-bottom:14px}
+    .v4 .subline{font-size:16px;color:#666;letter-spacing:-.01em;line-height:1.5;margin-bottom:20px}
+    .v4 .stack{font-size:12px;font-weight:500;color:#525252;letter-spacing:.02em}
+    .v4 .stack span{color:#333;margin:0 8px}
+    .v4 .meta{min-width:180px;text-align:right;padding-left:40px;border-left:1px solid #222}
+    .v4 .location{font-size:12px;font-weight:500;color:#525252;margin-bottom:8px}
+    .v4 .status{font-size:11px;font-weight:600;color:#fdfdfd}
+    .v4 .status::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:#fdfdfd;margin-right:6px;vertical-align:middle}
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <h1>Bannieres LinkedIn</h1>
+  <p class="subtitle">4 versions &mdash; 1584 &times; 396 px &mdash; Exporte celle qui te correspond en PNG @2x</p>
+
+  <!-- ═══════════════════════════════════════════ V1 ═══ -->
+  <div class="version">
+    <div class="version-header">
+      <span class="version-num">V1</span>
+      <span class="version-title">Commerciale &mdash; avec prix et offres</span>
+    </div>
+    <p class="version-desc">La version originale. Affiche les prix, l'URL et les offres. Plus agressive, oriente vers l'action. Risque : les prix sont coup&eacute;s sur mobile LinkedIn (zone droite invisible).</p>
+    <div class="pros-cons">
+      <div class="pros"><strong>Forces</strong>Le prospect voit imm&eacute;diatement le tarif et l'offre. Filtre les non-qualifi&eacute;s. URL visible.</div>
+      <div class="cons"><strong>Faiblesses</strong>Prix coup&eacute;s sur mobile (70% du trafic). Fait "pub" plus que "pro". Les agents l'ont scor&eacute;e faible en professionnalisme.</div>
+    </div>
+    <div class="banner-wrap">
+      <button class="dl-btn" onclick="exportBanner('v1')">Telecharger PNG @2x</button>
+      <div class="banner-scaler"><div class="banner v1" id="v1">
+        <div class="grid-bg"></div>
+        <div class="accent-line"></div>
+        <div class="corner-dot"></div>
+        <div class="content">
+          <div class="spacer"></div>
+          <div class="main">
+            <div class="badge">Syst&egrave;mes digitaux & IA</div>
+            <div class="headline">Votre site livr&eacute;<br>en 10 jours.</div>
+            <div class="subline">Pour artisans, BTP<br>et prestataires B2B</div>
+          </div>
+          <div class="zone-right">
+            <div class="offer"><div class="offer-label">Sprint</div><div class="offer-price">2 900 &euro;</div><div class="offer-note">5-10 jours &middot; tarif fixe</div></div>
+            <div class="offer"><div class="offer-label">Build</div><div class="offer-price">6 900 &euro;</div><div class="offer-note">1-2 mois &middot; tarif fixe</div></div>
+            <div class="url">aissabelkoussa.fr</div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ V2 ═══ -->
+  <div class="version">
+    <div class="version-header">
+      <span class="version-num">V2</span>
+      <span class="version-title">Cr&eacute;dibilit&eacute; &mdash; sans prix, avec stack et localisation</span>
+      <span class="version-rec">Recommand&eacute;e</span>
+    </div>
+    <p class="version-desc">Consensus de 10 agents d'analyse. Pas de prix, pas d'URL, pas de CTA. Headline + sous-titre cible + stack technique + localisation. Surface de cr&eacute;dibilit&eacute; pure. Lisible sur desktop ET mobile.</p>
+    <div class="pros-cons">
+      <div class="pros"><strong>Forces</strong>Pro, sobre, coh&eacute;rent avec le site. Le g&eacute;rant BTP voit "PME et artisans BTP" et se reconna&icirc;t. "Albi" rassure en local. Stack = preuve technique.</div>
+      <div class="cons"><strong>Faiblesses</strong>Pas d'appel &agrave; l'action direct. Le prix n'est pas visible (mais c'est voulu &mdash; il est dans la headline et le About).</div>
+    </div>
+    <div class="banner-wrap">
+      <button class="dl-btn" onclick="exportBanner('v2')">Telecharger PNG @2x</button>
+      <div class="banner-scaler"><div class="banner v2" id="v2">
+        <div class="grid-bg"></div>
+        <div class="accent-line"></div>
+        <div class="content">
+          <div class="spacer"></div>
+          <div class="main">
+            <div class="headline">D&eacute;veloppement Web<br>& Syst&egrave;mes Digitaux</div>
+            <div class="subline">Solutions sur mesure pour PME et artisans BTP</div>
+            <div class="stack">React<span>&middot;</span>Next.js<span>&middot;</span>Python<span>&middot;</span>IA</div>
+          </div>
+          <div class="meta">
+            <div class="location">Albi, Occitanie</div>
+            <div class="status">Disponible</div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ V3 ═══ -->
+  <div class="version">
+    <div class="version-header">
+      <span class="version-num">V3</span>
+      <span class="version-title">Ultra minimale &mdash; texte centr&eacute; uniquement</span>
+    </div>
+    <p class="version-desc">Le maximum du minimalisme. Un seul message centr&eacute;, pas de zone droite, pas de stack. Laisse la headline et le About faire tout le travail. Pour ceux qui veulent un profil type "architecte senior".</p>
+    <div class="pros-cons">
+      <div class="pros"><strong>Forces</strong>Tr&egrave;s &eacute;l&eacute;gant, impossible de rater le message. Fonctionne parfaitement sur mobile. Signal "premium".</div>
+      <div class="cons"><strong>Faiblesses</strong>Z&eacute;ro contexte technique. Le g&eacute;rant BTP doit lire la headline pour comprendre. Peut para&icirc;tre vide si le reste du profil n'est pas solide.</div>
+    </div>
+    <div class="banner-wrap">
+      <button class="dl-btn" onclick="exportBanner('v3')">Telecharger PNG @2x</button>
+      <div class="banner-scaler"><div class="banner v3" id="v3">
+        <div class="grid-bg"></div>
+        <div class="accent-line"></div>
+        <div class="content">
+          <div class="center-text">
+            <div class="headline">Construire votre &eacute;cosyst&egrave;me digital<br>sur des fondations solides.</div>
+            <div class="subline">A&iuml;ssa Belkoussa &mdash; Albi, Occitanie</div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ V4 ═══ -->
+  <div class="version">
+    <div class="version-header">
+      <span class="version-num">V4</span>
+      <span class="version-title">Dark &mdash; inversion du th&egrave;me</span>
+    </div>
+    <p class="version-desc">M&ecirc;me structure que la V2 mais en mode sombre. Forte tendance 2025-2026 (navy, charcoal, noir). Cr&eacute;e un contraste visuel fort dans le feed LinkedIn (majoritairement blanc). Signal "premium tech".</p>
+    <div class="pros-cons">
+      <div class="pros"><strong>Forces</strong>Se d&eacute;marque visuellement dans le feed. Tendance forte 2025-2026. Signal tech/premium. Lisible sur mobile.</div>
+      <div class="cons"><strong>Faiblesses</strong>Moins coh&eacute;rent avec le site (fond blanc). Peut para&icirc;tre "startup" plus que "artisan". Contraste photo de profil &agrave; v&eacute;rifier.</div>
+    </div>
+    <div class="banner-wrap">
+      <button class="dl-btn" onclick="exportBanner('v4')">Telecharger PNG @2x</button>
+      <div class="banner-scaler"><div class="banner v4" id="v4">
+        <div class="grid-bg"></div>
+        <div class="accent-line"></div>
+        <div class="content">
+          <div class="spacer"></div>
+          <div class="main">
+            <div class="headline">D&eacute;veloppement Web<br>& Syst&egrave;mes Digitaux</div>
+            <div class="subline">Solutions sur mesure pour PME et artisans BTP</div>
+            <div class="stack">React<span>&middot;</span>Next.js<span>&middot;</span>Python<span>&middot;</span>IA</div>
+          </div>
+          <div class="meta">
+            <div class="location">Albi, Occitanie</div>
+            <div class="status">Disponible</div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function exportBanner(id) {
+  const banner = document.getElementById(id);
+  const btn = banner.closest('.banner-wrap').querySelector('.dl-btn');
+  btn.textContent = 'Export...';
+  btn.style.opacity = '0.5';
+
+  const scale = 2;
+  const w = 1584;
+  const h = 396;
+  const isDark = id === 'v4';
+  const bg = isDark ? '#0a0a0a' : '#fdfdfd';
+  const gridColor = isDark ? 'rgba(255,255,255,0.02)' : 'rgba(0,0,0,0.015)';
+  const textColor = isDark ? '#fdfdfd' : '#1a1a1a';
+  const mutedColor = isDark ? '#666666' : '#666666';
+  const faintColor = isDark ? '#525252' : '#999999';
+  const borderColor = isDark ? '#222222' : '#eeeeee';
+  const accentColor = isDark ? '#fdfdfd' : '#1a1a1a';
+
+  const canvas = document.createElement('canvas');
+  canvas.width = w * scale;
+  canvas.height = h * scale;
+  const ctx = canvas.getContext('2d');
+  ctx.scale(scale, scale);
+
+  // Background
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, w, h);
+
+  // Grid
+  ctx.strokeStyle = gridColor;
+  ctx.lineWidth = 1;
+  for (let x = 0; x <= w; x += 48) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke(); }
+  for (let y = 0; y <= h; y += 48) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke(); }
+
+  const cy = h / 2;
+
+  if (id === 'v1') {
+    // Accent line
+    ctx.fillStyle = '#1a1a1a';
+    ctx.fillRect(w * 0.38, h - 3, w * 0.62, 3);
+    // Corner dot
+    ctx.beginPath(); ctx.arc(w - 24, 24, 4, 0, Math.PI * 2); ctx.fill();
+    // Separator
+    ctx.strokeStyle = '#eeeeee'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(w * 0.75, h * 0.2); ctx.lineTo(w * 0.75, h * 0.8); ctx.stroke();
+    // Badge dot
+    const tx = w * 0.38 + 48;
+    ctx.fillStyle = '#1a1a1a'; ctx.beginPath(); ctx.arc(tx, cy - 72, 3, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = '#666666'; ctx.font = '700 9px Inter'; ctx.fillText('SYSTEMES DIGITAUX & IA', tx + 12, cy - 68);
+    // Headline
+    ctx.fillStyle = '#1a1a1a'; ctx.font = '500 38px Outfit';
+    ctx.fillText('Votre site livr\u00e9', tx, cy - 20);
+    ctx.fillText('en 10 jours.', tx, cy + 24);
+    // Subline
+    ctx.fillStyle = '#666666'; ctx.font = '400 14px Inter';
+    ctx.fillText('Pour artisans, BTP', tx, cy + 56);
+    ctx.fillText('et prestataires B2B', tx, cy + 76);
+    // Right zone
+    const rx = w * 0.75 + 40;
+    ctx.fillStyle = '#999999'; ctx.font = '700 9px Inter'; ctx.fillText('SPRINT', rx, cy - 52);
+    ctx.fillStyle = '#1a1a1a'; ctx.font = '500 22px Outfit'; ctx.fillText('2 900 \u20ac', rx, cy - 28);
+    ctx.fillStyle = '#999999'; ctx.font = '400 10px Inter'; ctx.fillText('5-10 jours \u00b7 tarif fixe', rx, cy - 14);
+    ctx.fillStyle = '#999999'; ctx.font = '700 9px Inter'; ctx.fillText('BUILD', rx, cy + 16);
+    ctx.fillStyle = '#1a1a1a'; ctx.font = '500 22px Outfit'; ctx.fillText('6 900 \u20ac', rx, cy + 40);
+    ctx.fillStyle = '#999999'; ctx.font = '400 10px Inter'; ctx.fillText('1-2 mois \u00b7 tarif fixe', rx, cy + 54);
+    ctx.strokeStyle = '#eeeeee'; ctx.beginPath(); ctx.moveTo(rx, cy + 76); ctx.lineTo(rx + 140, cy + 76); ctx.stroke();
+    ctx.fillStyle = '#1a1a1a'; ctx.font = '500 12px Inter'; ctx.fillText('aissabelkoussa.fr', rx, cy + 94);
+
+  } else if (id === 'v2' || id === 'v4') {
+    // Accent line
+    ctx.fillStyle = accentColor; ctx.fillRect(360, h - 2, w - 360, 2);
+    // Separator
+    const sx = w - 244;
+    ctx.strokeStyle = borderColor; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(sx, h * 0.2); ctx.lineTo(sx, h * 0.8); ctx.stroke();
+    // Text
+    const tx = 408;
+    ctx.fillStyle = textColor; ctx.font = '500 52px Outfit';
+    ctx.fillText('D\u00e9veloppement Web', tx, cy - 30);
+    ctx.fillText('& Syst\u00e8mes Digitaux', tx, cy + 30);
+    ctx.fillStyle = mutedColor; ctx.font = '400 16px Inter';
+    ctx.fillText('Solutions sur mesure pour PME et artisans BTP', tx, cy + 64);
+    ctx.fillStyle = faintColor; ctx.font = '500 12px Inter';
+    ctx.fillText('React  \u00b7  Next.js  \u00b7  Python  \u00b7  IA', tx, cy + 92);
+    // Meta
+    const mx = w - 64;
+    ctx.textAlign = 'right';
+    ctx.fillStyle = faintColor; ctx.font = '500 12px Inter'; ctx.fillText('Albi, Occitanie', mx, cy - 8);
+    ctx.fillStyle = accentColor; ctx.beginPath(); ctx.arc(mx - 68, cy + 14, 3, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = accentColor; ctx.font = '600 11px Inter'; ctx.fillText('Disponible', mx, cy + 18);
+    ctx.textAlign = 'left';
+
+  } else if (id === 'v3') {
+    // Accent line full width
+    ctx.fillStyle = '#1a1a1a'; ctx.fillRect(0, h - 2, w, 2);
+    // Centered text
+    ctx.textAlign = 'center';
+    ctx.fillStyle = '#1a1a1a'; ctx.font = '500 44px Outfit';
+    ctx.fillText('Construire votre \u00e9cosyst\u00e8me digital', w / 2, cy - 16);
+    ctx.fillText('sur des fondations solides.', w / 2, cy + 36);
+    ctx.fillStyle = '#999999'; ctx.font = '400 14px Inter';
+    ctx.fillText('A\u00efssa Belkoussa \u2014 Albi, Occitanie', w / 2, cy + 72);
+    ctx.textAlign = 'left';
+  }
+
+  canvas.toBlob((blob) => {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `linkedin-banner-${id}-@2x.png`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    btn.textContent = 'OK !';
+    btn.style.background = '#16a34a';
+    setTimeout(() => { btn.textContent = 'Telecharger PNG @2x'; btn.style.background = '#1a1a1a'; btn.style.opacity = '.85'; }, 2500);
+  }, 'image/png', 1.0);
+}
+
+// ═══ Responsive scaling ═══
+function scaleBanners() {
+  document.querySelectorAll('.banner-wrap').forEach(wrap => {
+    const scaler = wrap.querySelector('.banner-scaler');
+    if (!scaler) return;
+    const wrapWidth = wrap.clientWidth;
+    const bannerWidth = 1584;
+    const scale = Math.min(1, wrapWidth / bannerWidth);
+    scaler.style.transform = `scale(${scale})`;
+    scaler.style.transformOrigin = 'top left';
+    wrap.style.height = (396 * scale) + 'px';
+  });
+}
+window.addEventListener('resize', scaleBanners);
+window.addEventListener('load', scaleBanners);
+scaleBanners();
+</script>
+
+</body>
+</html>
