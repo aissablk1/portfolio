@@ -591,16 +591,16 @@ const dictionaries: Record<Language, Dictionary> = {
           contextLabel: "Entreprise ou Projet",
           contextPlaceholder: "Dassault Systèmes"
         },
-        needs: { 
-          title: "De quoi avez-vous besoin ?", 
+        needs: {
+          title: "De quoi avez-vous besoin ?",
           options: [
-            { id: "design", label: "Design & Expériences", template: "Je souhaite refondre mon interface avec une approche systémique et immersive. Mon objectif est de..." },
-            { id: "app", label: "Apps Large Scale", template: "J'ai besoin de construire une application SaaS robuste et scalable capable de gérer..." },
-            { id: "chatbot", label: "Chatbots IA", template: "Je cherche à intégrer un agent conversationnel intelligent pour automatiser..." },
-            { id: "phone", label: "IA Téléphonique", template: "Je souhaite déployer un agent IA vocal capable de gérer mes appels et..." },
-            { id: "workflow", label: "Workflows Autonomes", template: "Je veux automatiser mon processus de [domaine] via des workflows indépendants et performants." },
-            { id: "full", label: "Système Complet", template: "Je souhaite créer un écosystème sur-mesure combinant architecture, design et IA de bout en bout." }
-          ] 
+            { id: "site", label: "Site web professionnel", template: "J'ai besoin d'un site web professionnel qui reflète mon activité et génère des contacts qualifiés. Mon activité est..." },
+            { id: "automation", label: "Automatisation & IA", template: "Je perds du temps sur des tâches répétitives (devis, relances, suivi client...). Je voudrais automatiser..." },
+            { id: "dashboard", label: "Dashboard & données", template: "J'ai besoin d'un tableau de bord pour piloter mon activité avec des données en temps réel. Aujourd'hui je gère avec..." },
+            { id: "system", label: "Système complet", template: "J'ai besoin d'un écosystème complet : site + automatisations + données. Mon objectif business est de..." },
+            { id: "maintenance", label: "Maintenance d'un système existant", template: "J'ai déjà un site/système en place mais il n'est plus maintenu. J'ai besoin de..." },
+            { id: "other", label: "Autre besoin", template: "" }
+          ]
         },
         details: { 
           title: "Dites-m'en plus", 
@@ -1058,16 +1058,16 @@ const dictionaries: Record<Language, Dictionary> = {
           contextLabel: "Company or Project",
           contextPlaceholder: "Wayne Enterprises"
         },
-        needs: { 
-          title: "What do you need?", 
+        needs: {
+          title: "What do you need?",
           options: [
-            { id: "design", label: "Design & Experiences", template: "I want to redesign my interface with a systemic and immersive approach. My goal is to..." },
-            { id: "app", label: "Large Scale Apps", template: "I need to build a robust and scalable SaaS application capable of handling..." },
-            { id: "chatbot", label: "AI Chatbots", template: "I'm looking to integrate an intelligent conversational agent to automate..." },
-            { id: "phone", label: "AI Phone Agents", template: "I wish to deploy a vocal AI agent capable of handling my calls and..." },
-            { id: "workflow", label: "Autonomous Workflows", template: "I want to automate my [domain] process via independent and high-performance workflows." },
-            { id: "full", label: "Full System", template: "I want to create a bespoke ecosystem combining architecture, design, and AI from end to end." }
-          ] 
+            { id: "site", label: "Professional website", template: "I need a professional website that reflects my business and generates qualified leads. My business is..." },
+            { id: "automation", label: "Automation & AI", template: "I'm losing time on repetitive tasks (quotes, follow-ups, client tracking...). I'd like to automate..." },
+            { id: "dashboard", label: "Dashboard & data", template: "I need a dashboard to monitor my business with real-time data. Today I manage with..." },
+            { id: "system", label: "Complete system", template: "I need a full ecosystem: website + automations + data. My business goal is to..." },
+            { id: "maintenance", label: "Maintenance of an existing system", template: "I already have a website/system in place but it's no longer maintained. I need..." },
+            { id: "other", label: "Other need", template: "" }
+          ]
         },
         details: { 
           title: "Tell me more", 

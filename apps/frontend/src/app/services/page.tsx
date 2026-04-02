@@ -304,7 +304,7 @@ export default function ServicesPage() {
 
                       {/* CTA */}
                       <Link
-                        href="/contact"
+                        href={`/contact?plan=${isDecoy ? "autonome" : isHighlighted ? "accelerateur" : "partenaire"}`}
                         className={cn(
                           "inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all mb-8",
                           isHighlighted

@@ -1,10 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "./LanguageContext";
 import { cn } from "@/utils/cn";
-import { Check, ChevronRight, ChevronLeft, Send } from "lucide-react";
+import { Check, ChevronRight, ChevronLeft, Send, Rocket, Zap, Handshake } from "lucide-react";
 
 type FormState = {
   name: string;
@@ -16,8 +17,17 @@ type FormState = {
   _honey: string;
 };
 
+const planDetails: Record<string, { fr: string; en: string; price: string; icon: typeof Rocket }> = {
+  autonome: { fr: "Autonome", en: "Autonomous", price: "3 900 €", icon: Zap },
+  accelerateur: { fr: "Accélérateur", en: "Accelerator", price: "2 900 €", icon: Rocket },
+  partenaire: { fr: "Partenaire", en: "Partner", price: "6 900 €", icon: Handshake },
+};
+
 const ContactForm = () => {
   const { dict, language } = useLanguage();
+  const searchParams = useSearchParams();
+  const selectedPlan = searchParams.get("plan");
+  const plan = selectedPlan && planDetails[selectedPlan] ? planDetails[selectedPlan] : null;
   const [step, setStep] = useState(0);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -54,7 +64,7 @@ const ContactForm = () => {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData, lang: language }),
+        body: JSON.stringify({ ...formData, lang: language, plan: selectedPlan || "" }),
       });
       if (!res.ok) throw new Error("Send failed");
       setIsSubmitted(true);
@@ -206,7 +216,10 @@ const ContactForm = () => {
               {dict.funnel.steps.details.budgetLabel}
             </label>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-               {["< 10k", "10k - 30k", "30k - 100k", "100k+"].map((range) => (
+               {(language === "fr"
+                 ? ["~ 3 000 €", "~ 7 000 €", "10 000 € +", "Sur mesure"]
+                 : ["~ €3,000", "~ €7,000", "€10,000+", "Custom"]
+               ).map((range) => (
                  <button
                     key={range}
                     type="button"
@@ -255,6 +268,24 @@ const ContactForm = () => {
 
   return (
     <div className="max-w-3xl mx-auto">
+      {/* Selected Plan Banner */}
+      {plan && (
+        <div className="mb-10 flex items-center gap-4 p-5 bg-site-accent/[0.04] border border-site-accent/20 rounded-2xl">
+          <div className="w-10 h-10 rounded-full bg-site-accent/10 flex items-center justify-center shrink-0">
+            <plan.icon size={18} className="text-site-accent" />
+          </div>
+          <div className="flex-1">
+            <p className="text-xs font-bold uppercase tracking-widest text-site-accent">
+              {language === "fr" ? "Plan sélectionné" : "Selected plan"}
+            </p>
+            <p className="text-lg font-medium tracking-tight">
+              {language === "fr" ? plan.fr : plan.en} — {plan.price}
+            </p>
+          </div>
+          <Check size={18} className="text-site-accent shrink-0" />
+        </div>
+      )}
+
       {/* Progress Bar */}
       <div className="mb-20 space-y-4">
         <div className="flex justify-between text-[10px] font-bold uppercase tracking-[0.3em] text-site-text-light/40">
