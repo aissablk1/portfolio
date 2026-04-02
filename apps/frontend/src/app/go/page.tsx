@@ -445,10 +445,10 @@ export default function GoPage() {
                 Gratuit, zéro engagement.
               </p>
               <Link
-                href="/contact"
+                href="/contact?plan=accelerateur"
                 className="inline-flex items-center gap-3 bg-site-text text-site-bg px-10 py-5 rounded-full text-[11px] font-bold uppercase tracking-widest hover:scale-105 transition-all duration-300"
               >
-                Réserver un échange
+                Recevoir ma proposition en 48h
                 <ArrowUpRight size={14} />
               </Link>
             </motion.div>

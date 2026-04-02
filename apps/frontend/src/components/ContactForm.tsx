@@ -260,7 +260,7 @@ const ContactForm = () => {
           onClick={() => window.location.href = "/"}
           className="px-8 py-4 bg-site-border/30 rounded-full font-bold uppercase tracking-widest text-xs hover:bg-site-accent hover:text-white transition-all shadow-sm"
         >
-          Back to base
+          {language === "fr" ? "Retour à l'accueil" : "Back to home"}
         </button>
       </motion.div>
     );
@@ -289,8 +289,8 @@ const ContactForm = () => {
       {/* Progress Bar */}
       <div className="mb-20 space-y-4">
         <div className="flex justify-between text-[10px] font-bold uppercase tracking-[0.3em] text-site-text-light/40">
-           <span>Progress</span>
-           <span>Step {step + 1} / {steps.length}</span>
+           <span>{language === "fr" ? "Progression" : "Progress"}</span>
+           <span>{language === "fr" ? "Étape" : "Step"} {step + 1} / {steps.length}</span>
         </div>
         <div className="h-1 w-full bg-site-border rounded-full overflow-hidden">
           <motion.div

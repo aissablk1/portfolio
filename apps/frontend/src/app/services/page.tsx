@@ -335,6 +335,16 @@ export default function ServicesPage() {
                         <ArrowUpRight size={14} />
                       </Link>
 
+                      {/* Micro-guarantee near CTA */}
+                      {!isDecoy && (
+                        <p className="text-[10px] text-site-text-light/40 text-center mb-6 flex items-center justify-center gap-1.5">
+                          <Shield size={10} className="shrink-0" />
+                          {language === "fr"
+                            ? "Satisfait ou retravaillé — Prix garanti, zéro surprise"
+                            : "Satisfied or reworked — Guaranteed price, zero surprises"}
+                        </p>
+                      )}
+
                       {/* Micro-testimonial on highlighted card */}
                       {isHighlighted && (
                         <div className="mb-8 flex items-start gap-3 text-xs text-site-text-light/60 italic">
