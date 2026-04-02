@@ -8,14 +8,13 @@ const DURATION = 2800; // total preloader duration in ms
 
 export default function Preloader({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
-  const [phase, setPhase] = useState<"letters" | "assemble" | "exit">("letters");
+  const [phase, setPhase] = useState<"letters" | "exit">("letters");
 
   useEffect(() => {
-    const t1 = setTimeout(() => setPhase("assemble"), 1200);
-    const t2 = setTimeout(() => setPhase("exit"), 2200);
-    const t3 = setTimeout(() => setIsLoading(false), DURATION);
+    const t1 = setTimeout(() => setPhase("exit"), 1800);
+    const t2 = setTimeout(() => setIsLoading(false), 2500);
 
-    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
+    return () => { clearTimeout(t1); clearTimeout(t2); };
   }, []);
 
   // Block scroll during preloader
@@ -58,13 +57,6 @@ export default function Preloader({ children }: { children: React.ReactNode }) {
                               opacity: 1,
                               y: 0,
                               filter: "blur(0px)",
-                            }
-                          : phase === "assemble"
-                          ? {
-                              opacity: 1,
-                              y: 0,
-                              filter: "blur(0px)",
-                              letterSpacing: "0.02em",
                             }
                           : {
                               opacity: 0,
