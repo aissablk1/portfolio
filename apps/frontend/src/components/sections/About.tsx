@@ -43,11 +43,6 @@ const About = () => {
                 </div>
              </div>
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-site-accent/10 blur-[100px] rounded-full" />
-             <div className="absolute -bottom-6 -right-6 bg-white/80 backdrop-blur-xl p-8 rounded-2xl shadow-xl border border-site-border max-w-[200px]">
-                <p className="text-xs font-bold leading-tight uppercase tracking-widest">
-                    {dict.about.location}
-                </p>
-             </div>
         </motion.div>
       </div>
     </section>
