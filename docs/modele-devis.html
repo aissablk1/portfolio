@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Devis — Aïssa Belkoussa</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+    :root {
+      --black: #0a0a0a;
+      --white: #fafafa;
+      --gray-100: #f5f5f5;
+      --gray-200: #e5e5e5;
+      --gray-400: #a3a3a3;
+      --gray-500: #737373;
+      --gray-600: #525252;
+      --accent: #2563eb;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--white);
+      color: var(--black);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 48px 40px;
+    }
+
+    /* ── Editable fields ─────────────────── */
+    [contenteditable] {
+      outline: none;
+      border-bottom: 1px dashed var(--gray-200);
+      padding: 2px 4px;
+      transition: border-color 0.2s;
+    }
+
+    [contenteditable]:hover,
+    [contenteditable]:focus {
+      border-bottom-color: var(--accent);
+      background: rgba(37, 99, 235, 0.03);
+    }
+
+    @media print {
+      [contenteditable] {
+        border-bottom: none;
+        padding: 0;
+        background: none;
+      }
+    }
+
+    /* ── Header ─────────────────────────── */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 40px;
+      padding-bottom: 24px;
+      border-bottom: 2px solid var(--black);
+    }
+
+    .header-left h1 {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .header-left p {
+      font-size: 11px;
+      color: var(--gray-500);
+      line-height: 1.8;
+    }
+
+    .header-right {
+      text-align: right;
+      font-size: 11px;
+      color: var(--gray-500);
+      line-height: 1.8;
+    }
+
+    .header-right a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    /* ── Document info ──────────────────── */
+    .doc-info {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-bottom: 40px;
+    }
+
+    .doc-block h2 {
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .doc-field {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      padding: 6px 0;
+      border-bottom: 1px solid var(--gray-100);
+    }
+
+    .doc-field .label {
+      color: var(--gray-500);
+      font-weight: 500;
+    }
+
+    .doc-field .value {
+      font-weight: 600;
+      text-align: right;
+    }
+
+    .client-info {
+      background: var(--gray-100);
+      border-radius: 8px;
+      padding: 16px 20px;
+    }
+
+    .client-info p {
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    /* ── Tableau de prestation ──────────── */
+    .section-title {
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 24px;
+      font-size: 12px;
+    }
+
+    thead th {
+      text-align: left;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--gray-500);
+      padding: 10px 12px;
+      border-bottom: 2px solid var(--black);
+    }
+
+    thead th:last-child,
+    thead th:nth-child(3) {
+      text-align: right;
+    }
+
+    tbody td {
+      padding: 12px;
+      border-bottom: 1px solid var(--gray-100);
+      vertical-align: top;
+    }
+
+    tbody td:last-child,
+    tbody td:nth-child(3) {
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .item-name {
+      font-weight: 600;
+    }
+
+    .item-desc {
+      font-size: 11px;
+      color: var(--gray-500);
+      margin-top: 2px;
+    }
+
+    /* ── Totaux ─────────────────────────── */
+    .totals {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 32px;
+    }
+
+    .totals-box {
+      width: 280px;
+    }
+
+    .total-line {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      font-size: 12px;
+      border-bottom: 1px solid var(--gray-100);
+    }
+
+    .total-line .label {
+      color: var(--gray-500);
+    }
+
+    .total-line.final {
+      border-bottom: 2px solid var(--black);
+      font-size: 16px;
+      font-weight: 800;
+      padding: 12px 0;
+    }
+
+    .total-line.final .label {
+      color: var(--black);
+    }
+
+    /* ── Echeancier ─────────────────────── */
+    .echeancier {
+      background: var(--gray-100);
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin-bottom: 32px;
+    }
+
+    .echeancier h3 {
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .echeance {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      padding: 6px 0;
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    .echeance:last-child {
+      border-bottom: none;
+    }
+
+    .echeance .label {
+      color: var(--gray-600);
+    }
+
+    .echeance .amount {
+      font-weight: 700;
+    }
+
+    /* ── Conditions ─────────────────────── */
+    .conditions {
+      margin-bottom: 40px;
+    }
+
+    .conditions h3 {
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .conditions p,
+    .conditions li {
+      font-size: 11px;
+      color: var(--gray-500);
+      line-height: 1.7;
+    }
+
+    .conditions ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .conditions li {
+      padding: 3px 0 3px 16px;
+      position: relative;
+    }
+
+    .conditions li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--gray-400);
+    }
+
+    /* ── Signatures ─────────────────────── */
+    .signatures {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      padding-top: 32px;
+      border-top: 2px solid var(--black);
+    }
+
+    .sig-block h4 {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .sig-block p {
+      font-size: 11px;
+      color: var(--gray-500);
+      margin-bottom: 4px;
+    }
+
+    .sig-area {
+      height: 80px;
+      border: 1px dashed var(--gray-200);
+      border-radius: 6px;
+      margin-top: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: var(--gray-400);
+    }
+
+    /* ── Footer ─────────────────────────── */
+    .footer-legal {
+      margin-top: 32px;
+      padding-top: 16px;
+      border-top: 1px solid var(--gray-200);
+      font-size: 9px;
+      color: var(--gray-400);
+      text-align: center;
+      line-height: 1.8;
+    }
+
+    /* ── Print ──────────────────────────── */
+    @media print {
+      body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page { padding: 32px 28px; max-width: 100%; }
+      .echeancier { background: var(--gray-100) !important; }
+      .sig-area { border-style: solid; }
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- Header -->
+    <div class="header">
+      <div class="header-left">
+        <h1>Devis</h1>
+        <p>
+          Aïssa Belkoussa<br>
+          Systèmes digitaux & intelligence artificielle<br>
+          SIRET : <span contenteditable>XXX XXX XXX XXXXX</span><br>
+          Albi, France
+        </p>
+      </div>
+      <div class="header-right">
+        aissabelkoussa.fr<br>
+        <a href="mailto:contact@aissabelkoussa.fr">contact@aissabelkoussa.fr</a><br>
+        <br>
+        Devis n° <span contenteditable>D-2026-001</span><br>
+        Date : <span contenteditable>02/04/2026</span><br>
+        Valide jusqu'au : <span contenteditable>02/05/2026</span>
+      </div>
+    </div>
+
+    <!-- Infos document + client -->
+    <div class="doc-info">
+      <div class="doc-block">
+        <h2>Prestation</h2>
+        <div class="doc-field">
+          <span class="label">Type</span>
+          <span class="value" contenteditable>Sprint</span>
+        </div>
+        <div class="doc-field">
+          <span class="label">Livraison estimée</span>
+          <span class="value" contenteditable>10 jours ouvrés</span>
+        </div>
+        <div class="doc-field">
+          <span class="label">Début prévu</span>
+          <span class="value" contenteditable>À définir</span>
+        </div>
+      </div>
+      <div class="doc-block">
+        <h2>Client</h2>
+        <div class="client-info">
+          <p>
+            <strong contenteditable>Nom de l'entreprise</strong><br>
+            <span contenteditable>Prénom Nom du dirigeant</span><br>
+            <span contenteditable>Adresse complète</span><br>
+            <span contenteditable>Code postal, Ville</span><br>
+            SIRET : <span contenteditable>XXX XXX XXX XXXXX</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tableau de prestation -->
+    <div class="section-title">Détail de la prestation</div>
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 50%">Désignation</th>
+          <th>Qté</th>
+          <th>Prix unitaire</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="item-name" contenteditable>Sprint — Système digital clé en main</div>
+            <div class="item-desc" contenteditable>Site professionnel + prise de RDV en ligne + devis automatisé. Maquette validée, déploiement en production, support 15 jours inclus.</div>
+          </td>
+          <td contenteditable>1</td>
+          <td contenteditable>2 900,00 €</td>
+          <td contenteditable>2 900,00 €</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="item-name" contenteditable>Nom de domaine + hébergement (12 mois)</div>
+            <div class="item-desc" contenteditable>Configuration DNS, certificat SSL, CDN mondial.</div>
+          </td>
+          <td contenteditable>1</td>
+          <td contenteditable>Offert</td>
+          <td contenteditable>0,00 €</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Totaux -->
+    <div class="totals">
+      <div class="totals-box">
+        <div class="total-line">
+          <span class="label">Total HT</span>
+          <span contenteditable>2 900,00 €</span>
+        </div>
+        <div class="total-line">
+          <span class="label">TVA</span>
+          <span>Non applicable (art. 293 B CGI)</span>
+        </div>
+        <div class="total-line final">
+          <span class="label">Total TTC</span>
+          <span contenteditable>2 900,00 €</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Echeancier -->
+    <div class="echeancier">
+      <h3>Échéancier de paiement</h3>
+      <div class="echeance">
+        <span class="label"><strong>1/2</strong> — À la signature du devis</span>
+        <span class="amount" contenteditable>1 450,00 €</span>
+      </div>
+      <div class="echeance">
+        <span class="label"><strong>2/2</strong> — À la livraison</span>
+        <span class="amount" contenteditable>1 450,00 €</span>
+      </div>
+    </div>
+
+    <!-- Conditions -->
+    <div class="conditions">
+      <h3>Conditions</h3>
+      <ul>
+        <li>Prix forfaitaire garanti — aucun dépassement facturé</li>
+        <li>Licence d'utilisation exclusive et illimitée dans le temps</li>
+        <li>Satisfait ou retravaillé — si le livrable ne correspond pas au brief validé</li>
+        <li>Paiement par virement bancaire ou carte</li>
+        <li>Pénalités de retard : 3 fois le taux d'intérêt légal + 40 € forfaitaire</li>
+        <li>CGV complètes disponibles sur aissabelkoussa.fr/cgv</li>
+      </ul>
+    </div>
+
+    <!-- Signatures -->
+    <div class="signatures">
+      <div class="sig-block">
+        <h4>Le prestataire</h4>
+        <p>Aïssa Belkoussa</p>
+        <p>Date :</p>
+        <div class="sig-area">Signature</div>
+      </div>
+      <div class="sig-block">
+        <h4>Le client</h4>
+        <p contenteditable>Nom du signataire</p>
+        <p>Date :</p>
+        <p style="font-size: 10px; color: var(--gray-400); margin-top: 4px;">Mention manuscrite "Bon pour accord"</p>
+        <div class="sig-area">Signature + "Bon pour accord"</div>
+      </div>
+    </div>
+
+    <!-- Footer legal -->
+    <div class="footer-legal">
+      Aïssa Belkoussa — Systèmes digitaux & IA — SIRET : <span contenteditable>XXX XXX XXX XXXXX</span> — Albi, France<br>
+      TVA non applicable, art. 293 B du CGI — Conditions générales de vente : aissabelkoussa.fr/cgv
+    </div>
+
+  </div>
+</body>
+</html>
