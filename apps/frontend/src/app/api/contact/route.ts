@@ -145,7 +145,8 @@ const labels = {
 };
 
 // --- Escape ---
-function esc(str: string): string {
+function esc(str: string | undefined | null): string {
+  if (!str) return "";
   return str
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")

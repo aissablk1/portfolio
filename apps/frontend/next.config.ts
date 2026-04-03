@@ -27,8 +27,7 @@ const nextConfig: NextConfig = {
           key: "Permissions-Policy",
           value: "camera=(), microphone=(), geolocation=()",
         },
-        { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
-        { key: "Cross-Origin-Embedder-Policy", value: "credentialless" },
+        { key: "Cross-Origin-Opener-Policy", value: "same-origin-allow-popups" },
         {
           key: "Content-Security-Policy",
           value:
