@@ -7,7 +7,7 @@ export default function CGVPage() {
     <LegalPage
       badge="CGV"
       title="Conditions générales de vente"
-      lastUpdated="2 avril 2026"
+      lastUpdated="3 avril 2026"
       sections={[
         {
           title: "Conditions de règlement",
@@ -252,10 +252,23 @@ export default function CGVPage() {
               <p>
                 La responsabilité du prestataire, toutes causes confondues, est
                 strictement limitée au montant HT effectivement payé par le
-                client au titre de la prestation concernée. En aucun cas le
-                prestataire ne pourra être tenu responsable des préjudices
-                indirects (perte de chiffre d'affaires, perte de données,
-                atteinte à l'image, etc.).
+                client au titre de la prestation concernée.
+              </p>
+              <p>
+                En aucun cas le prestataire ne pourra être tenu responsable des
+                préjudices indirects, notamment : perte de chiffre d'affaires,
+                perte de données, perte de clientèle, atteinte à l'image ou à
+                la réputation, manque à gagner, préjudice commercial ou
+                financier de toute nature, y compris ceux résultant d'une fuite,
+                d'une perte ou d'un accès non autorisé aux données du client
+                (cf. article « Confidentialité et données sensibles du
+                client »).
+              </p>
+              <p>
+                Le prestataire est tenu à une obligation de moyens. Il met en
+                œuvre les mesures de sécurité raisonnables conformes aux bonnes
+                pratiques de l'industrie, mais ne garantit pas l'inviolabilité
+                des systèmes, réseaux ou services du client ou de tiers.
               </p>
             </>
           ),
@@ -453,6 +466,149 @@ export default function CGVPage() {
                   politique de confidentialité
                 </a>
                 .
+              </p>
+            </>
+          ),
+        },
+        {
+          title: "Confidentialité et données sensibles du client",
+          content: (
+            <>
+              <p>
+                Dans le cadre de l'exécution des prestations (création de site,
+                automatisation, intégration de systèmes, maintenance), le
+                prestataire peut être amené à accéder, manipuler ou traiter des
+                données sensibles appartenant au client ou à ses propres
+                clients, notamment :
+              </p>
+              <ul className="list-disc pl-5 space-y-1 mt-2">
+                <li>
+                  Coordonnées bancaires et informations financières (IBAN, RIB,
+                  numéros de compte)
+                </li>
+                <li>
+                  Identifiants et accès techniques (mots de passe, clés API,
+                  accès serveurs, panneaux d'administration)
+                </li>
+                <li>
+                  Données clients du client (fichiers clients, contacts,
+                  historiques de commandes, factures)
+                </li>
+                <li>
+                  Données métier confidentielles (chiffre d'affaires, marges,
+                  stratégie commerciale, tarification)
+                </li>
+                <li>
+                  Tout autre document ou information communiqué par le client
+                  dans le cadre de la mission
+                </li>
+              </ul>
+
+              <p className="mt-4 font-medium">
+                Engagements du prestataire (obligation de moyens) :
+              </p>
+              <ul className="list-disc pl-5 space-y-1 mt-2">
+                <li>
+                  Mettre en œuvre les mesures de sécurité raisonnables et
+                  conformes aux bonnes pratiques de l'industrie (chiffrement,
+                  accès restreints, authentification forte)
+                </li>
+                <li>
+                  Accéder aux données du client uniquement dans la mesure
+                  strictement nécessaire à l'exécution de la prestation
+                </li>
+                <li>
+                  Ne divulguer aucune donnée confidentielle à des tiers, sauf
+                  obligation légale ou autorisation écrite du client
+                </li>
+                <li>
+                  Supprimer ou restituer l'ensemble des données, accès et
+                  identifiants du client à l'issue de la mission ou sur demande
+                </li>
+                <li>
+                  Signaler au client toute faille de sécurité ou tout incident
+                  détecté dans les meilleurs délais
+                </li>
+              </ul>
+
+              <p className="mt-4 font-medium">
+                Limitation de responsabilité en matière de données :
+              </p>
+              <p className="mt-2">
+                Le prestataire s'engage à une{" "}
+                <strong>obligation de moyens</strong> en matière de protection
+                des données, et non à une obligation de résultat. En aucun cas
+                le prestataire ne pourra être tenu responsable :
+              </p>
+              <ul className="list-disc pl-5 space-y-1 mt-2">
+                <li>
+                  Des fuites, pertes, altérations ou accès non autorisés aux
+                  données résultant d'une défaillance de l'infrastructure, des
+                  systèmes ou des services du client ou de prestataires tiers
+                  choisis par le client
+                </li>
+                <li>
+                  Des incidents de sécurité causés par des attaques
+                  informatiques (hacking, phishing, ransomware, ingénierie
+                  sociale) visant les systèmes du client, les services tiers ou
+                  l'environnement technique hors du contrôle direct du
+                  prestataire
+                </li>
+                <li>
+                  De la perte de données liée à l'absence de sauvegardes
+                  effectuées par le client sur ses propres systèmes
+                </li>
+                <li>
+                  De l'utilisation par le client de mots de passe faibles, du
+                  partage d'identifiants par des canaux non sécurisés, ou du
+                  non-respect des recommandations de sécurité formulées par le
+                  prestataire
+                </li>
+                <li>
+                  Des conséquences liées à la transmission volontaire par le
+                  client de données sensibles (coordonnées bancaires,
+                  identifiants, etc.) via des canaux non chiffrés ou non
+                  sécurisés (email non chiffré, messagerie instantanée grand
+                  public, etc.)
+                </li>
+                <li>
+                  Des dommages indirects ou consécutifs tels que perte de
+                  clientèle, atteinte à la réputation, manque à gagner ou
+                  préjudice commercial résultant d'une fuite de données
+                </li>
+              </ul>
+
+              <p className="mt-4 font-medium">
+                Obligations du client :
+              </p>
+              <ul className="list-disc pl-5 space-y-1 mt-2">
+                <li>
+                  Effectuer une sauvegarde complète de ses données et systèmes
+                  avant de communiquer tout accès au prestataire
+                </li>
+                <li>
+                  Transmettre les identifiants et données sensibles
+                  exclusivement par des canaux sécurisés (gestionnaire de mots
+                  de passe partagé, transfert chiffré, espace sécurisé dédié)
+                </li>
+                <li>
+                  Informer le prestataire de la nature sensible des données
+                  auxquelles il accorde l'accès, et de toute réglementation
+                  spécifique applicable (PCI-DSS, données de santé, etc.)
+                </li>
+                <li>
+                  Révoquer les accès accordés au prestataire à l'issue de la
+                  mission ou dès qu'ils ne sont plus nécessaires
+                </li>
+                <li>
+                  S'assurer de la conformité réglementaire (RGPD, CNIL) du
+                  traitement des données personnelles de ses propres clients
+                </li>
+              </ul>
+
+              <p className="mt-4">
+                La présente clause de confidentialité survit à la fin du contrat
+                pour une durée de deux (2) ans.
               </p>
             </>
           ),

@@ -7,7 +7,7 @@ export default function MentionsLegalesPage() {
     <LegalPage
       badge="Mentions légales"
       title="Mentions légales"
-      lastUpdated="28 mars 2026"
+      lastUpdated="3 avril 2026"
       sections={[
         {
           title: "Éditeur du site",
@@ -146,19 +146,36 @@ export default function MentionsLegalesPage() {
           ),
         },
         {
-          title: "Cookies",
+          title: "Cookies et traceurs",
           content: (
             <>
               <p>
-                Le site n'utilise aucun cookie de tracking, de publicité ni
-                d'analyse. Aucun outil de mesure d'audience tiers n'est intégré.
+                Le site utilise des cookies et traceurs strictement nécessaires
+                à son fonctionnement ainsi que des traceurs d&apos;analyse
+                anonymisée (Vercel Analytics, beacon interne). Aucun cookie
+                publicitaire, de retargeting ou de profilage n&apos;est utilisé.
               </p>
               <p>
-                Seul un stockage local (localStorage) est utilisé pour
-                mémoriser la préférence de langue de l'utilisateur (français ou
-                anglais). Ce stockage est strictement nécessaire au
-                fonctionnement du site et ne constitue pas un cookie au sens de
-                la directive ePrivacy.
+                Un stockage local (localStorage) est utilisé pour mémoriser la
+                préférence de langue de l&apos;utilisateur (français ou anglais),
+                strictement nécessaire au fonctionnement du site (art. 5.3
+                directive ePrivacy).
+              </p>
+              <p>
+                Les polices de caractères sont chargées depuis Google Fonts.
+                Les liens vers des services tiers (Calendly, WhatsApp, LinkedIn,
+                GitHub, Telegram) sont soumis aux politiques de cookies de leurs
+                éditeurs respectifs.
+              </p>
+              <p>
+                Pour plus de détails, consultez la{" "}
+                <a
+                  href="/confidentialite"
+                  className="text-site-accent hover:underline"
+                >
+                  politique de confidentialité
+                </a>
+                .
               </p>
             </>
           ),

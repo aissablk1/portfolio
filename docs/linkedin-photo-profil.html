@@ -218,6 +218,13 @@
       ctx.fillStyle = '#fdfdfd';
       ctx.fillRect(0, 0, size, size);
 
+      // Grille de fond (reproduit le ::before CSS)
+      ctx.strokeStyle = 'rgba(0,0,0,0.012)';
+      ctx.lineWidth = 1;
+      var gs = 32 * (size / 360);
+      for (var gx = 0; gx <= size; gx += gs) { ctx.beginPath(); ctx.moveTo(gx, 0); ctx.lineTo(gx, size); ctx.stroke(); }
+      for (var gy = 0; gy <= size; gy += gs) { ctx.beginPath(); ctx.moveTo(0, gy); ctx.lineTo(size, gy); ctx.stroke(); }
+
       var img = new Image();
       img.onload = function() {
         var zoom = document.getElementById(zoomId).value / 100;

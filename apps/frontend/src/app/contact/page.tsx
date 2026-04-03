@@ -4,6 +4,7 @@ import React, { Suspense } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
+import CalendlyWidget from "@/components/CalendlyWidget";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/components/LanguageContext";
 
@@ -70,6 +71,29 @@ const ContactPage = () => {
             </div>
 
           </div>
+
+          {/* Calendly — Réservation directe */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-24"
+          >
+            <div className="flex items-center gap-6 mb-10">
+              <div className="flex-1 h-px bg-site-border/50" />
+              <span className="text-xs font-bold uppercase tracking-[0.3em] text-site-text-light">
+                Ou réservez directement
+              </span>
+              <div className="flex-1 h-px bg-site-border/50" />
+            </div>
+            <div className="bg-white/40 backdrop-blur-3xl border border-site-border rounded-[3rem] shadow-2xl shadow-site-accent/5 overflow-hidden">
+              <Suspense fallback={<div className="min-h-[700px]" />}>
+                <CalendlyWidget />
+              </Suspense>
+            </div>
+          </motion.div>
+
         </div>
       </main>
 
