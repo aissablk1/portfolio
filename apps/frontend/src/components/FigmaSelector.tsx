@@ -76,7 +76,7 @@ const FigmaSelector = () => {
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 1, delay: 1.5 }}
-      className="hidden md:block fixed top-[120px] right-[80px] z-40 border-2 border-[#18A0FB] bg-[#18A0FB]/5 shadow-[0_0_30px_rgba(24,160,251,0.1)] group active:cursor-grabbing hover:bg-[#18A0FB]/8 transition-colors cursor-grab"
+      className="hidden md:block absolute top-[100px] right-[60px] z-40 border-2 border-[#18A0FB] bg-[#18A0FB]/5 shadow-[0_0_30px_rgba(24,160,251,0.1)] group active:cursor-grabbing hover:bg-[#18A0FB]/8 transition-colors cursor-grab"
     >
       {/* Corner Handles */}
       {["-top-1.5 -left-1.5", "-top-1.5 -right-1.5", "-bottom-1.5 -left-1.5"].map((pos, i) => (

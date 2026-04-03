@@ -21,14 +21,14 @@ export default function Home() {
       <Header />
       {/* <SideNav /> */}
       <FloatingCta />
-      <FigmaSelector />
-      
+
       <div className="grid grid-cols-1 relative">
         {/* Left Column (Empty Spacer) */}
         <div className="hidden lg:block" />
 
         {/* Center Column (Main Content) */}
         <main id="main-content" className="w-full relative z-10">
+          <FigmaSelector />
           <Hero />
           <Offers />
           <Approach />
