@@ -9,11 +9,31 @@ const FigmaSelector = () => {
   const [layerName, setLayerName] = useState("HERO");
   const boxRef = useRef<HTMLDivElement>(null);
 
-  const handleResize = (_event: unknown, info: { delta: { x: number; y: number } }) => {
-    setRect(prev => ({
-      width: Math.max(80, prev.width + info.delta.x),
-      height: Math.max(80, prev.height + info.delta.y),
-    }));
+  const isResizing = useRef(false);
+  const lastPos = useRef({ x: 0, y: 0 });
+
+  const onResizeStart = (e: React.PointerEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+    isResizing.current = true;
+    lastPos.current = { x: e.clientX, y: e.clientY };
+    const onMove = (ev: PointerEvent) => {
+      if (!isResizing.current) return;
+      const dx = ev.clientX - lastPos.current.x;
+      const dy = ev.clientY - lastPos.current.y;
+      lastPos.current = { x: ev.clientX, y: ev.clientY };
+      setRect(prev => ({
+        width: Math.max(80, prev.width + dx),
+        height: Math.max(80, prev.height + dy),
+      }));
+    };
+    const onUp = () => {
+      isResizing.current = false;
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerup", onUp);
+    };
+    window.addEventListener("pointermove", onMove);
+    window.addEventListener("pointerup", onUp);
   };
 
   const detectLayer = useCallback(() => {
@@ -69,13 +89,9 @@ const FigmaSelector = () => {
       ))}
 
       {/* Resize Handle */}
-      <motion.div
-        className="absolute -bottom-1.5 -right-1.5 w-4 h-4 bg-white border-2 border-[#18A0FB] rounded-sm cursor-nwse-resize z-30 shadow-md hover:scale-150 transition-transform"
-        drag
-        dragMomentum={false}
-        dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }}
-        onDrag={handleResize}
-        whileTap={{ scale: 1.2 }}
+      <div
+        onPointerDown={onResizeStart}
+        className="absolute -bottom-1.5 -right-1.5 w-4 h-4 bg-white border-2 border-[#18A0FB] rounded-sm cursor-nwse-resize z-30 shadow-md hover:scale-150 transition-transform touch-none"
       />
 
       {/* Layer Label */}
