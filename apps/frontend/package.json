@@ -14,6 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "@react-email/components": "^1.0.10",
+    "@stripe/stripe-js": "^9.0.1",
     "@tailwindcss/postcss": "^4.2.1",
     "@tailwindcss/typography": "^0.5.19",
     "@types/node": "^25.5.0",
@@ -37,6 +38,7 @@
     "rehype-slug": "^6.0.0",
     "remark-gfm": "^4.0.1",
     "resend": "^6.9.4",
+    "stripe": "^22.0.0",
     "tailwind-merge": "^3.5.0",
     "tailwindcss": "^4.2.1",
     "typescript": "^5.9.3"
