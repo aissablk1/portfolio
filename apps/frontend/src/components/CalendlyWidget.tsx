@@ -16,7 +16,7 @@ const CalendlyWidget = () => {
         className="calendly-inline-widget w-full rounded-2xl overflow-hidden"
         data-url={CALENDLY_URL}
         title="Réserver un appel découverte — Calendly"
-        style={{ minWidth: 320, height: 700 }}
+        style={{ minWidth: 320, width: "100%", height: 750 }}
       />
     </>
   );

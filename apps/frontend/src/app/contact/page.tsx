@@ -87,8 +87,8 @@ const ContactPage = () => {
               </span>
               <div className="flex-1 h-px bg-site-border/50" />
             </div>
-            <div className="bg-white/40 backdrop-blur-3xl border border-site-border rounded-[3rem] shadow-2xl shadow-site-accent/5 overflow-hidden">
-              <div className="px-8 pt-10 pb-4 md:px-16 md:pt-14 md:pb-6">
+            <div className="bg-white/40 backdrop-blur-3xl border border-site-border rounded-[2rem] shadow-2xl shadow-site-accent/5">
+              <div className="px-8 pt-10 pb-4 md:px-12 md:pt-12 md:pb-4">
                 <h3 className="text-2xl md:text-3xl font-display font-medium tracking-tight mb-3">
                   Appel découverte
                 </h3>
