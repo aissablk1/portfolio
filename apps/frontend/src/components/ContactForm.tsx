@@ -85,21 +85,19 @@ const ContactForm = () => {
           rel="noopener noreferrer"
           className="inline-flex items-center gap-3 bg-site-accent text-white px-10 py-5 rounded-full text-xs font-bold uppercase tracking-widest hover:scale-105 transition-all shadow-lg mb-4"
         >
-          {language === "fr" ? "Réserver mon appel — 30 min" : "Book my call — 30 min"}
+          {dict.funnel.success.bookCall}
           <ArrowUpRight size={14} />
         </a>
         <p className="text-[10px] text-site-text-light/40 mb-6">
-          {language === "fr"
-            ? "Gratuit, sans engagement — créneaux limités"
-            : "Free, no commitment — limited slots"}
+          {dict.funnel.success.bookCallSubtext}
         </p>
         <a
-          href={`https://wa.me/33782721406?text=${encodeURIComponent(language === "fr" ? "Bonjour Aïssa, je viens d'envoyer ma demande via le site." : "Hi Aïssa, I just submitted my request through the website.")}`}
+          href={`https://wa.me/33782721406?text=${encodeURIComponent(dict.funnel.success.whatsappMessage)}`}
           target="_blank"
           rel="noopener noreferrer"
           className="text-[11px] font-bold uppercase tracking-widest text-site-text-light hover:text-site-accent transition-colors mb-10 inline-flex items-center gap-2"
         >
-          {language === "fr" ? "Ou m'écrire sur WhatsApp" : "Or message me on WhatsApp"}
+          {dict.funnel.success.whatsappCta}
           <ArrowUpRight size={10} />
         </a>
 
@@ -107,7 +105,7 @@ const ContactForm = () => {
           onClick={() => window.location.href = "/"}
           className="px-6 py-3 bg-site-border/20 rounded-full font-bold uppercase tracking-widest text-[10px] text-site-text-light hover:text-site-text transition-all"
         >
-          {language === "fr" ? "Retour à l'accueil" : "Back to home"}
+          {dict.funnel.success.backHome}
         </button>
       </motion.div>
     );
@@ -129,10 +127,10 @@ const ContactForm = () => {
           </div>
           <div className="flex-1">
             <p className="text-xs font-bold uppercase tracking-widest text-site-accent">
-              {language === "fr" ? "Plan sélectionné" : "Selected plan"}
+              {dict.funnel.plan.selectedLabel}
             </p>
             <p className="text-lg font-medium tracking-tight">
-              {language === "fr" ? plan.fr : plan.en} — {plan.price}
+              {plan[language]} — {plan.price}
             </p>
           </div>
           <Check size={18} className="text-site-accent shrink-0" />
@@ -216,13 +214,13 @@ const ContactForm = () => {
       {/* Message (optional) */}
       <div className="space-y-2">
         <label className="text-[10px] font-bold uppercase tracking-widest text-site-text-light/60">
-          {language === "fr" ? "Votre message (optionnel)" : "Your message (optional)"}
+          {dict.funnel.steps.message.label}
         </label>
         <textarea
           value={formData.message}
           onChange={(e) => setFormData({ ...formData, message: e.target.value })}
           className="w-full bg-transparent border border-site-border p-5 rounded-2xl text-base min-h-[120px] focus:border-site-accent outline-none transition-colors resize-none leading-relaxed"
-          placeholder={language === "fr" ? "Décrivez votre besoin en quelques mots..." : "Describe your need in a few words..."}
+          placeholder={dict.funnel.steps.message.placeholder}
         />
       </div>
 
@@ -245,15 +243,13 @@ const ContactForm = () => {
           )}
         >
           {isSubmitting
-            ? (language === "fr" ? "Envoi en cours..." : "Sending...")
-            : (language === "fr" ? "Recevoir ma proposition en 48h" : "Get my proposal in 48h")}
+            ? dict.funnel.cta.submitting
+            : dict.funnel.cta.submit}
           {!isSubmitting && <Send size={16} />}
         </button>
         <p className="text-[10px] text-site-text-light/40 flex items-center gap-1.5">
           <Shield size={10} />
-          {language === "fr"
-            ? "Gratuit, sans engagement — réponse sous 48h"
-            : "Free, no commitment — response within 48h"}
+          {dict.funnel.cta.guarantee}
         </p>
       </div>
     </motion.form>

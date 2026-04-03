@@ -24,18 +24,11 @@ const About = () => {
             </span>
           </div>
           <div className="space-y-6">
-            <p className="text-xl md:text-2xl font-semibold text-site-text leading-relaxed">
-              Je m&apos;appelle Aïssa. Je suis entrepreneur, builder, et architecte de systèmes — basé dans le sud de France, opérant partout.
-            </p>
-            <p className="text-xl md:text-2xl font-semibold text-site-text leading-relaxed">
-              Pas d&apos;héritage, pas de filet. Juste des années à apprendre, construire et tester — jusqu&apos;à maîtriser ce que beaucoup délèguent sans comprendre.
-            </p>
-            <p className="text-xl md:text-2xl font-semibold text-site-text leading-relaxed">
-              Ce qui me différencie ? Je vis dans les deux mondes à la fois : je comprends la stratégie business et je construis le système technique qui l&apos;exécute. Pas besoin de chef de projet entre vous et le code.
-            </p>
-            <p className="text-xl md:text-2xl font-semibold text-site-text leading-relaxed">
-              Si vous avez une idée de système — floue ou précise — je peux la transformer en quelque chose de réel.
-            </p>
+            {dict.about.bio.map((paragraph, i) => (
+              <p key={i} className="text-xl md:text-2xl font-semibold text-site-text leading-relaxed">
+                {paragraph}
+              </p>
+            ))}
           </div>
         </motion.div>
         <motion.div
@@ -46,7 +39,7 @@ const About = () => {
           className="relative"
         >
              <div className="relative aspect-4/5 overflow-hidden rounded-4xl grayscale hover:grayscale-0 transition-all duration-700">
-                <Image src="/assets/images/AISSABELKOUSSA.png" alt="AÏSSA BELKOUSSA" fill className="object-cover" />
+                <Image src="/assets/images/AISSABELKOUSSA.png" alt={dict.about.photoAlt} fill className="object-cover" />
                 {/* Portrait Placeholder */}
                 <div className="absolute inset-0 bg-linear-to-tr from-site-accent/20 to-transparent mix-blend-overlay" />
                 <div className="absolute inset-0 flex items-center justify-center">

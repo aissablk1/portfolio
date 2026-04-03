@@ -36,6 +36,7 @@ interface Dictionary {
     tiers: Array<{
       name: string;
       tag: string;
+      badge?: string;
       description: string;
       price: string;
       priceNote: string;
@@ -140,6 +141,8 @@ interface Dictionary {
   about: {
     content: string;
     location: string;
+    bio: string[];
+    photoAlt: string;
   };
   contact: {
     title: string;
@@ -180,10 +183,33 @@ interface Dictionary {
         customMessage: string;
         useTemplate: string;
       };
+      message: { label: string; placeholder: string };
     };
-    cta: { next: string; prev: string; submit: string };
-    success: { title: string; message: string };
+    cta: { next: string; prev: string; submit: string; submitting: string; guarantee: string };
+    success: {
+      title: string;
+      message: string;
+      bookCall: string;
+      bookCallSubtext: string;
+      whatsappMessage: string;
+      whatsappCta: string;
+      backHome: string;
+    };
+    plan: { selectedLabel: string };
     errors: { generic: string; rate: string };
+  };
+  contactPage: {
+    badge: string;
+    heading: string;
+    headingItalic: string;
+    intro: string;
+    availability: string;
+    calendlySection: string;
+    calendlyTitle: string;
+    calendlyDuration: string;
+    calendlyLocation: string;
+    calendlyFree: string;
+    calendlyDesc: string;
   };
   diagnostic: {
     srTitle: string;
@@ -304,7 +330,7 @@ const dictionaries: Record<Language, Dictionary> = {
     services: {
       badge: "Offres & Résultats",
       title: "Votre système digital.\nConçu, livré, opérationnel.",
-      subtitle: "Trois formats clairs. Un seul objectif : un système qui tourne dès la livraison. Premier échange gratuit, sans engagement.",
+      subtitle: "Quatre offres claires. Un seul objectif : un système qui tourne dès la livraison. Premier échange gratuit, sans engagement.",
       popularBadge: "Recommandé",
       includesLabel: "Ce qui est inclus",
       durationLabel: "Durée estimée",
@@ -324,33 +350,34 @@ const dictionaries: Record<Language, Dictionary> = {
       },
       tiers: [
         {
-          name: "Autonome",
-          tag: "Projet seul",
-          description: "Votre système livré clé en main. Vous gérez la suite — idéal si vous avez une équipe technique en interne.",
-          price: "3 900 €",
-          priceNote: "Paiement unique. Aucune maintenance incluse.",
+          name: "Pilote Automatique",
+          tag: "Premier système",
+          badge: "Nouveau",
+          description: "Votre premier système automatisé en 5 jours. Chatbot + emails auto + dashboard — tout ce qu'il faut pour démarrer.",
+          price: "1 500 €",
+          priceNote: "Paiement unique. Livraison en 5 jours ouvrés.",
           monthlyPrice: "",
           monthlyNote: "",
-          duration: "5 à 10 jours ouvrés",
+          duration: "5 jours ouvrés",
           features: [
-            "1 système livré (site, automation ou dashboard)",
-            "Brief stratégique + maquette validée",
-            "Licence d'utilisation exclusive",
+            "Chatbot IA intégré à votre site",
+            "Emails automatiques (bienvenue, relance, suivi)",
+            "Dashboard de suivi en temps réel",
             "Déploiement en production",
-            "Documentation technique renforcée",
-            "Formation autonomie (2h)",
+            "Documentation technique",
+            "Formation prise en main (1h)",
           ],
           excluded: [
             "Aucune maintenance post-livraison",
             "Aucune mise à jour de sécurité",
             "Aucun monitoring",
-            "Aucun support",
           ],
         },
         {
-          name: "Accélérateur",
+          name: "Pro",
           tag: "Projet + maintenance",
-          description: "Votre système livré et maintenu. 3 mois de maintenance offerts — vous ne touchez à rien.",
+          badge: "Recommandé",
+          description: "Système complet livré et maintenu. 3 mois de maintenance offerts — vous ne touchez à rien.",
           price: "2 900 €",
           priceNote: "Puis 490 €/mois après les 3 mois offerts. Sans engagement.",
           monthlyPrice: "490 €",
@@ -369,10 +396,10 @@ const dictionaries: Record<Language, Dictionary> = {
           excluded: [],
         },
         {
-          name: "Partenaire",
+          name: "Sur-mesure",
           tag: "Système + évolution continue",
-          description: "Votre infrastructure complète — site, IA, données — avec un partenaire technique dédié qui fait évoluer votre système.",
-          price: "6 900 €",
+          description: "Partenaire technique dédié. Votre infrastructure complète — site, IA, données — avec un accompagnement continu.",
+          price: "À partir de 6 900 €",
           priceNote: "Puis 1 900 €/mois après les 3 mois offerts. Sans engagement.",
           monthlyPrice: "1 900 €",
           monthlyNote: "3 mois offerts (valeur 5 700 €)",
@@ -389,9 +416,29 @@ const dictionaries: Record<Language, Dictionary> = {
           ],
           excluded: [],
         },
+        {
+          name: "Formation IA",
+          tag: "Montée en compétences",
+          badge: "Nouveau",
+          description: "Rendez votre équipe autonome sur l'IA. Formations pratiques, sur-mesure, finançables OPCO.",
+          price: "À partir de 490 €/pers",
+          priceNote: "Finançable OPCO. Tarif dégressif selon le nombre de participants.",
+          monthlyPrice: "",
+          monthlyNote: "",
+          duration: "1 à 3 jours",
+          features: [
+            "Audit des besoins IA de votre équipe",
+            "Programme de formation personnalisé",
+            "Ateliers pratiques sur vos cas d'usage",
+            "Supports de formation inclus",
+            "Suivi post-formation (1 mois)",
+            "Finançable OPCO",
+          ],
+          excluded: [],
+        },
       ],
       ecosystemCta: {
-        text: "Besoin d'une architecture sur mesure ? Le plan Écosystème s'adapte à vos ambitions — de 2 à 6 mois, CTO externalisé.",
+        text: "Besoin d'une architecture sur mesure ? Le plan Sur-mesure s'adapte à vos ambitions — de 2 à 6 mois, CTO externalisé.",
         button: "Échanger 30 min",
       },
       comparison: {
@@ -635,6 +682,13 @@ const dictionaries: Record<Language, Dictionary> = {
     about: {
       content: "Je m'appelle Aïssa. Je suis entrepreneur, builder, et architecte de systèmes — basé dans le sud de France, opérant partout.\n\nPas d'héritage, pas de filet. Juste des années à apprendre, construire et tester — jusqu'à maîtriser ce que beaucoup délèguent sans comprendre.\n\nCe qui me différencie ? Je vis dans les deux mondes à la fois : je comprends la stratégie business et je construis le système technique qui l'exécute. Pas besoin de chef de projet entre vous et le code.\n\nSi vous avez une idée de système — floue ou précise — je peux l'utiliser pour transformer en quelque chose de réel.",
       location: "Basé dans le sud de 🇫🇷. Travaillant dans le monde entier.",
+      bio: [
+        "Je m'appelle Aïssa. Je suis entrepreneur, builder, et architecte de systèmes — basé dans le sud de France, opérant partout.",
+        "Pas d'héritage, pas de filet. Juste des années à apprendre, construire et tester — jusqu'à maîtriser ce que beaucoup délèguent sans comprendre.",
+        "Ce qui me différencie ? Je vis dans les deux mondes à la fois : je comprends la stratégie business et je construis le système technique qui l'exécute. Pas besoin de chef de projet entre vous et le code.",
+        "Si vous avez une idée de système — floue ou précise — je peux la transformer en quelque chose de réel.",
+      ],
+      photoAlt: "Aïssa BELKOUSSA — Architecte de systèmes",
     },
     contact: {
       title: "Une idée de système ? Un process qui tourne mal ? Un projet qui attend depuis trop longtemps ?",
@@ -678,23 +732,43 @@ const dictionaries: Record<Language, Dictionary> = {
             { id: "other", label: "Autre besoin", template: "" }
           ]
         },
-        details: { 
-          title: "Dites-m'en plus", 
-          messageLabel: "Votre message", 
+        details: {
+          title: "Dites-m'en plus",
+          messageLabel: "Votre message",
           budgetLabel: "Budget estimé",
           customMessage: "Message personnalisé",
           useTemplate: "Utiliser un template"
         },
+        message: { label: "Votre message (optionnel)", placeholder: "Décrivez votre besoin en quelques mots..." },
       },
-      cta: { next: "Continuer", prev: "Retour", submit: "Envoyer ma demande" },
+      cta: { next: "Continuer", prev: "Retour", submit: "Recevoir ma proposition en 48h", submitting: "Envoi en cours...", guarantee: "Gratuit, sans engagement — réponse sous 48h" },
       success: {
         title: "Demande reçue",
-        message: "Je reviens vers vous sous 48h pour analyser votre système."
+        message: "Je reviens vers vous sous 48h pour analyser votre système.",
+        bookCall: "Réserver mon appel — 30 min",
+        bookCallSubtext: "Gratuit, sans engagement — créneaux limités",
+        whatsappMessage: "Bonjour Aïssa, je viens d'envoyer ma demande via le site.",
+        whatsappCta: "Ou m'écrire sur WhatsApp",
+        backHome: "Retour à l'accueil",
       },
+      plan: { selectedLabel: "Plan sélectionné" },
       errors: {
         generic: "Une erreur est survenue. Réessayez ou contactez-moi sur LinkedIn.",
         rate: "Trop de demandes. Réessayez dans quelques minutes.",
       },
+    },
+    contactPage: {
+      badge: "Initiation de projet",
+      heading: "Construisons\nvotre futur",
+      headingItalic: "système.",
+      intro: "Dites-moi tout sur vos ambitions. Que ce soit pour une architecture complexe, une automation intelligente ou un cockpit de données, je suis là pour structurer votre chaos.",
+      availability: "Disponibilité : Projets T2-T3",
+      calendlySection: "Ou réservez directement",
+      calendlyTitle: "Appel découverte",
+      calendlyDuration: "30 min",
+      calendlyLocation: "Google Meet",
+      calendlyFree: "Gratuit, sans engagement",
+      calendlyDesc: "On fait le point sur votre besoin, votre budget et vos délais. Vous repartez avec une vision claire de ce qui est possible — même si on ne travaille pas ensemble.",
     },
     diagnostic: {
       srTitle: "Diagnostic digital gratuit",
@@ -838,7 +912,7 @@ const dictionaries: Record<Language, Dictionary> = {
     services: {
       badge: "Services & Results",
       title: "Your digital system.\nDesigned, delivered, operational.",
-      subtitle: "Three clear formats. One goal: a system that runs from day one. First call free, no strings attached.",
+      subtitle: "Four clear offers. One goal: a system that runs from day one. First call free, no strings attached.",
       popularBadge: "Recommended",
       includesLabel: "What's included",
       durationLabel: "Estimated timeline",
@@ -858,33 +932,34 @@ const dictionaries: Record<Language, Dictionary> = {
       },
       tiers: [
         {
-          name: "Autonomous",
-          tag: "Project only",
-          description: "Your system delivered turnkey. You handle the rest — ideal if you have an in-house technical team.",
-          price: "€3,900",
-          priceNote: "One-time payment. No maintenance included.",
+          name: "Autopilot",
+          tag: "First system",
+          badge: "New",
+          description: "Your first automated system in 5 days. Chatbot + auto emails + dashboard — everything you need to get started.",
+          price: "€1,500",
+          priceNote: "One-time payment. Delivered in 5 business days.",
           monthlyPrice: "",
           monthlyNote: "",
-          duration: "5 to 10 business days",
+          duration: "5 business days",
           features: [
-            "1 system delivered (website, automation or dashboard)",
-            "Strategic brief + validated mockup",
-            "Exclusive usage license",
+            "AI chatbot integrated to your website",
+            "Automated emails (welcome, follow-up, tracking)",
+            "Real-time tracking dashboard",
             "Production deployment",
-            "Enhanced technical documentation",
-            "Autonomy training (2h)",
+            "Technical documentation",
+            "Onboarding session (1h)",
           ],
           excluded: [
             "No post-delivery maintenance",
             "No security updates",
             "No monitoring",
-            "No support",
           ],
         },
         {
-          name: "Accelerator",
+          name: "Pro",
           tag: "Project + maintenance",
-          description: "Your system delivered and maintained. 3 months free maintenance — you don't touch a thing.",
+          badge: "Recommended",
+          description: "Complete system delivered and maintained. 3 months free maintenance — you don't touch a thing.",
           price: "€2,900",
           priceNote: "Then €490/month after 3 free months. No commitment.",
           monthlyPrice: "€490",
@@ -903,10 +978,10 @@ const dictionaries: Record<Language, Dictionary> = {
           excluded: [],
         },
         {
-          name: "Partner",
+          name: "Custom",
           tag: "System + continuous evolution",
-          description: "Your complete infrastructure — site, AI, data — with a dedicated technical partner evolving your system.",
-          price: "€6,900",
+          description: "Dedicated technical partner. Your complete infrastructure — site, AI, data — with ongoing support.",
+          price: "From €6,900",
           priceNote: "Then €1,900/month after 3 free months. No commitment.",
           monthlyPrice: "€1,900",
           monthlyNote: "3 months free (€5,700 value)",
@@ -923,9 +998,29 @@ const dictionaries: Record<Language, Dictionary> = {
           ],
           excluded: [],
         },
+        {
+          name: "AI Training",
+          tag: "Skill building",
+          badge: "New",
+          description: "Make your team autonomous on AI. Hands-on, tailored training sessions.",
+          price: "From €490/person",
+          priceNote: "Eligible for OPCO funding. Volume discounts available.",
+          monthlyPrice: "",
+          monthlyNote: "",
+          duration: "1 to 3 days",
+          features: [
+            "Team AI needs audit",
+            "Custom training program",
+            "Hands-on workshops on your use cases",
+            "Training materials included",
+            "Post-training follow-up (1 month)",
+            "Eligible for OPCO funding",
+          ],
+          excluded: [],
+        },
       ],
       ecosystemCta: {
-        text: "Need a custom architecture? The Ecosystem plan adapts to your ambitions — 2 to 6 months, outsourced CTO.",
+        text: "Need a custom architecture? The Custom plan adapts to your ambitions — 2 to 6 months, outsourced CTO.",
         button: "Chat for 30 min",
       },
       comparison: {
@@ -1167,8 +1262,15 @@ const dictionaries: Record<Language, Dictionary> = {
       ]
     },
     about: {
-      content: "My name is Aïssa. I am an entrepreneur, builder, and systems architect — based in southern France, operating everywhere.\n\nNo inheritance, no safety net. Just years of learning, building, and testing — until I mastered what many delegate without understanding.\n\nWhat sets me apart? I live in both worlds: I understand business strategy and I build the technical system that executes it. No need for a project manager between you and the code.\n\nIf you have a system idea — fuzzy or precise — I can transform it into something real.",
+      content: "My name is Aïssa. I'm an entrepreneur, builder, and systems architect — based in the South of France, operating worldwide.\n\nNo inheritance, no safety net. Just years of learning, building and testing — until I mastered what many outsource without understanding.\n\nWhat sets me apart? I live in both worlds at once: I understand business strategy and I build the technical system that executes it. No need for a project manager between you and the code.\n\nIf you have a system idea — vague or precise — I can turn it into something real.",
       location: "Based in the South of 🇫🇷. Working worldwide.",
+      bio: [
+        "My name is Aïssa. I'm an entrepreneur, builder, and systems architect — based in the South of France, operating worldwide.",
+        "No inheritance, no safety net. Just years of learning, building and testing — until I mastered what many outsource without understanding.",
+        "What sets me apart? I live in both worlds at once: I understand business strategy and I build the technical system that executes it. No need for a project manager between you and the code.",
+        "If you have a system idea — vague or precise — I can turn it into something real.",
+      ],
+      photoAlt: "Aïssa BELKOUSSA — Systems Architect",
     },
     contact: {
       title: "A system idea? A process gone wrong? A project waiting for long enough?",
@@ -1212,23 +1314,43 @@ const dictionaries: Record<Language, Dictionary> = {
             { id: "other", label: "Other need", template: "" }
           ]
         },
-        details: { 
-          title: "Tell me more", 
-          messageLabel: "Your message", 
+        details: {
+          title: "Tell me more",
+          messageLabel: "Your message",
           budgetLabel: "Estimated Budget",
           customMessage: "Custom message",
           useTemplate: "Use template"
         },
+        message: { label: "Your message (optional)", placeholder: "Describe your need in a few words..." },
       },
-      cta: { next: "Continue", prev: "Back", submit: "Send my request" },
+      cta: { next: "Continue", prev: "Back", submit: "Get my proposal in 48h", submitting: "Sending...", guarantee: "Free, no commitment — response within 48h" },
       success: {
         title: "Request received",
-        message: "I'll get back to you within 48h to analyze your system."
+        message: "I'll get back to you within 48h to analyze your system.",
+        bookCall: "Book my call — 30 min",
+        bookCallSubtext: "Free, no commitment — limited slots",
+        whatsappMessage: "Hi Aïssa, I just submitted my request through the website.",
+        whatsappCta: "Or message me on WhatsApp",
+        backHome: "Back to home",
       },
+      plan: { selectedLabel: "Selected plan" },
       errors: {
         generic: "Something went wrong. Please try again or reach out on LinkedIn.",
         rate: "Too many requests. Please try again in a few minutes.",
       },
+    },
+    contactPage: {
+      badge: "Project initiation",
+      heading: "Let's build\nyour next",
+      headingItalic: "system.",
+      intro: "Tell me everything about your ambitions. Whether it's a complex architecture, an intelligent automation, or a data dashboard, I'm here to structure your chaos.",
+      availability: "Availability: Q2-Q3 Projects",
+      calendlySection: "Or book directly",
+      calendlyTitle: "Discovery call",
+      calendlyDuration: "30 min",
+      calendlyLocation: "Google Meet",
+      calendlyFree: "Free, no commitment",
+      calendlyDesc: "We review your needs, budget and timeline. You leave with a clear picture of what's possible — even if we don't work together.",
     },
     diagnostic: {
       srTitle: "Free digital diagnostic",

@@ -35,14 +35,17 @@ const ContactPage = () => {
                 <div className="flex items-center gap-4 mb-8">
                   <div className="w-2 h-2 rounded-full bg-site-accent" />
                   <span className="text-xs font-bold uppercase tracking-[0.3em] text-site-text-light">
-                    Initiation de projet
+                    {dict.contactPage.badge}
                   </span>
                 </div>
                 <h1 className="text-5xl md:text-6xl font-display font-medium mb-8 leading-tight tracking-tight">
-                  Construisons<br/>votre futur<br/><span className="italic font-light">système.</span>
+                  {dict.contactPage.heading.split("\n").map((line, i, arr) => (
+                    <React.Fragment key={i}>{line}{i < arr.length - 1 && <br/>}</React.Fragment>
+                  ))}
+                  <br/><span className="italic font-light">{dict.contactPage.headingItalic}</span>
                 </h1>
                 <p className="text-site-text-light leading-relaxed mb-12 max-w-sm">
-                  Dites-moi tout sur vos ambitions. Que ce soit pour une architecture complexe, une automation intelligente ou un cockpit de données, je suis là pour structurer votre chaos.
+                  {dict.contactPage.intro}
                 </p>
                 
                 <div className="space-y-6 pt-8 border-t border-site-border/50">
@@ -50,7 +53,7 @@ const ContactPage = () => {
                         <div className="p-2 border border-site-border rounded-lg bg-white/50">
                             <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
                         </div>
-                        <span className="text-[10px] font-bold uppercase tracking-widest">Disponibilité : Projets T2-T3</span>
+                        <span className="text-[10px] font-bold uppercase tracking-widest">{dict.contactPage.availability}</span>
                     </div>
                 </div>
               </motion.div>
@@ -83,27 +86,27 @@ const ContactPage = () => {
             <div className="flex items-center gap-6 mb-10">
               <div className="flex-1 h-px bg-site-border/50" />
               <span className="text-xs font-bold uppercase tracking-[0.3em] text-site-text-light">
-                Ou réservez directement
+                {dict.contactPage.calendlySection}
               </span>
               <div className="flex-1 h-px bg-site-border/50" />
             </div>
             <div className="bg-white/40 backdrop-blur-3xl border border-site-border rounded-[2rem] shadow-2xl shadow-site-accent/5">
               <div className="px-8 pt-10 pb-4 md:px-12 md:pt-12 md:pb-4">
                 <h3 className="text-2xl md:text-3xl font-display font-medium tracking-tight mb-3">
-                  Appel découverte
+                  {dict.contactPage.calendlyTitle}
                 </h3>
                 <div className="flex flex-wrap items-center gap-3 text-sm text-site-text-light/60">
                   <span className="inline-flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
-                    30 min
+                    {dict.contactPage.calendlyDuration}
                   </span>
                   <span className="text-site-border">|</span>
-                  <span>Google Meet</span>
+                  <span>{dict.contactPage.calendlyLocation}</span>
                   <span className="text-site-border">|</span>
-                  <span>Gratuit, sans engagement</span>
+                  <span>{dict.contactPage.calendlyFree}</span>
                 </div>
                 <p className="mt-4 text-sm text-site-text-light/50 max-w-xl leading-relaxed">
-                  On fait le point sur votre besoin, votre budget et vos délais. Vous repartez avec une vision claire de ce qui est possible — même si on ne travaille pas ensemble.
+                  {dict.contactPage.calendlyDesc}
                 </p>
               </div>
               <Suspense fallback={<div className="min-h-[700px]" />}>
