@@ -337,6 +337,7 @@ async function sendEmail(payload: {
   to: string;
   subject: string;
   html: string;
+  text?: string;
   reply_to?: string;
 }): Promise<boolean> {
   const res = await fetch("https://api.resend.com/emails", {
@@ -422,6 +423,7 @@ export async function POST(request: Request) {
       to: CONTACT_EMAIL,
       subject: `${t.subject} — ${body.need} — ${body.name} (${lead.label})`,
       html: buildAdminEmail(body),
+      text: `${t.subject} (${lead.label} ${lead.score}/100)\n\n${t.name}: ${body.name}\n${t.email}: ${body.email}\n${t.need}: ${body.need}\n${t.budget}: ${body.budget}\n${t.message}: ${body.message || t.notProvided}\nPlan: ${body.plan || (body.lang === "fr" ? "Aucun" : "None")}\n\n${lead.action}`,
       reply_to: body.email,
     }),
     // 2. Confirmation to prospect
@@ -429,6 +431,7 @@ export async function POST(request: Request) {
       to: body.email,
       subject: t.confirmSubject,
       html: buildConfirmationEmail(body),
+      text: `${t.confirmGreeting} ${body.name.split(" ")[0]},\n\n${t.confirmBody}\n${t.confirmPromise}\n\n${t.confirmDetail}\n${t.need}: ${body.need}\n${t.budget}: ${body.budget}${body.context ? `\n${t.company}: ${body.context}` : ""}\n\n${t.confirmClosing}\n${t.confirmSignature}\n${t.confirmRole}\n${t.confirmSite}`,
     }),
   ]);
 
