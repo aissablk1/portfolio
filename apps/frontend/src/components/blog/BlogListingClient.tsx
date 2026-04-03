@@ -3,6 +3,7 @@
 import React from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { useLanguage } from "../LanguageContext";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowUpRight, Calendar, Clock } from "lucide-react";
@@ -19,6 +20,30 @@ interface BlogPost {
 }
 
 export default function BlogListingClient({ posts }: { posts: BlogPost[] }) {
+  const { language } = useLanguage();
+  const t = {
+    badge: "Blog",
+    title:
+      language === "fr"
+        ? "Articles experts : IA, automatisation et sites web pour PME"
+        : "Expert articles: AI, automation & websites for SMBs",
+    subtitle:
+      language === "fr"
+        ? "Guides pratiques, études de cas et retours d'expérience pour les artisans BTP et prestataires B2B qui veulent se digitaliser."
+        : "Practical guides, case studies and real-world feedback for tradespeople and B2B providers looking to go digital.",
+    empty:
+      language === "fr"
+        ? "Aucun article publié pour le moment. Revenez bientôt."
+        : "No articles published yet. Check back soon.",
+    featured: language === "fr" ? "À la une" : "Featured",
+    cta:
+      language === "fr"
+        ? "Tu veux un système qui tourne pour toi ?"
+        : "Want a system that runs for you?",
+    viewOffers: language === "fr" ? "Voir les offres" : "View offers",
+  };
+  const dateLocale = language === "fr" ? "fr-FR" : "en-GB";
+
   return (
     <div className="bg-site-bg min-h-screen">
       <Header />
@@ -34,22 +59,22 @@ export default function BlogListingClient({ posts }: { posts: BlogPost[] }) {
             >
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-2 h-2 rounded-full bg-site-accent" />
-                <span className="text-xs font-bold uppercase tracking-widest text-site-accent">Blog</span>
+                <span className="text-xs font-bold uppercase tracking-widest text-site-accent">{t.badge}</span>
               </div>
               <h1
                 style={{ fontSize: "clamp(1.75rem, 4vw, 3rem)", lineHeight: 1.05 }}
                 className="font-display font-medium tracking-tighter uppercase max-w-3xl"
               >
-                Articles experts : IA, automatisation et sites web pour PME
+                {t.title}
               </h1>
               <p className="text-site-text-light mt-4 max-w-xl text-sm">
-                Guides pratiques, études de cas et retours d'expérience pour les artisans BTP et prestataires B2B qui veulent se digitaliser.
+                {t.subtitle}
               </p>
             </motion.div>
 
             {/* Posts grid */}
             {posts.length === 0 ? (
-              <p className="text-site-text-light text-sm">Aucun article publié pour le moment. Revenez bientôt.</p>
+              <p className="text-site-text-light text-sm">{t.empty}</p>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {posts.map((post, idx) => (
@@ -65,7 +90,7 @@ export default function BlogListingClient({ posts }: { posts: BlogPost[] }) {
                     >
                       {post.featured && (
                         <span className="text-[8px] font-bold uppercase tracking-widest text-site-accent bg-site-accent/10 px-2 py-0.5 rounded-full mb-4 inline-block">
-                          À la une
+                          {t.featured}
                         </span>
                       )}
                       <h2 className="text-lg font-display font-medium tracking-tight mb-3 group-hover:text-site-accent transition-colors">
@@ -77,7 +102,7 @@ export default function BlogListingClient({ posts }: { posts: BlogPost[] }) {
                       <div className="flex items-center gap-4 text-[11px] text-site-text-light/60">
                         <span className="flex items-center gap-1">
                           <Calendar size={12} />
-                          {new Date(post.date).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })}
+                          {new Date(post.date).toLocaleDateString(dateLocale, { day: "numeric", month: "long", year: "numeric" })}
                         </span>
                         <span className="flex items-center gap-1">
                           <Clock size={12} />
@@ -104,12 +129,12 @@ export default function BlogListingClient({ posts }: { posts: BlogPost[] }) {
               transition={{ delay: 0.5 }}
               className="mt-16 text-center"
             >
-              <p className="text-sm text-site-text-light mb-4">Tu veux un système qui tourne pour toi ?</p>
+              <p className="text-sm text-site-text-light mb-4">{t.cta}</p>
               <Link
                 href="/services"
                 className="inline-flex items-center gap-2 bg-site-accent text-white px-8 py-4 rounded-full text-xs font-bold uppercase tracking-widest hover:scale-105 transition-transform"
               >
-                Voir les offres
+                {t.viewOffers}
                 <ArrowUpRight size={14} />
               </Link>
             </motion.div>
