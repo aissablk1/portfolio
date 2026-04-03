@@ -73,7 +73,7 @@ const PricingTeaser = () => {
                 >
                   <Link
                     href="/services"
-                    className={`h-full bg-site-bg p-8 md:p-10 flex flex-col justify-between transition-colors group ${isHighlight ? "bg-site-accent/[0.04] hover:bg-site-accent/[0.08]" : "hover:bg-site-bg/50"}`}
+                    className={`h-full bg-site-bg p-8 md:p-10 flex flex-col justify-between transition-colors group ${isHighlight ? "bg-site-accent/[0.04] hover:bg-site-accent/[0.08]" : "hover:bg-black/[0.02]"}`}
                   >
                     <div>
                       <div className="flex items-center justify-between mb-6">
