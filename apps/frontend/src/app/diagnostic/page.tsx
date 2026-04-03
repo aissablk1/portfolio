@@ -6,102 +6,13 @@ import Link from "next/link";
 import { ArrowRight, ArrowLeft, CheckCircle2, AlertTriangle, XCircle, Send } from "lucide-react";
 import { cn } from "@/utils/cn";
 import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import { useLanguage } from "@/components/LanguageContext";
 
-/* ── Questions ─────────────────────────────────────────────────────── */
-const questions = [
-  {
-    id: "site",
-    question: "Votre site web actuel vous rapporte-t-il des clients ?",
-    options: [
-      { label: "Oui, régulièrement", score: 3 },
-      { label: "Quelques-uns, mais pas assez", score: 2 },
-      { label: "Non, c'est juste une vitrine", score: 1 },
-      { label: "Je n'ai pas de site", score: 0 },
-    ],
-  },
-  {
-    id: "rdv",
-    question: "Comment vos clients prennent-ils rendez-vous ?",
-    options: [
-      { label: "En ligne (Calendly, formulaire...)", score: 3 },
-      { label: "Par email", score: 2 },
-      { label: "Par téléphone uniquement", score: 1 },
-      { label: "Bouche-à-oreille", score: 0 },
-    ],
-  },
-  {
-    id: "devis",
-    question: "Combien de temps pour envoyer un devis ?",
-    options: [
-      { label: "Automatique (moins de 5 min)", score: 3 },
-      { label: "Moins d'1 heure", score: 2 },
-      { label: "Quelques heures à 1 jour", score: 1 },
-      { label: "Plusieurs jours", score: 0 },
-    ],
-  },
-  {
-    id: "relance",
-    question: "Relancez-vous vos prospects non convertis ?",
-    options: [
-      { label: "Oui, automatiquement", score: 3 },
-      { label: "Oui, manuellement", score: 2 },
-      { label: "Parfois, quand j'y pense", score: 1 },
-      { label: "Jamais", score: 0 },
-    ],
-  },
-  {
-    id: "temps",
-    question: "Combien d'heures/semaine passez-vous sur des tâches admin répétitives ?",
-    options: [
-      { label: "Moins de 2h", score: 3 },
-      { label: "2 à 5h", score: 2 },
-      { label: "5 à 10h", score: 1 },
-      { label: "Plus de 10h", score: 0 },
-    ],
-  },
-];
-
-/* ── Score interpretation ──────────────────────────────────────────── */
-function getResult(score: number) {
-  if (score >= 12) {
-    return {
-      level: "Avancé",
-      color: "text-green-600",
-      bgColor: "bg-green-50 border-green-200",
-      icon: CheckCircle2,
-      headline: "Votre système digital est solide.",
-      body: "Vous avez déjà une bonne base. L'étape suivante : automatiser ce qui reste manuel et optimiser votre tunnel de conversion pour maximiser chaque visite.",
-      cta: "Passer au niveau supérieur",
-      plan: "partenaire",
-    };
-  }
-  if (score >= 7) {
-    return {
-      level: "Intermédiaire",
-      color: "text-amber-600",
-      bgColor: "bg-amber-50 border-amber-200",
-      icon: AlertTriangle,
-      headline: "Vous perdez du temps et des clients chaque semaine.",
-      body: "Les fondations sont là, mais votre système a des trous. Des devis trop lents, des relances oubliées, un site qui n'amène pas de leads — chaque semaine, c'est du CA qui s'évapore.",
-      cta: "Colmater les fuites",
-      plan: "accelerateur",
-    };
-  }
-  return {
-    level: "Débutant",
-    color: "text-red-600",
-    bgColor: "bg-red-50 border-red-200",
-    icon: XCircle,
-    headline: "Votre activité tourne sans filet digital.",
-    body: "Pas de site efficace, pas de prise de RDV en ligne, pas de relance automatique. Vous faites tout à la main — et vous laissez de l'argent sur la table chaque jour. La bonne nouvelle : un système complet se met en place en 10 jours.",
-    cta: "Construire mon système",
-    plan: "accelerateur",
-  };
-}
-
-/* ── Component ─────────────────────────────────────────────────────── */
 export default function DiagnosticPage() {
+  const { dict, language } = useLanguage();
+  const d = dict.diagnostic;
+  const questions = d.questions;
+
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<Record<string, number>>({});
   const [email, setEmail] = useState("");
@@ -115,6 +26,14 @@ export default function DiagnosticPage() {
 
   const totalScore = Object.values(answers).reduce((a, b) => a + b, 0);
   const maxScore = questions.length * 3;
+
+  function getResult(score: number) {
+    const levels = d.results.levels;
+    if (score >= 12) return { ...levels.advanced, icon: CheckCircle2, color: "text-green-600", bgColor: "bg-green-50 border-green-200", plan: "partenaire" };
+    if (score >= 7) return { ...levels.intermediate, icon: AlertTriangle, color: "text-amber-600", bgColor: "bg-amber-50 border-amber-200", plan: "accelerateur" };
+    return { ...levels.beginner, icon: XCircle, color: "text-red-600", bgColor: "bg-red-50 border-red-200", plan: "accelerateur" };
+  }
+
   const result = getResult(totalScore);
 
   const selectAnswer = (questionId: string, score: number) => {
@@ -132,17 +51,15 @@ export default function DiagnosticPage() {
         body: JSON.stringify({
           name,
           email,
-          context: "",
           need: `Diagnostic digital — Score ${totalScore}/${maxScore} (${result.level})`,
-          message: `Résultats du diagnostic :\n${questions.map((q) => `- ${q.question} → ${q.options.find((o) => o.score === answers[q.id])?.label || "?"}`).join("\n")}\n\nScore : ${totalScore}/${maxScore} — Niveau : ${result.level}`,
-          budget: totalScore <= 6 ? "~ 3 000 €" : "~ 7 000 €",
-          lang: "fr",
+          message: `${d.results.answersLabel} :\n${questions.map((q) => `- ${q.question} → ${q.options.find((o) => o.score === answers[q.id])?.label || "?"}`).join("\n")}\n\nScore : ${totalScore}/${maxScore} — ${d.results.levelLabel} : ${result.level}`,
+          lang: language,
           plan: result.plan,
           _honey: "",
         }),
       });
     } catch {
-      // Fire and forget — show results anyway
+      // Fire and forget
     }
     setSending(false);
     setSubmitted(true);
@@ -154,25 +71,23 @@ export default function DiagnosticPage() {
       <Header />
 
       <main id="main-content" className="pt-40 pb-20 px-6">
-        <h1 className="sr-only">Diagnostic digital gratuit</h1>
+        <h1 className="sr-only">{d.srTitle}</h1>
         <div className="max-w-2xl mx-auto">
-          {/* ── Progress bar ────────────────────────────────────── */}
+          {/* Progress bar */}
           {!isResultPhase && (
             <div className="mb-12">
               <div className="flex justify-between text-[10px] font-bold uppercase tracking-widest text-site-text-light/40 mb-3">
-                <span>Diagnostic</span>
+                <span>{d.progressLabel}</span>
                 <span>
                   {isEmailPhase
-                    ? "Dernière étape"
-                    : `Question ${step + 1} / ${questions.length}`}
+                    ? d.lastStep
+                    : `${d.questionOf} ${step + 1} / ${questions.length}`}
                 </span>
               </div>
               <div className="h-1 w-full bg-site-border rounded-full overflow-hidden">
                 <motion.div
                   className="h-full bg-site-text"
-                  animate={{
-                    width: `${((step + 1) / (questions.length + 1)) * 100}%`,
-                  }}
+                  animate={{ width: `${((step + 1) / (questions.length + 1)) * 100}%` }}
                   transition={{ duration: 0.5, ease: "circOut" }}
                 />
               </div>
@@ -180,7 +95,7 @@ export default function DiagnosticPage() {
           )}
 
           <AnimatePresence mode="wait">
-            {/* ── Questions ──────────────────────────────────── */}
+            {/* Questions */}
             {isQuestionPhase && (
               <motion.div
                 key={`q-${step}`}
@@ -218,13 +133,13 @@ export default function DiagnosticPage() {
                     className="mt-8 flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-site-text-light hover:text-site-text transition-colors"
                   >
                     <ArrowLeft size={14} />
-                    Retour
+                    {d.back}
                   </button>
                 )}
               </motion.div>
             )}
 
-            {/* ── Email capture ──────────────────────────────── */}
+            {/* Email capture */}
             {isEmailPhase && (
               <motion.div
                 key="email"
@@ -234,18 +149,17 @@ export default function DiagnosticPage() {
                 transition={{ duration: 0.4 }}
               >
                 <h2 className="text-3xl md:text-4xl font-medium tracking-tighter uppercase mb-4 leading-tight">
-                  Vos résultats sont prêts.
+                  {d.emailPhase.title}
                 </h2>
                 <p className="text-site-text-light mb-10">
-                  Entrez votre nom et email pour voir votre score et recevoir
-                  des recommandations personnalisées.
+                  {d.emailPhase.subtitle}
                 </p>
                 <div className="space-y-4">
                   <input
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    placeholder="Votre prénom"
+                    placeholder={d.emailPhase.namePlaceholder}
                     className="w-full bg-transparent border-b border-site-border py-4 text-xl focus:border-site-text outline-none transition-colors"
                     autoFocus
                   />
@@ -253,7 +167,7 @@ export default function DiagnosticPage() {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="votre@email.com"
+                    placeholder={d.emailPhase.emailPlaceholder}
                     className="w-full bg-transparent border-b border-site-border py-4 text-xl focus:border-site-text outline-none transition-colors"
                   />
                 </div>
@@ -263,7 +177,7 @@ export default function DiagnosticPage() {
                     className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-site-text-light hover:text-site-text transition-colors"
                   >
                     <ArrowLeft size={14} />
-                    Retour
+                    {d.back}
                   </button>
                   <button
                     onClick={handleEmailSubmit}
@@ -275,14 +189,14 @@ export default function DiagnosticPage() {
                         : "bg-site-border text-site-text-light/50 cursor-not-allowed"
                     )}
                   >
-                    {sending ? "Envoi..." : "Voir mes résultats"}
+                    {sending ? d.emailPhase.sending : d.emailPhase.submit}
                     {!sending && <Send size={14} />}
                   </button>
                 </div>
               </motion.div>
             )}
 
-            {/* ── Results ────────────────────────────────────── */}
+            {/* Results */}
             {isResultPhase && (
               <motion.div
                 key="results"
@@ -290,74 +204,45 @@ export default function DiagnosticPage() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6 }}
               >
-                {/* Score header */}
                 <div className="text-center mb-12">
                   <div className="inline-flex items-center gap-3 mb-6">
-                    <span className="text-7xl font-medium tracking-tighter">
-                      {totalScore}
-                    </span>
-                    <span className="text-2xl text-site-text-light tracking-tighter">
-                      / {maxScore}
-                    </span>
+                    <span className="text-7xl font-medium tracking-tighter">{totalScore}</span>
+                    <span className="text-2xl text-site-text-light tracking-tighter">/ {maxScore}</span>
                   </div>
-                  <div
-                    className={cn(
-                      "inline-flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-bold",
-                      result.bgColor
-                    )}
-                  >
+                  <div className={cn("inline-flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-bold", result.bgColor)}>
                     <result.icon size={16} />
-                    <span className={result.color}>Niveau {result.level}</span>
+                    <span className={result.color}>{d.results.levelLabel} {result.level}</span>
                   </div>
                 </div>
 
-                {/* Result card */}
                 <div className="border border-site-border rounded-2xl p-8 md:p-10 mb-8">
                   <h3 className="text-2xl md:text-3xl font-medium tracking-tighter uppercase mb-4">
                     {result.headline}
                   </h3>
-                  <p className="text-site-text-light leading-relaxed mb-8">
-                    {result.body}
-                  </p>
+                  <p className="text-site-text-light leading-relaxed mb-8">{result.body}</p>
 
-                  {/* Answer recap */}
                   <div className="space-y-3 mb-8 border-t border-site-border pt-6">
                     <p className="text-[10px] font-bold uppercase tracking-widest text-site-text-light/40 mb-4">
-                      Vos réponses
+                      {d.results.answersLabel}
                     </p>
                     {questions.map((q) => {
-                      const answer = q.options.find(
-                        (o) => o.score === answers[q.id]
-                      );
+                      const answer = q.options.find((o) => o.score === answers[q.id]);
                       const isGood = (answers[q.id] ?? 0) >= 2;
                       return (
-                        <div
-                          key={q.id}
-                          className="flex items-start gap-3 text-sm"
-                        >
-                          <span
-                            className={cn(
-                              "mt-0.5 shrink-0",
-                              isGood ? "text-green-500" : "text-red-400"
-                            )}
-                          >
+                        <div key={q.id} className="flex items-start gap-3 text-sm">
+                          <span className={cn("mt-0.5 shrink-0", isGood ? "text-green-500" : "text-red-400")}>
                             {isGood ? "+" : "-"}
                           </span>
                           <div>
-                            <span className="text-site-text-light">
-                              {q.question}
-                            </span>
+                            <span className="text-site-text-light">{q.question}</span>
                             <br />
-                            <span className="font-medium">
-                              {answer?.label}
-                            </span>
+                            <span className="font-medium">{answer?.label}</span>
                           </div>
                         </div>
                       );
                     })}
                   </div>
 
-                  {/* CTA */}
                   <Link
                     href={`/contact?plan=${result.plan}`}
                     className="inline-flex items-center gap-3 bg-site-text text-site-bg px-8 py-4 rounded-full text-xs font-bold uppercase tracking-widest hover:scale-105 transition-all"
@@ -367,13 +252,9 @@ export default function DiagnosticPage() {
                   </Link>
                 </div>
 
-                {/* Secondary CTA */}
                 <div className="text-center">
-                  <Link
-                    href="/go"
-                    className="text-xs font-bold uppercase tracking-widest text-site-text-light hover:text-site-text transition-colors"
-                  >
-                    Voir toutes les offres
+                  <Link href="/go" className="text-xs font-bold uppercase tracking-widest text-site-text-light hover:text-site-text transition-colors">
+                    {d.results.seeOffers}
                   </Link>
                 </div>
               </motion.div>

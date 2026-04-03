@@ -171,6 +171,36 @@ interface Dictionary {
     cta: { next: string; prev: string; submit: string };
     success: { title: string; message: string };
   };
+  diagnostic: {
+    srTitle: string;
+    progressLabel: string;
+    lastStep: string;
+    questionOf: string;
+    back: string;
+    questions: Array<{
+      id: string;
+      question: string;
+      options: Array<{ label: string; score: number }>;
+    }>;
+    emailPhase: {
+      title: string;
+      subtitle: string;
+      namePlaceholder: string;
+      emailPlaceholder: string;
+      sending: string;
+      submit: string;
+    };
+    results: {
+      levelLabel: string;
+      answersLabel: string;
+      seeOffers: string;
+      levels: {
+        advanced: { level: string; headline: string; body: string; cta: string };
+        intermediate: { level: string; headline: string; body: string; cta: string };
+        beginner: { level: string; headline: string; body: string; cta: string };
+      };
+    };
+  };
   domainAlert: {
     badge: string;
     title: string;
@@ -616,6 +646,38 @@ const dictionaries: Record<Language, Dictionary> = {
       success: {
         title: "Demande reçue",
         message: "Je reviens vers vous sous 48h pour analyser votre système."
+      },
+    },
+    diagnostic: {
+      srTitle: "Diagnostic digital gratuit",
+      progressLabel: "Diagnostic",
+      lastStep: "Dernière étape",
+      questionOf: "Question",
+      back: "Retour",
+      questions: [
+        { id: "site", question: "Votre site web actuel vous rapporte-t-il des clients ?", options: [{ label: "Oui, régulièrement", score: 3 }, { label: "Quelques-uns, mais pas assez", score: 2 }, { label: "Non, c'est juste une vitrine", score: 1 }, { label: "Je n'ai pas de site", score: 0 }] },
+        { id: "rdv", question: "Comment vos clients prennent-ils rendez-vous ?", options: [{ label: "En ligne (Calendly, formulaire...)", score: 3 }, { label: "Par email", score: 2 }, { label: "Par téléphone uniquement", score: 1 }, { label: "Bouche-à-oreille", score: 0 }] },
+        { id: "devis", question: "Combien de temps pour envoyer un devis ?", options: [{ label: "Automatique (moins de 5 min)", score: 3 }, { label: "Moins d'1 heure", score: 2 }, { label: "Quelques heures à 1 jour", score: 1 }, { label: "Plusieurs jours", score: 0 }] },
+        { id: "relance", question: "Relancez-vous vos prospects non convertis ?", options: [{ label: "Oui, automatiquement", score: 3 }, { label: "Oui, manuellement", score: 2 }, { label: "Parfois, quand j'y pense", score: 1 }, { label: "Jamais", score: 0 }] },
+        { id: "temps", question: "Combien d'heures/semaine sur des tâches admin répétitives ?", options: [{ label: "Moins de 2h", score: 3 }, { label: "2 à 5h", score: 2 }, { label: "5 à 10h", score: 1 }, { label: "Plus de 10h", score: 0 }] },
+      ],
+      emailPhase: {
+        title: "Vos résultats sont prêts.",
+        subtitle: "Entrez votre nom et email pour voir votre score et recevoir des recommandations personnalisées.",
+        namePlaceholder: "Votre prénom",
+        emailPlaceholder: "votre@email.com",
+        sending: "Envoi...",
+        submit: "Voir mes résultats",
+      },
+      results: {
+        levelLabel: "Niveau",
+        answersLabel: "Vos réponses",
+        seeOffers: "Voir toutes les offres",
+        levels: {
+          advanced: { level: "Avancé", headline: "Votre système digital est solide.", body: "Vous avez déjà une bonne base. L'étape suivante : automatiser ce qui reste manuel et optimiser votre tunnel de conversion pour maximiser chaque visite.", cta: "Passer au niveau supérieur" },
+          intermediate: { level: "Intermédiaire", headline: "Vous perdez du temps et des clients chaque semaine.", body: "Les fondations sont là, mais votre système a des trous. Des devis trop lents, des relances oubliées, un site qui n'amène pas de leads — chaque semaine, c'est du CA qui s'évapore.", cta: "Colmater les fuites" },
+          beginner: { level: "Débutant", headline: "Votre activité tourne sans filet digital.", body: "Pas de site efficace, pas de prise de RDV en ligne, pas de relance automatique. Vous faites tout à la main — et vous laissez de l'argent sur la table chaque jour. La bonne nouvelle : un système complet se met en place en 10 jours.", cta: "Construire mon système" },
+        },
       },
     },
     domainAlert: {
@@ -1084,6 +1146,38 @@ const dictionaries: Record<Language, Dictionary> = {
       success: {
         title: "Request received",
         message: "I'll get back to you within 48h to analyze your system."
+      },
+    },
+    diagnostic: {
+      srTitle: "Free digital diagnostic",
+      progressLabel: "Diagnostic",
+      lastStep: "Last step",
+      questionOf: "Question",
+      back: "Back",
+      questions: [
+        { id: "site", question: "Does your current website bring you clients?", options: [{ label: "Yes, regularly", score: 3 }, { label: "A few, but not enough", score: 2 }, { label: "No, it's just a showcase", score: 1 }, { label: "I don't have a website", score: 0 }] },
+        { id: "rdv", question: "How do your clients book appointments?", options: [{ label: "Online (Calendly, form...)", score: 3 }, { label: "By email", score: 2 }, { label: "By phone only", score: 1 }, { label: "Word of mouth", score: 0 }] },
+        { id: "devis", question: "How long to send a quote?", options: [{ label: "Automatic (under 5 min)", score: 3 }, { label: "Under 1 hour", score: 2 }, { label: "A few hours to 1 day", score: 1 }, { label: "Several days", score: 0 }] },
+        { id: "relance", question: "Do you follow up with unconverted prospects?", options: [{ label: "Yes, automatically", score: 3 }, { label: "Yes, manually", score: 2 }, { label: "Sometimes, when I remember", score: 1 }, { label: "Never", score: 0 }] },
+        { id: "temps", question: "Hours/week spent on repetitive admin tasks?", options: [{ label: "Under 2h", score: 3 }, { label: "2 to 5h", score: 2 }, { label: "5 to 10h", score: 1 }, { label: "Over 10h", score: 0 }] },
+      ],
+      emailPhase: {
+        title: "Your results are ready.",
+        subtitle: "Enter your name and email to see your score and receive personalized recommendations.",
+        namePlaceholder: "Your first name",
+        emailPlaceholder: "your@email.com",
+        sending: "Sending...",
+        submit: "See my results",
+      },
+      results: {
+        levelLabel: "Level",
+        answersLabel: "Your answers",
+        seeOffers: "See all plans",
+        levels: {
+          advanced: { level: "Advanced", headline: "Your digital system is solid.", body: "You already have a strong foundation. Next step: automate what's still manual and optimize your conversion funnel to maximize every visit.", cta: "Level up" },
+          intermediate: { level: "Intermediate", headline: "You're losing time and clients every week.", body: "The foundations are there, but your system has gaps. Slow quotes, forgotten follow-ups, a site that doesn't generate leads — every week, revenue evaporates.", cta: "Fix the leaks" },
+          beginner: { level: "Beginner", headline: "Your business runs without a digital safety net.", body: "No effective website, no online booking, no automatic follow-up. You do everything manually — and leave money on the table every day. Good news: a complete system is up in 10 days.", cta: "Build my system" },
+        },
       },
     },
     domainAlert: {
