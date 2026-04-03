@@ -1,335 +1,985 @@
 "use client";
 
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import React, { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/components/LanguageContext";
-import { motion, AnimatePresence, useInView } from "framer-motion";
-import { ArrowUpRight, Check, X, Zap, Rocket, Handshake, RotateCcw, ChevronDown, Shield, Clock, MessageSquare, TrendingUp, Gift } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  ArrowUpRight,
+  Check,
+  X,
+  ChevronDown,
+  Sparkles,
+  Globe,
+  BarChart3,
+  Bot,
+  GraduationCap,
+  Briefcase,
+  BadgeEuro,
+  Users,
+  Landmark,
+  Rocket,
+} from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/utils/cn";
-import ROICalculator from "@/components/sections/ROICalculator";
-import AvailabilityBanner from "@/components/AvailabilityBanner";
 import ExitIntentModal from "@/components/ExitIntentModal";
 
-type SubBilling = "monthly" | "yearly";
+/* ────────────────────────────────────────────────────────────────────────────
+   CONTENT — FR / EN
+   ──────────────────────────────────────────────────────────────────────────── */
 
-const tierIcons = [Zap, Rocket, Handshake];
+const content = {
+  fr: {
+    hero: {
+      title: "Des systemes qui travaillent pour vous",
+      subtitle:
+        "Construction, automatisation, formation — prix fixe, resultat garanti",
+    },
 
-/* ── Count-up animation for metric numbers ─────────────────────────── */
-function CountUpMetric({ value, delay = 0 }: { value: string; delay?: number }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
-  const [display, setDisplay] = useState("0");
-  const hasAnimated = useRef(false);
+    /* ── Section 2 : Expertise ── */
+    expertise: {
+      sectionBadge: "Expertise",
+      categories: [
+        {
+          title: "Automatisation & Process",
+          badge: "Le plus demande",
+          subtitle:
+            "Les systemes qui font tourner votre entreprise sans vous",
+          items: [
+            "Sequences email automatiques",
+            "Chatbot IA sur-mesure",
+            "CRM et workflows (n8n/Make)",
+            "Prise de RDV en ligne",
+            "Relances automatiques",
+          ],
+        },
+        {
+          title: "Sites & Conversion",
+          badge: null,
+          subtitle:
+            "Les interfaces qui transforment vos visiteurs en clients",
+          items: [
+            "Site professionnel haute performance",
+            "Landing pages optimisees",
+            "Tunnels de conversion",
+            "SEO local",
+            "Formulaires intelligents",
+          ],
+        },
+        {
+          title: "Pilotage & Intelligence",
+          badge: null,
+          subtitle:
+            "Les chiffres qui manquent pour decider vite et bien",
+          items: [
+            "Dashboards temps reel",
+            "KPI et reporting automatise",
+            "Alertes et seuils intelligents",
+            "Integration IA decisionnelle",
+          ],
+        },
+      ],
+    },
 
-  const match = value.match(/^([^\d]*)(\d+)(.*)/);
+    /* ── Section 3 : Pricing tiers ── */
+    pricing: {
+      sectionBadge: "Tarifs",
+      title: "Systemes",
+      tiers: [
+        {
+          name: "Starter",
+          price: "1 500 \u20ac",
+          tagline: "Votre premier systeme automatise",
+          features: [
+            "1 automatisation cle en main (chatbot OU emails OU prise de RDV)",
+            "Brief + maquette validee",
+            "Livraison 5 jours",
+            "Formation 1h incluse",
+          ],
+          cta: "Demarrer",
+          ctaLink: "/contact?plan=starter",
+          highlighted: false,
+          badge: null,
+          monthly: null,
+        },
+        {
+          name: "Pro",
+          price: "2 900 \u20ac",
+          tagline:
+            "Le systeme complet + 3 mois de tranquillite",
+          features: [
+            "Systeme cle en main multi-briques",
+            "3 mois monitoring + support offerts (valeur 1 470 \u20ac)",
+            "Bugs corriges sous 48h",
+            "MAJ securite + rapport mensuel",
+            "Livraison 5-10 jours",
+          ],
+          cta: "Choisir Pro",
+          ctaLink: "/contact?plan=pro",
+          highlighted: true,
+          badge: "Recommande",
+          monthly: "Puis 490 \u20ac/mois. Sans engagement.",
+        },
+        {
+          name: "Sur-mesure",
+          price: "a partir de 6 900 \u20ac",
+          tagline: "Votre partenaire technique dedie",
+          features: [
+            "Systeme complet (site + IA + data)",
+            "Integration IA sur-mesure",
+            "3 mois evolution + support Premium (valeur 5 700 \u20ac)",
+            "10h/mois d\u2019evolutions",
+            "Support prioritaire 24h",
+            "Reunion strategique mensuelle",
+          ],
+          cta: "Discuter du projet",
+          ctaLink: "/contact?plan=sur-mesure",
+          highlighted: false,
+          badge: null,
+          monthly: "Puis 1 900 \u20ac/mois. Sans engagement.",
+        },
+      ],
+    },
 
-  const animateCount = useCallback(() => {
-    if (!match || hasAnimated.current) return;
-    hasAnimated.current = true;
+    /* ── Section 4 : Pilote Automatique ── */
+    pilote: {
+      badge: "Nouveau — Offre d\u2019entree",
+      title: "Pilote Automatique — 1 500 \u20ac",
+      subtitle: "Votre business tourne tout seul en 5 jours",
+      features: [
+        "5 emails automatiques personnalises",
+        "Chatbot IA entraine sur vos FAQ",
+        "Notifications prospect chaud",
+        "Dashboard de suivi",
+      ],
+      delivery: "Livraison : 5 jours ouvres",
+      option: "Maintenance : 290 \u20ac/mois (optionnel)",
+      cta: "Commander le Pilote Automatique",
+      ctaLink: "/contact?plan=pilote-automatique",
+    },
 
-    const target = parseInt(match[2]);
-    const duration = Math.min(1.2 + target * 0.01, 2);
-    const startTime = performance.now();
+    /* ── Section 5 : Formations ── */
+    formation: {
+      sectionBadge: "Formation",
+      title: "Formation IA — Rendez votre equipe autonome",
+      cards: [
+        {
+          name: "IA Pratique",
+          duration: "1 jour",
+          priceInter: "490 \u20ac/personne (inter)",
+          priceIntra: "1 500 \u20ac (intra, groupe 6-12)",
+          features: [
+            "Prompt engineering",
+            "Cas d\u2019usage metier",
+            "Kit IA personnalise",
+          ],
+          tagline: "Vos equipes repartent operationnelles",
+        },
+        {
+          name: "Automatiser son business",
+          duration: "2 jours",
+          priceInter: "890 \u20ac/personne (inter)",
+          priceIntra: "2 800 \u20ac (intra)",
+          features: [
+            "Automatisations Make/n8n",
+            "Chatbot, email auto",
+            "Mesure ROI",
+          ],
+          tagline:
+            "2-3 automatisations deployees pendant la formation",
+        },
+        {
+          name: "Sur-mesure",
+          duration: "3-5 jours",
+          priceInter: "800 \u20ac/jour",
+          priceIntra: null,
+          features: [
+            "Audit prealable",
+            "Programme personnalise",
+            "Suivi 3 mois",
+          ],
+          tagline: "Transformation IA structuree",
+        },
+      ],
+    },
 
-    const tick = (now: number) => {
-      const elapsed = (now - startTime) / 1000;
-      const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setDisplay(String(Math.round(eased * target)));
-      if (progress < 1) requestAnimationFrame(tick);
-    };
+    /* ── Section 6 : Consulting TJM ── */
+    consulting: {
+      title: "Besoin d\u2019un expert a la journee ?",
+      subtitle:
+        "Audit, conseil, architecture, implementation — a la carte",
+      rates: [
+        { label: "Demi-journee", price: "450 \u20ac" },
+        { label: "Journee", price: "800 \u20ac" },
+        { label: "Semaine", price: "3 600 \u20ac" },
+        { label: "Mois", price: "6 800 \u20ac" },
+      ],
+    },
 
-    setTimeout(() => requestAnimationFrame(tick), delay * 1000);
-  }, [match, delay]);
+    /* ── Section 7 : Aides financieres ── */
+    aides: {
+      title: "Vos clients peuvent financer jusqu\u2019a 100% du projet",
+      note: "Je vous accompagne dans le montage du dossier de financement.",
+      cards: [
+        {
+          name: "OPCO",
+          desc: "Jusqu\u2019a 100% pour les TPE < 50 salaries",
+          context: "Formation",
+        },
+        {
+          name: "OCCAL",
+          desc: "Jusqu\u2019a 70% des depenses, plafond 23 000 \u20ac",
+          context: "Artisans, commerce",
+        },
+        {
+          name: "Pass Occitanie",
+          desc: "50% des depenses, plafond 10 000 \u20ac",
+          context: "TPE/PME",
+        },
+        {
+          name: "IA Booster France 2030",
+          desc: "Diagnostic + formation gratuits",
+          context: "Bpifrance",
+        },
+      ],
+    },
 
-  useEffect(() => {
-    if (isInView) animateCount();
-  }, [isInView, animateCount]);
+    /* ── Section 8 : Comparatif ── */
+    comparatif: {
+      badge: "Comparatif",
+      title: "Pourquoi pas une agence, un freelance ou un SaaS ?",
+      subtitle:
+        "Comparez les modeles. Choisissez en connaissance de cause.",
+      columns: [
+        "",
+        "Agence web",
+        "Freelance low-cost",
+        "SaaS (Axonaut, etc.)",
+        "Aissa Belkoussa",
+      ],
+      rows: [
+        {
+          label: "Delai",
+          values: ["2-6 mois", "1-3 semaines", "Immediat", "5-10 jours"],
+        },
+        {
+          label: "Prix",
+          values: [
+            "10 000-50 000 \u20ac",
+            "500-2 000 \u20ac",
+            "50-200 \u20ac/mois",
+            "A partir de 1 500 \u20ac",
+          ],
+        },
+        {
+          label: "Maintenance",
+          values: [
+            "Supplement couteux",
+            "Aucune ou limitee",
+            "Incluse (generique)",
+            "3 mois offerts",
+          ],
+        },
+        {
+          label: "IA integree",
+          values: ["Rarement", "Non", "Basique", "Sur-mesure"],
+        },
+        {
+          label: "Formation incluse",
+          values: ["Payante", "Non", "Documentation", "Oui (1h+)"],
+        },
+        {
+          label: "Sur-mesure",
+          values: ["Oui (cher)", "Partiel", "Non", "100%"],
+        },
+        {
+          label: "Code source",
+          values: [
+            "Rarement",
+            "Variable",
+            "Non applicable (N/A)",
+            "Licence exclusive",
+          ],
+        },
+      ],
+    },
 
-  if (!match) return <span ref={ref}>{value}</span>;
+    /* ── Section 9 : Maintenance ── */
+    maintenance: {
+      badge: "Maintenance",
+      title: "Abonnements maintenance",
+      subtitle:
+        "Apres les 3 mois offerts, gardez votre systeme au top.",
+      plans: [
+        {
+          name: "Essentiel",
+          price: "490 \u20ac/mois",
+          priceYearly: "368 \u20ac/mois",
+          priceYearlyTotal: "4 410 \u20ac/an (soit 3 mois offerts)",
+          features: [
+            "MAJ securite et performances",
+            "Monitoring 24/7",
+            "Bugs corriges sous 48h",
+            "Rapport mensuel",
+            "Support par email",
+          ],
+        },
+        {
+          name: "Premium",
+          price: "1 900 \u20ac/mois",
+          priceYearly: "1 425 \u20ac/mois",
+          priceYearlyTotal: "17 100 \u20ac/an (soit 3 mois offerts)",
+          features: [
+            "Tout Essentiel +",
+            "10h/mois d\u2019evolutions",
+            "Support prioritaire 24h",
+            "Reunion strategique mensuelle",
+            "Optimisation IA continue",
+          ],
+        },
+      ],
+      annualNote:
+        "Engagement annuel : -25% (3 mois offerts sur 12). Sans engagement sinon.",
+    },
 
-  return (
-    <span ref={ref}>
-      {match[1]}{isInView ? display : "0"}{match[3]}
-    </span>
-  );
-}
+    /* ── Section 10 : FAQ ── */
+    faq: [
+      {
+        q: "Que se passe-t-il si j\u2019arrete la maintenance ?",
+        a: "Votre site reste en ligne et fonctionnel. Mais sans mises a jour regulieres, les performances SEO se degradent, les failles de securite ne sont plus corrigees, et votre systeme ne s\u2019adapte plus aux evolutions du marche. En moyenne, un site non maintenu perd 20-35% de son trafic organique en 6 mois.",
+      },
+      {
+        q: "Pourquoi 3 mois offerts ?",
+        a: "Un systeme digital a besoin de 3 mois pour atteindre son plein potentiel. Pendant cette periode, on optimise, on ajuste, on mesure. Vous voyez les resultats concrets avant de vous engager sur la suite.",
+      },
+      {
+        q: "Et si je ne sais pas exactement ce dont j\u2019ai besoin ?",
+        a: "C\u2019est le cas de 80% de mes clients au premier appel. L\u2019echange de 30 minutes sert exactement a ca : clarifier votre besoin, identifier la bonne approche, et vous proposer le format adapte. Aucun engagement.",
+      },
+      {
+        q: "Est-ce que je suis proprietaire du code ?",
+        a: "Vous beneficiez d\u2019une licence d\u2019utilisation exclusive et illimitee dans le temps. Vous exploitez votre systeme en toute liberte. La propriete intellectuelle reste au prestataire, ce qui garantit la maintenance et l\u2019evolution continue de vos outils.",
+      },
+      {
+        q: "Je peux gerer moi-meme la maintenance ?",
+        a: "Oui. Apres les 3 mois offerts, vous etes libre de gerer la maintenance en interne si vous avez les competences techniques. Votre systeme reste fonctionnel.",
+      },
+      {
+        q: "Que se passe-t-il si le projet prend plus de temps ?",
+        a: "Les prix sont forfaitaires. Si le projet depasse le cadre prevu pour des raisons de mon cote, je ne facture pas le surplus. Si le perimetre evolue de votre cote, on en discute et on ajuste ensemble.",
+      },
+      {
+        q: "L\u2019abonnement est-il avec engagement ?",
+        a: "Non. Apres les 3 mois offerts, la maintenance est sans engagement — vous pouvez arreter a tout moment. L\u2019engagement annuel est une option qui vous fait economiser 25% (3 mois gratuits sur 12).",
+      },
+      {
+        q: "Comment financer le projet avec mon OPCO ?",
+        a: "Je vous aide a monter le dossier. Pour les TPE < 50 salaries, la formation peut etre prise en charge a 100%.",
+      },
+      {
+        q: "Proposez-vous des formations ?",
+        a: "Oui, de 1 jour (acculturation IA) a 5 jours (transformation complete). Financables OPCO.",
+      },
+    ],
+
+    /* ── Section 11 : Final CTA ── */
+    finalCta: {
+      title: "Premier echange gratuit.\n30 min. Zero engagement.",
+      cta: "Prendre rendez-vous",
+    },
+
+    /* ── UI strings ── */
+    ui: {
+      servicesAndPricing: "Services & Tarifs",
+      getProposal: "Recevoir ma proposition",
+      seePricing: "Voir les tarifs",
+      threePillars: "Trois piliers pour votre croissance",
+      included: "Inclus",
+      funding: "Financement",
+      billingFrequency: "Frequence de facturation",
+      monthly: "Mensuel",
+      annual: "Annuel",
+      learnMore: "En savoir plus",
+      faqTitle: "Vos questions,\nmes reponses.",
+      faqSubtitle: "Tout ce que vous devez savoir avant de lancer votre systeme. Une question manque ? Echangeons.",
+      finalCtaSubtitle: "On regarde ensemble si je peux vous aider. Pas de commercial, pas de bullshit.",
+      stickyCta: "Premier echange gratuit — 30 min",
+    },
+  },
+
+  en: {
+    hero: {
+      title: "Systems that work for you",
+      subtitle:
+        "Build, automate, train — fixed price, guaranteed results",
+    },
+
+    expertise: {
+      sectionBadge: "Expertise",
+      categories: [
+        {
+          title: "Automation & Process",
+          badge: "Most requested",
+          subtitle:
+            "The systems that run your business without you",
+          items: [
+            "Automated email sequences",
+            "Custom AI chatbot",
+            "CRM and workflows (n8n/Make)",
+            "Online appointment booking",
+            "Automated follow-ups",
+          ],
+        },
+        {
+          title: "Sites & Conversion",
+          badge: null,
+          subtitle:
+            "The interfaces that turn visitors into customers",
+          items: [
+            "High-performance professional website",
+            "Optimized landing pages",
+            "Conversion tunnels",
+            "Local SEO",
+            "Smart forms",
+          ],
+        },
+        {
+          title: "Analytics & Intelligence",
+          badge: null,
+          subtitle:
+            "The numbers you need to decide fast and well",
+          items: [
+            "Real-time dashboards",
+            "Automated KPI & reporting",
+            "Smart alerts & thresholds",
+            "AI-powered decision support",
+          ],
+        },
+      ],
+    },
+
+    pricing: {
+      sectionBadge: "Pricing",
+      title: "Systems",
+      tiers: [
+        {
+          name: "Starter",
+          price: "\u20ac1,500",
+          tagline: "Your first automated system",
+          features: [
+            "1 turnkey automation (chatbot OR emails OR booking)",
+            "Brief + validated mockup",
+            "Delivered in 5 days",
+            "1h training included",
+          ],
+          cta: "Get started",
+          ctaLink: "/contact?plan=starter",
+          highlighted: false,
+          badge: null,
+          monthly: null,
+        },
+        {
+          name: "Pro",
+          price: "\u20ac2,900",
+          tagline:
+            "The complete system + 3 months of peace of mind",
+          features: [
+            "Turnkey multi-module system",
+            "3 months monitoring + support included (\u20ac1,470 value)",
+            "Bugs fixed within 48h",
+            "Security updates + monthly report",
+            "Delivered in 5-10 days",
+          ],
+          cta: "Choose Pro",
+          ctaLink: "/contact?plan=pro",
+          highlighted: true,
+          badge: "Recommended",
+          monthly: "Then \u20ac490/month. No commitment.",
+        },
+        {
+          name: "Custom",
+          price: "from \u20ac6,900",
+          tagline: "Your dedicated technical partner",
+          features: [
+            "Complete system (website + AI + data)",
+            "Custom AI integration",
+            "3 months evolution + Premium support (\u20ac5,700 value)",
+            "10h/month of evolutions",
+            "Priority 24h support",
+            "Monthly strategic meeting",
+          ],
+          cta: "Let\u2019s discuss",
+          ctaLink: "/contact?plan=sur-mesure",
+          highlighted: false,
+          badge: null,
+          monthly: "Then \u20ac1,900/month. No commitment.",
+        },
+      ],
+    },
+
+    pilote: {
+      badge: "New \u2014 Entry offer",
+      title: "Autopilot \u2014 \u20ac1,500",
+      subtitle: "Your business runs itself in 5 days",
+      features: [
+        "5 personalized automated emails",
+        "AI chatbot trained on your FAQs",
+        "Hot lead notifications",
+        "Tracking dashboard",
+      ],
+      delivery: "Delivery: 5 business days",
+      option: "Maintenance: \u20ac290/month (optional)",
+      cta: "Order the Autopilot",
+      ctaLink: "/contact?plan=pilote-automatique",
+    },
+
+    formation: {
+      sectionBadge: "Training",
+      title: "AI Training \u2014 Make your team autonomous",
+      cards: [
+        {
+          name: "Practical AI",
+          duration: "1 day",
+          priceInter: "\u20ac490/person (inter)",
+          priceIntra: "\u20ac1,500 (intra, group 6-12)",
+          features: [
+            "Prompt engineering",
+            "Business use cases",
+            "Custom AI kit",
+          ],
+          tagline: "Your teams leave operational",
+        },
+        {
+          name: "Automate your business",
+          duration: "2 days",
+          priceInter: "\u20ac890/person (inter)",
+          priceIntra: "\u20ac2,800 (intra)",
+          features: [
+            "Make/n8n automations",
+            "Chatbot, email auto",
+            "ROI measurement",
+          ],
+          tagline:
+            "2-3 automations deployed during training",
+        },
+        {
+          name: "Custom",
+          duration: "3-5 days",
+          priceInter: "\u20ac800/day",
+          priceIntra: null,
+          features: [
+            "Preliminary audit",
+            "Custom program",
+            "3-month follow-up",
+          ],
+          tagline: "Structured AI transformation",
+        },
+      ],
+    },
+
+    consulting: {
+      title: "Need an expert for the day?",
+      subtitle:
+        "Audit, consulting, architecture, implementation \u2014 a la carte",
+      rates: [
+        { label: "Half-day", price: "\u20ac450" },
+        { label: "Full day", price: "\u20ac800" },
+        { label: "Week", price: "\u20ac3,600" },
+        { label: "Month", price: "\u20ac6,800" },
+      ],
+    },
+
+    aides: {
+      title: "Your clients can fund up to 100% of the project",
+      note: "I help you with the funding application.",
+      cards: [
+        {
+          name: "OPCO",
+          desc: "Up to 100% for SMEs < 50 employees",
+          context: "Training",
+        },
+        {
+          name: "OCCAL",
+          desc: "Up to 70% of expenses, \u20ac23,000 cap",
+          context: "Craftsmen, retail",
+        },
+        {
+          name: "Pass Occitanie",
+          desc: "50% of expenses, \u20ac10,000 cap",
+          context: "SMEs",
+        },
+        {
+          name: "AI Booster France 2030",
+          desc: "Free diagnostic + training",
+          context: "Bpifrance",
+        },
+      ],
+    },
+
+    comparatif: {
+      badge: "Comparison",
+      title: "Why not an agency, a cheap freelancer or a SaaS?",
+      subtitle:
+        "Compare the models. Choose with full knowledge.",
+      columns: [
+        "",
+        "Web agency",
+        "Low-cost freelancer",
+        "SaaS (Axonaut, etc.)",
+        "Aissa Belkoussa",
+      ],
+      rows: [
+        {
+          label: "Timeframe",
+          values: ["2-6 months", "1-3 weeks", "Immediate", "5-10 days"],
+        },
+        {
+          label: "Price",
+          values: [
+            "\u20ac10,000-50,000",
+            "\u20ac500-2,000",
+            "\u20ac50-200/mo",
+            "From \u20ac1,500",
+          ],
+        },
+        {
+          label: "Maintenance",
+          values: [
+            "Costly add-on",
+            "None or limited",
+            "Included (generic)",
+            "3 months free",
+          ],
+        },
+        {
+          label: "AI built-in",
+          values: ["Rarely", "No", "Basic", "Custom"],
+        },
+        {
+          label: "Training included",
+          values: ["Paid", "No", "Documentation", "Yes (1h+)"],
+        },
+        {
+          label: "Custom-built",
+          values: ["Yes (expensive)", "Partial", "No", "100%"],
+        },
+        {
+          label: "Source code",
+          values: [
+            "Rarely",
+            "Variable",
+            "Not Applicable (N/A)",
+            "Exclusive license",
+          ],
+        },
+      ],
+    },
+
+    maintenance: {
+      badge: "Maintenance",
+      title: "Maintenance subscriptions",
+      subtitle:
+        "After the 3 free months, keep your system running at its best.",
+      plans: [
+        {
+          name: "Essential",
+          price: "\u20ac490/month",
+          priceYearly: "\u20ac368/month",
+          priceYearlyTotal: "\u20ac4,410/year (3 months free)",
+          features: [
+            "Security & performance updates",
+            "24/7 monitoring",
+            "Bugs fixed within 48h",
+            "Monthly report",
+            "Email support",
+          ],
+        },
+        {
+          name: "Premium",
+          price: "\u20ac1,900/month",
+          priceYearly: "\u20ac1,425/month",
+          priceYearlyTotal: "\u20ac17,100/year (3 months free)",
+          features: [
+            "Everything in Essential +",
+            "10h/month of evolutions",
+            "Priority 24h support",
+            "Monthly strategic meeting",
+            "Continuous AI optimization",
+          ],
+        },
+      ],
+      annualNote:
+        "Annual commitment: -25% (3 months free out of 12). No commitment otherwise.",
+    },
+
+    faq: [
+      {
+        q: "What happens if I stop maintenance?",
+        a: "Your site stays online and functional. But without regular updates, SEO performance degrades, security vulnerabilities go unpatched, and your system stops adapting. On average, an unmaintained site loses 20-35% of organic traffic in 6 months.",
+      },
+      {
+        q: "Why 3 free months?",
+        a: "A digital system needs 3 months to reach full potential. During this period, we optimize, adjust, and measure. You see concrete results before committing.",
+      },
+      {
+        q: "What if I don\u2019t know exactly what I need?",
+        a: "That\u2019s the case for 80% of my clients. The 30-minute call is exactly for that: clarifying your need, identifying the right approach, and proposing the right format. No commitment.",
+      },
+      {
+        q: "Do I own the code?",
+        a: "You get an exclusive, unlimited usage license. You operate your system freely. Intellectual property remains with the provider, ensuring ongoing maintenance and evolution.",
+      },
+      {
+        q: "Can I handle maintenance myself?",
+        a: "Yes. After the 3 free months, you\u2019re free to manage maintenance in-house if you have the technical skills. Your system stays functional.",
+      },
+      {
+        q: "What if the project takes longer?",
+        a: "Prices are fixed. If the project exceeds scope on my side, I don\u2019t charge extra. If scope evolves from your side, we discuss and adjust together.",
+      },
+      {
+        q: "Is there a commitment?",
+        a: "No. After the 3 free months, maintenance is commitment-free. The annual plan is an option that saves you 25% (3 months free out of 12).",
+      },
+      {
+        q: "How to fund the project with OPCO?",
+        a: "I help you build the application. For SMEs < 50 employees, training can be 100% covered.",
+      },
+      {
+        q: "Do you offer training?",
+        a: "Yes, from 1 day (AI introduction) to 5 days (full transformation). OPCO fundable.",
+      },
+    ],
+
+    finalCta: {
+      title: "Free first call.\n30 min. Zero commitment.",
+      cta: "Book a call",
+    },
+
+    /* ── UI strings ── */
+    ui: {
+      servicesAndPricing: "Services & Pricing",
+      getProposal: "Get my proposal",
+      seePricing: "See pricing",
+      threePillars: "Three pillars for your growth",
+      included: "Included",
+      funding: "Funding",
+      billingFrequency: "Billing frequency",
+      monthly: "Monthly",
+      annual: "Annual",
+      learnMore: "Learn more",
+      faqTitle: "Your questions,\nmy answers.",
+      faqSubtitle: "Everything you need to know before launching your system. Missing a question? Let\u2019s talk.",
+      finalCtaSubtitle: "Let\u2019s see together if I can help. No salesman, no BS.",
+      stickyCta: "Free first call \u2014 30 min",
+    },
+  },
+};
+
+/* ────────────────────────────────────────────────────────────────────────────
+   ICONS for expertise categories
+   ──────────────────────────────────────────────────────────────────────────── */
+const categoryIcons = [Bot, Globe, BarChart3];
+const aideIcons = [Users, Landmark, Rocket, Sparkles];
+
+/* ────────────────────────────────────────────────────────────────────────────
+   ANIMATION VARIANTS
+   ──────────────────────────────────────────────────────────────────────────── */
+const fadeUp = {
+  initial: { opacity: 0, y: 30 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true } as const,
+  transition: { duration: 0.8, ease: [0.25, 1, 0.5, 1] as [number, number, number, number] },
+};
+
+const fadeUpSmall = (delay = 0) => ({
+  initial: { opacity: 0, y: 20 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true } as const,
+  transition: { duration: 0.6, delay, ease: [0.25, 1, 0.5, 1] as [number, number, number, number] },
+});
+
+/* ────────────────────────────────────────────────────────────────────────────
+   COMPONENT
+   ──────────────────────────────────────────────────────────────────────────── */
 
 export default function ServicesPage() {
-  const { language, dict } = useLanguage();
-  const s = dict.services;
-  const [hoveredTier, setHoveredTier] = useState<number | null>(null);
+  const { language } = useLanguage();
+  const t = content[language];
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [subBilling, setSubBilling] = useState<SubBilling>("monthly");
-
-  const faq = language === "fr" ? [
-    { q: "Que se passe-t-il si j'arrête la maintenance ?", a: "Votre site reste en ligne et fonctionnel. Mais sans mises à jour régulières, les performances SEO se dégradent, les failles de sécurité ne sont plus corrigées, et votre système ne s'adapte plus aux évolutions du marché. En moyenne, un site non maintenu perd 20-35% de son trafic organique en 6 mois." },
-    { q: "Pourquoi 3 mois offerts ?", a: "Un système digital a besoin de 3 mois pour atteindre son plein potentiel. Pendant cette période, on optimise, on ajuste, on mesure. Vous voyez les résultats concrets avant de vous engager sur la suite." },
-    { q: "Et si je ne sais pas exactement ce dont j'ai besoin ?", a: "C'est le cas de 80% de mes clients au premier appel. L'échange de 30 minutes sert exactement à ça : clarifier votre besoin, identifier la bonne approche, et vous proposer le format adapté. Aucun engagement." },
-    { q: "Est-ce que je suis propriétaire du code ?", a: "Vous bénéficiez d'une licence d'utilisation exclusive et illimitée dans le temps. Vous exploitez votre système en toute liberté. La propriété intellectuelle reste au prestataire, ce qui garantit la maintenance et l'évolution continue de vos outils." },
-    { q: "Je peux gérer moi-même la maintenance ?", a: "Absolument, c'est le plan Autonome. Il convient aux entreprises qui ont une équipe technique en interne capable de gérer les mises à jour, la sécurité, le SEO technique et les intégrations IA." },
-    { q: "Que se passe-t-il si le projet prend plus de temps ?", a: "Les prix sont forfaitaires. Si le projet dépasse le cadre prévu pour des raisons de mon côté, je ne facture pas le surplus. Si le périmètre évolue de votre côté, on en discute et on ajuste ensemble." },
-    { q: "L'abonnement est-il avec engagement ?", a: "Non. Après les 3 mois offerts, la maintenance est sans engagement — vous pouvez arrêter à tout moment. L'engagement annuel est une option qui vous fait économiser 25% (3 mois gratuits sur 12)." },
-  ] : [
-    { q: "What happens if I stop maintenance?", a: "Your site stays online and functional. But without regular updates, SEO performance degrades, security vulnerabilities go unpatched, and your system stops adapting to market changes. On average, an unmaintained site loses 20-35% of organic traffic in 6 months." },
-    { q: "Why 3 free months?", a: "A digital system needs 3 months to reach full potential. During this period, we optimize, adjust, and measure. You see concrete results before committing to ongoing maintenance." },
-    { q: "What if I don't know exactly what I need?", a: "That's the case for 80% of my clients on the first call. The 30-minute exchange is exactly for that: clarifying your need, identifying the right approach, and proposing the right format. No commitment." },
-    { q: "Do I own the code?", a: "You get an exclusive, unlimited usage license. You operate your system freely. Intellectual property remains with the provider, ensuring ongoing maintenance and evolution of your tools." },
-    { q: "Can I handle maintenance myself?", a: "Absolutely, that's the Autonomous plan. It's suited for companies with an in-house technical team capable of managing updates, security, technical SEO, and AI integrations." },
-    { q: "What if the project takes longer?", a: "Prices are fixed. If the project exceeds scope due to my side, I don't charge extra. If scope evolves from your side, we discuss and adjust together." },
-    { q: "Is there a commitment on the subscription?", a: "No. After the 3 free months, maintenance is commitment-free — you can cancel anytime. Annual commitment is an option that saves you 25% (3 months free out of 12)." },
-  ];
-
-  const guarantees = language === "fr" ? [
-    { icon: Shield, title: "Satisfait ou retravaillé", desc: "Si le livrable ne correspond pas au brief validé, je retravaille sans frais supplémentaires." },
-    { icon: Clock, title: "Délais respectés", desc: "Les dates de livraison sont contractuelles. En cas de retard de mon côté, remise appliquée." },
-    { icon: MessageSquare, title: "Transparence totale", desc: "Accès temps réel à l'avancement. Zéro surprise, zéro jargon." },
-  ] : [
-    { icon: Shield, title: "Satisfied or reworked", desc: "If the deliverable doesn't match the validated brief, I rework at no extra cost." },
-    { icon: Clock, title: "Deadlines respected", desc: "Delivery dates are contractual. If I'm late, a discount is applied." },
-    { icon: MessageSquare, title: "Full transparency", desc: "Real-time access to progress. Zero surprises, zero jargon." },
-  ];
+  const [subBilling, setSubBilling] = useState<"monthly" | "yearly">("monthly");
 
   return (
     <div className="bg-site-bg min-h-screen">
       <Header />
 
       <main className="pt-40 pb-0">
-        {/* ── Hero ──────────────────────────────────────────────────────── */}
+        {/* ═══════════════════════════════════════════════════════════════════
+            SECTION 1 — HERO
+        ═══════════════════════════════════════════════════════════════════ */}
         <section className="px-container mb-32">
           <div className="max-w-7xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
-            >
+            <motion.div {...fadeUp}>
               <div className="flex items-center gap-4 mb-8">
                 <div className="w-2 h-2 rounded-full bg-site-accent" />
                 <span className="text-xs font-bold uppercase tracking-widest text-site-text-light">
-                  {s.badge}
+                  {t.ui.servicesAndPricing}
                 </span>
               </div>
               <h1 className="text-fluid-display tracking-tighter uppercase max-w-4xl mb-8 whitespace-pre-line">
-                {s.title}
+                {t.hero.title}
               </h1>
               <p className="text-site-text-light text-lg md:text-xl max-w-2xl leading-relaxed mb-10">
-                {s.subtitle}
+                {t.hero.subtitle}
               </p>
               <div className="flex flex-wrap gap-4">
                 <Link
-                  href="/contact?plan=accelerateur"
+                  href="/contact"
                   className="inline-flex items-center gap-3 bg-site-accent text-white px-8 py-4 rounded-full text-xs font-bold uppercase tracking-widest hover:scale-105 transition-all shadow-lg"
                 >
-                  {language === "fr" ? "Recevoir ma proposition" : "Get my proposal"}
+                  {t.ui.getProposal}
                   <ArrowUpRight size={14} />
                 </Link>
                 <Link
                   href="#pricing"
                   className="inline-flex items-center gap-2 px-6 py-4 rounded-full border border-site-border text-xs font-bold uppercase tracking-widest text-site-text-light hover:border-site-accent hover:text-site-accent transition-all"
                 >
-                  {language === "fr" ? "Voir les plans" : "See plans"}
+                  {t.ui.seePricing}
                 </Link>
               </div>
             </motion.div>
           </div>
         </section>
 
-        {/* ── Time Savings / Gains de temps ─────────────────────────────── */}
+        {/* ═══════════════════════════════════════════════════════════════════
+            SECTION 2 — 3 CATEGORIES D'EXPERTISE
+        ═══════════════════════════════════════════════════════════════════ */}
         <section className="px-container mb-32">
           <div className="max-w-7xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="mb-16"
-            >
+            <motion.div {...fadeUp} className="mb-16">
               <div className="flex items-center gap-4 mb-8">
-                <TrendingUp size={16} className="text-site-accent" />
+                <div className="w-2 h-2 rounded-full bg-site-accent" />
                 <span className="text-xs font-bold uppercase tracking-widest text-site-text-light">
-                  {s.timeSavings.badge}
+                  {t.expertise.sectionBadge}
                 </span>
               </div>
-              <h2 className="text-fluid-title tracking-tighter uppercase max-w-3xl mb-6 whitespace-pre-line">
-                {s.timeSavings.title}
+              <h2 className="text-fluid-title tracking-tighter uppercase max-w-3xl">
+                {t.ui.threePillars}
               </h2>
-              <p className="text-site-text-light max-w-2xl leading-relaxed">
-                {s.timeSavings.subtitle}
-              </p>
             </motion.div>
 
-            <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-              {s.timeSavings.items.map((item, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: idx * 0.08 }}
-                  className="group relative border border-site-border rounded-2xl p-6 md:p-8 hover:border-site-accent/30 transition-all duration-300"
-                >
-                  <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-site-accent/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <span className="block text-3xl md:text-4xl lg:text-5xl font-medium tracking-tighter text-site-accent mb-3">
-                    <CountUpMetric value={item.metric} delay={idx * 0.15} />
-                  </span>
-                  <span className="block text-sm md:text-base font-medium mb-2">
-                    {item.label}
-                  </span>
-                  <span className="block text-xs md:text-sm text-site-text-light/60 leading-relaxed">
-                    {item.detail}
-                  </span>
-                </motion.div>
-              ))}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {t.expertise.categories.map((cat, idx) => {
+                const Icon = categoryIcons[idx];
+                return (
+                  <motion.div
+                    key={idx}
+                    {...fadeUpSmall(idx * 0.12)}
+                    className="relative border border-site-border rounded-2xl p-8 md:p-10 hover:border-site-accent/30 transition-colors group"
+                  >
+                    {cat.badge && (
+                      <span className="absolute -top-3 left-6 text-[9px] font-bold uppercase tracking-widest text-white bg-site-accent px-3 py-1 rounded-full">
+                        {cat.badge}
+                      </span>
+                    )}
+
+                    <div className="flex items-center gap-4 mb-6 mt-1">
+                      <div className="w-10 h-10 rounded-full border border-site-border flex items-center justify-center text-site-text-light group-hover:border-site-accent group-hover:text-site-accent transition-colors">
+                        <Icon size={18} strokeWidth={1.5} />
+                      </div>
+                      <h3 className="text-lg font-medium tracking-tight uppercase">
+                        {cat.title}
+                      </h3>
+                    </div>
+
+                    <p className="text-sm text-site-text-light leading-relaxed mb-6">
+                      {cat.subtitle}
+                    </p>
+
+                    <ul className="space-y-3">
+                      {cat.items.map((item, i) => (
+                        <li key={i} className="flex items-start gap-3">
+                          <Check
+                            size={14}
+                            className="mt-0.5 text-site-accent shrink-0"
+                            strokeWidth={2.5}
+                          />
+                          <span className="text-sm text-site-text-light">
+                            {item}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
         </section>
 
-        {/* ── Pricing Tiers (Autonome / Accélérateur / Partenaire) ──────── */}
-        <section id="pricing" className="px-container mb-20 scroll-mt-20">
+        {/* ═══════════════════════════════════════════════════════════════════
+            SECTION 3 — GRILLE TARIFAIRE SYSTEMES
+        ═══════════════════════════════════════════════════════════════════ */}
+        <section id="pricing" className="px-container mb-32 scroll-mt-20">
           <div className="max-w-7xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-16"
-            >
-              <h2 className="text-fluid-title tracking-tighter uppercase mb-6">
-                {language === "fr"
-                  ? "Votre système complet :\nconstruction + évolution continue"
-                  : "Your complete system:\nbuild + continuous evolution"}
-              </h2>
-              <p className="text-site-text-light max-w-2xl mx-auto mb-10">
-                {language === "fr"
-                  ? "Un site sans maintenance, c'est comme une voiture sans entretien : ça roule… quelques mois."
-                  : "A site without maintenance is like a car without servicing: it runs… for a few months."}
-              </p>
-
-              {/* Social proof stats */}
-              <div className="flex flex-wrap justify-center gap-8 md:gap-14">
-                {(language === "fr" ? [
-                  { value: "99%", label: "projets livrés dans les délais" },
-                  { value: "48h", label: "temps de réponse max" },
-                  { value: "0", label: "intermédiaire" },
-                  { value: "3 mois", label: "de maintenance offerts" },
-                ] : [
-                  { value: "99%", label: "projects delivered on time" },
-                  { value: "48h", label: "max response time" },
-                  { value: "0", label: "middlemen" },
-                  { value: "3 months", label: "free maintenance" },
-                ]).map((stat, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: i * 0.08 }}
-                    className="text-center"
-                  >
-                    <div className="text-2xl md:text-3xl font-medium tracking-tighter text-site-accent">{stat.value}</div>
-                    <div className="text-[10px] font-bold uppercase tracking-widest text-site-text-light/50 mt-1">{stat.label}</div>
-                  </motion.div>
-                ))}
+            <motion.div {...fadeUp} className="text-center mb-16">
+              <div className="flex items-center justify-center gap-4 mb-8">
+                <div className="w-2 h-2 rounded-full bg-site-accent" />
+                <span className="text-xs font-bold uppercase tracking-widest text-site-text-light">
+                  {t.pricing.sectionBadge}
+                </span>
               </div>
+              <h2 className="text-fluid-title tracking-tighter uppercase mb-4">
+                {t.pricing.title}
+              </h2>
             </motion.div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-0 lg:items-end">
-              {s.tiers.map((tier, idx) => {
-                const Icon = tierIcons[idx];
-                const isHighlighted = idx === 1;
-                const isDecoy = idx === 0;
-
+              {t.pricing.tiers.map((tier, idx) => {
+                const isHighlighted = tier.highlighted;
                 return (
                   <motion.div
                     key={idx}
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: idx * 0.12, ease: [0.25, 1, 0.5, 1] }}
-                    onMouseEnter={() => setHoveredTier(idx)}
-                    onMouseLeave={() => setHoveredTier(null)}
+                    {...fadeUpSmall(idx * 0.12)}
                     className={cn(
                       "relative flex flex-col border rounded-2xl transition-all duration-500",
                       isHighlighted
                         ? "lg:scale-105 lg:z-10 border-site-accent shadow-[0_0_60px_-12px_rgba(0,0,0,0.15)] bg-site-bg"
-                        : isDecoy
-                        ? "bg-site-bg border-site-border/60 opacity-90 hover:opacity-100"
-                        : "bg-site-bg border-site-border hover:border-site-accent/30",
-                      hoveredTier === idx && !isHighlighted && "shadow-lg opacity-100"
+                        : "bg-site-bg border-site-border hover:border-site-accent/30"
                     )}
                   >
-                    {isHighlighted && (
+                    {tier.badge && (
                       <div className="absolute -top-4 left-1/2 -translate-x-1/2">
                         <span className="text-[10px] font-bold uppercase tracking-widest text-white bg-site-accent px-4 py-1.5 rounded-full">
-                          {s.popularBadge}
+                          {tier.badge}
                         </span>
                       </div>
                     )}
 
                     <div className="p-8 md:p-10 flex flex-col flex-1">
-                      {/* Header */}
-                      <div className="flex items-center gap-4 mb-2">
-                        <div className={cn(
-                          "w-10 h-10 rounded-full border flex items-center justify-center",
-                          isHighlighted ? "border-site-accent text-site-accent" : "border-site-border text-site-text-light"
-                        )}>
-                          <Icon size={18} strokeWidth={1.5} />
-                        </div>
-                        <div>
-                          <h3 className="text-xl font-medium tracking-tight uppercase">{tier.name}</h3>
-                        </div>
-                      </div>
-                      <span className={cn(
-                        "text-[10px] font-bold uppercase tracking-widest mb-6",
-                        isDecoy ? "text-site-text-light/40" : "text-site-accent/60"
-                      )}>
-                        {tier.tag}
-                      </span>
-
-                      <p className="text-site-text-light text-sm leading-relaxed mb-8 min-h-[48px]">
-                        {tier.description}
+                      <h3 className="text-xl font-medium tracking-tight uppercase mb-2">
+                        {tier.name}
+                      </h3>
+                      <p className="text-sm text-site-text-light leading-relaxed mb-6 min-h-[40px]">
+                        {tier.tagline}
                       </p>
 
                       {/* Price */}
                       <div className="mb-8">
-                        {isHighlighted && (
-                          <div className="mb-2">
-                            <span className="text-sm text-site-text-light/40 line-through">
-                              {language === "fr" ? "5 370 € sans maintenance" : "€5,370 without maintenance"}
-                            </span>
-                          </div>
-                        )}
                         <span className="text-4xl md:text-5xl font-medium tracking-tighter">
                           {tier.price}
                         </span>
-
-                        {tier.monthlyPrice && (
-                          <div className="mt-3 flex items-center gap-2">
-                            <span className="text-sm text-site-text-light">
-                              {language === "fr" ? "puis" : "then"}{" "}
-                              <span className="font-medium text-site-text">{tier.monthlyPrice}</span>
-                              /{language === "fr" ? "mois" : "mo"}
-                            </span>
-                          </div>
+                        {tier.monthly && (
+                          <p className="text-xs text-site-text-light/60 mt-2">
+                            {tier.monthly}
+                          </p>
                         )}
-
-                        {tier.monthlyNote && (
-                          <div className="mt-2 inline-flex items-center gap-1.5 bg-green-50 text-green-700 text-[11px] font-bold px-3 py-1 rounded-full">
-                            <Gift size={12} />
-                            {tier.monthlyNote}
-                          </div>
-                        )}
-
-                        <p className="text-xs text-site-text-light/50 mt-3">
-                          {tier.priceNote}
-                        </p>
                       </div>
 
                       {/* CTA */}
                       <Link
-                        href={`/contact?plan=${isDecoy ? "autonome" : isHighlighted ? "accelerateur" : "partenaire"}`}
+                        href={tier.ctaLink}
                         className={cn(
                           "inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all mb-8",
                           isHighlighted
@@ -337,168 +987,292 @@ export default function ServicesPage() {
                             : "border border-site-border text-site-text hover:border-site-accent hover:text-site-accent"
                         )}
                       >
-                        {isDecoy
-                          ? (language === "fr" ? "Choisir l'autonomie" : "Choose autonomy")
-                          : isHighlighted
-                          ? (language === "fr" ? "Recevoir ma proposition en 48h" : "Get my proposal in 48h")
-                          : (language === "fr" ? "Recevoir mon diagnostic gratuit" : "Get my free diagnostic")
-                        }
+                        {tier.cta}
                         <ArrowUpRight size={14} />
                       </Link>
-
-                      {/* Micro-guarantee near CTA */}
-                      {!isDecoy && (
-                        <p className="text-[10px] text-site-text-light/40 text-center mb-6 flex items-center justify-center gap-1.5">
-                          <Shield size={10} className="shrink-0" />
-                          {language === "fr"
-                            ? "Satisfait ou retravaillé — Prix garanti, zéro surprise"
-                            : "Satisfied or reworked — Guaranteed price, zero surprises"}
-                        </p>
-                      )}
 
                       {/* Features */}
                       <div className="border-t border-site-border pt-6 flex-1">
                         <p className="text-[10px] font-bold uppercase tracking-widest text-site-text-light/40 mb-4">
-                          {s.includesLabel}
+                          {t.ui.included}
                         </p>
                         <ul className="space-y-3">
-                          {tier.features.map((feature, fIdx) => (
-                            <li key={fIdx} className="flex items-start gap-3">
-                              <Check size={14} className="mt-0.5 text-site-accent shrink-0" strokeWidth={2.5} />
-                              <span className="text-sm text-site-text-light">{feature}</span>
+                          {tier.features.map((f, fi) => (
+                            <li key={fi} className="flex items-start gap-3">
+                              <Check
+                                size={14}
+                                className="mt-0.5 text-site-accent shrink-0"
+                                strokeWidth={2.5}
+                              />
+                              <span className="text-sm text-site-text-light">
+                                {f}
+                              </span>
                             </li>
                           ))}
                         </ul>
-
-                        {/* Excluded items (for decoy) */}
-                        {tier.excluded.length > 0 && (
-                          <div className="mt-4 pt-4 border-t border-red-100">
-                            <ul className="space-y-2">
-                              {tier.excluded.map((item, eIdx) => (
-                                <li key={eIdx} className="flex items-start gap-3">
-                                  <X size={14} className="mt-0.5 text-red-400 shrink-0" strokeWidth={2.5} />
-                                  <span className="text-sm text-red-400/80">{item}</span>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        )}
-
-                        <div className="mt-6 pt-4 border-t border-site-border/50">
-                          <p className="text-[10px] font-bold uppercase tracking-widest text-site-text-light/40 mb-1">
-                            {s.durationLabel}
-                          </p>
-                          <p className="text-sm font-medium">{tier.duration}</p>
-                        </div>
                       </div>
                     </div>
                   </motion.div>
                 );
               })}
             </div>
-
-            {/* Ecosystem CTA */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="mt-12 text-center"
-            >
-              <p className="text-site-text-light text-sm mb-4">
-                {s.ecosystemCta.text}
-              </p>
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-site-accent hover:underline"
-              >
-                {s.ecosystemCta.button}
-                <ArrowUpRight size={12} />
-              </Link>
-            </motion.div>
           </div>
         </section>
 
-        {/* ── Guarantees ───────────────────────────────────────────────── */}
-        <section className="bg-site-accent text-white rounded-4xl md:rounded-[4rem] mx-2 md:mx-4 px-container section-padding">
+        {/* ═══════════════════════════════════════════════════════════════════
+            SECTION 4 — PILOTE AUTOMATIQUE
+        ═══════════════════════════════════════════════════════════════════ */}
+        <section className="mx-2 md:mx-4 mb-32">
+          <div className="relative bg-site-accent text-white rounded-4xl md:rounded-[4rem] overflow-hidden">
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(255,255,255,0.1)_0%,transparent_60%)]" />
+
+            <div className="relative px-container section-padding">
+              <div className="max-w-7xl mx-auto">
+                <motion.div {...fadeUp}>
+                  <span className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest bg-white/15 px-4 py-1.5 rounded-full mb-8">
+                    <Sparkles size={12} />
+                    {t.pilote.badge}
+                  </span>
+
+                  <h2 className="text-fluid-title tracking-tighter uppercase mb-4">
+                    {t.pilote.title}
+                  </h2>
+                  <p className="text-lg opacity-80 max-w-xl mb-10">
+                    {t.pilote.subtitle}
+                  </p>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-xl mb-10">
+                    {t.pilote.features.map((f, i) => (
+                      <div key={i} className="flex items-start gap-3">
+                        <Check
+                          size={14}
+                          className="mt-0.5 opacity-60 shrink-0"
+                          strokeWidth={2.5}
+                        />
+                        <span className="text-sm opacity-80">{f}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-10">
+                    <span className="text-sm opacity-60">{t.pilote.delivery}</span>
+                    <span className="hidden sm:block w-1 h-1 rounded-full bg-white/30" />
+                    <span className="text-sm opacity-60">{t.pilote.option}</span>
+                  </div>
+
+                  <Link
+                    href={t.pilote.ctaLink}
+                    className="inline-flex items-center gap-3 bg-white text-site-accent px-8 py-4 rounded-full text-xs font-bold uppercase tracking-widest hover:scale-105 transition-all"
+                  >
+                    {t.pilote.cta}
+                    <ArrowUpRight size={14} />
+                  </Link>
+                </motion.div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ═══════════════════════════════════════════════════════════════════
+            SECTION 5 — FORMATION IA
+        ═══════════════════════════════════════════════════════════════════ */}
+        <section className="px-container mb-32">
           <div className="max-w-7xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="mb-20"
-            >
-              <h2 className="text-fluid-title tracking-tighter uppercase mb-4">
-                {language === "fr" ? "Zéro risque" : "Zero risk"}
+            <motion.div {...fadeUp} className="mb-16">
+              <div className="flex items-center gap-4 mb-8">
+                <GraduationCap size={16} className="text-site-accent" />
+                <span className="text-xs font-bold uppercase tracking-widest text-site-text-light">
+                  {t.formation.sectionBadge}
+                </span>
+              </div>
+              <h2 className="text-fluid-title tracking-tighter uppercase max-w-3xl">
+                {t.formation.title}
               </h2>
-              <p className="text-lg opacity-60 max-w-xl">
-                {language === "fr"
-                  ? "Je m'engage sur le résultat, pas seulement sur l'effort."
-                  : "I commit to the result, not just the effort."}
-              </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 border-t border-white/10 pt-16">
-              {guarantees.map((g, idx) => (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {t.formation.cards.map((card, idx) => (
                 <motion.div
                   key={idx}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: idx * 0.1 }}
+                  {...fadeUpSmall(idx * 0.12)}
+                  className="border border-site-border rounded-2xl p-8 md:p-10 flex flex-col hover:border-site-accent/30 transition-colors"
                 >
-                  <g.icon size={24} className="mb-6 opacity-40" strokeWidth={1.5} />
-                  <h4 className="text-xl font-medium mb-3">{g.title}</h4>
-                  <p className="text-sm opacity-60 leading-relaxed">{g.desc}</p>
+                  <div className="flex items-center justify-between mb-4">
+                    <h4 className="text-lg font-medium tracking-tight uppercase">
+                      {card.name}
+                    </h4>
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-site-accent bg-site-accent/10 px-2.5 py-1 rounded-full">
+                      {card.duration}
+                    </span>
+                  </div>
+
+                  <div className="mb-6">
+                    <p className="text-sm font-medium">{card.priceInter}</p>
+                    {card.priceIntra && (
+                      <p className="text-xs text-site-text-light/60 mt-1">
+                        {card.priceIntra}
+                      </p>
+                    )}
+                  </div>
+
+                  <ul className="space-y-3 flex-1 mb-6">
+                    {card.features.map((f, fi) => (
+                      <li key={fi} className="flex items-start gap-3">
+                        <Check
+                          size={12}
+                          className="mt-1 text-site-accent shrink-0"
+                          strokeWidth={2.5}
+                        />
+                        <span className="text-sm text-site-text-light">{f}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <p className="text-xs text-site-accent font-medium italic">
+                    {card.tagline}
+                  </p>
                 </motion.div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* ── Comparison table (Agence vs Freelance vs Aïssa) ──────────── */}
-        <section className="px-container section-padding">
+        {/* ═══════════════════════════════════════════════════════════════════
+            SECTION 6 — CONSULTING & ACCOMPAGNEMENT (TJM)
+        ═══════════════════════════════════════════════════════════════════ */}
+        <section className="px-container mb-32">
           <div className="max-w-7xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="mb-16"
-            >
+            <motion.div {...fadeUp} className="mb-12">
               <div className="flex items-center gap-4 mb-8">
-                <div className="w-2 h-2 rounded-full bg-site-accent" />
+                <Briefcase size={16} className="text-site-accent" />
                 <span className="text-xs font-bold uppercase tracking-widest text-site-text-light">
-                  {s.comparison.badge}
+                  Consulting
                 </span>
               </div>
-              <h2 className="text-fluid-title tracking-tighter uppercase max-w-3xl mb-6 whitespace-pre-line">
-                {s.comparison.title}
+              <h2 className="text-fluid-title tracking-tighter uppercase max-w-3xl mb-4">
+                {t.consulting.title}
               </h2>
               <p className="text-site-text-light max-w-2xl leading-relaxed">
-                {s.comparison.subtitle}
+                {t.consulting.subtitle}
               </p>
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              {...fadeUpSmall(0.1)}
+              className="grid grid-cols-2 md:grid-cols-4 gap-4"
+            >
+              {t.consulting.rates.map((r, idx) => (
+                <div
+                  key={idx}
+                  className="border border-site-border rounded-2xl p-6 md:p-8 text-center hover:border-site-accent/30 transition-colors"
+                >
+                  <p className="text-2xl md:text-3xl font-medium tracking-tighter text-site-accent mb-2">
+                    {r.price}
+                  </p>
+                  <p className="text-xs font-bold uppercase tracking-widest text-site-text-light/50">
+                    {r.label}
+                  </p>
+                </div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+
+        {/* ═══════════════════════════════════════════════════════════════════
+            SECTION 7 — AIDES FINANCIERES
+        ═══════════════════════════════════════════════════════════════════ */}
+        <section className="mx-2 md:mx-4 mb-32">
+          <div className="relative bg-site-text text-white rounded-4xl md:rounded-[4rem] overflow-hidden">
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(255,255,255,0.05)_0%,transparent_60%)]" />
+
+            <div className="relative px-container section-padding">
+              <div className="max-w-7xl mx-auto">
+                <motion.div {...fadeUp} className="mb-16">
+                  <div className="flex items-center gap-4 mb-8">
+                    <BadgeEuro size={16} className="opacity-60" />
+                    <span className="text-xs font-bold uppercase tracking-widest opacity-50">
+                      {t.ui.funding}
+                    </span>
+                  </div>
+                  <h2 className="text-fluid-title tracking-tighter uppercase max-w-3xl">
+                    {t.aides.title}
+                  </h2>
+                </motion.div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  {t.aides.cards.map((card, idx) => {
+                    const Icon = aideIcons[idx];
+                    return (
+                      <motion.div
+                        key={idx}
+                        {...fadeUpSmall(idx * 0.1)}
+                        className="border border-white/10 rounded-2xl p-6 md:p-8 hover:border-white/20 transition-colors"
+                      >
+                        <Icon
+                          size={20}
+                          className="mb-4 opacity-40"
+                          strokeWidth={1.5}
+                        />
+                        <h4 className="text-base font-medium mb-2">
+                          {card.name}
+                        </h4>
+                        <p className="text-sm opacity-70 mb-3 leading-relaxed">
+                          {card.desc}
+                        </p>
+                        <span className="text-[10px] font-bold uppercase tracking-widest opacity-40">
+                          {card.context}
+                        </span>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+
+                <motion.p
+                  {...fadeUpSmall(0.4)}
+                  className="mt-10 text-sm opacity-50 text-center"
+                >
+                  {t.aides.note}
+                </motion.p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ═══════════════════════════════════════════════════════════════════
+            SECTION 8 — COMPARATIF MARCHE
+        ═══════════════════════════════════════════════════════════════════ */}
+        <section className="px-container mb-32">
+          <div className="max-w-7xl mx-auto">
+            <motion.div {...fadeUp} className="mb-16">
+              <div className="flex items-center gap-4 mb-8">
+                <div className="w-2 h-2 rounded-full bg-site-accent" />
+                <span className="text-xs font-bold uppercase tracking-widest text-site-text-light">
+                  {t.comparatif.badge}
+                </span>
+              </div>
+              <h2 className="text-fluid-title tracking-tighter uppercase max-w-3xl mb-6 whitespace-pre-line">
+                {t.comparatif.title}
+              </h2>
+              <p className="text-site-text-light max-w-2xl leading-relaxed">
+                {t.comparatif.subtitle}
+              </p>
+            </motion.div>
+
+            <motion.div
+              {...fadeUpSmall(0.2)}
               className="overflow-x-auto -mx-container px-container"
             >
-              <table className="w-full min-w-[640px] border-collapse">
+              <table className="w-full min-w-[800px] border-collapse">
                 <thead>
                   <tr>
-                    {s.comparison.columns.map((col, i) => (
+                    {t.comparatif.columns.map((col, i) => (
                       <th
                         key={i}
                         className={cn(
                           "text-left py-4 px-5 text-xs font-bold uppercase tracking-widest",
                           i === 0
-                            ? "text-site-text-light/40 w-[22%]"
-                            : i === 3
+                            ? "text-site-text-light/40 w-[18%]"
+                            : i === 4
                             ? "text-site-accent bg-site-accent/[0.04] rounded-t-xl"
                             : "text-site-text-light"
                         )}
@@ -509,11 +1283,8 @@ export default function ServicesPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {s.comparison.rows.map((row, rIdx) => (
-                    <tr
-                      key={rIdx}
-                      className="border-t border-site-border/50"
-                    >
+                  {t.comparatif.rows.map((row, rIdx) => (
+                    <tr key={rIdx} className="border-t border-site-border/50">
                       <td className="py-4 px-5 text-sm font-medium">
                         {row.label}
                       </td>
@@ -522,7 +1293,7 @@ export default function ServicesPage() {
                           key={vIdx}
                           className={cn(
                             "py-4 px-5 text-sm",
-                            vIdx === 2
+                            vIdx === 3
                               ? "text-site-accent font-medium bg-site-accent/[0.04]"
                               : "text-site-text-light"
                           )}
@@ -538,35 +1309,32 @@ export default function ServicesPage() {
           </div>
         </section>
 
-        {/* ── ROI Calculator ──────────────────────────────────────────── */}
-        <ROICalculator />
-
-        {/* ── Recurring / Subscriptions (for existing clients) ──────────── */}
-        <section className="px-container section-padding">
+        {/* ═══════════════════════════════════════════════════════════════════
+            SECTION 9 — MAINTENANCE (ABONNEMENTS)
+        ═══════════════════════════════════════════════════════════════════ */}
+        <section className="px-container mb-32">
           <div className="max-w-7xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="mb-20"
-            >
+            <motion.div {...fadeUp} className="mb-16">
               <div className="flex items-center gap-4 mb-8">
-                <RotateCcw size={16} className="text-site-accent" />
+                <div className="w-2 h-2 rounded-full bg-site-accent" />
                 <span className="text-xs font-bold uppercase tracking-widest text-site-text-light">
-                  {s.recurring.badge}
+                  {t.maintenance.badge}
                 </span>
               </div>
-              <h2 className="text-fluid-title tracking-tighter uppercase max-w-3xl mb-6 whitespace-pre-line">
-                {s.recurring.title}
+              <h2 className="text-fluid-title tracking-tighter uppercase max-w-3xl mb-6">
+                {t.maintenance.title}
               </h2>
               <p className="text-site-text-light max-w-2xl leading-relaxed mb-10">
-                {s.recurring.subtitle}
+                {t.maintenance.subtitle}
               </p>
 
-              {/* Subscription Billing Toggle */}
-              <div role="tablist" aria-label={language === "fr" ? "Fréquence de facturation" : "Billing frequency"} className="inline-flex items-center bg-[#f5f5f5] rounded-full p-1 gap-0.5">
-                {(["monthly", "yearly"] as SubBilling[]).map((mode) => (
+              {/* Billing Toggle */}
+              <div
+                role="tablist"
+                aria-label={t.ui.billingFrequency}
+                className="inline-flex items-center bg-[#f5f5f5] rounded-full p-1 gap-0.5"
+              >
+                {(["monthly", "yearly"] as const).map((mode) => (
                   <button
                     key={mode}
                     role="tab"
@@ -580,17 +1348,19 @@ export default function ServicesPage() {
                         : "text-site-text-light hover:text-site-text"
                     )}
                   >
-                    {mode === "monthly" && s.recurring.billingToggle.monthly}
+                    {mode === "monthly" ? t.ui.monthly : null}
                     {mode === "yearly" && (
                       <>
-                        {s.recurring.billingToggle.yearly}
-                        <span className={cn(
-                          "text-[9px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap transition-colors duration-300",
-                          subBilling === "yearly"
-                            ? "bg-white/20 text-white"
-                            : "bg-green-100 text-green-700"
-                        )}>
-                          {s.recurring.billingToggle.saveBadge}
+                        {t.ui.annual}
+                        <span
+                          className={cn(
+                            "text-[9px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap transition-colors duration-300",
+                            subBilling === "yearly"
+                              ? "bg-white/20 text-white"
+                              : "bg-green-100 text-green-700"
+                          )}
+                        >
+                          -25%
                         </span>
                       </>
                     )}
@@ -599,17 +1369,16 @@ export default function ServicesPage() {
               </div>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {s.recurring.plans.map((plan, idx) => (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl">
+              {t.maintenance.plans.map((plan, idx) => (
                 <motion.div
                   key={idx}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: idx * 0.1 }}
+                  {...fadeUpSmall(idx * 0.12)}
                   className="border border-site-border rounded-2xl p-8 md:p-10 flex flex-col hover:border-site-accent/30 transition-colors"
                 >
-                  <h4 className="text-lg font-medium tracking-tight uppercase mb-4">{plan.name}</h4>
+                  <h4 className="text-lg font-medium tracking-tight uppercase mb-4">
+                    {plan.name}
+                  </h4>
 
                   <div className="mb-8 min-h-[70px]">
                     <AnimatePresence mode="wait">
@@ -618,14 +1387,16 @@ export default function ServicesPage() {
                         initial={{ opacity: 0, y: 8 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -8 }}
-                        transition={{ duration: 0.25, ease: [0.25, 1, 0.5, 1] }}
+                        transition={{
+                          duration: 0.25,
+                          ease: [0.25, 1, 0.5, 1] as [number, number, number, number],
+                        }}
                       >
                         <div className="flex items-baseline gap-1">
                           <span className="text-3xl md:text-4xl font-medium tracking-tighter">
-                            {subBilling === "yearly" ? plan.priceYearly : plan.price}
-                          </span>
-                          <span className="text-site-text-light text-sm">
-                            /{language === "fr" ? "mois" : "mo"}
+                            {subBilling === "yearly"
+                              ? plan.priceYearly
+                              : plan.price}
                           </span>
                         </div>
                         {subBilling === "yearly" && (
@@ -640,7 +1411,11 @@ export default function ServicesPage() {
                   <ul className="space-y-3 flex-1 mb-8">
                     {plan.features.map((f, fi) => (
                       <li key={fi} className="flex items-start gap-3">
-                        <Check size={12} className="mt-1 text-site-accent shrink-0" strokeWidth={2.5} />
+                        <Check
+                          size={12}
+                          className="mt-1 text-site-accent shrink-0"
+                          strokeWidth={2.5}
+                        />
                         <span className="text-sm text-site-text-light">{f}</span>
                       </li>
                     ))}
@@ -650,116 +1425,63 @@ export default function ServicesPage() {
                     href="/contact"
                     className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full border border-site-border text-xs font-bold uppercase tracking-widest hover:border-site-accent hover:text-site-accent transition-all"
                   >
-                    {s.cta}
+                    {t.ui.learnMore}
                     <ArrowUpRight size={12} />
                   </Link>
                 </motion.div>
               ))}
             </div>
-          </div>
-        </section>
 
-        {/* ── Process (connected timeline) ──────────────────────────────── */}
-        <section className="px-container pb-32">
-          <div className="max-w-7xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="mb-20"
+            <motion.p
+              {...fadeUpSmall(0.3)}
+              className="mt-8 text-xs text-site-text-light/50 max-w-4xl"
             >
-              <div className="flex items-center gap-4 mb-8">
-                <div className="w-2 h-2 rounded-full bg-site-accent" />
-                <span className="text-xs font-bold uppercase tracking-widest text-site-text-light">
-                  {s.process.badge}
-                </span>
-              </div>
-              <h2 className="text-fluid-title tracking-tighter uppercase max-w-3xl">
-                {s.process.title}
-              </h2>
-            </motion.div>
-
-            <div className="relative">
-              <div className="absolute left-5 md:left-1/2 top-0 bottom-0 w-px bg-site-border md:-translate-x-px" />
-
-              {s.process.steps.map((step, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, x: idx % 2 === 0 ? -30 : 30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: idx * 0.15 }}
-                  className={cn(
-                    "relative flex items-start gap-8 mb-16 last:mb-0",
-                    "md:w-1/2",
-                    idx % 2 === 0 ? "md:pr-16 md:ml-0" : "md:pl-16 md:ml-auto"
-                  )}
-                >
-                  <div className={cn(
-                    "absolute w-10 h-10 rounded-full bg-site-bg border-2 border-site-accent flex items-center justify-center text-xs font-bold shrink-0 z-10",
-                    "left-0 md:left-auto",
-                    idx % 2 === 0 ? "md:right-[-20px]" : "md:left-[-20px]"
-                  )}>
-                    {String(idx + 1).padStart(2, "0")}
-                  </div>
-
-                  <div className="pl-16 md:pl-0">
-                    <h4 className="text-lg font-medium uppercase tracking-tight mb-2">{step.title}</h4>
-                    <p className="text-sm text-site-text-light leading-relaxed">{step.description}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+              {t.maintenance.annualNote}
+            </motion.p>
           </div>
         </section>
 
-        {/* ── FAQ ───────────────────────────────────────────────────────── */}
+        {/* ═══════════════════════════════════════════════════════════════════
+            SECTION 10 — FAQ
+        ═══════════════════════════════════════════════════════════════════ */}
         <section className="px-container pb-32 border-t border-site-border pt-32">
           <div className="max-w-7xl mx-auto">
-            {/* Header row: title left, subtitle right */}
+            {/* Header */}
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-              >
+              <motion.div {...fadeUp}>
                 <div className="flex items-center gap-4 mb-6">
                   <div className="w-2 h-2 rounded-full bg-site-accent" />
-                  <span className="text-xs font-bold uppercase tracking-widest text-site-text-light">FAQ</span>
+                  <span className="text-xs font-bold uppercase tracking-widest text-site-text-light">
+                    FAQ
+                  </span>
                 </div>
                 <h2 className="text-fluid-title tracking-tighter uppercase">
-                  {language === "fr" ? "Vos questions,\nmes réponses." : "Your questions,\nmy answers."}
+                  {t.ui.faqTitle}
                 </h2>
               </motion.div>
               <motion.p
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
+                {...fadeUpSmall(0.2)}
                 className="text-site-text-light max-w-sm text-sm leading-relaxed md:text-right"
               >
-                {language === "fr"
-                  ? "Tout ce que vous devez savoir avant de lancer votre système. Une question manque ? Échangeons."
-                  : "Everything you need to know before launching your system. Missing a question? Let's talk."}
+                {t.ui.faqSubtitle}
               </motion.p>
             </div>
 
-            {/* FAQ cards — 2 columns on desktop */}
+            {/* FAQ cards — 2 columns */}
             {(() => {
-              const left = faq.filter((_, i) => i % 2 === 0);
-              const right = faq.filter((_, i) => i % 2 === 1);
+              const left = t.faq.filter((_, i) => i % 2 === 0);
+              const right = t.faq.filter((_, i) => i % 2 === 1);
 
-              const renderCard = (item: typeof faq[0], realIdx: number, delayIdx: number) => {
+              const renderCard = (
+                item: (typeof t.faq)[0],
+                realIdx: number,
+                delayIdx: number
+              ) => {
                 const isOpen = openFaq === realIdx;
                 return (
                   <motion.div
                     key={realIdx}
-                    initial={{ opacity: 0, y: 16 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: delayIdx * 0.06 }}
+                    {...fadeUpSmall(delayIdx * 0.06)}
                     className={cn(
                       "group border rounded-2xl overflow-hidden transition-colors duration-300",
                       isOpen
@@ -773,12 +1495,14 @@ export default function ServicesPage() {
                       aria-controls={`faq-answer-${realIdx}`}
                       className="w-full p-6 md:p-8 flex items-start gap-5 text-left cursor-pointer"
                     >
-                      <span className={cn(
-                        "text-xs font-bold shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-colors duration-300",
-                        isOpen
-                          ? "bg-site-accent text-white"
-                          : "bg-site-border/60 text-site-text-light"
-                      )}>
+                      <span
+                        className={cn(
+                          "text-xs font-bold shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-colors duration-300",
+                          isOpen
+                            ? "bg-site-accent text-white"
+                            : "bg-site-border/60 text-site-text-light"
+                        )}
+                      >
                         {String(realIdx + 1).padStart(2, "0")}
                       </span>
                       <span className="flex-1 text-sm md:text-base font-medium leading-snug group-hover:text-site-accent transition-colors">
@@ -798,10 +1522,17 @@ export default function ServicesPage() {
                           initial={{ height: 0, opacity: 0 }}
                           animate={{ height: "auto", opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
+                          transition={{
+                            duration: 0.3,
+                            ease: [0.23, 1, 0.32, 1] as [number, number, number, number],
+                          }}
                           className="overflow-hidden"
                         >
-                          <div id={`faq-answer-${realIdx}`} role="region" className="px-6 md:px-8 pb-6 md:pb-8 pl-[4.25rem] md:pl-[4.75rem]">
+                          <div
+                            id={`faq-answer-${realIdx}`}
+                            role="region"
+                            className="px-6 md:px-8 pb-6 md:pb-8 pl-[4.25rem] md:pl-[4.75rem]"
+                          >
                             <p className="text-sm text-site-text-light leading-relaxed">
                               {item.a}
                             </p>
@@ -827,30 +1558,29 @@ export default function ServicesPage() {
           </div>
         </section>
 
-        {/* ── Final CTA ────────────────────────────────────────────────── */}
+        {/* ═══════════════════════════════════════════════════════════════════
+            SECTION 11 — CTA FINAL
+        ═══════════════════════════════════════════════════════════════════ */}
         <section className="px-container pb-32">
           <div className="max-w-7xl mx-auto">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
+              {...fadeUp}
               className="border border-site-border rounded-3xl p-12 md:p-20 text-center relative overflow-hidden"
             >
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,var(--color-site-accent)_0%,transparent_70%)] opacity-[0.03]" />
 
               <div className="relative">
-                <h2 className="text-fluid-title tracking-tighter uppercase mb-6">
-                  {s.finalCta.title}
+                <h2 className="text-fluid-title tracking-tighter uppercase mb-6 whitespace-pre-line">
+                  {t.finalCta.title}
                 </h2>
                 <p className="text-site-text-light mb-10 max-w-lg mx-auto">
-                  {s.finalCta.subtitle}
+                  {t.ui.finalCtaSubtitle}
                 </p>
                 <Link
-                  href="/contact?plan=accelerateur"
+                  href="/contact"
                   className="inline-flex items-center gap-3 bg-site-accent text-white px-10 py-5 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-site-accent/85 hover:scale-105 transition-all"
                 >
-                  {s.finalCta.button}
+                  {t.finalCta.cta}
                   <ArrowUpRight size={14} />
                 </Link>
               </div>
@@ -862,13 +1592,13 @@ export default function ServicesPage() {
       <Footer />
       <ExitIntentModal />
 
-      {/* ── Sticky CTA mobile ──────────────────────────────────────── */}
+      {/* ── Sticky CTA mobile ────────────────────────────────────────── */}
       <div className="fixed bottom-0 left-0 right-0 z-50 lg:hidden bg-site-bg/90 backdrop-blur-xl border-t border-site-border px-4 py-3 safe-area-pb">
         <Link
-          href="/contact?plan=accelerateur"
+          href="/contact"
           className="flex items-center justify-center gap-2 w-full bg-site-accent text-white py-3.5 rounded-full text-xs font-bold uppercase tracking-widest"
         >
-          {language === "fr" ? "Ma proposition en 48h — 2 900 €" : "My proposal in 48h — €2,900"}
+          {t.ui.stickyCta}
           <ArrowUpRight size={14} />
         </Link>
       </div>
