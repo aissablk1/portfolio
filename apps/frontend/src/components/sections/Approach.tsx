@@ -8,7 +8,7 @@ const Approach = () => {
   const { dict } = useLanguage();
 
   return (
-    <section id="approach" className="px-container section-padding bg-site-accent text-white rounded-4xl md:rounded-[4rem] mx-2 md:mx-4">
+    <section id="approach" data-layer="Approach" className="px-container section-padding bg-site-accent text-white rounded-4xl md:rounded-[4rem] mx-2 md:mx-4">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start mb-32">
           <div>

@@ -79,15 +79,15 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 1, 0.5, 1] }}
             className="mt-8 md:mt-12"
           >
-            <p className="max-w-xl text-base md:text-lg lg:text-fluid-body text-site-text-light mb-8 md:mb-12">
+            <p data-layer="Subtitle" className="max-w-xl text-base md:text-lg lg:text-fluid-body text-site-text-light mb-8 md:mb-12">
               {dict.hero.subtitle}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/contact" className="bg-site-accent text-white px-8 py-4 rounded-full text-sm font-medium hover:scale-105 transition-transform text-center">
+              <Link href="/contact" data-layer="CTA_Primary" className="bg-site-accent text-white px-8 py-4 rounded-full text-sm font-medium hover:scale-105 transition-transform text-center">
                 {dict.hero.ctaPrimary}
               </Link>
-              <Link href="/services" className="border border-site-accent/40 text-site-accent px-8 py-4 rounded-full text-sm font-medium hover:bg-site-accent hover:text-white transition-all text-center">
+              <Link href="/services" data-layer="CTA_Secondary" className="border border-site-accent/40 text-site-accent px-8 py-4 rounded-full text-sm font-medium hover:bg-site-accent hover:text-white transition-all text-center">
                 {dict.hero.ctaSecondary}
               </Link>
             </div>
@@ -108,14 +108,15 @@ const Hero = () => {
            
            {/* Custom SVG Cursor */}
            <motion.div
+             data-layer="Cursor"
              initial={{ opacity: 0, scale: 0.5 }}
-             animate={{ 
-               opacity: 1, 
+             animate={{
+               opacity: 1,
                scale: 1,
                y: [0, -20, 0],
                x: [0, 50, 0]
              }}
-             transition={{ 
+             transition={{
                opacity: { duration: 1, delay: 1.5 },
                scale: { duration: 1, delay: 1.5 },
                y: { duration: 4, repeat: Infinity, ease: "easeInOut" },
@@ -212,7 +213,7 @@ const Hero = () => {
         </div>
       </div>
       
-      <div className="sticky bottom-[-125px] w-full max-w-7xl mx-auto mb-0 px-container pb-0 overflow-hidden flex justify-center">
+      <div data-layer="Scroll_Indicator" className="sticky bottom-[-125px] w-full max-w-7xl mx-auto mb-0 px-container pb-0 overflow-hidden flex justify-center">
         <motion.div
           aria-hidden="true"
           initial={{ opacity: 0 }}

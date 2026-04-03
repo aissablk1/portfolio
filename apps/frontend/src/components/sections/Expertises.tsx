@@ -46,7 +46,7 @@ const Expertises = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section id="expertise" className="section-padding overflow-x-hidden">
+    <section id="expertise" data-layer="Expertises" className="section-padding overflow-x-hidden">
       <div className="max-w-7xl mx-auto px-container mb-20 md:mb-32">
         <div className="flex items-center gap-4 mb-6">
           <div className="w-2 h-2 rounded-full bg-site-accent" />

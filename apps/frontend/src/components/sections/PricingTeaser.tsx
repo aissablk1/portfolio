@@ -14,7 +14,7 @@ const PricingTeaser = () => {
   const pt = dict.pricingTeaser;
 
   return (
-    <section id="pricing" className="relative overflow-hidden">
+    <section id="pricing" data-layer="Pricing" className="relative overflow-hidden">
       {/* Fond accent subtil pour casser le scroll */}
       <div className="absolute inset-0 bg-site-accent/[0.03]" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,var(--color-site-accent)_0%,transparent_70%)] opacity-[0.04]" />
@@ -73,6 +73,7 @@ const PricingTeaser = () => {
                 >
                   <Link
                     href="/services"
+                    data-layer="Pricing_Card"
                     className={`h-full bg-site-bg p-8 md:p-10 flex flex-col justify-between transition-colors group ${isHighlight ? "bg-site-accent/[0.04] hover:bg-site-accent/[0.08]" : "hover:bg-black/[0.02]"}`}
                   >
                     <div>

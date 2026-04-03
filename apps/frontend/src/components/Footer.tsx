@@ -10,7 +10,7 @@ const Footer = () => {
   const { dict } = useLanguage();
 
   return (
-    <footer className="pt-0 py-20 border-t border-site-border mt-20 overflow-hidden">
+    <footer data-layer="Footer" className="pt-0 py-20 border-t border-site-border mt-20 overflow-hidden">
       <div className="relative mt-0 mb-32 overflow-hidden pointer-events-none select-none bg-black border-y border-site-border py-12 w-full">
         <video aria-hidden="true" className="absolute inset-0 w-full h-full object-cover pointer-events-none z-0" autoPlay muted loop playsInline preload="none">
           <source data-src="/assets/videos/glitch-red.webm" type="video/webm" src="/assets/videos/glitch-red.webm" />

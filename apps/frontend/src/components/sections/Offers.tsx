@@ -16,7 +16,7 @@ const Offers = () => {
   ];
 
   return (
-    <section id="offers" className="px-container section-padding border-t border-site-border">
+    <section id="offers" data-layer="Offers" className="px-container section-padding border-t border-site-border">
       <div className="max-w-7xl mx-auto">
         <div className="mb-20 md:mb-28">
           <div className="flex items-center gap-4 mb-6">
@@ -38,10 +38,11 @@ const Offers = () => {
             >
               <Link
                 href="/contact"
+                data-layer="Offer_Card"
                 className="h-full bg-site-bg p-8 md:p-12 flex flex-col justify-between hover:bg-site-bg/50 transition-colors group"
               >
                 <div>
-                  <h3 className="text-fluid-title mb-6 font-medium uppercase tracking-tighter">
+                  <h3 data-layer="Offer_Title" className="text-fluid-title mb-6 font-medium uppercase tracking-tighter">
                     {pillar.title}
                   </h3>
                   <p className="text-site-text-light leading-relaxed text-[15px]">

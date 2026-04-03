@@ -9,7 +9,7 @@ const Contact = () => {
   const { dict } = useLanguage();
 
   return (
-    <section id="contact" className="px-container section-padding">
+    <section id="contact" data-layer="Contact" className="px-container section-padding">
       <div className="max-w-7xl mx-auto text-center">
         <motion.div
           initial={{ opacity: 0, y: 40 }}

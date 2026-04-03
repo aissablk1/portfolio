@@ -77,6 +77,7 @@ const Header = () => {
       </Link>
 
       <header
+        data-layer="Header"
         className={cn(
           "fixed top-[28px] left-0 right-0 z-50 transition-all duration-300 px-container py-6",
           isScrolled ? "bg-site-bg/80 backdrop-blur-md py-4 top-0" : "bg-transparent"

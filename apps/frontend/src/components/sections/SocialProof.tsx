@@ -9,7 +9,7 @@ const SocialProof = () => {
   const s = dict.socialProof;
 
   return (
-    <section className="relative overflow-hidden">
+    <section data-layer="Social_Proof" className="relative overflow-hidden">
       <div className="relative px-container section-padding border-t border-site-border">
         <div className="max-w-7xl mx-auto">
 
@@ -42,6 +42,7 @@ const SocialProof = () => {
                   delay: idx * 0.1,
                   ease: [0.25, 1, 0.5, 1],
                 }}
+                data-layer="Project_Card"
                 className="bg-site-bg p-8 flex flex-col gap-4"
               >
                 <div className="flex items-center justify-between">

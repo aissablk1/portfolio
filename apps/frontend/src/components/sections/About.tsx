@@ -9,7 +9,7 @@ const About = () => {
   const { dict } = useLanguage();
 
   return (
-    <section id="about" className="px-container section-padding border-t border-site-border">
+    <section id="about" data-layer="About" className="px-container section-padding border-t border-site-border">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
