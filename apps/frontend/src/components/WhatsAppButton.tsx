@@ -7,15 +7,11 @@ const PHONE = "33782721406";
 
 export default function WhatsAppButton() {
   const pathname = usePathname();
-  const { language } = useLanguage();
+  const { dict } = useLanguage();
 
   // Hide on pages that already have a WhatsApp link
   if (pathname === "/links" || pathname === "/diagnostic") return null;
-  const message = encodeURIComponent(
-    language === "fr"
-      ? "Bonjour Aïssa, j'ai vu votre site et j'aimerais en savoir plus sur vos services."
-      : "Hi Aïssa, I saw your website and I'd like to learn more about your services."
-  );
+  const message = encodeURIComponent(dict.whatsapp.defaultMessage);
 
   return (
     <a

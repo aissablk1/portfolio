@@ -7,7 +7,7 @@ import { ScrollVelocityContainer, ScrollVelocityRow } from "./ui/scroll-based-ve
 
 
 const Footer = () => {
-  const { dict, language } = useLanguage();
+  const { dict } = useLanguage();
 
   return (
     <footer className="pt-0 py-20 border-t border-site-border mt-20 overflow-hidden">
@@ -68,7 +68,7 @@ const Footer = () => {
                   <span className="text-xs font-bold uppercase tracking-widest text-site-text-light">Architecture</span>
                   <Link href="/#systems" className="text-sm hover:underline">{dict.nav.systems}</Link>
                   <Link href="/services" className="text-sm hover:underline">{dict.nav.services}</Link>
-                  <Link href="/diagnostic" className="text-sm hover:underline">{language === "fr" ? "Diagnostic gratuit" : "Free diagnostic"}</Link>
+                  <Link href="/diagnostic" className="text-sm hover:underline">{dict.ui.diagnosticFree}</Link>
                   <Link href="/#about" className="text-sm hover:underline">{dict.nav.about}</Link>
                   <Link href="/contact" className="text-sm hover:underline">{dict.nav.contact}</Link>
               </div>

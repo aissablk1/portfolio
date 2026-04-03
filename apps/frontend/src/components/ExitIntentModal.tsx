@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useLanguage } from "./LanguageContext";
 
 export default function ExitIntentModal() {
-  const { language } = useLanguage();
+  const { dict } = useLanguage();
   const [show, setShow] = useState(false);
   const [dismissed, setDismissed] = useState(false);
 
@@ -67,17 +67,13 @@ export default function ExitIntentModal() {
 
             <div className="text-center">
               <p className="text-xs font-bold uppercase tracking-widest text-site-accent mb-4">
-                {language === "fr" ? "Avant de partir" : "Before you go"}
+                {dict.exitIntent.badge}
               </p>
               <h3 className="text-2xl md:text-3xl font-display font-medium tracking-tighter uppercase mb-4">
-                {language === "fr"
-                  ? "Votre diagnostic\ngratuit en 2 min"
-                  : "Your free diagnostic\nin 2 minutes"}
+                {dict.exitIntent.title}
               </h3>
               <p className="text-site-text-light text-sm leading-relaxed mb-8 max-w-sm mx-auto">
-                {language === "fr"
-                  ? "Découvrez combien d'heures et d'argent vous perdez chaque semaine sans système automatisé. Zéro engagement."
-                  : "Discover how many hours and money you're losing each week without an automated system. Zero commitment."}
+                {dict.exitIntent.subtitle}
               </p>
 
               <Link
@@ -85,14 +81,12 @@ export default function ExitIntentModal() {
                 onClick={close}
                 className="inline-flex items-center gap-3 bg-site-accent text-white px-8 py-4 rounded-full text-xs font-bold uppercase tracking-widest hover:scale-105 transition-all shadow-lg"
               >
-                {language === "fr" ? "Recevoir mon diagnostic" : "Get my diagnostic"}
+                {dict.exitIntent.cta}
                 <ArrowUpRight size={14} />
               </Link>
 
               <p className="text-[10px] text-site-text-light/40 mt-4">
-                {language === "fr"
-                  ? "Réponse personnalisée sous 48h"
-                  : "Personalized response within 48h"}
+                {dict.exitIntent.trust}
               </p>
             </div>
           </motion.div>

@@ -3,26 +3,15 @@
 import React from "react";
 import { useLanguage } from "../LanguageContext";
 import { motion } from "framer-motion";
-import { ArrowUpRight, Zap, Rocket, Handshake, Gift } from "lucide-react";
+import { ArrowUpRight, Zap, Rocket, Handshake, GraduationCap, Gift } from "lucide-react";
 import Link from "next/link";
 
-const icons = [Zap, Rocket, Handshake];
+const icons = [Zap, Rocket, Handshake, GraduationCap];
 
 const PricingTeaser = () => {
-  const { language, dict } = useLanguage();
+  const { dict } = useLanguage();
   const s = dict.services;
-
-  const stats = language === "fr"
-    ? [
-        { value: "100%", label: "Code livré en votre nom" },
-        { value: "48h", label: "Temps de réponse max" },
-        { value: "0", label: "Intermédiaire" },
-      ]
-    : [
-        { value: "100%", label: "Code delivered under your name" },
-        { value: "48h", label: "Max response time" },
-        { value: "0", label: "Middlemen" },
-      ];
+  const pt = dict.pricingTeaser;
 
   return (
     <section id="pricing" className="relative overflow-hidden">
@@ -52,7 +41,7 @@ const PricingTeaser = () => {
 
             {/* Social proof stats */}
             <div className="flex gap-12">
-              {stats.map((stat, idx) => (
+              {pt.stats.map((stat, idx) => (
                 <motion.div
                   key={idx}
                   initial={{ opacity: 0, y: 10 }}
@@ -69,10 +58,11 @@ const PricingTeaser = () => {
           </div>
 
           {/* Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-site-border border border-site-border rounded-2xl overflow-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-site-border border border-site-border rounded-2xl overflow-hidden">
             {s.tiers.map((tier, idx) => {
               const Icon = icons[idx];
-              const isMiddle = idx === 1;
+              const isHighlight = idx === 1;
+              const tierBadge = tier.badge;
               return (
                 <motion.div
                   key={idx}
@@ -83,35 +73,35 @@ const PricingTeaser = () => {
                 >
                   <Link
                     href="/services"
-                    className={`h-full bg-site-bg p-8 md:p-12 flex flex-col justify-between transition-colors group ${isMiddle ? "bg-site-accent/[0.04] hover:bg-site-accent/[0.08]" : "hover:bg-site-bg/50"}`}
+                    className={`h-full bg-site-bg p-8 md:p-10 flex flex-col justify-between transition-colors group ${isHighlight ? "bg-site-accent/[0.04] hover:bg-site-accent/[0.08]" : "hover:bg-site-bg/50"}`}
                   >
                     <div>
                       <div className="flex items-center justify-between mb-6">
-                        <div className="flex items-center gap-4">
-                          <Icon size={18} className={isMiddle ? "text-site-accent" : "text-site-text-light"} strokeWidth={1.5} />
+                        <div className="flex items-center gap-3">
+                          <Icon size={18} className={isHighlight ? "text-site-accent" : "text-site-text-light"} strokeWidth={1.5} />
                           <span className="text-[10px] font-bold uppercase tracking-widest text-site-text-light/40">
                             {tier.tag}
                           </span>
                         </div>
-                        {isMiddle && (
-                          <span className="text-[9px] font-bold uppercase tracking-widest text-site-accent bg-site-accent/10 px-2 py-0.5 rounded-full">
-                            {s.popularBadge}
+                        {tierBadge && (
+                          <span className={`text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full ${isHighlight ? "text-site-accent bg-site-accent/10" : "text-site-accent bg-site-accent/10"}`}>
+                            {tierBadge}
                           </span>
                         )}
                       </div>
-                      <h3 className="text-2xl md:text-3xl font-medium uppercase tracking-tighter mb-4">
+                      <h3 className="text-xl md:text-2xl font-medium uppercase tracking-tighter mb-4">
                         {tier.name}
                       </h3>
                       <p className="text-site-text-light text-sm leading-relaxed mb-8">
                         {tier.description}
                       </p>
                       <div>
-                        <p className="text-2xl font-medium tracking-tight">
+                        <p className="text-xl md:text-2xl font-medium tracking-tight">
                           {tier.price}
                         </p>
                         {tier.monthlyPrice && (
                           <p className="text-xs text-site-text-light mt-1">
-                            {language === "fr" ? "puis" : "then"} {tier.monthlyPrice}/{language === "fr" ? "mois" : "mo"}
+                            {pt.then} {tier.monthlyPrice}{pt.month}
                           </p>
                         )}
                         {tier.monthlyNote && (
@@ -143,7 +133,7 @@ const PricingTeaser = () => {
               href="/services"
               className="inline-flex items-center gap-3 bg-site-accent text-white px-8 py-4 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-site-accent/85 transition-all hover:scale-105"
             >
-              {language === "fr" ? "Tous les détails et abonnements" : "All details and subscriptions"}
+              {pt.allDetails}
               <ArrowUpRight size={14} />
             </Link>
           </motion.div>

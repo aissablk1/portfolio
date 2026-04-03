@@ -9,7 +9,7 @@ import { usePathname } from "next/navigation";
 
 const FloatingCta = () => {
   const [visible, setVisible] = useState(false);
-  const { language } = useLanguage();
+  const { dict } = useLanguage();
   const pathname = usePathname();
 
   // Don't show on /services or /contact pages
@@ -39,7 +39,7 @@ const FloatingCta = () => {
             href="/services"
             className="flex items-center gap-2 bg-site-accent text-white px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg shadow-site-accent/25 hover:shadow-site-accent/40 hover:scale-105 transition-all"
           >
-            {language === "fr" ? "Voir les tarifs" : "View pricing"}
+            {dict.ui.viewPricing}
             <ArrowUpRight size={14} />
           </Link>
         </motion.div>

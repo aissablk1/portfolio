@@ -282,6 +282,27 @@ interface Dictionary {
       articles: string[];
     };
   };
+  notFound: {
+    code: string;
+    title: string;
+    subtitle: string;
+    seePlans: string;
+    backHome: string;
+  };
+  phishing: {
+    alreadyHere: string;
+    domainLabel: string;
+    holderLabel: string;
+    registrarLabel: string;
+    registeredLabel: string;
+    expiresLabel: string;
+    statusLabel: string;
+    dnsLabel: string;
+    hostingLabel: string;
+    sslLabel: string;
+    historyLabel: string;
+    suspectLabel: string;
+  };
   domainLegit: {
     badge: string;
     title: string;
@@ -312,6 +333,30 @@ interface Dictionary {
       description: string;
       cta: string;
     };
+  };
+  exitIntent: {
+    badge: string;
+    title: string;
+    subtitle: string;
+    cta: string;
+    trust: string;
+  };
+  whatsapp: {
+    defaultMessage: string;
+  };
+  pricingTeaser: {
+    stats: Array<{ value: string; label: string }>;
+    then: string;
+    month: string;
+    allDetails: string;
+  };
+  ui: {
+    diagnosticFree: string;
+    pricing: string;
+    menuOpen: string;
+    menuClose: string;
+    learnMore: string;
+    viewPricing: string;
   };
 }
 
@@ -861,6 +906,27 @@ const dictionaries: Record<Language, Dictionary> = {
         ],
       },
     },
+    notFound: {
+      code: "404",
+      title: "Cette page n'existe pas.",
+      subtitle: "L'URL que vous avez suivie ne mène nulle part. Peut-être a-t-elle été déplacée, supprimée, ou n'a-t-elle jamais existé.",
+      seePlans: "Voir les offres",
+      backHome: "Retour à l'accueil",
+    },
+    phishing: {
+      alreadyHere: "Vous y êtes déjà",
+      domainLabel: "Domaine",
+      holderLabel: "Detenteur",
+      registrarLabel: "Registrar",
+      registeredLabel: "Enregistre le",
+      expiresLabel: "Expire le",
+      statusLabel: "Statut",
+      dnsLabel: "DNS",
+      hostingLabel: "Hebergement",
+      sslLabel: "Certificat SSL",
+      historyLabel: "Historique du contenu",
+      suspectLabel: "Infrastructure suspecte",
+    },
     domainLegit: {
       badge: "Domaine officiel verifie",
       title: "aissabelkoussa.fr — vous etes au bon endroit.",
@@ -896,6 +962,34 @@ const dictionaries: Record<Language, Dictionary> = {
         description: "Le domaine aissabelkoussa.com a été enregistré par « Team AG Internet » le 26 mai 2025 sans mon consentement. Ce détenteur a depuis masqué son identité via WHOIS privacy. Des signalements ont été déposés.",
         cta: "Voir le detail de l'usurpation",
       },
+    },
+    exitIntent: {
+      badge: "Avant de partir",
+      title: "Votre diagnostic\ngratuit en 2 min",
+      subtitle: "Découvrez combien d'heures par semaine votre entreprise perd sur des tâches automatisables.",
+      cta: "Recevoir mon diagnostic",
+      trust: "Réponse personnalisée sous 48h",
+    },
+    whatsapp: {
+      defaultMessage: "Bonjour Aïssa, j'ai vu votre site et j'aimerais discuter d'un projet.",
+    },
+    pricingTeaser: {
+      stats: [
+        { value: "100%", label: "Code livré en votre nom" },
+        { value: "48h", label: "Temps de réponse max" },
+        { value: "0", label: "Intermédiaire" },
+      ],
+      then: "puis",
+      month: "/mois",
+      allDetails: "Tous les détails et abonnements",
+    },
+    ui: {
+      diagnosticFree: "Diagnostic gratuit",
+      pricing: "Tarifs",
+      menuOpen: "Ouvrir le menu",
+      menuClose: "Fermer le menu",
+      learnMore: "En savoir +",
+      viewPricing: "Voir les tarifs",
     },
   },
   en: {
@@ -1443,6 +1537,27 @@ const dictionaries: Record<Language, Dictionary> = {
         ],
       },
     },
+    notFound: {
+      code: "404",
+      title: "This page doesn't exist.",
+      subtitle: "The URL you followed leads nowhere. It may have been moved, deleted, or never existed.",
+      seePlans: "See our plans",
+      backHome: "Back to home",
+    },
+    phishing: {
+      alreadyHere: "You are already here",
+      domainLabel: "Domain",
+      holderLabel: "Holder",
+      registrarLabel: "Registrar",
+      registeredLabel: "Registered on",
+      expiresLabel: "Expires on",
+      statusLabel: "Status",
+      dnsLabel: "DNS",
+      hostingLabel: "Hosting",
+      sslLabel: "SSL Certificate",
+      historyLabel: "Content history",
+      suspectLabel: "Suspicious infrastructure",
+    },
     domainLegit: {
       badge: "Verified official domain",
       title: "aissabelkoussa.fr — you are in the right place.",
@@ -1478,6 +1593,34 @@ const dictionaries: Record<Language, Dictionary> = {
         description: "The domain aissabelkoussa.com was registered by 'Team AG Internet' on May 26, 2025 without my consent. This registrant has since hidden their identity via WHOIS privacy. Reports have been filed.",
         cta: "View usurpation details",
       },
+    },
+    exitIntent: {
+      badge: "Before you go",
+      title: "Your free diagnostic\nin 2 minutes",
+      subtitle: "Discover how many hours per week your business loses on automatable tasks.",
+      cta: "Get my diagnostic",
+      trust: "Personalized response within 48h",
+    },
+    whatsapp: {
+      defaultMessage: "Hi Aïssa, I saw your website and would like to discuss a project.",
+    },
+    pricingTeaser: {
+      stats: [
+        { value: "100%", label: "Code delivered under your name" },
+        { value: "48h", label: "Max response time" },
+        { value: "0", label: "Middlemen" },
+      ],
+      then: "then",
+      month: "/mo",
+      allDetails: "All details and subscriptions",
+    },
+    ui: {
+      diagnosticFree: "Free diagnostic",
+      pricing: "Pricing",
+      menuOpen: "Open menu",
+      menuClose: "Close menu",
+      learnMore: "Learn more +",
+      viewPricing: "View pricing",
     },
   },
 };

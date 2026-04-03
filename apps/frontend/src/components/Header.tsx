@@ -69,7 +69,7 @@ const Header = () => {
           <AlertTriangle size={10} className="animate-pulse shrink-0 md:w-3 md:h-3" strokeWidth={3} />
           <span>{dict.warning}</span>
           <span className="hidden md:inline invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200 ml-1 underline underline-offset-2">
-            {language === "fr" ? "En savoir +" : "Learn more +"}
+            {dict.ui.learnMore}
           </span>
         </p>
         <div className="absolute bottom-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-red-600/30 to-transparent" />
@@ -105,7 +105,7 @@ const Header = () => {
               href="/diagnostic"
               className="hidden md:inline-flex items-center px-5 py-2 text-[10px] font-bold uppercase tracking-widest border border-site-border text-site-text-light rounded-full hover:border-site-accent hover:text-site-accent transition-all"
             >
-              {language === "fr" ? "Diagnostic gratuit" : "Free diagnostic"}
+              {dict.ui.diagnosticFree}
             </Link>
 
             {/* Services CTA — always visible, filled */}
@@ -113,7 +113,7 @@ const Header = () => {
               href="/services"
               className="hidden md:inline-flex items-center px-5 py-2 text-[10px] font-bold uppercase tracking-widest bg-site-accent text-white rounded-full hover:bg-site-accent/85 transition-all"
             >
-              {language === "fr" ? "Tarifs" : "Pricing"}
+              {dict.ui.pricing}
             </Link>
 
             {/* Language toggle */}
@@ -142,7 +142,7 @@ const Header = () => {
             <button
               onClick={() => setMenuOpen(!menuOpen)}
               className="lg:hidden flex flex-col justify-center items-center w-8 h-8 gap-1.5"
-              aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
+              aria-label={menuOpen ? dict.ui.menuClose : dict.ui.menuOpen}
               aria-expanded={menuOpen}
             >
               <span
@@ -198,7 +198,7 @@ const Header = () => {
                   onClick={() => setMenuOpen(false)}
                   className="text-lg font-display font-medium tracking-tight border border-site-border text-site-text-light px-8 py-3 rounded-full hover:border-site-accent hover:text-site-accent transition-colors"
                 >
-                  {language === "fr" ? "Diagnostic gratuit" : "Free diagnostic"}
+                  {dict.ui.diagnosticFree}
                 </Link>
                 <Link
                   href="/contact"
