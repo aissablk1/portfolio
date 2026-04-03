@@ -368,12 +368,13 @@ export async function POST(request: Request) {
     request.headers.get("x-real-ip") ||
     "unknown";
 
-  if (isRateLimited(ip)) {
-    return NextResponse.json(
-      { error: "Too many requests" },
-      { status: 429 }
-    );
-  }
+  // Rate limiting temporairement désactivé (tests en cours)
+  // if (isRateLimited(ip)) {
+  //   return NextResponse.json(
+  //     { error: "Too many requests" },
+  //     { status: 429 }
+  //   );
+  // }
 
   // Parse body
   let body: unknown;

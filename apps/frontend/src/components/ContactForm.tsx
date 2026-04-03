@@ -28,7 +28,7 @@ const ContactForm = () => {
   const plan = selectedPlan && planDetails[selectedPlan] ? planDetails[selectedPlan] : null;
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitError, setSubmitError] = useState(false);
+  const [submitError, setSubmitError] = useState<false | "generic" | "rate">(false);
   const [formData, setFormData] = useState<FormState>({
     name: "",
     email: "",
@@ -52,10 +52,10 @@ const ContactForm = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...formData, lang: language, plan: selectedPlan || "" }),
       });
-      if (!res.ok) throw new Error("Send failed");
+      if (!res.ok) throw new Error(res.status === 429 ? "rate" : "generic");
       setIsSubmitted(true);
-    } catch {
-      setSubmitError(true);
+    } catch (err) {
+      setSubmitError(err instanceof Error && err.message === "rate" ? "rate" : "generic");
     } finally {
       setIsSubmitting(false);
     }
@@ -228,9 +228,13 @@ const ContactForm = () => {
 
       {submitError && (
         <p className="text-sm text-red-500 text-center">
-          {language === "fr"
-            ? "Une erreur est survenue. Réessayez ou contactez-moi sur LinkedIn."
-            : "Something went wrong. Please try again or reach out on LinkedIn."}
+          {submitError === "rate"
+            ? (language === "fr"
+              ? "Trop de demandes. Réessayez dans quelques minutes."
+              : "Too many requests. Please try again in a few minutes.")
+            : (language === "fr"
+              ? "Une erreur est survenue. Réessayez ou contactez-moi sur LinkedIn."
+              : "Something went wrong. Please try again or reach out on LinkedIn.")}
         </p>
       )}
 
