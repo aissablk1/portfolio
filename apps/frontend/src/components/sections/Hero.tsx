@@ -161,7 +161,7 @@ const Hero = () => {
               >
                 <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
                 <span className="opacity-70 font-medium">Layer</span>
-                <span className="border-l border-white/20 pl-2">Globe_Visual_Engine</span>
+                <span className="border-l border-white/20 pl-2">Globe</span>
               </motion.div>
 
               {/* Real-time Dimensions HUD */}
