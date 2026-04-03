@@ -59,7 +59,7 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-12">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-12 self-end">
               <div className="flex flex-col gap-4">
                   <span className="text-xs font-bold uppercase tracking-widest text-site-text-light">Explore</span>
                   <Link href="/#offers" className="text-sm hover:underline">{dict.nav.offers}</Link>
