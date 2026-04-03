@@ -29,8 +29,9 @@ import {
 } from "lucide-react";
 
 export default function DomainAlertPage() {
-  const { dict, language } = useLanguage();
+  const { dict } = useLanguage();
   const d = dict.domainAlert;
+  const p = dict.phishing;
 
   const [isOnLegitDomain, setIsOnLegitDomain] = React.useState(false);
 
@@ -121,57 +122,57 @@ export default function DomainAlertPage() {
               {[
                 {
                   icon: Globe,
-                  label: "Domaine",
+                  label: p.domainLabel,
                   value: d.facts.domain,
                 },
                 {
                   icon: User,
-                  label: "Detenteur",
+                  label: p.holderLabel,
                   value: d.facts.holder,
                 },
                 {
                   icon: Server,
-                  label: "Registrar",
+                  label: p.registrarLabel,
                   value: d.facts.registrar,
                 },
                 {
                   icon: Calendar,
-                  label: "Enregistre le",
+                  label: p.registeredLabel,
                   value: d.facts.registeredOn,
                 },
                 {
                   icon: Clock,
-                  label: "Expire le",
+                  label: p.expiresLabel,
                   value: d.facts.expiresOn,
                 },
                 {
                   icon: Lock,
-                  label: "Statut",
+                  label: p.statusLabel,
                   value: d.facts.status,
                 },
                 {
                   icon: Wifi,
-                  label: "DNS",
+                  label: p.dnsLabel,
                   value: d.facts.dns,
                 },
                 {
                   icon: Cloud,
-                  label: "Hebergement",
+                  label: p.hostingLabel,
                   value: d.facts.hosting,
                 },
                 {
                   icon: ShieldX,
-                  label: "Certificat SSL",
+                  label: p.sslLabel,
                   value: d.facts.ssl,
                 },
                 {
                   icon: History,
-                  label: "Historique du contenu",
+                  label: p.historyLabel,
                   value: d.facts.contentHistory,
                 },
                 {
                   icon: Network,
-                  label: "Infrastructure suspecte",
+                  label: p.suspectLabel,
                   value: d.facts.suspiciousInfra,
                 },
               ].map((fact) => (
@@ -295,7 +296,7 @@ export default function DomainAlertPage() {
                 {isOnLegitDomain && (
                   <span className="text-xs font-bold uppercase tracking-[0.2em] text-green-400 flex items-center gap-2">
                     <CheckCircle2 size={14} />
-                    {language === "fr" ? "Vous y \u00eates d\u00e9j\u00e0" : "You are already here"}
+                    {p.alreadyHere}
                   </span>
                 )}
               </div>

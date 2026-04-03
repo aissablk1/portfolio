@@ -7,7 +7,8 @@ import Footer from "@/components/Footer";
 import { useLanguage } from "@/components/LanguageContext";
 
 export default function NotFound() {
-  const { language } = useLanguage();
+  const { dict } = useLanguage();
+  const t = dict.notFound;
 
   return (
     <div className="bg-site-bg min-h-screen relative">
@@ -21,7 +22,7 @@ export default function NotFound() {
             transition={{ duration: 0.6 }}
             className="text-xs font-bold uppercase tracking-[0.3em] text-site-accent mb-8"
           >
-            404
+            {t.code}
           </motion.p>
 
           <motion.h1
@@ -30,9 +31,7 @@ export default function NotFound() {
             transition={{ duration: 0.8, delay: 0.1 }}
             className="text-5xl md:text-7xl font-display font-medium mb-6 leading-tight tracking-tight"
           >
-            {language === "fr"
-              ? "Cette page n'existe pas."
-              : "This page doesn't exist."}
+            {t.title}
           </motion.h1>
 
           <motion.p
@@ -41,9 +40,7 @@ export default function NotFound() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-lg text-site-text-light leading-relaxed mb-12 max-w-lg mx-auto"
           >
-            {language === "fr"
-              ? "L'URL que vous avez suivie ne mene nulle part. Revenez a la base."
-              : "The URL you followed leads nowhere. Head back to base."}
+            {t.subtitle}
           </motion.p>
 
           <motion.div
@@ -56,13 +53,13 @@ export default function NotFound() {
               href="/services"
               className="inline-flex items-center gap-3 bg-site-accent text-white px-8 py-4 rounded-full font-display font-medium text-sm hover:bg-site-accent/90 transition-colors"
             >
-              {language === "fr" ? "Voir les offres" : "See our plans"}
+              {t.seePlans}
             </Link>
             <Link
               href="/"
               className="inline-flex items-center gap-3 border border-site-border px-8 py-4 rounded-full font-display font-medium text-sm hover:border-site-accent hover:text-site-accent transition-colors"
             >
-              {language === "fr" ? "Retour à l'accueil" : "Back to home"}
+              {t.backHome}
             </Link>
           </motion.div>
         </div>
