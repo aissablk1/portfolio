@@ -1,7 +1,7 @@
 "use client";
 
 import Header from "@/components/Header";
-import SideNav from "@/components/SideNav";
+// import SideNav from "@/components/SideNav";
 import FloatingCta from "@/components/FloatingCta";
 import Hero from "@/components/sections/Hero";
 import Offers from "@/components/sections/Offers";
@@ -17,7 +17,7 @@ export default function Home() {
   return (
     <div className="bg-site-bg min-h-screen">
       <Header />
-      <SideNav />
+      {/* <SideNav /> */}
       <FloatingCta />
       
       <div className="grid grid-cols-1 relative">
@@ -31,7 +31,7 @@ export default function Home() {
           <Approach />
           <Expertises />
           <PricingTeaser />
-          <Systems />
+          {/* <Systems /> */}
           <About />
           <Contact />
           <Footer />
