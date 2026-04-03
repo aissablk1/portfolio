@@ -172,7 +172,7 @@ const Header = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-50 bg-site-bg lg:hidden flex flex-col"
+            className="fixed inset-0 z-[60] bg-site-bg lg:hidden flex flex-col"
           >
             {/* Menu header — logo + close button */}
             <div className="px-container py-6 flex items-center justify-between shrink-0">
@@ -226,14 +226,14 @@ const Header = () => {
                 <Link
                   href="/diagnostic"
                   onClick={() => setMenuOpen(false)}
-                  className="text-lg font-display font-medium tracking-tight border border-site-border text-site-text-light px-8 py-3 rounded-full hover:border-site-accent hover:text-site-accent transition-colors"
+                  className="text-lg font-display font-medium tracking-tight border border-site-border text-site-text-light px-8 py-4 rounded-full hover:border-site-accent hover:text-site-accent transition-colors text-center w-64"
                 >
                   {dict.ui.diagnosticFree}
                 </Link>
                 <Link
                   href="/contact"
                   onClick={() => setMenuOpen(false)}
-                  className="text-2xl font-display font-medium tracking-tight bg-site-accent text-white px-8 py-3 rounded-full hover:bg-site-accent/90 transition-colors"
+                  className="text-lg font-display font-medium tracking-tight bg-site-accent text-white px-8 py-4 rounded-full hover:bg-site-accent/90 transition-colors text-center w-64"
                 >
                   {dict.nav.contact}
                 </Link>
