@@ -13,6 +13,7 @@ import Systems from "@/components/sections/Systems";
 import About from "@/components/sections/About";
 import Contact from "@/components/sections/Contact";
 import Footer from "@/components/Footer";
+import FigmaSelector from "@/components/FigmaSelector";
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
       <Header />
       {/* <SideNav /> */}
       <FloatingCta />
+      <FigmaSelector />
       
       <div className="grid grid-cols-1 relative">
         {/* Left Column (Empty Spacer) */}
