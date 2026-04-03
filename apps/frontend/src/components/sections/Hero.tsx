@@ -61,7 +61,7 @@ const Hero = () => {
           </motion.div>
         </div>
 
-        <div className="hidden md:block lg:block lg:col-span-4 relative h-[600px] -mr-20" style={{ mask: "linear-gradient(to bottom, black 50%, transparent 100%)", WebkitMask: "linear-gradient(to bottom, black 50%, transparent 100%)" }}>
+        <div className="hidden md:block lg:block lg:col-span-4 relative h-[600px] -mr-20" style={{ mask: "linear-gradient(to bottom, transparent 0%, black 10%, black 80%, transparent 100%)", WebkitMask: "linear-gradient(to bottom, transparent 0%, black 10%, black 80%, transparent 100%)" }}>
            <div className="absolute inset-0 bg-size-[32px_32px] bg-[radial-gradient(var(--color-site-border)_1px,transparent_1px)] mask-[radial-gradient(ellipse_at_center,black,transparent_80%)]">
               <Globe />
            </div>
