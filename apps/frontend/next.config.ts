@@ -27,11 +27,10 @@ const nextConfig: NextConfig = {
           key: "Permissions-Policy",
           value: "camera=(), microphone=(), geolocation=()",
         },
-        { key: "Cross-Origin-Opener-Policy", value: "same-origin-allow-popups" },
         {
           key: "Content-Security-Policy",
           value:
-            "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://vercel.live https://assets.calendly.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://vercel.live https://assets.calendly.com; font-src 'self' https://fonts.gstatic.com https://vercel.live; img-src 'self' data: blob: https://vercel.com https://vercel.live https://assets.calendly.com; media-src 'self'; connect-src 'self' https://vercel.live https://vitals.vercel-insights.com https://portfolio-api-72tq.onrender.com https://api.resend.com https://calendly.com; frame-src 'self' https://vercel.live https://calendly.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'",
+            "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://vercel.live https://*.calendly.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://vercel.live https://*.calendly.com; font-src 'self' https://fonts.gstatic.com https://vercel.live; img-src 'self' data: blob: https://vercel.com https://vercel.live https://*.calendly.com; media-src 'self'; connect-src 'self' https://vercel.live https://vitals.vercel-insights.com https://portfolio-api-72tq.onrender.com https://api.resend.com https://*.calendly.com; frame-src 'self' https://vercel.live https://calendly.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'",
         },
       ],
     },
