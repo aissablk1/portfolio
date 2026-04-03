@@ -358,6 +358,31 @@ interface Dictionary {
     learnMore: string;
     viewPricing: string;
   };
+  availabilityBanner: {
+    months: string[];
+    slotSingular: string;
+    slotPlural: string;
+  };
+  maintenanceGate: {
+    title: string;
+    description: string;
+    comeback: string;
+    passwordPlaceholder: string;
+  };
+  roi: {
+    badge: string;
+    title: string;
+    tradeLabel: string;
+    hoursLabel: (hours: number) => string;
+    projection: string;
+    savedPerWeek: string;
+    valuePerWeek: string;
+    savedPerYear: string;
+    weeksUnit: string;
+    breakEven: string;
+    summary: (weeksToROI: number, weeklySaved: string) => string;
+    placeholder: string;
+  };
 }
 
 const dictionaries: Record<Language, Dictionary> = {
@@ -991,6 +1016,32 @@ const dictionaries: Record<Language, Dictionary> = {
       learnMore: "En savoir +",
       viewPricing: "Voir les tarifs",
     },
+    availabilityBanner: {
+      months: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
+      slotSingular: "{month} {year} — {slots} créneau projet disponible",
+      slotPlural: "{month} {year} — {slots} créneaux projets disponibles",
+    },
+    maintenanceGate: {
+      title: "Site en maintenance",
+      description: "Le site est en cours de construction et sera bientôt disponible.",
+      comeback: "Revenez d'ici peu.",
+      passwordPlaceholder: "Mot de passe",
+    },
+    roi: {
+      badge: "Calculez votre ROI",
+      title: "Combien vous coûte\nchaque semaine sans système ?",
+      tradeLabel: "Votre métier",
+      hoursLabel: (hours: number) => `Heures perdues en admin par semaine : ${hours}h`,
+      projection: "Votre projection",
+      savedPerWeek: "récupérées / semaine",
+      valuePerWeek: "de valeur / semaine",
+      savedPerYear: "économisés / an",
+      weeksUnit: "sem.",
+      breakEven: "pour rentabiliser",
+      summary: (weeksToROI: number, weeklySaved: string) =>
+        `En ${weeksToROI} semaines, votre système Accélérateur à 2 900 € est rentabilisé. Ensuite, c'est ${weeklySaved} € de valeur nette chaque semaine.`,
+      placeholder: "Sélectionnez votre métier pour voir votre ROI",
+    },
   },
   en: {
     warning: "aissabelkoussa.com is a phishing domain, make sure you are on aissabelkoussa.fr",
@@ -1621,6 +1672,32 @@ const dictionaries: Record<Language, Dictionary> = {
       menuClose: "Close menu",
       learnMore: "Learn more +",
       viewPricing: "View pricing",
+    },
+    availabilityBanner: {
+      months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+      slotSingular: "{month} {year} — {slots} project slot available",
+      slotPlural: "{month} {year} — {slots} project slots available",
+    },
+    maintenanceGate: {
+      title: "Under maintenance",
+      description: "The website is under construction and will be available soon.",
+      comeback: "Check back shortly.",
+      passwordPlaceholder: "Password",
+    },
+    roi: {
+      badge: "Calculate your ROI",
+      title: "How much is each week\nwithout a system costing you?",
+      tradeLabel: "Your trade",
+      hoursLabel: (hours: number) => `Hours lost on admin per week: ${hours}h`,
+      projection: "Your projection",
+      savedPerWeek: "saved / week",
+      valuePerWeek: "value / week",
+      savedPerYear: "saved / year",
+      weeksUnit: "wks",
+      breakEven: "to break even",
+      summary: (weeksToROI: number, weeklySaved: string) =>
+        `In ${weeksToROI} weeks, your Accelerator system at €2,900 pays for itself. After that, it's €${weeklySaved} net value every week.`,
+      placeholder: "Select your trade to see your ROI",
     },
   },
 };

@@ -14,7 +14,7 @@ export default function MaintenanceGate({
 }: {
   children: React.ReactNode;
 }) {
-  const { language, setLanguage } = useLanguage();
+  const { language, setLanguage, dict } = useLanguage();
   const [isUnlocked, setIsUnlocked] = useState(false);
   const [isChecking, setIsChecking] = useState(true);
   const bufferRef = useRef("");
@@ -158,7 +158,6 @@ export default function MaintenanceGate({
     }
   };
 
-  const isFr = language === "fr";
   const isLocked = !isUnlocked && !isChecking;
 
   // Avoid hydration flash
@@ -223,19 +222,15 @@ export default function MaintenanceGate({
 
             {/* Title */}
             <h1 className="text-3xl md:text-4xl font-display font-medium tracking-tight mb-4">
-              {isFr ? "Site en maintenance" : "Under maintenance"}
+              {dict.maintenanceGate.title}
             </h1>
 
             {/* Description */}
             <p className="text-site-text-light leading-relaxed mb-2">
-              {isFr
-                ? "Le site est en cours de construction et sera bientôt disponible."
-                : "The website is under construction and will be available soon."}
+              {dict.maintenanceGate.description}
             </p>
             <p className="text-site-text-light/60 text-sm">
-              {isFr
-                ? "Revenez d'ici peu."
-                : "Check back shortly."}
+              {dict.maintenanceGate.comeback}
             </p>
 
             {/* Mobile password input — visible on mobile portrait only, hidden on desktop and landscape */}
@@ -250,7 +245,7 @@ export default function MaintenanceGate({
                   value={mobileValue}
                   onChange={(e) => handleMobileInput(e.target.value)}
                   onKeyDown={handleMobileKeyDown}
-                  placeholder={isFr ? "Mot de passe" : "Password"}
+                  placeholder={dict.maintenanceGate.passwordPlaceholder}
                   className="bg-transparent text-sm text-site-text placeholder:text-site-text-light/50 outline-none w-full"
                   autoComplete="off"
                   autoCorrect="off"

@@ -28,7 +28,7 @@ const trades = {
 };
 
 export default function ROICalculator() {
-  const { language } = useLanguage();
+  const { language, dict } = useLanguage();
   const tradeList = trades[language];
   const [selectedTrade, setSelectedTrade] = useState<string | null>(null);
   const [hoursLost, setHoursLost] = useState(12);
@@ -56,13 +56,11 @@ export default function ROICalculator() {
           <div className="flex items-center gap-4 mb-8">
             <Calculator size={16} className="text-site-accent" />
             <span className="text-xs font-bold uppercase tracking-widest text-site-text-light">
-              {language === "fr" ? "Calculez votre ROI" : "Calculate your ROI"}
+              {dict.roi.badge}
             </span>
           </div>
           <h2 className="text-fluid-title tracking-tighter uppercase max-w-3xl mb-6 whitespace-pre-line">
-            {language === "fr"
-              ? "Combien vous coûte\nchaque semaine sans système ?"
-              : "How much is each week\nwithout a system costing you?"}
+            {dict.roi.title}
           </h2>
         </motion.div>
 
@@ -78,7 +76,7 @@ export default function ROICalculator() {
             {/* Trade selection */}
             <div>
               <label className="text-[10px] font-bold uppercase tracking-widest text-site-text-light/60 mb-4 block">
-                {language === "fr" ? "Votre métier" : "Your trade"}
+                {dict.roi.tradeLabel}
               </label>
               <div className="grid grid-cols-2 gap-3">
                 {tradeList.map((t) => (
@@ -102,9 +100,7 @@ export default function ROICalculator() {
             {/* Hours slider */}
             <div>
               <label className="text-[10px] font-bold uppercase tracking-widest text-site-text-light/60 mb-4 block">
-                {language === "fr"
-                  ? `Heures perdues en admin par semaine : ${hoursLost}h`
-                  : `Hours lost on admin per week: ${hoursLost}h`}
+                {dict.roi.hoursLabel(hoursLost)}
               </label>
               <input
                 type="range"
@@ -139,7 +135,7 @@ export default function ROICalculator() {
                 <div className="flex items-center gap-3 mb-2">
                   <TrendingUp size={18} className="text-site-accent" />
                   <span className="text-xs font-bold uppercase tracking-widest text-site-accent">
-                    {language === "fr" ? "Votre projection" : "Your projection"}
+                    {dict.roi.projection}
                   </span>
                 </div>
 
@@ -149,7 +145,7 @@ export default function ROICalculator() {
                       {hoursSaved}h
                     </div>
                     <p className="text-xs text-site-text-light mt-1">
-                      {language === "fr" ? "récupérées / semaine" : "saved / week"}
+                      {dict.roi.savedPerWeek}
                     </p>
                   </div>
                   <div>
@@ -157,7 +153,7 @@ export default function ROICalculator() {
                       {weeklySaved.toLocaleString("fr-FR")} €
                     </div>
                     <p className="text-xs text-site-text-light mt-1">
-                      {language === "fr" ? "de valeur / semaine" : "value / week"}
+                      {dict.roi.valuePerWeek}
                     </p>
                   </div>
                   <div>
@@ -165,33 +161,29 @@ export default function ROICalculator() {
                       {yearlySaved.toLocaleString("fr-FR")} €
                     </div>
                     <p className="text-xs text-site-text-light mt-1">
-                      {language === "fr" ? "économisés / an" : "saved / year"}
+                      {dict.roi.savedPerYear}
                     </p>
                   </div>
                   <div>
                     <div className="text-3xl md:text-4xl font-medium tracking-tighter text-site-accent">
-                      {weeksToROI} {language === "fr" ? "sem." : "wks"}
+                      {weeksToROI} {dict.roi.weeksUnit}
                     </div>
                     <p className="text-xs text-site-text-light mt-1">
-                      {language === "fr" ? "pour rentabiliser" : "to break even"}
+                      {dict.roi.breakEven}
                     </p>
                   </div>
                 </div>
 
                 <div className="pt-6 border-t border-site-accent/10">
                   <p className="text-sm text-site-text-light leading-relaxed">
-                    {language === "fr"
-                      ? `En ${weeksToROI} semaines, votre système Accélérateur à 2 900 € est rentabilisé. Ensuite, c'est ${weeklySaved.toLocaleString("fr-FR")} € de valeur nette chaque semaine.`
-                      : `In ${weeksToROI} weeks, your Accelerator system at €2,900 pays for itself. After that, it's €${weeklySaved.toLocaleString("fr-FR")} net value every week.`}
+                    {dict.roi.summary(weeksToROI, weeklySaved.toLocaleString("fr-FR"))}
                   </p>
                 </div>
               </div>
             ) : (
               <div className="flex items-center justify-center h-full min-h-[250px] text-site-text-light/30">
                 <p className="text-sm text-center">
-                  {language === "fr"
-                    ? "Sélectionnez votre métier pour voir votre ROI"
-                    : "Select your trade to see your ROI"}
+                  {dict.roi.placeholder}
                 </p>
               </div>
             )}
