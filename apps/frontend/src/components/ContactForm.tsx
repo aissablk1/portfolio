@@ -228,13 +228,7 @@ const ContactForm = () => {
 
       {submitError && (
         <p className="text-sm text-red-500 text-center">
-          {submitError === "rate"
-            ? (language === "fr"
-              ? "Trop de demandes. Réessayez dans quelques minutes."
-              : "Too many requests. Please try again in a few minutes.")
-            : (language === "fr"
-              ? "Une erreur est survenue. Réessayez ou contactez-moi sur LinkedIn."
-              : "Something went wrong. Please try again or reach out on LinkedIn.")}
+          {submitError === "rate" ? dict.funnel.errors.rate : dict.funnel.errors.generic}
         </p>
       )}
 

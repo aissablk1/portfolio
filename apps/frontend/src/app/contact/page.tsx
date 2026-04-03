@@ -88,6 +88,24 @@ const ContactPage = () => {
               <div className="flex-1 h-px bg-site-border/50" />
             </div>
             <div className="bg-white/40 backdrop-blur-3xl border border-site-border rounded-[3rem] shadow-2xl shadow-site-accent/5 overflow-hidden">
+              <div className="px-8 pt-10 pb-4 md:px-16 md:pt-14 md:pb-6">
+                <h3 className="text-2xl md:text-3xl font-display font-medium tracking-tight mb-3">
+                  Appel découverte
+                </h3>
+                <div className="flex flex-wrap items-center gap-3 text-sm text-site-text-light/60">
+                  <span className="inline-flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
+                    30 min
+                  </span>
+                  <span className="text-site-border">|</span>
+                  <span>Google Meet</span>
+                  <span className="text-site-border">|</span>
+                  <span>Gratuit, sans engagement</span>
+                </div>
+                <p className="mt-4 text-sm text-site-text-light/50 max-w-xl leading-relaxed">
+                  On fait le point sur votre besoin, votre budget et vos délais. Vous repartez avec une vision claire de ce qui est possible — même si on ne travaille pas ensemble.
+                </p>
+              </div>
               <Suspense fallback={<div className="min-h-[700px]" />}>
                 <CalendlyWidget />
               </Suspense>

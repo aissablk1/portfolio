@@ -111,6 +111,19 @@ interface Dictionary {
       microcopy: string;
     }>;
   };
+  socialProof: {
+    badge: string;
+    title: string;
+    projects: Array<{
+      name: string;
+      sector: string;
+      description: string;
+    }>;
+    stats: Array<{
+      value: string;
+      label: string;
+    }>;
+  };
   systems: {
     title: string;
     intro: string;
@@ -170,6 +183,7 @@ interface Dictionary {
     };
     cta: { next: string; prev: string; submit: string };
     success: { title: string; message: string };
+    errors: { generic: string; rate: string };
   };
   diagnostic: {
     srTitle: string;
@@ -555,6 +569,36 @@ const dictionaries: Record<Language, Dictionary> = {
         }
       ],
     },
+    socialProof: {
+      badge: "Références",
+      title: "Projets livrés",
+      projects: [
+        {
+          name: "DK Building",
+          sector: "BTP",
+          description: "Site corporate + CMS sur-mesure pour une PME de construction metallique",
+        },
+        {
+          name: "Syna Events",
+          sector: "Evenementiel",
+          description: "Site evenementiel deploye en production",
+        },
+        {
+          name: "Jolananas",
+          sector: "E-commerce",
+          description: "Storefront Shopify premium connectee via GraphQL",
+        },
+        {
+          name: "Albi RP",
+          sector: "Gaming",
+          description: "Ecosysteme complet : jeu Roblox + bot Discord + site + API",
+        },
+      ],
+      stats: [
+        { value: "93", label: "projets realises" },
+        { value: "4+", label: "annees d'experience" },
+      ],
+    },
     systems: {
       title: "Systèmes construits, pas promis",
       intro: "Ce n'est pas ce que je pourrais faire. C'est ce que j'ai fait.",
@@ -646,6 +690,10 @@ const dictionaries: Record<Language, Dictionary> = {
       success: {
         title: "Demande reçue",
         message: "Je reviens vers vous sous 48h pour analyser votre système."
+      },
+      errors: {
+        generic: "Une erreur est survenue. Réessayez ou contactez-moi sur LinkedIn.",
+        rate: "Trop de demandes. Réessayez dans quelques minutes.",
       },
     },
     diagnostic: {
@@ -1055,6 +1103,36 @@ const dictionaries: Record<Language, Dictionary> = {
         }
       ],
     },
+    socialProof: {
+      badge: "References",
+      title: "Delivered projects",
+      projects: [
+        {
+          name: "DK Building",
+          sector: "Construction",
+          description: "Corporate site + custom CMS for a steel construction SME",
+        },
+        {
+          name: "Syna Events",
+          sector: "Events",
+          description: "Event website deployed in production",
+        },
+        {
+          name: "Jolananas",
+          sector: "E-commerce",
+          description: "Premium Shopify storefront connected via GraphQL",
+        },
+        {
+          name: "Albi RP",
+          sector: "Gaming",
+          description: "Full ecosystem: Roblox game + Discord bot + website + API",
+        },
+      ],
+      stats: [
+        { value: "93", label: "delivered projects" },
+        { value: "4+", label: "years of experience" },
+      ],
+    },
     systems: {
       title: "Built systems, not promises",
       intro: "It's not what I could do. It's what I have done.",
@@ -1146,6 +1224,10 @@ const dictionaries: Record<Language, Dictionary> = {
       success: {
         title: "Request received",
         message: "I'll get back to you within 48h to analyze your system."
+      },
+      errors: {
+        generic: "Something went wrong. Please try again or reach out on LinkedIn.",
+        rate: "Too many requests. Please try again in a few minutes.",
       },
     },
     diagnostic: {
