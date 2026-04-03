@@ -15,10 +15,9 @@ const Hero = () => {
     width: 400,
     height: 480,
   });
+  const [layerName, setLayerName] = React.useState("GLOBE");
+  const boxRef = React.useRef<HTMLDivElement>(null);
 
-  // Handle resizing from the bottom-right for simplicity and high-fidelity feel
-  // In a full implementation, we'd handle all 8 handles, but for a "Hero" demo,
-  // smooth bottom-right resizing + full dragging is usually the "wow" factor.
   const handleResize = (event: any, info: any) => {
     setRect(prev => ({
       ...prev,
@@ -27,11 +26,45 @@ const Hero = () => {
     }));
   };
 
+  // Detect which element is under the center of the selection box
+  const detectLayer = React.useCallback(() => {
+    if (!boxRef.current) return;
+    const r = boxRef.current.getBoundingClientRect();
+    const cx = r.left + r.width / 2;
+    const cy = r.top + r.height / 2;
+    // Temporarily hide the box so elementFromPoint sees through it
+    boxRef.current.style.pointerEvents = "none";
+    const el = document.elementFromPoint(cx, cy);
+    boxRef.current.style.pointerEvents = "";
+    if (!el) return;
+    // Walk up to find the nearest named element (data-layer or section/component)
+    let node: Element | null = el;
+    while (node && node !== document.body) {
+      const name = node.getAttribute("data-layer");
+      if (name) { setLayerName(name.toUpperCase()); return; }
+      // Fallback: use tag + class hints
+      const tag = node.tagName.toLowerCase();
+      if (tag === "section") {
+        const id = node.id || node.getAttribute("aria-label") || "";
+        if (id) { setLayerName(id.toUpperCase().replace(/-/g, "_")); return; }
+      }
+      if (tag === "h1") { setLayerName("HEADING"); return; }
+      if (tag === "h2") { setLayerName("TITLE"); return; }
+      if (tag === "button" || tag === "a") { setLayerName("CTA"); return; }
+      if (tag === "img" || tag === "video" || tag === "canvas") { setLayerName(tag.toUpperCase()); return; }
+      if (tag === "footer") { setLayerName("FOOTER"); return; }
+      if (tag === "header" || tag === "nav") { setLayerName("HEADER"); return; }
+      node = node.parentElement;
+    }
+    setLayerName("BACKGROUND");
+  }, []);
+
   return (
-    <section className="px-container pt-32 pb-16 md:pt-60 md:pb-32">
+    <section className="px-container pt-32 pb-16 md:pt-60 md:pb-32" data-layer="Hero">
       <div className="max-w-7xl mx-auto grid grid-cols-12 gap-6 md:gap-12 items-center">
         <div className="col-span-12 lg:col-span-7">
           <motion.h1
+            data-layer="Headline"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
@@ -69,7 +102,7 @@ const Hero = () => {
                       WebkitMaskComposite: "destination-in",
                     }}
         >
-           <div className="absolute inset-0 bg-size-[32px_32px] bg-[radial-gradient(var(--color-site-border)_1px,transparent_1px)] mask-[radial-gradient(ellipse_at_center,black,transparent_80%)]">
+           <div data-layer="Globe" className="absolute inset-0 bg-size-[32px_32px] bg-[radial-gradient(var(--color-site-border)_1px,transparent_1px)] mask-[radial-gradient(ellipse_at_center,black,transparent_80%)]">
               <Globe />
            </div>
            
@@ -112,8 +145,11 @@ const Hero = () => {
 
             {/* Interactive Figma Selection Box */}
             <motion.div
+              ref={boxRef}
               drag
               dragMomentum={false}
+              onDrag={detectLayer}
+              onDragEnd={detectLayer}
               style={{
                 width: rect.width,
                 height: rect.height,
@@ -161,7 +197,7 @@ const Hero = () => {
               >
                 <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
                 <span className="opacity-70 font-medium">Layer</span>
-                <span className="border-l border-white/20 pl-2">Globe</span>
+                <span className="border-l border-white/20 pl-2">{layerName}</span>
               </motion.div>
 
               {/* Real-time Dimensions HUD */}
