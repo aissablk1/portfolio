@@ -8,6 +8,7 @@ import { cn } from "@/utils/cn";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import AvailabilityBanner from "@/components/AvailabilityBanner";
+import CheckoutButton from "@/components/CheckoutButton";
 
 type Niche = null | "btp" | "b2b";
 
@@ -178,13 +179,11 @@ export default function GoPage() {
                   <p className="text-xs text-white/40 mb-6">
                     Option maintenance : 290 €/mois
                   </p>
-                  <Link
-                    href="/contact?plan=pilote"
+                  <CheckoutButton
+                    plan="pilote-automatique"
+                    label="Automatiser mon business"
                     className="inline-flex items-center gap-2 bg-white text-site-accent px-6 py-3 rounded-full text-[11px] font-bold uppercase tracking-widest hover:scale-105 transition-all duration-300"
-                  >
-                    Automatiser mon business
-                    <ArrowUpRight size={12} />
-                  </Link>
+                  />
                 </div>
               </div>
             </motion.div>
@@ -315,13 +314,11 @@ export default function GoPage() {
                       <p className="inline-block mt-2 mb-6 text-[10px] font-bold bg-site-bg/10 text-site-bg px-3 py-1 rounded-full">
                         3 mois offerts (valeur 1 470 €)
                       </p>
-                      <Link
-                        href="/contact?plan=accelerateur"
+                      <CheckoutButton
+                        plan="pro"
+                        label="Lancer mon système"
                         className="inline-flex items-center gap-2 bg-site-bg text-site-text px-6 py-3 rounded-full text-[11px] font-bold uppercase tracking-widest hover:scale-105 transition-all duration-300"
-                      >
-                        Lancer mon système
-                        <ArrowUpRight size={12} />
-                      </Link>
+                      />
                     </div>
                   </div>
                 </div>
@@ -416,6 +413,7 @@ export default function GoPage() {
                   priceUnit: "/pers.",
                   desc: "Prompt engineering + cas d'usage métier. Votre équipe repart avec des compétences IA opérationnelles.",
                   href: "/contact?plan=formation-ia-pratique",
+                  checkoutPlan: "formation-ia-pratique",
                 },
                 {
                   name: "Automatiser son business",
@@ -424,6 +422,7 @@ export default function GoPage() {
                   priceUnit: "/pers.",
                   desc: "Automatisations déployées pendant la formation. Vos process tournent avant la fin du jour 2.",
                   href: "/contact?plan=formation-automatisation",
+                  checkoutPlan: "formation-automatisation",
                 },
                 {
                   name: "Sur-mesure",
@@ -432,6 +431,7 @@ export default function GoPage() {
                   priceUnit: "/jour",
                   desc: "Programme personnalisé + suivi 3 mois. Conçu autour de vos enjeux spécifiques.",
                   href: "/contact?plan=formation-sur-mesure",
+                  checkoutPlan: null,
                 },
               ].map((formation, i) => (
                 <motion.div
@@ -452,13 +452,21 @@ export default function GoPage() {
                     <span className="text-site-text-light text-sm">{formation.priceUnit}</span>
                   </div>
                   <p className="text-sm text-site-text-light leading-relaxed mb-6">{formation.desc}</p>
-                  <Link
-                    href={formation.href}
-                    className="inline-flex items-center gap-2 border border-site-border px-5 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-widest hover:border-site-text hover:bg-site-text hover:text-site-bg transition-all duration-300"
-                  >
-                    En savoir plus
-                    <ArrowUpRight size={11} />
-                  </Link>
+                  {formation.checkoutPlan ? (
+                    <CheckoutButton
+                      plan={formation.checkoutPlan}
+                      label="En savoir plus"
+                      className="inline-flex items-center gap-2 border border-site-border px-5 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-widest hover:border-site-text hover:bg-site-text hover:text-site-bg transition-all duration-300"
+                    />
+                  ) : (
+                    <Link
+                      href={formation.href}
+                      className="inline-flex items-center gap-2 border border-site-border px-5 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-widest hover:border-site-text hover:bg-site-text hover:text-site-bg transition-all duration-300"
+                    >
+                      En savoir plus
+                      <ArrowUpRight size={11} />
+                    </Link>
+                  )}
                 </motion.div>
               ))}
             </div>
@@ -657,13 +665,11 @@ export default function GoPage() {
                 30 minutes suffisent pour cadrer votre projet.
                 Gratuit, zéro engagement.
               </p>
-              <Link
-                href="/contact?plan=accelerateur"
+              <CheckoutButton
+                plan="pro"
+                label="Recevoir ma proposition en 48h"
                 className="inline-flex items-center gap-3 bg-site-text text-site-bg px-10 py-5 rounded-full text-[11px] font-bold uppercase tracking-widest hover:scale-105 transition-all duration-300"
-              >
-                Recevoir ma proposition en 48h
-                <ArrowUpRight size={14} />
-              </Link>
+              />
             </motion.div>
           </div>
         </section>

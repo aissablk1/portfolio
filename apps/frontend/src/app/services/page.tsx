@@ -24,6 +24,7 @@ import {
 import Link from "next/link";
 import { cn } from "@/utils/cn";
 import ExitIntentModal from "@/components/ExitIntentModal";
+import CheckoutButton from "@/components/CheckoutButton";
 
 /* ────────────────────────────────────────────────────────────────────────────
    CONTENT — FR / EN
@@ -102,6 +103,7 @@ const content = {
           highlighted: false,
           badge: null,
           monthly: null,
+          checkoutPlan: "pilote-automatique" as string | null,
         },
         {
           name: "Pro",
@@ -120,6 +122,7 @@ const content = {
           highlighted: true,
           badge: "Recommandé",
           monthly: "Puis 490 \u20ac/mois. Sans engagement.",
+          checkoutPlan: "pro" as string | null,
         },
         {
           name: "Sur-mesure",
@@ -138,6 +141,7 @@ const content = {
           highlighted: false,
           badge: null,
           monthly: "Puis 1 900 \u20ac/mois. Sans engagement.",
+          checkoutPlan: null as string | null,
         },
       ],
     },
@@ -478,6 +482,7 @@ const content = {
           highlighted: false,
           badge: null,
           monthly: null,
+          checkoutPlan: "pilote-automatique" as string | null,
         },
         {
           name: "Pro",
@@ -496,6 +501,7 @@ const content = {
           highlighted: true,
           badge: "Recommended",
           monthly: "Then \u20ac490/month. No commitment.",
+          checkoutPlan: "pro" as string | null,
         },
         {
           name: "Custom",
@@ -514,6 +520,7 @@ const content = {
           highlighted: false,
           badge: null,
           monthly: "Then \u20ac1,900/month. No commitment.",
+          checkoutPlan: null as string | null,
         },
       ],
     },
@@ -978,18 +985,31 @@ export default function ServicesPage() {
                       </div>
 
                       {/* CTA */}
-                      <Link
-                        href={tier.ctaLink}
-                        className={cn(
-                          "inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all mb-8",
-                          isHighlighted
-                            ? "bg-site-accent text-white hover:bg-site-accent/85 hover:scale-105"
-                            : "border border-site-border text-site-text hover:border-site-accent hover:text-site-accent"
-                        )}
-                      >
-                        {tier.cta}
-                        <ArrowUpRight size={14} />
-                      </Link>
+                      {tier.checkoutPlan ? (
+                        <CheckoutButton
+                          plan={tier.checkoutPlan}
+                          label={tier.cta}
+                          className={cn(
+                            "inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all mb-8",
+                            isHighlighted
+                              ? "bg-site-accent text-white hover:bg-site-accent/85 hover:scale-105"
+                              : "border border-site-border text-site-text hover:border-site-accent hover:text-site-accent"
+                          )}
+                        />
+                      ) : (
+                        <Link
+                          href={tier.ctaLink}
+                          className={cn(
+                            "inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all mb-8",
+                            isHighlighted
+                              ? "bg-site-accent text-white hover:bg-site-accent/85 hover:scale-105"
+                              : "border border-site-border text-site-text hover:border-site-accent hover:text-site-accent"
+                          )}
+                        >
+                          {tier.cta}
+                          <ArrowUpRight size={14} />
+                        </Link>
+                      )}
 
                       {/* Features */}
                       <div className="border-t border-site-border pt-6 flex-1">
@@ -1060,13 +1080,11 @@ export default function ServicesPage() {
                     <span className="text-sm opacity-60">{t.pilote.option}</span>
                   </div>
 
-                  <Link
-                    href={t.pilote.ctaLink}
+                  <CheckoutButton
+                    plan="pilote-automatique"
+                    label={t.pilote.cta}
                     className="inline-flex items-center gap-3 bg-white text-site-accent px-8 py-4 rounded-full text-xs font-bold uppercase tracking-widest hover:scale-105 transition-all"
-                  >
-                    {t.pilote.cta}
-                    <ArrowUpRight size={14} />
-                  </Link>
+                  />
                 </motion.div>
               </div>
             </div>
