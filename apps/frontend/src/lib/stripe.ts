@@ -1,16 +1,19 @@
 import Stripe from "stripe";
 
-function getStripe() {
-  const key = process.env.STRIPE_SECRET_KEY;
-  if (!key) {
-    throw new Error("STRIPE_SECRET_KEY is not defined");
+let _stripe: Stripe | null = null;
+
+export function getStripe(): Stripe {
+  if (!_stripe) {
+    const key = process.env.STRIPE_SECRET_KEY;
+    if (!key) throw new Error("STRIPE_SECRET_KEY is not defined");
+    _stripe = new Stripe(key, { typescript: true });
   }
-  return new Stripe(key, { typescript: true });
+  return _stripe;
 }
 
-// Lazy initialization — only throws when actually used, not at import time
+// Re-export as `stripe` for convenience — lazy singleton
 export const stripe = new Proxy({} as Stripe, {
-  get(_, prop) {
-    return (getStripe() as Record<string | symbol, unknown>)[prop];
+  get(_, prop: string | symbol) {
+    return Reflect.get(getStripe(), prop);
   },
 });
