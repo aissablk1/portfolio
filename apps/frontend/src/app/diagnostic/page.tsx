@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight, ArrowLeft, CheckCircle2, AlertTriangle, XCircle, Send } from "lucide-react";
 import { cn } from "@/utils/cn";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 /* ── Questions ─────────────────────────────────────────────────────── */
 const questions = [
@@ -149,19 +151,9 @@ export default function DiagnosticPage() {
 
   return (
     <div className="bg-site-bg min-h-screen">
-      {/* ── Topbar ──────────────────────────────────────────────── */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-site-bg/80 backdrop-blur-xl border-b border-site-border">
-        <div className="max-w-6xl mx-auto px-6 flex items-center justify-between h-14">
-          <Link href="/" className="text-sm font-medium tracking-tight">
-            Aïssa Belkoussa
-          </Link>
-          <span className="text-[10px] font-bold uppercase tracking-widest text-site-text-light">
-            Diagnostic gratuit
-          </span>
-        </div>
-      </header>
+      <Header />
 
-      <main id="main-content" className="pt-32 pb-20 px-6">
+      <main id="main-content" className="pt-40 pb-20 px-6">
         <h1 className="sr-only">Diagnostic digital gratuit</h1>
         <div className="max-w-2xl mx-auto">
           {/* ── Progress bar ────────────────────────────────────── */}
