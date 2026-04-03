@@ -32,9 +32,9 @@ import ExitIntentModal from "@/components/ExitIntentModal";
 const content = {
   fr: {
     hero: {
-      title: "Des systemes qui travaillent pour vous",
+      title: "Systèmes IA clé en main — à partir de 1 500 €, livrés en 5 jours",
       subtitle:
-        "Construction, automatisation, formation — prix fixe, resultat garanti",
+        "Automatisation, site professionnel, dashboards — prix fixe garanti, 3 mois de maintenance offerts. Formation IA dès 490 €/personne.",
     },
 
     /* ── Section 2 : Expertise ── */
@@ -43,11 +43,11 @@ const content = {
       categories: [
         {
           title: "Automatisation & Process",
-          badge: "Le plus demande",
+          badge: "Le plus demandé",
           subtitle:
-            "Les systemes qui font tourner votre entreprise sans vous",
+            "Les entreprises qui automatisent leurs relances et emails récupèrent 10 à 15 heures par semaine. Voici les 5 briques que je déploie.",
           items: [
-            "Sequences email automatiques",
+            "Séquences email automatiques",
             "Chatbot IA sur-mesure",
             "CRM et workflows (n8n/Make)",
             "Prise de RDV en ligne",
@@ -58,10 +58,10 @@ const content = {
           title: "Sites & Conversion",
           badge: null,
           subtitle:
-            "Les interfaces qui transforment vos visiteurs en clients",
+            "Un site professionnel optimisé génère 3 à 5× plus de leads qu'un site vitrine classique. Voici les leviers de conversion que j'intègre.",
           items: [
             "Site professionnel haute performance",
-            "Landing pages optimisees",
+            "Landing pages optimisées",
             "Tunnels de conversion",
             "SEO local",
             "Formulaires intelligents",
@@ -71,12 +71,12 @@ const content = {
           title: "Pilotage & Intelligence",
           badge: null,
           subtitle:
-            "Les chiffres qui manquent pour decider vite et bien",
+            "80 % des PME prennent leurs décisions sans dashboard. Un tableau de bord temps réel réduit le délai de décision de 60 %.",
           items: [
-            "Dashboards temps reel",
-            "KPI et reporting automatise",
+            "Dashboards temps réel",
+            "KPI et reporting automatisé",
             "Alertes et seuils intelligents",
-            "Integration IA decisionnelle",
+            "Intégration IA décisionnelle",
           ],
         },
       ],
@@ -85,19 +85,19 @@ const content = {
     /* ── Section 3 : Pricing tiers ── */
     pricing: {
       sectionBadge: "Tarifs",
-      title: "Systemes",
+      title: "3 formules de 1 500 € à 6 900 € — prix fixe, livraison 5 à 10 jours",
       tiers: [
         {
           name: "Starter",
           price: "1 500 \u20ac",
-          tagline: "Votre premier systeme automatise",
+          tagline: "Votre premier système automatisé",
           features: [
-            "1 automatisation cle en main (chatbot OU emails OU prise de RDV)",
-            "Brief + maquette validee",
+            "1 automatisation clé en main (chatbot OU emails OU prise de RDV)",
+            "Brief + maquette validée",
             "Livraison 5 jours",
             "Formation 1h incluse",
           ],
-          cta: "Demarrer",
+          cta: "Démarrer",
           ctaLink: "/contact?plan=starter",
           highlighted: false,
           badge: null,
@@ -107,31 +107,31 @@ const content = {
           name: "Pro",
           price: "2 900 \u20ac",
           tagline:
-            "Le systeme complet + 3 mois de tranquillite",
+            "Le système complet + 3 mois de tranquillité",
           features: [
-            "Systeme cle en main multi-briques",
+            "Système clé en main multi-briques",
             "3 mois monitoring + support offerts (valeur 1 470 \u20ac)",
-            "Bugs corriges sous 48h",
-            "MAJ securite + rapport mensuel",
+            "Bugs corrigés sous 48h",
+            "MAJ sécurité + rapport mensuel",
             "Livraison 5-10 jours",
           ],
           cta: "Choisir Pro",
           ctaLink: "/contact?plan=pro",
           highlighted: true,
-          badge: "Recommande",
+          badge: "Recommandé",
           monthly: "Puis 490 \u20ac/mois. Sans engagement.",
         },
         {
           name: "Sur-mesure",
-          price: "a partir de 6 900 \u20ac",
-          tagline: "Votre partenaire technique dedie",
+          price: "à partir de 6 900 \u20ac",
+          tagline: "Votre partenaire technique dédié",
           features: [
-            "Systeme complet (site + IA + data)",
-            "Integration IA sur-mesure",
-            "3 mois evolution + support Premium (valeur 5 700 \u20ac)",
-            "10h/mois d\u2019evolutions",
+            "Système complet (site + IA + data)",
+            "Intégration IA sur-mesure",
+            "3 mois évolution + support Premium (valeur 5 700 \u20ac)",
+            "10h/mois d\u2019évolutions",
             "Support prioritaire 24h",
-            "Reunion strategique mensuelle",
+            "Réunion stratégique mensuelle",
           ],
           cta: "Discuter du projet",
           ctaLink: "/contact?plan=sur-mesure",
@@ -144,16 +144,16 @@ const content = {
 
     /* ── Section 4 : Pilote Automatique ── */
     pilote: {
-      badge: "Nouveau — Offre d\u2019entree",
+      badge: "Nouveau — Offre d\u2019entrée",
       title: "Pilote Automatique — 1 500 \u20ac",
       subtitle: "Votre business tourne tout seul en 5 jours",
       features: [
-        "5 emails automatiques personnalises",
-        "Chatbot IA entraine sur vos FAQ",
+        "5 emails automatiques personnalisés",
+        "Chatbot IA entraîné sur vos FAQ",
         "Notifications prospect chaud",
         "Dashboard de suivi",
       ],
-      delivery: "Livraison : 5 jours ouvres",
+      delivery: "Livraison : 5 jours ouvrés",
       option: "Maintenance : 290 \u20ac/mois (optionnel)",
       cta: "Commander le Pilote Automatique",
       ctaLink: "/contact?plan=pilote-automatique",
@@ -162,7 +162,7 @@ const content = {
     /* ── Section 5 : Formations ── */
     formation: {
       sectionBadge: "Formation",
-      title: "Formation IA — Rendez votre equipe autonome",
+      title: "Formation IA pour entreprises — de 1 à 5 jours, à partir de 490 €/personne, finançable OPCO à 100 %",
       cards: [
         {
           name: "IA Pratique",
@@ -171,10 +171,10 @@ const content = {
           priceIntra: "1 500 \u20ac (intra, groupe 6-12)",
           features: [
             "Prompt engineering",
-            "Cas d\u2019usage metier",
-            "Kit IA personnalise",
+            "Cas d\u2019usage métier",
+            "Kit IA personnalisé",
           ],
-          tagline: "Vos equipes repartent operationnelles",
+          tagline: "Vos équipes repartent opérationnelles",
         },
         {
           name: "Automatiser son business",
@@ -187,7 +187,7 @@ const content = {
             "Mesure ROI",
           ],
           tagline:
-            "2-3 automatisations deployees pendant la formation",
+            "2-3 automatisations déployées pendant la formation",
         },
         {
           name: "Sur-mesure",
@@ -195,46 +195,46 @@ const content = {
           priceInter: "800 \u20ac/jour",
           priceIntra: null,
           features: [
-            "Audit prealable",
-            "Programme personnalise",
+            "Audit préalable",
+            "Programme personnalisé",
             "Suivi 3 mois",
           ],
-          tagline: "Transformation IA structuree",
+          tagline: "Transformation IA structurée",
         },
       ],
     },
 
     /* ── Section 6 : Consulting TJM ── */
     consulting: {
-      title: "Besoin d\u2019un expert a la journee ?",
+      title: "Consulting IA & digital — 450 €/demi-journée, 800 €/jour, 3 600 €/semaine",
       subtitle:
-        "Audit, conseil, architecture, implementation — a la carte",
+        "Audit, conseil, architecture, implémentation — à la carte",
       rates: [
-        { label: "Demi-journee", price: "450 \u20ac" },
-        { label: "Journee", price: "800 \u20ac" },
+        { label: "Demi-journée", price: "450 \u20ac" },
+        { label: "Journée", price: "800 \u20ac" },
         { label: "Semaine", price: "3 600 \u20ac" },
         { label: "Mois", price: "6 800 \u20ac" },
       ],
     },
 
-    /* ── Section 7 : Aides financieres ── */
+    /* ── Section 7 : Aides financières ── */
     aides: {
-      title: "Vos clients peuvent financer jusqu\u2019a 100% du projet",
+      title: "4 aides publiques pour financer jusqu'à 100 % de votre projet digital",
       note: "Je vous accompagne dans le montage du dossier de financement.",
       cards: [
         {
           name: "OPCO",
-          desc: "Jusqu\u2019a 100% pour les TPE < 50 salaries",
+          desc: "Jusqu\u2019à 100% pour les entreprises de moins de 50 salariés",
           context: "Formation",
         },
         {
           name: "OCCAL",
-          desc: "Jusqu\u2019a 70% des depenses, plafond 23 000 \u20ac",
+          desc: "Jusqu\u2019à 70% des dépenses, plafond 23 000 \u20ac",
           context: "Artisans, commerce",
         },
         {
           name: "Pass Occitanie",
-          desc: "50% des depenses, plafond 10 000 \u20ac",
+          desc: "50% des dépenses, plafond 10 000 \u20ac",
           context: "TPE/PME",
         },
         {
@@ -248,9 +248,9 @@ const content = {
     /* ── Section 8 : Comparatif ── */
     comparatif: {
       badge: "Comparatif",
-      title: "Pourquoi pas une agence, un freelance ou un SaaS ?",
+      title: "Agence (10-50K €, 2-6 mois) vs freelance spécialisé (1 500 €, 5 jours) — comparatif",
       subtitle:
-        "Comparez les modeles. Choisissez en connaissance de cause.",
+        "Comparez les modèles. Choisissez en connaissance de cause.",
       columns: [
         "",
         "Agence web",
@@ -260,8 +260,8 @@ const content = {
       ],
       rows: [
         {
-          label: "Delai",
-          values: ["2-6 mois", "1-3 semaines", "Immediat", "5-10 jours"],
+          label: "Délai",
+          values: ["2-6 mois", "1-3 semaines", "Immédiat", "5-10 jours"],
         },
         {
           label: "Prix",
@@ -269,20 +269,20 @@ const content = {
             "10 000-50 000 \u20ac",
             "500-2 000 \u20ac",
             "50-200 \u20ac/mois",
-            "A partir de 1 500 \u20ac",
+            "À partir de 1 500 \u20ac",
           ],
         },
         {
           label: "Maintenance",
           values: [
-            "Supplement couteux",
-            "Aucune ou limitee",
-            "Incluse (generique)",
+            "Supplément coûteux",
+            "Aucune ou limitée",
+            "Incluse (générique)",
             "3 mois offerts",
           ],
         },
         {
-          label: "IA integree",
+          label: "IA intégrée",
           values: ["Rarement", "Non", "Basique", "Sur-mesure"],
         },
         {
@@ -308,9 +308,9 @@ const content = {
     /* ── Section 9 : Maintenance ── */
     maintenance: {
       badge: "Maintenance",
-      title: "Abonnements maintenance",
+      title: "Maintenance site & IA — 490 €/mois (Essentiel) ou 1 900 €/mois (Premium), -25 % en annuel",
       subtitle:
-        "Apres les 3 mois offerts, gardez votre systeme au top.",
+        "Après les 3 mois offerts, gardez votre système au top.",
       plans: [
         {
           name: "Essentiel",
@@ -318,9 +318,9 @@ const content = {
           priceYearly: "368 \u20ac/mois",
           priceYearlyTotal: "4 410 \u20ac/an (soit 3 mois offerts)",
           features: [
-            "MAJ securite et performances",
+            "MAJ sécurité et performances",
             "Monitoring 24/7",
-            "Bugs corriges sous 48h",
+            "Bugs corrigés sous 48h",
             "Rapport mensuel",
             "Support par email",
           ],
@@ -332,9 +332,9 @@ const content = {
           priceYearlyTotal: "17 100 \u20ac/an (soit 3 mois offerts)",
           features: [
             "Tout Essentiel +",
-            "10h/mois d\u2019evolutions",
+            "10h/mois d\u2019évolutions",
             "Support prioritaire 24h",
-            "Reunion strategique mensuelle",
+            "Réunion stratégique mensuelle",
             "Optimisation IA continue",
           ],
         },
@@ -346,46 +346,46 @@ const content = {
     /* ── Section 10 : FAQ ── */
     faq: [
       {
-        q: "Que se passe-t-il si j\u2019arrete la maintenance ?",
-        a: "Votre site reste en ligne et fonctionnel. Mais sans mises a jour regulieres, les performances SEO se degradent, les failles de securite ne sont plus corrigees, et votre systeme ne s\u2019adapte plus aux evolutions du marche. En moyenne, un site non maintenu perd 20-35% de son trafic organique en 6 mois.",
+        q: "Que se passe-t-il si j\u2019arrête la maintenance ?",
+        a: "Votre site reste en ligne et fonctionnel. Mais sans mises à jour régulières, les performances SEO se dégradent, les failles de sécurité ne sont plus corrigées, et votre système ne s\u2019adapte plus aux évolutions du marché. En moyenne, un site non maintenu perd 20-35% de son trafic organique en 6 mois.",
       },
       {
         q: "Pourquoi 3 mois offerts ?",
-        a: "Un systeme digital a besoin de 3 mois pour atteindre son plein potentiel. Pendant cette periode, on optimise, on ajuste, on mesure. Vous voyez les resultats concrets avant de vous engager sur la suite.",
+        a: "Un système digital a besoin de 3 mois pour atteindre son plein potentiel. Pendant cette période, on optimise, on ajuste, on mesure. Vous voyez les résultats concrets avant de vous engager sur la suite.",
       },
       {
         q: "Et si je ne sais pas exactement ce dont j\u2019ai besoin ?",
-        a: "C\u2019est le cas de 80% de mes clients au premier appel. L\u2019echange de 30 minutes sert exactement a ca : clarifier votre besoin, identifier la bonne approche, et vous proposer le format adapte. Aucun engagement.",
+        a: "C\u2019est le cas de 80% de mes clients au premier appel. L\u2019échange de 30 minutes sert exactement à ça : clarifier votre besoin, identifier la bonne approche, et vous proposer le format adapté. Aucun engagement.",
       },
       {
-        q: "Est-ce que je suis proprietaire du code ?",
-        a: "Vous beneficiez d\u2019une licence d\u2019utilisation exclusive et illimitee dans le temps. Vous exploitez votre systeme en toute liberte. La propriete intellectuelle reste au prestataire, ce qui garantit la maintenance et l\u2019evolution continue de vos outils.",
+        q: "Est-ce que je suis propriétaire du code ?",
+        a: "Vous bénéficiez d\u2019une licence d\u2019utilisation exclusive et illimitée dans le temps. Vous exploitez votre système en toute liberté. La propriété intellectuelle reste au prestataire, ce qui garantit la maintenance et l\u2019évolution continue de vos outils.",
       },
       {
-        q: "Je peux gerer moi-meme la maintenance ?",
-        a: "Oui. Apres les 3 mois offerts, vous etes libre de gerer la maintenance en interne si vous avez les competences techniques. Votre systeme reste fonctionnel.",
+        q: "Je peux gérer moi-même la maintenance ?",
+        a: "Oui. Après les 3 mois offerts, vous êtes libre de gérer la maintenance en interne si vous avez les compétences techniques. Votre système reste fonctionnel.",
       },
       {
         q: "Que se passe-t-il si le projet prend plus de temps ?",
-        a: "Les prix sont forfaitaires. Si le projet depasse le cadre prevu pour des raisons de mon cote, je ne facture pas le surplus. Si le perimetre evolue de votre cote, on en discute et on ajuste ensemble.",
+        a: "Les prix sont forfaitaires. Si le projet dépasse le cadre prévu pour des raisons de mon côté, je ne facture pas le surplus. Si le périmètre évolue de votre côté, on en discute et on ajuste ensemble.",
       },
       {
         q: "L\u2019abonnement est-il avec engagement ?",
-        a: "Non. Apres les 3 mois offerts, la maintenance est sans engagement — vous pouvez arreter a tout moment. L\u2019engagement annuel est une option qui vous fait economiser 25% (3 mois gratuits sur 12).",
+        a: "Non. Après les 3 mois offerts, la maintenance est sans engagement — vous pouvez arrêter à tout moment. L\u2019engagement annuel est une option qui vous fait économiser 25% (3 mois gratuits sur 12).",
       },
       {
         q: "Comment financer le projet avec mon OPCO ?",
-        a: "Je vous aide a monter le dossier. Pour les TPE < 50 salaries, la formation peut etre prise en charge a 100%.",
+        a: "Je vous aide à monter le dossier. Pour les entreprises de moins de 50 salariés, la formation peut être prise en charge à 100%.",
       },
       {
         q: "Proposez-vous des formations ?",
-        a: "Oui, de 1 jour (acculturation IA) a 5 jours (transformation complete). Financables OPCO.",
+        a: "Oui, de 1 jour (acculturation IA) à 5 jours (transformation complète). Finançables OPCO.",
       },
     ],
 
     /* ── Section 11 : Final CTA ── */
     finalCta: {
-      title: "Premier echange gratuit.\n30 min. Zero engagement.",
+      title: "Premier échange gratuit.\n30 min. Zéro engagement.",
       cta: "Prendre rendez-vous",
     },
 
@@ -397,14 +397,14 @@ const content = {
       threePillars: "Trois piliers pour votre croissance",
       included: "Inclus",
       funding: "Financement",
-      billingFrequency: "Frequence de facturation",
+      billingFrequency: "Fréquence de facturation",
       monthly: "Mensuel",
       annual: "Annuel",
       learnMore: "En savoir plus",
-      faqTitle: "Vos questions,\nmes reponses.",
-      faqSubtitle: "Tout ce que vous devez savoir avant de lancer votre systeme. Une question manque ? Echangeons.",
+      faqTitle: "9 questions fréquentes sur les systèmes IA, les prix et la maintenance",
+      faqSubtitle: "Tout ce que vous devez savoir avant de lancer votre système. Une question manque ? Échangeons.",
       finalCtaSubtitle: "On regarde ensemble si je peux vous aider. Pas de commercial, pas de bullshit.",
-      stickyCta: "Premier echange gratuit — 30 min",
+      stickyCta: "Premier échange gratuit — 30 min",
     },
   },
 
@@ -596,7 +596,7 @@ const content = {
       cards: [
         {
           name: "OPCO",
-          desc: "Up to 100% for SMEs < 50 employees",
+          desc: "Up to 100% for companies with fewer than 50 employees",
           context: "Training",
         },
         {
@@ -744,7 +744,7 @@ const content = {
       },
       {
         q: "How to fund the project with OPCO?",
-        a: "I help you build the application. For SMEs < 50 employees, training can be 100% covered.",
+        a: "I help you build the application. For companies with fewer than 50 employees, training can be 100% covered.",
       },
       {
         q: "Do you offer training?",

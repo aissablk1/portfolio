@@ -15,7 +15,7 @@ const nicheContent = {
   btp: {
     subtitle: "Vous passez 10h/semaine au téléphone, à envoyer des devis par mail et relancer les clients. Votre site ne vous rapporte aucun client. Vos concurrents, eux, reçoivent des demandes de devis à 23h.",
     roiTitle: "Scénario type — Artisan BTP, 5-10 salariés",
-    roiDesc: "Un artisan qui perdrait 10 heures par semaine à répondre au téléphone, envoyer des devis par mail et relancer ses clients. Accélérateur à 2 900 € : site pro + prise de RDV en ligne + devis automatisé + 3 mois de maintenance inclus. Le système tournerait dès J+10.",
+    roiDesc: "Accélérateur à 2 900 € pour artisan BTP (5-10 salariés) : site pro + prise de RDV en ligne + devis automatisé + 3 mois de maintenance inclus. Résultat estimé : 10h/semaine libérées, soit 800 € de valeur récupérée par semaine. Rentabilisé en 4 semaines.",
     stats: [
       { value: "10h", label: "libérées chaque semaine" },
       { value: "800 €", label: "de valeur récupérée par semaine" },
@@ -25,7 +25,7 @@ const nicheContent = {
   b2b: {
     subtitle: "Vous prospectez à la main — LinkedIn, bouche-à-oreille. Votre site ne capture aucun lead. Vos relances sont oubliées. Chaque semaine, des prospects disparaissent sans que vous le sachiez.",
     roiTitle: "Scénario type — Consultant B2B, 200-500K€ CA",
-    roiDesc: "Un consultant qui prospecterait manuellement — LinkedIn + bouche-à-oreille. Aucun tunnel de conversion. Accélérateur à 2 900 € : landing page qui convertit + formulaire qualifié + séquence de relance automatique + 3 mois de maintenance. Le tunnel tournerait 24/7.",
+    roiDesc: "Accélérateur à 2 900 € pour consultant B2B (200-500K € CA) : landing page + formulaire qualifié + séquence de relance automatique + 3 mois de maintenance. Résultat estimé : 1 à 3 clients supplémentaires par mois, 5 000 € de CA additionnel. Rentabilisé dès le premier client signé.",
     stats: [
       { value: "1-3", label: "clients supplémentaires par mois" },
       { value: "5 000 €", label: "de CA additionnel mensuel" },
@@ -59,9 +59,9 @@ export default function GoPage() {
                 Offres & Résultats
               </p>
               <h1 className="text-fluid-display tracking-tighter uppercase leading-[1.05] mb-8">
-                Votre système devrait
+                Automatisez votre acquisition client dès 1 500 €
                 <br />
-                déjà tourner.
+                — système livré en 5 jours
               </h1>
               <AnimatePresence mode="wait">
                 <motion.p
@@ -74,7 +74,7 @@ export default function GoPage() {
                 >
                   {niche
                     ? nicheContent[niche].subtitle
-                    : "Vous perdez du temps sur des tâches qui devraient être automatisées. Votre site ne reflète pas la qualité de votre travail. Vos process sont manuels, vos données dispersées."}
+                    : "Un artisan BTP récupère 10h/semaine en automatisant ses relances et devis. Un consultant B2B gagne 1 à 3 clients supplémentaires par mois avec un tunnel de conversion. Voici les systèmes, les prix et le ROI attendu."}
                 </motion.p>
               </AnimatePresence>
             </motion.div>
@@ -517,7 +517,7 @@ export default function GoPage() {
                 Après la livraison
               </p>
               <h2 className="text-fluid-title tracking-tighter uppercase max-w-3xl">
-                Un système ne se lance pas. Il se maintient.
+                Maintenance incluse 3 mois, puis 490 €/mois sans engagement
               </h2>
             </motion.div>
 
@@ -606,7 +606,7 @@ export default function GoPage() {
                 {[
                   {
                     name: "OPCO",
-                    detail: "100 % pour TPE < 50 salariés",
+                    detail: "100 % pour entreprises < 50 salariés",
                     scope: "Formation",
                   },
                   {
@@ -651,7 +651,7 @@ export default function GoPage() {
           <div className="max-w-4xl mx-auto text-center">
             <motion.div {...fade()}>
               <h2 className="text-fluid-title tracking-tighter uppercase mb-6">
-                Prêt à lancer votre système ?
+                Premier échange gratuit — 30 min, zéro engagement, proposition en 48h
               </h2>
               <p className="text-site-text-light mb-10 max-w-lg mx-auto">
                 30 minutes suffisent pour cadrer votre projet.

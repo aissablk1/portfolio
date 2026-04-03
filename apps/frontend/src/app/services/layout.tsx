@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import JsonLd from "@/components/JsonLd";
-import { servicesPageSchema, breadcrumbs } from "@/lib/schemas";
+import {
+  servicesPageSchema,
+  faqSchema,
+  formationSchemas,
+  consultingSchema,
+  breadcrumbs,
+} from "@/lib/schemas";
 
 const siteUrl = "https://www.aissabelkoussa.fr";
 
@@ -27,7 +33,7 @@ export default function ServicesLayout({
 }) {
   return (
     <>
-      <JsonLd data={[servicesPageSchema, breadcrumbs.services]} />
+      <JsonLd data={[servicesPageSchema, faqSchema, ...formationSchemas, consultingSchema, breadcrumbs.services]} />
       {children}
     </>
   );

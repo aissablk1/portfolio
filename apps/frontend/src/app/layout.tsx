@@ -9,7 +9,6 @@ import {
   personSchema,
   organizationSchema,
   websiteSchema,
-  faqSchema,
   breadcrumbs,
 } from "@/lib/schemas";
 import JsonLd from "@/components/JsonLd";
@@ -111,10 +110,16 @@ export const metadata: Metadata = {
     },
   },
 
+  verification: {
+    other: {
+      "msvalidate.01": "BING_VERIFICATION_CODE",
+    },
+  },
+
   category: "technology",
 };
 
-const schemas = [personSchema, organizationSchema, websiteSchema, faqSchema, breadcrumbs.home];
+const schemas = [personSchema, organizationSchema, websiteSchema, breadcrumbs.home];
 
 export default function RootLayout({
   children,

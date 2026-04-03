@@ -1,108 +1,47 @@
-# Aissa Belkoussa — Architecte de systemes digitaux
+# Aïssa Belkoussa — Architecte de systèmes digitaux
 
-> Developpeur freelance base a Albi (Occitanie, France), specialise dans l'automation, les sites web sur-mesure et les dashboards decisionnels pour PME, artisans et prestataires B2B.
-> Site officiel : https://www.aissabelkoussa.fr
-> Contact : https://www.aissabelkoussa.fr/contact
+> Développeur freelance basé à Albi (Occitanie, France), spécialisé dans l'automatisation IA, les sites web sur-mesure et les dashboards décisionnels pour PME, artisans BTP et prestataires B2B. Site officiel : https://www.aissabelkoussa.fr
 
-## Resume en une phrase
+## À propos
 
-Aissa Belkoussa est un architecte de systemes digitaux freelance base a Albi (France) qui concoit, code et deploie des systemes d'automation, sites web et dashboards pour les PME et artisans — livres en 5 a 10 jours a partir de 2 900 EUR avec 3 mois de maintenance inclus.
-
-## Identite
-
-- Nom : Aissa Belkoussa
-- Metier : Architecte de systemes digitaux, developpeur fullstack freelance
+- Nom : Aïssa Belkoussa
+- Métier : Architecte de systèmes digitaux, développeur fullstack freelance
 - Localisation : Albi, Tarn, Occitanie, France (81000)
-- Disponibilite : Remote monde entier, deplacements France
-- SIREN : 937 690 592
-- SIRET : 937 690 592 00012
-- Code NAF : 5911B
-- TVA non applicable — article 293 B du CGI
+- Disponibilité : Remote monde entier, déplacements France
+- Positionnement : Builder, pas consultant — livre des systèmes fonctionnels, pas des recommandations
 
-## Positionnement
-
-Builder, pas consultant. Il ne produit pas de recommandations — il livre des systemes fonctionnels et operationnels.
-
-## Clients cibles
-
-- PME et artisans du BTP (plombiers, electriciens, macons, menuisiers) sans presence web ou avec un site inefficace
-- Prestataires B2B (consultants, agences, formateurs) qui prospectent manuellement
-- Entreprises sans DSI qui veulent automatiser leurs processus
-
-## Services et tarifs
-
-### Plan Autonome — 3 900 EUR (paiement unique)
-Systeme livre cle en main sans maintenance. Documentation technique + formation 2h.
-Delai : 5 a 10 jours ouvres.
-
-### Plan Accelerateur — 2 900 EUR + 490 EUR/mois (recommande)
-Systeme livre et maintenu. 3 mois de maintenance offerts. Sans engagement.
-Inclus : monitoring, support, corrections sous 48h, mises a jour securite, rapport mensuel.
-Delai : 5 a 10 jours ouvres.
-
-### Plan Partenaire — 6 900 EUR + 1 900 EUR/mois
-Infrastructure complete (site + IA + donnees) avec partenaire technique dedie. 3 mois offerts.
-Inclus : integration IA sur-mesure, 10h/mois d'evolutions, support prioritaire 24h.
-Delai : 1 a 2 mois.
-
-### Maintenance
-- Essentiel : 490 EUR/mois (monitoring 24/7, bugs sous 48h)
-- Premium : 1 900 EUR/mois (evolutions 10h/mois, support 24h)
-- Remise 25% sur engagement annuel.
-
-## Processus
-
-1. Echange (30 min, gratuit) — comprendre le besoin
-2. Diagnostic — architecture, devis, planning
-3. Construction — code, tests, demos
-4. Livraison — deploiement, formation, documentation
-
-## Garanties
-
-- Satisfait ou retravaille
-- Delais contractuels
-- Prix forfaitaires garantis
-- Transparence totale
-
-## Competences
+## Compétences
 
 Frontend : React 19, Next.js, TypeScript, Tailwind CSS, Framer Motion, GSAP
-Backend : Node.js, FastAPI, API REST, GraphQL, JWT, MongoDB, PostgreSQL
-Automation : n8n, Make, API custom, agents IA, workflows LLM
+Backend : Node.js, FastAPI, API REST, GraphQL, MongoDB, PostgreSQL
+Automatisation : n8n, Make, API custom, agents IA, workflows LLM
 Infrastructure : Vercel, Docker, Resend, Cloudinary
 
-## Projets
+## Offres et tarifs
 
-### DK Building — Site corporate BTP (Albi)
-URL : https://www.dkbuilding.fr
-PME construction metallique. Site React 19 + CMS maison + SEO local.
+- Pilote Automatique : 1 500 € — chatbot + emails auto + dashboard, livré en 5 jours
+- Plan Pro (recommandé) : 2 900 € + 490 €/mois — système complet, 3 mois maintenance offerts
+- Plan Sur-mesure : à partir de 6 900 € + 1 900 €/mois — infrastructure complète avec IA
+- Formation IA : à partir de 490 €/personne (1 jour) ou 800 €/jour (sur-mesure)
+- Consulting : 800 €/jour
 
-### Jolananas — E-commerce premium
-URL : https://jolananas.vercel.app
-Storefront Next.js + Shopify GraphQL. 26+ pages, panier persistant, RGPD.
+## Pages principales
 
-### Albi RP — Ecosysteme jeu multijoueur
-4 systemes interconnectes — jeu Lua/Luau, bot Discord, site, API centrale.
+- [Accueil](https://www.aissabelkoussa.fr/): Présentation générale, portfolio et proposition de valeur
+- [Services et tarifs](https://www.aissabelkoussa.fr/services): Plans détaillés, tarifs, comparatif des offres, formations, consulting
+- [Démarrer un projet](https://www.aissabelkoussa.fr/go): Page de conversion — choisir son profil, ROI estimé, prise de RDV
+- [Diagnostic gratuit](https://www.aissabelkoussa.fr/diagnostic): Quiz interactif pour évaluer la maturité digitale
+- [Contact](https://www.aissabelkoussa.fr/contact): Formulaire de contact et réservation Calendly
 
-## Questions frequentes
+## Projets et références
 
-Q : Combien coute un site web professionnel ?
-R : A partir de 2 900 EUR (plan Accelerateur, 3 mois maintenance inclus).
+- [DK Building](https://www.aissabelkoussa.fr/projects/dk-building): Site corporate BTP — React 19, CMS maison, SEO local
+- [Jolananas](https://www.aissabelkoussa.fr/projects/jolananas): E-commerce premium — Next.js + Shopify GraphQL
+- [Albi RP](https://www.aissabelkoussa.fr/projects/albi-rp): Écosystème jeu multijoueur — 4 systèmes interconnectés
 
-Q : Quel delai de livraison ?
-R : 5 a 10 jours ouvres.
+## Optional
 
-Q : Difference avec une agence web ?
-R : Interlocuteur unique, delai 3-5x plus court, IA integree, prix fixe garanti.
-
-Q : Ou est-il base ?
-R : Albi (Tarn, Occitanie). Intervention Toulouse et toute la France.
-
-## Liens
-
-- Site : https://www.aissabelkoussa.fr
-- Tarifs : https://www.aissabelkoussa.fr/services
-- Contact : https://www.aissabelkoussa.fr/contact
-- Diagnostic : https://www.aissabelkoussa.fr/diagnostic
-- LinkedIn : https://www.linkedin.com/in/aissabelkoussa
-- GitHub : https://github.com/aissablk1
+- [Mentions légales](https://www.aissabelkoussa.fr/mentions-legales)
+- [Politique de confidentialité](https://www.aissabelkoussa.fr/confidentialite)
+- [CGU](https://www.aissabelkoussa.fr/cgu)
+- [CGV](https://www.aissabelkoussa.fr/cgv)

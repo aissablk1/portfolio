@@ -34,6 +34,7 @@ const Header = () => {
     { id: "expertise", label: dict.nav.expertise },
     { id: "systems", label: dict.nav.systems },
     { id: "services", label: dict.nav.services, href: "/services" },
+    { id: "blog", label: dict.nav.blog, href: "/blog" },
     { id: "about", label: dict.nav.about },
   ];
 

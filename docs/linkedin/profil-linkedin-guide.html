@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guide LinkedIn — Aïssa Belkoussa</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+    :root {
+      --bg: #fafaf9; --text: #0a0a0a; --muted: #737373; --border: #e5e5e5;
+      --accent: #0a66c2; --green: #16a34a; --amber: #d97706; --red: #dc2626;
+      --surface: #ffffff; --dark: #0a0a0a;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    .page { max-width: 860px; margin: 0 auto; padding: 48px 32px 80px; }
+    h1 { font-size: 32px; font-weight: 900; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 6px; }
+    h2 { font-size: 20px; font-weight: 800; letter-spacing: -0.5px; margin: 48px 0 16px; padding-bottom: 10px; border-bottom: 2px solid var(--text); text-transform: uppercase; }
+    h3 { font-size: 15px; font-weight: 700; margin: 24px 0 10px; }
+    h4 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); margin: 20px 0 8px; }
+    p, li { font-size: 13px; line-height: 1.7; }
+    p { margin-bottom: 10px; }
+    ul, ol { margin: 6px 0 14px 18px; }
+    li { margin-bottom: 5px; }
+    .subtitle { font-size: 13px; color: var(--muted); margin-bottom: 32px; }
+    .badge { display: inline-block; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 3px 10px; border-radius: 20px; }
+    .badge-green { background: #f0fdf4; color: var(--green); }
+    .badge-amber { background: #fffbeb; color: var(--amber); }
+    .badge-red { background: #fef2f2; color: var(--red); }
+    .badge-blue { background: #eff6ff; color: var(--accent); }
+    table { width: 100%; border-collapse: collapse; margin: 12px 0 20px; font-size: 12px; }
+    th { text-align: left; font-weight: 700; padding: 8px 10px; border-bottom: 2px solid var(--text); font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+    td { padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px; margin: 12px 0; }
+    .card-dark { background: var(--dark); color: #fafafa; border: none; border-radius: 10px; padding: 24px; margin: 12px 0; }
+    .card-dark p, .card-dark li { color: #a3a3a3; }
+    .card-dark strong { color: #fafafa; }
+    .highlight { background: linear-gradient(135deg, rgba(10,102,194,0.04), rgba(10,102,194,0.08)); border: 1.5px solid var(--accent); }
+    .alert { padding: 14px 18px; border-radius: 8px; margin: 12px 0; font-size: 12px; }
+    .alert-green { background: #f0fdf4; border-left: 4px solid var(--green); }
+    .alert-amber { background: #fffbeb; border-left: 4px solid var(--amber); }
+
+    /* Copy box — champs à copier-coller */
+    .copy-box {
+      background: #1e1e2e;
+      color: #cdd6f4;
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin: 12px 0;
+      font-family: 'Inter', monospace;
+      font-size: 13px;
+      line-height: 1.8;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      position: relative;
+      border: 1px solid #313244;
+    }
+    .copy-box::before {
+      content: "COPIER-COLLER";
+      position: absolute;
+      top: -9px;
+      left: 16px;
+      background: var(--accent);
+      color: white;
+      font-size: 8px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      padding: 2px 10px;
+      border-radius: 10px;
+    }
+    .copy-box .highlight-text { color: #89b4fa; }
+    .copy-box .arrow { color: #a6e3a1; }
+    .copy-box .separator { color: #585b70; }
+
+    .field-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .cols-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .section-num { font-size: 10px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 1.5px; }
+
+    .checklist { list-style: none; margin: 8px 0; padding: 0; }
+    .checklist li { font-size: 12px; padding: 8px 0 8px 28px; position: relative; border-bottom: 1px solid var(--border); }
+    .checklist li::before { content: "\2610"; position: absolute; left: 0; font-size: 16px; }
+
+    hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+    @media print {
+      body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page { padding: 24px; }
+      .copy-box { background: #1e1e2e !important; color: #cdd6f4 !important; }
+      .card-dark { background: var(--dark) !important; color: #fafafa !important; }
+    }
+    @page { size: A4; margin: 15mm; }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <p style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:var(--muted); margin-bottom:24px;">Guide pas-&agrave;-pas &mdash; 3 avril 2026</p>
+  <h1>Configurer ton profil LinkedIn</h1>
+  <p class="subtitle">Chaque champ est pr&eacute;-rempli. Copie, colle, enregistre. 20 minutes max.</p>
+
+  <div class="alert alert-amber">
+    <strong>R&egrave;gle n&deg;1 :</strong> LinkedIn est un moteur de recherche. Chaque mot que tu mets dans ton profil est index&eacute;. Le titre, le &agrave; propos, l'exp&eacute;rience &mdash; tout doit contenir les mots-cl&eacute;s que tes prospects tapent : <em>IA, automatisation, artisans, PME, site web, Albi, Occitanie.</em>
+  </div>
+
+
+  <!-- 01 — INFORMATIONS DE BASE -->
+  <h2><span class="section-num">01</span> &mdash; Informations de base</h2>
+
+  <table>
+    <tr><th>Champ LinkedIn</th><th>Valeur actuelle</th><th>Mettre</th></tr>
+    <tr><td>Pr&eacute;nom</td><td>Aissa</td><td><strong>A&iuml;ssa</strong> (avec le tr&eacute;ma)</td></tr>
+    <tr><td>Nom</td><td>BELKOUSSA</td><td><strong>Belkoussa</strong> (minuscules &mdash; plus professionnel)</td></tr>
+    <tr><td>Nom suppl&eacute;mentaire</td><td><em>(vide)</em></td><td><em>(laisser vide)</em></td></tr>
+    <tr><td>Pronom personnel</td><td><em>(vide)</em></td><td><em>(laisser vide)</em></td></tr>
+  </table>
+
+
+  <!-- 02 — HEADLINE -->
+  <h2><span class="section-num">02</span> &mdash; Titre du profil (Headline) <span class="badge badge-red">Critique</span></h2>
+
+  <p>C'est le champ <strong>le plus important</strong> de ton profil. 220 caract&egrave;res max. Seuls les 60 premiers sont visibles sur mobile. C'est ce que les gens voient dans les r&eacute;sultats de recherche, dans tes commentaires, partout.</p>
+
+  <div class="alert alert-amber">
+    <strong>Actuel :</strong> "Auto-Entrepreneur" &mdash; &ccedil;a ne dit rien &agrave; personne. Un plombier &agrave; Albi qui cherche un site web ne tape pas "auto-entrepreneur" dans la barre de recherche.
+  </div>
+
+  <h3>Option recommand&eacute;e</h3>
+  <div class="copy-box">J'aide les artisans et PME &agrave; gagner 10h/semaine gr&acirc;ce &agrave; l'IA et l'automatisation | Albi &amp; Occitanie</div>
+
+  <h3>Alternatives</h3>
+  <div class="copy-box">Syst&egrave;mes IA cl&eacute; en main pour artisans &amp; PME | Sites, automatisation, formation | Albi, Occitanie</div>
+  <div class="copy-box">Je digitalise les artisans BTP et PME qui n'ont pas le temps | Consultant IA &amp; Automatisation | Albi</div>
+  <div class="copy-box">L'IA accessible aux artisans et PME : syst&egrave;mes cl&eacute; en main d&egrave;s 1 500&euro; | Formateur &amp; Consultant | Albi</div>
+
+
+  <!-- 03 — POSTE ET SECTEUR -->
+  <h2><span class="section-num">03</span> &mdash; Poste et secteur</h2>
+
+  <table>
+    <tr><th>Champ</th><th>Actuel</th><th>Mettre</th></tr>
+    <tr><td>Poste</td><td>Entrepreneur ind&eacute;pendant</td><td><strong>Consultant IA &amp; Syst&egrave;mes Digitaux</strong></td></tr>
+    <tr><td>Afficher l'entreprise</td><td><em>(d&eacute;coch&eacute;)</em></td><td><strong>Cocher</strong></td></tr>
+    <tr><td>Secteur</td><td>Services de relations publiques et communication</td><td><strong>Services et conseil en informatique</strong></td></tr>
+  </table>
+
+  <div class="copy-box">Consultant IA &amp; Syst&egrave;mes Digitaux</div>
+
+
+  <!-- 04 — FORMATION -->
+  <h2><span class="section-num">04</span> &mdash; Formation</h2>
+
+  <table>
+    <tr><th>&Eacute;cole</th><th>Action</th></tr>
+    <tr><td>Lyc&eacute;e Priv&eacute; Saint Dominique Albi</td><td>Garder</td></tr>
+    <tr><td><strong>L1 Informatique</strong></td><td><strong>Ajouter</strong> &mdash; en cours, 2025-2026. Cocher "Afficher dans le r&eacute;sum&eacute;"</td></tr>
+  </table>
+
+
+  <!-- 05 — LIEU -->
+  <h2><span class="section-num">05</span> &mdash; Lieu</h2>
+
+  <div class="alert alert-green">
+    <strong>D&eacute;j&agrave; bon :</strong> France, 81000, Albi. Ne rien changer.
+  </div>
+
+
+  <!-- 06 — COORDONNÉES -->
+  <h2><span class="section-num">06</span> &mdash; Coordonn&eacute;es</h2>
+
+  <table>
+    <tr><th>Champ</th><th>Actuel</th><th>Mettre</th></tr>
+    <tr><td>T&eacute;l&eacute;phone</td><td><em>(vide)</em></td><td>Ton num&eacute;ro pro <em>(optionnel)</em></td></tr>
+    <tr><td>Type t&eacute;l&eacute;phone</td><td>Domicile</td><td><strong>Professionnel</strong></td></tr>
+    <tr><td>Adresse</td><td><em>(vide)</em></td><td><em>(laisser vide)</em></td></tr>
+    <tr><td>Site web 1</td><td>https://aissabelkoussa.fr</td><td>&#10003; Garder</td></tr>
+    <tr><td><strong>Site web 2</strong></td><td><em>(manquant)</em></td><td><strong>Ajouter :</strong> voir ci-dessous</td></tr>
+    <tr><td><strong>Site web 3</strong></td><td><em>(manquant)</em></td><td><strong>Ajouter :</strong> voir ci-dessous</td></tr>
+  </table>
+
+  <h3>Site web 2 &mdash; Offres &amp; Tarifs</h3>
+  <div class="cols-2">
+    <div><div class="field-label">URL du site web</div><div class="copy-box" style="margin:0;">https://aissabelkoussa.fr/services</div></div>
+    <div><div class="field-label">Type de site web</div><p><strong>Autre</strong> &rarr; nom : <strong>"Offres &amp; Tarifs"</strong></p></div>
+  </div>
+
+  <h3>Site web 3 &mdash; R&eacute;server un appel</h3>
+  <div class="cols-2">
+    <div><div class="field-label">URL du site web</div><div class="copy-box" style="margin:0;">https://calendly.com/aissabelkoussa/30min</div></div>
+    <div><div class="field-label">Type de site web</div><p><strong>Autre</strong> &rarr; nom : <strong>"R&eacute;server un appel"</strong></p></div>
+  </div>
+
+
+  <!-- 07 — À PROPOS -->
+  <h2><span class="section-num">07</span> &mdash; Section "&Agrave; propos" <span class="badge badge-red">Critique</span></h2>
+
+  <p>2 600 caract&egrave;res max. Les <strong>300 premiers</strong> sont visibles avant "Voir plus" &mdash; l'accroche doit donner envie de cliquer.</p>
+
+  <div class="alert alert-amber">
+    <strong>Actuel :</strong> "&Eacute;tudiant introverti et..." &mdash; &agrave; remplacer int&eacute;gralement.
+  </div>
+
+  <div class="copy-box">Tu perds 10 heures par semaine sur des t&acirc;ches que l'IA peut faire &agrave; ta place.
+
+Relances clients oubli&eacute;es. Devis faits &agrave; la main. Factures qui tra&icirc;nent. Planning g&eacute;r&eacute; sur papier ou dans un tableau Excel qui date de 2015. Si tu es artisan BTP, consultant ou formateur ind&eacute;pendant, tu connais &ccedil;a.
+
+Le probl&egrave;me, ce n'est pas le manque de travail &mdash; c'est que l'administratif te bouffe le temps que tu devrais passer &agrave; produire et &agrave; d&eacute;velopper ton activit&eacute;.
+
+<span class="separator">&mdash;&mdash;&mdash;</span>
+
+Je construis des syst&egrave;mes digitaux cl&eacute; en main qui travaillent pour toi.
+
+Concr&egrave;tement, j'interviens de trois fa&ccedil;ons :
+
+<span class="arrow">&rarr;</span> <span class="highlight-text">Syst&egrave;mes IA sur mesure (1 500-6 900&euro;)</span> : automatisation de la gestion client, des devis, de la facturation, du suivi chantier, de la prospection. Des outils qui tournent seuls une fois configur&eacute;s.
+
+<span class="arrow">&rarr;</span> <span class="highlight-text">Formation IA pratique (490-800&euro;/jour)</span> : je t'apprends &agrave; utiliser l'IA dans ton m&eacute;tier au quotidien. Pas de th&eacute;orie abstraite, que du concret adapt&eacute; &agrave; ton secteur.
+
+<span class="arrow">&rarr;</span> <span class="highlight-text">Consulting strat&eacute;gique (800&euro;/jour)</span> : audit de tes process, identification des gains de temps, plan d'action digital personnalis&eacute;.
+
+<span class="separator">&mdash;&mdash;&mdash;</span>
+
+Pourquoi moi plut&ocirc;t qu'une agence parisienne &agrave; 15 000&euro; ?
+
+Parce que je suis &agrave; Albi, je travaille avec des artisans et des PME de 5 &agrave; 20 salari&eacute;s, et je parle ton langage &mdash; pas celui des startups de la tech. Mes solutions s'int&egrave;grent dans tes outils existants sans tout casser.
+
+Je suis micro-entrepreneur, pas une structure avec 10 commerciaux &agrave; payer. Mon prix refl&egrave;te mon travail, pas mes locaux.
+
+&Eacute;cris-moi en DM ou r&eacute;serve un appel d&eacute;couverte de 30 min (gratuit, z&eacute;ro engagement).
+
+<span class="arrow">&rarr;</span> aissabelkoussa.fr/services</div>
+
+  <p style="font-size:11px; color:var(--muted);">Note : dans LinkedIn, les "---" ne s'affichent pas comme s&eacute;parateurs. Remplace-les par une ligne vide ou par "&#9135;&#9135;&#9135;" si tu veux un s&eacute;parateur visuel.</p>
+
+
+  <!-- 08 — EXPÉRIENCE -->
+  <h2><span class="section-num">08</span> &mdash; Section "Exp&eacute;rience"</h2>
+
+  <p>Ajouter une nouvelle exp&eacute;rience avec ces valeurs :</p>
+
+  <table>
+    <tr><th>Champ</th><th>Valeur</th></tr>
+    <tr><td>Intitul&eacute;</td><td><strong>Consultant IA &amp; Syst&egrave;mes Digitaux</strong></td></tr>
+    <tr><td>Type d'emploi</td><td>Ind&eacute;pendant</td></tr>
+    <tr><td>Entreprise</td><td>A&iuml;ssa Belkoussa</td></tr>
+    <tr><td>Lieu</td><td>Albi, Occitanie, France</td></tr>
+    <tr><td>Date de d&eacute;but</td><td>Mars 2026</td></tr>
+    <tr><td>En cours</td><td>&#10003;</td></tr>
+  </table>
+
+  <h3>Description de l'exp&eacute;rience</h3>
+  <div class="copy-box">Je con&ccedil;ois et d&eacute;ploie des syst&egrave;mes digitaux cl&eacute; en main pour les artisans BTP et les prestataires B2B :
+
+<span class="arrow">&rarr;</span> Automatisation &amp; Process : emails automatiques, chatbots IA, CRM, workflows
+<span class="arrow">&rarr;</span> Sites &amp; Conversion : sites haute performance, tunnels de vente, SEO local
+<span class="arrow">&rarr;</span> Pilotage &amp; Intelligence : dashboards temps r&eacute;el, KPI, reporting IA
+<span class="arrow">&rarr;</span> Formation IA : formations 1-2 jours, prompt engineering, automatisation
+
+Stack : React 19, Next.js, Tailwind, Python/FastAPI, Supabase, n8n, Claude Code
+
+93 projets r&eacute;alis&eacute;s | Livraison en 5-10 jours | Prix fixe garanti</div>
+
+
+  <!-- 09 — EN VEDETTE -->
+  <h2><span class="section-num">09</span> &mdash; Section "En vedette"</h2>
+
+  <p>&Eacute;pingler ces 3 &eacute;l&eacute;ments (dans cet ordre) :</p>
+
+  <div class="cols-2" style="grid-template-columns: 1fr 1fr 1fr; gap:10px;">
+    <div class="card" style="text-align:center;">
+      <h4 style="margin-top:0">1. Premier post</h4>
+      <p style="font-size:11px; color:var(--muted);">&Eacute;pingler d&egrave;s publication</p>
+    </div>
+    <div class="card" style="text-align:center;">
+      <h4 style="margin-top:0">2. Page offres</h4>
+      <p style="font-size:11px; color:var(--muted);">aissabelkoussa.fr/services</p>
+    </div>
+    <div class="card" style="text-align:center;">
+      <h4 style="margin-top:0">3. Diagnostic gratuit</h4>
+      <p style="font-size:11px; color:var(--muted);">aissabelkoussa.fr/diagnostic</p>
+    </div>
+  </div>
+
+
+  <!-- 10 — PARAMÈTRES -->
+  <h2><span class="section-num">10</span> &mdash; Param&egrave;tres &agrave; activer</h2>
+
+  <table>
+    <tr><th>Param&egrave;tre</th><th>O&ugrave; le trouver</th><th>Action</th></tr>
+    <tr><td><strong>Mode Cr&eacute;ateur</strong></td><td>Param&egrave;tres &gt; Visibilit&eacute; &gt; Mode cr&eacute;ateur</td><td><strong>Activer</strong> &mdash; bouton "Suivre" par d&eacute;faut + acc&egrave;s Live</td></tr>
+    <tr><td><strong>Open Profile</strong></td><td>Pr&eacute;f&eacute;rences Premium (d&eacute;j&agrave; visible sur ton profil)</td><td><strong>Activer</strong> &mdash; n'importe qui peut t'&eacute;crire</td></tr>
+    <tr><td><strong>URL personnalis&eacute;e</strong></td><td>Modifier le profil public &gt; URL</td><td>V&eacute;rifier : <strong>linkedin.com/in/aissabelkoussa</strong></td></tr>
+  </table>
+
+
+  <!-- 11 — BANNIÈRE -->
+  <h2><span class="section-num">11</span> &mdash; Banni&egrave;re</h2>
+
+  <div class="card">
+    <p><strong>Taille :</strong> 1584 &times; 396 px</p>
+    <p><strong>G&eacute;n&eacute;rer avec :</strong> <code>docs/linkedin/linkedin-banner.html</code> &rarr; ouvrir dans le navigateur &rarr; screenshot ou imprimer en image</p>
+    <p><strong>Contenu :</strong></p>
+    <ul>
+      <li>Texte principal : "Syst&egrave;mes IA cl&eacute; en main pour artisans &amp; PME"</li>
+      <li>Sous-texte : "Sites | Automatisation | Formation | Albi, Occitanie"</li>
+      <li>URL : aissabelkoussa.fr</li>
+    </ul>
+  </div>
+
+
+  <!-- 12 — CHECKLIST -->
+  <h2><span class="section-num">12</span> &mdash; Checklist finale</h2>
+
+  <ul class="checklist">
+    <li>Pr&eacute;nom avec tr&eacute;ma : A&iuml;ssa</li>
+    <li>Nom en minuscules : Belkoussa (pas BELKOUSSA)</li>
+    <li>Headline optimis&eacute; (plus "Auto-Entrepreneur")</li>
+    <li>Poste : "Consultant IA &amp; Syst&egrave;mes Digitaux"</li>
+    <li>Secteur : "Services et conseil en informatique"</li>
+    <li>Type t&eacute;l&eacute;phone : Professionnel</li>
+    <li>Site web 2 ajout&eacute; : /services</li>
+    <li>Site web 3 ajout&eacute; : Calendly</li>
+    <li>Section &Agrave; propos remplac&eacute;e (texte complet coll&eacute;)</li>
+    <li>Exp&eacute;rience ajout&eacute;e avec description</li>
+    <li>L1 Informatique ajout&eacute;e en formation</li>
+    <li>Section "En vedette" configur&eacute;e (3 &eacute;l&eacute;ments)</li>
+    <li>Mode Cr&eacute;ateur activ&eacute;</li>
+    <li>Open Profile activ&eacute;</li>
+    <li>URL : linkedin.com/in/aissabelkoussa</li>
+    <li>Banni&egrave;re upload&eacute;e (1584&times;396)</li>
+  </ul>
+
+
+  <!-- FOOTER -->
+  <hr>
+  <p style="text-align:center; color:var(--muted); font-size:10px;">
+    Guide LinkedIn &mdash; A&iuml;ssa Belkoussa &mdash; 3 avril 2026<br>
+    Tous les textes dans les blocs sombres sont pr&ecirc;ts &agrave; copier-coller directement dans LinkedIn.
+  </p>
+
+</div>
+</body>
+</html>

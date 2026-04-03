@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Réunion Alexandre BRIHIEZ — 8 avril 2026</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+    :root {
+      --bg: #fafaf9; --text: #0a0a0a; --muted: #737373; --border: #e5e5e5;
+      --accent: #2563eb; --accent-light: #3b82f6;
+      --red: #dc2626; --green: #16a34a; --amber: #d97706;
+      --surface: #ffffff; --surface-dark: #0a0a0a;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    .page { max-width: 900px; margin: 0 auto; padding: 48px 32px 80px; }
+    h1 { font-size: 32px; font-weight: 900; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 6px; }
+    h2 { font-size: 20px; font-weight: 800; letter-spacing: -0.5px; margin: 48px 0 16px; padding-bottom: 10px; border-bottom: 2px solid var(--text); text-transform: uppercase; }
+    h3 { font-size: 15px; font-weight: 700; margin: 24px 0 10px; letter-spacing: -0.3px; }
+    h4 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); margin: 20px 0 8px; }
+    p, li { font-size: 13px; line-height: 1.7; }
+    p { margin-bottom: 10px; }
+    ul, ol { margin: 6px 0 14px 18px; }
+    li { margin-bottom: 5px; }
+    a { color: var(--accent); text-decoration: none; font-weight: 600; }
+    .subtitle { font-size: 13px; color: var(--muted); margin-bottom: 32px; }
+    .badge { display: inline-block; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 3px 10px; border-radius: 20px; }
+    .badge-red { background: #fef2f2; color: var(--red); }
+    .badge-green { background: #f0fdf4; color: var(--green); }
+    .badge-amber { background: #fffbeb; color: var(--amber); }
+    .badge-blue { background: #eff6ff; color: var(--accent); }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px; margin: 12px 0; }
+    .card-dark { background: var(--surface-dark); color: #fafafa; border: none; border-radius: 10px; padding: 24px; margin: 12px 0; }
+    .card-dark p, .card-dark li { color: #a3a3a3; }
+    .card-dark h3 { color: #fafafa; margin-top: 0; }
+    .card-dark strong { color: #fafafa; }
+    .alert { padding: 14px 18px; border-radius: 8px; margin: 12px 0; font-size: 12px; }
+    .alert-red { background: #fef2f2; border-left: 4px solid var(--red); }
+    .alert-amber { background: #fffbeb; border-left: 4px solid var(--amber); }
+    .alert-green { background: #f0fdf4; border-left: 4px solid var(--green); }
+    table { width: 100%; border-collapse: collapse; margin: 12px 0 20px; font-size: 12px; }
+    th { text-align: left; font-weight: 700; padding: 8px 10px; border-bottom: 2px solid var(--text); font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+    td { padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    .cols-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .cols-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+    .cols-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 10px; }
+    .highlight { background: linear-gradient(135deg, rgba(37,99,235,0.04), rgba(37,99,235,0.08)); border: 1.5px solid var(--accent); }
+    .section-num { font-size: 10px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 1.5px; }
+    .stat-card { text-align: center; padding: 16px; border: 1px solid var(--border); border-radius: 10px; }
+    .stat-card .number { font-size: 28px; font-weight: 800; letter-spacing: -1px; }
+    .stat-card .label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+    .checklist { list-style: none; margin: 8px 0; padding: 0; }
+    .checklist li { font-size: 12px; padding: 6px 0 6px 22px; position: relative; border-bottom: 1px solid var(--border); }
+    .checklist li::before { content: "\2610"; position: absolute; left: 0; font-size: 14px; }
+    .checklist li.done::before { content: "\2611"; color: var(--green); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+    @media print {
+      body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page { padding: 24px; max-width: 100%; }
+      .card-dark { background: var(--surface-dark) !important; color: #fafafa !important; }
+    }
+    @page { size: A4; margin: 15mm; }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- COVER -->
+  <p style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:var(--muted); margin-bottom:24px;">Dossier de r&eacute;union &mdash; 8 avril 2026</p>
+  <h1>A&iuml;ssa B &times; Alexandre B</h1>
+  <p class="subtitle">R&eacute;union Accompagnement #2 &mdash; Suivi du 3 avril<br>Objectif : montrer l'ex&eacute;cution, valider les nouvelles offres, obtenir un prospect concret</p>
+
+  <div class="alert alert-green">
+    <strong>Depuis le 3 avril :</strong> Site restructur&eacute; (3 cat&eacute;gories, Pilote Automatique, Formation IA, aides financi&egrave;res), &eacute;tude de march&eacute; compl&egrave;te, 7 Go lib&eacute;r&eacute;s sur le disque, playbook commercial produit.
+  </div>
+
+  <!-- 01 — RECAP RÉUNION 3 AVRIL -->
+  <h2><span class="section-num">01</span> &mdash; R&eacute;cap r&eacute;union du 3 avril</h2>
+  <div class="card">
+    <h3 style="margin-top:0">Feedback d'Alexandre &mdash; actions prises</h3>
+    <table>
+      <tr><th>Demande Alexandre</th><th>Action r&eacute;alis&eacute;e</th><th>Statut</th></tr>
+      <tr><td>Restructurer en 3 cat&eacute;gories</td><td>Page /services r&eacute;&eacute;crite : Automatisation &amp; Process, Sites &amp; Conversion, Pilotage &amp; Intelligence</td><td><span class="badge badge-green">Fait</span></td></tr>
+      <tr><td>Offre cl&eacute; en main achetable de suite</td><td>"Pilote Automatique" cr&eacute;&eacute; &agrave; 1 500&euro; (chatbot + emails auto + dashboard, 5 jours)</td><td><span class="badge badge-green">Fait</span></td></tr>
+      <tr><td>Ajouter de la formation</td><td>3 formations IA packag&eacute;es (1j &agrave; 490&euro;/pers, 2j &agrave; 890&euro;/pers, sur-mesure 800&euro;/jour)</td><td><span class="badge badge-green">Fait</span></td></tr>
+      <tr><td>Pricing TJM 800&euro;/jour</td><td>Grille TJM ajout&eacute;e : 450&euro; (1/2j), 800&euro; (jour), 3 600&euro; (sem), 6 800&euro; (mois)</td><td><span class="badge badge-green">Fait</span></td></tr>
+      <tr><td>3 niveaux : standard, premium, personnalis&eacute;</td><td>Starter 1 500&euro; / Pro 2 900&euro; / Sur-mesure 6 900&euro;+</td><td><span class="badge badge-green">Fait</span></td></tr>
+      <tr><td>Montrer des exemples portfolio</td><td>Section "Projets livr&eacute;s" ajout&eacute;e sur la homepage (4 vrais projets)</td><td><span class="badge badge-green">Fait</span></td></tr>
+    </table>
+  </div>
+
+  <!-- 02 — NOUVELLES OFFRES -->
+  <h2><span class="section-num">02</span> &mdash; Architecture des offres (nouveau)</h2>
+
+  <h3>3 cat&eacute;gories d'expertise</h3>
+  <div class="cols-3">
+    <div class="card highlight">
+      <h4 style="margin-top:0">Automatisation &amp; Process</h4>
+      <p style="font-size:11px; color:var(--muted);">Emails auto, chatbot IA, CRM, workflows n8n/Make, prise de RDV, relances. <strong>"Le plus demand&eacute;"</strong></p>
+    </div>
+    <div class="card">
+      <h4 style="margin-top:0">Sites &amp; Conversion</h4>
+      <p style="font-size:11px; color:var(--muted);">Site pro haute performance, landing pages, tunnels de conversion, SEO local, formulaires intelligents.</p>
+    </div>
+    <div class="card">
+      <h4 style="margin-top:0">Pilotage &amp; Intelligence</h4>
+      <p style="font-size:11px; color:var(--muted);">Dashboards temps r&eacute;el, KPI, reporting automatis&eacute;, alertes, IA d&eacute;cisionnelle.</p>
+    </div>
+  </div>
+
+  <h3>Grille tarifaire unifi&eacute;e</h3>
+  <table>
+    <tr><th>Offre</th><th>Prix</th><th>D&eacute;lai</th><th>Inclus</th></tr>
+    <tr style="background:#eff6ff;">
+      <td><strong>Pilote Automatique</strong> <span class="badge badge-green">Nouveau</span></td>
+      <td><strong>1 500&euro;</strong></td>
+      <td>5 jours</td>
+      <td>5 emails auto + chatbot IA + notifications + dashboard</td>
+    </tr>
+    <tr>
+      <td><strong>Pro</strong> <span class="badge badge-blue">Recommand&eacute;</span></td>
+      <td><strong>2 900&euro;</strong> puis 490&euro;/mois</td>
+      <td>5-10 jours</td>
+      <td>Syst&egrave;me complet + 3 mois monitoring offerts</td>
+    </tr>
+    <tr>
+      <td><strong>Sur-mesure</strong></td>
+      <td>&Agrave; partir de <strong>6 900&euro;</strong> puis 1 900&euro;/mois</td>
+      <td>1-2 mois</td>
+      <td>Multi-briques (site + IA + data) + partenaire d&eacute;di&eacute;</td>
+    </tr>
+    <tr style="background:#f0fdf4;">
+      <td><strong>Formation IA Pratique</strong> <span class="badge badge-green">Nouveau</span></td>
+      <td><strong>490&euro;</strong>/pers (inter) &mdash; <strong>1 500&euro;</strong> (intra)</td>
+      <td>1 jour</td>
+      <td>Prompt engineering + cas d'usage m&eacute;tier + kit IA</td>
+    </tr>
+    <tr style="background:#f0fdf4;">
+      <td><strong>Formation Automatisation</strong></td>
+      <td><strong>890&euro;</strong>/pers (inter) &mdash; <strong>2 800&euro;</strong> (intra)</td>
+      <td>2 jours</td>
+      <td>2-3 automatisations d&eacute;ploy&eacute;es pendant la formation</td>
+    </tr>
+    <tr>
+      <td><strong>Consulting TJM</strong></td>
+      <td><strong>800&euro;</strong>/jour &mdash; 450&euro;/demi-journ&eacute;e</td>
+      <td>&Agrave; la carte</td>
+      <td>Audit, conseil, architecture, impl&eacute;mentation</td>
+    </tr>
+  </table>
+
+  <!-- 03 — ÉTUDE DE MARCHÉ -->
+  <h2><span class="section-num">03</span> &mdash; &Eacute;tude de march&eacute; (donn&eacute;es v&eacute;rifi&eacute;es)</h2>
+
+  <div class="cols-4">
+    <div class="stat-card"><div class="number">25 000</div><div class="label">Entreprises dans le Tarn</div></div>
+    <div class="stat-card"><div class="number">82%</div><div class="label">PME investissent en digital 2026</div></div>
+    <div class="stat-card"><div class="number">37%</div><div class="label">TPE veulent se former mais ne savent pas vers qui</div></div>
+    <div class="stat-card"><div class="number">0</div><div class="label">Activateur France Num IA dans le Tarn</div></div>
+  </div>
+
+  <h3>TJM valid&eacute; par le march&eacute;</h3>
+  <table>
+    <tr><th>Sp&eacute;cialit&eacute;</th><th>Junior</th><th>Confirm&eacute;</th><th>Senior</th></tr>
+    <tr><td>Consultant IA g&eacute;n&eacute;raliste</td><td>500-600&euro;</td><td>600-900&euro;</td><td>900-1 200&euro;</td></tr>
+    <tr><td>Formateur Tech/IA</td><td>500-800&euro;</td><td>800-1 200&euro;</td><td>1 200-2 000&euro;</td></tr>
+    <tr><td>Dev Fullstack React/Next.js</td><td>350-450&euro;</td><td>500-600&euro;</td><td>650-750&euro;</td></tr>
+  </table>
+  <p style="font-size:11px; color:var(--muted);">Sources : Malt, Free-Work, Plateya, RH Solutions, FreelanceRepublik (50+ sources v&eacute;rifi&eacute;es)</p>
+
+  <div class="alert alert-green">
+    <strong>800&euro;/jour = pile dans la fourchette</strong> consultant IA confirm&eacute; en province. Conservateur m&ecirc;me &mdash; la moyenne nationale est 600-900&euro;, et les formateurs IA confirm&eacute;s facturent 800-1 200&euro;.
+  </div>
+
+  <h3>Le trou b&eacute;ant du march&eacute;</h3>
+  <div class="card-dark">
+    <h3>Aucun acteur ne fait les 3 &agrave; la fois</h3>
+    <p>Site + automatisation IA + formation pour les TPE/artisans de province. Simpl&eacute;bo fait des sites vitrines sans IA. Axonaut est un SaaS g&eacute;n&eacute;rique. Les freelances Malt vendent du temps, pas des r&eacute;sultats. Les agences IA (Mink, AXIIZ) ciblent les PME 20-250 salari&eacute;s, pas les TPE.</p>
+    <p><strong>A&iuml;ssa est le seul profil fullstack + IA bas&eacute; physiquement &agrave; Albi avec une offre cl&eacute; en main + formation.</strong></p>
+  </div>
+
+  <!-- 04 — AIDES FINANCIÈRES -->
+  <h2><span class="section-num">04</span> &mdash; Aides financi&egrave;res (argument de vente massif)</h2>
+
+  <div class="cols-2">
+    <div class="card highlight">
+      <h4 style="margin-top:0">OPCO</h4>
+      <p><strong>Jusqu'&agrave; 100%</strong> pour entreprises &lt; 50 salari&eacute;s (formation IA)</p>
+      <p style="font-size:11px; color:var(--muted);">&rarr; Un artisan peut se faire financer la formation int&eacute;gralement.</p>
+    </div>
+    <div class="card">
+      <h4 style="margin-top:0">OCCAL (Occitanie)</h4>
+      <p><strong>Jusqu'&agrave; 70%</strong> des d&eacute;penses, plafond <strong>23 000&euro;</strong></p>
+      <p style="font-size:11px; color:var(--muted);">Artisans, commerce, tourisme. Couvre le Pilote Automatique et le Pro.</p>
+    </div>
+    <div class="card">
+      <h4 style="margin-top:0">Pass Occitanie</h4>
+      <p><strong>50%</strong> des d&eacute;penses, plafond <strong>10 000&euro;</strong></p>
+      <p style="font-size:11px; color:var(--muted);">TPE/PME toutes. Couvre le syst&egrave;me cl&eacute; en main.</p>
+    </div>
+    <div class="card">
+      <h4 style="margin-top:0">IA Booster France 2030</h4>
+      <p><strong>Diagnostic + formation gratuits</strong> (Bpifrance)</p>
+      <p style="font-size:11px; color:var(--muted);">Phase 1 gratuite (10h). Phase 2 financ&eacute;e &agrave; 80%.</p>
+    </div>
+  </div>
+
+  <div class="alert alert-amber">
+    <strong>Concr&egrave;tement :</strong> un artisan qui prend le Pilote Automatique (1 500&euro;) + Formation IA (1 500&euro; intra) = 3 000&euro;. Avec l'OCCAL (70%) : reste &agrave; charge <strong>900&euro;</strong>. Avec OPCO sur la formation : reste &agrave; charge <strong>450&euro;</strong>.
+  </div>
+
+  <!-- 05 — EQUASYS / FACTORIA -->
+  <h2><span class="section-num">05</span> &mdash; Equasys &amp; Groupe Factoria (intelligence)</h2>
+
+  <div class="cols-2">
+    <div class="card">
+      <h4 style="margin-top:0">Equasys</h4>
+      <ul style="font-size:11px;">
+        <li><strong>CA :</strong> 2,77 M&euro; (2022)</li>
+        <li><strong>Effectif :</strong> 21-22 collaborateurs</li>
+        <li><strong>Si&egrave;ge :</strong> ZA Albitech, Albi + site Castres</li>
+        <li><strong>Activit&eacute; :</strong> EBP PRO/PME, Sage, Sage Batigest, infra IT, impression</li>
+        <li><strong>Cr&eacute;ation :</strong> 1997 (27 ans)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4 style="margin-top:0">Groupe Factoria</h4>
+      <ul style="font-size:11px;">
+        <li><strong>CA 2024 :</strong> 235 M&euro; (+12%)</li>
+        <li><strong>Entit&eacute;s :</strong> 41 en France</li>
+        <li><strong>Collaborateurs :</strong> ~900</li>
+        <li><strong>R&eacute;seau RESADIA :</strong> 150 points de pr&eacute;sence, 6 000 collaborateurs</li>
+        <li><strong>Investisseurs :</strong> Bpifrance + Oquendo Capital (45 M&euro;)</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Synergies identifi&eacute;es</h3>
+  <ol>
+    <li><strong>Formation IA pour les clients Equasys</strong> &mdash; les 21 collaborateurs n'ont pas de comp&eacute;tence IA. A&iuml;ssa = bras IA d'Equasys.</li>
+    <li><strong>Upsell base clients existante</strong> &mdash; TPE/PME d&eacute;j&agrave; &eacute;quip&eacute;es EBP/Sage = cibles naturelles pour l'IA.</li>
+    <li><strong>EBP n'a pas d'IA native</strong> &mdash; rachat Cegid en cours mais rien sorti. Cr&eacute;neau ouvert.</li>
+    <li><strong>RESADIA</strong> &mdash; si le mod&egrave;le fonctionne avec Equasys, duplicable sur 150 points de pr&eacute;sence.</li>
+  </ol>
+
+  <div class="alert alert-amber">
+    <strong>Admin-IA :</strong> aucune pr&eacute;sence en ligne d&eacute;tect&eacute;e. Projet en phase de conception/stealth. &Agrave; clarifier avec Alexandre : concept, prototype, MVP ? Produit Equasys ou personnel ?
+  </div>
+
+  <!-- 06 — AUTO-ÉCOLES -->
+  <h2><span class="section-num">06</span> &mdash; March&eacute; auto-&eacute;coles (contexte Admin-IA)</h2>
+
+  <div class="cols-3">
+    <div class="stat-card"><div class="number">12 500</div><div class="label">Auto-&eacute;coles en France</div></div>
+    <div class="stat-card"><div class="number">680</div><div class="label">En Occitanie</div></div>
+    <div class="stat-card"><div class="number">78</div><div class="label">Dans le Tarn</div></div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">Opportunit&eacute; Admin-IA</h3>
+    <ul style="font-size:11px;">
+      <li>March&eacute; de <strong>2,1 Mds&euro;</strong>, croissance +8%</li>
+      <li><strong>Aucun logiciel de gestion auto-&eacute;cole n'int&egrave;gre l'IA nativement</strong> (RAPIDO, DRIVUP, Elgea = gestion classique)</li>
+      <li>R&eacute;forme permis 2026 cr&eacute;e de la complexit&eacute; administrative suppl&eacute;mentaire</li>
+      <li>Stych AI = assistant &eacute;l&egrave;ve, pas outil de gestion interne</li>
+      <li>67% des auto-&eacute;coles n'ont pas de simulateur &mdash; digitalisation en retard</li>
+    </ul>
+    <p style="font-size:11px; color:var(--muted);"><strong>Si Alexandre cherche un d&eacute;veloppeur IA pour Admin-IA</strong>, c'est un projet viable. A&iuml;ssa apporte la stack technique (React, Next.js, Supabase, agents IA), Alexandre apporte la connaissance m&eacute;tier et le r&eacute;seau commercial.</p>
+  </div>
+
+  <!-- 07 — CCI / CMA / FRANCE NUM -->
+  <h2><span class="section-num">07</span> &mdash; Acc&egrave;s institutionnel (CCI, CMA, France Num)</h2>
+
+  <div class="cols-2">
+    <div class="card">
+      <h4 style="margin-top:0">CCI Tarn</h4>
+      <ul style="font-size:11px;">
+        <li>Plan strat&eacute;gique 2022-2026 (derni&egrave;re ann&eacute;e &mdash; moment de se positionner)</li>
+        <li><strong>Propose d&eacute;j&agrave; des formations IA</strong> (ateliers pratiques)</li>
+        <li>Diagnostic de Transition Num&eacute;rique (ne d&eacute;ploie pas, juste diagnostic)</li>
+        <li>ESN 81 : &Eacute;cole Sup&eacute;rieure du Num&eacute;rique &agrave; Albi</li>
+        <li>Purple Campus Albi/Castres : centre de formation CCI</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4 style="margin-top:0">CMA Tarn</h4>
+      <ul style="font-size:11px;">
+        <li><strong>Formation "IA et Artisanat" &agrave; 210&euro;</strong> (satisfaction 98,5%)</li>
+        <li>Rubrique Num&eacute;rique/Bureautique active</li>
+        <li>Oriente les artisans vers des prestataires locaux</li>
+        <li><strong>A&iuml;ssa pourrait devenir formateur r&eacute;f&eacute;rent</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card highlight">
+    <h3 style="margin-top:0">France Num &mdash; Devenir Activateur <span class="badge badge-red">Priorit&eacute; absolue</span></h3>
+    <ul>
+      <li><strong>0 activateur IA sp&eacute;cialis&eacute; identifi&eacute; dans le Tarn</strong> &mdash; place &agrave; prendre</li>
+      <li>Inscription <strong>gratuite</strong> sur extranet.francenum.gouv.fr</li>
+      <li>Conditions : activit&eacute; &gt; 6 mois + r&eacute;f&eacute;rences en transformation num&eacute;rique TPE</li>
+      <li>Validation en <strong>24h</strong>, profil visible sur francenum.gouv.fr</li>
+      <li>Acc&egrave;s au plan "Osez l'IA" (ambassadeur IA aupr&egrave;s des TPE)</li>
+      <li>Les CCI et CMA orientent les entreprises vers les activateurs r&eacute;f&eacute;renc&eacute;s</li>
+    </ul>
+  </div>
+
+  <!-- 08 — QUESTIONS POUR ALEXANDRE -->
+  <h2><span class="section-num">08</span> &mdash; Questions pour Alexandre</h2>
+
+  <div class="card-dark">
+    <h3>7 questions strat&eacute;giques</h3>
+    <ol>
+      <li><strong>"Tu as un artisan ou prestataire dans le Tarn que tu peux me pr&eacute;senter cette semaine ?"</strong><br><span style="font-size:11px;">Objectif #1 : un nom concret.</span></li>
+      <li><strong>"O&ugrave; en est Admin-IA ? Concept, prototype, MVP ?"</strong><br><span style="font-size:11px;">Clarifier : projet Equasys ou personnel ? Budget ? Timeline ?</span></li>
+      <li><strong>"Est-ce que tu cherches un dev/CTO technique pour Admin-IA ?"</strong><br><span style="font-size:11px;">Si oui, proposition de collaboration technique.</span></li>
+      <li><strong>"On pourrait proposer une offre conjointe 'Digital + IA' via Equasys ?"</strong><br><span style="font-size:11px;">Les clients EBP/Sage d'Equasys = prospects naturels pour la formation IA.</span></li>
+      <li><strong>"Tu connais le r&eacute;f&eacute;rent num&eacute;rique de la CCI Tarn ? Tu peux me le pr&eacute;senter ?"</strong><br><span style="font-size:11px;">Acc&egrave;s au r&eacute;seau institutionnel local.</span></li>
+      <li><strong>"On planifie une formation IA pilote ? Toi + 2-3 contacts Equasys, gratuite, comme cas test."</strong><br><span style="font-size:11px;">Premi&egrave;re formation r&eacute;elle = d&eacute;clencheur DREETS + t&eacute;moignage.</span></li>
+      <li><strong>"Quelle est la prochaine &eacute;tape concr&egrave;te qu'on fait lundi ?"</strong><br><span style="font-size:11px;">Terminer avec une action, pas un "on se rappelle".</span></li>
+    </ol>
+  </div>
+
+  <!-- 09 — PLAN D'ACTION -->
+  <h2><span class="section-num">09</span> &mdash; Plan d'action 4-8 avril</h2>
+
+  <table>
+    <tr><th>Jour</th><th>Actions cl&eacute;s</th><th>KPI</th></tr>
+    <tr>
+      <td><strong>Ven. 4</strong></td>
+      <td>Email r&eacute;cap Alexandre &bull; D&eacute;ployer Vercel &bull; Optimiser profil LinkedIn &bull; Pr&eacute;parer templates</td>
+      <td>Site live + profil LinkedIn 100%</td>
+    </tr>
+    <tr>
+      <td><strong>Sam. 5</strong></td>
+      <td>5-10 commentaires LinkedIn &bull; Publier post #1 (8h-8h30) &bull; R&eacute;pondre aux commentaires</td>
+      <td>Post publi&eacute; + 10 impressions</td>
+    </tr>
+    <tr>
+      <td><strong>Dim. 6</strong></td>
+      <td>Identifier 30 artisans BTP Tarn (Google Maps) &bull; Cr&eacute;er Google Sheet prospection &bull; Pr&eacute;parer 10 DMs</td>
+      <td>30 prospects + 10 DMs pr&ecirc;ts</td>
+    </tr>
+    <tr>
+      <td><strong>Lun. 7</strong></td>
+      <td>Envoyer 10 DMs LinkedIn &bull; Cr&eacute;er Calendly &bull; Relancer Alexandre &bull; Initier DREETS</td>
+      <td>10 DMs envoy&eacute;s + Calendly op&eacute;rationnel</td>
+    </tr>
+    <tr>
+      <td><strong>Mar. 8</strong></td>
+      <td><strong>R&eacute;union Alexandre</strong> &bull; D&eacute;mo site &bull; Email r&eacute;cap dans l'heure &bull; Mise &agrave; jour plan S2</td>
+      <td>1 prospect concret obtenu</td>
+    </tr>
+  </table>
+
+  <!-- 10 — CE QU'ON MONTRE -->
+  <h2><span class="section-num">10</span> &mdash; D&eacute;mo pendant le call</h2>
+
+  <ul class="checklist">
+    <li>Page /services restructur&eacute;e &mdash; 3 cat&eacute;gories + grille tarifaire + Pilote Auto + Formation + TJM + aides</li>
+    <li>Page /go &mdash; Pilote Automatique en vedette + aides financi&egrave;res</li>
+    <li>Homepage &mdash; Section "Projets livr&eacute;s" (social proof) + 4 offres dans PricingTeaser</li>
+    <li>One-pager offres (PDF) &mdash; mis &agrave; jour avec nouvelles offres + formation + aides</li>
+    <li>Page /diagnostic &mdash; scoring interactif (inchang&eacute;, fonctionne)</li>
+    <li>Donn&eacute;es de march&eacute; &mdash; 25 000 entreprises Tarn, 37% veulent se former, aides 70-100%</li>
+    <li>R&eacute;sultats prospection &mdash; premiers DMs envoy&eacute;s (stats taux r&eacute;ponse)</li>
+  </ul>
+
+  <!-- 11 — SÉQUENCE POST-RÉUNION -->
+  <h2><span class="section-num">11</span> &mdash; S&eacute;quence post-r&eacute;union</h2>
+
+  <table>
+    <tr><th>Timing</th><th>Action</th><th>Contenu</th></tr>
+    <tr><td><strong>Dans l'heure</strong></td><td>Email r&eacute;cap</td><td>R&eacute;sum&eacute; + engagements + prochaine &eacute;tape + one-pager PDF joint</td></tr>
+    <tr><td><strong>J+3</strong></td><td>Relance</td><td>Si nom donn&eacute; : "Tu as pu contacter [X] ?" / Si pas de nom : envoyer la liste des 10 entreprises</td></tr>
+    <tr><td><strong>J+7</strong></td><td>Dernier message</td><td>Si silence : cloture respectueuse / Si piste : point d'avancement</td></tr>
+  </table>
+  <p style="font-size:11px; color:var(--muted);"><strong>R&egrave;gles :</strong> max 3 relances. Chaque message = 1 objectif pr&eacute;cis. Jamais "tu as r&eacute;fl&eacute;chi ?".</p>
+
+  <!-- 12 — OBJECTIF 90 JOURS -->
+  <h2><span class="section-num">12</span> &mdash; Objectif 90 jours</h2>
+
+  <div class="cols-3">
+    <div class="card-dark" style="text-align:center;">
+      <div style="font-size:28px; font-weight:800; color:var(--accent-light);">5</div>
+      <div style="font-size:10px; color:#a3a3a3; text-transform:uppercase; letter-spacing:0.5px;">Clients pay&eacute;s</div>
+    </div>
+    <div class="card-dark" style="text-align:center;">
+      <div style="font-size:28px; font-weight:800; color:var(--accent-light);">18 000&euro;</div>
+      <div style="font-size:10px; color:#a3a3a3; text-transform:uppercase; letter-spacing:0.5px;">CA cumul&eacute;</div>
+    </div>
+    <div class="card-dark" style="text-align:center;">
+      <div style="font-size:28px; font-weight:800; color:var(--accent-light);">3</div>
+      <div style="font-size:10px; color:#a3a3a3; text-transform:uppercase; letter-spacing:0.5px;">Abonn&eacute;s maintenance</div>
+    </div>
+  </div>
+
+  <h3>Comment y arriver</h3>
+  <table>
+    <tr><th>Mois</th><th>Objectif</th><th>Levier</th></tr>
+    <tr><td><strong>Avril</strong></td><td>1er client pay&eacute; (Pilote Auto 1 500&euro; ou formation)</td><td>R&eacute;seau Alexandre + 10 DMs/sem + CCI/CMA</td></tr>
+    <tr><td><strong>Mai</strong></td><td>2-3 clients + 1 abo maintenance</td><td>LinkedIn (3 posts/sem) + cold outreach + France Num</td></tr>
+    <tr><td><strong>Juin</strong></td><td>15-18K&euro; CA cumul&eacute; + 3 abos</td><td>&Eacute;tudes de cas + t&eacute;moignages + formation OPCO</td></tr>
+  </table>
+
+  <!-- LIENS -->
+  <h2><span class="section-num">13</span> &mdash; Liens &amp; ressources</h2>
+  <table>
+    <tr><th>Ressource</th><th>URL / Emplacement</th></tr>
+    <tr><td>Site portfolio</td><td>aissabelkoussa.fr</td></tr>
+    <tr><td>Page offres (landing)</td><td>aissabelkoussa.fr/go</td></tr>
+    <tr><td>Page services + pricing</td><td>aissabelkoussa.fr/services</td></tr>
+    <tr><td>Diagnostic digital</td><td>aissabelkoussa.fr/diagnostic</td></tr>
+    <tr><td>Playbook commercial</td><td>docs/playbook-commercial.md</td></tr>
+    <tr><td>Strat&eacute;gie offres v2</td><td>docs/strategie-offres-v2.md</td></tr>
+    <tr><td>&Eacute;tude de march&eacute; Tarn</td><td>docs/etude-marche-consultant-ia-albi.md</td></tr>
+    <tr><td>France Num &mdash; Inscription Activateur</td><td>extranet.francenum.gouv.fr</td></tr>
+    <tr><td>CCI Tarn</td><td>tarn.cci.fr</td></tr>
+    <tr><td>CMA Tarn</td><td>cm-tarn.fr</td></tr>
+  </table>
+
+  <!-- FOOTER -->
+  <hr>
+  <p style="text-align:center; color:var(--muted); font-size:10px; margin-top:16px;">
+    Document g&eacute;n&eacute;r&eacute; le 3 avril 2026. Consolide : &eacute;tude de march&eacute; (50+ sources), analyse concurrentielle, playbook commercial, plan d'action, donn&eacute;es CCI/CMA/France Num.<br>
+    <strong>12 agents de recherche d&eacute;ploy&eacute;s. Donn&eacute;es r&eacute;elles uniquement.</strong>
+  </p>
+
+</div>
+</body>
+</html>

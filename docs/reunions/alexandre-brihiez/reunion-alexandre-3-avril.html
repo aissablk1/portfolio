@@ -1,0 +1,601 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Réunion Alexandre BRIHIEZ — 3 avril 2026</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+    :root {
+      --bg: #fafaf9; --text: #0a0a0a; --muted: #737373; --border: #e5e5e5;
+      --accent: #2563eb; --accent-light: #3b82f6;
+      --red: #dc2626; --green: #16a34a; --amber: #d97706;
+      --surface: #ffffff; --surface-dark: #0a0a0a;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page { max-width: 860px; margin: 0 auto; padding: 48px 32px 80px; }
+
+    h1 { font-size: 32px; font-weight: 900; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 6px; }
+    h2 { font-size: 20px; font-weight: 800; letter-spacing: -0.5px; margin: 48px 0 16px; padding-bottom: 10px; border-bottom: 2px solid var(--text); text-transform: uppercase; }
+    h3 { font-size: 15px; font-weight: 700; margin: 24px 0 10px; letter-spacing: -0.3px; }
+    h4 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); margin: 20px 0 8px; }
+    p, li { font-size: 13px; line-height: 1.7; }
+    p { margin-bottom: 10px; }
+    ul, ol { margin: 6px 0 14px 18px; }
+    li { margin-bottom: 5px; }
+    a { color: var(--accent); text-decoration: none; font-weight: 600; }
+
+    .subtitle { font-size: 13px; color: var(--muted); margin-bottom: 32px; }
+    .badge { display: inline-block; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 3px 10px; border-radius: 20px; }
+    .badge-red { background: #fef2f2; color: var(--red); }
+    .badge-green { background: #f0fdf4; color: var(--green); }
+    .badge-amber { background: #fffbeb; color: var(--amber); }
+    .badge-blue { background: #eff6ff; color: var(--accent); }
+
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px; margin: 12px 0; }
+    .card-dark { background: var(--surface-dark); color: #fafafa; border: none; border-radius: 10px; padding: 24px; margin: 12px 0; }
+    .card-dark p, .card-dark li { color: #a3a3a3; }
+    .card-dark h3 { color: #fafafa; margin-top: 0; }
+    .card-dark strong { color: #fafafa; }
+
+    .alert { padding: 14px 18px; border-radius: 8px; margin: 12px 0; font-size: 12px; }
+    .alert-red { background: #fef2f2; border-left: 4px solid var(--red); }
+    .alert-amber { background: #fffbeb; border-left: 4px solid var(--amber); }
+    .alert-green { background: #f0fdf4; border-left: 4px solid var(--green); }
+
+    table { width: 100%; border-collapse: collapse; margin: 12px 0 20px; font-size: 12px; }
+    th { text-align: left; font-weight: 700; padding: 8px 10px; border-bottom: 2px solid var(--text); font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+    td { padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+
+    .cols-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .cols-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+
+    .highlight { background: linear-gradient(135deg, rgba(37,99,235,0.04), rgba(37,99,235,0.08)); border: 1.5px solid var(--accent); }
+
+    /* Offres cards */
+    .offres { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin: 16px 0; }
+    .offre { border: 1.5px solid var(--border); border-radius: 10px; padding: 20px 16px; position: relative; }
+    .offre.best { border-color: var(--accent); background: linear-gradient(135deg, rgba(37,99,235,0.02), rgba(37,99,235,0.06)); }
+    .offre-badge { position: absolute; top: -8px; left: 50%; transform: translateX(-50%); background: var(--accent); color: white; font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 3px 10px; border-radius: 20px; white-space: nowrap; }
+    .offre h3 { font-size: 14px; font-weight: 700; text-transform: uppercase; margin: 0 0 4px; }
+    .offre-desc { font-size: 10px; color: var(--muted); margin-bottom: 12px; min-height: 30px; }
+    .offre-price { font-size: 24px; font-weight: 800; letter-spacing: -1px; margin-bottom: 2px; }
+    .offre-note { font-size: 9px; color: var(--muted); margin-bottom: 12px; }
+    .offre-features { list-style: none; border-top: 1px solid var(--border); padding-top: 10px; margin: 0; }
+    .offre-features li { font-size: 10px; color: #525252; padding: 2px 0 2px 14px; position: relative; }
+    .offre-features li::before { content: "✓"; position: absolute; left: 0; color: var(--accent); font-weight: 700; font-size: 9px; }
+
+    /* ROI block */
+    .roi { background: var(--surface-dark); color: #fafafa; border-radius: 10px; padding: 24px; margin: 16px 0; }
+    .roi-label { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--accent-light); margin-bottom: 10px; }
+    .roi h3 { font-size: 14px; font-weight: 700; margin-bottom: 6px; color: #fafafa; }
+    .roi p { font-size: 11px; color: #a3a3a3; margin-bottom: 12px; }
+    .roi-numbers { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+    .roi-stat { text-align: center; }
+    .roi-stat .number { font-size: 20px; font-weight: 800; color: var(--accent-light); }
+    .roi-stat .label { font-size: 9px; color: #a3a3a3; margin-top: 2px; }
+
+    /* Garanties */
+    .garanties { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin: 12px 0; }
+    .garantie { text-align: center; padding: 14px 10px; }
+    .garantie h4 { font-size: 11px; font-weight: 700; margin: 6px 0 4px; text-transform: none; letter-spacing: 0; color: var(--text); }
+    .garantie p { font-size: 9px; color: var(--muted); }
+
+    /* Checklist */
+    .checklist { list-style: none; margin: 8px 0; padding: 0; }
+    .checklist li { font-size: 12px; padding: 6px 0 6px 22px; position: relative; border-bottom: 1px solid var(--border); }
+    .checklist li::before { content: "☐"; position: absolute; left: 0; font-size: 14px; }
+    .checklist li.done::before { content: "☑"; color: var(--green); }
+
+    /* Sequence */
+    .sequence { position: relative; margin: 16px 0; padding-left: 20px; border-left: 2px solid var(--border); }
+    .sequence-item { margin-bottom: 16px; position: relative; }
+    .sequence-item::before { content: ''; position: absolute; left: -25px; top: 5px; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+    .sequence-item .date { font-size: 10px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.5px; }
+
+    /* Niches */
+    .niches { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0; }
+    .niche { background: #f5f5f5; border-radius: 8px; padding: 16px 18px; }
+    .niche-label { font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); margin-bottom: 6px; }
+    .niche h3 { font-size: 13px; margin: 0 0 4px; }
+    .niche p { font-size: 11px; color: var(--muted); margin: 0; }
+
+    /* Section dividers */
+    .section-num { font-size: 10px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 1.5px; }
+
+    hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+
+    /* Print */
+    @media print {
+      body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page { padding: 24px; max-width: 100%; }
+      h2 { break-before: auto; }
+      .card-dark, .roi { background: var(--surface-dark) !important; color: #fafafa !important; }
+      .offre.best { background: rgba(37,99,235,0.04) !important; }
+      .no-print { display: none; }
+    }
+    @page { size: A4; margin: 15mm; }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- COVER                                       -->
+  <!-- ═══════════════════════════════════════════ -->
+  <p style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:var(--muted); margin-bottom:24px;">Dossier de r&eacute;union &mdash; 3 avril 2026, 09:30</p>
+
+  <h1>A&iuml;ssa B &times; Alexandre B</h1>
+  <p class="subtitle">R&eacute;union Accompagnement &mdash; Microsoft Teams<br>Objectif : liste des skills IA &amp; site web, packager les offres, d&eacute;finir les tarifs</p>
+
+  <div class="alert alert-amber">
+    <strong>Rappel :</strong> Ce document consolide le one-pager offres, le plan strat&eacute;gique, les questions cl&eacute;s et la s&eacute;quence post-r&eacute;union. Tout est dans un seul endroit.
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- 01 — CONTEXTE RAPIDE                        -->
+  <!-- ═══════════════════════════════════════════ -->
+  <h2><span class="section-num">01</span> &mdash; Qui je suis</h2>
+
+  <div class="card">
+    <p><strong>A&iuml;ssa Belkoussa</strong> &mdash; Albi (81), micro-entrepreneur. D&eacute;veloppeur fullstack sp&eacute;cialis&eacute; syst&egrave;mes digitaux &amp; IA.</p>
+    <div class="cols-2" style="margin-top:12px;">
+      <div>
+        <h4 style="margin-top:0">Stack technique</h4>
+        <p style="font-size:11px; color:var(--muted);">React 19, Next.js, Tailwind, Python/FastAPI, Node.js, PostgreSQL, Supabase, Docker, Vercel, Claude Code (32 subagents), Three.js, GSAP</p>
+      </div>
+      <div>
+        <h4 style="margin-top:0">Capital</h4>
+        <p style="font-size:11px; color:var(--muted);">93 dossiers pro, 96 concepts dev, 2 772+ skills IA, portfolio d&eacute;ploy&eacute;, CGV compl&egrave;tes, pricing positionn&eacute;</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- 02 — MES COMPÉTENCES (skills IA & web)      -->
+  <!-- ═══════════════════════════════════════════ -->
+  <h2><span class="section-num">02</span> &mdash; Comp&eacute;tences IA &amp; Site Web</h2>
+
+  <h3>8 domaines d'expertise</h3>
+  <table>
+    <tr><th>Domaine</th><th>Ce que je livre</th><th>Exemple concret</th></tr>
+    <tr>
+      <td><strong>Automatisation</strong></td>
+      <td>Workflows autonomes, op&eacute;rations 24/7, n8n/Make/Zapier</td>
+      <td>Relances clients automatis&eacute;es, devis en 5 min au lieu de 3h</td>
+    </tr>
+    <tr>
+      <td><strong>IA concr&egrave;te</strong></td>
+      <td>LLM, agents autonomes, traitement de donn&eacute;es</td>
+      <td>Chatbot de qualification, tri automatique de demandes</td>
+    </tr>
+    <tr>
+      <td><strong>Dashboards &amp; data</strong></td>
+      <td>Cockpits de donn&eacute;es, indicateurs d&eacute;cisionnels</td>
+      <td>Tableau de bord CA/pipeline en temps r&eacute;el</td>
+    </tr>
+    <tr>
+      <td><strong>Process autonomes</strong></td>
+      <td>Optimisation algorithmique, performance</td>
+      <td>Scoring de leads automatique, routage intelligent</td>
+    </tr>
+    <tr>
+      <td><strong>Pilotage chiffr&eacute;</strong></td>
+      <td>Interfaces de d&eacute;cision, reporting</td>
+      <td>Rapport mensuel auto-g&eacute;n&eacute;r&eacute;, alertes seuils</td>
+    </tr>
+    <tr>
+      <td><strong>Sites qui convertissent</strong></td>
+      <td>Pr&eacute;sence digitale comme actif, tunnels</td>
+      <td>DK Building (BTP), Jolananas (e-commerce)</td>
+    </tr>
+    <tr>
+      <td><strong>Outils internes</strong></td>
+      <td>Simplification process &eacute;quipe, CRM custom</td>
+      <td>Admin panel avec m&eacute;dia manager, CMS sur-mesure</td>
+    </tr>
+    <tr>
+      <td><strong>Tunnels de vente</strong></td>
+      <td>Conversion, nurturing, lead magnets</td>
+      <td>Page /diagnostic (scoring), /go (landing niche)</td>
+    </tr>
+  </table>
+
+  <h3>Skills strat&eacute;giques pour BTP &amp; B2B</h3>
+  <div class="cols-2">
+    <div class="card">
+      <h4 style="margin-top:0">Pour vendre</h4>
+      <ul style="font-size:11px;">
+        <li><strong>pricing-strategy</strong> &mdash; Van Westendorp, Good/Better/Best</li>
+        <li><strong>sales-automator</strong> &mdash; s&eacute;quences email froids B2B</li>
+        <li><strong>marketing-psychology</strong> &mdash; PLFS, social proof</li>
+        <li><strong>free-tool-strategy</strong> &mdash; calculateur = lead magnet</li>
+        <li><strong>email-sequence</strong> &mdash; onboarding, nurture, win-back</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4 style="margin-top:0">Pour livrer</h4>
+      <ul style="font-size:11px;">
+        <li><strong>nextjs-best-practices</strong> &mdash; sites haute performance</li>
+        <li><strong>supabase-automation</strong> &mdash; backend + auth + stockage</li>
+        <li><strong>n8n-workflows</strong> &mdash; automatisations no-code/low-code</li>
+        <li><strong>seo-audit</strong> &mdash; r&eacute;f&eacute;rencement local</li>
+        <li><strong>ai-agents-architect</strong> &mdash; agents IA sur-mesure</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- 03 — NICHES CIBLES                          -->
+  <!-- ═══════════════════════════════════════════ -->
+  <h2><span class="section-num">03</span> &mdash; Niches cibles</h2>
+
+  <div class="niches">
+    <div class="niche">
+      <div class="niche-label">Niche 1</div>
+      <h3>BTP &amp; Artisans en croissance</h3>
+      <p>Plombiers, &eacute;lectriciens, ma&ccedil;ons, menuisiers (5-20 salari&eacute;s). Site pro, prise de RDV en ligne, devis automatis&eacute;, suivi chantiers.</p>
+    </div>
+    <div class="niche">
+      <div class="niche-label">Niche 2</div>
+      <h3>Prestataires B2B</h3>
+      <p>Consultants, formateurs, agences. Tunnels de conversion, automatisation relances, CRM IA, dashboards performance.</p>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- 04 — OFFRES & PRICING                       -->
+  <!-- ═══════════════════════════════════════════ -->
+  <h2><span class="section-num">04</span> &mdash; Offres &amp; Pricing</h2>
+
+  <p style="font-size:11px; color:var(--muted); font-weight:600; text-transform:uppercase; letter-spacing:1px; margin-bottom:12px;">Construction + &eacute;volution continue</p>
+
+  <div class="offres">
+    <div class="offre">
+      <h3>Autonome</h3>
+      <div class="offre-desc">Projet seul &mdash; id&eacute;al si &eacute;quipe technique en interne.</div>
+      <div class="offre-price">3 900 &euro;</div>
+      <div class="offre-note">Paiement unique. Aucune maintenance.</div>
+      <ul class="offre-features">
+        <li>1 syst&egrave;me livr&eacute;</li>
+        <li>Brief + maquette valid&eacute;e</li>
+        <li>Licence exclusive</li>
+        <li>Documentation technique renforc&eacute;e</li>
+        <li>Formation autonomie (2h)</li>
+      </ul>
+    </div>
+
+    <div class="offre best">
+      <div class="offre-badge">Recommand&eacute;</div>
+      <h3>Acc&eacute;l&eacute;rateur</h3>
+      <div class="offre-desc">Projet + maintenance. 3 mois offerts.</div>
+      <div class="offre-price">2 900 &euro;</div>
+      <div class="offre-note">Puis 490 &euro;/mois apr&egrave;s 3 mois offerts.</div>
+      <ul class="offre-features">
+        <li>1 syst&egrave;me cl&eacute; en main</li>
+        <li>Brief + maquette valid&eacute;e</li>
+        <li>Licence exclusive</li>
+        <li>3 mois monitoring + support offerts</li>
+        <li>Bugs corrig&eacute;s sous 48h</li>
+        <li>MAJ s&eacute;curit&eacute; + rapport mensuel</li>
+      </ul>
+    </div>
+
+    <div class="offre">
+      <h3>Partenaire</h3>
+      <div class="offre-desc">Syst&egrave;me complet + partenaire technique d&eacute;di&eacute;.</div>
+      <div class="offre-price">6 900 &euro;</div>
+      <div class="offre-note">Puis 1 900 &euro;/mois apr&egrave;s 3 mois offerts.</div>
+      <ul class="offre-features">
+        <li>Syst&egrave;me multi-briques (site + IA + data)</li>
+        <li>Int&eacute;gration IA sur-mesure</li>
+        <li>3 mois &eacute;volution + support Premium</li>
+        <li>&Eacute;volutions 10h/mois + support 24h</li>
+        <li>R&eacute;union strat&eacute;gique mensuelle</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Abonnements maintenance -->
+  <h3>Abonnements maintenance (apr&egrave;s 3 mois inclus)</h3>
+  <div class="cols-2">
+    <div class="card">
+      <h4 style="margin-top:0">Essentiel</h4>
+      <div style="font-size:20px; font-weight:800; letter-spacing:-0.5px;">490 &euro; <span style="font-size:12px; font-weight:400; color:var(--muted);">/mois</span></div>
+      <p style="font-size:11px; color:var(--muted);">Monitoring 24/7, bugs sous 48h, MAJ s&eacute;curit&eacute;, rapport mensuel. Annuel : 368 &euro;/mois.</p>
+    </div>
+    <div class="card">
+      <h4 style="margin-top:0">Premium</h4>
+      <div style="font-size:20px; font-weight:800; letter-spacing:-0.5px;">1 900 &euro; <span style="font-size:12px; font-weight:400; color:var(--muted);">/mois</span></div>
+      <p style="font-size:11px; color:var(--muted);">Essentiel + &eacute;volutions 10h/mois, support 24h, suivi strat&eacute;gique. Annuel : 1 425 &euro;/mois.</p>
+    </div>
+  </div>
+
+  <!-- ROI -->
+  <div class="roi">
+    <div class="roi-label">Sc&eacute;nario ROI &mdash; Artisan BTP, 5-10 salari&eacute;s</div>
+    <h3>Acc&eacute;l&eacute;rateur &agrave; 2 900 &euro; : site pro + RDV en ligne + devis automatis&eacute; + 3 mois maintenance</h3>
+    <p>Un artisan qui perd 10h/semaine sur le t&eacute;l&eacute;phone, les devis manuels et les relances. Le syst&egrave;me automatise tout et tourne d&egrave;s J+10.</p>
+    <div class="roi-numbers">
+      <div class="roi-stat">
+        <div class="number">10h</div>
+        <div class="label">lib&eacute;r&eacute;es / semaine</div>
+      </div>
+      <div class="roi-stat">
+        <div class="number">800 &euro;</div>
+        <div class="label">valeur r&eacute;cup&eacute;r&eacute;e / sem.</div>
+      </div>
+      <div class="roi-stat">
+        <div class="number">4 sem.</div>
+        <div class="label">pour rentabiliser</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Garanties -->
+  <div class="garanties">
+    <div class="garantie">
+      <div style="font-size:18px;">&#9711;</div>
+      <h4>Prix final garanti</h4>
+      <p>Pas de devis surprise. Le prix annonc&eacute; est le prix pay&eacute;.</p>
+    </div>
+    <div class="garantie">
+      <div style="font-size:18px;">&#9711;</div>
+      <h4>Satisfait ou retravaill&eacute;</h4>
+      <p>Livrable non conforme = retouche sans frais.</p>
+    </div>
+    <div class="garantie">
+      <div style="font-size:18px;">&#9711;</div>
+      <h4>Licence exclusive</h4>
+      <p>Code, d&eacute;ploiement, documentation : tout vous appartient.</p>
+    </div>
+  </div>
+
+  <!-- Comparatif -->
+  <h3>Comparatif march&eacute;</h3>
+  <table>
+    <tr><th>Crit&egrave;re</th><th>Agence web</th><th>Freelance low-cost</th><th>A&iuml;ssa Belkoussa</th></tr>
+    <tr><td>D&eacute;lai</td><td>2-4 mois</td><td>2-6 semaines</td><td><strong>5-10 jours</strong></td></tr>
+    <tr><td>Prix</td><td>8-25K&euro;</td><td>500-2K&euro;</td><td><strong>2 900&euro;</strong></td></tr>
+    <tr><td>Maintenance</td><td>Rare</td><td>Jamais</td><td><strong>3 mois offerts</strong></td></tr>
+    <tr><td>IA int&eacute;gr&eacute;e</td><td>Option+</td><td>Non</td><td><strong>Natif</strong></td></tr>
+    <tr><td>Interlocuteur unique</td><td>Non</td><td>Turnover</td><td><strong>Oui, stable</strong></td></tr>
+    <tr><td>Code source fourni</td><td>Parfois</td><td>Rare</td><td><strong>Toujours</strong></td></tr>
+  </table>
+
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- 05 — CE QUE J'AI DÉJÀ LIVRÉ                -->
+  <!-- ═══════════════════════════════════════════ -->
+  <h2><span class="section-num">05</span> &mdash; Projets livr&eacute;s</h2>
+
+  <div class="cols-2">
+    <div class="card">
+      <h4 style="margin-top:0">DK Building <span class="badge badge-green">BTP</span></h4>
+      <p style="font-size:11px;">PME construction m&eacute;tallique. Site corporate + CMS + galerie r&eacute;alisations. React 19, Node.js, Vercel, Turso DB, Cloudinary, GSAP.</p>
+    </div>
+    <div class="card">
+      <h4 style="margin-top:0">Syna Events <span class="badge badge-blue">Ev&eacute;nementiel</span></h4>
+      <p style="font-size:11px;">D&eacute;ploy&eacute; en production le 31 mars 2026. Site complet.</p>
+    </div>
+    <div class="card">
+      <h4 style="margin-top:0">Jolananas <span class="badge badge-amber">E-commerce</span></h4>
+      <p style="font-size:11px;">Storefront premium Shopify custom. Next.js, TypeScript, Shopify GraphQL, Prisma, PostgreSQL, Framer Motion.</p>
+    </div>
+    <div class="card">
+      <h4 style="margin-top:0">Albi RP <span class="badge badge-amber">&Eacute;cosyst&egrave;me</span></h4>
+      <p style="font-size:11px;">Serveur RP complet : Roblox + Discord bot + site + API. En production active.</p>
+    </div>
+  </div>
+
+  <div class="alert alert-amber">
+    <strong>Capital existant :</strong> 93 dossiers clients (restauration, BTP, auto, coiffure, mode, tech). Exp&eacute;rience terrain diversifi&eacute;e.
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- 06 — QUESTIONS POUR ALEXANDRE               -->
+  <!-- ═══════════════════════════════════════════ -->
+  <h2><span class="section-num">06</span> &mdash; Questions pour Alexandre</h2>
+
+  <div class="card-dark">
+    <h3>Les 5 questions essentielles</h3>
+    <ol>
+      <li><strong>"Tu connais un artisan BTP ou prestataire B2B dans le Tarn &agrave; qui je peux rendre service cette semaine ?"</strong><br><span style="font-size:11px;">Objectif : obtenir un nom concret, pas une promesse.</span></li>
+      <li><strong>"Est-ce que 2 900&euro; passe pour un artisan &agrave; Albi d'apr&egrave;s toi ?"</strong><br><span style="font-size:11px;">Feedback terrain sur le pricing &mdash; plus fiable qu'un calcul th&eacute;orique.</span></li>
+      <li><strong>"Tu serais partant pour un deal apporteur d'affaires ? Commission 20% sur chaque client que tu m'envoies."</strong><br><span style="font-size:11px;">Concr&eacute;tiser le partenariat pendant le call, pas apr&egrave;s.</span></li>
+      <li><strong>"C'est quoi ta vision &agrave; 6 mois pour mon accompagnement ?"</strong><br><span style="font-size:11px;">Comprendre ce qu'Alexandre attend et peut offrir.</span></li>
+      <li><strong>"Qu'est-ce qu'on fait lundi ?"</strong><br><span style="font-size:11px;">Terminer avec une action concr&egrave;te, pas un "on se rappelle".</span></li>
+    </ol>
+  </div>
+
+  <h3>Points de discussion (notes)</h3>
+  <ul class="checklist">
+    <li>Packager les offres &rarr; <strong>D&eacute;j&agrave; fait.</strong> Montrer le one-pager + page /go</li>
+    <li>Lister mes comp&eacute;tences &rarr; <strong>D&eacute;j&agrave; fait.</strong> Montrer les 8 expertises du site</li>
+    <li>Site web et IA &rarr; <strong>D&eacute;j&agrave; fait.</strong> D&eacute;mo live aissabelkoussa.fr</li>
+    <li>Besoin de webinaire, vid&eacute;o ? &rarr; &Agrave; discuter. Pas prioritaire avant le 1er client.</li>
+    <li>&Eacute;tendre r&eacute;seau LinkedIn &rarr; Profil &agrave; optimiser. 3 posts pr&ecirc;ts.</li>
+    <li>D&eacute;finir des tarifs &rarr; <strong>D&eacute;j&agrave; fait.</strong> Valider avec Alexandre.</li>
+    <li>Construire un pricing plan &rarr; <strong>D&eacute;j&agrave; fait.</strong> 3 plans + 2 abos maintenance.</li>
+  </ul>
+
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- 07 — LIENS & RESSOURCES                     -->
+  <!-- ═══════════════════════════════════════════ -->
+  <h2><span class="section-num">07</span> &mdash; Liens &amp; ressources</h2>
+
+  <table>
+    <tr><th>Ressource</th><th>URL / Emplacement</th></tr>
+    <tr><td>Site portfolio</td><td>aissabelkoussa.fr</td></tr>
+    <tr><td>Page offres (landing)</td><td>aissabelkoussa.fr/go</td></tr>
+    <tr><td>Diagnostic digital</td><td>aissabelkoussa.fr/diagnostic</td></tr>
+    <tr><td>Page services + pricing</td><td>aissabelkoussa.fr/services</td></tr>
+    <tr><td>Formulaire contact</td><td>aissabelkoussa.fr/contact</td></tr>
+    <tr><td>One-pager offres (PDF)</td><td>docs/one-pager-offres.html &rarr; imprimer en PDF</td></tr>
+    <tr><td>Mod&egrave;le devis</td><td>docs/modele-devis.html</td></tr>
+    <tr><td>CGV compl&egrave;tes</td><td>aissabelkoussa.fr/cgv</td></tr>
+  </table>
+
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- 08 — SÉQUENCE POST-RÉUNION                  -->
+  <!-- ═══════════════════════════════════════════ -->
+  <h2><span class="section-num">08</span> &mdash; S&eacute;quence post-r&eacute;union</h2>
+
+  <div class="sequence">
+    <div class="sequence-item">
+      <div class="date">Dans l'heure &mdash; Email r&eacute;cap</div>
+      <p><strong>Objet :</strong> R&eacute;cap de notre &eacute;change + prochaines &eacute;tapes</p>
+      <p style="font-size:11px; color:var(--muted);">R&eacute;sumer ce qui s'est dit. Joindre le one-pager PDF. Lien vers aissabelkoussa.fr/go. Proposer la prochaine action concr&egrave;te. <strong>Envoyer dans l'heure, pas 3h apr&egrave;s.</strong></p>
+    </div>
+
+    <div class="sequence-item">
+      <div class="date">J+3 (lundi 6 avril) &mdash; Relance</div>
+      <p><strong>Si nom donn&eacute; :</strong> "Tu as pu contacter [Prospect] ? Je peux lui &eacute;crire directement en te mettant en copie."</p>
+      <p><strong>Si pas de nom :</strong> Envoyer la liste de 10 entreprises identifi&eacute;es (Vaysse Stefan, SOLESBAT, La Menuiserie Albigeoise, Action Formation 81, Elh&eacute;a...). Demander s'il conna&icirc;t quelqu'un.</p>
+    </div>
+
+    <div class="sequence-item">
+      <div class="date">J+7 (vendredi 10 avril) &mdash; Dernier message</div>
+      <p><strong>Si silence :</strong> "Je ne vais pas te relancer 15 fois. Si le timing n'est pas le bon, aucun souci."</p>
+      <p><strong>Si piste en cours :</strong> "Point rapide : o&ugrave; en est-on avec [prospect] ? Besoin que je pr&eacute;pare quelque chose ?"</p>
+    </div>
+  </div>
+
+  <div class="alert alert-red">
+    <strong>R&egrave;gles strictes :</strong> Jamais plus de 3 relances. Chaque message = un objectif pr&eacute;cis (un nom, une action, un oui/non). Ne jamais demander "tu as r&eacute;fl&eacute;chi ?". Si silence apr&egrave;s 3 messages : passer &agrave; autre chose.
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- 09 — RÉSULTATS DE LA RÉUNION                -->
+  <!-- ═══════════════════════════════════════════ -->
+  <h2><span class="section-num">09</span> &mdash; R&eacute;sultats de la r&eacute;union du 3 avril</h2>
+
+  <div class="card">
+    <h4 style="margin-top:0">Profil Alexandre</h4>
+    <p style="font-size:11px;"><strong>Alexandre BRIHIEZ</strong> &mdash; Senior Business Developer chez <strong>Equasys</strong> (partenaire EBP/Sage, bas&eacute; &agrave; Albi). Son produit <strong>Admin-IA</strong> cible les auto-&eacute;coles (en phase de conception, pas encore live).</p>
+  </div>
+
+  <div class="card-dark">
+    <h3>Feedback &amp; recommandations</h3>
+    <ol>
+      <li><strong>Restructurer les offres en 3 cat&eacute;gories claires :</strong> Automatisation, Chatbots &amp; sites, Pilotage &amp; indicateurs</li>
+      <li><strong>Pricing TJM :</strong> 800&nbsp;&euro;/jour &mdash; taux horaire 125-150&nbsp;&euro;</li>
+      <li><strong>Focus cl&eacute; en main :</strong> automation mail + appel + chatbot &rarr; offre packag&eacute;e</li>
+      <li><strong>Portfolio :</strong> montrer des exemples concrets de r&eacute;alisations</li>
+      <li><strong>3 niveaux d'offre :</strong> Standard, Premium, Personnalis&eacute;</li>
+      <li><strong>Ajouter de la formation :</strong> prompting, IA appliqu&eacute;e &agrave; un cas concret</li>
+    </ol>
+  </div>
+
+  <div class="alert alert-green">
+    <strong>Prochaine r&eacute;union :</strong> &Agrave; planifier avec Alexandre pour valider la restructuration des offres et les premiers r&eacute;sultats.
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- 10 — MANQUEMENTS                            -->
+  <!-- ═══════════════════════════════════════════ -->
+  <h2><span class="section-num">10</span> &mdash; Points d'attention &amp; manquements</h2>
+
+  <table>
+    <tr><th>#</th><th>Manquement</th><th>Gravit&eacute;</th><th>Action</th></tr>
+    <tr>
+      <td>1</td>
+      <td><strong>Sc&eacute;nario ROI plombier non v&eacute;rifiable</strong> &mdash; utilis&eacute; partout mais absent du portfolio</td>
+      <td><span class="badge badge-red">Critique</span></td>
+      <td>Pr&eacute;senter comme sc&eacute;nario type, pas comme client r&eacute;el. Ou obtenir un vrai t&eacute;moignage DK Building.</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td><strong>0 client payant au nouveau tarif</strong></td>
+      <td><span class="badge badge-red">Critique</span></td>
+      <td>&Ecirc;tre transparent avec Alexandre. C'est justement pourquoi on se voit.</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td><strong>0 t&eacute;moignage / preuve sociale sur le site</strong></td>
+      <td><span class="badge badge-red">Critique</span></td>
+      <td>Demander un t&eacute;moignage &agrave; DK Building + Syna Events ce weekend.</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td><strong>DK Building &amp; Syna Events non factur&eacute;s</strong></td>
+      <td><span class="badge badge-amber">Majeur</span></td>
+      <td>Facturer ou formaliser en &eacute;change de t&eacute;moignage.</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td><strong>Go-to-market = 0% ex&eacute;cut&eacute;</strong></td>
+      <td><span class="badge badge-amber">Majeur</span></td>
+      <td>Envoyer 10 DMs vendredi apr&egrave;s-midi. Publier post LinkedIn #1 samedi.</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td><strong>SIRET placeholder dans devis/facture</strong></td>
+      <td><span class="badge badge-amber">Moyen</span></td>
+      <td>Renseigner le vrai num&eacute;ro SIRET avant d'envoyer quoi que ce soit.</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td><strong>Pas de Calendly</strong></td>
+      <td><span class="badge badge-amber">Moyen</span></td>
+      <td>Cr&eacute;er le compte et int&eacute;grer le lien dans ContactForm.tsx.</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td><strong>Image OG en portrait</strong> (LinkedIn/Twitter cass&eacute;)</td>
+      <td><span class="badge badge-amber">Moyen</span></td>
+      <td>G&eacute;n&eacute;rer une image 1200x630 paysage.</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td><strong>Visuels portfolio = maquettes grises</strong></td>
+      <td><span class="badge badge-amber">Majeur</span></td>
+      <td>Remplacer par de vrais screenshots des projets livr&eacute;s.</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td><strong>Disque Pro &agrave; 86 Mo libres</strong></td>
+      <td><span class="badge badge-red">Critique</span></td>
+      <td>Nettoyer node_modules + Docker avant de travailler sur un Sprint client.</td>
+    </tr>
+  </table>
+
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- FOOTER                                       -->
+  <!-- ═══════════════════════════════════════════ -->
+  <hr>
+
+  <div style="text-align:center; padding:20px 0;">
+    <div style="font-size:18px; font-weight:800; letter-spacing:-0.5px; margin-bottom:6px;">Premier &eacute;change. Z&eacute;ro engagement.</div>
+    <div style="font-size:12px; color:var(--muted); margin-bottom:4px;">aissabelkoussa.fr &mdash; contact@aissabelkoussa.fr &mdash; Albi, France</div>
+  </div>
+
+  <p style="text-align:center; color:var(--muted); font-size:10px; margin-top:16px;">
+    Document g&eacute;n&eacute;r&eacute; le 3 avril 2026. Consolide : one-pager-offres.html, plan-aissa-belkoussa.html, sequence-post-reunion-alexandre.md.
+  </p>
+
+</div>
+</body>
+</html>

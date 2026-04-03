@@ -19,6 +19,8 @@ Question directe : combien de temps vous passez chaque semaine à répondre au t
 
 Je pose la question parce que j'ai construit un système pour un plombier de 8 salariés qui perdait 10h/semaine là-dessus. En 10 jours, on a automatisé la prise de RDV et les devis — il a récupéré 800€/semaine de valeur.
 
+Pour démarrer simplement, j'ai une offre Pilote Automatique à 1 500€ : une automatisation clé en main (chatbot, emails ou RDV), livrée en 5 jours. Sinon l'Accélérateur à 2 900€ couvre le système complet + 3 mois de maintenance.
+
 Si c'est un sujet pour vous, faites le diagnostic gratuit (2 min) — vous verrez tout de suite ce que vous pouvez automatiser :
 → aissabelkoussa.fr/diagnostic
 
@@ -42,6 +44,10 @@ J'ai récemment construit un système pour une entreprise de plomberie de 8 sala
 - Relances clients automatiques
 
 Résultat : 10h libérées par semaine, ~800€ de valeur récupérée. Le système s'est rentabilisé en 4 semaines.
+
+Deux options pour démarrer :
+- Pilote Automatique (1 500€) : 1 automatisation clé en main, livrée en 5 jours
+- Accélérateur (2 900€) : système complet + 3 mois de maintenance offerts
 
 Si c'est un sujet pour [nom entreprise], je vous propose un échange de 15 minutes pour voir si ça s'applique à votre situation. Gratuit, sans engagement.
 
@@ -78,6 +84,8 @@ Je demande parce que c'est le pattern que je vois chez la majorité des consulta
 
 J'ai construit des tunnels de conversion pour des prestataires B2B qui transforment des visiteurs en prospects qualifiés automatiquement — du premier clic au rendez-vous pris. Le système tourne 24/7.
 
+On peut démarrer avec le Pilote Automatique à 1 500€ (1 automatisation clé en main, livrée en 5 jours) ou l'Accélérateur à 2 900€ (système complet + 3 mois de maintenance).
+
 Si c'est un sujet, faites le diagnostic gratuit (2 min) — ça vous donnera une idée claire de ce qui est automatisable :
 → aissabelkoussa.fr/diagnostic
 
@@ -104,6 +112,10 @@ Ce que je construis pour des consultants et formateurs comme vous :
 
 Résultat typique : 1 à 3 clients supplémentaires par mois via le tunnel. Le système se rentabilise dès le premier client converti.
 
+Deux formules possibles :
+- Pilote Automatique (1 500€) : 1 automatisation clé en main, livrée en 5 jours
+- Accélérateur (2 900€) : système complet + 3 mois de maintenance offerts
+
 15 minutes pour voir si ça s'applique à votre situation ?
 
 Aïssa Belkoussa
@@ -119,6 +131,51 @@ aissabelkoussa.fr
 | **Altair Business** | "25 ans d'expertise aéronautique, Qualiopi certifié — votre crédibilité est massive, mais votre site ne la met pas en valeur avec un parcours clair" |
 | **Consupting** | "en tant que consultant solo, chaque heure passée à prospecter est une heure non facturée — un tunnel qui travaille pendant vos missions change la donne" |
 | **Zenessor** | "vous vendez du coaching business aux TPE/PME — et si votre propre site était l'exemple vivant de ce que vous prêchez ? Un bilan de santé digitalisé en entrée de tunnel serait parfait" |
+
+---
+
+## FORMATION IA — Templates de vente
+
+### Template LinkedIn DM — Formation IA
+
+```
+Bonjour [Prénom],
+
+Question directe : votre équipe utilise l'IA au quotidien ?
+
+Je pose la question parce qu'à partir d'août 2026, la réglementation européenne impose un niveau minimum de compétences IA dans les entreprises.
+
+Je propose des formations d'1 jour, directement dans vos locaux, où vos équipes repartent avec des outils IA opérationnels — pas de la théorie, du concret.
+
+Le meilleur : c'est finançable à 100% par votre OPCO si vous avez moins de 50 salariés.
+
+Ça vous intéresse d'en savoir plus ?
+Aïssa
+```
+
+### Template Email — Formation IA
+
+```
+Objet : [Prénom], vos équipes sont prêtes pour la réglementation IA d'août 2026 ?
+
+Bonjour [Prénom],
+
+Je m'appelle Aïssa Belkoussa. Je forme les équipes des TPE/PME à l'utilisation concrète de l'IA dans leur métier.
+
+À partir d'août 2026, la réglementation européenne impose un niveau minimum de compétences IA dans les entreprises. La question n'est plus "si" mais "quand" vous allez former vos équipes.
+
+Ce que je propose :
+- Formation IA Pratique (1 jour) : vos équipes repartent avec des outils IA opérationnels
+- Formation Automatisation (2 jours) : maîtrise des automatisations métier de A à Z
+- Directement dans vos locaux, adapté à votre secteur
+
+Le meilleur : c'est finançable à 100% par votre OPCO si vous avez moins de 50 salariés. Je vous accompagne dans le montage du dossier.
+
+15 minutes pour voir si ça s'applique à [nom entreprise] ?
+
+Aïssa Belkoussa
+aissabelkoussa.fr
+```
 
 ---
 

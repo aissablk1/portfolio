@@ -300,6 +300,22 @@ export const faqSchema = {
         text: "Non. Apres les 3 mois offerts, la maintenance est sans engagement — vous pouvez arreter a tout moment. L'engagement annuel est une option qui fait economiser 25% (3 mois gratuits sur 12).",
       },
     },
+    {
+      "@type": "Question",
+      name: "Comment financer le projet avec mon OPCO ?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Je vous aide a monter le dossier. Pour les entreprises de moins de 50 salaries, la formation peut etre prise en charge a 100%. Les aides OCCAL (70%, plafond 23 000 EUR) et Pass Occitanie (50%, plafond 10 000 EUR) sont aussi mobilisables pour les projets numeriques.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Proposez-vous des formations ?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Oui. IA Pratique (1 jour, 490 EUR/personne), Automatiser son business (2 jours, 890 EUR/personne), et Sur-mesure (3-5 jours, 800 EUR/jour). Toutes sont financables OPCO jusqu'a 100%.",
+      },
+    },
   ],
 };
 
@@ -443,11 +459,43 @@ export const goPageSchema = {
   description:
     "3 situations, 3 systemes. Pour artisans BTP et prestataires B2B.",
   url: `${siteUrl}/go`,
-  numberOfItems: 3,
+  numberOfItems: 4,
   itemListElement: [
     {
       "@type": "ListItem",
       position: 1,
+      item: {
+        "@type": "Offer",
+        "@id": `${siteUrl}/go/#offer-pilote`,
+        name: "Pilote Automatique",
+        description:
+          "Automatisation acquisition client : emails, chatbot IA, notifications, dashboard. Livre cle en main en 5 jours ouvres.",
+        price: "1500",
+        priceCurrency: "EUR",
+        priceSpecification: [
+          {
+            "@type": "UnitPriceSpecification",
+            price: "1500",
+            priceCurrency: "EUR",
+            unitText: "projet",
+            description: "Mise en place",
+          },
+          {
+            "@type": "UnitPriceSpecification",
+            price: "290",
+            priceCurrency: "EUR",
+            unitText: "mois",
+            description: "Maintenance optionnelle",
+          },
+        ],
+        availability: "https://schema.org/InStock",
+        seller: { "@id": `${siteUrl}/#organization` },
+        areaServed: { "@type": "Country", name: "France" },
+      },
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
       item: {
         "@type": "Offer",
         "@id": `${siteUrl}/go/#offer-autonome`,
@@ -469,7 +517,7 @@ export const goPageSchema = {
     },
     {
       "@type": "ListItem",
-      position: 2,
+      position: 3,
       item: {
         "@type": "Offer",
         "@id": `${siteUrl}/go/#offer-accelerateur`,
@@ -501,7 +549,7 @@ export const goPageSchema = {
     },
     {
       "@type": "ListItem",
-      position: 3,
+      position: 4,
       item: {
         "@type": "Offer",
         "@id": `${siteUrl}/go/#offer-partenaire`,
@@ -721,6 +769,11 @@ export const breadcrumbs = {
     { name: "Accueil", url: siteUrl },
     { name: "Politique de confidentialite", url: `${siteUrl}/confidentialite` },
   ]),
+
+  blog: createBreadcrumbSchema([
+    { name: "Accueil", url: siteUrl },
+    { name: "Blog", url: `${siteUrl}/blog` },
+  ]),
 };
 
 export function createProjectBreadcrumb(projectName: string, slug: string) {
@@ -792,3 +845,157 @@ export const legalPages = {
     lastReviewed: "2026-03-28",
   }),
 };
+
+/* ================================================================== */
+/*  12. FORMATIONS — Course                                            */
+/* ================================================================== */
+
+export const formationSchemas = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "@id": `${siteUrl}/services/#formation-ia-pratique`,
+    name: "IA Pratique — Formation 1 jour",
+    description:
+      "Prompt engineering, cas d'usage metier, kit IA personnalise. Les equipes repartent operationnelles.",
+    provider: { "@id": `${siteUrl}/#organization` },
+    url: `${siteUrl}/services`,
+    inLanguage: "fr",
+    offers: [
+      {
+        "@type": "Offer",
+        price: "490",
+        priceCurrency: "EUR",
+        description: "Tarif inter-entreprise par personne",
+      },
+      {
+        "@type": "Offer",
+        price: "1500",
+        priceCurrency: "EUR",
+        description: "Tarif intra-entreprise (groupe 6-12)",
+      },
+    ],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "@id": `${siteUrl}/services/#formation-automatisation`,
+    name: "Automatiser son business — Formation 2 jours",
+    description:
+      "Automatisations Make/n8n, chatbot, email auto, mesure ROI. 2-3 automatisations deployees pendant la formation.",
+    provider: { "@id": `${siteUrl}/#organization` },
+    url: `${siteUrl}/services`,
+    inLanguage: "fr",
+    offers: [
+      {
+        "@type": "Offer",
+        price: "890",
+        priceCurrency: "EUR",
+        description: "Tarif inter-entreprise par personne",
+      },
+      {
+        "@type": "Offer",
+        price: "2800",
+        priceCurrency: "EUR",
+        description: "Tarif intra-entreprise",
+      },
+    ],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "@id": `${siteUrl}/services/#formation-sur-mesure`,
+    name: "Formation IA sur-mesure — 3 a 5 jours",
+    description:
+      "Audit prealable, programme personnalise, suivi 3 mois. Transformation IA structuree.",
+    provider: { "@id": `${siteUrl}/#organization` },
+    url: `${siteUrl}/services`,
+    inLanguage: "fr",
+    offers: {
+      "@type": "Offer",
+      price: "800",
+      priceCurrency: "EUR",
+      description: "Tarif journalier",
+    },
+  },
+];
+
+/* ================================================================== */
+/*  13. CONSULTING — Service                                           */
+/* ================================================================== */
+
+export const consultingSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": `${siteUrl}/services/#consulting`,
+  name: "Consulting IA & Digital",
+  description:
+    "Audit, conseil, architecture, implementation — a la carte. Demi-journee 450 EUR, journee 800 EUR, semaine 3 600 EUR, mois 6 800 EUR.",
+  provider: { "@id": `${siteUrl}/#organization` },
+  serviceType: "IT Consulting",
+  areaServed: { "@type": "Country", name: "France" },
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Tarifs consulting",
+    itemListElement: [
+      {
+        "@type": "Offer",
+        name: "Demi-journee",
+        price: "450",
+        priceCurrency: "EUR",
+      },
+      {
+        "@type": "Offer",
+        name: "Journee",
+        price: "800",
+        priceCurrency: "EUR",
+      },
+      {
+        "@type": "Offer",
+        name: "Semaine",
+        price: "3600",
+        priceCurrency: "EUR",
+      },
+      {
+        "@type": "Offer",
+        name: "Mois",
+        price: "6800",
+        priceCurrency: "EUR",
+      },
+    ],
+  },
+};
+
+/* ================================================================== */
+/*  14. ARTICLE — Blog                                                 */
+/* ================================================================== */
+
+export function createArticleSchema(article: {
+  title: string;
+  slug: string;
+  description: string;
+  date: string;
+  updatedAt?: string;
+  author: string;
+  image: string;
+  tags: string[];
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "@id": `${siteUrl}/blog/${article.slug}/#article`,
+    headline: article.title,
+    description: article.description,
+    url: `${siteUrl}/blog/${article.slug}`,
+    datePublished: article.date,
+    dateModified: article.updatedAt || article.date,
+    author: { "@id": `${siteUrl}/#person` },
+    publisher: { "@id": `${siteUrl}/#organization` },
+    image: article.image.startsWith("http")
+      ? article.image
+      : `${siteUrl}${article.image}`,
+    keywords: article.tags.join(", "),
+    inLanguage: "fr",
+    isPartOf: { "@id": `${siteUrl}/#website` },
+  };
+}

@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stratégie SEO & GEO — Aïssa Belkoussa</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+    :root {
+      --bg: #fafaf9; --text: #0a0a0a; --muted: #737373; --border: #e5e5e5;
+      --accent: #2563eb; --accent-light: #3b82f6;
+      --red: #dc2626; --green: #16a34a; --amber: #d97706;
+      --surface: #ffffff; --dark: #0a0a0a;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    .page { max-width: 900px; margin: 0 auto; padding: 48px 32px 80px; }
+    h1 { font-size: 32px; font-weight: 900; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 6px; }
+    h2 { font-size: 20px; font-weight: 800; letter-spacing: -0.5px; margin: 48px 0 16px; padding-bottom: 10px; border-bottom: 2px solid var(--text); text-transform: uppercase; }
+    h3 { font-size: 15px; font-weight: 700; margin: 24px 0 10px; }
+    h4 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); margin: 20px 0 8px; }
+    p, li { font-size: 13px; line-height: 1.7; }
+    p { margin-bottom: 10px; }
+    ul, ol { margin: 6px 0 14px 18px; }
+    li { margin-bottom: 5px; }
+    a { color: var(--accent); text-decoration: none; font-weight: 600; }
+    .subtitle { font-size: 13px; color: var(--muted); margin-bottom: 32px; }
+    .badge { display: inline-block; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 3px 10px; border-radius: 20px; }
+    .badge-red { background: #fef2f2; color: var(--red); }
+    .badge-green { background: #f0fdf4; color: var(--green); }
+    .badge-amber { background: #fffbeb; color: var(--amber); }
+    .badge-blue { background: #eff6ff; color: var(--accent); }
+    table { width: 100%; border-collapse: collapse; margin: 12px 0 20px; font-size: 12px; }
+    th { text-align: left; font-weight: 700; padding: 8px 10px; border-bottom: 2px solid var(--text); font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+    td { padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px; margin: 12px 0; }
+    .card-dark { background: var(--dark); color: #fafafa; border: none; border-radius: 10px; padding: 24px; margin: 12px 0; }
+    .card-dark p, .card-dark li { color: #a3a3a3; }
+    .card-dark strong { color: #fafafa; }
+    .highlight { background: linear-gradient(135deg, rgba(37,99,235,0.04), rgba(37,99,235,0.08)); border: 1.5px solid var(--accent); }
+    .alert { padding: 14px 18px; border-radius: 8px; margin: 12px 0; font-size: 12px; }
+    .alert-red { background: #fef2f2; border-left: 4px solid var(--red); }
+    .alert-amber { background: #fffbeb; border-left: 4px solid var(--amber); }
+    .alert-green { background: #f0fdf4; border-left: 4px solid var(--green); }
+    .cols-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .cols-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+    .cols-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 10px; }
+    .stat-card { text-align: center; padding: 16px; border: 1px solid var(--border); border-radius: 10px; }
+    .stat-card .number { font-size: 28px; font-weight: 800; letter-spacing: -1px; }
+    .stat-card .label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+    .section-num { font-size: 10px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 1.5px; }
+    .vs-table td:nth-child(2) { color: var(--red); }
+    .vs-table td:nth-child(3) { color: var(--green); font-weight: 600; }
+    .checklist { list-style: none; margin: 8px 0; padding: 0; }
+    .checklist li { font-size: 12px; padding: 8px 0 8px 28px; position: relative; border-bottom: 1px solid var(--border); }
+    .checklist li::before { content: "\2610"; position: absolute; left: 0; font-size: 16px; }
+    hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+    .source { font-size: 10px; color: var(--muted); font-style: italic; }
+    @media print {
+      body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page { padding: 24px; }
+      .card-dark { background: var(--dark) !important; color: #fafafa !important; }
+    }
+    @page { size: A4; margin: 15mm; }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <p style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:var(--muted); margin-bottom:24px;">Strat&eacute;gie SEO &amp; GEO &mdash; Avril 2026</p>
+  <h1>Pr&eacute;parer aissabelkoussa.fr<br>&agrave; l'&egrave;re de l'IA dans la recherche</h1>
+  <p class="subtitle">Google AI Overview arrive en France. Le SEO traditionnel perd 60% de sa puissance.<br>Voici le plan pour ne pas dispara&icirc;tre &mdash; et en profiter.</p>
+
+  <div class="alert alert-red">
+    <strong>Signal d'alerte :</strong> Quand AI Overview s'affiche, le CTR de la position 1 organique passe de 27% &agrave; 11%. C'est <strong>-59% de trafic</strong> pour le premier r&eacute;sultat. (Source : &eacute;tude Sistrix, Allemagne, 2026)
+  </div>
+
+
+  <!-- 01 — LE CONSTAT -->
+  <h2><span class="section-num">01</span> &mdash; Le constat : AI Overview tue le SEO classique</h2>
+
+  <div class="cols-4">
+    <div class="stat-card"><div class="number" style="color:var(--red);">-59%</div><div class="label">CTR position 1 avec AI Overview</div></div>
+    <div class="stat-card"><div class="number" style="color:var(--red);">60%</div><div class="label">Recherches &agrave; z&eacute;ro clic en 2026</div></div>
+    <div class="stat-card"><div class="number">25-50%</div><div class="label">Requ&ecirc;tes d&eacute;clenchant AI Overview</div></div>
+    <div class="stat-card"><div class="number" style="color:var(--green);">7,9%</div><div class="label">Requ&ecirc;tes locales affect&eacute;es</div></div>
+  </div>
+
+  <h3>Les chiffres cl&eacute;s</h3>
+  <table>
+    <tr><th>M&eacute;trique</th><th>Sans AI Overview</th><th>Avec AI Overview</th><th>Source</th></tr>
+    <tr><td>CTR position 1</td><td>27%</td><td style="color:var(--red); font-weight:700;">11%</td><td>Sistrix (Allemagne)</td></tr>
+    <tr><td>CTR moyen toutes positions</td><td>57%</td><td style="color:var(--red); font-weight:700;">33%</td><td>Sistrix</td></tr>
+    <tr><td>Taux de clic global</td><td>15%</td><td style="color:var(--red); font-weight:700;">8%</td><td>Pew Research (68 879 recherches)</td></tr>
+    <tr><td>Clics sur liens dans le r&eacute;sum&eacute; IA</td><td colspan="2" style="text-align:center;">1% seulement</td><td>Pew Research</td></tr>
+    <tr><td>Recherches locales affect&eacute;es</td><td colspan="2" style="text-align:center; color:var(--green); font-weight:700;">7,9% seulement</td><td>Ahrefs</td></tr>
+  </table>
+
+  <div class="alert alert-amber">
+    <strong>Et la France ?</strong> Pas de date officielle pour AI Overview en France. Blocage juridique li&eacute; aux "droits voisins" (r&eacute;mun&eacute;ration des m&eacute;dias). Le lancement &eacute;tait pr&eacute;vu fin 2025 mais le conflit persiste. <strong>Tu as 6 &agrave; 12 mois de sursis pour te pr&eacute;parer.</strong> Ceux qui attendent seront pris au d&eacute;pourvu.
+  </div>
+
+
+  <!-- 02 — SEO vs GEO -->
+  <h2><span class="section-num">02</span> &mdash; SEO classique vs GEO : ce qui change</h2>
+
+  <p>Le <strong>GEO</strong> (Generative Engine Optimization) est la pratique d'optimiser le contenu pour &ecirc;tre <strong>cit&eacute;, r&eacute;f&eacute;renc&eacute; ou recommand&eacute;</strong> par les moteurs IA : Google AI Overview, ChatGPT, Perplexity, Gemini.</p>
+
+  <table class="vs-table">
+    <tr><th>Crit&egrave;re</th><th>SEO classique</th><th>GEO (nouveau)</th></tr>
+    <tr><td>Objectif</td><td>Ranker dans les SERPs</td><td>&Ecirc;tre cit&eacute; dans les r&eacute;ponses IA</td></tr>
+    <tr><td>M&eacute;trique cl&eacute;</td><td>Position, CTR</td><td>Taux de citation, taux de mention</td></tr>
+    <tr><td>Levier principal</td><td>Backlinks, mots-cl&eacute;s</td><td>Densit&eacute; factuelle, donn&eacute;es structur&eacute;es</td></tr>
+    <tr><td>Fra&icirc;cheur</td><td>Importance mod&eacute;r&eacute;e</td><td>Critique (cycle 7-14 jours)</td></tr>
+    <tr><td>Format</td><td>Libre</td><td>Answer-first, listes, tableaux</td></tr>
+    <tr><td>Autorit&eacute;</td><td>Domain Authority</td><td>E-E-A-T + preuves sociales</td></tr>
+    <tr><td>Indexation</td><td>Google uniquement</td><td>Google + Bing + LLM (multi-moteur)</td></tr>
+  </table>
+
+  <div class="card-dark">
+    <h3>&Ecirc;tre cit&eacute; dans un AI Overview = +35% de clics organiques</h3>
+    <p>L'objectif n'est plus seulement de ranker. C'est d'&ecirc;tre la source que l'IA choisit de citer. 97% des sources cit&eacute;es dans les AI Overviews proviennent des 20 premiers r&eacute;sultats organiques &mdash; sans bon SEO de base, z&eacute;ro chance d'&ecirc;tre cit&eacute; par l'IA.</p>
+    <p><strong>80% du GEO repose sur un bon SEO.</strong> Les deux sont compl&eacute;mentaires, pas oppos&eacute;s.</p>
+  </div>
+
+
+  <!-- 03 — BONNE NOUVELLE : LE LOCAL -->
+  <h2><span class="section-num">03</span> &mdash; Bonne nouvelle : le SEO local est prot&eacute;g&eacute;</h2>
+
+  <div class="card highlight">
+    <h3 style="margin-top:0">Seulement 7,9% des recherches locales d&eacute;clenchent un AI Overview</h3>
+    <p>Le Pack Local (Google Maps) reste le format dominant pour "consultant IA Albi" ou "site web artisan Tarn". Raisons : les requ&ecirc;tes locales n&eacute;cessitent des donn&eacute;es temps r&eacute;el (horaires, proximit&eacute;, disponibilit&eacute;) que l'IA ne peut pas synth&eacute;tiser.</p>
+  </div>
+
+  <h3>Mais l'IA arrive dans le local aussi</h3>
+  <p><strong>Ask Maps</strong> (lanc&eacute; mars 2026) : Gemini dans Google Maps r&eacute;pond &agrave; des questions conversationnelles ("quel artisan pour refaire ma salle de bain &agrave; Albi ?") avec des recommandations personnalis&eacute;es. Les facteurs de classement restent les m&ecirc;mes :</p>
+
+  <table>
+    <tr><th>Facteur</th><th>Poids</th><th>Action</th></tr>
+    <tr><td><strong>Google Business Profile</strong></td><td>32% (n&deg;1)</td><td>Profil 100% complet, cat&eacute;gories, services, photos r&eacute;elles</td></tr>
+    <tr><td>Avis Google</td><td>&Eacute;lev&eacute;</td><td>Collecter activement (volume + r&eacute;cence + r&eacute;ponses)</td></tr>
+    <tr><td>Coh&eacute;rence NAP</td><td>Mod&eacute;r&eacute;</td><td>Nom/Adresse/T&eacute;l&eacute;phone identiques partout</td></tr>
+    <tr><td>Qualit&eacute; du site web</td><td>Mod&eacute;r&eacute;</td><td>SEO technique + contenu expert</td></tr>
+    <tr><td>Engagement profil</td><td>Mod&eacute;r&eacute;</td><td>Google Posts r&eacute;guliers</td></tr>
+  </table>
+
+
+  <!-- 04 — D'OÙ VIENNENT LES CITATIONS IA -->
+  <h2><span class="section-num">04</span> &mdash; D'o&ugrave; viennent les citations AI Overview</h2>
+
+  <div class="cols-3">
+    <div class="stat-card"><div class="number">65%</div><div class="label">Pages cit&eacute;es avec schema.org</div></div>
+    <div class="stat-card"><div class="number">21%</div><div class="label">Citations depuis Reddit</div></div>
+    <div class="stat-card"><div class="number">18,8%</div><div class="label">Citations depuis YouTube</div></div>
+  </div>
+
+  <h3>Plateformes qui alimentent les r&eacute;ponses IA</h3>
+  <table>
+    <tr><th>Plateforme</th><th>% des citations IA</th><th>Pertinent pour toi ?</th></tr>
+    <tr><td><strong>Sites experts (top 20 organique)</strong></td><td>97%</td><td><span class="badge badge-red">Critique</span> &mdash; ton blog + pages services</td></tr>
+    <tr><td><strong>LinkedIn</strong></td><td>13%</td><td><span class="badge badge-red">Critique</span> &mdash; posts experts 2-3x/sem</td></tr>
+    <tr><td><strong>YouTube</strong></td><td>18,8%</td><td><span class="badge badge-amber">Moyen terme</span> &mdash; mini-tutos IA artisans</td></tr>
+    <tr><td><strong>Reddit</strong></td><td>21%</td><td><span class="badge badge-green">Faible</span> &mdash; peu pertinent pour le local FR BTP</td></tr>
+    <tr><td><strong>Google Business Profile</strong></td><td>Via le Pack Local</td><td><span class="badge badge-red">Critique</span> &mdash; levier n&deg;1 local</td></tr>
+    <tr><td><strong>Avis clients (Trustpilot, Google)</strong></td><td>Signal E-E-A-T</td><td><span class="badge badge-red">Critique</span> &mdash; preuve sociale</td></tr>
+  </table>
+
+
+  <!-- 05 — MEILLEURES PRATIQUES GEO -->
+  <h2><span class="section-num">05</span> &mdash; Meilleures pratiques GEO 2026</h2>
+
+  <div class="cols-2">
+    <div class="card">
+      <h4 style="margin-top:0">Structure du contenu</h4>
+      <ul>
+        <li><strong>Answer-first</strong> : commencer chaque section par la r&eacute;ponse directe</li>
+        <li>44,2% des citations LLM viennent des premiers 30% du contenu</li>
+        <li>Listes, tableaux, &eacute;tapes num&eacute;rot&eacute;es (pas de blocs compacts)</li>
+        <li>Statistiques sourc&eacute;es (+40% de visibilit&eacute; IA)</li>
+        <li>FAQ align&eacute;es sur les vrais prompts utilisateurs</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4 style="margin-top:0">Donn&eacute;es structur&eacute;es (Schema.org)</h4>
+      <ul>
+        <li>JSON-LD obligatoire : Article, FAQPage, HowTo, LocalBusiness, Person</li>
+        <li>65% des pages cit&eacute;es dans les AI Overviews ont du balisage structur&eacute;</li>
+        <li><strong>Schema stacking</strong> : combiner plusieurs types sur une m&ecirc;me page</li>
+        <li>Nouveau : <strong>llms.txt</strong> &agrave; la racine (guide les LLM vers les pages cl&eacute;s)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4 style="margin-top:0">Fra&icirc;cheur du contenu</h4>
+      <ul>
+        <li>Cycle de mise &agrave; jour : <strong>7 &agrave; 14 jours</strong></li>
+        <li>Au-del&agrave;, le contenu perd sa priorit&eacute; de citation</li>
+        <li>1-2 nouveaux contenus par semaine minimum</li>
+        <li>Mettre &agrave; jour les articles existants (pas seulement cr&eacute;er)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4 style="margin-top:0">Multi-moteurs IA</h4>
+      <ul>
+        <li><strong>Google AI Overview</strong> : SEO classique + schema.org</li>
+        <li><strong>ChatGPT</strong> : indexation Bing + contenu encyclop&eacute;dique</li>
+        <li><strong>Perplexity</strong> : fra&icirc;cheur + sources communautaires + llms.txt</li>
+        <li><strong>Gemini</strong> : &eacute;cosyst&egrave;me Google (GBP, YouTube)</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <!-- 06 — REDDIT ET UGC -->
+  <h2><span class="section-num">06</span> &mdash; Reddit &amp; UGC : faut-il y aller ?</h2>
+
+  <div class="card">
+    <h3 style="margin-top:0">Reddit = 2e site le plus visible sur Google en 2026</h3>
+    <p>Appara&icirc;t dans <strong>1 requ&ecirc;te Google sur 5</strong>. Partenariat Google-Reddit sign&eacute; f&eacute;vrier 2024 (acc&egrave;s temps r&eacute;el pour l'entra&icirc;nement IA). Google a un <strong>int&eacute;r&ecirc;t structurel</strong> &agrave; le mettre en avant.</p>
+  </div>
+
+  <h3>Pertinent pour toi ?</h3>
+  <table>
+    <tr><th>Plateforme UGC</th><th>Pertinence pour un consultant IA local</th><th>Priorit&eacute;</th></tr>
+    <tr><td><strong>Google Reviews</strong></td><td>Signal n&deg;1 pour le local. Chaque avis compte.</td><td><span class="badge badge-red">Critique</span></td></tr>
+    <tr><td><strong>LinkedIn (posts)</strong></td><td>Contenu UGC pro tr&egrave;s bien index&eacute; en France. 13% des citations IA.</td><td><span class="badge badge-red">Critique</span></td></tr>
+    <tr><td><strong>Groupes Facebook locaux</strong></td><td>"Artisans du Tarn", "Entrepreneurs Albi" &mdash; participation utile.</td><td><span class="badge badge-amber">Haute</span></td></tr>
+    <tr><td><strong>YouTube</strong></td><td>Mini-tutos IA artisans (3-5 min). 18,8% des citations IA.</td><td><span class="badge badge-amber">Moyen terme</span></td></tr>
+    <tr><td><strong>Quora fran&ccedil;ais</strong></td><td>R&eacute;pondre aux questions IA pour PME.</td><td><span class="badge badge-green">Faible</span></td></tr>
+    <tr><td><strong>Reddit</strong></td><td>&Eacute;cosyst&egrave;me francophone trop petit pour le BTP local.</td><td><span class="badge badge-green">Pas urgent</span></td></tr>
+  </table>
+
+  <div class="alert alert-green">
+    <strong>Verdict :</strong> Oublie Reddit pour l'instant. Concentre-toi sur <strong>Google Reviews + LinkedIn + Groupes Facebook locaux</strong>. C'est l&agrave; que sont tes prospects et c'est ce que l'IA cite pour les recherches locales.
+  </div>
+
+
+  <!-- 07 — PLAN D'ACTION POUR AISSABELKOUSSA.FR -->
+  <h2><span class="section-num">07</span> &mdash; Plan d'action pour aissabelkoussa.fr</h2>
+
+  <h3>Actions imm&eacute;diates (cette semaine)</h3>
+  <table>
+    <tr><th>#</th><th>Action</th><th>Impact</th><th>Effort</th></tr>
+    <tr><td>1</td><td><strong>Google Business Profile</strong> &mdash; cr&eacute;er/compl&eacute;ter &agrave; 100% : cat&eacute;gories, services, zone g&eacute;o, photos r&eacute;elles, horaires</td><td><span class="badge badge-red">Tr&egrave;s &eacute;lev&eacute;</span></td><td>1h</td></tr>
+    <tr><td>2</td><td><strong>Indexation Bing</strong> &mdash; s'inscrire sur Bing Webmaster Tools + soumettre le sitemap (ChatGPT utilise Bing)</td><td><span class="badge badge-amber">Moyen</span></td><td>15 min</td></tr>
+    <tr><td>3</td><td><strong>Fichier llms.txt</strong> &mdash; cr&eacute;er &agrave; la racine du site, pointer vers /services, /go, /diagnostic, /contact</td><td><span class="badge badge-amber">Moyen</span></td><td>10 min</td></tr>
+    <tr><td>4</td><td><strong>Schema JSON-LD</strong> &mdash; v&eacute;rifier/ajouter LocalBusiness + Person + FAQPage + Service sur toutes les pages</td><td><span class="badge badge-red">&Eacute;lev&eacute;</span></td><td>2h</td></tr>
+  </table>
+
+  <h3>Actions court terme (2 semaines)</h3>
+  <table>
+    <tr><th>#</th><th>Action</th><th>Impact</th><th>Effort</th></tr>
+    <tr><td>5</td><td><strong>Blog expert</strong> &mdash; cr&eacute;er la section blog. 1er article : "Comment l'IA aide les artisans BTP &agrave; gagner 10h/semaine". Format answer-first, 1 500-2 500 mots, statistiques sourc&eacute;es.</td><td><span class="badge badge-red">Tr&egrave;s &eacute;lev&eacute;</span></td><td>1 jour</td></tr>
+    <tr><td>6</td><td><strong>Contenu answer-first</strong> &mdash; r&eacute;&eacute;crire les pages /services et /go pour que chaque section commence par la r&eacute;ponse (pas par une intro)</td><td><span class="badge badge-red">&Eacute;lev&eacute;</span></td><td>3h</td></tr>
+    <tr><td>7</td><td><strong>FAQ structur&eacute;es</strong> &mdash; ajouter FAQPage schema sur les FAQ existantes de /services (9 questions)</td><td><span class="badge badge-amber">Moyen</span></td><td>1h</td></tr>
+    <tr><td>8</td><td><strong>LinkedIn 3 posts/semaine</strong> &mdash; insights chiffr&eacute;s, cas d'usage, opinions (les 12 posts sont d&eacute;j&agrave; planifi&eacute;s)</td><td><span class="badge badge-red">&Eacute;lev&eacute;</span></td><td>Continu</td></tr>
+  </table>
+
+  <h3>Actions moyen terme (1-3 mois)</h3>
+  <table>
+    <tr><th>#</th><th>Action</th><th>Impact</th><th>Effort</th></tr>
+    <tr><td>9</td><td><strong>Blog r&eacute;gulier</strong> &mdash; 1-2 articles/semaine. Sujets : digitalisation BTP, guide IA artisans, &eacute;tudes de cas locales, comparatifs outils</td><td><span class="badge badge-red">Tr&egrave;s &eacute;lev&eacute;</span></td><td>Continu</td></tr>
+    <tr><td>10</td><td><strong>YouTube</strong> &mdash; mini-tutos 3-5 min ("Comment automatiser ses devis en 2 min avec l'IA"). 18,8% des citations AI Overview.</td><td><span class="badge badge-amber">Moyen-&eacute;lev&eacute;</span></td><td>&Eacute;lev&eacute;</td></tr>
+    <tr><td>11</td><td><strong>Google Reviews</strong> &mdash; strat&eacute;gie de collecte active. Demander un avis &agrave; chaque client livr&eacute; (m&ecirc;me les projets gratuits).</td><td><span class="badge badge-red">&Eacute;lev&eacute;</span></td><td>Continu</td></tr>
+    <tr><td>12</td><td><strong>Mise &agrave; jour contenu</strong> &mdash; cycle 7-14 jours sur les articles existants (stats &agrave; jour, nouvelles donn&eacute;es)</td><td><span class="badge badge-amber">Moyen</span></td><td>Continu</td></tr>
+    <tr><td>13</td><td><strong>Pages de d&eacute;finition</strong> &mdash; "Qu'est-ce que l'IA pour les artisans ?", "Guide digitalisation BTP" (les LLM adorent les d&eacute;finitions claires)</td><td><span class="badge badge-amber">Moyen</span></td><td>1 jour</td></tr>
+  </table>
+
+
+  <!-- 08 — SUJETS DE BLOG RECOMMANDÉS -->
+  <h2><span class="section-num">08</span> &mdash; 10 sujets de blog pour &ecirc;tre cit&eacute; par l'IA</h2>
+
+  <p>Chaque article doit suivre le format <strong>answer-first</strong> : la r&eacute;ponse en premi&egrave;re ligne, puis le d&eacute;veloppement. Inclure biographie auteur, statistiques sourc&eacute;es, FAQ en fin d'article.</p>
+
+  <ol>
+    <li><strong>"Comment l'IA aide les artisans BTP &agrave; gagner 10h/semaine"</strong> &mdash; cas concrets, sc&eacute;narios ROI, outils</li>
+    <li><strong>"Digitalisation artisan BTP : par o&ugrave; commencer en 2026"</strong> &mdash; guide &eacute;tape par &eacute;tape</li>
+    <li><strong>"Combien co&ucirc;te un consultant IA pour une PME ?"</strong> &mdash; grille tarifaire transparente (les LLM adorent les prix)</li>
+    <li><strong>"5 t&acirc;ches qu'un artisan peut automatiser aujourd'hui sans comp&eacute;tence technique"</strong></li>
+    <li><strong>"Les aides financi&egrave;res pour la digitalisation des artisans en Occitanie (2026)"</strong> &mdash; OCCAL, Pass Occitanie, OPCO</li>
+    <li><strong>"Site web artisan : pourquoi 70% des sites ne g&eacute;n&egrave;rent aucun client"</strong></li>
+    <li><strong>"Formation IA pour PME : ce que les dirigeants doivent savoir avant de se lancer"</strong></li>
+    <li><strong>"Chatbot IA pour artisans : inutile ou indispensable ?"</strong> &mdash; comparatif, ROI, pi&egrave;ges</li>
+    <li><strong>"SEO local pour artisans BTP : le guide complet (Google Maps, avis, fiche Google)"</strong></li>
+    <li><strong>"AI Act 2026 : ce que les PME fran&ccedil;aises doivent pr&eacute;parer avant ao&ucirc;t"</strong> &mdash; urgence r&eacute;glementaire</li>
+  </ol>
+
+
+  <!-- 09 — CHECKLIST TECHNIQUE -->
+  <h2><span class="section-num">09</span> &mdash; Checklist technique GEO</h2>
+
+  <ul class="checklist">
+    <li>Google Business Profile cr&eacute;&eacute; et complet &agrave; 100%</li>
+    <li>Bing Webmaster Tools &mdash; site enregistr&eacute; + sitemap soumis</li>
+    <li>Fichier llms.txt &agrave; la racine du site</li>
+    <li>Schema LocalBusiness en JSON-LD (toutes les pages)</li>
+    <li>Schema Person en JSON-LD (auteur/expert)</li>
+    <li>Schema FAQPage sur /services (9 questions)</li>
+    <li>Schema Article sur chaque article de blog</li>
+    <li>Schema Service sur chaque page d'offre</li>
+    <li>Contenu answer-first sur toutes les pages cl&eacute;s</li>
+    <li>Blog cr&eacute;&eacute; avec 1er article publi&eacute;</li>
+    <li>Cycle de mise &agrave; jour 7-14 jours en place</li>
+    <li>LinkedIn : 3 posts/semaine avec insights chiffr&eacute;s</li>
+    <li>Google Reviews : strat&eacute;gie de collecte active</li>
+    <li>NAP coh&eacute;rent (Nom/Adresse/T&eacute;l) sur tous les annuaires</li>
+    <li>Coh&eacute;rence multi-plateforme (site, LinkedIn, GBP, PagesJaunes)</li>
+  </ul>
+
+
+  <!-- 10 — SOURCES -->
+  <h2><span class="section-num">10</span> &mdash; Sources</h2>
+
+  <div style="font-size:11px; color:var(--muted); line-height:2;">
+    <p>
+      Sistrix &mdash; CTR par type de r&eacute;sultat (sistrix.com) &bull;
+      Search Engine Journal &mdash; Allemagne -59% CTR &bull;
+      Pew Research &mdash; AI Overviews halve click-through rates &bull;
+      Stackmatix &mdash; Google AI Overview SEO Impact 2026 &bull;
+      Digital Applied &mdash; AI Search Statistics 2026 &bull;
+      Natural-Net &mdash; AI Overview France &bull;
+      Agence GEO Pro &mdash; Blocage juridique France &bull;
+      Search Engine Land &mdash; Mastering GEO 2026 &bull;
+      GenOptima &mdash; GEO Best Practices 2026 &bull;
+      REVERB &mdash; What is GEO Complete Guide &bull;
+      Frase.io &mdash; What is GEO &bull;
+      Dataslayer &mdash; LLM SEO Audit &bull;
+      Local Dominator &mdash; Google Maps AI Overview &bull;
+      ALM Corp &mdash; Ask Maps &bull;
+      Markterior &mdash; AI-Powered Local SEO 2026 &bull;
+      Seize Marketing &mdash; Reddit &amp; SEO 2026 &bull;
+      Redd Agency &mdash; Agence Reddit et GEO &bull;
+      Ahrefs &mdash; AI Overviews et recherches locales &bull;
+      Abondance &mdash; AI Overviews bient&ocirc;t en France &bull;
+      Journal du Net &mdash; Tendances SEO 2026 GEO et PSO &bull;
+      SEOPepper &mdash; Analyse 8000 citations IA &bull;
+      Bluehost &mdash; What is llms.txt
+    </p>
+  </div>
+
+
+  <!-- FOOTER -->
+  <hr>
+  <p style="text-align:center; color:var(--muted); font-size:10px; margin-top:16px;">
+    Strat&eacute;gie SEO &amp; GEO &mdash; aissabelkoussa.fr &mdash; Avril 2026<br>
+    <strong>Le plan ne vaut rien. L'ex&eacute;cution vaut tout.</strong>
+  </p>
+
+</div>
+</body>
+</html>

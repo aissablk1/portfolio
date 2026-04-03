@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import JsonLd from "@/components/JsonLd";
-import { goPageSchema, breadcrumbs } from "@/lib/schemas";
+import { goPageSchema, formationSchemas, breadcrumbs } from "@/lib/schemas";
 
 const siteUrl = "https://www.aissabelkoussa.fr";
 
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 export default function GoLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <JsonLd data={[goPageSchema, breadcrumbs.go]} />
+      <JsonLd data={[goPageSchema, ...formationSchemas, breadcrumbs.go]} />
       {children}
     </>
   );

@@ -14,6 +14,7 @@ interface Dictionary {
     about: string;
     contact: string;
     services: string;
+    blog: string;
   };
   services: {
     badge: string;
@@ -396,6 +397,7 @@ const dictionaries: Record<Language, Dictionary> = {
       about: "À propos",
       contact: "Contact",
       services: "Services",
+      blog: "Blog",
     },
     services: {
       badge: "Offres & Résultats",
@@ -597,13 +599,13 @@ const dictionaries: Record<Language, Dictionary> = {
       },
     },
     hero: {
-      title: "Vous savez que vous devriez automatiser.\nVous ne savez pas par où commencer.",
-      subtitle: "Je transforme vos intuitions système en architectures digitales concrètes, cohérentes et fiables — de l'idée floue au système qui tourne en arrière-plan.",
+      title: "Automatisation IA pour PME et artisans —\nsystèmes livrés clé en main à partir de 1 500 €",
+      subtitle: "Sites professionnels, chatbots IA, workflows automatisés, dashboards — prix fixe, livraison en 5 à 10 jours, 3 mois de maintenance offerts. Basé à Albi, France.",
       ctaPrimary: "Initier un projet",
       ctaSecondary: "Voir les systèmes",
     },
     offers: {
-      title: "Ce que je construis pour vous",
+      title: "3 piliers : automatisation, interface de conversion, pilotage data",
       pillar1Props: { 
         title: "De l'intuition au système autonome", 
         sub: "Vous avez une idée de ce qui pourrait tourner tout seul. Je la structure, je l'architecture, je la déploie. Workflows, automatisations, infrastructures — sans la complexité inutile." 
@@ -1053,6 +1055,7 @@ const dictionaries: Record<Language, Dictionary> = {
       about: "About",
       contact: "Contact",
       services: "Pricing",
+      blog: "Blog",
     },
     services: {
       badge: "Services & Results",
