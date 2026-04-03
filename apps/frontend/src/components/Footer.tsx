@@ -12,7 +12,7 @@ const Footer = () => {
   return (
     <footer className="pt-0 py-20 border-t border-site-border mt-20 overflow-hidden">
       <div className="relative mt-0 mb-32 overflow-hidden pointer-events-none select-none bg-black border-y border-site-border py-12 w-full">
-        <video aria-hidden="true" className="absolute inset-0 w-full h-full object-cover pointer-events-none z-0" autoPlay muted loop playsInline>
+        <video aria-hidden="true" className="absolute inset-0 w-full h-full object-cover pointer-events-none z-0" autoPlay muted loop playsInline preload="none">
           <source data-src="/assets/videos/glitch-red.webm" type="video/webm" src="/assets/videos/glitch-red.webm" />
           <source data-src="/assets/videos/glitch-red.mp4" type="video/mp4" src="/assets/videos/glitch-red.mp4" />
         </video>
@@ -37,11 +37,13 @@ const Footer = () => {
           <div>
             <div className="relative mb-12 overflow-hidden isolation-isolate bg-site-bg">
               <video
+                aria-hidden="true"
                 className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
                 autoPlay
                 muted
                 loop
                 playsInline
+                preload="none"
               >
                 <source data-src="/assets/videos/glitch-red.webm" type="video/webm" src="/assets/videos/glitch-red.webm" />
                 <source data-src="/assets/videos/glitch-red.mp4" type="video/mp4" src="/assets/videos/glitch-red.mp4" />

@@ -21,7 +21,7 @@ const ContactPage = () => {
         <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-site-accent/5 blur-[150px] rounded-full -ml-80 -mb-80" />
       </div>
 
-      <main className="relative z-10 pt-40 pb-32 px-container">
+      <main id="main-content" className="relative z-10 pt-40 pb-32 px-container">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 items-start">
             

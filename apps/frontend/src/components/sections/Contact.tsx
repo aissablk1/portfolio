@@ -31,12 +31,14 @@ const Contact = () => {
             className="group relative inline-block px-12 py-6 rounded-full text-lg font-bold uppercase tracking-widest hover:scale-105 transition-all shadow-xl shadow-site-accent/20 overflow-hidden"
           >
             {/* Background Video */}
-            <video 
-              className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none" 
-              autoPlay 
-              muted 
-              loop 
+            <video
+              aria-hidden="true"
+              className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
+              autoPlay
+              muted
+              loop
               playsInline
+              preload="none"
             >
               <source data-src="/assets/videos/glitch-red.webm" type="video/webm" src="/assets/videos/glitch-red.webm" />
               <source data-src="/assets/videos/glitch-red.mp4" type="video/mp4" src="/assets/videos/glitch-red.mp4" />

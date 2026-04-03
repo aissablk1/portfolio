@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   description:
     "Mentions legales du site aissabelkoussa.fr — identite de l'editeur, hebergement, propriete intellectuelle et responsabilite.",
   robots: { index: true, follow: true },
+  alternates: {
+    canonical: "https://www.aissabelkoussa.fr/mentions-legales",
+  },
 };
 
 export default function MentionsLegalesLayout({

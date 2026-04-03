@@ -39,7 +39,7 @@ const About = () => {
           className="relative"
         >
              <div className="relative aspect-4/5 overflow-hidden rounded-4xl grayscale hover:grayscale-0 transition-all duration-700">
-                <Image src="/assets/images/AISSABELKOUSSA.png" alt={dict.about.photoAlt} fill className="object-cover" />
+                <Image src="/assets/images/AISSABELKOUSSA.png" alt={dict.about.photoAlt} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
                 {/* Portrait Placeholder */}
                 <div className="absolute inset-0 bg-linear-to-tr from-site-accent/20 to-transparent mix-blend-overlay" />
                 <div className="absolute inset-0 flex items-center justify-center">

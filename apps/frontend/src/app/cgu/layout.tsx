@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   description:
     "Conditions generales d'utilisation du site aissabelkoussa.fr — acces, propriete intellectuelle, responsabilite et droit applicable.",
   robots: { index: true, follow: true },
+  alternates: {
+    canonical: "https://www.aissabelkoussa.fr/cgu",
+  },
 };
 
 export default function CGULayout({

@@ -234,14 +234,6 @@ export const websiteSchema = {
   author: { "@id": `${siteUrl}/#person` },
   publisher: { "@id": `${siteUrl}/#organization` },
   inLanguage: ["fr", "en"],
-  potentialAction: {
-    "@type": "SearchAction",
-    target: {
-      "@type": "EntryPoint",
-      urlTemplate: `${siteUrl}/?q={search_term_string}`,
-    },
-    "query-input": "required name=search_term_string",
-  },
 };
 
 /* ================================================================== */

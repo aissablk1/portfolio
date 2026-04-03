@@ -28,7 +28,7 @@ const outfit = Outfit({
 });
 
 const siteUrl = "https://www.aissabelkoussa.fr";
-const siteTitle = "Creation site internet artisan & automatisation PME — Aissa Belkoussa, Albi";
+const siteTitle = "Sites web artisans BTP & automatisation PME — Aissa Belkoussa";
 const siteDescription =
   "Freelance creation site internet a Albi. Sites pour artisans BTP, automatisation devis et relances, dashboards PME. Livre en 10 jours, prix fixe. Devis gratuit.";
 
@@ -125,6 +125,8 @@ export default function RootLayout({
     <html lang="fr" className="scroll-smooth">
       <head>
         <JsonLd data={schemas} />
+        <link rel="dns-prefetch" href="https://assets.calendly.com" />
+        <link rel="dns-prefetch" href="https://portfolio-api-72tq.onrender.com" />
       </head>
       <body className={`${inter.variable} ${outfit.variable} antialiased`}>
         <a

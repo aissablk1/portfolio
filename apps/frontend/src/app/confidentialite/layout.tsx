@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   description:
     "Politique de confidentialite et protection des donnees personnelles du site aissabelkoussa.fr, conformement au RGPD.",
   robots: { index: true, follow: true },
+  alternates: {
+    canonical: "https://www.aissabelkoussa.fr/confidentialite",
+  },
 };
 
 export default function ConfidentialiteLayout({

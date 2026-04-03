@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   description:
     "Conditions generales de vente des prestations d'Aissa Belkoussa — reglement, propriete intellectuelle, responsabilite, RGPD.",
   robots: { index: true, follow: true },
+  alternates: {
+    canonical: "https://www.aissabelkoussa.fr/cgv",
+  },
 };
 
 export default function CGVLayout({

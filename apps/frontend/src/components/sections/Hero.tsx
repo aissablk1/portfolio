@@ -171,6 +171,7 @@ const Hero = () => {
       
       <div className="sticky bottom-[-125px] w-full max-w-7xl mx-auto mb-0 px-container pb-0 overflow-hidden flex justify-center">
         <motion.div
+          aria-hidden="true"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 2 }}

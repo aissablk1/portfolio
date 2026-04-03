@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   description:
     "5 questions pour evaluer votre maturite digitale. Resultat immediat + recommandations personnalisees. Gratuit, sans engagement.",
   robots: { index: true, follow: true },
+  alternates: {
+    canonical: "https://www.aissabelkoussa.fr/diagnostic",
+  },
   openGraph: {
     title: "Votre site vous rapporte-t-il des clients ? — Diagnostic gratuit",
     description:

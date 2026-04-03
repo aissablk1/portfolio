@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { useLanguage } from "./LanguageContext";
 import { cn } from "@/utils/cn";
-import { Check, Send, Rocket, Zap, Handshake, Shield, ArrowUpRight } from "lucide-react";
+import { Check, Send, Rocket, Zap, Handshake, Shield, ArrowUpRight, Bot } from "lucide-react";
 
 type FormState = {
   name: string;
@@ -19,6 +19,10 @@ const planDetails: Record<string, { fr: string; en: string; price: string; icon:
   autonome: { fr: "Autonome", en: "Autonomous", price: "3 900 €", icon: Zap },
   accelerateur: { fr: "Accélérateur", en: "Accelerator", price: "2 900 €", icon: Rocket },
   partenaire: { fr: "Partenaire", en: "Partner", price: "6 900 €", icon: Handshake },
+  starter: { fr: "Starter", en: "Starter", price: "1 500 €", icon: Zap },
+  pro: { fr: "Pro", en: "Pro", price: "2 900 €", icon: Rocket },
+  "sur-mesure": { fr: "Sur-mesure", en: "Custom", price: "6 900 €", icon: Handshake },
+  "pilote-automatique": { fr: "Pilote Automatique", en: "Auto Pilot", price: "1 500 €", icon: Bot },
 };
 
 const ContactForm = () => {
@@ -156,10 +160,11 @@ const ContactForm = () => {
       {/* Name + Email row */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-2">
-          <label className="text-[10px] font-bold uppercase tracking-widest text-site-text-light/60">
+          <label htmlFor="contact-name" className="text-[10px] font-bold uppercase tracking-widest text-site-text-light/60">
             {dict.funnel.steps.identity.nameLabel}
           </label>
           <input
+            id="contact-name"
             type="text"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -169,10 +174,11 @@ const ContactForm = () => {
           />
         </div>
         <div className="space-y-2">
-          <label className="text-[10px] font-bold uppercase tracking-widest text-site-text-light/60">
+          <label htmlFor="contact-email" className="text-[10px] font-bold uppercase tracking-widest text-site-text-light/60">
             {dict.funnel.steps.identity.emailLabel}
           </label>
           <input
+            id="contact-email"
             type="email"
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -184,10 +190,10 @@ const ContactForm = () => {
 
       {/* Need selection */}
       <div className="space-y-3">
-        <label className="text-[10px] font-bold uppercase tracking-widest text-site-text-light/60">
+        <label id="contact-need-label" className="text-[10px] font-bold uppercase tracking-widest text-site-text-light/60">
           {dict.funnel.steps.needs.title}
         </label>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3" aria-labelledby="contact-need-label">
           {dict.funnel.steps.needs.options.map((option) => (
             <button
               key={option.id}
@@ -213,10 +219,11 @@ const ContactForm = () => {
 
       {/* Message (optional) */}
       <div className="space-y-2">
-        <label className="text-[10px] font-bold uppercase tracking-widest text-site-text-light/60">
+        <label htmlFor="contact-message" className="text-[10px] font-bold uppercase tracking-widest text-site-text-light/60">
           {dict.funnel.steps.message.label}
         </label>
         <textarea
+          id="contact-message"
           value={formData.message}
           onChange={(e) => setFormData({ ...formData, message: e.target.value })}
           className="w-full bg-transparent border border-site-border p-5 rounded-2xl text-base min-h-[120px] focus:border-site-accent outline-none transition-colors resize-none leading-relaxed"

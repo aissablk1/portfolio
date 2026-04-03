@@ -14,7 +14,7 @@ export default function NotFound() {
     <div className="bg-site-bg min-h-screen relative">
       <Header />
 
-      <main className="relative z-10 pt-40 pb-32 px-container">
+      <main id="main-content" className="relative z-10 pt-40 pb-32 px-container">
         <div className="max-w-3xl mx-auto text-center">
           <motion.p
             initial={{ opacity: 0, y: 20 }}

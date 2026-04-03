@@ -32,6 +32,11 @@
     background-color: var(--color-site-accent);
     color: white;
   }
+
+  :focus-visible {
+    outline: 2px solid var(--color-site-accent);
+    outline-offset: 2px;
+  }
 }
 
 @layer utilities {

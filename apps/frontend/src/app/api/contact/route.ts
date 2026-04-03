@@ -363,19 +363,30 @@ export async function POST(request: Request) {
     );
   }
 
+  // Origin verification (CSRF protection)
+  const origin = request.headers.get("origin") || "";
+  const allowedOrigins = [
+    "https://www.aissabelkoussa.fr",
+    "https://aissabelkoussa.fr",
+    "https://aissabelkoussa.me",
+    "https://www.aissabelkoussa.me",
+  ];
+  if (origin && !allowedOrigins.includes(origin)) {
+    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+  }
+
   // Rate limiting
   const ip =
     request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
     request.headers.get("x-real-ip") ||
     "unknown";
 
-  // Rate limiting temporairement désactivé (tests en cours)
-  // if (isRateLimited(ip)) {
-  //   return NextResponse.json(
-  //     { error: "Too many requests" },
-  //     { status: 429 }
-  //   );
-  // }
+  if (isRateLimited(ip)) {
+    return NextResponse.json(
+      { error: "Too many requests" },
+      { status: 429 }
+    );
+  }
 
   // Parse body
   let body: unknown;

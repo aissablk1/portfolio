@@ -18,7 +18,7 @@ const Header = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -141,7 +141,7 @@ const Header = () => {
             {/* Hamburger — mobile only */}
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="lg:hidden flex flex-col justify-center items-center w-8 h-8 gap-1.5"
+              className="lg:hidden flex flex-col justify-center items-center w-11 h-11 gap-1.5"
               aria-label={menuOpen ? dict.ui.menuClose : dict.ui.menuOpen}
               aria-expanded={menuOpen}
             >

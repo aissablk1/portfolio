@@ -7,6 +7,7 @@ import Hero from "@/components/sections/Hero";
 import Offers from "@/components/sections/Offers";
 import Approach from "@/components/sections/Approach";
 import Expertises from "@/components/sections/Expertises";
+import SocialProof from "@/components/sections/SocialProof";
 import PricingTeaser from "@/components/sections/PricingTeaser";
 import Systems from "@/components/sections/Systems";
 import About from "@/components/sections/About";
@@ -25,17 +26,18 @@ export default function Home() {
         <div className="hidden lg:block" />
 
         {/* Center Column (Main Content) */}
-        <main className="w-full relative z-10">
+        <main id="main-content" className="w-full relative z-10">
           <Hero />
           <Offers />
           <Approach />
           <Expertises />
+          <SocialProof />
           <PricingTeaser />
           {/* <Systems /> */}
           <About />
           <Contact />
-          <Footer />
         </main>
+        <Footer />
 
         {/* Right Column (Spacer for Sticky SideNav) */}
         <div className="hidden lg:block relative">

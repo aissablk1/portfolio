@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, Check, HardHat, Briefcase } from "lucide-react";
+import { ArrowUpRight, Check, HardHat, Briefcase, Zap, GraduationCap, Landmark } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/utils/cn";
 import Header from "@/components/Header";
@@ -14,8 +14,8 @@ type Niche = null | "btp" | "b2b";
 const nicheContent = {
   btp: {
     subtitle: "Vous passez 10h/semaine au téléphone, à envoyer des devis par mail et relancer les clients. Votre site ne vous rapporte aucun client. Vos concurrents, eux, reçoivent des demandes de devis à 23h.",
-    roiTitle: "Entreprise de plomberie, 8 salariés",
-    roiDesc: "Le patron perd 10 heures par semaine à répondre au téléphone, envoyer des devis par mail et relancer les clients. Accélérateur à 2 900 € : site pro + prise de RDV en ligne + devis automatisé + 3 mois de maintenance inclus. Le système tourne dès J+10.",
+    roiTitle: "Scénario type — Artisan BTP, 5-10 salariés",
+    roiDesc: "Un artisan qui perdrait 10 heures par semaine à répondre au téléphone, envoyer des devis par mail et relancer ses clients. Accélérateur à 2 900 € : site pro + prise de RDV en ligne + devis automatisé + 3 mois de maintenance inclus. Le système tournerait dès J+10.",
     stats: [
       { value: "10h", label: "libérées chaque semaine" },
       { value: "800 €", label: "de valeur récupérée par semaine" },
@@ -24,8 +24,8 @@ const nicheContent = {
   },
   b2b: {
     subtitle: "Vous prospectez à la main — LinkedIn, bouche-à-oreille. Votre site ne capture aucun lead. Vos relances sont oubliées. Chaque semaine, des prospects disparaissent sans que vous le sachiez.",
-    roiTitle: "Consultant indépendant, 400K€ CA",
-    roiDesc: "Le fondateur prospecte manuellement — LinkedIn + bouche-à-oreille. Aucun tunnel de conversion. Accélérateur à 2 900 € : landing page qui convertit + formulaire qualifié + séquence de relance automatique + 3 mois de maintenance. Le tunnel tourne 24/7.",
+    roiTitle: "Scénario type — Consultant B2B, 200-500K€ CA",
+    roiDesc: "Un consultant qui prospecterait manuellement — LinkedIn + bouche-à-oreille. Aucun tunnel de conversion. Accélérateur à 2 900 € : landing page qui convertit + formulaire qualifié + séquence de relance automatique + 3 mois de maintenance. Le tunnel tournerait 24/7.",
     stats: [
       { value: "1-3", label: "clients supplémentaires par mois" },
       { value: "5 000 €", label: "de CA additionnel mensuel" },
@@ -50,7 +50,7 @@ export default function GoPage() {
       <Header />
       <AvailabilityBanner />
 
-      <main className="pt-40 pb-0">
+      <main id="main-content" className="pt-40 pb-0">
         {/* ── 1. Hook ──────────────────────────────────────────────── */}
         <section className="pb-32 px-container">
           <div className="max-w-4xl mx-auto">
@@ -118,6 +118,75 @@ export default function GoPage() {
                 Pas sûr ? Faites le diagnostic gratuit
                 <ArrowUpRight size={14} />
               </Link>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* ── Offre d'entrée — Pilote Automatique ──────────────────── */}
+        <section className="px-container pb-32">
+          <div className="max-w-5xl mx-auto">
+            <motion.div
+              {...fade()}
+              className="relative overflow-hidden rounded-2xl md:rounded-3xl bg-gradient-to-br from-site-accent to-site-accent/80 p-8 md:p-12"
+            >
+              <div className="absolute top-4 right-4 md:top-6 md:right-6">
+                <span className="text-[9px] font-bold uppercase tracking-widest bg-white/20 backdrop-blur-sm text-white px-4 py-1.5 rounded-full">
+                  Nouveau — Offre d'entrée
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-8 items-start text-white">
+                <div>
+                  <div className="flex items-center gap-3 mb-4">
+                    <Zap size={20} className="text-white/80" />
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-white/60">
+                      Pilote Automatique
+                    </span>
+                  </div>
+
+                  <h3 className="text-2xl md:text-3xl font-medium tracking-tighter uppercase mb-4">
+                    Votre business tourne tout seul
+                    <br className="hidden md:block" />
+                    en 5 jours.
+                  </h3>
+
+                  <p className="text-white/60 text-sm md:text-base leading-relaxed max-w-xl mb-6">
+                    L'essentiel pour automatiser votre acquisition — emails, chatbot IA,
+                    notifications prospect chaud. Livré clé en main en 5 jours ouvrés.
+                  </p>
+
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2">
+                    {[
+                      "5 emails automatiques personnalisés",
+                      "Chatbot IA entraîné sur vos FAQ",
+                      "Notifications prospect chaud",
+                      "Dashboard de suivi",
+                    ].map((f, i) => (
+                      <li key={i} className="flex items-start gap-2 text-sm text-white/70">
+                        <Check size={13} className="mt-0.5 shrink-0 text-white" strokeWidth={2.5} />
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="md:text-right md:min-w-[200px]">
+                  <div className="text-4xl md:text-5xl font-medium tracking-tighter">1 500 €</div>
+                  <p className="text-xs text-white/40 mt-1 mb-2">
+                    Livraison : 5 jours ouvrés
+                  </p>
+                  <p className="text-xs text-white/40 mb-6">
+                    Option maintenance : 290 €/mois
+                  </p>
+                  <Link
+                    href="/contact?plan=pilote"
+                    className="inline-flex items-center gap-2 bg-white text-site-accent px-6 py-3 rounded-full text-[11px] font-bold uppercase tracking-widest hover:scale-105 transition-all duration-300"
+                  >
+                    Automatiser mon business
+                    <ArrowUpRight size={12} />
+                  </Link>
+                </div>
+              </div>
             </motion.div>
           </div>
         </section>
@@ -323,6 +392,87 @@ export default function GoPage() {
           </div>
         </section>
 
+        {/* ── Formation IA ──────────────────────────────────────────── */}
+        <section className="px-container pb-32">
+          <div className="max-w-5xl mx-auto">
+            <motion.div {...fade()} className="mb-12">
+              <div className="flex items-center gap-3 mb-6">
+                <GraduationCap size={20} className="text-site-text-light" />
+                <p className="text-xs font-bold uppercase tracking-widest text-site-text-light">
+                  Formation IA
+                </p>
+              </div>
+              <h2 className="text-fluid-title tracking-tighter uppercase max-w-3xl">
+                Rendez votre équipe autonome.
+              </h2>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {[
+                {
+                  name: "IA Pratique",
+                  duration: "1 jour",
+                  price: "490 €",
+                  priceUnit: "/pers.",
+                  desc: "Prompt engineering + cas d'usage métier. Votre équipe repart avec des compétences IA opérationnelles.",
+                  href: "/contact?plan=formation-ia-pratique",
+                },
+                {
+                  name: "Automatiser son business",
+                  duration: "2 jours",
+                  price: "890 €",
+                  priceUnit: "/pers.",
+                  desc: "Automatisations déployées pendant la formation. Vos process tournent avant la fin du jour 2.",
+                  href: "/contact?plan=formation-automatisation",
+                },
+                {
+                  name: "Sur-mesure",
+                  duration: "À définir",
+                  price: "800 €",
+                  priceUnit: "/jour",
+                  desc: "Programme personnalisé + suivi 3 mois. Conçu autour de vos enjeux spécifiques.",
+                  href: "/contact?plan=formation-sur-mesure",
+                },
+              ].map((formation, i) => (
+                <motion.div
+                  key={i}
+                  {...fade(i * 0.1)}
+                  className="border border-site-border rounded-2xl p-8 hover:border-site-text/20 transition-colors"
+                >
+                  <div className="flex items-center justify-between mb-4">
+                    <h4 className="text-sm font-bold uppercase tracking-widest">
+                      {formation.name}
+                    </h4>
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-site-text-light bg-site-border/50 px-3 py-1 rounded-full">
+                      {formation.duration}
+                    </span>
+                  </div>
+                  <div className="flex items-baseline gap-1 mb-4">
+                    <span className="text-3xl md:text-4xl font-medium tracking-tighter">{formation.price}</span>
+                    <span className="text-site-text-light text-sm">{formation.priceUnit}</span>
+                  </div>
+                  <p className="text-sm text-site-text-light leading-relaxed mb-6">{formation.desc}</p>
+                  <Link
+                    href={formation.href}
+                    className="inline-flex items-center gap-2 border border-site-border px-5 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-widest hover:border-site-text hover:bg-site-text hover:text-site-bg transition-all duration-300"
+                  >
+                    En savoir plus
+                    <ArrowUpRight size={11} />
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+
+            <motion.p
+              {...fade(0.3)}
+              className="mt-6 text-sm text-site-text-light flex items-center gap-2"
+            >
+              <span className="inline-block w-2 h-2 rounded-full bg-green-500 shrink-0" />
+              Finançable OPCO jusqu'à 100 %
+            </motion.p>
+          </div>
+        </section>
+
         {/* ── 3. ROI — preuve concrète (dynamique selon niche) ────── */}
         <section id="roi-section" className="bg-site-text text-site-bg rounded-3xl md:rounded-[3rem] mx-2 md:mx-4 px-container py-20 md:py-28">
           <div className="max-w-5xl mx-auto">
@@ -335,7 +485,7 @@ export default function GoPage() {
                 transition={{ duration: 0.4 }}
               >
                 <p className="text-[10px] font-bold uppercase tracking-widest text-site-bg/30 mb-8">
-                  Exemple concret
+                  Scénario type
                 </p>
                 <h2 className="text-fluid-title tracking-tighter uppercase mb-6">
                   {roi.roiTitle}
@@ -431,6 +581,68 @@ export default function GoPage() {
                 </motion.div>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* ── Aides financières ──────────────────────────────────── */}
+        <section className="px-container pb-24 md:pb-32">
+          <div className="max-w-5xl mx-auto">
+            <motion.div
+              {...fade()}
+              className="bg-site-text text-site-bg rounded-2xl md:rounded-3xl p-8 md:p-12"
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <Landmark size={20} className="text-site-bg/60" />
+                <p className="text-[10px] font-bold uppercase tracking-widest text-site-bg/40">
+                  Aides financières
+                </p>
+              </div>
+
+              <h3 className="text-2xl md:text-3xl font-medium tracking-tighter uppercase mb-8">
+                Financez jusqu'à 100 % de votre projet.
+              </h3>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                {[
+                  {
+                    name: "OPCO",
+                    detail: "100 % pour TPE < 50 salariés",
+                    scope: "Formation",
+                  },
+                  {
+                    name: "OCCAL",
+                    detail: "70 %, plafond 23 000 €",
+                    scope: "Artisans Occitanie",
+                  },
+                  {
+                    name: "Pass Occitanie",
+                    detail: "50 %, plafond 10 000 €",
+                    scope: "Projets numériques",
+                  },
+                  {
+                    name: "IA Booster France 2030",
+                    detail: "Diagnostic gratuit",
+                    scope: "Bpifrance",
+                  },
+                ].map((aide, i) => (
+                  <div
+                    key={i}
+                    className="flex items-start gap-4 bg-site-bg/5 rounded-xl p-4"
+                  >
+                    <Check size={14} className="mt-0.5 shrink-0 text-site-bg/60" strokeWidth={2.5} />
+                    <div>
+                      <span className="text-sm font-bold">{aide.name}</span>
+                      <span className="text-sm text-site-bg/50"> — {aide.detail}</span>
+                      <p className="text-xs text-site-bg/30 mt-0.5">{aide.scope}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <p className="text-sm text-site-bg/50 leading-relaxed">
+                Je vous accompagne dans le montage du dossier — de l'éligibilité au versement.
+              </p>
+            </motion.div>
           </div>
         </section>
 

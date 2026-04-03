@@ -4,15 +4,15 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const LOGO_TEXT = "AÏSSA BELKOUSSA";
-const DURATION = 2800; // total preloader duration in ms
+const DURATION = 1200; // total preloader duration in ms
 
 export default function Preloader({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
   const [phase, setPhase] = useState<"letters" | "exit">("letters");
 
   useEffect(() => {
-    const t1 = setTimeout(() => setPhase("exit"), 1800);
-    const t2 = setTimeout(() => setIsLoading(false), 2500);
+    const t1 = setTimeout(() => setPhase("exit"), 800);
+    const t2 = setTimeout(() => setIsLoading(false), 1200);
 
     return () => { clearTimeout(t1); clearTimeout(t2); };
   }, []);
@@ -49,19 +49,16 @@ export default function Preloader({ children }: { children: React.ReactNode }) {
                       initial={{
                         opacity: 0,
                         y: 60 + Math.random() * 30,
-                        filter: "blur(8px)",
                       }}
                       animate={
                         phase === "letters"
                           ? {
                               opacity: 1,
                               y: 0,
-                              filter: "blur(0px)",
                             }
                           : {
                               opacity: 0,
                               y: -20,
-                              filter: "blur(4px)",
                             }
                       }
                       transition={{

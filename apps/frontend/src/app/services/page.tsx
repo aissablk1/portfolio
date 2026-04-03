@@ -814,7 +814,7 @@ export default function ServicesPage() {
     <div className="bg-site-bg min-h-screen">
       <Header />
 
-      <main className="pt-40 pb-0">
+      <main id="main-content" className="pt-40 pb-0">
         {/* ═══════════════════════════════════════════════════════════════════
             SECTION 1 — HERO
         ═══════════════════════════════════════════════════════════════════ */}
