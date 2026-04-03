@@ -1,11 +1,16 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useLanguage } from "./LanguageContext";
 
 const PHONE = "33782721406";
 
 export default function WhatsAppButton() {
+  const pathname = usePathname();
   const { language } = useLanguage();
+
+  // Hide on pages that already have a WhatsApp link
+  if (pathname === "/links" || pathname === "/diagnostic") return null;
   const message = encodeURIComponent(
     language === "fr"
       ? "Bonjour Aïssa, j'ai vu votre site et j'aimerais en savoir plus sur vos services."

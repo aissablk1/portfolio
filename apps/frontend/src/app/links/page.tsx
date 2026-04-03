@@ -59,7 +59,7 @@ export default function LinksPage() {
       />
       <div className="absolute inset-0 bg-gradient-to-b from-site-bg via-transparent to-site-bg" />
 
-      <div className="relative z-10 max-w-md mx-auto px-6 py-16">
+      <div className="relative z-10 max-w-md mx-auto px-6 py-16 min-h-screen flex flex-col justify-center">
         {/* Avatar + Name */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
