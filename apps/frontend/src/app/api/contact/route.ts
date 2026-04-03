@@ -420,7 +420,7 @@ export async function POST(request: Request) {
     // 1. Admin notification (with lead score in subject)
     sendEmail({
       to: CONTACT_EMAIL,
-      subject: `[${lead.label}] ${t.subject} — ${body.need} — ${body.name}`,
+      subject: `${t.subject} — ${body.need} — ${body.name} (${lead.label})`,
       html: buildAdminEmail(body),
       reply_to: body.email,
     }),

@@ -63,7 +63,7 @@ const Header = () => {
         href="/aissabelkoussa.com"
         className={cn(
           "group fixed top-0 left-0 right-0 z-60 py-1.5 bg-red-600/5 backdrop-blur-xl flex justify-center items-center transition-all duration-300 hover:bg-red-600/10",
-          isScrolled ? "top-[-28px]" : "top-0"
+          isScrolled ? "-top-10 opacity-0 pointer-events-none" : "top-0"
         )}
       >
         <p className="text-[8px] md:text-[10px] font-bold uppercase tracking-[0.08em] md:tracking-[0.2em] text-red-600 flex items-center gap-1.5 md:gap-2 px-4 text-center leading-tight">
@@ -163,7 +163,7 @@ const Header = () => {
         </div>
       </header>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Fullscreen Menu */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
@@ -171,9 +171,37 @@ const Header = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-site-bg/95 backdrop-blur-xl lg:hidden"
+            className="fixed inset-0 z-50 bg-site-bg lg:hidden flex flex-col"
           >
-            <nav className="flex flex-col items-center justify-center h-full gap-8">
+            {/* Menu header — logo + close button */}
+            <div className="px-container py-6 flex items-center justify-between shrink-0">
+              <Link
+                href="/"
+                onClick={(e) => {
+                  if (pathname === "/") {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }
+                  setMenuOpen(false);
+                }}
+                className="font-display text-xl font-semibold tracking-tighter"
+              >
+                AÏSSA BELKOUSSA
+              </Link>
+              <button
+                onClick={() => setMenuOpen(false)}
+                className="flex items-center justify-center w-11 h-11"
+                aria-label={dict.ui.menuClose}
+              >
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                  <line x1="4" y1="4" x2="16" y2="16" />
+                  <line x1="16" y1="4" x2="4" y2="16" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Navigation items — centered vertically in remaining space */}
+            <nav className="flex-1 flex flex-col items-center justify-center gap-8 pb-20">
               {navItems.map((item, i) => (
                 <motion.button
                   key={item.id}
@@ -192,7 +220,7 @@ const Header = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 10 }}
                 transition={{ duration: 0.3, delay: navItems.length * 0.05 }}
-                className="flex flex-col items-center gap-4"
+                className="flex flex-col items-center gap-4 mt-4"
               >
                 <Link
                   href="/diagnostic"
