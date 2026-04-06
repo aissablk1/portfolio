@@ -308,7 +308,7 @@ const content = {
             "Rarement",
             "Variable",
             "Non applicable (N/A)",
-            "Licence exclusive",
+            "Licence d'usage non exclusive",
           ],
         },
       ],
@@ -687,7 +687,7 @@ const content = {
             "Rarely",
             "Variable",
             "Not Applicable (N/A)",
-            "Exclusive license",
+            "Non-exclusive usage license",
           ],
         },
       ],
@@ -745,7 +745,7 @@ const content = {
       },
       {
         q: "Do I own the code?",
-        a: "You get an exclusive, unlimited usage license. You operate your system freely. Intellectual property remains with the provider, ensuring ongoing maintenance and evolution.",
+        a: "You get a non-exclusive, unlimited usage license. You operate your project freely. Intellectual property remains with the provider, ensuring ongoing maintenance and evolution.",
       },
       {
         q: "Can I handle maintenance myself?",

@@ -346,7 +346,7 @@ export const servicesPageSchema = {
         "@id": `${siteUrl}/services/#offer-autonome`,
         name: "Autonome — Projet seul",
         description:
-          "Systeme livre cle en main. Documentation technique renforcee, formation autonomie 2h, licence d'utilisation exclusive. Aucune maintenance incluse.",
+          "Systeme livre cle en main. Documentation technique renforcee, formation autonomie 2h, licence d'usage non exclusive. Aucune maintenance incluse.",
         price: "3900",
         priceCurrency: "EUR",
         priceSpecification: {
@@ -363,7 +363,7 @@ export const servicesPageSchema = {
           "@type": "Service",
           name: "Autonome",
           description:
-            "1 systeme livre (site, automation ou dashboard), brief + maquette validee, licence exclusive, documentation technique renforcee, formation autonomie 2h.",
+            "1 systeme livre (site, automation ou dashboard), brief + maquette validee, licence d'usage non exclusive, documentation technique renforcee, formation autonomie 2h.",
         },
       },
       {
@@ -402,7 +402,7 @@ export const servicesPageSchema = {
           "@type": "Service",
           name: "Accelerateur",
           description:
-            "1 systeme cle en main, licence exclusive, 3 mois monitoring + support offerts, corrections bugs sous 48h, MAJ securite continues, rapport mensuel.",
+            "1 systeme cle en main, licence d'usage non exclusive, 3 mois monitoring + support offerts, corrections bugs sous 48h, MAJ securite continues, rapport mensuel.",
         },
       },
       {

@@ -13,7 +13,7 @@ const siteUrl = "https://www.aissabelkoussa.fr";
 export const metadata: Metadata = {
   title: "Tarifs & Services",
   description:
-    "Systemes digitaux livres en 5-10 jours avec 3 mois de maintenance inclus. Autonome (3 900 EUR), Accelerateur (2 900 EUR + 490 EUR/mois), Partenaire (6 900 EUR + 1 900 EUR/mois). Prix fixe, licence exclusive, zero intermediaire.",
+    "Systemes digitaux livres en 5-10 jours avec 3 mois de maintenance inclus. Autonome (3 900 EUR), Accelerateur (2 900 EUR + 490 EUR/mois), Partenaire (6 900 EUR + 1 900 EUR/mois). Prix fixe, licence d'usage incluse, zero intermediaire.",
   alternates: {
     canonical: `${siteUrl}/services`,
   },

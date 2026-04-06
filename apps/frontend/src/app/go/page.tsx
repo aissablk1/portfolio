@@ -86,7 +86,7 @@ const content = {
       features: [
         "1 système livré (site, automation ou dashboard)",
         "Brief + maquette validée",
-        "Licence d'utilisation exclusive",
+        "Licence d'usage non exclusive",
         "Documentation technique renforcée",
         "Formation autonomie (2h)",
       ],
@@ -102,7 +102,7 @@ const content = {
       desc: "Votre système livré et maintenu. 3 mois de maintenance offerts — monitoring 24/7, bugs sous 48h, mises à jour sécurité. Vous ne touchez à rien.",
       features: [
         "1 système livré clé en main",
-        "Licence d'utilisation exclusive",
+        "Licence d'usage non exclusive",
         "3 mois monitoring + support offerts",
         "Corrections de bugs sous 48h",
         "Mises à jour sécurité continues",
@@ -198,8 +198,8 @@ const content = {
         desc: "Si le livrable ne correspond pas au brief validé, je retravaille sans frais supplémentaires.",
       },
       {
-        title: "Licence exclusive incluse",
-        desc: "Accès complet au code, documentation, déploiement — vous exploitez librement votre système. Zéro dépendance.",
+        title: "Licence d'usage incluse",
+        desc: "Accès complet au code, documentation, déploiement — vous exploitez librement votre projet. Propriété intellectuelle maintenue par le prestataire.",
       },
     ],
 
@@ -292,7 +292,7 @@ const content = {
       features: [
         "1 delivered system (website, automation or dashboard)",
         "Brief + validated mockup",
-        "Exclusive usage license",
+        "Non-exclusive usage license",
         "Enhanced technical documentation",
         "Autonomy training (2h)",
       ],
@@ -308,7 +308,7 @@ const content = {
       desc: "Your system delivered and maintained. 3 months of free maintenance — 24/7 monitoring, bugs fixed within 48h, security updates. You don't touch a thing.",
       features: [
         "1 turnkey delivered system",
-        "Exclusive usage license",
+        "Non-exclusive usage license",
         "3 months monitoring + support included",
         "Bug fixes within 48h",
         "Continuous security updates",
@@ -404,8 +404,8 @@ const content = {
         desc: "If the deliverable doesn't match the validated brief, I rework it at no extra cost.",
       },
       {
-        title: "Exclusive license included",
-        desc: "Full access to code, documentation, deployment — you freely operate your system. Zero dependency.",
+        title: "Usage license included",
+        desc: "Full access to code, documentation, deployment — you freely operate your project. Intellectual property maintained by the provider.",
       },
     ],
 

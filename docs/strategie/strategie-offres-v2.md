@@ -143,7 +143,7 @@ Les 3 offres historiques sont conservees, renommees pour plus de clarte commerci
 | **Delai** | 5 a 10 jours ouvres |
 | **Pour qui** | Entreprise avec equipe technique en interne, besoin ponctuel |
 | **Ce qui est livre** | 1 systeme complet (site OU automation OU dashboard) |
-| **Inclus** | Brief + maquette validee, licence d'utilisation exclusive, documentation technique renforcee, formation autonomie (2h) |
+| **Inclus** | Brief + maquette validee, licence d'usage non exclusive, documentation technique renforcee, formation autonomie (2h) |
 | **Maintenance** | Aucune. Le client gere seul apres livraison. |
 | **Garantie** | Prix final garanti. Satisfait ou retravaille. |
 

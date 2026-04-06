@@ -7,7 +7,7 @@ const siteUrl = "https://www.aissabelkoussa.fr";
 export const metadata: Metadata = {
   title: "Votre systeme devrait deja tourner — Offres & Resultats",
   description:
-    "Systemes digitaux pour artisans BTP et prestataires B2B. Accelerateur : 2 900 EUR + 3 mois maintenance offerts. Livre en 5-10 jours. Prix fixe, licence exclusive.",
+    "Systemes digitaux pour artisans BTP et prestataires B2B. Accelerateur : 2 900 EUR + 3 mois maintenance offerts. Livre en 5-10 jours. Prix fixe, licence d'usage incluse.",
   alternates: {
     canonical: `${siteUrl}/go`,
   },

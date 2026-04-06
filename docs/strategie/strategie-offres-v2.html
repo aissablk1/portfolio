@@ -1,0 +1,1378 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stratégie commerciale v2 — Repositionnement</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #0a0a0a;
+      --white: #fafafa;
+      --gray-100: #f5f5f5;
+      --gray-200: #e5e5e5;
+      --gray-500: #737373;
+      --gray-600: #525252;
+      --accent: #2563eb;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--black);
+      line-height: 1.7;
+      font-size: 14px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 48px 40px;
+    }
+
+    header h1 {
+      font-size: 22px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--black);
+      margin-bottom: 24px;
+    }
+
+    .meta-block {
+      background: var(--gray-100);
+      border-left: 3px solid var(--accent);
+      padding: 16px 20px;
+      margin-bottom: 32px;
+      border-radius: 0 6px 6px 0;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .meta-block strong {
+      color: var(--black);
+    }
+
+    h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--black);
+      margin-top: 40px;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--black);
+      margin-top: 28px;
+      margin-bottom: 12px;
+    }
+
+    h4 {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gray-600);
+      margin-top: 24px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    p {
+      margin-bottom: 12px;
+      color: var(--black);
+    }
+
+    ul, ol {
+      margin-bottom: 12px;
+      padding-left: 24px;
+    }
+
+    li {
+      margin-bottom: 6px;
+      font-size: 13px;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid var(--gray-200);
+      margin: 32px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      font-size: 13px;
+    }
+
+    th {
+      background: var(--gray-100);
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--gray-200);
+      color: var(--gray-600);
+    }
+
+    td {
+      font-size: 13px;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--gray-200);
+      vertical-align: top;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    blockquote {
+      border-left: 3px solid var(--accent);
+      padding: 14px 20px;
+      margin: 16px 0;
+      font-style: italic;
+      color: var(--gray-600);
+      background: var(--white);
+      border-radius: 0 6px 6px 0;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    code {
+      background: var(--gray-100);
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-size: 12px;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+    }
+
+    pre {
+      background: var(--gray-100);
+      border-radius: 6px;
+      padding: 16px 20px;
+      margin: 16px 0;
+      overflow-x: auto;
+      font-size: 12px;
+      line-height: 1.6;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      color: var(--black);
+    }
+
+    .price-card {
+      background: var(--gray-100);
+      border-radius: 8px;
+      padding: 24px;
+      margin: 16px 0;
+    }
+
+    .price-card--recommended {
+      border: 2px solid var(--accent);
+      position: relative;
+    }
+
+    .price-card--recommended::before {
+      content: 'RECOMMANDÉ';
+      position: absolute;
+      top: -10px;
+      left: 20px;
+      background: var(--accent);
+      color: white;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      padding: 2px 10px;
+      border-radius: 4px;
+    }
+
+    .price-card h4 {
+      margin-top: 0;
+      font-size: 14px;
+      color: var(--black);
+    }
+
+    .price-card .price {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--accent);
+      margin: 8px 0;
+    }
+
+    .toc {
+      background: var(--gray-100);
+      border-radius: 6px;
+      padding: 20px 24px;
+      margin-bottom: 32px;
+    }
+
+    .toc ol {
+      padding-left: 20px;
+      margin-bottom: 0;
+    }
+
+    .toc li {
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    .toc a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .toc a:hover {
+      text-decoration: underline;
+    }
+
+    .wording-section {
+      margin: 20px 0;
+    }
+
+    .wording-section .titre {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .wording-section .sous-titre {
+      font-size: 13px;
+      color: var(--gray-600);
+      margin-bottom: 12px;
+    }
+
+    .wording-section .cta {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 8px 20px;
+      background: var(--accent);
+      color: white;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+
+    .badge {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      padding: 2px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      vertical-align: middle;
+      margin-left: 8px;
+    }
+
+    .confidential {
+      margin-top: 48px;
+      padding: 16px 20px;
+      border-left: 3px solid var(--accent);
+      font-size: 12px;
+      color: var(--gray-500);
+      font-style: italic;
+    }
+
+    strong {
+      font-weight: 600;
+    }
+
+    .category-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <header>
+      <h1>Stratégie commerciale v2 — Repositionnement</h1>
+    </header>
+
+    <div class="meta-block">
+      <strong>Date :</strong> 3 avril 2026<br>
+      <strong>Auteur :</strong> Document stratégique — Cabinet conseil<br>
+      <strong>Contexte :</strong> Restructuration des offres suite au feedback d'Alexandre BRIHIEZ (réunion du 3 avril 2026)<br>
+      <strong>Destinataire :</strong> Aïssa Belkoussa — Développeur fullstack &amp; consultant IA, Albi (81)
+    </div>
+
+    <div class="toc">
+      <h3 style="margin-top:0; margin-bottom:10px;">Table des matières</h3>
+      <ol>
+        <li><a href="#1-architecture-des-3-categories-dexpertise">Architecture des 3 catégories d'expertise</a></li>
+        <li><a href="#2-grille-tarifaire-unifiee">Grille tarifaire unifiée</a></li>
+        <li><a href="#3-offre-cle-en-main-pilote-automatique">Offre clé en main « Pilote Automatique »</a></li>
+        <li><a href="#4-positionnement-par-rapport-a-admin-ia">Positionnement par rapport à Admin-IA</a></li>
+        <li><a href="#5-wording-commercial-par-offre">Wording commercial par offre</a></li>
+        <li><a href="#6-matrice-de-decision-client">Matrice de décision client</a></li>
+        <li><a href="#7-prochaines-etapes">Prochaines étapes</a></li>
+      </ol>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- SYNTHÈSE EXÉCUTIVE -->
+    <!-- ============================================ -->
+
+    <h2>Synthèse exécutive</h2>
+
+    <p>Alexandre BRIHIEZ recommande trois pivots majeurs :</p>
+
+    <ol>
+      <li><strong>Simplifier l'architecture</strong> : passer de 8 domaines d'expertise à 3 catégories lisibles en 5 secondes</li>
+      <li><strong>Ajouter la formation IA</strong> : nouvelle source de revenus, positionnement d'expert, porte d'entrée vers le consulting</li>
+      <li><strong>Introduire le TJM</strong> : 800 €/jour pour les missions sur-mesure, en complément des forfaits existants</li>
+    </ol>
+
+    <p>Ce document restructure l'ensemble du catalogue commercial d'Aïssa Belkoussa.</p>
+
+    <hr>
+
+    <!-- ============================================ -->
+    <!-- 1. ARCHITECTURE DES 3 CATÉGORIES -->
+    <!-- ============================================ -->
+
+    <h2 id="1-architecture-des-3-categories-dexpertise">1. Architecture des 3 catégories d'expertise</h2>
+
+    <h3>Avant (8 domaines — trop dilué)</h3>
+
+    <p>Automatisation | IA concrète | Dashboards &amp; data | Process autonomes | Pilotage chiffré | Sites qui convertissent | Outils internes | Tunnels de vente</p>
+
+    <p><strong>Problème :</strong> un prospect qui lit 8 domaines ne retient rien. Il ne sait pas où il se situe. Il quitte la page.</p>
+
+    <h3>Après (3 catégories — cristallin)</h3>
+
+    <hr>
+
+    <!-- Catégorie 1 -->
+    <h3><span class="category-label">Catégorie 1</span><br>AUTOMATISATION &amp; OUTILS INTERNES</h3>
+
+    <p><strong>Ce qu'elle contient (fusion de) :</strong> Automatisation + Process autonomes + Outils internes + Dashboards &amp; data</p>
+
+    <p><strong>Pitch en une phrase :</strong> « Je construis les systèmes qui font tourner votre entreprise sans vous. »</p>
+
+    <p><strong>Ce qui est inclus :</strong></p>
+    <ul>
+      <li>Workflows automatisés (n8n, Make, Zapier, custom)</li>
+      <li>Dashboards décisionnels temps réel (CA, pipeline, KPIs)</li>
+      <li>CRM et outils internes sur-mesure (admin panels, media managers, CMS)</li>
+      <li>Process autonomes : scoring de leads, routage intelligent, relances automatiques</li>
+      <li>Connexion entre vos outils existants (ERP, comptabilité, agenda, mails)</li>
+    </ul>
+
+    <p><strong>Use cases concrets :</strong></p>
+    <ul>
+      <li>Un artisan plombier qui perd 10h/semaine à relancer ses devis par mail → relances automatiques, devis généré en 5 min, rappels SMS avant intervention</li>
+      <li>Un consultant B2B qui gère 150 prospects dans un tableur → CRM sur-mesure avec scoring IA, pipeline visuel, alertes de relance</li>
+      <li>Un patron de PME qui attend le 15 du mois pour savoir s'il est rentable → dashboard temps réel avec alertes seuils, rapport auto-généré chaque lundi</li>
+    </ul>
+
+    <p><strong>Wording vendeur :</strong></p>
+    <blockquote>
+      Vos collaborateurs perdent des heures sur des tâches répétitives. Vos données sont éparpillées entre 6 outils. Vos décisions arrivent en retard parce que les chiffres ne sont pas consolidés. Je branche un système qui collecte, traite et agit à votre place — 24h/24, sans erreur, sans pause café.
+    </blockquote>
+
+    <hr>
+
+    <!-- Catégorie 2 -->
+    <h3><span class="category-label">Catégorie 2</span><br>CHATBOTS &amp; SITES QUI CONVERTISSENT</h3>
+
+    <p><strong>Ce qu'elle contient (fusion de) :</strong> IA concrète + Sites qui convertissent + Tunnels de vente</p>
+
+    <p><strong>Pitch en une phrase :</strong> « Je crée les interfaces qui transforment vos visiteurs en clients. »</p>
+
+    <p><strong>Ce qui est inclus :</strong></p>
+    <ul>
+      <li>Sites web haute performance (React 19, Next.js, SEO local)</li>
+      <li>Chatbots IA de qualification et service client (Claude, GPT, custom)</li>
+      <li>Tunnels de conversion complets (landing pages, lead magnets, nurturing)</li>
+      <li>Pages de diagnostic interactives (scoring visiteurs)</li>
+      <li>Intégration formulaires intelligents, prise de RDV en ligne, devis en ligne</li>
+    </ul>
+
+    <p><strong>Use cases concrets :</strong></p>
+    <ul>
+      <li>Un électricien dont le site date de 2014 et génère 0 appel → site moderne avec SEO local, apparaît dans le top 3 Google Maps, formulaire de devis en 30 secondes</li>
+      <li>Un formateur B2B qui perd 60% de ses prospects entre le premier contact et la signature → tunnel : landing page + chatbot de qualification + séquence email automatique + relance SMS</li>
+      <li>Une auto-école qui répond aux mêmes 15 questions par téléphone 30 fois par jour → chatbot IA qui répond instantanément, prend les RDV, et qualifie les prospects avant l'appel humain</li>
+    </ul>
+
+    <p><strong>Wording vendeur :</strong></p>
+    <blockquote>
+      Votre site est une vitrine. Pas un vendeur. Un site qui convertit, c'est un site qui répond aux questions avant qu'on les pose, qui qualifie vos prospects pendant que vous dormez, et qui transforme un visiteur curieux en client signé. C'est exactement ce que je construis.
+    </blockquote>
+
+    <hr>
+
+    <!-- Catégorie 3 -->
+    <h3><span class="category-label">Catégorie 3</span><br>PILOTAGE &amp; INDICATEURS</h3>
+
+    <p><strong>Ce qu'elle contient (fusion de) :</strong> Pilotage chiffré + Dashboards &amp; data (volet stratégique)</p>
+
+    <p><strong>Pitch en une phrase :</strong> « Je vous donne les chiffres qui manquent pour décider vite et bien. »</p>
+
+    <p><strong>Ce qui est inclus :</strong></p>
+    <ul>
+      <li>Tableaux de bord stratégiques (CA, marges, conversion, acquisition)</li>
+      <li>Rapports auto-générés (hebdomadaires, mensuels)</li>
+      <li>Alertes intelligentes (seuils, anomalies, opportunités)</li>
+      <li>Consolidation de données multi-sources (comptabilité, CRM, site, publicité)</li>
+      <li>Interfaces de décision pour dirigeants (mobile-friendly, temps réel)</li>
+    </ul>
+
+    <p><strong>Use cases concrets :</strong></p>
+    <ul>
+      <li>Un gérant de 3 agences qui découvre en fin de trimestre qu'une agence perd de l'argent → dashboard consolidé avec alertes en temps réel, il le voit le jour même</li>
+      <li>Un prestataire B2B qui ne sait pas quel canal lui rapporte le plus de clients → tableau d'attribution marketing avec coût par lead par canal, mis à jour automatiquement</li>
+      <li>Un artisan en croissance qui dépasse les seuils TVA sans s'en rendre compte → alertes automatiques sur les seuils réglementaires, projection à 3 mois</li>
+    </ul>
+
+    <p><strong>Wording vendeur :</strong></p>
+    <blockquote>
+      Vous pilotez votre entreprise à l'instinct ? Ça marche… jusqu'au jour où ça ne marche plus. Je construis le cockpit qui vous manque : les bons chiffres, au bon moment, dans un format que vous comprenez en 10 secondes. Plus besoin d'attendre le comptable.
+    </blockquote>
+
+    <hr>
+
+    <!-- Matrice de correspondance -->
+    <h3>Matrice de correspondance (ancien vers nouveau)</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Ancien domaine</th>
+          <th>Nouvelle catégorie</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Automatisation</td>
+          <td>Automatisation &amp; Outils internes</td>
+        </tr>
+        <tr>
+          <td>Process autonomes</td>
+          <td>Automatisation &amp; Outils internes</td>
+        </tr>
+        <tr>
+          <td>Outils internes</td>
+          <td>Automatisation &amp; Outils internes</td>
+        </tr>
+        <tr>
+          <td>Dashboards &amp; data</td>
+          <td>Automatisation &amp; Outils internes (opérationnel) + Pilotage &amp; Indicateurs (stratégique)</td>
+        </tr>
+        <tr>
+          <td>IA concrète</td>
+          <td>Chatbots &amp; Sites qui convertissent</td>
+        </tr>
+        <tr>
+          <td>Sites qui convertissent</td>
+          <td>Chatbots &amp; Sites qui convertissent</td>
+        </tr>
+        <tr>
+          <td>Tunnels de vente</td>
+          <td>Chatbots &amp; Sites qui convertissent</td>
+        </tr>
+        <tr>
+          <td>Pilotage chiffré</td>
+          <td>Pilotage &amp; Indicateurs</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <hr>
+
+    <!-- ============================================ -->
+    <!-- 2. GRILLE TARIFAIRE UNIFIÉE -->
+    <!-- ============================================ -->
+
+    <h2 id="2-grille-tarifaire-unifiee">2. Grille tarifaire unifiée</h2>
+
+    <h3>A. Systèmes au forfait — projets livrés clé en main</h3>
+
+    <p>Les 3 offres historiques sont conservées, renommées pour plus de clarté commerciale.</p>
+
+    <hr>
+
+    <!-- STANDARD -->
+    <div class="price-card">
+      <h4>STANDARD <span style="font-size:11px; color:var(--gray-500); text-transform:none; letter-spacing:0;">(ex-Autonome)</span></h4>
+      <table>
+        <tbody>
+          <tr><td><strong>Prix</strong></td><td>3 900 € (paiement unique)</td></tr>
+          <tr><td><strong>Délai</strong></td><td>5 à 10 jours ouvrés</td></tr>
+          <tr><td><strong>Pour qui</strong></td><td>Entreprise avec équipe technique en interne, besoin ponctuel</td></tr>
+          <tr><td><strong>Ce qui est livré</strong></td><td>1 système complet (site OU automation OU dashboard)</td></tr>
+          <tr><td><strong>Inclus</strong></td><td>Brief + maquette validée, licence d'usage non exclusive, documentation technique renforcée, formation autonomie (2h)</td></tr>
+          <tr><td><strong>Maintenance</strong></td><td>Aucune. Le client gère seul après livraison.</td></tr>
+          <tr><td><strong>Garantie</strong></td><td>Prix final garanti. Satisfait ou retravaillé.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr>
+
+    <!-- PREMIUM -->
+    <div class="price-card price-card--recommended">
+      <h4>PREMIUM <span style="font-size:11px; color:var(--gray-500); text-transform:none; letter-spacing:0;">(ex-Accélérateur)</span><span class="badge">Recommandé</span></h4>
+      <table>
+        <tbody>
+          <tr><td><strong>Prix</strong></td><td>2 900 € + 490 €/mois après 3 mois offerts</td></tr>
+          <tr><td><strong>Délai</strong></td><td>5 à 10 jours ouvrés</td></tr>
+          <tr><td><strong>Pour qui</strong></td><td>PME/artisan qui veut un système qui tourne sans s'en occuper</td></tr>
+          <tr><td><strong>Ce qui est livré</strong></td><td>1 système complet clé en main</td></tr>
+          <tr><td><strong>Inclus</strong></td><td>Tout le Standard + 3 mois de monitoring et support offerts, bugs corrigés sous 48h, MAJ sécurité + rapport mensuel</td></tr>
+          <tr><td><strong>Après 3 mois</strong></td><td>Abonnement Essentiel à 490 €/mois (sans engagement) ou annuel à 368 €/mois</td></tr>
+          <tr><td><strong>Garantie</strong></td><td>Prix final garanti. Satisfait ou retravaillé.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p><strong>Pourquoi c'est le plan recommandé :</strong> le prix d'entrée est plus bas que le Standard (2 900 vs 3 900 €), les 3 mois de maintenance offerts donnent le temps de prouver la valeur, et la transition vers l'abonnement est naturelle. C'est le produit d'appel.</p>
+
+    <hr>
+
+    <!-- PERSONNALISÉ -->
+    <div class="price-card">
+      <h4>PERSONNALISÉ <span style="font-size:11px; color:var(--gray-500); text-transform:none; letter-spacing:0;">(ex-Partenaire)</span></h4>
+      <table>
+        <tbody>
+          <tr><td><strong>Prix</strong></td><td>6 900 € + 1 900 €/mois après 3 mois offerts</td></tr>
+          <tr><td><strong>Délai</strong></td><td>1 à 2 mois</td></tr>
+          <tr><td><strong>Pour qui</strong></td><td>Entreprise ambitieuse qui veut un partenaire technique dédié</td></tr>
+          <tr><td><strong>Ce qui est livré</strong></td><td>Système multi-briques (site + IA + data + automatisations)</td></tr>
+          <tr><td><strong>Inclus</strong></td><td>Tout le Premium + intégration IA sur-mesure, évolutions 10h/mois, support prioritaire 24h, réunion stratégique mensuelle, accès prioritaire nouvelles technos IA</td></tr>
+          <tr><td><strong>Après 3 mois</strong></td><td>Abonnement Premium à 1 900 €/mois (sans engagement) ou annuel à 1 425 €/mois</td></tr>
+          <tr><td><strong>Garantie</strong></td><td>Prix final garanti. Satisfait ou retravaillé.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr>
+
+    <!-- B. Consulting & Accompagnement -->
+    <h3>B. Consulting &amp; Accompagnement — missions sur-mesure au TJM</h3>
+
+    <p>Pour les entreprises qui ont besoin d'expertise ponctuelle, d'audit, de conseil stratégique, ou d'accompagnement projet sans passer par un forfait.</p>
+
+    <div class="price-card">
+      <table>
+        <thead>
+          <tr>
+            <th>Formule</th>
+            <th>Durée</th>
+            <th>Prix HT</th>
+            <th>Prix équivalent/heure</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Demi-journée</strong></td>
+            <td>4h</td>
+            <td>450 €</td>
+            <td>112 €/h</td>
+          </tr>
+          <tr>
+            <td><strong>Journée complète</strong></td>
+            <td>8h</td>
+            <td>800 €</td>
+            <td>100 €/h</td>
+          </tr>
+          <tr>
+            <td><strong>Forfait semaine</strong></td>
+            <td>5 jours (40h)</td>
+            <td>3 600 €</td>
+            <td>90 €/h</td>
+          </tr>
+          <tr>
+            <td><strong>Forfait mensuel</strong></td>
+            <td>10 jours/mois</td>
+            <td>6 800 €</td>
+            <td>85 €/h</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p><strong>Positionnement TJM à 800 €/jour :</strong></p>
+    <ul>
+      <li>Cohérent avec la recommandation d'Alexandre BRIHIEZ</li>
+      <li>Aligné avec le marché des consultants IA/dev fullstack en région (600-1 200 €/jour)</li>
+      <li>La demi-journée à 450 € est volontairement plus chère au prorata pour décourager les micro-missions et orienter vers la journée complète</li>
+      <li>Le forfait semaine offre une remise de 10% pour inciter aux engagements plus longs</li>
+      <li>Le forfait mensuel offre une remise de 15% — idéal pour les missions longues</li>
+    </ul>
+
+    <p><strong>Cas d'usage du TJM :</strong></p>
+    <ul>
+      <li>Audit technique d'un système existant (1-2 jours)</li>
+      <li>Accompagnement au choix et à l'implémentation d'outils IA (forfait semaine)</li>
+      <li>Direction technique externalisée pour une PME en croissance (forfait mensuel)</li>
+      <li>Conseil stratégique digital ponctuel (demi-journée)</li>
+      <li>Intervention sur un projet en difficulté — diagnostic et plan d'action (1-3 jours)</li>
+    </ul>
+
+    <hr>
+
+    <!-- C. Formation IA -->
+    <h3>C. Formation IA — nouvelle offre</h3>
+
+    <p>Positionnement : démystifier l'IA pour les dirigeants et équipes de PME. Pas un cours académique. Un transfert de compétences actionnable le jour même.</p>
+
+    <hr>
+
+    <!-- Formation 1 jour -->
+    <div class="price-card">
+      <h4>Formation 1 jour — « L'IA en pratique »</h4>
+      <table>
+        <tbody>
+          <tr><td><strong>Durée</strong></td><td>7h (9h-12h30 / 14h-17h30)</td></tr>
+          <tr><td><strong>Prix inter-entreprise</strong></td><td>490 € HT / personne (4 à 10 participants)</td></tr>
+          <tr><td><strong>Prix intra-entreprise</strong></td><td>1 800 € HT / groupe (jusqu'à 12 personnes)</td></tr>
+          <tr><td><strong>Public</strong></td><td>Dirigeants, managers, équipes opérationnelles</td></tr>
+          <tr><td><strong>Objectif</strong></td><td>Comprendre ce que l'IA peut concrètement faire pour VOTRE entreprise</td></tr>
+          <tr><td><strong>Programme</strong></td><td>
+            <ul style="margin:0; padding-left:18px;">
+              <li>Matin : Ce que l'IA fait vraiment (démos live, pas de slides PowerPoint)</li>
+              <li>Matin : Les 5 cas d'usage IA les plus rentables pour une PME</li>
+              <li>Après-midi : Atelier pratique — automatiser une tâche réelle de votre entreprise</li>
+              <li>Après-midi : Plan d'action personnalisé à 90 jours</li>
+            </ul>
+          </td></tr>
+          <tr><td><strong>Livrable</strong></td><td>Plan d'action IA personnalisé + accès à 3 templates d'automatisation</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr>
+
+    <!-- Formation 2 jours -->
+    <div class="price-card">
+      <h4>Formation 2 jours — « IA &amp; Automatisation avancées »</h4>
+      <table>
+        <tbody>
+          <tr><td><strong>Durée</strong></td><td>14h sur 2 jours</td></tr>
+          <tr><td><strong>Prix inter-entreprise</strong></td><td>890 € HT / personne (4 à 10 participants)</td></tr>
+          <tr><td><strong>Prix intra-entreprise</strong></td><td>3 200 € HT / groupe (jusqu'à 12 personnes)</td></tr>
+          <tr><td><strong>Public</strong></td><td>Équipes qui veulent implémenter eux-mêmes des solutions IA</td></tr>
+          <tr><td><strong>Objectif</strong></td><td>Savoir configurer et déployer des automatisations IA sans coder</td></tr>
+          <tr><td><strong>Programme</strong></td><td>
+            <ul style="margin:0; padding-left:18px;">
+              <li>Jour 1 : Cartographie des processus automatisables + configuration n8n/Make</li>
+              <li>Jour 1 : Construction d'un premier workflow complet (relances, devis, reporting)</li>
+              <li>Jour 2 : Intégration d'IA dans les workflows (chatbot, traitement de documents, génération)</li>
+              <li>Jour 2 : Déploiement, monitoring, maintenance — être autonome</li>
+            </ul>
+          </td></tr>
+          <tr><td><strong>Livrable</strong></td><td>3 workflows configurés et déployés + documentation + 30 jours de support email</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr>
+
+    <!-- Formation sur-mesure -->
+    <div class="price-card">
+      <h4>Formation sur-mesure</h4>
+      <table>
+        <tbody>
+          <tr><td><strong>Durée</strong></td><td>De 1/2 journée à 5 jours selon le besoin</td></tr>
+          <tr><td><strong>Prix</strong></td><td>Sur devis (base TJM 800 €/jour)</td></tr>
+          <tr><td><strong>Public</strong></td><td>Équipe spécifique avec un besoin identifié</td></tr>
+          <tr><td><strong>Exemples</strong></td><td>Formation à un outil interne livré, montée en compétence sur un stack technique, workshop stratégique IA pour COMEX</td></tr>
+          <tr><td><strong>Livrable</strong></td><td>Sur-mesure selon l'objectif</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr>
+
+    <!-- Stratégie formation comme porte d'entrée -->
+    <h3>Stratégie de la formation comme porte d'entrée</h3>
+
+    <p>La formation n'est pas qu'un produit. C'est un canal d'acquisition :</p>
+
+    <ol>
+      <li><strong>Le prospect hésite à investir 2 900 € ?</strong> → « Commencez par une journée de formation à 490 €/personne. Vous verrez concrètement ce que l'IA peut faire pour vous. »</li>
+      <li><strong>À la fin de la formation</strong>, le plan d'action à 90 jours révèle les chantiers concrets → c'est le moment de proposer un forfait Standard ou Premium pour les implémenter</li>
+      <li><strong>Taux de conversion estimé</strong> : 30 à 40% des participants à une formation achèteront un accompagnement ou un système dans les 3 mois</li>
+    </ol>
+
+    <hr>
+
+    <!-- D. Tableau récapitulatif complet -->
+    <h3>D. Tableau récapitulatif complet</h3>
+
+    <div class="price-card">
+      <table>
+        <thead>
+          <tr>
+            <th>Offre</th>
+            <th>Prix d'entrée</th>
+            <th>Récurrence</th>
+            <th>Cible</th>
+            <th>Complexité</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Formation 1 jour</td>
+            <td>490 €/pers.</td>
+            <td>Ponctuel</td>
+            <td>Découverte</td>
+            <td>Faible</td>
+          </tr>
+          <tr>
+            <td>Formation 2 jours</td>
+            <td>890 €/pers.</td>
+            <td>Ponctuel</td>
+            <td>Montée en compétence</td>
+            <td>Moyenne</td>
+          </tr>
+          <tr>
+            <td>Consulting demi-journée</td>
+            <td>450 €</td>
+            <td>Ponctuel</td>
+            <td>Besoin ponctuel</td>
+            <td>Variable</td>
+          </tr>
+          <tr>
+            <td>Consulting journée</td>
+            <td>800 €</td>
+            <td>Ponctuel</td>
+            <td>Audit / conseil</td>
+            <td>Variable</td>
+          </tr>
+          <tr style="font-weight:600;">
+            <td>Pilote Automatique</td>
+            <td>1 500 €</td>
+            <td>Ponctuel</td>
+            <td>PME pressée</td>
+            <td>Clé en main</td>
+          </tr>
+          <tr>
+            <td>Système Standard</td>
+            <td>3 900 €</td>
+            <td>Ponctuel</td>
+            <td>Projet technique</td>
+            <td>Moyenne</td>
+          </tr>
+          <tr style="font-weight:600;">
+            <td>Système Premium</td>
+            <td>2 900 €</td>
+            <td>490 €/mois</td>
+            <td>PME sans équipe tech</td>
+            <td>Clé en main</td>
+          </tr>
+          <tr>
+            <td>Système Personnalisé</td>
+            <td>6 900 €</td>
+            <td>1 900 €/mois</td>
+            <td>Entreprise ambitieuse</td>
+            <td>Haute</td>
+          </tr>
+          <tr>
+            <td>Consulting forfait semaine</td>
+            <td>3 600 €</td>
+            <td>Ponctuel</td>
+            <td>Mission intensive</td>
+            <td>Variable</td>
+          </tr>
+          <tr>
+            <td>Consulting forfait mensuel</td>
+            <td>6 800 €</td>
+            <td>Mensuel</td>
+            <td>Direction technique</td>
+            <td>Haute</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr>
+
+    <!-- ============================================ -->
+    <!-- 3. OFFRE CLÉ EN MAIN : PILOTE AUTOMATIQUE -->
+    <!-- ============================================ -->
+
+    <h2 id="3-offre-cle-en-main-pilote-automatique">3. Offre clé en main : « Pilote Automatique »</h2>
+
+    <p>C'est le produit qu'Alexandre demande : simple, achetable immédiatement, compréhensible en 10 secondes.</p>
+
+    <hr>
+
+    <h3>NOM : PILOTE AUTOMATIQUE</h3>
+
+    <p><strong>Sous-titre :</strong> Votre prospection tourne toute seule en 5 jours.</p>
+
+    <hr>
+
+    <!-- Ce qui est livré -->
+    <h3>Ce qui est livré</h3>
+
+    <div class="price-card">
+      <table>
+        <thead>
+          <tr>
+            <th>Brique</th>
+            <th>Détail</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Automatisation email</strong></td>
+            <td>Séquence de 5 emails automatiques : confirmation, relance J+3, valeur J+7, proposition J+14, dernier rappel J+21. Templates écrits, configurés et testés.</td>
+          </tr>
+          <tr>
+            <td><strong>Automatisation appel</strong></td>
+            <td>Notification automatique quand un prospect est « chaud » (a ouvert 3+ emails, cliqué sur un lien, visité la page tarifs). Fiche prospect avec historique avant l'appel.</td>
+          </tr>
+          <tr>
+            <td><strong>Chatbot IA</strong></td>
+            <td>Chatbot installé sur le site du client. Répond aux 10-15 questions les plus fréquentes. Qualifie les prospects (budget, délai, besoin). Prend les RDV automatiquement dans l'agenda du client.</td>
+          </tr>
+          <tr>
+            <td><strong>Dashboard de suivi</strong></td>
+            <td>Interface simple : combien de prospects dans le tunnel, où ils en sont, qui rappeler aujourd'hui.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr>
+
+    <!-- Prix et conditions -->
+    <h3>Prix et conditions</h3>
+
+    <div class="price-card">
+      <table>
+        <tbody>
+          <tr><td><strong>Prix</strong></td><td>1 500 € HT (paiement unique)</td></tr>
+          <tr><td><strong>Délai de livraison</strong></td><td>5 jours ouvrés</td></tr>
+          <tr><td><strong>Maintenance</strong></td><td>Option : 290 €/mois (monitoring chatbot + ajustement séquences + rapport mensuel)</td></tr>
+          <tr><td><strong>Prérequis</strong></td><td>Le client a un site web (même basique) et une liste de prospects ou un formulaire de contact</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr>
+
+    <!-- Pourquoi 1 500 € -->
+    <h3>Pourquoi 1 500 € et pas plus</h3>
+
+    <ul>
+      <li><strong>Point d'entrée bas</strong> : un artisan ou un prestataire B2B peut dire oui sans comité de direction</li>
+      <li><strong>Délai court</strong> : 5 jours, pas 2 mois. Le ROI est visible en 2 semaines</li>
+      <li><strong>Upsell naturel</strong> : une fois que le « Pilote Automatique » tourne et génère des leads, le client a besoin d'un vrai site (Premium à 2 900 €) ou d'un système complet (Personnalisé à 6 900 €)</li>
+      <li><strong>Marge saine</strong> : 1 500 € pour 2-3 jours de travail effectif (avec les templates industrialisés) = TJM équivalent de 500-750 €. Correct pour un produit packageable.</li>
+    </ul>
+
+    <hr>
+
+    <!-- Parcours client type -->
+    <h3>Parcours client type</h3>
+
+    <pre>Prospect découvre Aïssa (LinkedIn, site, bouche-à-oreille)
+    |
+    v
+Appel découverte 30 min (gratuit)
+    |
+    v
+"Vous voulez des résultats rapides ? Commencez par le Pilote Automatique."
+    |
+    v
+1 500 € — livraison en 5 jours
+    |
+    v
+Les leads commencent à arriver (J+10 à J+15)
+    |
+    v
+"Maintenant que la prospection tourne, il vous faut un site à la hauteur."
+    --> Premium à 2 900 € (site + chatbot intégré + maintenance)
+    |
+    v
+6 mois plus tard : "Votre business a grandi. On passe au Personnalisé."
+    --> 6 900 € + 1 900 €/mois</pre>
+
+    <hr>
+
+    <!-- ============================================ -->
+    <!-- 4. POSITIONNEMENT PAR RAPPORT À ADMIN-IA -->
+    <!-- ============================================ -->
+
+    <h2 id="4-positionnement-par-rapport-a-admin-ia">4. Positionnement par rapport à Admin-IA</h2>
+
+    <h3>Contexte</h3>
+
+    <p>Alexandre BRIHIEZ développe <strong>Admin-IA</strong>, un produit ciblé sur les auto-écoles. Il est à la fois accompagnateur d'Aïssa et porteur de son propre projet.</p>
+
+    <h3>Principe directeur : complémentarité, jamais concurrence</h3>
+
+    <p>La relation doit être win-win sur toute la durée. Si Alexandre perçoit de la concurrence, la relation s'arrête.</p>
+
+    <hr>
+
+    <!-- Matrice de positionnement -->
+    <h3>Matrice de positionnement</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Dimension</th>
+          <th>Admin-IA (Alexandre)</th>
+          <th>Aïssa Belkoussa</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Cible</strong></td>
+          <td>Auto-écoles (niche unique)</td>
+          <td>PME multi-secteurs (BTP, B2B, services)</td>
+        </tr>
+        <tr>
+          <td><strong>Produit</strong></td>
+          <td>Produit SaaS vertical (1 solution pour 1 marché)</td>
+          <td>Systèmes sur-mesure (solution adaptée à chaque client)</td>
+        </tr>
+        <tr>
+          <td><strong>Approche</strong></td>
+          <td>Scalable — 1 produit, N clients</td>
+          <td>Artisanale — chaque système est unique</td>
+        </tr>
+        <tr>
+          <td><strong>IA</strong></td>
+          <td>Intégrée dans le produit auto-école</td>
+          <td>Déployable dans n'importe quel contexte</td>
+        </tr>
+        <tr>
+          <td><strong>Prix</strong></td>
+          <td>Abonnement SaaS (récurrent, prévisible)</td>
+          <td>Forfait + maintenance (projet + suivi)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <hr>
+
+    <!-- 3 scénarios de collaboration -->
+    <h3>3 scénarios de collaboration</h3>
+
+    <h4>Scénario 1 : Aïssa comme prestataire technique d'Admin-IA</h4>
+
+    <p>Si Alexandre a besoin de muscle technique pour développer Admin-IA :</p>
+    <ul>
+      <li>Aïssa intervient au TJM (800 €/jour) ou au forfait</li>
+      <li>Périmètre clair : Aïssa livre du code, Alexandre vend le produit</li>
+      <li>Pas de concurrence possible : Aïssa ne vend pas aux auto-écoles</li>
+    </ul>
+
+    <p><strong>Avantage pour Alexandre :</strong> un dev fullstack + IA sans embaucher<br>
+    <strong>Avantage pour Aïssa :</strong> revenus récurrents, référence solide, accès au réseau d'Alexandre</p>
+
+    <h4>Scénario 2 : Apporteur d'affaires croisé</h4>
+
+    <ul>
+      <li>Alexandre envoie à Aïssa les contacts PME/artisans de son réseau qui ne sont pas des auto-écoles</li>
+      <li>Aïssa envoie à Alexandre les contacts auto-écoles qu'il rencontre</li>
+      <li>Commission : 10 à 15% du premier projet pour l'apporteur</li>
+    </ul>
+
+    <p><strong>Avantage pour les deux :</strong> chacun monétise les contacts hors périmètre</p>
+
+    <h4>Scénario 3 : Formation IA conjointe</h4>
+
+    <ul>
+      <li>Alexandre a les contacts auto-écoles et le réseau TPE</li>
+      <li>Aïssa a l'expertise technique et le contenu de formation</li>
+      <li>Proposition : co-animer des formations IA pour dirigeants de TPE/PME</li>
+      <li>Partage de revenus 50/50 ou selon l'apport (contacts vs contenu)</li>
+    </ul>
+
+    <p><strong>Avantage :</strong> accès au réseau d'Alexandre sans concurrencer Admin-IA</p>
+
+    <hr>
+
+    <!-- Les 3 règles d'or -->
+    <h3>Les 3 règles d'or de la relation Alexandre/Aïssa</h3>
+
+    <ol>
+      <li><strong>Jamais toucher aux auto-écoles.</strong> Même si une auto-école demande un site web. La rediriger vers Alexandre.</li>
+      <li><strong>Être transparent sur les prix.</strong> Alexandre connaît le TJM, les forfaits, les marges. Pas de surprise.</li>
+      <li><strong>Documenter les recommandations.</strong> Chaque client envoyé par l'un à l'autre est tracé. Les commissions sont payées dans les 30 jours après encaissement.</li>
+    </ol>
+
+    <hr>
+
+    <!-- ============================================ -->
+    <!-- 5. WORDING COMMERCIAL PAR OFFRE -->
+    <!-- ============================================ -->
+
+    <h2 id="5-wording-commercial-par-offre">5. Wording commercial par offre</h2>
+
+    <!-- Pilote Automatique -->
+    <div class="wording-section">
+      <h3>Offre : PILOTE AUTOMATIQUE</h3>
+      <p class="titre">Prospection. Automatisée. En 5 jours.</p>
+      <p class="sous-titre">Vos emails, vos relances et votre chatbot travaillent pour vous pendant que vous êtes sur le terrain.</p>
+
+      <p><strong>Bénéfices :</strong></p>
+      <ul>
+        <li>Arrêtez de courir après vos prospects — ils reviennent tout seuls</li>
+        <li>Un chatbot répond à vos clients 24h/24, même le dimanche</li>
+        <li>Vous savez exactement qui rappeler et quand, chaque matin</li>
+        <li>Rentabilisé dès le premier mois : 1 client signé rembourse l'investissement</li>
+        <li>Installé en 5 jours. Pas en 5 mois.</li>
+      </ul>
+
+      <blockquote>« Je veux que ma prospection tourne toute seule »</blockquote>
+    </div>
+
+    <hr>
+
+    <!-- Système Standard -->
+    <div class="wording-section">
+      <h3>Offre : SYSTÈME STANDARD</h3>
+      <p class="titre">Votre système. Livré. Terminé.</p>
+      <p class="sous-titre">Un projet numérique complet, livré en 10 jours, avec le code source et la documentation.</p>
+
+      <p><strong>Bénéfices :</strong></p>
+      <ul>
+        <li>Un système fonctionnel dès la livraison — pas une maquette, pas un prototype</li>
+        <li>Tout le code vous appartient. Aucune dépendance. Aucun abonnement caché.</li>
+        <li>Documentation complète — votre équipe technique reprend la main immédiatement</li>
+        <li>Livraison en 5 à 10 jours là où une agence met 3 mois</li>
+        <li>Prix fixe garanti : pas de surprise, pas de dépassement</li>
+      </ul>
+
+      <blockquote>« Je lance mon projet »</blockquote>
+    </div>
+
+    <hr>
+
+    <!-- Système Premium -->
+    <div class="wording-section">
+      <h3>Offre : SYSTÈME PREMIUM <span class="badge">Recommandé</span></h3>
+      <p class="titre">Clé en main. Zéro souci.</p>
+      <p class="sous-titre">Votre système est livré, surveillé et maintenu pendant 3 mois — vous n'avez rien à faire.</p>
+
+      <p><strong>Bénéfices :</strong></p>
+      <ul>
+        <li>3 mois de tranquillité totale : je surveille, j'optimise, je corrige</li>
+        <li>Bugs corrigés en 48h — pas dans 2 semaines</li>
+        <li>Rapport mensuel : vous voyez exactement ce que le système produit</li>
+        <li>Le prix d'entrée le plus accessible (2 900 €) pour un système complet</li>
+        <li>Annulez quand vous voulez après les 3 mois offerts. Zéro engagement.</li>
+      </ul>
+
+      <blockquote>« Je veux un système qui tourne sans moi »</blockquote>
+    </div>
+
+    <hr>
+
+    <!-- Système Personnalisé -->
+    <div class="wording-section">
+      <h3>Offre : SYSTÈME PERSONNALISÉ</h3>
+      <p class="titre">Votre partenaire technique dédié.</p>
+      <p class="sous-titre">Un directeur technique à la demande qui fait évoluer votre système chaque mois.</p>
+
+      <p><strong>Bénéfices :</strong></p>
+      <ul>
+        <li>Un interlocuteur unique qui connaît votre business, votre code et vos objectifs</li>
+        <li>10h de développement par mois : votre système évolue avec votre entreprise</li>
+        <li>Réunion stratégique mensuelle : on décide ensemble des priorités</li>
+        <li>Support prioritaire 24h — quand ça casse, ça se répare dans la journée</li>
+        <li>Accès aux dernières innovations IA avant tout le monde</li>
+      </ul>
+
+      <blockquote>« Je veux un partenaire technique »</blockquote>
+    </div>
+
+    <hr>
+
+    <!-- Consulting (TJM) -->
+    <div class="wording-section">
+      <h3>Offre : CONSULTING (TJM)</h3>
+      <p class="titre">Expertise IA. À la journée.</p>
+      <p class="sous-titre">Un consultant IA senior à votre table pour résoudre un problème précis.</p>
+
+      <p><strong>Bénéfices :</strong></p>
+      <ul>
+        <li>Pas de forfait, pas d'engagement : vous payez l'expertise dont vous avez besoin</li>
+        <li>Diagnostic actionnable en 1 journée — pas un rapport de 80 pages</li>
+        <li>Recommandations implémentables immédiatement par votre équipe</li>
+        <li>Spécialiste IA + dev + data : pas besoin de 3 consultants différents</li>
+        <li>Remise dégressive sur les engagements long terme (semaine, mois)</li>
+      </ul>
+
+      <blockquote>« Réserver une journée de consulting »</blockquote>
+    </div>
+
+    <hr>
+
+    <!-- Formation IA -->
+    <div class="wording-section">
+      <h3>Offre : FORMATION IA</h3>
+      <p class="titre">L'IA démystifiée. En 1 jour.</p>
+      <p class="sous-titre">Vos équipes repartent avec un plan d'action concret et 3 automatisations configurées.</p>
+
+      <p><strong>Bénéfices :</strong></p>
+      <ul>
+        <li>Pas de théorie. Des démos live et des ateliers pratiques avec VOS données</li>
+        <li>Chaque participant repart avec un plan d'action personnalisé à 90 jours</li>
+        <li>Des templates d'automatisation prêts à l'emploi, installés le jour même</li>
+        <li>Un formateur qui code en production tous les jours — pas un professeur</li>
+        <li>Résultat mesurable : les participants savent utiliser l'IA dès le lendemain</li>
+      </ul>
+
+      <blockquote>« Former mon équipe à l'IA »</blockquote>
+    </div>
+
+    <hr>
+
+    <!-- ============================================ -->
+    <!-- 6. MATRICE DE DÉCISION CLIENT -->
+    <!-- ============================================ -->
+
+    <h2 id="6-matrice-de-decision-client">6. Matrice de décision client</h2>
+
+    <p>Pour guider le prospect vers la bonne offre en 3 questions :</p>
+
+    <h3>Question 1 : « Vous savez ce dont vous avez besoin ? »</h3>
+
+    <ul>
+      <li><strong>Non, je veux comprendre</strong> → Formation IA (490 €/pers.)</li>
+      <li><strong>Oui, mais j'ai besoin de conseil</strong> → Consulting TJM (800 €/jour)</li>
+      <li><strong>Oui, je veux un système livré</strong> → Question 2</li>
+    </ul>
+
+    <h3>Question 2 : « Vous avez une équipe technique en interne ? »</h3>
+
+    <ul>
+      <li><strong>Oui</strong> → Système Standard (3 900 €)</li>
+      <li><strong>Non</strong> → Question 3</li>
+    </ul>
+
+    <h3>Question 3 : « Quel est votre niveau d'ambition ? »</h3>
+
+    <ul>
+      <li><strong>Un besoin simple et rapide</strong> → Pilote Automatique (1 500 €)</li>
+      <li><strong>Un système complet, clé en main</strong> → Système Premium (2 900 €)</li>
+      <li><strong>Un partenaire technique dédié</strong> → Système Personnalisé (6 900 €)</li>
+    </ul>
+
+    <hr>
+
+    <!-- Arbre de décision simplifié -->
+    <h3>Arbre de décision simplifié pour le site web</h3>
+
+    <pre>"Quel est votre besoin principal ?"
+
+[Comprendre l'IA]          [Un système concret]         [De l'expertise]
+     |                           |                            |
+Formation IA              Quel budget ?                  Consulting
+490 €/pers.          /        |         \               800 €/jour
+                    /         |          \
+              &lt; 2 000 €   2-5K €     &gt; 5K €
+                  |           |            |
+         Pilote Auto.     Premium     Personnalisé
+           1 500 €       2 900 €       6 900 €</pre>
+
+    <hr>
+
+    <!-- ============================================ -->
+    <!-- 7. PROCHAINES ÉTAPES -->
+    <!-- ============================================ -->
+
+    <h2 id="7-prochaines-etapes">7. Prochaines étapes</h2>
+
+    <h3>Semaine du 7 avril 2026</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Action</th>
+          <th>Priorité</th>
+          <th>Responsable</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Valider ce document avec Alexandre (envoyer par email)</td>
+          <td>Critique</td>
+          <td>Aïssa</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Mettre à jour le one-pager offres avec les 3 catégories</td>
+          <td>Haute</td>
+          <td>Aïssa</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Mettre à jour la page /services et /go du portfolio</td>
+          <td>Haute</td>
+          <td>Aïssa</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Créer la page /formation sur le site</td>
+          <td>Haute</td>
+          <td>Aïssa</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Rédiger le contenu commercial « Pilote Automatique »</td>
+          <td>Haute</td>
+          <td>Aïssa</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>Industrialiser les templates Pilote Automatique (emails, chatbot, dashboard)</td>
+          <td>Moyenne</td>
+          <td>Aïssa</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Semaine du 14 avril 2026</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Action</th>
+          <th>Priorité</th>
+          <th>Responsable</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>7</td>
+          <td>Tester le Pilote Automatique sur 1 client réel (tarif réduit ou gratuit contre témoignage)</td>
+          <td>Critique</td>
+          <td>Aïssa</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>Proposer le Scénario 2 (apporteur d'affaires croisé) à Alexandre</td>
+          <td>Haute</td>
+          <td>Aïssa</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td>Publier le premier post LinkedIn sur les 3 catégories d'expertise</td>
+          <td>Haute</td>
+          <td>Aïssa</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td>Créer le programme détaillé de la formation 1 jour pour démarchage</td>
+          <td>Moyenne</td>
+          <td>Aïssa</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>KPIs à suivre</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Indicateur</th>
+          <th>Objectif à 90 jours</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Nombre de « Pilote Automatique » vendus</td>
+          <td>3 minimum</td>
+        </tr>
+        <tr>
+          <td>Nombre de prospects en pipeline</td>
+          <td>15+</td>
+        </tr>
+        <tr>
+          <td>CA généré</td>
+          <td>10 000 € minimum</td>
+        </tr>
+        <tr>
+          <td>Taux de conversion Pilote Auto → Premium</td>
+          <td>30%+</td>
+        </tr>
+        <tr>
+          <td>Formations dispensées</td>
+          <td>1 minimum</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <hr>
+
+    <!-- ============================================ -->
+    <!-- ANNEXE -->
+    <!-- ============================================ -->
+
+    <h2>Annexe : Grille de prix complète (version imprimable)</h2>
+
+    <pre>SYSTÈMES AU FORFAIT
+--------------------------------------------
+Standard         3 900 €    (unique)
+Premium          2 900 €    + 490 €/mois
+Personnalisé     6 900 €    + 1 900 €/mois
+Pilote Auto.     1 500 €    (unique)
+
+CONSULTING (TJM)
+--------------------------------------------
+Demi-journée       450 €
+Journée             800 €
+Semaine           3 600 €
+Mois              6 800 €
+
+FORMATION IA
+--------------------------------------------
+1 jour (inter)      490 € / personne
+1 jour (intra)    1 800 € / groupe
+2 jours (inter)     890 € / personne
+2 jours (intra)   3 200 € / groupe
+Sur-mesure        Sur devis (base 800 €/jour)
+
+MAINTENANCE (après 3 mois offerts)
+--------------------------------------------
+Essentiel          490 €/mois  (annuel : 368 €)
+Premium          1 900 €/mois  (annuel : 1 425 €)
+Pilote Auto.       290 €/mois</pre>
+
+    <hr>
+
+    <div class="confidential">
+      <strong>Document confidentiel.</strong> Usage interne uniquement. Ne pas diffuser sans l'accord d'Aïssa Belkoussa.<br>
+      Version 2.0 — 3 avril 2026
+    </div>
+
+  </div>
+</body>
+</html>
