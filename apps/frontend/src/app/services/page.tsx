@@ -368,7 +368,7 @@ const content = {
       },
       {
         q: "Est-ce que je suis propriétaire du code ?",
-        a: "Vous bénéficiez d\u2019une licence d\u2019utilisation exclusive et illimitée dans le temps. Vous exploitez votre système en toute liberté. La propriété intellectuelle reste au prestataire, ce qui garantit la maintenance et l\u2019évolution continue de vos outils.",
+        a: "Vous bénéficiez d\u2019une licence d\u2019utilisation non exclusive et illimitée dans le temps. Vous exploitez votre projet en toute liberté. La propriété intellectuelle reste au prestataire, ce qui garantit la maintenance et l\u2019évolution continue de vos outils.",
       },
       {
         q: "Je peux gérer moi-même la maintenance ?",

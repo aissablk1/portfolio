@@ -106,10 +106,10 @@ export default function CGVPage() {
               </p>
               <ul>
                 <li>
-                  <strong>Exclusive</strong> : le prestataire s'interdit de
-                  réutiliser les livrables spécifiques au client (code
-                  personnalisé, design sur mesure) pour un tiers concurrent
-                  direct sur le même marché géographique ;
+                  <strong>Non exclusive</strong> : le prestataire conserve le
+                  droit de réutiliser librement tout ou partie des livrables
+                  (code, design, composants, méthodes, architecture) pour tout
+                  autre projet ou client, sans restriction ;
                 </li>
                 <li>Illimitée dans le temps ;</li>
                 <li>
@@ -122,9 +122,9 @@ export default function CGVPage() {
               </ul>
               <p>
                 La licence ne couvre pas : la revente, la sous‑licence à des
-                tiers, ni la modification des briques logicielles propriétaires
-                du prestataire (frameworks, outils internes, bibliothèques
-                réutilisables).
+                tiers, la modification du code source en dehors du périmètre
+                défini au devis, ni l'extraction des briques logicielles pour
+                un usage indépendant du projet livré.
               </p>
               <p>
                 <strong>Effet de l'arrêt de la maintenance.</strong> En cas de
