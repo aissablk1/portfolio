@@ -308,7 +308,7 @@ const content = {
             "Rarement",
             "Variable",
             "Non applicable (N/A)",
-            "Licence d'usage non exclusive",
+            "Licence d'usage complète",
           ],
         },
       ],
@@ -368,7 +368,7 @@ const content = {
       },
       {
         q: "Est-ce que je suis propriétaire du code ?",
-        a: "Vous bénéficiez d\u2019une licence d\u2019utilisation non exclusive et illimitée dans le temps. Vous exploitez votre projet en toute liberté. La propriété intellectuelle reste au prestataire, ce qui garantit la maintenance et l\u2019évolution continue de vos outils.",
+        a: "Vous bénéficiez d\u2019une licence d\u2019usage complète et illimitée dans le temps. Vous exploitez votre projet en toute liberté. La propriété intellectuelle reste au prestataire, ce qui garantit la maintenance et l\u2019évolution continue de vos outils.",
       },
       {
         q: "Je peux gérer moi-même la maintenance ?",
@@ -687,7 +687,7 @@ const content = {
             "Rarely",
             "Variable",
             "Not Applicable (N/A)",
-            "Non-exclusive usage license",
+            "Comprehensive usage license",
           ],
         },
       ],
@@ -745,7 +745,7 @@ const content = {
       },
       {
         q: "Do I own the code?",
-        a: "You get a non-exclusive, unlimited usage license. You operate your project freely. Intellectual property remains with the provider, ensuring ongoing maintenance and evolution.",
+        a: "You get a comprehensive, unlimited usage license. You operate your project freely. Intellectual property remains with the provider, ensuring ongoing maintenance and evolution.",
       },
       {
         q: "Can I handle maintenance myself?",

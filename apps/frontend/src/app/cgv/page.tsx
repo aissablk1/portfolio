@@ -156,6 +156,20 @@ export default function CGVPage() {
                 compatibilité ou d'amélioration continue du service.
               </p>
               <p>
+                <strong>Collecte de données d'usage.</strong> Le prestataire se
+                réserve le droit de collecter des données d'usage anonymisées
+                issues du fonctionnement des systèmes livrés (statistiques de
+                fréquentation, performances techniques, comportements de
+                navigation, taux de conversion, données d'interaction). Ces
+                données, dépourvues de toute information personnelle
+                identifiable, sont utilisées à des fins d'amélioration continue
+                des services, d'optimisation des performances, de recherche et
+                développement, et de benchmark commercial. Le client est informé
+                de cette collecte et peut s'y opposer par demande écrite. Cette
+                collecte est conforme au RGPD et à la politique de
+                confidentialité accessible sur le site du prestataire.
+              </p>
+              <p>
                 Sauf opposition expresse du client, le prestataire est autorisé
                 à mentionner le nom et le logo du client ainsi qu'à présenter
                 le projet réalisé au titre de ses références commerciales

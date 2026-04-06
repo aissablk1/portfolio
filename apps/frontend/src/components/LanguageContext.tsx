@@ -527,7 +527,7 @@ const dictionaries: Record<Language, Dictionary> = {
           features: [
             "1 système livré clé en main (site, automation ou dashboard)",
             "Brief stratégique + maquette validée avant dev",
-            "Licence d'usage non exclusive",
+            "Licence d'usage complète",
             "Déploiement en production inclus",
             "3 mois de monitoring + support offerts",
             "Corrections de bugs sous 48h",
@@ -1254,7 +1254,7 @@ const dictionaries: Record<Language, Dictionary> = {
           features: [
             "1 turnkey system (website, automation or dashboard)",
             "Strategic brief + validated mockup",
-            "Non-exclusive usage license",
+            "Comprehensive usage license",
             "Production deployment included",
             "3 months monitoring + support included",
             "Bug fixes within 48h",

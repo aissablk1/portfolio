@@ -86,7 +86,7 @@ const content = {
       features: [
         "1 système livré (site, automation ou dashboard)",
         "Brief + maquette validée",
-        "Licence d'usage non exclusive",
+        "Licence d'usage complète",
         "Documentation technique renforcée",
         "Formation autonomie (2h)",
       ],
@@ -102,7 +102,7 @@ const content = {
       desc: "Votre système livré et maintenu. 3 mois de maintenance offerts — monitoring 24/7, bugs sous 48h, mises à jour sécurité. Vous ne touchez à rien.",
       features: [
         "1 système livré clé en main",
-        "Licence d'usage non exclusive",
+        "Licence d'usage complète",
         "3 mois monitoring + support offerts",
         "Corrections de bugs sous 48h",
         "Mises à jour sécurité continues",
@@ -292,7 +292,7 @@ const content = {
       features: [
         "1 delivered system (website, automation or dashboard)",
         "Brief + validated mockup",
-        "Non-exclusive usage license",
+        "Comprehensive usage license",
         "Enhanced technical documentation",
         "Autonomy training (2h)",
       ],
@@ -308,7 +308,7 @@ const content = {
       desc: "Your system delivered and maintained. 3 months of free maintenance — 24/7 monitoring, bugs fixed within 48h, security updates. You don't touch a thing.",
       features: [
         "1 turnkey delivered system",
-        "Non-exclusive usage license",
+        "Comprehensive usage license",
         "3 months monitoring + support included",
         "Bug fixes within 48h",
         "Continuous security updates",
