@@ -6,6 +6,9 @@ import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import ArticlePageClient from "@/components/blog/ArticlePageClient";
 
+export const revalidate = 3600;
+export const dynamicParams = true;
+
 export function generateStaticParams() {
   return getAllPosts().map((post) => ({ slug: post.slug }));
 }

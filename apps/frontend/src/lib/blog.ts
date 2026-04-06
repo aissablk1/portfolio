@@ -12,6 +12,7 @@ export interface BlogPost {
   title: string;
   description: string;
   date: string;
+  publishAt?: string;
   updatedAt?: string;
   author: string;
   tags: string[];
@@ -54,10 +55,17 @@ function getAllSlugs(): string[] {
   return Array.from(slugs);
 }
 
+function isScheduledForNow(data: Record<string, unknown>): boolean {
+  const publishAt = data.publishAt as string | undefined;
+  if (!publishAt) return true;
+  return new Date(publishAt) <= new Date();
+}
+
 function parsePost(slug: string, filePath: string): BlogPost | null {
   const raw = fs.readFileSync(filePath, "utf-8");
   const { data, content } = matter(raw);
   if (!data.published) return null;
+  if (!isScheduledForNow(data)) return null;
   return { slug, ...data, readingTime: readingTime(content).text, content } as BlogPost;
 }
 
