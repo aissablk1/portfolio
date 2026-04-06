@@ -10,15 +10,10 @@ export function generateStaticParams() {
   return getAllPosts().map((post) => ({ slug: post.slug }));
 }
 
-export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
-  const post = getPostBySlug(slug);
-  if (!post) notFound();
-  const related = getRelatedPosts(slug, post.tags);
-
-  const mdxContent = (
+function renderMdx(source: string) {
+  return (
     <MDXRemote
-      source={post.content}
+      source={source}
       options={{
         mdxOptions: {
           remarkPlugins: [remarkGfm],
@@ -27,6 +22,27 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       }}
     />
   );
+}
 
-  return <ArticlePageClient post={post} related={related}>{mdxContent}</ArticlePageClient>;
+export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+
+  const postFr = getPostBySlug(slug, "fr");
+  const postEn = getPostBySlug(slug, "en");
+
+  if (!postFr && !postEn) notFound();
+
+  const relatedFr = postFr ? getRelatedPosts(slug, postFr.tags, 3, "fr") : [];
+  const relatedEn = postEn ? getRelatedPosts(slug, postEn.tags, 3, "en") : [];
+
+  return (
+    <ArticlePageClient
+      postFr={postFr}
+      postEn={postEn}
+      relatedFr={relatedFr}
+      relatedEn={relatedEn}
+      mdxFr={postFr ? renderMdx(postFr.content) : null}
+      mdxEn={postEn ? renderMdx(postEn.content) : null}
+    />
+  );
 }

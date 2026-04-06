@@ -1,17 +1,21 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { motion, useSpring, useScroll } from "framer-motion";
+import { usePathname } from "next/navigation";
 
 export function ScrollIndicator() {
   const { scrollYProgress } = useScroll();
-  
+  const pathname = usePathname();
+
   // Use useSpring for smooth progress bar animation
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
     restDelta: 0.001
   });
+
+  // Hide on pages with dark/custom backgrounds
+  if (pathname === "/links") return null;
 
   return (
     <div

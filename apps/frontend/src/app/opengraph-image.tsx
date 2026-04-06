@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "Aissa Belkoussa — Sites et automatisations pour artisans et PME";
+export const alt = "Aïssa BELKOUSSA — Sites et automatisations pour artisans et PME";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -57,7 +57,7 @@ export default async function Image() {
             margin: "0 0 20px 0",
           }}
         >
-          Aissa Belkoussa
+          Aïssa BELKOUSSA
         </h1>
         <p
           style={{

@@ -5,7 +5,7 @@ import { legalPages, breadcrumbs } from "@/lib/schemas";
 export const metadata: Metadata = {
   title: "Conditions generales de vente",
   description:
-    "Conditions generales de vente des prestations d'Aissa Belkoussa — reglement, propriete intellectuelle, responsabilite, RGPD.",
+    "Conditions generales de vente des prestations d'Aïssa BELKOUSSA — reglement, propriete intellectuelle, responsabilite, RGPD.",
   robots: { index: true, follow: true },
   alternates: {
     canonical: "https://www.aissabelkoussa.fr/cgv",

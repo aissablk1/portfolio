@@ -18,7 +18,7 @@ const Footer = () => {
         </video>
         <ScrollVelocityContainer className="relative z-10 text-[14vw] leading-[0.8] font-display font-bold uppercase tracking-tighter text-white flex flex-col gap-0">
           <ScrollVelocityRow baseVelocity={3} direction={1}>
-            <span className="mr-[2vw]">Aïssa Belkoussa</span>
+            <span className="mr-[2vw]">Aïssa BELKOUSSA</span>
             <span className="mr-[2vw] opacity-50">&bull;</span>
             <span className="mr-[2vw]">{dict.footer.jobTitle}</span>
             <span className="mr-[2vw] opacity-50">&bull;</span>
@@ -61,13 +61,13 @@ const Footer = () => {
 
           <div className="grid grid-cols-2 md:grid-cols-3 gap-12 self-end">
               <div className="flex flex-col gap-4">
-                  <span className="text-xs font-bold uppercase tracking-widest text-site-text-light">Explore</span>
+                  <span className="text-xs font-bold uppercase tracking-widest text-site-text-light">{dict.footer.explore}</span>
                   <Link href="/#offers" className="text-sm hover:underline">{dict.nav.offers}</Link>
                   <Link href="/#approach" className="text-sm hover:underline">{dict.nav.approach}</Link>
                   <Link href="/#expertise" className="text-sm hover:underline">{dict.nav.expertise}</Link>
               </div>
               <div className="flex flex-col gap-4">
-                  <span className="text-xs font-bold uppercase tracking-widest text-site-text-light">Architecture</span>
+                  <span className="text-xs font-bold uppercase tracking-widest text-site-text-light">{dict.footer.architecture}</span>
                   <Link href="/#systems" className="text-sm hover:underline">{dict.nav.systems}</Link>
                   <Link href="/services" className="text-sm hover:underline">{dict.nav.services}</Link>
                   <Link href="/diagnostic" className="text-sm hover:underline">{dict.ui.diagnosticFree}</Link>
@@ -75,7 +75,7 @@ const Footer = () => {
                   <Link href="/contact" className="text-sm hover:underline">{dict.nav.contact}</Link>
               </div>
               <div className="flex flex-col gap-4 col-span-2 md:col-span-1">
-                  <span className="text-xs font-bold uppercase tracking-widest text-site-text-light">Legal</span>
+                  <span className="text-xs font-bold uppercase tracking-widest text-site-text-light">{dict.footer.legal}</span>
                   <Link href="/mentions-legales" className="text-sm hover:underline">{dict.footer.legalNotice}</Link>
                   <Link href="/confidentialite" className="text-sm hover:underline">{dict.footer.privacyPolicy}</Link>
                   <Link href="/cgu" className="text-sm hover:underline">{dict.footer.termsOfService}</Link>

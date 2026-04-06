@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     canonical: `${siteUrl}/services`,
   },
   openGraph: {
-    title: "Tarifs & Services — Aissa Belkoussa",
+    title: "Tarifs & Services — Aïssa BELKOUSSA",
     description:
       "Votre systeme digital concu, livre et maintenu. 3 mois de maintenance offerts. A partir de 2 900 EUR.",
     url: `${siteUrl}/services`,

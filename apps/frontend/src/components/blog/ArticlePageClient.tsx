@@ -21,28 +21,26 @@ interface BlogPost {
 }
 
 export default function ArticlePageClient({
-  post,
-  related,
-  children,
+  postFr,
+  postEn,
+  relatedFr,
+  relatedEn,
+  mdxFr,
+  mdxEn,
 }: {
-  post: BlogPost;
-  related: Omit<BlogPost, "content">[];
-  children: React.ReactNode;
+  postFr: BlogPost | null;
+  postEn: BlogPost | null;
+  relatedFr: Omit<BlogPost, "content">[];
+  relatedEn: Omit<BlogPost, "content">[];
+  mdxFr: React.ReactNode;
+  mdxEn: React.ReactNode;
 }) {
-  const { language } = useLanguage();
-  const t = {
-    backToBlog: language === "fr" ? "Retour au blog" : "Back to blog",
-    helpful:
-      language === "fr"
-        ? "Cet article t'a été utile ?"
-        : "Was this article helpful?",
-    share:
-      language === "fr"
-        ? "Partage-le avec un artisan ou un entrepreneur qui en a besoin."
-        : "Share it with a tradesperson or entrepreneur who needs it.",
-    viewOffers: language === "fr" ? "Voir les offres" : "View offers",
-    relatedArticles: language === "fr" ? "Articles liés" : "Related articles",
-  };
+  const { language, dict } = useLanguage();
+
+  // Pick the right version, fallback to FR
+  const post = (language === "en" && postEn ? postEn : postFr)!;
+  const related = language === "en" && postEn ? relatedEn : relatedFr;
+  const mdxContent = language === "en" && mdxEn ? mdxEn : mdxFr;
   const dateLocale = language === "fr" ? "fr-FR" : "en-GB";
 
   return (
@@ -55,7 +53,7 @@ export default function ArticlePageClient({
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mb-12">
               <Link href="/blog" className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-site-text-light hover:text-site-accent transition-colors">
                 <ArrowLeft size={14} />
-                {t.backToBlog}
+                {dict.article.backToBlog}
               </Link>
             </motion.div>
 
@@ -115,21 +113,21 @@ export default function ArticlePageClient({
                 prose-code:bg-site-border/50 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-[12px] prose-code:font-mono
               "
             >
-              {children}
+              {mdxContent}
             </motion.div>
 
             {/* Share + CTA */}
             <div className="mt-16 pt-8 border-t border-site-border">
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
                 <div>
-                  <p className="text-sm font-bold mb-1">{t.helpful}</p>
-                  <p className="text-xs text-site-text-light">{t.share}</p>
+                  <p className="text-sm font-bold mb-1">{dict.article.helpful}</p>
+                  <p className="text-xs text-site-text-light">{dict.article.share}</p>
                 </div>
                 <Link
                   href="/services"
                   className="inline-flex items-center gap-2 bg-site-accent text-white px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest hover:scale-105 transition-transform shrink-0"
                 >
-                  {t.viewOffers}
+                  {dict.article.viewOffers}
                   <ArrowUpRight size={14} />
                 </Link>
               </div>
@@ -138,7 +136,7 @@ export default function ArticlePageClient({
             {/* Related articles */}
             {related.length > 0 && (
               <div className="mt-16">
-                <h3 className="text-xs font-bold uppercase tracking-widest text-site-text-light mb-6">{t.relatedArticles}</h3>
+                <h3 className="text-xs font-bold uppercase tracking-widest text-site-text-light mb-6">{dict.article.relatedArticles}</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                   {related.map((r) => (
                     <Link

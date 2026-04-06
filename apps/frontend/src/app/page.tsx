@@ -35,7 +35,7 @@ export default function Home() {
           <Expertises />
           <SocialProof />
           <PricingTeaser />
-          {/* <Systems /> */}
+          <Systems />
           <About />
           <Contact />
         </main>

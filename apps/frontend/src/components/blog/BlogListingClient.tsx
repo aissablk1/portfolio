@@ -19,29 +19,9 @@ interface BlogPost {
   featured: boolean;
 }
 
-export default function BlogListingClient({ posts }: { posts: BlogPost[] }) {
-  const { language } = useLanguage();
-  const t = {
-    badge: "Blog",
-    title:
-      language === "fr"
-        ? "Articles experts : IA, automatisation et sites web pour PME"
-        : "Expert articles: AI, automation & websites for SMBs",
-    subtitle:
-      language === "fr"
-        ? "Guides pratiques, études de cas et retours d'expérience pour les artisans BTP et prestataires B2B qui veulent se digitaliser."
-        : "Practical guides, case studies and real-world feedback for tradespeople and B2B providers looking to go digital.",
-    empty:
-      language === "fr"
-        ? "Aucun article publié pour le moment. Revenez bientôt."
-        : "No articles published yet. Check back soon.",
-    featured: language === "fr" ? "À la une" : "Featured",
-    cta:
-      language === "fr"
-        ? "Tu veux un système qui tourne pour toi ?"
-        : "Want a system that runs for you?",
-    viewOffers: language === "fr" ? "Voir les offres" : "View offers",
-  };
+export default function BlogListingClient({ postsFr, postsEn }: { postsFr: BlogPost[]; postsEn: BlogPost[] }) {
+  const { language, dict } = useLanguage();
+  const posts = language === "en" ? postsEn : postsFr;
   const dateLocale = language === "fr" ? "fr-FR" : "en-GB";
 
   return (
@@ -59,22 +39,22 @@ export default function BlogListingClient({ posts }: { posts: BlogPost[] }) {
             >
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-2 h-2 rounded-full bg-site-accent" />
-                <span className="text-xs font-bold uppercase tracking-widest text-site-accent">{t.badge}</span>
+                <span className="text-xs font-bold uppercase tracking-widest text-site-accent">{dict.blog.badge}</span>
               </div>
               <h1
                 style={{ fontSize: "clamp(1.75rem, 4vw, 3rem)", lineHeight: 1.05 }}
                 className="font-display font-medium tracking-tighter uppercase max-w-3xl"
               >
-                {t.title}
+                {dict.blog.title}
               </h1>
               <p className="text-site-text-light mt-4 max-w-xl text-sm">
-                {t.subtitle}
+                {dict.blog.subtitle}
               </p>
             </motion.div>
 
             {/* Posts grid */}
             {posts.length === 0 ? (
-              <p className="text-site-text-light text-sm">{t.empty}</p>
+              <p className="text-site-text-light text-sm">{dict.blog.empty}</p>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {posts.map((post, idx) => (
@@ -90,7 +70,7 @@ export default function BlogListingClient({ posts }: { posts: BlogPost[] }) {
                     >
                       {post.featured && (
                         <span className="text-[8px] font-bold uppercase tracking-widest text-site-accent bg-site-accent/10 px-2 py-0.5 rounded-full mb-4 inline-block">
-                          {t.featured}
+                          {dict.blog.featured}
                         </span>
                       )}
                       <h2 className="text-lg font-display font-medium tracking-tight mb-3 group-hover:text-site-accent transition-colors">
@@ -129,12 +109,12 @@ export default function BlogListingClient({ posts }: { posts: BlogPost[] }) {
               transition={{ delay: 0.5 }}
               className="mt-16 text-center"
             >
-              <p className="text-sm text-site-text-light mb-4">{t.cta}</p>
+              <p className="text-sm text-site-text-light mb-4">{dict.blog.cta}</p>
               <Link
                 href="/services"
                 className="inline-flex items-center gap-2 bg-site-accent text-white px-8 py-4 rounded-full text-xs font-bold uppercase tracking-widest hover:scale-105 transition-transform"
               >
-                {t.viewOffers}
+                {dict.blog.viewOffers}
                 <ArrowUpRight size={14} />
               </Link>
             </motion.div>

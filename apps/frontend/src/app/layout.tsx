@@ -27,7 +27,7 @@ const outfit = Outfit({
 });
 
 const siteUrl = "https://www.aissabelkoussa.fr";
-const siteTitle = "Sites web artisans BTP & automatisation PME — Aissa Belkoussa";
+const siteTitle = "Sites web artisans BTP & automatisation PME — Aïssa BELKOUSSA";
 const siteDescription =
   "Freelance creation site internet a Albi. Sites pour artisans BTP, automatisation devis et relances, dashboards PME. Livre en 10 jours, prix fixe. Devis gratuit.";
 
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
 
   title: {
     default: siteTitle,
-    template: "%s — Aïssa Belkoussa",
+    template: "%s — Aïssa BELKOUSSA",
   },
 
   description: siteDescription,
@@ -65,9 +65,9 @@ export const metadata: Metadata = {
     "site internet electricien",
   ],
 
-  authors: [{ name: "Aïssa Belkoussa", url: siteUrl }],
-  creator: "Aïssa Belkoussa",
-  publisher: "Aïssa Belkoussa",
+  authors: [{ name: "Aïssa BELKOUSSA", url: siteUrl }],
+  creator: "Aïssa BELKOUSSA",
+  publisher: "Aïssa BELKOUSSA",
 
   alternates: {
     canonical: siteUrl,
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "fr_FR",
     url: siteUrl,
-    siteName: "Aïssa Belkoussa",
+    siteName: "Aïssa BELKOUSSA",
     title: siteTitle,
     description: siteDescription,
     images: [
@@ -85,7 +85,7 @@ export const metadata: Metadata = {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "Aissa Belkoussa — Sites et automatisations pour artisans et PME, Albi",
+        alt: "Aïssa BELKOUSSA — Sites et automatisations pour artisans et PME, Albi",
       },
     ],
   },

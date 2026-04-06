@@ -17,7 +17,7 @@ export default function MentionsLegalesPage() {
                 Le site <strong>aissabelkoussa.fr</strong> est édité par :
               </p>
               <p>
-                <strong>Aïssa Belkoussa</strong>
+                <strong>Aïssa BELKOUSSA</strong>
                 <br />
                 Entrepreneur individuel (micro-entreprise)
                 <br />
@@ -45,7 +45,7 @@ export default function MentionsLegalesPage() {
           title: "Directeur de la publication",
           content: (
             <p>
-              Le directeur de la publication est <strong>Aïssa Belkoussa</strong>
+              Le directeur de la publication est <strong>Aïssa BELKOUSSA</strong>
               , en sa qualité d'éditeur du site.
             </p>
           ),
@@ -111,13 +111,13 @@ export default function MentionsLegalesPage() {
                 L'ensemble du contenu du site (textes, images, code source,
                 maquettes, logos, animations, vidéos, architecture) est protégé
                 par le droit de la propriété intellectuelle et demeure la
-                propriété exclusive d'Aïssa Belkoussa, sauf mention contraire.
+                propriété exclusive d'Aïssa BELKOUSSA, sauf mention contraire.
               </p>
               <p>
                 Toute reproduction, représentation, modification, publication,
                 adaptation de tout ou partie des éléments du site, quel que soit
                 le moyen ou le procédé utilisé, est interdite sans
-                l'autorisation écrite préalable d'Aïssa Belkoussa.
+                l'autorisation écrite préalable d'Aïssa BELKOUSSA.
               </p>
               <p>
                 Toute exploitation non autorisée du site ou de l'un quelconque

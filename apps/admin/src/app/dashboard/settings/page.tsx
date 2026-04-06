@@ -461,7 +461,7 @@ export default function SettingsPage() {
               label="Nom d'affichage"
               value={displayName}
               onChange={setDisplayName}
-              placeholder="Aissa Belkoussa"
+              placeholder="Aïssa BELKOUSSA"
             />
             <InputField
               label="URL de l'avatar"

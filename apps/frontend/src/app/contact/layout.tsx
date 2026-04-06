@@ -7,12 +7,12 @@ const siteUrl = "https://www.aissabelkoussa.fr";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Initier un projet avec Aissa Belkoussa. 30 minutes suffisent pour cadrer votre besoin. Architecture de systemes, automation, IA. Gratuit, zero engagement.",
+    "Initier un projet avec Aïssa BELKOUSSA. 30 minutes suffisent pour cadrer votre besoin. Architecture de systemes, automation, IA. Gratuit, zero engagement.",
   alternates: {
     canonical: `${siteUrl}/contact`,
   },
   openGraph: {
-    title: "Contact — Aissa Belkoussa",
+    title: "Contact — Aïssa BELKOUSSA",
     description:
       "Construisons votre futur systeme. Architecture, automation, IA — 30 minutes pour cadrer votre projet.",
     url: `${siteUrl}/contact`,

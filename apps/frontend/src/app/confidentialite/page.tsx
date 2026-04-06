@@ -15,7 +15,7 @@ export default function ConfidentialitePage() {
             <>
               <p>Le responsable du traitement des données personnelles est :</p>
               <p>
-                <strong>Aïssa Belkoussa</strong>
+                <strong>Aïssa BELKOUSSA</strong>
                 <br />
                 Entrepreneur individuel (micro-entreprise)
                 <br />

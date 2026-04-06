@@ -44,7 +44,7 @@ export default function GlassButtonPreview() {
           </h2>
           <div className="flex flex-wrap gap-4 items-center">
             <GlassButton size="xs">XS – Aïssa</GlassButton>
-            <GlassButton size="sm">SM – Aïssa Belkoussa</GlassButton>
+            <GlassButton size="sm">SM – Aïssa BELKOUSSA</GlassButton>
             <GlassButton size="md">MD – Glass Button</GlassButton>
             <GlassButton size="lg">LG – Call To Action</GlassButton>
           </div>
@@ -62,7 +62,7 @@ export default function GlassButtonPreview() {
                 Default
               </p>
               <GlassButton size="md">
-                Aïssa Belkoussa – Portfolio
+                Aïssa BELKOUSSA – Portfolio
               </GlassButton>
             </div>
 

@@ -59,12 +59,13 @@ const content = {
           title: "Sites & Conversion",
           badge: null,
           subtitle:
-            "Un site professionnel optimisé génère 3 à 5× plus de leads qu'un site vitrine classique. Voici les leviers de conversion que j'intègre.",
+            "Un site professionnel optimisé génère 3 à 5× plus de leads qu'un site vitrine classique. En 2026, vos clients cherchent aussi sur ChatGPT et Perplexity — je construis des sites visibles partout.",
           items: [
             "Site professionnel haute performance",
             "Landing pages optimisées",
             "Tunnels de conversion",
-            "SEO local",
+            "SEO local + GEO (visibilité Google & IA)",
+            "Données structurées Schema.org",
             "Formulaires intelligents",
           ],
         },
@@ -260,7 +261,7 @@ const content = {
         "Agence web",
         "Freelance low-cost",
         "SaaS (Axonaut, etc.)",
-        "Aissa Belkoussa",
+        "Aïssa BELKOUSSA",
       ],
       rows: [
         {
@@ -288,6 +289,10 @@ const content = {
         {
           label: "IA intégrée",
           values: ["Rarement", "Non", "Basique", "Sur-mesure"],
+        },
+        {
+          label: "Visibilité IA (GEO)",
+          values: ["Non", "Non", "Non", "Inclus"],
         },
         {
           label: "Formation incluse",
@@ -439,12 +444,13 @@ const content = {
           title: "Sites & Conversion",
           badge: null,
           subtitle:
-            "The interfaces that turn visitors into customers",
+            "The interfaces that turn visitors into customers — on Google and in AI responses",
           items: [
             "High-performance professional website",
             "Optimized landing pages",
             "Conversion tunnels",
-            "Local SEO",
+            "Local SEO + GEO (Google & AI visibility)",
+            "Schema.org structured data",
             "Smart forms",
           ],
         },
@@ -634,7 +640,7 @@ const content = {
         "Web agency",
         "Low-cost freelancer",
         "SaaS (Axonaut, etc.)",
-        "Aissa Belkoussa",
+        "Aïssa BELKOUSSA",
       ],
       rows: [
         {
@@ -662,6 +668,10 @@ const content = {
         {
           label: "AI built-in",
           values: ["Rarely", "No", "Basic", "Custom"],
+        },
+        {
+          label: "AI visibility (GEO)",
+          values: ["No", "No", "No", "Included"],
         },
         {
           label: "Training included",

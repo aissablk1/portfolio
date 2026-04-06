@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     canonical: `${siteUrl}/go`,
   },
   openGraph: {
-    title: "Votre systeme devrait deja tourner — Aissa Belkoussa",
+    title: "Votre systeme devrait deja tourner — Aïssa BELKOUSSA",
     description:
       "Sites, automatisations IA, dashboards — livres en 5-10 jours avec 3 mois de maintenance inclus. A partir de 2 900 EUR.",
     url: `${siteUrl}/go`,

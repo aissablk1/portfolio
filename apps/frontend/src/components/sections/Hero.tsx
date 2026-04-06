@@ -120,7 +120,7 @@ const Hero = () => {
               }}
               className="text-[10px] font-bold uppercase tracking-[0.2em] select-none"
             >
-              Scroll ⭣
+              {dict.hero.scroll}
             </motion.span>
           ))}
           

@@ -17,7 +17,7 @@ export default function CGUPage() {
               pour objet de définir les modalités d&apos;accès et
               d&apos;utilisation du site internet{" "}
               <strong>aissabelkoussa.fr</strong> (ci-après « le Site »), édité
-              par Aïssa Belkoussa. L&apos;accès et l&apos;utilisation du Site
+              par Aïssa BELKOUSSA. L&apos;accès et l&apos;utilisation du Site
               impliquent l&apos;acceptation pleine et entière des présentes CGU.
             </p>
           ),
@@ -147,7 +147,7 @@ export default function CGUPage() {
                 vidéos, code source, maquettes, logos, animations, architecture,
                 design) sont protégés par le droit de la propriété
                 intellectuelle et restent la propriété exclusive d&apos;Aïssa
-                Belkoussa, sauf mention contraire.
+                BELKOUSSA, sauf mention contraire.
               </p>
               <p>
                 Toute reproduction, représentation, modification, distribution

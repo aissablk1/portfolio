@@ -50,7 +50,7 @@ const Offers = () => {
                   </p>
                 </div>
                 <div className="mt-12 flex items-center gap-2 text-xs font-bold uppercase tracking-widest opacity-40 group-hover:opacity-100 group-hover:text-site-accent transition-all">
-                  Initier <ArrowUpRight size={14} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                  {dict.offers.initiate} <ArrowUpRight size={14} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                 </div>
               </Link>
             </motion.div>

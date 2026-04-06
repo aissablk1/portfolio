@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Script from "next/script";
 import { ArrowUpRight, Calendar } from "lucide-react";
+import { useLanguage } from "./LanguageContext";
 
 const CALENDLY_URL =
   "https://calendly.com/aissabelkoussa/30min?hide_event_type_details=1&hide_gdpr_banner=1";
@@ -10,6 +11,7 @@ const CALENDLY_LINK = "https://calendly.com/aissabelkoussa/30min";
 
 const CalendlyWidget = () => {
   const [blocked, setBlocked] = useState(false);
+  const { dict } = useLanguage();
 
   useEffect(() => {
     // Check after 4s if Calendly widget loaded — if not, it's blocked
@@ -33,7 +35,7 @@ const CalendlyWidget = () => {
           <div
             className="calendly-inline-widget w-full rounded-2xl overflow-hidden"
             data-url={CALENDLY_URL}
-            title="Réserver un appel découverte — Calendly"
+            title={dict.calendly.title}
             style={{ minWidth: 320, width: "100%", height: 750 }}
           />
         </>
@@ -47,10 +49,10 @@ const CalendlyWidget = () => {
           </div>
           <div className="text-center">
             <h3 className="text-xl font-display font-medium tracking-tight mb-2">
-              Réserver un appel découverte
+              {dict.calendly.fallbackTitle}
             </h3>
             <p className="text-sm text-site-text-light max-w-md">
-              30 minutes pour cadrer votre projet. Gratuit, zéro engagement.
+              {dict.calendly.fallbackDesc}
             </p>
           </div>
           <a
@@ -59,7 +61,7 @@ const CalendlyWidget = () => {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-3 bg-site-accent text-white px-10 py-5 rounded-full text-xs font-bold uppercase tracking-widest hover:scale-105 transition-all shadow-lg"
           >
-            Choisir un créneau
+            {dict.calendly.fallbackCta}
             <ArrowUpRight size={14} />
           </a>
         </div>

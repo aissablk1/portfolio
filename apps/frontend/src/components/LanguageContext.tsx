@@ -91,9 +91,11 @@ interface Dictionary {
     subtitle: string;
     ctaPrimary: string;
     ctaSecondary: string;
+    scroll: string;
   };
   offers: {
     title: string;
+    initiate: string;
     pillar1Props: { title: string; sub: string };
     pillar2Props: { title: string; sub: string };
     pillar3Props: { title: string; sub: string };
@@ -129,6 +131,21 @@ interface Dictionary {
   systems: {
     title: string;
     intro: string;
+    backLink: string;
+    notFound: string;
+    backToBase: string;
+    category: string;
+    categoryValue: string;
+    year: string;
+    status: string;
+    deployed: string;
+    intelligence: string;
+    architectureLabel: string;
+    architectureDesc: string;
+    innovationLabel: string;
+    innovationDesc: string;
+    startCta: string;
+    startCtaButton: string;
     items: Array<{
       id: string;
       slug: string;
@@ -164,6 +181,9 @@ interface Dictionary {
     privacyPolicy: string;
     termsOfService: string;
     termsAndConditions: string;
+    explore: string;
+    architecture: string;
+    legal: string;
   };
   funnel: {
     steps: {
@@ -358,6 +378,55 @@ interface Dictionary {
     menuClose: string;
     learnMore: string;
     viewPricing: string;
+    redirecting: string;
+  };
+  checkout: {
+    verifying: string;
+    confirmed: string;
+    thanks: string;
+    confirmedDesc: string;
+    thanksDesc: string;
+    planKickoff: string;
+    backHome: string;
+    reassurance: string;
+  };
+  calendly: {
+    title: string;
+    fallbackTitle: string;
+    fallbackDesc: string;
+    fallbackCta: string;
+  };
+  blog: {
+    badge: string;
+    title: string;
+    subtitle: string;
+    empty: string;
+    featured: string;
+    cta: string;
+    viewOffers: string;
+  };
+  article: {
+    backToBlog: string;
+    helpful: string;
+    share: string;
+    viewOffers: string;
+    relatedArticles: string;
+  };
+  links: {
+    subtitle: string;
+    portfolio: string;
+    portfolioDesc: string;
+    pricing: string;
+    pricingDesc: string;
+    diagnostic: string;
+    diagnosticDesc: string;
+    contact: string;
+    contactDesc: string;
+    whatsapp: string;
+    whatsappDesc: string;
+    blog: string;
+    blogDesc: string;
+    available: string;
   };
   availabilityBanner: {
     months: string[];
@@ -517,7 +586,7 @@ const dictionaries: Record<Language, Dictionary> = {
         badge: "Pourquoi moi",
         title: "Agence, freelance Fiverr,\nou builder pro ?",
         subtitle: "Comparez objectivement avant de choisir.",
-        columns: ["Critère", "Agence web", "Freelance low-cost", "Aïssa Belkoussa"],
+        columns: ["Critère", "Agence web", "Freelance low-cost", "Aïssa BELKOUSSA"],
         rows: [
           { label: "Délai de livraison", values: ["2 à 4 mois", "2 à 6 semaines", "5 à 10 jours"] },
           { label: "Prix moyen", values: ["8 000 – 25 000 €", "500 – 2 000 €", "2 900 €"] },
@@ -603,12 +672,14 @@ const dictionaries: Record<Language, Dictionary> = {
       subtitle: "Sites professionnels, chatbots IA, workflows automatisés, dashboards — prix fixe, livraison en 5 à 10 jours, 3 mois de maintenance offerts. Basé à Albi, France.",
       ctaPrimary: "Initier un projet",
       ctaSecondary: "Voir les systèmes",
+      scroll: "Scroll ⭣",
     },
     offers: {
       title: "3 piliers : automatisation, interface de conversion, pilotage data",
-      pillar1Props: { 
-        title: "De l'intuition au système autonome", 
-        sub: "Vous avez une idée de ce qui pourrait tourner tout seul. Je la structure, je l'architecture, je la déploie. Workflows, automatisations, infrastructures — sans la complexité inutile." 
+      initiate: "Initier",
+      pillar1Props: {
+        title: "De l'intuition au système autonome",
+        sub: "Vous avez une idée de ce qui pourrait tourner tout seul. Je la structure, je l'architecture, je la déploie. Workflows, automatisations, infrastructures — sans la complexité inutile."
       },
       pillar2Props: { 
         title: "Une interface qui reflète ce que vous avez construit", 
@@ -721,6 +792,21 @@ const dictionaries: Record<Language, Dictionary> = {
     systems: {
       title: "Systèmes construits, pas promis",
       intro: "Ce n'est pas ce que je pourrais faire. C'est ce que j'ai fait.",
+      backLink: "Retour aux systèmes",
+      notFound: "Système introuvable.",
+      backToBase: "Retour à la base",
+      category: "Catégorie",
+      categoryValue: "Architecture système",
+      year: "Année",
+      status: "Statut",
+      deployed: "Déployé",
+      intelligence: "Intelligence\nsystème",
+      architectureLabel: "Architecture",
+      architectureDesc: "Approche micro-services avec pipelines de déploiement automatisés et observabilité en temps réel.",
+      innovationLabel: "Innovation",
+      innovationDesc: "Agents IA intégrés pour l'optimisation des workflows et l'automatisation des processus décisionnels.",
+      startCta: "Démarrer un système\ncomme celui-ci ?",
+      startCtaButton: "Initier un projet",
       items: [
         {
           id: "dk-building",
@@ -781,6 +867,9 @@ const dictionaries: Record<Language, Dictionary> = {
       privacyPolicy: "Politique de confidentialité",
       termsOfService: "Conditions générales d'utilisation",
       termsAndConditions: "Conditions générales de vente",
+      explore: "Explorer",
+      architecture: "Architecture",
+      legal: "Légal",
     },
     funnel: {
       steps: {
@@ -961,7 +1050,7 @@ const dictionaries: Record<Language, Dictionary> = {
       ownership: {
         title: "Propriété du domaine",
         domain: "aissabelkoussa.fr",
-        holder: "Aïssa Belkoussa (personne physique)",
+        holder: "Aïssa BELKOUSSA (personne physique)",
         registrar: "OVHcloud (Roubaix, France)",
         createdOn: "2025",
         dns: "OVHcloud — CNAME vers Vercel (f1f0ec239b0fc4a4.vercel-dns-017.com)",
@@ -1017,6 +1106,55 @@ const dictionaries: Record<Language, Dictionary> = {
       menuClose: "Fermer le menu",
       learnMore: "En savoir +",
       viewPricing: "Voir les tarifs",
+      redirecting: "Redirection...",
+    },
+    checkout: {
+      verifying: "Vérification du paiement...",
+      confirmed: "Paiement confirmé",
+      thanks: "Merci",
+      confirmedDesc: "Votre commande a été enregistrée. Vous recevrez un email de confirmation sous quelques minutes.",
+      thanksDesc: "Merci pour votre confiance. Si le paiement est en cours de traitement, vous recevrez une confirmation par email.",
+      planKickoff: "Planifier le kick-off",
+      backHome: "Retour à l'accueil",
+      reassurance: "Facture envoyée par email \u2022 Support disponible 7j/7",
+    },
+    calendly: {
+      title: "Réserver un appel découverte — Calendly",
+      fallbackTitle: "Réserver un appel découverte",
+      fallbackDesc: "30 minutes pour cadrer votre projet. Gratuit, zéro engagement.",
+      fallbackCta: "Choisir un créneau",
+    },
+    blog: {
+      badge: "Blog",
+      title: "Articles experts : IA, automatisation et sites web pour PME",
+      subtitle: "Guides pratiques, études de cas et retours d'expérience pour les artisans BTP et prestataires B2B qui veulent se digitaliser.",
+      empty: "Aucun article publié pour le moment. Revenez bientôt.",
+      featured: "À la une",
+      cta: "Tu veux un système qui tourne pour toi ?",
+      viewOffers: "Voir les offres",
+    },
+    article: {
+      backToBlog: "Retour au blog",
+      helpful: "Cet article t'a été utile ?",
+      share: "Partage-le avec un artisan ou un entrepreneur qui en a besoin.",
+      viewOffers: "Voir les offres",
+      relatedArticles: "Articles liés",
+    },
+    links: {
+      subtitle: "Architecte de systèmes digitaux — Albi, France",
+      portfolio: "Portfolio & Systèmes",
+      portfolioDesc: "Voir mes réalisations et mon approche",
+      pricing: "Tarifs & Plans",
+      pricingDesc: "Autonome · Accélérateur · Partenaire",
+      diagnostic: "Diagnostic gratuit",
+      diagnosticDesc: "Testez votre maturité digitale en 2 min",
+      contact: "Prendre contact",
+      contactDesc: "Recevoir ma proposition en 48h",
+      whatsapp: "WhatsApp",
+      whatsappDesc: "Réponse en quelques heures",
+      blog: "Blog",
+      blogDesc: "Articles experts IA & automatisation",
+      available: "Disponible pour nouveaux projets",
     },
     availabilityBanner: {
       months: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
@@ -1175,7 +1313,7 @@ const dictionaries: Record<Language, Dictionary> = {
         badge: "Why me",
         title: "Agency, cheap freelancer,\nor pro builder?",
         subtitle: "Compare objectively before choosing.",
-        columns: ["Criteria", "Web agency", "Low-cost freelancer", "Aïssa Belkoussa"],
+        columns: ["Criteria", "Web agency", "Low-cost freelancer", "Aïssa BELKOUSSA"],
         rows: [
           { label: "Delivery time", values: ["2 to 4 months", "2 to 6 weeks", "5 to 10 days"] },
           { label: "Average price", values: ["€8,000 – €25,000", "€500 – €2,000", "€2,900"] },
@@ -1261,9 +1399,11 @@ const dictionaries: Record<Language, Dictionary> = {
       subtitle: "I transform your system intuitions into concrete, coherent, and reliable digital architectures — from a fuzzy idea to a system that runs in the background.",
       ctaPrimary: "Initialize a project",
       ctaSecondary: "View systems",
+      scroll: "Scroll ⭣",
     },
     offers: {
       title: "What I build for you",
+      initiate: "Explore",
       pillar1Props: { 
         title: "From intuition to autonomous system", 
         sub: "You have an idea of what could run on its own. I structure it, architect it, and deploy it. Workflows, automations, infrastructures — without unnecessary complexity." 
@@ -1379,6 +1519,21 @@ const dictionaries: Record<Language, Dictionary> = {
     systems: {
       title: "Built systems, not promises",
       intro: "It's not what I could do. It's what I have done.",
+      backLink: "Back to systems",
+      notFound: "System not found.",
+      backToBase: "Back to base",
+      category: "Category",
+      categoryValue: "System Architecture",
+      year: "Year",
+      status: "Status",
+      deployed: "Deployed",
+      intelligence: "System\nIntelligence",
+      architectureLabel: "Architecture",
+      architectureDesc: "Micro-services approach with automated deployment pipelines and real-time observability.",
+      innovationLabel: "Innovation",
+      innovationDesc: "Integrated AI agents for workflow optimization and automated decision-making processes.",
+      startCta: "Start a system\nlike this?",
+      startCtaButton: "Initialize a project",
       items: [
         {
           id: "dk-building",
@@ -1439,6 +1594,9 @@ const dictionaries: Record<Language, Dictionary> = {
       privacyPolicy: "Privacy policy",
       termsOfService: "Terms of service",
       termsAndConditions: "Terms and conditions",
+      explore: "Explore",
+      architecture: "Architecture",
+      legal: "Legal",
     },
     funnel: {
       steps: {
@@ -1619,7 +1777,7 @@ const dictionaries: Record<Language, Dictionary> = {
       ownership: {
         title: "Domain ownership",
         domain: "aissabelkoussa.fr",
-        holder: "Aïssa Belkoussa (individual)",
+        holder: "Aïssa BELKOUSSA (individual)",
         registrar: "OVHcloud (Roubaix, France)",
         createdOn: "2025",
         dns: "OVHcloud — CNAME to Vercel (f1f0ec239b0fc4a4.vercel-dns-017.com)",
@@ -1675,6 +1833,55 @@ const dictionaries: Record<Language, Dictionary> = {
       menuClose: "Close menu",
       learnMore: "Learn more +",
       viewPricing: "View pricing",
+      redirecting: "Redirecting...",
+    },
+    checkout: {
+      verifying: "Verifying payment...",
+      confirmed: "Payment confirmed",
+      thanks: "Thank you",
+      confirmedDesc: "Your order has been registered. You will receive a confirmation email within a few minutes.",
+      thanksDesc: "Thank you for your trust. If the payment is being processed, you will receive a confirmation by email.",
+      planKickoff: "Schedule the kick-off",
+      backHome: "Back to home",
+      reassurance: "Invoice sent by email \u2022 Support available 7/7",
+    },
+    calendly: {
+      title: "Book a discovery call — Calendly",
+      fallbackTitle: "Book a discovery call",
+      fallbackDesc: "30 minutes to scope your project. Free, zero commitment.",
+      fallbackCta: "Choose a slot",
+    },
+    blog: {
+      badge: "Blog",
+      title: "Expert articles: AI, automation & websites for SMBs",
+      subtitle: "Practical guides, case studies and real-world feedback for tradespeople and B2B providers looking to go digital.",
+      empty: "No articles published yet. Check back soon.",
+      featured: "Featured",
+      cta: "Want a system that runs for you?",
+      viewOffers: "View offers",
+    },
+    article: {
+      backToBlog: "Back to blog",
+      helpful: "Was this article helpful?",
+      share: "Share it with a tradesperson or entrepreneur who needs it.",
+      viewOffers: "View offers",
+      relatedArticles: "Related articles",
+    },
+    links: {
+      subtitle: "Digital systems architect — Albi, France",
+      portfolio: "Portfolio & Systems",
+      portfolioDesc: "See my work and approach",
+      pricing: "Pricing & Plans",
+      pricingDesc: "Standalone · Accelerator · Partner",
+      diagnostic: "Free diagnostic",
+      diagnosticDesc: "Test your digital maturity in 2 min",
+      contact: "Get in touch",
+      contactDesc: "Receive my proposal within 48h",
+      whatsapp: "WhatsApp",
+      whatsappDesc: "Response within a few hours",
+      blog: "Blog",
+      blogDesc: "Expert articles on AI & automation",
+      available: "Available for new projects",
     },
     availabilityBanner: {
       months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],

@@ -21,9 +21,9 @@ const ProjectPage = () => {
       <div className="min-h-screen flex items-center justify-center p-8 text-center">
         <div>
           <h1 className="text-4xl font-bold mb-4">404</h1>
-          <p className="mb-8">System not found.</p>
+          <p className="mb-8">{dict.systems.notFound}</p>
           <Link href="/" className="text-site-accent font-bold uppercase tracking-widest text-xs">
-            Back to Base
+            {dict.systems.backToBase}
           </Link>
         </div>
       </div>
@@ -60,7 +60,7 @@ const ProjectPage = () => {
               className="group flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-site-text-light hover:text-site-accent transition-colors"
             >
               <div className="w-8 h-px bg-site-border group-hover:w-12 group-hover:bg-site-accent transition-all" />
-              <span>Back to Systems</span>
+              <span>{dict.systems.backLink}</span>
             </Link>
           </motion.div>
 
@@ -95,18 +95,18 @@ const ProjectPage = () => {
                 
                 <div className="flex flex-wrap gap-8">
                     <div>
-                        <p className="text-[10px] font-bold uppercase tracking-widest text-site-text-light/50 mb-2">Category</p>
-                        <p className="text-sm font-medium">System Architecture</p>
+                        <p className="text-[10px] font-bold uppercase tracking-widest text-site-text-light/50 mb-2">{dict.systems.category}</p>
+                        <p className="text-sm font-medium">{dict.systems.categoryValue}</p>
                     </div>
                     <div>
-                        <p className="text-[10px] font-bold uppercase tracking-widest text-site-text-light/50 mb-2">Year</p>
+                        <p className="text-[10px] font-bold uppercase tracking-widest text-site-text-light/50 mb-2">{dict.systems.year}</p>
                         <p className="text-sm font-medium">2026</p>
                     </div>
                     <div>
-                        <p className="text-[10px] font-bold uppercase tracking-widest text-site-text-light/50 mb-2">Status</p>
+                        <p className="text-[10px] font-bold uppercase tracking-widest text-site-text-light/50 mb-2">{dict.systems.status}</p>
                         <p className="text-sm font-medium flex items-center gap-2">
                             <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                            Deployed
+                            {dict.systems.deployed}
                         </p>
                     </div>
                 </div>
@@ -118,23 +118,53 @@ const ProjectPage = () => {
                 transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
                 className="aspect-square relative"
             >
-                {/* Premium Abstract Visual Placeholder */}
-                <div className="absolute inset-0 bg-site-border/30 rounded-3xl border border-site-border overflow-hidden group">
-                    <div 
-                        className="absolute inset-x-12 -bottom-24 top-24 bg-white rounded-t-2xl shadow-2xl p-12 flex flex-col gap-6"
-                        style={{ boxShadow: `0 -20px 60px -15px ${project.color}20` }}
+                {/* Premium Abstract Visual */}
+                <div
+                  className="absolute inset-0 rounded-3xl border border-site-border overflow-hidden"
+                  style={{ backgroundColor: project.color }}
+                >
+                    {/* Grid pattern — behind everything */}
+                    <div
+                      className="absolute inset-0 opacity-[0.06] pointer-events-none"
+                      style={{
+                        backgroundImage: 'linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)',
+                        backgroundSize: '32px 32px',
+                      }}
+                    />
+
+                    {/* Floating browser mockup — above grid */}
+                    <div
+                      className="absolute inset-x-12 -bottom-24 top-20 bg-white rounded-t-2xl shadow-[0_-8px_40px_rgba(0,0,0,0.15)] z-10"
                     >
-                        <div className="w-1/3 h-3 bg-site-border rounded" />
-                        <div className="w-full h-px bg-site-border" />
-                        <div className="grid grid-cols-2 gap-8 h-full">
-                            <div className="bg-site-border/10 rounded-xl" />
-                            <div className="bg-site-border/10 rounded-xl" />
+                        {/* Browser chrome */}
+                        <div className="flex items-center gap-1.5 px-5 py-3.5 border-b border-gray-100">
+                          <div className="w-2.5 h-2.5 rounded-full bg-red-300" />
+                          <div className="w-2.5 h-2.5 rounded-full bg-yellow-300" />
+                          <div className="w-2.5 h-2.5 rounded-full bg-green-300" />
+                          <div className="ml-4 h-5 w-36 bg-gray-100 rounded-full" />
+                        </div>
+                        {/* Content skeleton */}
+                        <div className="p-8 space-y-5">
+                          <div className="flex items-center gap-3">
+                            <div className="w-8 h-8 rounded" style={{ backgroundColor: `${project.color}30` }} />
+                            <div className="h-3 w-32 bg-gray-100 rounded" />
+                          </div>
+                          <div className="space-y-2.5">
+                            <div className="h-2.5 w-full bg-gray-50 rounded" />
+                            <div className="h-2.5 w-3/4 bg-gray-50 rounded" />
+                          </div>
+                          <div className="grid grid-cols-2 gap-4 pt-3">
+                            <div className="h-24 rounded-lg" style={{ backgroundColor: `${project.color}08` }} />
+                            <div className="h-24 rounded-lg" style={{ backgroundColor: `${project.color}08` }} />
+                          </div>
                         </div>
                     </div>
-                    
-                    {/* Animated grid overlay */}
-                    <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
-                         style={{ backgroundImage: 'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+
+                    {/* Glow */}
+                    <div
+                      className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-3/4 h-32 rounded-full blur-3xl opacity-30 pointer-events-none"
+                      style={{ backgroundColor: project.color }}
+                    />
                 </div>
             </motion.div>
           </section>
@@ -143,7 +173,7 @@ const ProjectPage = () => {
           <section className="border-t border-site-border pt-32 mb-32">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
                 <div className="lg:col-span-4">
-                    <h2 className="text-3xl font-bold uppercase tracking-tighter mb-8">System<br/>Intelligence</h2>
+                    <h2 className="text-3xl font-bold uppercase tracking-tighter mb-8 whitespace-pre-line">{dict.systems.intelligence}</h2>
                     <div className="space-y-6">
                         {[1, 2, 3].map(i => (
                             <div key={i} className="flex gap-4">
@@ -158,19 +188,19 @@ const ProjectPage = () => {
                 </div>
                 <div className="lg:col-span-8">
                     <p className="text-2xl font-light leading-relaxed mb-12">
-                        {project.desc} Designed to be scalable, efficient and modular. The system core utilizes modern architectures to provide seamless integration and high-performance throughput.
+                        {project.desc}
                     </p>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                          <div className="p-8 rounded-2xl bg-white border border-site-border shadow-sm">
-                            <h4 className="font-bold uppercase tracking-widest text-[10px] mb-4">Architecture</h4>
+                            <h4 className="font-bold uppercase tracking-widest text-[10px] mb-4">{dict.systems.architectureLabel}</h4>
                             <p className="text-sm text-site-text-light">
-                                Micro-services approach with automated deployment pipelines and real-time observability.
+                                {dict.systems.architectureDesc}
                             </p>
                          </div>
                          <div className="p-8 rounded-2xl bg-white border border-site-border shadow-sm">
-                            <h4 className="font-bold uppercase tracking-widest text-[10px] mb-4">Innovation</h4>
+                            <h4 className="font-bold uppercase tracking-widest text-[10px] mb-4">{dict.systems.innovationLabel}</h4>
                             <p className="text-sm text-site-text-light">
-                                Integrated AI agents for workflow optimization and automated decision-making processes.
+                                {dict.systems.innovationDesc}
                             </p>
                          </div>
                     </div>
@@ -181,14 +211,14 @@ const ProjectPage = () => {
           {/* Call to Action */}
           <section className="bg-site-accent text-white p-12 md:p-24 rounded-[3rem] text-center mb-32 relative overflow-hidden">
             <div className="relative z-10">
-                <h2 className="text-4xl md:text-6xl font-bold mb-8 uppercase tracking-tighter leading-tight">
-                    Start a system<br/>like this?
+                <h2 className="text-4xl md:text-6xl font-bold mb-8 uppercase tracking-tighter leading-tight whitespace-pre-line">
+                    {dict.systems.startCta}
                 </h2>
-                <Link 
-                    href="/contact" 
+                <Link
+                    href="/contact"
                     className="inline-block px-12 py-5 bg-white text-site-accent font-bold uppercase tracking-[0.2em] text-sm rounded-full hover:scale-105 transition-transform"
                 >
-                    Initier un projet
+                    {dict.systems.startCtaButton}
                 </Link>
             </div>
             {/* Background elements */}

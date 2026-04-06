@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { ArrowUpRight, Loader2 } from "lucide-react";
+import { useLanguage } from "./LanguageContext";
 
 interface Props {
   plan: string;
@@ -11,6 +12,7 @@ interface Props {
 
 export default function CheckoutButton({ plan, label, className }: Props) {
   const [loading, setLoading] = useState(false);
+  const { dict } = useLanguage();
 
   const handleCheckout = async () => {
     if (loading) return;
@@ -45,7 +47,7 @@ export default function CheckoutButton({ plan, label, className }: Props) {
     >
       {loading ? (
         <>
-          <Loader2 size={12} className="animate-spin" /> Redirection...
+          <Loader2 size={12} className="animate-spin" /> {dict.ui.redirecting}
         </>
       ) : (
         <>

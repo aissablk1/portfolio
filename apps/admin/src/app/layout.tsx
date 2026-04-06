@@ -14,7 +14,7 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Admin — Aïssa Belkoussa",
+  title: "Admin — Aïssa BELKOUSSA",
   description: "Dashboard d'administration du portfolio",
   robots: { index: false, follow: false },
 };

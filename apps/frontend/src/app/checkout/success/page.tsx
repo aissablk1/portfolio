@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { useLanguage } from "@/components/LanguageContext";
 import { motion } from "framer-motion";
 import { CheckCircle, ArrowRight, Calendar, Loader2 } from "lucide-react";
 import Link from "next/link";
@@ -18,6 +19,7 @@ function SuccessContent() {
   const sessionId = searchParams.get("session_id");
   const [session, setSession] = useState<SessionData | null>(null);
   const [loading, setLoading] = useState(true);
+  const { dict } = useLanguage();
 
   useEffect(() => {
     if (!sessionId) {
@@ -41,7 +43,7 @@ function SuccessContent() {
       <div className="flex flex-col items-center justify-center min-h-[60vh] gap-6">
         <Loader2 size={32} className="animate-spin text-site-text-light" />
         <p className="text-sm text-site-text-light font-medium">
-          Verification du paiement...
+          {dict.checkout.verifying}
         </p>
       </div>
     );
@@ -68,12 +70,10 @@ function SuccessContent() {
         className="flex flex-col gap-4"
       >
         <h1 className="font-display text-4xl md:text-5xl font-bold tracking-tight">
-          {session ? "Paiement confirme" : "Merci"}
+          {session ? dict.checkout.confirmed : dict.checkout.thanks}
         </h1>
         <p className="text-site-text-light text-lg max-w-md mx-auto leading-relaxed">
-          {session
-            ? "Votre commande a ete enregistree. Vous recevrez un email de confirmation sous quelques minutes."
-            : "Merci pour votre confiance. Si le paiement est en cours de traitement, vous recevrez une confirmation par email."}
+          {session ? dict.checkout.confirmedDesc : dict.checkout.thanksDesc}
         </p>
       </motion.div>
 
@@ -105,7 +105,7 @@ function SuccessContent() {
           className="inline-flex items-center gap-2 bg-site-text text-site-bg px-6 py-3 rounded-full text-[11px] font-bold uppercase tracking-widest hover:opacity-90 transition-opacity duration-300"
         >
           <Calendar size={12} />
-          Planifier le kick-off
+          {dict.checkout.planKickoff}
         </a>
 
         {/* Back to home */}
@@ -113,7 +113,7 @@ function SuccessContent() {
           href="/"
           className="inline-flex items-center gap-2 border border-site-border px-6 py-3 rounded-full text-[11px] font-bold uppercase tracking-widest hover:border-site-text transition-colors duration-300"
         >
-          Retour a l&apos;accueil
+          {dict.checkout.backHome}
           <ArrowRight size={12} />
         </Link>
       </motion.div>
@@ -125,7 +125,7 @@ function SuccessContent() {
         transition={{ duration: 0.6, delay: 0.9 }}
         className="text-[10px] uppercase tracking-[0.2em] text-site-text-light/50 mt-8"
       >
-        Facture envoyee par email &bull; Support disponible 7j/7
+        {dict.checkout.reassurance}
       </motion.p>
     </div>
   );
