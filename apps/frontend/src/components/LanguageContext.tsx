@@ -951,11 +951,13 @@ const dictionaries: Record<Language, Dictionary> = {
         emailPlaceholder: "votre@email.com",
         sending: "Envoi...",
         submit: "Voir mes résultats",
+        skip: "Voir sans donner mon email",
       },
       results: {
         levelLabel: "Niveau",
         answersLabel: "Vos réponses",
         seeOffers: "Voir toutes les offres",
+        sendError: "Vos résultats sont affichés, mais l'envoi par email a échoué. Réessayez plus tard ou contactez-nous directement.",
         levels: {
           advanced: { level: "Avancé", headline: "Votre système digital est solide.", body: "Vous avez déjà une bonne base. L'étape suivante : automatiser ce qui reste manuel et optimiser votre tunnel de conversion pour maximiser chaque visite.", cta: "Passer au niveau supérieur" },
           intermediate: { level: "Intermédiaire", headline: "Vous perdez du temps et des clients chaque semaine.", body: "Les fondations sont là, mais votre système a des trous. Des devis trop lents, des relances oubliées, un site qui n'amène pas de leads — chaque semaine, c'est du CA qui s'évapore.", cta: "Colmater les fuites" },
@@ -1678,11 +1680,13 @@ const dictionaries: Record<Language, Dictionary> = {
         emailPlaceholder: "your@email.com",
         sending: "Sending...",
         submit: "See my results",
+        skip: "See without giving my email",
       },
       results: {
         levelLabel: "Level",
         answersLabel: "Your answers",
         seeOffers: "See all plans",
+        sendError: "Your results are displayed, but the email failed to send. Try again later or contact us directly.",
         levels: {
           advanced: { level: "Advanced", headline: "Your digital system is solid.", body: "You already have a strong foundation. Next step: automate what's still manual and optimize your conversion funnel to maximize every visit.", cta: "Level up" },
           intermediate: { level: "Intermediate", headline: "You're losing time and clients every week.", body: "The foundations are there, but your system has gaps. Slow quotes, forgotten follow-ups, a site that doesn't generate leads — every week, revenue evaporates.", cta: "Fix the leaks" },

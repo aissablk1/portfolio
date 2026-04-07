@@ -1,12 +1,14 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight, ArrowLeft, CheckCircle2, AlertTriangle, XCircle, Send } from "lucide-react";
 import { cn } from "@/utils/cn";
 import Header from "@/components/Header";
 import { useLanguage } from "@/components/LanguageContext";
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 export default function DiagnosticPage() {
   const { dict, language } = useLanguage();
@@ -19,10 +21,14 @@ export default function DiagnosticPage() {
   const [name, setName] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
+  const [sendError, setSendError] = useState(false);
+  const [skipEmail, setSkipEmail] = useState(false);
+
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const isQuestionPhase = step < questions.length;
-  const isEmailPhase = step === questions.length;
-  const isResultPhase = step === questions.length + 1;
+  const isEmailPhase = step === questions.length && !skipEmail;
+  const isResultPhase = step === questions.length + 1 || (step === questions.length && skipEmail);
 
   const totalScore = Object.values(answers).reduce((a, b) => a + b, 0);
   const maxScore = questions.length * 3;
@@ -31,26 +37,41 @@ export default function DiagnosticPage() {
     const levels = d.results.levels;
     if (score >= 12) return { ...levels.advanced, icon: CheckCircle2, color: "text-green-600", bgColor: "bg-green-50 border-green-200", plan: "partenaire" };
     if (score >= 7) return { ...levels.intermediate, icon: AlertTriangle, color: "text-amber-600", bgColor: "bg-amber-50 border-amber-200", plan: "accelerateur" };
-    return { ...levels.beginner, icon: XCircle, color: "text-red-600", bgColor: "bg-red-50 border-red-200", plan: "accelerateur" };
+    return { ...levels.beginner, icon: XCircle, color: "text-red-600", bgColor: "bg-red-50 border-red-200", plan: "partenaire" };
   }
 
   const result = getResult(totalScore);
 
+  // Focus management on step change
+  useEffect(() => {
+    if (containerRef.current) {
+      const heading = containerRef.current.querySelector("h2, [role='status']");
+      if (heading instanceof HTMLElement) heading.focus();
+    }
+  }, [step, skipEmail]);
+
   const selectAnswer = (questionId: string, score: number) => {
     setAnswers((prev) => ({ ...prev, [questionId]: score }));
-    setTimeout(() => setStep((s) => s + 1), 300);
+    setTimeout(() => setStep((s) => s + 1), 400);
+  };
+
+  const goToQuestion = (index: number) => {
+    if (answers[questions[index]?.id] !== undefined || index <= step) {
+      setStep(index);
+    }
   };
 
   const handleEmailSubmit = async () => {
-    if (!email || !name) return;
+    if (!EMAIL_RE.test(email) || !name.trim()) return;
     setSending(true);
+    setSendError(false);
     try {
-      await fetch("/api/contact", {
+      const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name,
-          email,
+          name: name.trim(),
+          email: email.trim(),
           need: `Diagnostic digital — Score ${totalScore}/${maxScore} (${result.level})`,
           message: `${d.results.answersLabel} :\n${questions.map((q) => `- ${q.question} → ${q.options.find((o) => o.score === answers[q.id])?.label || "?"}`).join("\n")}\n\nScore : ${totalScore}/${maxScore} — ${d.results.levelLabel} : ${result.level}`,
           lang: language,
@@ -58,13 +79,16 @@ export default function DiagnosticPage() {
           _honey: "",
         }),
       });
+      if (!res.ok) setSendError(true);
     } catch {
-      // Fire and forget
+      setSendError(true);
     }
     setSending(false);
     setSubmitted(true);
     setStep(questions.length + 1);
   };
+
+  const emailValid = EMAIL_RE.test(email) && name.trim().length > 0;
 
   return (
     <div className="bg-site-bg min-h-screen">
@@ -72,8 +96,8 @@ export default function DiagnosticPage() {
 
       <main id="main-content" className="pt-40 pb-20 px-6">
         <h1 className="sr-only">{d.srTitle}</h1>
-        <div className="max-w-2xl mx-auto">
-          {/* Progress bar */}
+        <div className="max-w-2xl mx-auto" ref={containerRef}>
+          {/* Progress bar — clickable steps */}
           {!isResultPhase && (
             <div className="mb-12">
               <div className="flex justify-between text-[10px] font-bold uppercase tracking-widest text-site-text-light/40 mb-3">
@@ -84,12 +108,31 @@ export default function DiagnosticPage() {
                     : `${d.questionOf} ${step + 1} / ${questions.length}`}
                 </span>
               </div>
-              <div className="h-1 w-full bg-site-border rounded-full overflow-hidden">
+              <div className="h-1 w-full bg-site-border rounded-full overflow-hidden relative">
                 <motion.div
                   className="h-full bg-site-text"
                   animate={{ width: `${((step + 1) / (questions.length + 1)) * 100}%` }}
                   transition={{ duration: 0.5, ease: "circOut" }}
                 />
+              </div>
+              {/* Step indicators */}
+              <div className="flex gap-1.5 mt-3">
+                {questions.map((q, i) => {
+                  const answered = answers[q.id] !== undefined;
+                  const isCurrent = i === step;
+                  return (
+                    <button
+                      key={q.id}
+                      onClick={() => goToQuestion(i)}
+                      disabled={!answered && i > step}
+                      aria-label={`${d.questionOf} ${i + 1}`}
+                      className={cn(
+                        "h-1.5 flex-1 rounded-full transition-all duration-300",
+                        isCurrent ? "bg-site-text" : answered ? "bg-site-text/40 hover:bg-site-text/60 cursor-pointer" : "bg-site-border cursor-not-allowed"
+                      )}
+                    />
+                  );
+                })}
               </div>
             </div>
           )}
@@ -104,16 +147,18 @@ export default function DiagnosticPage() {
                 exit={{ opacity: 0, x: -30 }}
                 transition={{ duration: 0.4 }}
               >
-                <h2 className="text-3xl md:text-4xl font-medium tracking-tighter uppercase mb-10 leading-tight">
+                <h2 className="text-3xl md:text-4xl font-medium tracking-tighter uppercase mb-10 leading-tight" tabIndex={-1}>
                   {questions[step].question}
                 </h2>
-                <div className="space-y-3">
+                <div className="space-y-3" role="radiogroup" aria-label={questions[step].question}>
                   {questions[step].options.map((opt) => {
                     const selected = answers[questions[step].id] === opt.score;
                     return (
                       <button
-                        key={opt.label}
+                        key={opt.score}
                         onClick={() => selectAnswer(questions[step].id, opt.score)}
+                        role="radio"
+                        aria-checked={selected}
                         className={cn(
                           "w-full text-left p-5 rounded-xl border transition-all duration-200",
                           selected
@@ -148,28 +193,35 @@ export default function DiagnosticPage() {
                 exit={{ opacity: 0, x: -30 }}
                 transition={{ duration: 0.4 }}
               >
-                <h2 className="text-3xl md:text-4xl font-medium tracking-tighter uppercase mb-4 leading-tight">
+                <h2 className="text-3xl md:text-4xl font-medium tracking-tighter uppercase mb-4 leading-tight" tabIndex={-1}>
                   {d.emailPhase.title}
                 </h2>
                 <p className="text-site-text-light mb-10">
                   {d.emailPhase.subtitle}
                 </p>
                 <div className="space-y-4">
-                  <input
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder={d.emailPhase.namePlaceholder}
-                    className="w-full bg-transparent border-b border-site-border py-4 text-xl focus:border-site-text outline-none transition-colors"
-                    autoFocus
-                  />
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder={d.emailPhase.emailPlaceholder}
-                    className="w-full bg-transparent border-b border-site-border py-4 text-xl focus:border-site-text outline-none transition-colors"
-                  />
+                  <div>
+                    <label htmlFor="diag-name" className="sr-only">{d.emailPhase.namePlaceholder}</label>
+                    <input
+                      id="diag-name"
+                      type="text"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      placeholder={d.emailPhase.namePlaceholder}
+                      className="w-full bg-transparent border-b border-site-border py-4 text-xl focus:border-site-text outline-none transition-colors"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="diag-email" className="sr-only">{d.emailPhase.emailPlaceholder}</label>
+                    <input
+                      id="diag-email"
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder={d.emailPhase.emailPlaceholder}
+                      className="w-full bg-transparent border-b border-site-border py-4 text-xl focus:border-site-text outline-none transition-colors"
+                    />
+                  </div>
                 </div>
                 <div className="mt-10 flex items-center justify-between">
                   <button
@@ -181,16 +233,25 @@ export default function DiagnosticPage() {
                   </button>
                   <button
                     onClick={handleEmailSubmit}
-                    disabled={!email.includes("@") || !name || sending}
+                    disabled={!emailValid || sending}
                     className={cn(
                       "flex items-center gap-3 px-8 py-4 rounded-full font-bold uppercase tracking-widest text-xs transition-all",
-                      email.includes("@") && name && !sending
+                      emailValid && !sending
                         ? "bg-site-text text-site-bg hover:scale-105"
                         : "bg-site-border text-site-text-light/50 cursor-not-allowed"
                     )}
                   >
                     {sending ? d.emailPhase.sending : d.emailPhase.submit}
                     {!sending && <Send size={14} />}
+                  </button>
+                </div>
+                {/* Skip email */}
+                <div className="mt-6 text-center">
+                  <button
+                    onClick={() => setSkipEmail(true)}
+                    className="text-[11px] font-medium text-site-text-light/40 hover:text-site-text-light transition-colors underline underline-offset-2"
+                  >
+                    {d.emailPhase.skip}
                   </button>
                 </div>
               </motion.div>
@@ -204,7 +265,12 @@ export default function DiagnosticPage() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6 }}
               >
-                <div className="text-center mb-12">
+                {sendError && (
+                  <div className="mb-6 p-4 rounded-xl border border-amber-200 bg-amber-50 text-amber-800 text-sm" role="alert">
+                    {d.results.sendError}
+                  </div>
+                )}
+                <div className="text-center mb-12" role="status" tabIndex={-1}>
                   <div className="inline-flex items-center gap-3 mb-6">
                     <span className="text-7xl font-medium tracking-tighter">{totalScore}</span>
                     <span className="text-2xl text-site-text-light tracking-tighter">/ {maxScore}</span>
