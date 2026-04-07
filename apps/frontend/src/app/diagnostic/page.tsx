@@ -290,34 +290,50 @@ export default function DiagnosticPage() {
                     {d.results.sendError}
                   </div>
                 )}
-                <div className="text-center mb-12" role="status" tabIndex={-1}>
-                  <div className="inline-flex items-center gap-3 mb-6">
-                    <span className="text-7xl font-medium tracking-tighter">{totalScore}</span>
+
+                {/* Score + Level badge */}
+                <div className="text-center mb-10" role="status" tabIndex={-1}>
+                  <div className="inline-flex items-baseline gap-2 mb-4">
+                    <span className={cn("text-7xl font-medium tracking-tighter", result.color)}>{totalScore}</span>
                     <span className="text-2xl text-site-text-light tracking-tighter">/ {maxScore}</span>
                   </div>
                   <div className={cn("inline-flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-bold", result.bgColor)}>
-                    <result.icon size={16} />
+                    <result.icon size={16} className={result.color} />
                     <span className={result.color}>{d.results.levelLabel} {result.level}</span>
                   </div>
                 </div>
 
-                <div className="border border-site-border rounded-2xl p-8 md:p-10 mb-8">
+                {/* Headline + Body + CTA */}
+                <div className="border border-site-border rounded-2xl p-8 md:p-10 mb-6">
                   <h3 className="text-2xl md:text-3xl font-medium tracking-tighter uppercase mb-4">
                     {result.headline}
                   </h3>
                   <p className="text-site-text-light leading-relaxed mb-8">{result.body}</p>
 
-                  <div className="space-y-3 mb-8 border-t border-site-border pt-6">
-                    <p className="text-[10px] font-bold uppercase tracking-widest text-site-text-light/40 mb-4">
-                      {d.results.answersLabel}
-                    </p>
+                  <Link
+                    href={`/contact?plan=${result.plan}`}
+                    className="inline-flex items-center gap-3 bg-site-text text-site-bg px-8 py-4 rounded-full text-xs font-bold uppercase tracking-widest hover:scale-105 transition-all"
+                  >
+                    {result.cta}
+                    <ArrowRight size={14} />
+                  </Link>
+                </div>
+
+                {/* Answers recap — collapsible */}
+                <details className="border border-site-border rounded-2xl overflow-hidden mb-8 group">
+                  <summary className="p-6 cursor-pointer flex items-center justify-between text-[10px] font-bold uppercase tracking-widest text-site-text-light/60 hover:text-site-text-light transition-colors">
+                    {d.results.answersLabel}
+                    <ArrowRight size={12} className="group-open:rotate-90 transition-transform" />
+                  </summary>
+                  <div className="px-6 pb-6 space-y-3">
                     {questions.map((q) => {
                       const answer = q.options.find((o) => o.score === answers[q.id]);
-                      const isGood = (answers[q.id] ?? 0) >= 2;
+                      const qScore = answers[q.id] ?? 0;
+                      const isGood = qScore >= 2;
                       return (
                         <div key={q.id} className="flex items-start gap-3 text-sm">
-                          <span className={cn("mt-0.5 shrink-0", isGood ? "text-green-500" : "text-red-400")}>
-                            {isGood ? "+" : "-"}
+                          <span className={cn("mt-0.5 shrink-0 text-xs font-bold w-5 text-center", isGood ? "text-green-500" : "text-red-400")}>
+                            {qScore}
                           </span>
                           <div>
                             <span className="text-site-text-light">{q.question}</span>
@@ -328,15 +344,7 @@ export default function DiagnosticPage() {
                       );
                     })}
                   </div>
-
-                  <Link
-                    href={`/contact?plan=${result.plan}`}
-                    className="inline-flex items-center gap-3 bg-site-text text-site-bg px-8 py-4 rounded-full text-xs font-bold uppercase tracking-widest hover:scale-105 transition-all"
-                  >
-                    {result.cta}
-                    <ArrowRight size={14} />
-                  </Link>
-                </div>
+                </details>
 
                 <div className="text-center">
                   <Link href="/go" className="text-xs font-bold uppercase tracking-widest text-site-text-light hover:text-site-text transition-colors">
