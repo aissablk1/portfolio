@@ -87,7 +87,7 @@ export const STRIPE_TRIPWIRE = {
   name: "Audit Digital Express",
   description:
     "Rapport d'audit personnalise de votre presence digitale. Livre par email sous 24h.",
-  priceId: "price_TRIPWIRE_TODO", // A remplacer apres creation dans Stripe
+  priceId: "price_1TJVRMBJITi85SXRqvWdyUXJ",
   amount: 4700,
   mode: "payment" as const,
 };

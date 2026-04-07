@@ -465,7 +465,7 @@ def lead_magnet_j0(ctx: dict, unsub_url: str) -> tuple[str, str]:
     """J+0 : Livraison du PDF."""
     name = h(ctx.get("name", ""))
     resource_title = h(ctx.get("resource_title", "votre ressource"))
-    download_url = ctx.get("download_url", f"{SITE_URL}/resources/checklist-presence-digitale.pdf")
+    download_url = ctx.get("download_url", f"{SITE_URL}/resources/checklist-presence-digitale.html")
 
     subject = f"{name}, votre {resource_title} est prete"
 

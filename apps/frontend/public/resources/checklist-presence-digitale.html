@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checklist : 15 signaux que votre site vous coute de l'argent — Aissa BELKOUSSA</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #0a0a0a;
+    color: #e0e0e0;
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  @media print {
+    body { background: #fff; color: #1a1a1a; }
+    .page { box-shadow: none; border: none; }
+    .header { background: #1a1a1a !important; }
+    .check-item { border-color: #e5e5e5 !important; }
+    .section-title { color: #1a1a1a !important; }
+    a { color: #1a1a1a !important; }
+  }
+
+  .page {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 48px 40px;
+  }
+
+  .header {
+    text-align: center;
+    padding: 40px 0;
+    border-bottom: 1px solid #222;
+    margin-bottom: 40px;
+  }
+
+  .header h1 {
+    font-size: 14px;
+    letter-spacing: 0.3em;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 24px;
+    text-transform: uppercase;
+  }
+
+  .header h2 {
+    font-size: 28px;
+    font-weight: 500;
+    color: #fff;
+    letter-spacing: -0.03em;
+    line-height: 1.3;
+    margin: 0 0 12px;
+  }
+
+  .header p {
+    color: #888;
+    font-size: 14px;
+  }
+
+  .intro {
+    margin-bottom: 40px;
+    padding: 24px;
+    background: #161616;
+    border-radius: 12px;
+    border: 1px solid #222;
+  }
+
+  .intro p { margin: 0; }
+
+  .section-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #888;
+    margin: 40px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #222;
+  }
+
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid #1a1a1a;
+  }
+
+  .check-box {
+    width: 22px;
+    height: 22px;
+    border: 2px solid #333;
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .check-content h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    margin: 0 0 4px;
+  }
+
+  .check-content p {
+    font-size: 13px;
+    color: #999;
+    margin: 0;
+  }
+
+  .signal-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-left: 8px;
+  }
+
+  .tag-critique { background: #ef444420; color: #ef4444; border: 1px solid #ef444430; }
+  .tag-important { background: #f59e0b20; color: #f59e0b; border: 1px solid #f59e0b30; }
+  .tag-optimisation { background: #22c55e20; color: #22c55e; border: 1px solid #22c55e30; }
+
+  .scoring {
+    margin: 48px 0 40px;
+    padding: 32px;
+    background: #161616;
+    border-radius: 12px;
+    border: 1px solid #222;
+  }
+
+  .scoring h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+    margin: 0 0 16px;
+  }
+
+  .score-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #1a1a1a;
+    font-size: 14px;
+  }
+
+  .score-row:last-child { border-bottom: none; }
+
+  .score-label { color: #999; }
+  .score-value { color: #fff; font-weight: 600; }
+  .score-critique { color: #ef4444; }
+  .score-moyen { color: #f59e0b; }
+  .score-bon { color: #22c55e; }
+
+  .cta {
+    text-align: center;
+    margin: 48px 0 0;
+    padding: 40px 0;
+    border-top: 1px solid #222;
+  }
+
+  .cta h3 {
+    font-size: 20px;
+    font-weight: 500;
+    color: #fff;
+    margin: 0 0 12px;
+    letter-spacing: -0.02em;
+  }
+
+  .cta p {
+    color: #888;
+    font-size: 14px;
+    margin: 0 0 24px;
+  }
+
+  .cta a {
+    display: inline-block;
+    background: #fff;
+    color: #0a0a0a;
+    padding: 14px 32px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .cta a:hover { opacity: 0.9; }
+
+  .footer {
+    text-align: center;
+    padding: 24px 0;
+    color: #444;
+    font-size: 12px;
+  }
+
+  .footer a { color: #888; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <h1>Aissa Belkoussa</h1>
+    <h2>15 signaux que votre site<br>vous coute de l'argent</h2>
+    <p>Checklist d'auto-diagnostic — Presence digitale PME & artisans</p>
+  </div>
+
+  <div class="intro">
+    <p>Cochez chaque signal que vous observez sur votre site ou votre presence en ligne. Chaque case cochee represente un point de friction qui vous fait perdre des clients et du chiffre d'affaires. A la fin, comptez vos cases pour evaluer votre situation.</p>
+  </div>
+
+  <!-- SECTION 1 : Visibilite -->
+  <div class="section-title">A — Visibilite & Referencement (5 signaux)</div>
+
+  <div class="check-item">
+    <div class="check-box"></div>
+    <div class="check-content">
+      <h3>1. Votre entreprise n'apparait pas sur Google Maps <span class="signal-tag tag-critique">Critique</span></h3>
+      <p>84% des recherches locales passent par Google Maps. Sans fiche Google Business Profile optimisee (photos, horaires, avis), vous etes invisible pour les clients qui cherchent "plombier Albi" ou "consultant pres de chez moi".</p>
+    </div>
+  </div>
+
+  <div class="check-item">
+    <div class="check-box"></div>
+    <div class="check-content">
+      <h3>2. Votre site ne s'affiche pas sur la premiere page Google <span class="signal-tag tag-critique">Critique</span></h3>
+      <p>75% des utilisateurs ne depassent jamais la premiere page. Si votre site est en page 2 ou au-dela, c'est comme s'il n'existait pas. Verifiez en tapant votre metier + votre ville dans Google.</p>
+    </div>
+  </div>
+
+  <div class="check-item">
+    <div class="check-box"></div>
+    <div class="check-content">
+      <h3>3. Vous n'avez aucun avis Google (ou moins de 5) <span class="signal-tag tag-important">Important</span></h3>
+      <p>Les entreprises avec 5+ avis ont 270% plus de chances d'etre contactees. Chaque avis manquant est un client perdu au profit d'un concurrent mieux note.</p>
+    </div>
+  </div>
+
+  <div class="check-item">
+    <div class="check-box"></div>
+    <div class="check-content">
+      <h3>4. Vous n'avez pas de profil LinkedIn professionnel <span class="signal-tag tag-optimisation">Optimisation</span></h3>
+      <p>LinkedIn est le premier reflexe des decideurs B2B. Un profil incomplet ou absent coupe l'acces a une source de prospects qualifies — surtout pour les prestataires de services.</p>
+    </div>
+  </div>
+
+  <div class="check-item">
+    <div class="check-box"></div>
+    <div class="check-content">
+      <h3>5. Votre nom d'entreprise + metier ne donne rien sur Google <span class="signal-tag tag-critique">Critique</span></h3>
+      <p>Si un prospect tape votre nom et ne trouve rien, il ira voir quelqu'un d'autre. L'absence de presence numerique est aujourd'hui synonyme de manque de credibilite.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 2 : Site web -->
+  <div class="section-title">B — Site web & Experience utilisateur (5 signaux)</div>
+
+  <div class="check-item">
+    <div class="check-box"></div>
+    <div class="check-content">
+      <h3>6. Votre site met plus de 3 secondes a charger <span class="signal-tag tag-critique">Critique</span></h3>
+      <p>53% des visiteurs mobiles quittent un site qui met plus de 3 secondes a charger. Testez le votre sur PageSpeed Insights (pagespeed.web.dev). Un score inferieur a 50 est un probleme urgent.</p>
+    </div>
+  </div>
+
+  <div class="check-item">
+    <div class="check-box"></div>
+    <div class="check-content">
+      <h3>7. Votre site n'est pas adapte au mobile <span class="signal-tag tag-critique">Critique</span></h3>
+      <p>68% du trafic web est mobile. Si votre site est illisible sur telephone, vous perdez 2 visiteurs sur 3. Ouvrez votre site sur votre telephone : si vous devez zoomer pour lire, c'est un probleme.</p>
+    </div>
+  </div>
+
+  <div class="check-item">
+    <div class="check-box"></div>
+    <div class="check-content">
+      <h3>8. Pas de bouton d'action visible en haut de page <span class="signal-tag tag-important">Important</span></h3>
+      <p>Un visiteur decide en 5 secondes s'il reste ou part. Si votre page d'accueil n'a pas un message clair + un bouton d'action visible sans scroller (CTA : "Demander un devis", "Reserver"), vous perdez la majorite des visiteurs.</p>
+    </div>
+  </div>
+
+  <div class="check-item">
+    <div class="check-box"></div>
+    <div class="check-content">
+      <h3>9. Aucun temoignage client sur votre site <span class="signal-tag tag-important">Important</span></h3>
+      <p>92% des acheteurs lisent les avis avant de decider. Sans preuve sociale (temoignages, logos clients, etudes de cas), votre site manque de credibilite. Meme 2-3 temoignages courts font la difference.</p>
+    </div>
+  </div>
+
+  <div class="check-item">
+    <div class="check-box"></div>
+    <div class="check-content">
+      <h3>10. Votre site n'a pas de certificat HTTPS (cadenas) <span class="signal-tag tag-critique">Critique</span></h3>
+      <p>Google penalise les sites sans HTTPS dans les resultats de recherche, et Chrome affiche "Non securise" aux visiteurs. C'est un signal de danger qui fait fuir immediatement.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 3 : Conversion -->
+  <div class="section-title">C — Conversion & Automatisation (5 signaux)</div>
+
+  <div class="check-item">
+    <div class="check-box"></div>
+    <div class="check-content">
+      <h3>11. Pas de formulaire de contact ou de demande de devis <span class="signal-tag tag-critique">Critique</span></h3>
+      <p>Si le seul moyen de vous contacter est un numero de telephone, vous perdez tous les visiteurs en dehors de vos horaires d'ouverture + ceux qui preferent ecrire. Un formulaire simple convertit 2 a 5x plus qu'un numero de telephone seul.</p>
+    </div>
+  </div>
+
+  <div class="check-item">
+    <div class="check-box"></div>
+    <div class="check-content">
+      <h3>12. Pas de systeme de prise de RDV en ligne <span class="signal-tag tag-important">Important</span></h3>
+      <p>Chaque appel pour planifier un rendez-vous prend 15-20 minutes. Un outil gratuit comme Calendly ou Cal.com elimine 80% des allers-retours et reduit les no-shows de 40%.</p>
+    </div>
+  </div>
+
+  <div class="check-item">
+    <div class="check-box"></div>
+    <div class="check-content">
+      <h3>13. Vos devis prennent plus d'1 heure a envoyer <span class="signal-tag tag-important">Important</span></h3>
+      <p>Un devis envoye en 5 minutes a 3x plus de chances d'etre accepte. Si vous faites vos devis manuellement sur Word ou Excel, vous perdez du temps ET des clients au profit de ceux qui repondent plus vite.</p>
+    </div>
+  </div>
+
+  <div class="check-item">
+    <div class="check-box"></div>
+    <div class="check-content">
+      <h3>14. Vous ne relancez pas les prospects non convertis <span class="signal-tag tag-critique">Critique</span></h3>
+      <p>80% des ventes se font entre la 5eme et la 12eme relance. Mais 44% des professionnels abandonnent apres 1 seul suivi. Une sequence de relance automatique (3 emails sur 14 jours) double le taux de conversion — sans effort.</p>
+    </div>
+  </div>
+
+  <div class="check-item">
+    <div class="check-box"></div>
+    <div class="check-content">
+      <h3>15. Plus de 5h/semaine sur des taches admin repetitives <span class="signal-tag tag-important">Important</span></h3>
+      <p>Facturation, relances, planification, copier-coller entre outils — si vous passez plus de 5h par semaine sur ces taches, vous perdez l'equivalent d'un mois complet de travail productif par an. Ces taches s'automatisent en quelques jours.</p>
+    </div>
+  </div>
+
+  <!-- SCORING -->
+  <div class="scoring">
+    <h3>Votre score</h3>
+    <p style="color:#999;font-size:13px;margin-bottom:20px;">Comptez le nombre de cases cochees.</p>
+    <div class="score-row">
+      <span class="score-label">0 a 3 signaux</span>
+      <span class="score-value score-bon">Bon — Votre presence est solide, optimisez les details</span>
+    </div>
+    <div class="score-row">
+      <span class="score-label">4 a 8 signaux</span>
+      <span class="score-value score-moyen">Moyen — Des fuites existent, chaque semaine compte</span>
+    </div>
+    <div class="score-row">
+      <span class="score-label">9 a 12 signaux</span>
+      <span class="score-value score-critique">Critique — Vous perdez des clients chaque jour</span>
+    </div>
+    <div class="score-row">
+      <span class="score-label">13 a 15 signaux</span>
+      <span class="score-value score-critique">Urgence — Votre activite tourne sans filet digital</span>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta">
+    <h3>Envie d'un diagnostic personnalise ?</h3>
+    <p>5 questions, 2 minutes, resultat immediat + recommandations adaptees a votre metier.</p>
+    <a href="https://www.aissabelkoussa.fr/diagnostic">Faire mon diagnostic gratuit</a>
+  </div>
+
+  <div class="footer">
+    <p>&copy; 2026 Aissa Belkoussa &middot; <a href="https://www.aissabelkoussa.fr">aissabelkoussa.fr</a> &middot; Architecte de systemes digitaux — Albi, France</p>
+  </div>
+
+</div>
+</body>
+</html>
