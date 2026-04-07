@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Desinscription confirmee — Aissa BELKOUSSA",
+  title: "Desinscription confirmee — Aïssa BELKOUSSA",
   robots: { index: false, follow: false },
 };
 

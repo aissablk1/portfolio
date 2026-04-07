@@ -5,7 +5,7 @@
  * et aux specifications Schema.org en vigueur.
  *
  * Architecture @id :
- *   /#person           → Aissa Belkoussa (Person)
+ *   /#person           → Aïssa BELKOUSSA (Person)
  *   /#organization     → Entreprise (ProfessionalService + LocalBusiness)
  *   /#website          → Site web
  *   /services/#service → Service principal
@@ -24,7 +24,7 @@ export const personSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
   "@id": `${siteUrl}/#person`,
-  name: "Aissa Belkoussa",
+  name: "Aïssa BELKOUSSA",
   givenName: "Aissa",
   familyName: "Belkoussa",
   url: siteUrl,
@@ -80,8 +80,8 @@ export const organizationSchema = {
   "@context": "https://schema.org",
   "@type": ["ProfessionalService", "LocalBusiness"],
   "@id": `${siteUrl}/#organization`,
-  name: "Aissa Belkoussa",
-  legalName: "Aissa Belkoussa",
+  name: "Aïssa BELKOUSSA",
+  legalName: "Aïssa BELKOUSSA",
   url: siteUrl,
   logo: {
     "@type": "ImageObject",
@@ -227,7 +227,7 @@ export const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   "@id": `${siteUrl}/#website`,
-  name: "Aissa Belkoussa",
+  name: "Aïssa BELKOUSSA",
   url: siteUrl,
   description:
     "Portfolio et services — Architecture de systemes, automation et developpement digital sur-mesure.",
@@ -640,7 +640,7 @@ export const contactPageSchema = {
   "@context": "https://schema.org",
   "@type": "ContactPage",
   "@id": `${siteUrl}/contact/#contact`,
-  name: "Contact — Aissa Belkoussa",
+  name: "Contact — Aïssa BELKOUSSA",
   url: `${siteUrl}/contact`,
   description:
     "Initier un projet. 30 minutes suffisent pour cadrer votre besoin. Gratuit, zero engagement.",
@@ -833,7 +833,7 @@ export const legalPages = {
     name: "Conditions generales de vente",
     url: `${siteUrl}/cgv`,
     description:
-      "CGV des prestations d'Aissa Belkoussa : reglement, propriete intellectuelle, responsabilite, RGPD.",
+      "CGV des prestations d'Aïssa BELKOUSSA : reglement, propriete intellectuelle, responsabilite, RGPD.",
     lastReviewed: "2026-04-02",
   }),
 

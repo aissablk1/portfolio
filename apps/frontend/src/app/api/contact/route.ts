@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 const CONTACT_EMAIL = "contact@aissabelkoussa.fr";
-const FROM_EMAIL = `Aïssa Belkoussa <contact@aissabelkoussa.fr>`;
+const FROM_EMAIL = `Aïssa BELKOUSSA <contact@aissabelkoussa.fr>`;
 
 // --- Rate limiting (in-memory, per-IP, resets on deploy) ---
 const rateMap = new Map<string, { count: number; resetAt: number }>();
@@ -104,7 +104,7 @@ const labels = {
     submittedAt: "Soumis le",
     language: "Langue du visiteur",
     replyNow: "Répondre maintenant",
-    footer: "Aïssa Belkoussa &bull; Architecte de systèmes",
+    footer: "Aïssa BELKOUSSA &bull; Architecte de systèmes",
     // Confirmation email
     confirmSubject: "Bien reçu — je reviens vers vous rapidement",
     confirmGreeting: "Bonjour",
@@ -113,7 +113,7 @@ const labels = {
     confirmPromise: "Je reviens vers vous sous 48h maximum.",
     confirmDetail: "Voici un récapitulatif de votre demande :",
     confirmClosing: "À très bientôt,",
-    confirmSignature: "Aïssa Belkoussa",
+    confirmSignature: "Aïssa BELKOUSSA",
     confirmRole: "Architecte de systèmes & Développeur",
     confirmSite: "www.aissabelkoussa.fr",
   },
@@ -130,7 +130,7 @@ const labels = {
     submittedAt: "Submitted on",
     language: "Visitor language",
     replyNow: "Reply now",
-    footer: "Aïssa Belkoussa &bull; Systems Architect",
+    footer: "Aïssa BELKOUSSA &bull; Systems Architect",
     confirmSubject: "Received — I'll get back to you shortly",
     confirmGreeting: "Hi",
     confirmBody:
@@ -138,7 +138,7 @@ const labels = {
     confirmPromise: "I'll get back to you within 48 hours.",
     confirmDetail: "Here's a summary of your request:",
     confirmClosing: "Talk soon,",
-    confirmSignature: "Aïssa Belkoussa",
+    confirmSignature: "Aïssa BELKOUSSA",
     confirmRole: "Systems Architect & Developer",
     confirmSite: "www.aissabelkoussa.fr",
   },

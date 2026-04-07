@@ -2,8 +2,8 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Aïssa Belkoussa — Architecte de systemes & Automation",
-    short_name: "Aïssa Belkoussa",
+    name: "Aïssa BELKOUSSA — Architecte de systemes & Automation",
+    short_name: "Aïssa BELKOUSSA",
     description:
       "Architecture de systemes, automation et developpement digital sur-mesure.",
     start_url: "/",

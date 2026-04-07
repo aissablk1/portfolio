@@ -1,10 +1,10 @@
-# Aïssa Belkoussa — Architecte de systèmes digitaux
+# Aïssa BELKOUSSA — Architecte de systèmes digitaux
 
 > Développeur freelance basé à Albi (Occitanie, France), spécialisé dans l'automatisation IA, les sites web sur-mesure et les dashboards décisionnels pour PME, artisans BTP et prestataires B2B. Site officiel : https://www.aissabelkoussa.fr
 
 ## À propos
 
-- Nom : Aïssa Belkoussa
+- Nom : Aïssa BELKOUSSA
 - Métier : Architecte de systèmes digitaux, développeur fullstack freelance
 - Localisation : Albi, Tarn, Occitanie, France (81000)
 - Disponibilité : Remote monde entier, déplacements France
