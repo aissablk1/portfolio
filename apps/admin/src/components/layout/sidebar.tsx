@@ -17,6 +17,7 @@ import {
   Menu,
   X,
   Kanban,
+  TrendingUp,
 } from "lucide-react";
 import { useAuth } from "@/hooks/use-auth";
 import { cn, getInitials } from "@/lib/utils";
@@ -30,6 +31,7 @@ interface NavItem {
 const navItems: NavItem[] = [
   { label: "Vue d'ensemble", href: "/dashboard", icon: LayoutDashboard },
   { label: "Pipeline", href: "/dashboard/pipeline", icon: Kanban },
+  { label: "Funnels", href: "/dashboard/funnels", icon: TrendingUp },
   { label: "Contacts", href: "/dashboard/contacts", icon: Users },
   { label: "Emails", href: "/dashboard/emails", icon: Mail },
   { label: "Analytique", href: "/dashboard/analytics", icon: BarChart3 },

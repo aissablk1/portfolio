@@ -276,6 +276,57 @@ export interface GitHubProfile {
   cached_at: string;
 }
 
+// ─── Funnels & Sequences ────────────────────────────
+export interface EmailSequence {
+  id: string;
+  subscriber_email: string;
+  subscriber_name: string;
+  sequence_type: string;
+  current_step: number;
+  total_steps: number;
+  status: "active" | "completed" | "cancelled" | "paused";
+  created_at: string;
+  updated_at: string;
+  steps: {
+    step_index: number;
+    template_key: string;
+    delay_hours: number;
+    scheduled_at: string;
+    sent_at: string | null;
+    status: string;
+    resend_id: string | null;
+    error: string | null;
+  }[];
+}
+
+export interface SequenceStats {
+  total_active: number;
+  total_completed: number;
+  total_cancelled: number;
+  total_paused: number;
+  emails_sent_today: number;
+  emails_pending: number;
+  unsubscribe_rate: number;
+  by_type: Record<string, number>;
+}
+
+export interface FunnelStats {
+  diagnostic_started: number;
+  diagnostic_completed: number;
+  email_captured: number;
+  sequence_started: number;
+  sequence_email_sent: number;
+  tripwire_viewed: number;
+  tripwire_purchased: number;
+  tripwire_revenue: number;
+  upsell_shown: number;
+  upsell_accepted: number;
+  upsell_skipped: number;
+  lead_magnet_downloaded: number;
+  purchase: number;
+  conversion_rates: Record<string, number>;
+}
+
 // ─── Page Views ─────────────────────────────────────
 export interface PageViewStats {
   today: number;

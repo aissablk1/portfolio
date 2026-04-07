@@ -79,6 +79,19 @@ export const STRIPE_PRODUCTS: Record<StripePlan, StripeProduct> = {
  * Pro — Maintenance (abonnement mensuel)
  * A utiliser separement pour les checkout en mode subscription.
  */
+/**
+ * Tripwire — Audit Digital Express (47 EUR)
+ * TODO: Creer le prix dans Stripe Dashboard et remplacer le priceId ci-dessous.
+ */
+export const STRIPE_TRIPWIRE = {
+  name: "Audit Digital Express",
+  description:
+    "Rapport d'audit personnalise de votre presence digitale. Livre par email sous 24h.",
+  priceId: "price_TRIPWIRE_TODO", // A remplacer apres creation dans Stripe
+  amount: 4700,
+  mode: "payment" as const,
+};
+
 export const STRIPE_MAINTENANCE_SUBSCRIPTION = {
   name: "Pro — Maintenance",
   description:

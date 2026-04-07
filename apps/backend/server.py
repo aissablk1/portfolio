@@ -10,7 +10,10 @@ from services.email_service import EmailService
 from services.spam_protection import SpamProtection
 from services.notification_service import NotificationService
 from services.storage_service import StorageService
+from services.resend_service import ResendService
+from services.sequence_service import SequenceService
 from admin_routes import admin_router
+from sequence_routes import sequence_router, init_sequence_routes
 from services.auth_service import create_admin_user, load_blacklisted_tokens, hash_password
 import asyncio
 import uuid
@@ -32,6 +35,8 @@ email_service = EmailService()
 spam_protection = SpamProtection()
 notification_service = NotificationService()
 storage_service = StorageService()
+resend_service = ResendService()
+sequence_service = SequenceService(resend_service)
 
 # Create the main app without a prefix
 app = FastAPI(title="AÏSSA BELKOUSSA Portfolio API", version="1.0.0")
@@ -368,9 +373,13 @@ async def track_pageview(request: Request):
         return {"ok": True}  # Ne jamais échouer côté client
 
 
+# Initialize sequence routes with DB and service
+init_sequence_routes(db, sequence_service)
+
 # Include the routers in the main app
 app.include_router(api_router)
 app.include_router(admin_router)
+app.include_router(sequence_router)
 
 
 # ─── Middlewares ──────────────────────────────────────────────────────────────

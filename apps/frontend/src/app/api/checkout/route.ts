@@ -3,6 +3,7 @@ import { stripe } from "@/lib/stripe";
 import {
   STRIPE_PRODUCTS,
   STRIPE_MAINTENANCE_SUBSCRIPTION,
+  STRIPE_TRIPWIRE,
   type StripePlan,
 } from "@/lib/stripe-products";
 
@@ -15,11 +16,14 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Plan manquant" }, { status: 400 });
     }
 
-    // Gestion du plan maintenance (subscription) separement
+    // Gestion des plans speciaux
     const isMaintenance = plan === "pro-maintenance";
-    const product = isMaintenance
-      ? STRIPE_MAINTENANCE_SUBSCRIPTION
-      : STRIPE_PRODUCTS[plan as StripePlan];
+    const isAudit = plan === "audit";
+    const product = isAudit
+      ? STRIPE_TRIPWIRE
+      : isMaintenance
+        ? STRIPE_MAINTENANCE_SUBSCRIPTION
+        : STRIPE_PRODUCTS[plan as StripePlan];
 
     if (!product) {
       return NextResponse.json({ error: "Plan invalide" }, { status: 400 });
@@ -32,7 +36,7 @@ export async function POST(request: NextRequest) {
       mode: product.mode,
       payment_method_types: ["card"],
       line_items: [{ price: product.priceId, quantity: 1 }],
-      success_url: `${origin}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
+      success_url: `${origin}/checkout/upsell?session_id={CHECKOUT_SESSION_ID}&plan=${plan}`,
       cancel_url: `${origin}/services`,
       locale: "fr",
       allow_promotion_codes: true,

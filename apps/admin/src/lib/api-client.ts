@@ -305,6 +305,37 @@ class ApiClient {
     return this.request<ApiResponse<import("./types").PageViewStats>>("/api/admin/stats/visits");
   }
 
+  // ─── Funnels & Sequences ──────────────────────
+  async getSequences(params?: Record<string, string | number>) {
+    const searchParams = new URLSearchParams();
+    if (params) {
+      Object.entries(params).forEach(([key, value]) => {
+        if (value !== undefined && value !== "") searchParams.set(key, String(value));
+      });
+    }
+    const query = searchParams.toString();
+    return this.request<ApiResponse<{ sequences: import("./types").EmailSequence[]; total: number; page: number; per_page: number; total_pages: number }>>(`/api/admin/sequences${query ? `?${query}` : ""}`);
+  }
+
+  async getSequence(id: string) {
+    return this.request<ApiResponse<import("./types").EmailSequence>>(`/api/admin/sequences/${id}`);
+  }
+
+  async updateSequence(id: string, action: string) {
+    return this.request<ApiResponse<{ success: boolean }>>(`/api/admin/sequences/${id}`, {
+      method: "PATCH",
+      body: JSON.stringify({ action }),
+    });
+  }
+
+  async getSequenceStats() {
+    return this.request<ApiResponse<import("./types").SequenceStats>>("/api/admin/sequences/stats");
+  }
+
+  async getFunnelStats() {
+    return this.request<ApiResponse<import("./types").FunnelStats>>("/api/admin/funnels/stats");
+  }
+
   // ─── Security ───────────────────────────────────
   async getSpamLog(params?: Record<string, string | number>) {
     const searchParams = new URLSearchParams();

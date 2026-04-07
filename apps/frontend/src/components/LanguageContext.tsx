@@ -1184,6 +1184,33 @@ const dictionaries: Record<Language, Dictionary> = {
         `En ${weeksToROI} semaines, votre système Accélérateur à 2 900 € est rentabilisé. Ensuite, c'est ${weeklySaved} € de valeur nette chaque semaine.`,
       placeholder: "Sélectionnez votre métier pour voir votre ROI",
     },
+    audit: {
+      badge: "Audit express",
+      title: "Votre site vous rapporte-t-il des clients ?",
+      subtitle: "Un rapport personnalise qui identifie exactement ce qui ne fonctionne dans votre systeme digital — et comment le corriger.",
+      cta: "Commander mon audit",
+      price: "47",
+      originalPrice: "197",
+      guarantee: "Satisfait ou rembourse",
+      delivery: "Livre sous 24h",
+      deductible: "Paiement unique. Deductible si vous passez a une offre superieure.",
+      freeDiagnostic: "Vous preferez un diagnostic gratuit d'abord ?",
+      freeDiagnosticCta: "Faire le diagnostic gratuit",
+    },
+    upsell: {
+      timerLabel: "Offre disponible",
+      skip: "Non merci, voir ma confirmation",
+    },
+    unsubscribe: {
+      title: "Desinscription confirmee",
+      subtitle: "Vous ne recevrez plus d'emails automatiques de notre part.",
+      backHome: "Retour a l'accueil",
+    },
+    leadMagnet: {
+      submit: "Recevoir la ressource",
+      ready: "Votre ressource est prete.",
+      download: "Telecharger",
+    },
   },
   en: {
     warning: "aissabelkoussa.com is a phishing domain, make sure you are on aissabelkoussa.fr",
@@ -1912,6 +1939,33 @@ const dictionaries: Record<Language, Dictionary> = {
       summary: (weeksToROI: number, weeklySaved: string) =>
         `In ${weeksToROI} weeks, your Accelerator system at €2,900 pays for itself. After that, it's €${weeklySaved} net value every week.`,
       placeholder: "Select your trade to see your ROI",
+    },
+    audit: {
+      badge: "Express audit",
+      title: "Does your website bring you clients?",
+      subtitle: "A personalized report that identifies exactly what's broken in your digital system — and how to fix it.",
+      cta: "Order my audit",
+      price: "47",
+      originalPrice: "197",
+      guarantee: "Satisfied or refunded",
+      delivery: "Delivered within 24h",
+      deductible: "One-time payment. Deductible if you upgrade to a higher offer.",
+      freeDiagnostic: "Prefer a free diagnostic first?",
+      freeDiagnosticCta: "Take the free diagnostic",
+    },
+    upsell: {
+      timerLabel: "Offer available",
+      skip: "No thanks, see my confirmation",
+    },
+    unsubscribe: {
+      title: "Unsubscription confirmed",
+      subtitle: "You will no longer receive automated emails from us.",
+      backHome: "Back to home",
+    },
+    leadMagnet: {
+      submit: "Get the resource",
+      ready: "Your resource is ready.",
+      download: "Download",
     },
   },
 };

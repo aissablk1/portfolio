@@ -83,6 +83,27 @@ export default function DiagnosticPage() {
     } catch {
       setSendError(true);
     }
+    // Trigger sequence email post-diagnostic (fire and forget)
+    const weakest = questions.reduce(
+      (w, q) => ((answers[q.id] ?? 99) < (answers[w.id] ?? 99) ? q : w),
+      questions[0]
+    );
+    fetch("/api/sequences/trigger-diagnostic", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: email.trim(),
+        name: name.trim(),
+        score: totalScore,
+        maxScore,
+        weakestId: weakest.id,
+        weakestQuestion: weakest.question,
+        weakestArea: weakest.options.find((o) => o.score === answers[weakest.id])?.label || "",
+        recommendedPlan: result.plan,
+        answers,
+      }),
+    }).catch(() => {});
+
     setSending(false);
     setSubmitted(true);
     setStep(questions.length + 1);
