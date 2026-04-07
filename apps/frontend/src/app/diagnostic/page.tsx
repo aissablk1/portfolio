@@ -167,7 +167,7 @@ export default function DiagnosticPage() {
                 exit={{ opacity: 0, x: -30 }}
                 transition={{ duration: 0.4 }}
               >
-                <h2 className="text-3xl md:text-4xl font-medium tracking-tighter uppercase mb-10 leading-tight" tabIndex={-1}>
+                <h2 className="text-3xl md:text-4xl font-medium tracking-tighter uppercase mb-10 leading-tight outline-none" tabIndex={-1}>
                   {questions[step].question}
                 </h2>
                 <div className="space-y-3" role="radiogroup" aria-label={questions[step].question}>
@@ -213,7 +213,7 @@ export default function DiagnosticPage() {
                 exit={{ opacity: 0, x: -30 }}
                 transition={{ duration: 0.4 }}
               >
-                <h2 className="text-3xl md:text-4xl font-medium tracking-tighter uppercase mb-4 leading-tight" tabIndex={-1}>
+                <h2 className="text-3xl md:text-4xl font-medium tracking-tighter uppercase mb-4 leading-tight outline-none" tabIndex={-1}>
                   {d.emailPhase.title}
                 </h2>
                 <p className="text-site-text-light mb-10">
@@ -292,7 +292,7 @@ export default function DiagnosticPage() {
                 )}
 
                 {/* Score + Level badge */}
-                <div className="text-center mb-10" role="status" tabIndex={-1}>
+                <div className="text-center mb-10 outline-none" role="status" tabIndex={-1}>
                   <div className="inline-flex items-baseline gap-2 mb-4">
                     <span className={cn("text-7xl font-medium tracking-tighter", result.color)}>{totalScore}</span>
                     <span className="text-2xl text-site-text-light tracking-tighter">/ {maxScore}</span>
