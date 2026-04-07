@@ -276,6 +276,13 @@ interface Dictionary {
     deductible: string;
     freeDiagnostic: string;
     freeDiagnosticCta: string;
+    teaserBadge: string;
+    teaserDesc: string;
+    teaserCta: string;
+    blogBadge: string;
+    blogTitle: string;
+    blogDesc: string;
+    blogCta: string;
   };
   upsell: {
     timerLabel: string;
@@ -1227,6 +1234,13 @@ const dictionaries: Record<Language, Dictionary> = {
       deductible: "Paiement unique. Deductible si vous passez a une offre superieure.",
       freeDiagnostic: "Vous preferez un diagnostic gratuit d'abord ?",
       freeDiagnosticCta: "Faire le diagnostic gratuit",
+      teaserBadge: "Pas encore pret a vous lancer ?",
+      teaserDesc: "Recevez un audit personnalise de votre presence digitale pour seulement 47 EUR. Rapport detaille livre sous 24h.",
+      teaserCta: "Commander mon audit — 47 EUR",
+      blogBadge: "Aller plus loin",
+      blogTitle: "Recevez un audit personnalise de votre presence digitale",
+      blogDesc: "5 axes analyses, recommandations concretes, livre sous 24h. Seulement 47 EUR.",
+      blogCta: "Commander mon audit — 47 EUR",
     },
     upsell: {
       timerLabel: "Offre disponible",
@@ -1984,6 +1998,13 @@ const dictionaries: Record<Language, Dictionary> = {
       deductible: "One-time payment. Deductible if you upgrade to a higher offer.",
       freeDiagnostic: "Prefer a free diagnostic first?",
       freeDiagnosticCta: "Take the free diagnostic",
+      teaserBadge: "Not ready to commit?",
+      teaserDesc: "Get a personalized audit of your digital presence for just EUR 47. Detailed report delivered within 24h.",
+      teaserCta: "Get my audit — EUR 47",
+      blogBadge: "Go further",
+      blogTitle: "Get a personalized audit of your digital presence",
+      blogDesc: "5 axes analyzed, concrete recommendations, delivered within 24h. Only EUR 47.",
+      blogCta: "Order my audit — EUR 47",
     },
     upsell: {
       timerLabel: "Offer available",
