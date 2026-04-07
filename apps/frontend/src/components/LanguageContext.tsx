@@ -250,17 +250,46 @@ interface Dictionary {
       emailPlaceholder: string;
       sending: string;
       submit: string;
+      skip: string;
     };
     results: {
       levelLabel: string;
       answersLabel: string;
       seeOffers: string;
+      sendError: string;
       levels: {
         advanced: { level: string; headline: string; body: string; cta: string };
         intermediate: { level: string; headline: string; body: string; cta: string };
         beginner: { level: string; headline: string; body: string; cta: string };
       };
     };
+  };
+  audit: {
+    badge: string;
+    title: string;
+    subtitle: string;
+    cta: string;
+    price: string;
+    originalPrice: string;
+    guarantee: string;
+    delivery: string;
+    deductible: string;
+    freeDiagnostic: string;
+    freeDiagnosticCta: string;
+  };
+  upsell: {
+    timerLabel: string;
+    skip: string;
+  };
+  unsubscribe: {
+    title: string;
+    subtitle: string;
+    backHome: string;
+  };
+  leadMagnet: {
+    submit: string;
+    ready: string;
+    download: string;
   };
   domainAlert: {
     badge: string;
