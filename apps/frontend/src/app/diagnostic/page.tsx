@@ -292,14 +292,14 @@ export default function DiagnosticPage() {
                 )}
 
                 {/* Score + Level badge */}
-                <div className="text-center mb-10 outline-none" role="status" tabIndex={-1}>
-                  <div className="inline-flex items-baseline gap-2 mb-4">
-                    <span className={cn("text-7xl font-medium tracking-tighter", result.color)}>{totalScore}</span>
-                    <span className="text-2xl text-site-text-light tracking-tighter">/ {maxScore}</span>
+                <div className="flex flex-col items-center gap-3 mb-10 outline-none" role="status" tabIndex={-1}>
+                  <div className="flex items-baseline gap-1">
+                    <span className={cn("text-8xl font-medium tracking-tighter leading-none", result.color)}>{totalScore}</span>
+                    <span className="text-3xl text-site-text-light/40 tracking-tighter font-light">/ {maxScore}</span>
                   </div>
-                  <div className={cn("inline-flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-bold", result.bgColor)}>
-                    <result.icon size={16} className={result.color} />
-                    <span className={result.color}>{d.results.levelLabel} {result.level}</span>
+                  <div className={cn("flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-bold uppercase tracking-widest", result.bgColor)}>
+                    <result.icon size={14} className={result.color} />
+                    <span className={result.color}>{result.level}</span>
                   </div>
                 </div>
 
