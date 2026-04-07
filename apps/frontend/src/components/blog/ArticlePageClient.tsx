@@ -88,7 +88,7 @@ export default function ArticlePageClient({
                 </span>
                 <span className="flex items-center gap-1">
                   <Clock size={12} />
-                  {post.readingTime}
+                  {language === "fr" ? post.readingTime.replace("min read", "min de lecture") : post.readingTime}
                 </span>
               </div>
             </motion.header>

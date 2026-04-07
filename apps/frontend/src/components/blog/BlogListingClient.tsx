@@ -86,7 +86,7 @@ export default function BlogListingClient({ postsFr, postsEn }: { postsFr: BlogP
                         </span>
                         <span className="flex items-center gap-1">
                           <Clock size={12} />
-                          {post.readingTime}
+                          {language === "fr" ? post.readingTime.replace("min read", "min de lecture") : post.readingTime}
                         </span>
                       </div>
                       <div className="flex flex-wrap gap-2 mt-4">
