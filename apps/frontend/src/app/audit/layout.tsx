@@ -3,15 +3,15 @@ import type { Metadata } from "next";
 const siteUrl = "https://www.aissabelkoussa.fr";
 
 export const metadata: Metadata = {
-  title: "Audit digital personnalise — 47 EUR | Aïssa BELKOUSSA",
+  title: "Audit digital personnalisé — 47 € | Aïssa BELKOUSSA",
   description:
-    "Rapport d'audit personnalise de votre presence digitale. 5 axes analyses, recommandations concretes, livre par email sous 24h. 47 EUR au lieu de 197 EUR.",
+    "Rapport d'audit personnalisé de votre présence digitale. 5 axes analysés, recommandations concrètes, livré par e-mail sous 24h. 47 € au lieu de 197 €.",
   robots: { index: true, follow: true },
   alternates: { canonical: `${siteUrl}/audit` },
   openGraph: {
-    title: "Audit digital personnalise — 47 EUR",
+    title: "Audit digital personnalisé — 47 €",
     description:
-      "5 axes analyses, recommandations concretes, livre par email sous 24h.",
+      "5 axes analysés, recommandations concrètes, livré par e-mail sous 24h.",
     url: `${siteUrl}/audit`,
     siteName: "Aïssa BELKOUSSA",
     locale: "fr_FR",

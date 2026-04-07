@@ -23,12 +23,16 @@ export default function DiagnosticPage() {
   const [sending, setSending] = useState(false);
   const [sendError, setSendError] = useState(false);
   const [skipEmail, setSkipEmail] = useState(false);
+  const [transitioning, setTransitioning] = useState(false);
 
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const isQuestionPhase = step < questions.length;
-  const isEmailPhase = step === questions.length && !skipEmail;
-  const isResultPhase = step === questions.length + 1 || (step === questions.length && skipEmail);
+  // Clamp step to valid range
+  const maxStep = questions.length + 1;
+  const safeStep = Math.min(Math.max(step, 0), maxStep);
+  const isQuestionPhase = safeStep < questions.length;
+  const isEmailPhase = safeStep === questions.length && !skipEmail;
+  const isResultPhase = safeStep === questions.length + 1 || (safeStep === questions.length && skipEmail);
 
   const totalScore = Object.values(answers).reduce((a, b) => a + b, 0);
   const maxScore = questions.length * 3;
@@ -48,15 +52,20 @@ export default function DiagnosticPage() {
       const heading = containerRef.current.querySelector("h2, [role='status']");
       if (heading instanceof HTMLElement) heading.focus();
     }
-  }, [step, skipEmail]);
+  }, [safeStep, skipEmail]);
 
   const selectAnswer = (questionId: string, score: number) => {
+    if (transitioning) return;
+    setTransitioning(true);
     setAnswers((prev) => ({ ...prev, [questionId]: score }));
-    setTimeout(() => setStep((s) => s + 1), 400);
+    setTimeout(() => {
+      setStep((s) => Math.min(s + 1, maxStep));
+      setTransitioning(false);
+    }, 400);
   };
 
   const goToQuestion = (index: number) => {
-    if (answers[questions[index]?.id] !== undefined || index <= step) {
+    if (answers[questions[index]?.id] !== undefined || index <= safeStep) {
       setStep(index);
     }
   };
@@ -126,18 +135,18 @@ export default function DiagnosticPage() {
                 <span>
                   {isEmailPhase
                     ? d.lastStep
-                    : `${d.questionOf} ${step + 1} / ${questions.length}`}
+                    : `${d.questionOf} ${Math.min(safeStep + 1, questions.length)} / ${questions.length}`}
                 </span>
               </div>
               <div className="flex gap-1.5">
                 {questions.map((q, i) => {
                   const answered = answers[q.id] !== undefined;
-                  const isCurrent = i === step;
+                  const isCurrent = i === safeStep;
                   return (
                     <button
                       key={q.id}
                       onClick={() => goToQuestion(i)}
-                      disabled={!answered && i > step}
+                      disabled={!answered && i > safeStep}
                       aria-label={`${d.questionOf} ${i + 1}`}
                       className={cn(
                         "h-1.5 flex-1 rounded-full transition-all duration-300",
@@ -159,24 +168,24 @@ export default function DiagnosticPage() {
 
           <AnimatePresence mode="wait">
             {/* Questions */}
-            {isQuestionPhase && (
+            {isQuestionPhase && questions[safeStep] && (
               <motion.div
-                key={`q-${step}`}
+                key={`q-${safeStep}`}
                 initial={{ opacity: 0, x: 30 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -30 }}
                 transition={{ duration: 0.4 }}
               >
                 <h2 className="text-3xl md:text-4xl font-medium tracking-tighter uppercase mb-10 leading-tight outline-none" tabIndex={-1}>
-                  {questions[step].question}
+                  {questions[safeStep].question}
                 </h2>
-                <div className="space-y-3" role="radiogroup" aria-label={questions[step].question}>
-                  {questions[step].options.map((opt) => {
-                    const selected = answers[questions[step].id] === opt.score;
+                <div className="space-y-3" role="radiogroup" aria-label={questions[safeStep].question}>
+                  {questions[safeStep].options.map((opt) => {
+                    const selected = answers[questions[safeStep].id] === opt.score;
                     return (
                       <button
                         key={opt.score}
-                        onClick={() => selectAnswer(questions[step].id, opt.score)}
+                        onClick={() => selectAnswer(questions[safeStep].id, opt.score)}
                         role="radio"
                         aria-checked={selected}
                         className={cn(
@@ -192,7 +201,7 @@ export default function DiagnosticPage() {
                   })}
                 </div>
 
-                {step > 0 && (
+                {safeStep > 0 && (
                   <button
                     onClick={() => setStep((s) => s - 1)}
                     className="mt-8 flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-site-text-light hover:text-site-text transition-colors"
