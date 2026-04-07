@@ -319,6 +319,27 @@ export default function DiagnosticPage() {
                   </Link>
                 </div>
 
+                {/* Audit CTA for low scores */}
+                {totalScore < 12 && (
+                  <div className="border border-site-border rounded-2xl p-6 md:p-8 mb-6 text-center">
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-site-text-light/40 mb-3">
+                      {language === "en" ? "Not ready to commit?" : "Pas encore pret a vous lancer ?"}
+                    </p>
+                    <p className="text-sm text-site-text-light mb-4">
+                      {language === "en"
+                        ? "Get a personalized audit of your digital presence for just 47 EUR. Detailed report delivered within 24h."
+                        : "Recevez un audit personnalise de votre presence digitale pour seulement 47 EUR. Rapport detaille livre sous 24h."}
+                    </p>
+                    <Link
+                      href="/audit"
+                      className="inline-flex items-center gap-2 border border-site-border px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest hover:border-site-text transition-colors"
+                    >
+                      {language === "en" ? "Get my audit — 47 EUR" : "Commander mon audit — 47 EUR"}
+                      <ArrowRight size={14} />
+                    </Link>
+                  </div>
+                )}
+
                 {/* Answers recap — collapsible */}
                 <details className="border border-site-border rounded-2xl overflow-hidden mb-8 group">
                   <summary className="p-6 cursor-pointer flex items-center justify-between text-[10px] font-bold uppercase tracking-widest text-site-text-light/60 hover:text-site-text-light transition-colors">

@@ -88,6 +88,16 @@ export default function ExitIntentModal() {
               <p className="text-[10px] text-site-text-light/40 mt-4">
                 {dict.exitIntent.trust}
               </p>
+
+              <div className="mt-6 pt-4 border-t border-site-border">
+                <Link
+                  href="/audit"
+                  onClick={close}
+                  className="text-[11px] font-medium text-site-text-light hover:text-site-text transition-colors underline underline-offset-2"
+                >
+                  {dict.exitIntent.auditCta || "Ou recevez un audit personnalise pour 47 EUR"}
+                </Link>
+              </div>
             </div>
           </motion.div>
         </motion.div>

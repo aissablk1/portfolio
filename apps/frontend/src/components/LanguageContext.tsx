@@ -390,6 +390,7 @@ interface Dictionary {
     subtitle: string;
     cta: string;
     trust: string;
+    auditCta: string;
   };
   whatsapp: {
     defaultMessage: string;
@@ -1116,6 +1117,7 @@ const dictionaries: Record<Language, Dictionary> = {
       subtitle: "Découvrez combien d'heures par semaine votre entreprise perd sur des tâches automatisables.",
       cta: "Recevoir mon diagnostic",
       trust: "Réponse personnalisée sous 48h",
+      auditCta: "Ou recevez un audit personnalise pour 47 EUR",
     },
     whatsapp: {
       defaultMessage: "Bonjour Aïssa, j'ai vu votre site et j'aimerais discuter d'un projet.",
@@ -1872,6 +1874,7 @@ const dictionaries: Record<Language, Dictionary> = {
       subtitle: "Discover how many hours per week your business loses on automatable tasks.",
       cta: "Get my diagnostic",
       trust: "Personalized response within 48h",
+      auditCta: "Or get a personalized audit for EUR 47",
     },
     whatsapp: {
       defaultMessage: "Hi Aïssa, I saw your website and would like to discuss a project.",

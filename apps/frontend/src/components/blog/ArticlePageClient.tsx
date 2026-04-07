@@ -133,6 +133,30 @@ export default function ArticlePageClient({
               </div>
             </div>
 
+            {/* Audit CTA */}
+            <div className="mt-12 border border-site-border rounded-2xl p-8 text-center">
+              <p className="text-xs font-bold uppercase tracking-widest text-site-text-light/40 mb-3">
+                {language === "en" ? "Go further" : "Aller plus loin"}
+              </p>
+              <h4 className="text-lg font-medium tracking-tight mb-2">
+                {language === "en"
+                  ? "Get a personalized audit of your digital presence"
+                  : "Recevez un audit personnalise de votre presence digitale"}
+              </h4>
+              <p className="text-sm text-site-text-light mb-6 max-w-md mx-auto">
+                {language === "en"
+                  ? "5 axes analyzed, concrete recommendations, delivered within 24h. Only 47 EUR."
+                  : "5 axes analyses, recommandations concretes, livre sous 24h. Seulement 47 EUR."}
+              </p>
+              <Link
+                href="/audit"
+                className="inline-flex items-center gap-2 bg-site-text text-site-bg px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest hover:scale-105 transition-transform"
+              >
+                {language === "en" ? "Order my audit — 47 EUR" : "Commander mon audit — 47 EUR"}
+                <ArrowUpRight size={14} />
+              </Link>
+            </div>
+
             {/* Related articles */}
             {related.length > 0 && (
               <div className="mt-16">
