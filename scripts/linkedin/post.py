@@ -95,6 +95,37 @@ La perfection technique ne paie pas les factures. Les conversations, oui.
         "comment_link": "https://aissabelkoussa.fr/diagnostic",
     },
     {
+        "id": 5,
+        "title": "Article blog — 3 signaux site web couteux",
+        "date_prevue": "7 avril 2026",
+        "hashtags": "#siteweb #PME #artisans #digital #TPE",
+        "content": """Vous payez un hébergement.
+Vous avez payé un prestataire.
+Peut-être même un nom de domaine premium.
+
+Et votre site ne génère ni appels, ni emails, ni demandes de devis.
+
+J'ai écrit un article sur les 3 signaux concrets qui montrent que votre site vous coûte de l'argent au lieu d'en rapporter.
+
+Signal 1 : Vous ne savez pas combien de visiteurs vous recevez.
+→ Un site sans analytics, c'est un magasin sans compteur de passages.
+
+Signal 2 : Votre dernier contact entrant via le site date de plus de 3 mois.
+→ Un artisan qui facture 45€/h et perd 1 lead/semaine, c'est 36 000€/an de CA non capté.
+
+Signal 3 : Votre formulaire envoie un email que personne ne lit.
+→ Le prospect attend. Et il finit chez votre concurrent qui a répondu en 2h.
+
+La bonne nouvelle : les 3 se corrigent en moins de 10 jours.
+
+L'article complet est en commentaire 👇
+
+Si vous cochez 2 sur 3, faites le diagnostic gratuit (2 min) sur mon site. Résultat immédiat.
+
+#siteweb #PME #artisans #digital #TPE""",
+        "comment_link": "L'article complet : https://www.aissabelkoussa.fr/blog/site-web-coute-argent-3-signaux\n\nDiagnostic gratuit (2 minutes, résultat immédiat) : https://www.aissabelkoussa.fr/diagnostic",
+    },
+    {
         "id": 3,
         "title": "Post educatif : 3 signaux site mort",
         "date_prevue": "14 avril 2026",

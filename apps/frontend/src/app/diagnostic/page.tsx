@@ -129,15 +129,7 @@ export default function DiagnosticPage() {
                     : `${d.questionOf} ${step + 1} / ${questions.length}`}
                 </span>
               </div>
-              <div className="h-1 w-full bg-site-border rounded-full overflow-hidden relative">
-                <motion.div
-                  className="h-full bg-site-text"
-                  animate={{ width: `${((step + 1) / (questions.length + 1)) * 100}%` }}
-                  transition={{ duration: 0.5, ease: "circOut" }}
-                />
-              </div>
-              {/* Step indicators */}
-              <div className="flex gap-1.5 mt-3">
+              <div className="flex gap-1.5">
                 {questions.map((q, i) => {
                   const answered = answers[q.id] !== undefined;
                   const isCurrent = i === step;
@@ -154,6 +146,13 @@ export default function DiagnosticPage() {
                     />
                   );
                 })}
+                {/* Email step indicator */}
+                <div
+                  className={cn(
+                    "h-1.5 flex-1 rounded-full transition-all duration-300",
+                    isEmailPhase ? "bg-site-text" : "bg-site-border"
+                  )}
+                />
               </div>
             </div>
           )}
