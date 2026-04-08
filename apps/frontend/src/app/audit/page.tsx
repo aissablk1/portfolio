@@ -22,15 +22,25 @@ export default function AuditPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ plan: "audit" }),
       });
+
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.error || "Erreur lors du paiement");
+      }
+
       const data = await res.json();
       if (data.url) {
         window.location.href = data.url;
         return;
+      } else {
+        throw new Error("URL de session manquante");
       }
-    } catch {
-      // Fallback
+    } catch (err: any) {
+      console.error("Stripe Checkout Error:", err);
+      alert(fr ? "Erreur lors du lancement du paiement. Veuillez reessayer ou me contacter directement via WhatsApp." : "Error launching payment. Please try again or contact me directly via WhatsApp.");
+    } finally {
+      setPurchasing(false);
     }
-    setPurchasing(false);
   };
 
   const features = fr

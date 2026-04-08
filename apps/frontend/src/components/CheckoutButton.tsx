@@ -23,14 +23,24 @@ export default function CheckoutButton({ plan, label, className }: Props) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ plan }),
       });
+
+      if (!res.ok) {
+        const errorData = await res.json();
+        console.error("Checkout API Error:", errorData.error);
+        window.location.href = `/contact?plan=${plan}&error=stripe_error`;
+        return;
+      }
+
       const data = await res.json();
       if (data.url) {
         window.location.href = data.url;
       } else {
-        window.location.href = `/contact?plan=${plan}`;
+        console.error("No URL returned from checkout API");
+        window.location.href = `/contact?plan=${plan}&error=no_url`;
       }
-    } catch {
-      window.location.href = `/contact?plan=${plan}`;
+    } catch (err) {
+      console.error("Checkout Fetch Error:", err);
+      window.location.href = `/contact?plan=${plan}&error=fetch_error`;
     } finally {
       setLoading(false);
     }

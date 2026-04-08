@@ -13,10 +13,9 @@ export async function POST(request: NextRequest) {
     const { plan, email } = body as { plan: string; email?: string };
 
     if (!plan) {
-      return NextResponse.json({ error: "Plan manquant" }, { status: 400 });
+      return NextResponse.json({ error: "Plan manquant." }, { status: 400 });
     }
 
-    // Gestion des plans speciaux
     const isMaintenance = plan === "pro-maintenance";
     const isAudit = plan === "audit";
     const product = isAudit
@@ -25,12 +24,16 @@ export async function POST(request: NextRequest) {
         ? STRIPE_MAINTENANCE_SUBSCRIPTION
         : STRIPE_PRODUCTS[plan as StripePlan];
 
+    console.log(`[Checkout] Plan: ${plan}, isAudit: ${isAudit}, Product found: ${!!product}`);
+
     if (!product) {
-      return NextResponse.json({ error: "Plan invalide" }, { status: 400 });
+      return NextResponse.json({ error: `Produit invalide: ${plan}` }, { status: 400 });
     }
 
     const origin =
       request.headers.get("origin") || "https://www.aissabelkoussa.fr";
+
+    console.log(`[Checkout] Creating session for ${product.name} (Price: ${product.priceId}) from origin: ${origin}`);
 
     const session = await stripe.checkout.sessions.create({
       mode: product.mode,
@@ -45,11 +48,17 @@ export async function POST(request: NextRequest) {
       ...(email && { customer_email: email }),
     });
 
+    console.log(`[Checkout] Session created: ${session.id}`);
+
     return NextResponse.json({ url: session.url });
-  } catch (error) {
-    console.error("Stripe checkout error:", error);
+  } catch (error: any) {
+    console.error("Stripe Checkout Error 상세:", {
+      message: error.message,
+      stack: error.stack,
+      raw: error,
+    });
     return NextResponse.json(
-      { error: "Erreur lors de la creation de la session." },
+      { error: `Erreur Stripe: ${error.message || "Erreur inconnue"}` },
       { status: 500 },
     );
   }
