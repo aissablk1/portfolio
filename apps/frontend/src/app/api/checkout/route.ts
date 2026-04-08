@@ -6,6 +6,7 @@ import {
   STRIPE_TRIPWIRE,
   type StripePlan,
 } from "@/lib/stripe-products";
+import { Logger } from "@/lib/logger";
 
 export async function POST(request: NextRequest) {
   try {
@@ -13,6 +14,7 @@ export async function POST(request: NextRequest) {
     const { plan, email } = body as { plan: string; email?: string };
 
     if (!plan) {
+      Logger.error("Plan manquant dans la requete");
       return NextResponse.json({ error: "Plan manquant." }, { status: 400 });
     }
 
@@ -25,22 +27,26 @@ export async function POST(request: NextRequest) {
         : STRIPE_PRODUCTS[plan as StripePlan];
 
     const key = process.env.STRIPE_SECRET_KEY || "";
-    console.log(`[Checkout] Plan: ${plan}, isAudit: ${isAudit}, Product found: ${!!product}, Key length: ${key.length}`);
+    Logger.info(`Tentative de checkout pour: ${plan}`, { 
+      isAudit, 
+      productFound: !!product, 
+      keyLength: key.length 
+    });
 
     if (key.length < 10) {
-      console.error("[Checkout] CRITICAL: STRIPE_SECRET_KEY is empty or too short!");
+      Logger.error("STRIPE_SECRET_KEY est manquant ou trop court dans cet environnement.");
     }
 
     if (!product) {
+      Logger.error(`Produit introuvable pour le plan: ${plan}`);
       return NextResponse.json({ error: `Produit invalide: ${plan}` }, { status: 400 });
     }
 
-    const origin =
-      request.headers.get("origin") || "https://www.aissabelkoussa.fr";
+    // Sanitize origin: remove trailing slash for Stripe consistency
+    const rawOrigin = request.headers.get("origin") || "https://www.aissabelkoussa.fr";
+    const origin = rawOrigin.endsWith("/") ? rawOrigin.slice(0, -1) : rawOrigin;
 
-    console.log(`[Checkout] Creating session for ${product.name} (Price: ${product.priceId}) from origin: ${origin}`);
-
-    const session = await stripe.checkout.sessions.create({
+    const sessionParams: any = {
       mode: product.mode,
       payment_method_types: ["card"],
       line_items: [{ price: product.priceId, quantity: 1 }],
@@ -50,18 +56,22 @@ export async function POST(request: NextRequest) {
       allow_promotion_codes: true,
       billing_address_collection: "required",
       metadata: { plan },
-      ...(email && { customer_email: email }),
-    });
+    };
 
-    console.log(`[Checkout] Session created: ${session.id}`);
+    // Ensure email is a valid non-empty string
+    if (email && typeof email === 'string' && email.trim().length > 0) {
+      sessionParams.customer_email = email.trim();
+    }
+
+    Logger.debug("Creation de la session Stripe avec les parametres:", sessionParams);
+
+    const session = await stripe.checkout.sessions.create(sessionParams);
+
+    Logger.info(`Session Stripe creee avec succes: ${session.id}`);
 
     return NextResponse.json({ url: session.url });
   } catch (error: any) {
-    console.error("Stripe Checkout Error 상세:", {
-      message: error.message,
-      stack: error.stack,
-      raw: error,
-    });
+    Logger.error("Erreur lors de la creation de la session Stripe", error);
     return NextResponse.json(
       { error: `Erreur Stripe: ${error.message || "Erreur inconnue"}` },
       { status: 500 },
