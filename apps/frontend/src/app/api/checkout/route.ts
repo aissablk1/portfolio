@@ -24,7 +24,12 @@ export async function POST(request: NextRequest) {
         ? STRIPE_MAINTENANCE_SUBSCRIPTION
         : STRIPE_PRODUCTS[plan as StripePlan];
 
-    console.log(`[Checkout] Plan: ${plan}, isAudit: ${isAudit}, Product found: ${!!product}`);
+    const key = process.env.STRIPE_SECRET_KEY || "";
+    console.log(`[Checkout] Plan: ${plan}, isAudit: ${isAudit}, Product found: ${!!product}, Key length: ${key.length}`);
+
+    if (key.length < 10) {
+      console.error("[Checkout] CRITICAL: STRIPE_SECRET_KEY is empty or too short!");
+    }
 
     if (!product) {
       return NextResponse.json({ error: `Produit invalide: ${plan}` }, { status: 400 });
