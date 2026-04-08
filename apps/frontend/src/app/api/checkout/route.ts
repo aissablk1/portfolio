@@ -48,7 +48,6 @@ export async function POST(request: NextRequest) {
 
     const sessionParams: any = {
       mode: product.mode,
-      payment_method_types: ["card"],
       line_items: [{ price: product.priceId, quantity: 1 }],
       success_url: `${origin}/checkout/upsell?session_id={CHECKOUT_SESSION_ID}&plan=${plan}`,
       cancel_url: `${origin}/services`,
@@ -63,7 +62,11 @@ export async function POST(request: NextRequest) {
       sessionParams.customer_email = email.trim();
     }
 
-    Logger.debug("Creation de la session Stripe avec les parametres:", sessionParams);
+    // Diagnostic log for Phase 4 (sanitized)
+    Logger.info("Creation de la session Stripe avec les parametres (simplifies):", {
+      ...sessionParams,
+      success_url: sessionParams.success_url.replace(/plan=([^&]+)/, "plan=***"),
+    });
 
     const session = await stripe.checkout.sessions.create(sessionParams);
 

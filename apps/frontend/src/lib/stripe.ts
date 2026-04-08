@@ -7,7 +7,7 @@ export function getStripe(): Stripe {
     const key = process.env.STRIPE_SECRET_KEY;
     if (!key) throw new Error("STRIPE_SECRET_KEY is not defined");
     _stripe = new Stripe(key, {
-      apiVersion: "2023-10-16",
+      apiVersion: "2025-01-27.acacia",
       typescript: true,
       httpClient: Stripe.createFetchHttpClient(),
       telemetry: false,
