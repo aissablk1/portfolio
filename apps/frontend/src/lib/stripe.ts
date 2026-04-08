@@ -6,7 +6,16 @@ export function getStripe(): Stripe {
   if (!_stripe) {
     const key = process.env.STRIPE_SECRET_KEY;
     if (!key) throw new Error("STRIPE_SECRET_KEY is not defined");
-    _stripe = new Stripe(key, { typescript: true });
+    _stripe = new Stripe(key, {
+      apiVersion: "2024-12-18.acacia",
+      typescript: true,
+      maxNetworkRetries: 3,
+      timeout: 15000,
+      appInfo: {
+        name: "Aïssa Portfolio",
+        version: "1.0.0",
+      },
+    });
   }
   return _stripe;
 }
