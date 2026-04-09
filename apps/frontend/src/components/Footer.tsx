@@ -65,6 +65,7 @@ const Footer = () => {
                   <Link href="/#offers" className="text-sm hover:underline">{dict.nav.offers}</Link>
                   <Link href="/#approach" className="text-sm hover:underline">{dict.nav.approach}</Link>
                   <Link href="/#expertise" className="text-sm hover:underline">{dict.nav.expertise}</Link>
+                  <Link href="/blog" className="text-sm hover:underline">Blog</Link>
               </div>
               <div className="flex flex-col gap-4">
                   <span className="text-xs font-bold uppercase tracking-widest text-site-text-light">{dict.footer.architecture}</span>
