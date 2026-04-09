@@ -74,9 +74,16 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ url: session.url });
   } catch (error: any) {
-    Logger.error("Erreur lors de la creation de la session Stripe", error);
+    Logger.error("Erreur lors de la creation de la session Stripe", {
+      message: error.message,
+      type: error.type,
+      code: error.code,
+      param: error.param,
+      statusCode: error.statusCode,
+      requestId: error.requestId,
+    });
     return NextResponse.json(
-      { error: `Erreur Stripe: ${error.message || "Erreur inconnue"}` },
+      { error: `Erreur Stripe: ${error.message || "Erreur inconnue"}`, code: error.code, param: error.param },
       { status: 500 },
     );
   }
