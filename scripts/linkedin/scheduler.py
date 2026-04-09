@@ -28,6 +28,14 @@ SCHEDULE = [
     {"post_id": 1, "date": "2026-04-05", "time": "08:30", "label": "Storytelling BTP"},
     {"post_id": 2, "date": "2026-04-10", "time": "08:30", "label": "Post verite"},
     {"post_id": 3, "date": "2026-04-14", "time": "08:30", "label": "Post educatif"},
+    {"post_id": 6, "date": "2026-04-10", "time": "10:00", "label": "Post #6"},
+    {"post_id": 7, "date": "2026-04-11", "time": "10:00", "label": "Post #7"},
+    {"post_id": 8, "date": "2026-04-12", "time": "12:00", "label": "Post #8"},
+    {"post_id": 9, "date": "2026-04-14", "time": "10:00", "label": "Post #9"},
+    {"post_id": 10, "date": "2026-04-15", "time": "10:00", "label": "Post #10"},
+    {"post_id": 11, "date": "2026-04-16", "time": "10:00", "label": "Post #11"},
+    {"post_id": 12, "date": "2026-04-17", "time": "10:00", "label": "Post #12"},
+    {"post_id": 13, "date": "2026-04-18", "time": "10:00", "label": "Post #13"},
 ]
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
