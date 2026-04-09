@@ -416,6 +416,10 @@ interface Dictionary {
     learnMore: string;
     viewPricing: string;
     redirecting: string;
+    cookieMessage: string;
+    cookieAccept: string;
+    cookieDecline: string;
+    cookiePolicy: string;
   };
   checkout: {
     verifying: string;
@@ -1147,6 +1151,10 @@ const dictionaries: Record<Language, Dictionary> = {
       learnMore: "En savoir +",
       viewPricing: "Voir les tarifs",
       redirecting: "Redirection...",
+      cookieMessage: "Ce site utilise des cookies d'analyse (Google Analytics) pour mesurer l'audience et ameliorer l'experience. Aucune donnee personnelle n'est partagee a des fins publicitaires.",
+      cookieAccept: "Accepter",
+      cookieDecline: "Refuser",
+      cookiePolicy: "Politique de confidentialite",
     },
     checkout: {
       verifying: "Vérification du paiement...",
@@ -1911,6 +1919,10 @@ const dictionaries: Record<Language, Dictionary> = {
       learnMore: "Learn more +",
       viewPricing: "View pricing",
       redirecting: "Redirecting...",
+      cookieMessage: "This site uses analytics cookies (Google Analytics) to measure audience and improve experience. No personal data is shared for advertising purposes.",
+      cookieAccept: "Accept",
+      cookieDecline: "Decline",
+      cookiePolicy: "Privacy policy",
     },
     checkout: {
       verifying: "Verifying payment...",

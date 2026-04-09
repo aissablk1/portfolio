@@ -45,8 +45,7 @@ function loadAnalytics() {
 
 export default function CookieConsent() {
   const [visible, setVisible] = useState(false);
-  const { language } = useLanguage();
-  const fr = language !== "en";
+  const { dict } = useLanguage();
 
   useEffect(() => {
     const consent = getConsent();
@@ -73,20 +72,17 @@ export default function CookieConsent() {
   return (
     <div
       role="dialog"
-      aria-label={fr ? "Consentement cookies" : "Cookie consent"}
+      aria-label={dict.ui.cookieAccept}
       className="fixed bottom-0 left-0 right-0 z-50 p-4 md:p-6"
     >
       <div className="max-w-2xl mx-auto bg-site-bg border border-site-border rounded-2xl p-6 shadow-[0_-4px_24px_rgba(0,0,0,0.08)]">
         <p className="text-sm text-site-text-light leading-relaxed mb-4">
-          {fr
-            ? "Ce site utilise des cookies d'analyse (Google Analytics) pour mesurer l'audience et ameliorer l'experience. Aucune donnee personnelle n'est partagee a des fins publicitaires."
-            : "This site uses analytics cookies (Google Analytics) to measure audience and improve experience. No personal data is shared for advertising purposes."}
-          {" "}
+          {dict.ui.cookieMessage}{" "}
           <a
             href="/confidentialite"
             className="underline underline-offset-2 text-site-text hover:text-site-accent transition-colors"
           >
-            {fr ? "Politique de confidentialite" : "Privacy policy"}
+            {dict.ui.cookiePolicy}
           </a>
         </p>
         <div className="flex items-center gap-3">
@@ -94,13 +90,13 @@ export default function CookieConsent() {
             onClick={handleAccept}
             className="px-5 py-2.5 bg-site-text text-site-bg text-xs font-bold uppercase tracking-widest rounded-full hover:scale-105 transition-transform"
           >
-            {fr ? "Accepter" : "Accept"}
+            {dict.ui.cookieAccept}
           </button>
           <button
             onClick={handleRefuse}
             className="px-5 py-2.5 border border-site-border text-xs font-bold uppercase tracking-widest rounded-full hover:border-site-text transition-colors"
           >
-            {fr ? "Refuser" : "Decline"}
+            {dict.ui.cookieDecline}
           </button>
         </div>
       </div>
