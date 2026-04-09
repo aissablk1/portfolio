@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { stripe } from "@/lib/stripe";
 import {
   STRIPE_PRODUCTS,
   STRIPE_MAINTENANCE_SUBSCRIPTION,
@@ -7,6 +6,63 @@ import {
   type StripePlan,
 } from "@/lib/stripe-products";
 import { Logger } from "@/lib/logger";
+
+/**
+ * Create a Stripe Checkout Session via raw fetch (bypasses SDK bundling issues on Vercel).
+ */
+async function createCheckoutSession(params: Record<string, unknown>): Promise<{ id: string; url: string }> {
+  const key = process.env.STRIPE_SECRET_KEY;
+  if (!key) throw new Error("STRIPE_SECRET_KEY is not defined");
+
+  // Encode params as application/x-www-form-urlencoded (Stripe API format)
+  const body = encodeStripeParams(params);
+
+  const res = await fetch("https://api.stripe.com/v1/checkout/sessions", {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${key}`,
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Stripe-Version": "2025-01-27.acacia",
+    },
+    body,
+  });
+
+  const data = await res.json();
+
+  if (!res.ok) {
+    const err = new Error(data.error?.message || "Stripe API error");
+    (err as any).type = data.error?.type;
+    (err as any).code = data.error?.code;
+    (err as any).param = data.error?.param;
+    (err as any).statusCode = res.status;
+    throw err;
+  }
+
+  return data;
+}
+
+/** Encode nested params to Stripe's form format: line_items[0][price]=xxx */
+function encodeStripeParams(obj: Record<string, unknown>, prefix = ""): string {
+  const parts: string[] = [];
+  for (const [key, value] of Object.entries(obj)) {
+    const fullKey = prefix ? `${prefix}[${key}]` : key;
+    if (value === null || value === undefined) continue;
+    if (typeof value === "object" && !Array.isArray(value)) {
+      parts.push(encodeStripeParams(value as Record<string, unknown>, fullKey));
+    } else if (Array.isArray(value)) {
+      value.forEach((item, i) => {
+        if (typeof item === "object" && item !== null) {
+          parts.push(encodeStripeParams(item as Record<string, unknown>, `${fullKey}[${i}]`));
+        } else {
+          parts.push(`${encodeURIComponent(`${fullKey}[${i}]`)}=${encodeURIComponent(String(item))}`);
+        }
+      });
+    } else {
+      parts.push(`${encodeURIComponent(fullKey)}=${encodeURIComponent(String(value))}`);
+    }
+  }
+  return parts.filter(Boolean).join("&");
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -26,51 +82,35 @@ export async function POST(request: NextRequest) {
         ? STRIPE_MAINTENANCE_SUBSCRIPTION
         : STRIPE_PRODUCTS[plan as StripePlan];
 
-    const key = process.env.STRIPE_SECRET_KEY || "";
-    Logger.info(`Tentative de checkout pour: ${plan}`, { 
-      isAudit, 
-      productFound: !!product, 
-      keyLength: key.length 
-    });
-
-    if (key.length < 10) {
-      Logger.error("STRIPE_SECRET_KEY est manquant ou trop court dans cet environnement.");
-    }
-
     if (!product) {
       Logger.error(`Produit introuvable pour le plan: ${plan}`);
       return NextResponse.json({ error: `Produit invalide: ${plan}` }, { status: 400 });
     }
 
-    // Sanitize origin: remove trailing slash for Stripe consistency
     const rawOrigin = request.headers.get("origin") || "https://www.aissabelkoussa.fr";
     const origin = rawOrigin.endsWith("/") ? rawOrigin.slice(0, -1) : rawOrigin;
 
-    const sessionParams: any = {
+    const sessionParams: Record<string, unknown> = {
       mode: product.mode,
-      line_items: [{ price: product.priceId, quantity: 1 }],
+      "line_items[0][price]": product.priceId,
+      "line_items[0][quantity]": "1",
       success_url: `${origin}/checkout/upsell?session_id={CHECKOUT_SESSION_ID}&plan=${plan}`,
       cancel_url: `${origin}/services`,
       locale: "fr",
-      allow_promotion_codes: true,
+      allow_promotion_codes: "true",
       billing_address_collection: "required",
-      metadata: { plan },
+      "metadata[plan]": plan,
     };
 
-    // Ensure email is a valid non-empty string
-    if (email && typeof email === 'string' && email.trim().length > 0) {
+    if (email && typeof email === "string" && email.trim().length > 0) {
       sessionParams.customer_email = email.trim();
     }
 
-    // Diagnostic log for Phase 4 (sanitized)
-    Logger.info("Creation de la session Stripe avec les parametres (simplifies):", {
-      ...sessionParams,
-      success_url: sessionParams.success_url.replace(/plan=([^&]+)/, "plan=***"),
-    });
+    Logger.info(`Checkout pour: ${plan}`, { product: product.name, origin });
 
-    const session = await stripe.checkout.sessions.create(sessionParams);
+    const session = await createCheckoutSession(sessionParams);
 
-    Logger.info(`Session Stripe creee avec succes: ${session.id}`);
+    Logger.info(`Session Stripe creee: ${session.id}`);
 
     return NextResponse.json({ url: session.url });
   } catch (error: any) {
