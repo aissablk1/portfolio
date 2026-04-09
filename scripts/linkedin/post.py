@@ -202,6 +202,271 @@ MP ou commentaire pour faire le point sur votre visibilité.
 #SEO #GEO #IA #VisibiliteDigitale #MarketingDigital #Freelance""",
         "comment_link": "L'article complet est ici : https://www.aissabelkoussa.fr/blog/seo-vs-geo-visibilite-ia-2026\n\nAu programme :\n• La différence SEO vs GEO en un tableau\n• Ce que les IA regardent concrètement pour vous citer\n• 5 actions concrètes avec les coûts associés\n• FAQ (comment tester, en combien de temps ça marche)",
     },
+    {
+        "id": 6,
+        "title": "Artisan BTP : votre fiche Google est invisible",
+        "date_prevue": "10 avril 2026",
+        "hashtags": "#BTP #artisans #GoogleMaps #Tarn #referencement",
+        "content": """Votre fiche Google Business existe.
+Mais personne ne vous trouve.
+
+87% des clients cherchent un artisan local sur Google avant de decrocher leur telephone. Si votre fiche n'apparait pas dans les 3 premiers resultats du pack local, vous etes invisible pour la majorite de vos prospects.
+
+J'ai audite des dizaines de fiches d'artisans dans le Tarn. Les 3 erreurs reviennent systematiquement :
+
+1. Aucune photo de chantier.
+Google favorise les fiches actives. Une fiche sans photo recente, c'est une fiche que l'algorithme enterre. Les fiches avec plus de 10 photos recoivent 35% de clics supplementaires par rapport a celles qui n'en ont pas.
+
+2. Zero avis client.
+Un artisan avec 0 avis face a un concurrent qui en a 15, c'est un match perdu d'avance. 72% des consommateurs ne contactent pas une entreprise avec moins de 3 avis.
+
+3. Categories mal choisies.
+"Construction" au lieu de "Constructeur de maisons individuelles". Google est literal. Si votre categorie est vague, il vous classe derriere ceux qui sont precis.
+
+3 actions a faire cette semaine :
+- Ajoutez 5 photos de vos derniers chantiers (avant/apres)
+- Envoyez un SMS a vos 3 derniers clients satisfaits pour leur demander un avis
+- Verifiez votre categorie principale sur business.google.com
+
+J'ai ecrit un guide complet avec les 7 etapes concretes pour passer de invisible a premier resultat local. Le lien est en commentaire.
+
+Si vous voulez un diagnostic gratuit de votre fiche Google, le lien est aussi en commentaire. Ca prend 2 minutes.
+
+#BTP #artisans #GoogleMaps #Tarn #referencement""",
+        "comment_link": "Le guide complet (7 etapes) : https://www.aissabelkoussa.fr/blog/artisan-btp-fiche-google-maps-2026\n\nDiagnostic gratuit de votre presence en ligne (2 minutes) : https://www.aissabelkoussa.fr/diagnostic",
+    },
+    {
+        "id": 7,
+        "title": "Agent immobilier : arretez les visites inutiles",
+        "date_prevue": "11 avril 2026",
+        "hashtags": "#immobilier #chatbot #IA #qualification #leads",
+        "content": """Un agent immobilier fait en moyenne 12 visites pour signer 1 mandat.
+40% de ces visiteurs ne sont pas qualifies.
+
+C'est du tourisme immobilier. Des curieux sans financement, des acheteurs qui ne savent pas encore ce qu'ils cherchent, des vendeurs qui testent le marche sans intention reelle.
+
+Chaque visite non qualifiee, c'est 1h30 de perdue. Le deplacement, la preparation du dossier, le temps sur place, le compte-rendu. Multipliez par 5 visites inutiles par semaine : vous perdez presque une journee entiere.
+
+La solution existe et elle ne demande pas de revolution technologique.
+
+Un chatbot installe sur votre site pose 5 questions avant la prise de rendez-vous :
+- Quel est votre budget ?
+- Avez-vous obtenu un accord de principe bancaire ?
+- Dans quel delai souhaitez-vous acheter ?
+- Quelle surface minimum recherchez-vous ?
+- Quel secteur geographique ?
+
+Si le prospect ne passe pas ces 5 filtres, il recoit une reponse automatique avec des ressources utiles. Pas de rendez-vous pris.
+
+Les resultats constates chez les agents qui l'utilisent :
+- 35% de visites non qualifiees en moins
+- 10 heures recuperees par mois
+- Un taux de conversion visite-mandat qui passe de 8% a 14%
+
+Le chatbot travaille 24h/24. Il repond aux demandes du dimanche soir. Il ne se fatigue pas et il ne juge pas.
+
+L'article complet avec le detail de la mise en place est en commentaire.
+
+#immobilier #chatbot #IA #qualification #leads""",
+        "comment_link": "L'article complet : https://www.aissabelkoussa.fr/blog/agent-immobilier-chatbot-visite-ia\n\nDiagnostic gratuit de votre presence en ligne (2 minutes) : https://www.aissabelkoussa.fr/diagnostic",
+    },
+    {
+        "id": 8,
+        "title": "Restaurateur : le telephone vous coute 1 500 EUR/mois",
+        "date_prevue": "12 avril 2026",
+        "hashtags": "#restaurant #reservation #automatisation #hotellerie #TPE",
+        "content": """Votre serveur decroche le telephone 47 fois par service.
+Pendant ce temps, la table 6 attend sa commande.
+
+Le telephone sonne pour des reservations, des modifications, des annulations, des questions sur le menu, des demandes d'horaires. La moitie de ces appels pourrait etre traitee automatiquement.
+
+Faisons le calcul.
+
+Un serveur passe en moyenne 2 heures par jour au telephone. Au SMIC charge, ca represente environ 1 500 EUR par mois. Pour repondre a des questions dont 60% ont la meme reponse : "Oui, on est ouvert ce soir. Non, on ne prend pas de reservation avant 19h. Oui, on a une terrasse."
+
+3 solutions concretes, de la plus simple a la plus complete :
+
+Google Reserve (gratuit).
+Connectez votre fiche Google Business a un systeme de reservation. Le client reserve directement depuis Google Maps. Zero appel, zero friction. C'est gratuit et ca se configure en 20 minutes.
+
+Chatbot sur votre site.
+Un widget de chat repond aux questions frequentes et prend les reservations 24h/24. Le client du dimanche soir qui veut reserver pour mardi n'a plus besoin d'attendre lundi midi.
+
+WhatsApp Business automatise.
+Reponses automatiques aux messages les plus frequents. Confirmation de reservation instantanee. Le client recoit un message de rappel la veille.
+
+Resultat : votre serveur sert les clients au lieu de decrocher le telephone. Et vos reservations augmentent parce que le client n'a plus a attendre que quelqu'un reponde.
+
+L'article complet avec le comparatif des solutions est en commentaire.
+
+#restaurant #reservation #automatisation #hotellerie #TPE""",
+        "comment_link": "L'article complet : https://www.aissabelkoussa.fr/blog/restaurant-reservations-automatiques-ia\n\nDiagnostic gratuit de votre presence en ligne (2 minutes) : https://www.aissabelkoussa.fr/diagnostic",
+    },
+    {
+        "id": 9,
+        "title": "Comptable : vos relances partent a J+45",
+        "date_prevue": "14 avril 2026",
+        "hashtags": "#comptable #impayes #automatisation #n8n #recouvrement",
+        "content": """Vos relances d'impayes partent a J+45.
+Vos confreres les envoient a J+3. Automatiquement.
+
+Le probleme n'est pas la volonte. C'est le temps. Entre la saisie, les declarations, les bilans et les rendez-vous clients, les relances passent en bas de la pile. Et quand vous y pensez enfin, le retard de paiement est devenu un impaye.
+
+Un systeme de relance automatise fonctionne en 3 niveaux :
+
+Niveau 1 — J+3 apres echeance. Ton courtois.
+"Bonjour, nous constatons que la facture F-2026-0847 d'un montant de 2 340 EUR arrivee a echeance le 7 avril n'a pas encore ete reglee. Merci de proceder au reglement ou de nous indiquer si un probleme se pose."
+
+Niveau 2 — J+15. Ton formel.
+Rappel avec mention des penalites de retard prevues dans les CGV. Piece jointe : la facture originale et les conditions de reglement.
+
+Niveau 3 — J+30. Escalade.
+Notification au responsable du dossier. Mise en demeure preparee automatiquement. Le comptable n'intervient que pour valider l'envoi.
+
+Les outils pour mettre ca en place :
+- n8n (gratuit, auto-heberge) : connecte votre logiciel comptable a votre messagerie
+- Make (10 EUR/mois) : alternative cloud sans installation
+
+Les chiffres parlent d'eux-memes : taux de recouvrement de 78% en relance manuelle contre 94% en relance automatisee. La difference, c'est la regularite. La machine ne procrastine pas.
+
+L'article complet avec les templates de relance et le tutoriel de configuration est en commentaire.
+
+#comptable #impayes #automatisation #n8n #recouvrement""",
+        "comment_link": "L'article complet : https://www.aissabelkoussa.fr/blog/comptable-automatiser-relances-impayees\n\nDiagnostic gratuit de votre presence en ligne (2 minutes) : https://www.aissabelkoussa.fr/diagnostic",
+    },
+    {
+        "id": 10,
+        "title": "Commerce local : faut-il vraiment un site e-commerce ?",
+        "date_prevue": "15 avril 2026",
+        "hashtags": "#commerce #ecommerce #local #clickandcollect #TPE",
+        "content": """Un commerce de proximite a-t-il interet a vendre en ligne ?
+La reponse honnete : ca depend.
+
+Tout le monde vous dit qu'il faut un site e-commerce. Les agences vous vendent des boutiques Shopify a 3 000 EUR. Mais personne ne vous pose les bonnes questions avant.
+
+3 criteres pour savoir si ca vaut le coup :
+
+1. Vos produits sont-ils recurrents ?
+Si vos clients achetent une seule fois (un meuble, un cadeau), le e-commerce aura du mal a etre rentable. Si vos clients reviennent chaque mois (epicerie, cosmetiques, fournitures), le panier recurrent justifie l'investissement.
+
+2. Votre catalogue depasse-t-il 20 references ?
+En dessous, une simple page avec un formulaire de commande suffit. Un vrai site e-commerce avec gestion de stock, paiement en ligne et logistique n'a de sens qu'avec un catalogue suffisant pour que le client ait l'envie de naviguer.
+
+3. Pouvez-vous y consacrer 3 heures par semaine ?
+Un site e-commerce demande de la maintenance : mise a jour des stocks, traitement des commandes, photos produits, reponses aux questions. Si vous n'avez pas ce temps, le site deviendra une vitrine abandonnee.
+
+Quand NE PAS le faire :
+- Vous avez moins de 10 produits
+- Vos clients viennent uniquement pour le conseil en magasin
+- Vous n'avez personne pour gerer les commandes en ligne
+
+Le meilleur compromis pour beaucoup de commerces locaux : le click and collect. Le client commande en ligne, vous preparez, il passe recuperer. Pas de livraison, pas de logistique complexe, pas de frais de port qui decouragent l'achat.
+
+L'article complet avec le comparatif des solutions est en commentaire.
+
+#commerce #ecommerce #local #clickandcollect #TPE""",
+        "comment_link": "L'article complet : https://www.aissabelkoussa.fr/blog/commerce-proximite-site-ecommerce-local\n\nDiagnostic gratuit de votre presence en ligne (2 minutes) : https://www.aissabelkoussa.fr/diagnostic",
+    },
+    {
+        "id": 11,
+        "title": "L'IA promet 40% de gains. Pour une TPE, ca donne combien ?",
+        "date_prevue": "16 avril 2026",
+        "hashtags": "#IA #ROI #TPE #productivite #automatisation",
+        "content": """L'IA promet des gains de productivite de 40%.
+Mais pour une TPE de 3 personnes, combien ca rapporte en euros ?
+
+Les grands cabinets publient des chiffres impressionnants. McKinsey annonce 40% de gains de productivite. Goldman Sachs parle de 300 millions d'emplois impactes. Mais ces chiffres concernent des entreprises de 500 personnes avec des budgets IT a 6 chiffres.
+
+Pour une TPE, voici ce que ca donne concretement.
+
+Administration : 850 EUR/mois de gains.
+Facturation automatique, relances d'impayes a J+3, classement des documents par IA. Une assistante administrative qui passait 3 heures par jour sur ces taches les fait en 45 minutes.
+
+Commercial : 5 leads supplementaires par semaine.
+Chatbot de qualification sur le site, reponses automatiques aux demandes recurrentes, suivi automatise des prospects. Le commercial passe son temps a closer au lieu de trier les demandes.
+
+Service client : 60% des demandes traitees automatiquement.
+FAQ intelligente, chatbot qui repond aux questions de premier niveau, redirection vers le bon interlocuteur. Le client a une reponse en 30 secondes au lieu d'attendre 48 heures.
+
+Total : environ 7 450 EUR par mois de gains pour un investissement de 354 EUR (outils IA + automatisations).
+
+Mais il y a un piege.
+
+L'IA sans processus clairement definis, c'est zero retour sur investissement. Si vos process actuels sont desorganises, l'IA automatisera le desordre. Il faut d'abord structurer, ensuite automatiser.
+
+L'article complet avec le detail des calculs et les outils recommandes est en commentaire.
+
+#IA #ROI #TPE #productivite #automatisation""",
+        "comment_link": "L'article complet : https://www.aissabelkoussa.fr/blog/roi-intelligence-artificielle-tpe-2026\n\nDiagnostic gratuit de votre presence en ligne (2 minutes) : https://www.aissabelkoussa.fr/diagnostic",
+    },
+    {
+        "id": 12,
+        "title": "Le planning de chantier sur post-it coute plus cher que l'outil",
+        "date_prevue": "17 avril 2026",
+        "hashtags": "#BTP #planning #chantier #artisan #automatisation",
+        "content": """Le planning de chantier sur post-it coute plus cher que l'outil qui le remplace.
+
+3 heures par semaine. C'est le temps moyen qu'un artisan passe a reorganiser son planning manuellement. Appeler les sous-traitants, verifier les disponibilites, decaler les interventions quand la meteo ne suit pas, prevenir les clients du retard.
+
+3 heures par semaine, a 45 EUR de l'heure, ca fait 6 345 EUR par an de temps non facture.
+
+Et le resultat n'est meme pas fiable. Selon la FFB, 40% des chantiers en France sont livres en retard. La premiere cause : un manque de coordination entre les intervenants.
+
+3 solutions, du gratuit au sur-mesure :
+
+Google Calendar partage (gratuit).
+Chaque chantier est un calendrier. Chaque intervenant voit ses creneaux. Les modifications sont synchronisees en temps reel. Ce n'est pas un logiciel de planning BTP, mais pour un artisan avec 2 a 5 chantiers simultanes, ca suffit.
+
+Obat (25 a 79 EUR/mois).
+Logiciel francais concu pour les artisans du batiment. Planning, devis, factures et suivi de chantier dans un seul outil. L'avantage : c'est pense pour le BTP, pas adapte depuis un outil generique.
+
+Solution sur mesure.
+Pour les entreprises qui ont des besoins specifiques : planning connecte au logiciel de devis, notifications automatiques aux clients, tableau de bord temps reel sur la rentabilite de chaque chantier.
+
+La question n'est pas "est-ce que j'ai besoin d'un outil ?" La question est : "est-ce que je peux me permettre de perdre 6 345 EUR par an en organisation manuelle ?"
+
+L'article complet avec le comparatif detaille est en commentaire.
+
+#BTP #planning #chantier #artisan #automatisation""",
+        "comment_link": "L'article complet : https://www.aissabelkoussa.fr/blog/artisan-btp-planning-chantier-automatise\n\nDiagnostic gratuit de votre presence en ligne (2 minutes) : https://www.aissabelkoussa.fr/diagnostic",
+    },
+    {
+        "id": 13,
+        "title": "Votre formation se vend a 497 EUR. Le probleme n'est pas le prix.",
+        "date_prevue": "18 avril 2026",
+        "hashtags": "#coaching #formation #tunneldevente #marketing #freelance",
+        "content": """Votre formation se vend a 497 EUR.
+Votre page de vente convertit a 1,2%.
+Le probleme n'est pas le prix.
+
+Une page de vente seule, meme bien ecrite, convertit entre 1% et 2%. Ca signifie que sur 100 visiteurs, 98 partent sans acheter. Et la majorite ne reviendront jamais.
+
+Un tunnel de vente complet convertit entre 4% et 8%. Pas parce qu'il est magique. Parce qu'il respecte le parcours naturel de decision d'un acheteur.
+
+Les 5 etapes d'un tunnel qui fonctionne :
+
+Etape 1 — Le lead magnet.
+Un contenu gratuit a forte valeur qui resout un probleme precis de votre cible. Un guide PDF, une checklist, une mini-formation video. Le visiteur donne son email en echange.
+
+Etape 2 — La page de capture.
+Une seule page, un seul objectif : recuperer l'email. Pas de menu, pas de liens sortants, pas de distractions. Un titre, une promesse, un formulaire.
+
+Etape 3 — La sequence email.
+5 a 7 emails sur 10 jours. Chaque email apporte de la valeur et construit la confiance. Le dernier email presente l'offre.
+
+Etape 4 — La page de vente.
+Le prospect arrive ici apres avoir lu vos emails, consomme votre contenu gratuit et compris votre expertise. Il ne decouvre pas votre offre a froid. Il est prepare.
+
+Etape 5 — L'upsell.
+Apres l'achat : une offre complementaire (coaching individuel, module avance, communaute premium). 15 a 25% des acheteurs acceptent un upsell bien presente.
+
+Pour demarrer sans investissement : Systeme.io est gratuit jusqu'a 2 000 contacts. Ca couvre les 5 etapes.
+
+L'article complet avec les templates et les exemples concrets est en commentaire.
+
+#coaching #formation #tunneldevente #marketing #freelance""",
+        "comment_link": "L'article complet : https://www.aissabelkoussa.fr/blog/coach-tunnel-vente-formation-en-ligne\n\nDiagnostic gratuit de votre presence en ligne (2 minutes) : https://www.aissabelkoussa.fr/diagnostic",
+    },
 ]
 
 
