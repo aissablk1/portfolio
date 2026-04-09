@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="doc-category" content="Prospection">
+  <meta name="doc-title" content="30 prospects BTP Tarn">
+  <meta name="doc-color" content="#2563eb">
+  <title>30 prospects BTP Tarn — Aissa Belkoussa</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Geist', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      background: #fafafa;
+      color: #0a0a0a;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 860px; margin: 0 auto; padding: 48px 32px; }
+    .back { display: inline-block; font-size: 13px; font-weight: 500; color: #737373; text-decoration: none; margin-bottom: 32px; transition: color 0.2s; }
+    .back:hover { color: #2563eb; }
+    h1 { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 4px; }
+    .subtitle { font-size: 13px; color: #737373; margin-bottom: 8px; }
+    .legend { display: flex; gap: 20px; margin-bottom: 24px; font-size: 12px; color: #737373; flex-wrap: wrap; }
+    .legend-item { display: flex; align-items: center; gap: 6px; }
+    .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    .stats-row { display: flex; gap: 16px; margin-bottom: 32px; flex-wrap: wrap; }
+    .stat-card { background: #fff; border: 1px solid #e5e5e5; border-radius: 8px; padding: 14px 18px; flex: 1; min-width: 120px; }
+    .stat-card .val { font-size: 24px; font-weight: 800; letter-spacing: -0.5px; }
+    .stat-card .lbl { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: #737373; margin-top: 2px; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; background: #fff; border: 1px solid #e5e5e5; border-radius: 8px; overflow: hidden; }
+    thead { background: #f5f5f5; }
+    th { text-align: left; padding: 10px 12px; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: #737373; border-bottom: 2px solid #e5e5e5; cursor: pointer; user-select: none; white-space: nowrap; }
+    th:hover { color: #0a0a0a; }
+    td { padding: 10px 12px; border-bottom: 1px solid #f0f0f0; vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #fafafa; }
+    td a { color: #2563eb; text-decoration: none; font-weight: 500; }
+    td a:hover { text-decoration: underline; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; white-space: nowrap; }
+    .badge-haute { background: #fef2f2; color: #dc2626; }
+    .badge-moyenne { background: #fffbeb; color: #d97706; }
+    .badge-basse { background: #f0fdf4; color: #16a34a; }
+    .num { color: #a3a3a3; font-weight: 600; font-variant-numeric: tabular-nums; }
+    .ville { color: #737373; font-size: 12px; }
+    .no-link { color: #a3a3a3; font-style: italic; font-size: 12px; }
+    .footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #e5e5e5; font-size: 11px; color: #a3a3a3; display: flex; justify-content: space-between; }
+    @media (max-width: 640px) {
+      .page { padding: 24px 16px; }
+      table { font-size: 12px; display: block; overflow-x: auto; }
+      th, td { padding: 8px 8px; }
+      .stats-row { gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <a href="../index.html" class="back">&larr; Retour</a>
+    <h1>30 prospects BTP — Tarn (81)</h1>
+    <p class="subtitle">Entreprises du batiment identifiees pour prospection site web + IA</p>
+
+    <div class="legend">
+      <div class="legend-item"><span class="legend-dot" style="background:#dc2626"></span> Haute — pas de site web</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#d97706"></span> Moyenne — site obsolete</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#16a34a"></span> Basse — site correct</div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card"><div class="val">30</div><div class="lbl">Prospects</div></div>
+      <div class="stat-card"><div class="val">7</div><div class="lbl">Villes</div></div>
+      <div class="stat-card"><div class="val">8</div><div class="lbl">Activites</div></div>
+      <div class="stat-card"><div class="val" id="haute-count">0</div><div class="lbl">Priorite haute</div></div>
+    </div>
+
+    <table id="prospects-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Entreprise</th>
+          <th>Activite</th>
+          <th>Ville</th>
+          <th>Site web</th>
+          <th>LinkedIn</th>
+          <th>Priorite</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+
+    <div class="footer">
+      <span>Usage interne — prospection</span>
+      <span id="gen-date"></span>
+    </div>
+  </div>
+
+  <script>
+    var PROSPECTS = [
+      { entreprise: "Societe Albigeoise de Maconnerie", activite: "Maconnerie", ville: "Albi", site: null, linkedin: null, priorite: "Haute" },
+      { entreprise: "Entreprise Batiment Albet", activite: "Maconnerie", ville: "Albi", site: null, linkedin: null, priorite: "Haute" },
+      { entreprise: "J.M. Camps", activite: "Maconnerie", ville: "Albi", site: null, linkedin: null, priorite: "Haute" },
+      { entreprise: "Florian Palazy", activite: "Maconnerie", ville: "Albi", site: null, linkedin: null, priorite: "Haute" },
+      { entreprise: "AMelec.tarn", activite: "Electricite", ville: "Albi", site: null, linkedin: null, priorite: "Haute" },
+      { entreprise: "Olivier Energies Service", activite: "Electricite", ville: "Albi", site: null, linkedin: null, priorite: "Haute" },
+      { entreprise: "FC Maconnerie", activite: "Maconnerie", ville: "Albi", site: null, linkedin: null, priorite: "Haute" },
+      { entreprise: "Tarn Entreprise de Batiment", activite: "Maconnerie", ville: "Albi", site: null, linkedin: null, priorite: "Haute" },
+      { entreprise: "Pierre Chamayou TP", activite: "Maconnerie", ville: "Albi", site: null, linkedin: null, priorite: "Haute" },
+      { entreprise: "Carivenc Bernard", activite: "Maconnerie", ville: "Castres", site: null, linkedin: null, priorite: "Haute" },
+      { entreprise: "Tarn Pavillon", activite: "Maconnerie", ville: "Castres", site: null, linkedin: null, priorite: "Haute" },
+      { entreprise: "CROS et Fils", activite: "Maconnerie", ville: "Castres", site: null, linkedin: null, priorite: "Haute" },
+      { entreprise: "Tarn Constructions", activite: "Maconnerie", ville: "Castres", site: null, linkedin: null, priorite: "Haute" },
+      { entreprise: "Faure et Fils", activite: "Couverture", ville: "Castres", site: "https://www.sarlfaure.com", linkedin: null, priorite: "Moyenne" },
+      { entreprise: "MG Peinture", activite: "Peinture", ville: "Gaillac", site: "https://www.mg-peinture.com", linkedin: null, priorite: "Moyenne" },
+      { entreprise: "Bonnaudet et Cie", activite: "Peinture", ville: "Gaillac", site: "http://www.bonnaudet-et-cie.fr", linkedin: null, priorite: "Moyenne" },
+      { entreprise: "Mtec Peinture", activite: "Peinture", ville: "Gaillac", site: "https://mtecpeinture.fr", linkedin: null, priorite: "Moyenne" },
+      { entreprise: "Conesa", activite: "Peinture", ville: "Gaillac", site: "https://www.facade-isolation-tarn.fr", linkedin: null, priorite: "Moyenne" },
+      { entreprise: "Batirea Ingenierie", activite: "Maconnerie", ville: "Gaillac", site: null, linkedin: null, priorite: "Haute" },
+      { entreprise: "Appaix TP SAS", activite: "Maconnerie", ville: "Carmaux", site: null, linkedin: null, priorite: "Haute" },
+      { entreprise: "SARL Vedel", activite: "Charpente", ville: "Carmaux", site: "https://www.vedelbois-travaux.com", linkedin: null, priorite: "Moyenne" },
+      { entreprise: "MT Renov Tarn", activite: "Couverture", ville: "Carmaux", site: "https://mt-renov-tarn.fr", linkedin: null, priorite: "Moyenne" },
+      { entreprise: "Pierre et Bois Tradition", activite: "Charpente", ville: "Lavaur", site: null, linkedin: null, priorite: "Haute" },
+      { entreprise: "Sarl Cayla Plomberie", activite: "Plomberie", ville: "Gaillac", site: null, linkedin: null, priorite: "Haute" },
+      { entreprise: "Brice Molluna", activite: "Peinture", ville: "Albi", site: "https://www.bricemolluna.fr", linkedin: null, priorite: "Basse" },
+      { entreprise: "CORNUS Plomberie", activite: "Plomberie", ville: "Castres", site: null, linkedin: null, priorite: "Haute" },
+      { entreprise: "Terrassement 81", activite: "Maconnerie", ville: "Castres", site: null, linkedin: null, priorite: "Haute" },
+      { entreprise: "Socorebat Albi", activite: "Maconnerie", ville: "Albi", site: "https://www.socorebat-france.fr", linkedin: null, priorite: "Basse" },
+      { entreprise: "Idealbat", activite: "Charpente", ville: "Mazamet", site: null, linkedin: null, priorite: "Haute" },
+      { entreprise: "MG Multi-services", activite: "Plomberie", ville: "Castres", site: null, linkedin: null, priorite: "Haute" }
+    ];
+
+    function createNoLink(text) {
+      var span = document.createElement("span");
+      span.className = "no-link";
+      span.textContent = text;
+      return span;
+    }
+
+    function renderTable() {
+      var tbody = document.getElementById("tbody");
+      tbody.textContent = "";
+      var hauteCount = 0;
+
+      PROSPECTS.forEach(function(p, i) {
+        if (p.priorite === "Haute") hauteCount++;
+
+        var tr = document.createElement("tr");
+
+        var tdNum = document.createElement("td");
+        tdNum.className = "num";
+        tdNum.textContent = i + 1;
+
+        var tdNom = document.createElement("td");
+        tdNom.style.fontWeight = "600";
+        tdNom.textContent = p.entreprise;
+
+        var tdAct = document.createElement("td");
+        tdAct.textContent = p.activite;
+
+        var tdVille = document.createElement("td");
+        tdVille.className = "ville";
+        tdVille.textContent = p.ville;
+
+        var tdSite = document.createElement("td");
+        if (p.site) {
+          var a = document.createElement("a");
+          a.href = p.site;
+          a.target = "_blank";
+          a.rel = "noopener";
+          a.textContent = p.site.replace(/https?:\/\/(www\.)?/, "").replace(/\/$/, "");
+          tdSite.appendChild(a);
+        } else {
+          tdSite.appendChild(createNoLink("Aucun"));
+        }
+
+        var tdLi = document.createElement("td");
+        if (p.linkedin) {
+          var aLi = document.createElement("a");
+          aLi.href = p.linkedin;
+          aLi.target = "_blank";
+          aLi.rel = "noopener";
+          aLi.textContent = "Profil";
+          tdLi.appendChild(aLi);
+        } else {
+          tdLi.appendChild(createNoLink("Non trouve"));
+        }
+
+        var tdPrio = document.createElement("td");
+        var badge = document.createElement("span");
+        badge.className = "badge badge-" + p.priorite.toLowerCase();
+        badge.textContent = p.priorite;
+        tdPrio.appendChild(badge);
+
+        tr.appendChild(tdNum);
+        tr.appendChild(tdNom);
+        tr.appendChild(tdAct);
+        tr.appendChild(tdVille);
+        tr.appendChild(tdSite);
+        tr.appendChild(tdLi);
+        tr.appendChild(tdPrio);
+        tbody.appendChild(tr);
+      });
+
+      document.getElementById("haute-count").textContent = hauteCount;
+    }
+
+    /* Tri par colonne */
+    var sortDir = {};
+    document.querySelectorAll("th").forEach(function(th, idx) {
+      th.addEventListener("click", function() {
+        var keys = ["index", "entreprise", "activite", "ville", "site", "linkedin", "priorite"];
+        var key = keys[idx];
+        if (!key || key === "index") return;
+        sortDir[key] = !(sortDir[key] || false);
+        var dir = sortDir[key] ? 1 : -1;
+        PROSPECTS.sort(function(a, b) {
+          var va = (a[key] || "").toLowerCase();
+          var vb = (b[key] || "").toLowerCase();
+          return va < vb ? -dir : va > vb ? dir : 0;
+        });
+        renderTable();
+      });
+    });
+
+    var now = new Date();
+    document.getElementById("gen-date").textContent = "Genere le " + now.toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" });
+    renderTable();
+  </script>
+</body>
+</html>

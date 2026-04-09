@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documents — Aïssa Belkoussa</title>
+  <style>
+    :root {
+      --black: #0a0a0a; --white: #fafafa; --gray-50: #f9fafb; --gray-100: #f5f5f5;
+      --gray-200: #e5e5e5; --gray-400: #a3a3a3; --gray-500: #737373;
+      --accent: #2563eb; --accent-bg: #eff6ff;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Geist', -apple-system, BlinkMacSystemFont, system-ui, sans-serif; background: var(--white); color: var(--black); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+    .page { max-width: 960px; margin: 0 auto; padding: 48px 40px; }
+    .header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; padding-bottom: 32px; border-bottom: 2px solid var(--black); }
+    .header-left h1 { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; text-transform: uppercase; margin-bottom: 4px; }
+    .header-left p { font-size: 12px; color: var(--gray-500); font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; }
+    .header-right { text-align: right; font-size: 11px; color: var(--gray-500); line-height: 1.8; }
+    .header-right a { color: var(--accent); text-decoration: none; font-weight: 600; }
+    .search-bar { margin-bottom: 32px; }
+    .search-bar input { width: 100%; padding: 12px 16px; font-family: inherit; font-size: 14px; border: 1px solid var(--gray-200); border-radius: 8px; background: var(--gray-50); color: var(--black); outline: none; transition: border-color 0.2s, box-shadow 0.2s; }
+    .search-bar input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-bg); }
+    .search-bar input::placeholder { color: var(--gray-400); }
+    .stats { display: flex; gap: 24px; margin-bottom: 40px; }
+    .stat { background: var(--gray-100); border-radius: 8px; padding: 16px 20px; flex: 1; }
+    .stat-value { font-size: 28px; font-weight: 800; letter-spacing: -1px; }
+    .stat-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--gray-500); margin-top: 2px; }
+    .category { margin-bottom: 36px; }
+    .category-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; cursor: pointer; user-select: none; }
+    .category-header:hover .category-title { color: var(--accent); }
+    .category-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: white; flex-shrink: 0; }
+    .category-title { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; transition: color 0.2s; }
+    .category-count { font-size: 11px; font-weight: 600; color: var(--gray-400); margin-left: auto; }
+    .category-chevron { font-size: 12px; color: var(--gray-400); transition: transform 0.2s; }
+    .category.collapsed .category-chevron { transform: rotate(-90deg); }
+    .category.collapsed .doc-list { display: none; }
+    .doc-list { display: grid; gap: 6px; }
+    .doc-item { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-radius: 8px; text-decoration: none; color: var(--black); transition: background 0.15s; }
+    .doc-item:hover { background: var(--gray-100); }
+    .doc-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+    .doc-name { font-size: 13px; font-weight: 500; flex: 1; }
+    .doc-type { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--gray-400); padding: 2px 6px; background: var(--gray-100); border-radius: 3px; }
+    .footer { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--gray-200); font-size: 11px; color: var(--gray-400); display: flex; justify-content: space-between; }
+    @media (max-width: 640px) { .page { padding: 24px 20px; } .header { flex-direction: column; gap: 12px; } .header-right { text-align: left; } .stats { flex-direction: column; gap: 8px; } .stat-value { font-size: 22px; } }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="header">
+      <div class="header-left">
+        <h1>Documents</h1>
+        <p>Aissa Belkoussa — Base documentaire interne</p>
+      </div>
+      <div class="header-right">
+        <a href="https://aissabelkoussa.fr">aissabelkoussa.fr</a><br>
+        Portfolio &middot; Albi (81)
+      </div>
+    </div>
+    <div class="search-bar">
+      <input type="text" id="search" placeholder="Rechercher un document..." autocomplete="off">
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="stat-value" id="total-count">0</div><div class="stat-label">Documents</div></div>
+      <div class="stat"><div class="stat-value" id="cat-count">0</div><div class="stat-label">Categories</div></div>
+      <div class="stat"><div class="stat-value" id="last-update">--</div><div class="stat-label">Derniere maj</div></div>
+    </div>
+    <div id="categories"></div>
+    <div class="footer">
+      <span>Usage interne uniquement</span>
+      <span id="gen-date"></span>
+    </div>
+  </div>
+
+  <script>
+    /*
+     * Index documentaire — donnees embarquees (zero fetch, compatible file://)
+     * Pour ajouter un doc : ajouter une entree dans CATEGORIES ci-dessous.
+     */
+    var CATEGORIES = [
+      {
+        name: "Strategie", color: "#0f172a",
+        docs: [
+          { name: "Playbook commercial", path: "strategie/playbook-commercial.html" },
+          { name: "Strategie offres v2 — Repositionnement", path: "strategie/strategie-offres-v2.html" },
+          { name: "Etude de marche — Consultant IA Albi", path: "strategie/etude-marche-consultant-ia-albi.html" },
+          { name: "Plan strategique Aissa Belkoussa", path: "strategie/plan-aissa-belkoussa.html" },
+          { name: "Tableau de bord business", path: "strategie/business-dashboard.html" },
+          { name: "Checklist de lancement", path: "strategie/checklist-lancement.html" },
+          { name: "SEO & Geo — Strategie locale", path: "strategie/seo-geo-strategy.html" },
+          { name: "Formations reglementaires 2026", path: "strategie/formations-reglementaires-2026.html" }
+        ]
+      },
+      {
+        name: "Prospection", color: "#2563eb",
+        docs: [
+          { name: "Calendrier prospection — 14 jours", path: "prospection/calendrier-prospection-14j.html" },
+          { name: "Templates cold outreach", path: "prospection/cold-outreach-templates.html" },
+          { name: "Systeme de retention client", path: "prospection/systeme-retention-client.html" },
+          { name: "Tracker prospection", path: "prospection/tracker-prospection.html" },
+          { name: "30 prospects BTP Tarn", path: "prospection/prospects-btp-tarn.html" }
+        ]
+      },
+      {
+        name: "LinkedIn", color: "#0a66c2",
+        docs: [
+          { name: "Posts LinkedIn — Prets a publier", path: "linkedin/linkedin-premier-post.html" },
+          { name: "Plan LinkedIn", path: "linkedin/plan-linkedin.html" },
+          { name: "Profil LinkedIn — Guide complet", path: "linkedin/profil-linkedin-guide.html" },
+          { name: "LinkedIn — Copier-coller", path: "linkedin/linkedin-copier-coller.html" },
+          { name: "Bannieres LinkedIn", path: "linkedin/linkedin-banner.html" },
+          { name: "Photo de profil LinkedIn", path: "linkedin/linkedin-photo-profil.html" }
+        ]
+      },
+      {
+        name: "Commercial", color: "#16a34a",
+        docs: [
+          { name: "One-pager offres", path: "commercial/one-pager-offres.html" },
+          { name: "Modele de devis", path: "commercial/modele-devis.html" },
+          { name: "Modele de facture", path: "commercial/modele-facture.html" }
+        ]
+      },
+      {
+        name: "Email templates", color: "#9333ea",
+        docs: [
+          { name: "01 — Email bienvenue", path: "email-templates/01-bienvenue.html" },
+          { name: "02 — Rapport mois 1", path: "email-templates/02-rapport-mois-1.html" },
+          { name: "03 — Transition mois 3", path: "email-templates/03-transition-mois-3.html" }
+        ]
+      },
+      {
+        name: "Reunions", color: "#ea580c",
+        docs: [
+          { name: "Reunion Alexandre — 3 avril", path: "reunions/alexandre-brihiez/reunion-alexandre-3-avril.html" },
+          { name: "Reunion Alexandre — 8 avril", path: "reunions/alexandre-brihiez/reunion-alexandre-8-avril.html" },
+          { name: "Sequence post-reunion Alexandre", path: "reunions/alexandre-brihiez/sequence-post-reunion-alexandre.html" }
+        ]
+      },
+      {
+        name: "Technique", color: "#64748b",
+        docs: [
+          { name: "Workflows n8n — Automatisation", path: "n8n-workflows/workflows.html" },
+          { name: "Systeme de contact — Formulaire + API", path: "technique/contact-system.html" },
+          { name: "Composants UI — Inventaire React", path: "technique/composants-ui.html" },
+          { name: "Dictionnaire bilingue FR/EN", path: "technique/dictionnaire-bilingue.html" },
+          { name: "SEO & GEO — Configuration technique", path: "technique/seo-geo.html" },
+          { name: "Infrastructure — Stack et hebergement", path: "technique/infrastructure.html" }
+        ]
+      },
+      {
+        name: "Sessions", color: "#475569",
+        docs: [
+          { name: "25 mars — Refonte complete portfolio", path: "sessions/2026-03-25_portfolio-refonte-complete.html" }
+        ]
+      },
+      {
+        name: "Specs", color: "#e11d48",
+        docs: [
+          { name: "Sprint Contenu + Business (9-17 avril)", path: "superpowers/specs/2026-04-09-sprint-contenu-business-design.html" }
+        ]
+      }
+    ];
+
+    function render(filter) {
+      var container = document.getElementById("categories");
+      container.textContent = "";
+      var totalDocs = 0, visibleCats = 0;
+      var lf = (filter || "").toLowerCase();
+
+      CATEGORIES.forEach(function(cat) {
+        var filtered = cat.docs.filter(function(d) {
+          return d.name.toLowerCase().indexOf(lf) !== -1 || cat.name.toLowerCase().indexOf(lf) !== -1;
+        });
+        if (filtered.length === 0) return;
+        visibleCats++;
+        totalDocs += filtered.length;
+
+        var section = document.createElement("div");
+        section.className = "category";
+
+        var header = document.createElement("div");
+        header.className = "category-header";
+
+        var icon = document.createElement("div");
+        icon.className = "category-icon";
+        icon.style.background = cat.color;
+        icon.textContent = cat.name.charAt(0);
+
+        var title = document.createElement("span");
+        title.className = "category-title";
+        title.textContent = cat.name;
+
+        var count = document.createElement("span");
+        count.className = "category-count";
+        count.textContent = filtered.length + " doc" + (filtered.length > 1 ? "s" : "");
+
+        var chevron = document.createElement("span");
+        chevron.className = "category-chevron";
+        chevron.textContent = "\u25BE";
+
+        header.appendChild(icon);
+        header.appendChild(title);
+        header.appendChild(count);
+        header.appendChild(chevron);
+        header.addEventListener("click", function() { section.classList.toggle("collapsed"); });
+
+        var list = document.createElement("div");
+        list.className = "doc-list";
+
+        filtered.forEach(function(doc) {
+          var a = document.createElement("a");
+          a.className = "doc-item";
+          a.href = doc.path;
+
+          var dot = document.createElement("span");
+          dot.className = "doc-dot";
+          dot.style.background = cat.color;
+
+          var name = document.createElement("span");
+          name.className = "doc-name";
+          name.textContent = doc.name;
+
+          var type = document.createElement("span");
+          type.className = "doc-type";
+          type.textContent = "HTML";
+
+          a.appendChild(dot);
+          a.appendChild(name);
+          a.appendChild(type);
+          list.appendChild(a);
+        });
+
+        section.appendChild(header);
+        section.appendChild(list);
+        container.appendChild(section);
+      });
+
+      document.getElementById("total-count").textContent = totalDocs;
+      document.getElementById("cat-count").textContent = visibleCats;
+    }
+
+    document.getElementById("search").addEventListener("input", function(e) { render(e.target.value); });
+    var now = new Date();
+    document.getElementById("last-update").textContent = now.toLocaleDateString("fr-FR", { day: "numeric", month: "short" });
+    document.getElementById("gen-date").textContent = "Genere le " + now.toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" });
+    render();
+  </script>
+</body>
+</html>
