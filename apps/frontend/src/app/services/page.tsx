@@ -1495,21 +1495,23 @@ export default function ServicesPage() {
               </motion.p>
             </div>
 
-            {/* FAQ cards — 2-col grid, open item spans 2 rows */}
-            <div
-              className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5"
-              style={{ gridAutoFlow: "column", gridTemplateRows: `repeat(${Math.ceil(t.faq.length / 2)}, auto)` }}
-            >
-              {t.faq.map((item, realIdx) => {
+            {/* FAQ cards — 2 independent column grids, open item spans 2 rows */}
+            {(() => {
+              const left = t.faq.filter((_, i) => i % 2 === 0);
+              const right = t.faq.filter((_, i) => i % 2 === 1);
+
+              const renderCard = (
+                item: (typeof t.faq)[0],
+                realIdx: number,
+                delayIdx: number
+              ) => {
                 const isOpen = openFaq === realIdx;
                 return (
                   <motion.div
                     key={realIdx}
-                    layout
-                    {...fadeUpSmall(realIdx * 0.04)}
-                    transition={{ layout: { duration: 0.35, ease: [0.23, 1, 0.32, 1] } }}
+                    {...fadeUpSmall(delayIdx * 0.06)}
                     className={cn(
-                      "group border rounded-2xl overflow-hidden transition-colors duration-300",
+                      "group border rounded-2xl overflow-hidden transition-colors duration-300 self-start",
                       isOpen
                         ? "border-site-accent bg-site-accent/[0.02] shadow-sm md:[grid-row:span_2]"
                         : "border-site-border hover:border-site-accent/30"
@@ -1568,8 +1570,21 @@ export default function ServicesPage() {
                     </AnimatePresence>
                   </motion.div>
                 );
-              })}
-            </div>
+              };
+
+              const colRows = (count: number) => `repeat(${count}, auto)`;
+
+              return (
+                <div className="flex flex-col md:flex-row gap-4 md:gap-5">
+                  <div className="flex-1 grid gap-4 md:gap-5" style={{ gridTemplateRows: colRows(left.length) }}>
+                    {left.map((item, i) => renderCard(item, i * 2, i))}
+                  </div>
+                  <div className="flex-1 grid gap-4 md:gap-5" style={{ gridTemplateRows: colRows(right.length) }}>
+                    {right.map((item, i) => renderCard(item, i * 2 + 1, i))}
+                  </div>
+                </div>
+              );
+            })()}
           </div>
         </section>
 
