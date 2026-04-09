@@ -74,16 +74,23 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ url: session.url });
   } catch (error: any) {
-    Logger.error("Erreur lors de la creation de la session Stripe", {
+    // Capture all error properties for diagnosis
+    const errorInfo = {
       message: error.message,
+      name: error.name,
       type: error.type,
       code: error.code,
       param: error.param,
       statusCode: error.statusCode,
       requestId: error.requestId,
-    });
+      detail: error.detail,
+      raw: error.rawType || error.raw?.message,
+      headers: error.headers ? Object.fromEntries(Object.entries(error.headers).filter(([k]) => k.startsWith('stripe'))) : undefined,
+      stack: error.stack?.split('\n').slice(0, 3).join(' | '),
+    };
+    Logger.error("Stripe checkout error (full)", errorInfo);
     return NextResponse.json(
-      { error: `Erreur Stripe: ${error.message || "Erreur inconnue"}`, code: error.code, param: error.param },
+      { error: `Erreur Stripe: ${error.message || "Erreur inconnue"}`, debug: errorInfo },
       { status: 500 },
     );
   }
