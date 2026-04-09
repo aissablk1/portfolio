@@ -15,7 +15,7 @@
     .page { max-width:1200px; margin:0 auto; padding:32px 24px; }
     h1 { font-size:24px; font-weight:800; letter-spacing:-0.5px; margin-bottom:4px; }
     .subtitle { font-size:12px; color:var(--muted); margin-bottom:32px; }
-    .stats { display:grid; grid-template-columns:repeat(5,1fr); gap:12px; margin-bottom:32px; }
+    .stats { display:grid; grid-template-columns:repeat(7,1fr); gap:12px; margin-bottom:32px; }
     .stat { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:16px; text-align:center; }
     .stat .number { font-size:28px; font-weight:800; }
     .stat .label { font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin-top:4px; }
@@ -37,9 +37,11 @@
     <div class="subtitle">Objectif : 1er client payant en 14 jours — 3 avril au 16 avril 2026</div>
 
     <div class="stats">
-      <div class="stat"><div class="number" id="s-total">12</div><div class="label">Prospects</div></div>
+      <div class="stat"><div class="number" id="s-total">42</div><div class="label">Prospects</div></div>
+      <div class="stat"><div class="number" id="s-signals" style="color:var(--muted)">0</div><div class="label">Signaux</div></div>
       <div class="stat"><div class="number" id="s-contacted" style="color:var(--amber)">0</div><div class="label">Contactes</div></div>
       <div class="stat"><div class="number" id="s-replied" style="color:var(--green)">0</div><div class="label">Reponses</div></div>
+      <div class="stat"><div class="number" id="s-hot" style="color:var(--amber)">0</div><div class="label">Chauds</div></div>
       <div class="stat"><div class="number" id="s-calls" style="color:var(--accent)">0</div><div class="label">Appels</div></div>
       <div class="stat"><div class="number" id="s-signed" style="color:var(--green)">0</div><div class="label">Signes</div></div>
     </div>
@@ -52,8 +54,10 @@
           <th>Entreprise</th>
           <th>Niche</th>
           <th>Canal</th>
+          <th>Source</th>
           <th>Date envoi</th>
           <th>Statut</th>
+          <th>Relance</th>
           <th>Notes</th>
         </tr>
       </thead>
@@ -75,18 +79,64 @@
       { name:"Dirigeant Consupting", company:"Consupting", niche:"b2b" },
       { name:"Dirigeant Zenessor", company:"Zenessor", niche:"b2b" },
       { name:"Alexandre BRIHIEZ", company:"Apporteur affaires", niche:"b2b" },
+      { name:"Dirigeant", company:"Societe Albigeoise de Maconnerie", niche:"btp" },
+      { name:"Dirigeant", company:"Entreprise Batiment Albet", niche:"btp" },
+      { name:"Dirigeant", company:"J.M. Camps", niche:"btp" },
+      { name:"Dirigeant", company:"Florian Palazy", niche:"btp" },
+      { name:"Dirigeant", company:"AMelec.tarn", niche:"btp" },
+      { name:"Dirigeant", company:"Olivier Energies Service", niche:"btp" },
+      { name:"Dirigeant", company:"FC Maconnerie", niche:"btp" },
+      { name:"Dirigeant", company:"Tarn Entreprise de Batiment", niche:"btp" },
+      { name:"Dirigeant", company:"Pierre Chamayou TP", niche:"btp" },
+      { name:"Dirigeant", company:"Carivenc Bernard", niche:"btp" },
+      { name:"Dirigeant", company:"Tarn Pavillon", niche:"btp" },
+      { name:"Dirigeant", company:"CROS et Fils", niche:"btp" },
+      { name:"Dirigeant", company:"Tarn Constructions", niche:"btp" },
+      { name:"Dirigeant", company:"Faure et Fils", niche:"btp" },
+      { name:"Dirigeant", company:"MG Peinture", niche:"btp" },
+      { name:"Dirigeant", company:"Bonnaudet et Cie", niche:"btp" },
+      { name:"Dirigeant", company:"Mtec Peinture", niche:"btp" },
+      { name:"Dirigeant", company:"Conesa", niche:"btp" },
+      { name:"Dirigeant", company:"Batirea Ingenierie", niche:"btp" },
+      { name:"Dirigeant", company:"Appaix TP SAS", niche:"btp" },
+      { name:"Dirigeant", company:"SARL Vedel", niche:"btp" },
+      { name:"Dirigeant", company:"MT Renov Tarn", niche:"btp" },
+      { name:"Dirigeant", company:"Pierre et Bois Tradition", niche:"btp" },
+      { name:"Dirigeant", company:"Sarl Cayla Plomberie", niche:"btp" },
+      { name:"Dirigeant", company:"Brice Molluna", niche:"btp" },
+      { name:"Dirigeant", company:"CORNUS Plomberie", niche:"btp" },
+      { name:"Dirigeant", company:"Terrassement 81", niche:"btp" },
+      { name:"Dirigeant", company:"Socorebat Albi", niche:"btp" },
+      { name:"Dirigeant", company:"Idealbat", niche:"btp" },
+      { name:"Dirigeant", company:"MG Multi-services", niche:"btp" },
     ];
 
     const statusOptions = [
+      { value:"signal", label:"Signal" },
       { value:"pending", label:"En attente" },
+      { value:"dm_sent", label:"DM envoye" },
       { value:"sent", label:"Envoye" },
       { value:"replied", label:"Repondu" },
+      { value:"hot", label:"Prospect chaud" },
       { value:"call", label:"Appel fait" },
       { value:"signed", label:"Signe" },
+      { value:"nurture", label:"A nourrir" },
       { value:"lost", label:"Perdu" },
     ];
 
     const canalOptions = ["linkedin","email","teams","phone"];
+    const sourceOptions = ["profil","connexion","like","commentaire","cold","referral"];
+
+    function getRelanceStatus(dateStr, status) {
+      if (!dateStr || status === "signed" || status === "lost" || status === "replied" || status === "call" || status === "hot") return "";
+      var sent = new Date(dateStr);
+      var now = new Date();
+      var days = Math.floor((now - sent) / 86400000);
+      if (days >= 14) return "J+14";
+      if (days >= 7) return "J+7";
+      if (days >= 3) return "J+3";
+      return "";
+    }
 
     function save() {
       const rows = document.querySelectorAll('#tbody tr');
@@ -95,28 +145,52 @@
           canal: row.querySelector('.c-canal').value,
           date: row.querySelector('.c-date').value,
           status: row.querySelector('.c-status').value,
+          source: row.querySelector('.c-source').value,
           notes: row.querySelector('.c-notes').value,
         };
       });
       localStorage.setItem('tracker-v2', JSON.stringify(data));
       updateStats();
+      updateRelance();
     }
 
     function updateStats() {
       const rows = document.querySelectorAll('#tbody .c-status');
-      let total=rows.length, contacted=0, replied=0, calls=0, signed=0;
+      let total=rows.length, signals=0, contacted=0, replied=0, hot=0, calls=0, signed=0;
       rows.forEach(function(sel) {
         var s = sel.value;
-        if (s==='sent'||s==='replied'||s==='call'||s==='signed') contacted++;
-        if (s==='replied'||s==='call'||s==='signed') replied++;
-        if (s==='call'||s==='signed') calls++;
+        if (s==='signal') signals++;
+        if (s==='dm_sent'||s==='sent') contacted++;
+        if (s==='replied') replied++;
+        if (s==='hot') hot++;
+        if (s==='call') calls++;
         if (s==='signed') signed++;
       });
       document.getElementById('s-total').textContent = total;
+      document.getElementById('s-signals').textContent = signals;
       document.getElementById('s-contacted').textContent = contacted;
       document.getElementById('s-replied').textContent = replied;
+      document.getElementById('s-hot').textContent = hot;
       document.getElementById('s-calls').textContent = calls;
       document.getElementById('s-signed').textContent = signed;
+    }
+
+    function updateRelance() {
+      var trs = document.querySelectorAll('#tbody tr');
+      trs.forEach(function(tr) {
+        var dateVal = tr.querySelector('.c-date').value;
+        var statusVal = tr.querySelector('.c-status').value;
+        var relanceTd = tr.querySelector('.c-relance');
+        if (!relanceTd) return;
+        var r = getRelanceStatus(dateVal, statusVal);
+        relanceTd.textContent = r;
+        relanceTd.style.background = '';
+        relanceTd.style.color = '';
+        relanceTd.style.fontWeight = '';
+        if (r === 'J+3') { relanceTd.style.background = '#fffbeb'; relanceTd.style.color = '#92400e'; relanceTd.style.fontWeight = '700'; }
+        else if (r === 'J+7') { relanceTd.style.background = '#fff7ed'; relanceTd.style.color = '#c2410c'; relanceTd.style.fontWeight = '700'; }
+        else if (r === 'J+14') { relanceTd.style.background = '#fef2f2'; relanceTd.style.color = '#991b1b'; relanceTd.style.fontWeight = '700'; }
+      });
     }
 
     function render() {
@@ -163,6 +237,20 @@
         td4.appendChild(selCanal);
         tr.appendChild(td4);
 
+        var td4b = document.createElement('td');
+        var selSource = document.createElement('select');
+        selSource.className = 'c-source';
+        selSource.onchange = save;
+        sourceOptions.forEach(function(src) {
+          var opt = document.createElement('option');
+          opt.value = src;
+          opt.textContent = src;
+          if ((s.source || 'profil') === src) opt.selected = true;
+          selSource.appendChild(opt);
+        });
+        td4b.appendChild(selSource);
+        tr.appendChild(td4b);
+
         var td5 = document.createElement('td');
         var dateInput = document.createElement('input');
         dateInput.type = 'date';
@@ -186,6 +274,14 @@
         td6.appendChild(selStatus);
         tr.appendChild(td6);
 
+        var td6b = document.createElement('td');
+        td6b.className = 'c-relance';
+        td6b.style.fontSize = '11px';
+        td6b.style.textAlign = 'center';
+        td6b.style.borderRadius = '4px';
+        td6b.style.padding = '10px 6px';
+        tr.appendChild(td6b);
+
         var td7 = document.createElement('td');
         var notesInput = document.createElement('input');
         notesInput.type = 'text';
@@ -200,6 +296,7 @@
       });
 
       updateStats();
+      updateRelance();
     }
 
     render();
