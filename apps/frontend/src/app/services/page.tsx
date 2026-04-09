@@ -1520,12 +1520,12 @@ export default function ServicesPage() {
                     ref={realIdx === 0 ? faqMeasureRef : undefined}
                     {...fadeUpSmall(delayIdx * 0.06)}
                     className={cn(
-                      "group border rounded-2xl overflow-hidden transition-colors duration-300",
+                      "group border rounded-2xl overflow-hidden transition-[min-height,border-color,background-color,box-shadow] duration-300",
                       isOpen
                         ? "border-site-accent bg-site-accent/[0.02] shadow-sm"
                         : "border-site-border hover:border-site-accent/30"
                     )}
-                    style={isOpen && openMinH ? { minHeight: openMinH } : undefined}
+                    style={{ minHeight: isOpen && openMinH ? openMinH : 0 }}
                   >
                     <button
                       onClick={() => setOpenFaq(isOpen ? null : realIdx)}
