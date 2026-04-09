@@ -1554,30 +1554,24 @@ export default function ServicesPage() {
                         )}
                       />
                     </button>
-                    <AnimatePresence initial={false}>
-                      {isOpen && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{
-                            height: { duration: 0.35, ease: [0.23, 1, 0.32, 1] },
-                            opacity: { duration: 0.25, delay: 0.05 },
-                          }}
-                          className="overflow-hidden"
-                        >
-                          <div
-                            id={`faq-answer-${realIdx}`}
-                            role="region"
-                            className="px-6 md:px-8 pb-6 md:pb-8 pl-[4.25rem] md:pl-[4.75rem]"
-                          >
-                            <p className="text-sm text-site-text-light leading-relaxed">
-                              {item.a}
-                            </p>
-                          </div>
-                        </motion.div>
+                    <div
+                      className={cn(
+                        "grid transition-[grid-template-rows,opacity] duration-300 ease-[cubic-bezier(0.23,1,0.32,1)]",
+                        isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
                       )}
-                    </AnimatePresence>
+                    >
+                      <div className="overflow-hidden">
+                        <div
+                          id={`faq-answer-${realIdx}`}
+                          role="region"
+                          className="px-6 md:px-8 pb-6 md:pb-8 pl-[4.25rem] md:pl-[4.75rem]"
+                        >
+                          <p className="text-sm text-site-text-light leading-relaxed">
+                            {item.a}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
                   </motion.div>
                 );
               };
