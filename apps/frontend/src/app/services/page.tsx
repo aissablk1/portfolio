@@ -1495,7 +1495,7 @@ export default function ServicesPage() {
               </motion.p>
             </div>
 
-            {/* FAQ cards — 2 independent column grids, open item spans 2 rows */}
+            {/* FAQ cards — 2 flex columns */}
             {(() => {
               const left = t.faq.filter((_, i) => i % 2 === 0);
               const right = t.faq.filter((_, i) => i % 2 === 1);
@@ -1511,9 +1511,9 @@ export default function ServicesPage() {
                     key={realIdx}
                     {...fadeUpSmall(delayIdx * 0.06)}
                     className={cn(
-                      "group border rounded-2xl overflow-hidden transition-colors duration-300 self-start",
+                      "group border rounded-2xl overflow-hidden transition-colors duration-300",
                       isOpen
-                        ? "border-site-accent bg-site-accent/[0.02] shadow-sm md:[grid-row:span_2]"
+                        ? "border-site-accent bg-site-accent/[0.02] shadow-sm"
                         : "border-site-border hover:border-site-accent/30"
                     )}
                   >
@@ -1544,15 +1544,15 @@ export default function ServicesPage() {
                         )}
                       />
                     </button>
-                    <AnimatePresence>
+                    <AnimatePresence initial={false}>
                       {isOpen && (
                         <motion.div
                           initial={{ height: 0, opacity: 0 }}
                           animate={{ height: "auto", opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
                           transition={{
-                            duration: 0.3,
-                            ease: [0.23, 1, 0.32, 1] as [number, number, number, number],
+                            height: { duration: 0.35, ease: [0.23, 1, 0.32, 1] },
+                            opacity: { duration: 0.25, delay: 0.05 },
                           }}
                           className="overflow-hidden"
                         >
@@ -1572,14 +1572,12 @@ export default function ServicesPage() {
                 );
               };
 
-              const colRows = (count: number) => `repeat(${count}, auto)`;
-
               return (
                 <div className="flex flex-col md:flex-row gap-4 md:gap-5">
-                  <div className="flex-1 grid gap-4 md:gap-5" style={{ gridTemplateRows: colRows(left.length) }}>
+                  <div className="flex-1 flex flex-col gap-4 md:gap-5">
                     {left.map((item, i) => renderCard(item, i * 2, i))}
                   </div>
-                  <div className="flex-1 grid gap-4 md:gap-5" style={{ gridTemplateRows: colRows(right.length) }}>
+                  <div className="flex-1 flex flex-col gap-4 md:gap-5">
                     {right.map((item, i) => renderCard(item, i * 2 + 1, i))}
                   </div>
                 </div>
