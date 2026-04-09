@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  serverExternalPackages: ["stripe"],
   experimental: {
     optimizeCss: true,
     optimizePackageImports: ["framer-motion", "lucide-react"],
