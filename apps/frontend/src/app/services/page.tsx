@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/components/LanguageContext";
@@ -826,6 +826,11 @@ export default function ServicesPage() {
   const t = content[language];
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [subBilling, setSubBilling] = useState<"monthly" | "yearly">("monthly");
+  const faqClosedH = useRef(0);
+  const faqGap = 20; // md:gap-5 = 1.25rem = 20px
+  const faqMeasureRef = useCallback((el: HTMLDivElement | null) => {
+    if (el && faqClosedH.current === 0) faqClosedH.current = el.offsetHeight;
+  }, []);
 
   return (
     <div className="bg-site-bg min-h-screen">
@@ -1506,9 +1511,13 @@ export default function ServicesPage() {
                 delayIdx: number
               ) => {
                 const isOpen = openFaq === realIdx;
+                const openMinH = faqClosedH.current > 0
+                  ? faqClosedH.current * 2 + faqGap
+                  : undefined;
                 return (
                   <motion.div
                     key={realIdx}
+                    ref={realIdx === 0 ? faqMeasureRef : undefined}
                     {...fadeUpSmall(delayIdx * 0.06)}
                     className={cn(
                       "group border rounded-2xl overflow-hidden transition-colors duration-300",
@@ -1516,6 +1525,7 @@ export default function ServicesPage() {
                         ? "border-site-accent bg-site-accent/[0.02] shadow-sm"
                         : "border-site-border hover:border-site-accent/30"
                     )}
+                    style={isOpen && openMinH ? { minHeight: openMinH } : undefined}
                   >
                     <button
                       onClick={() => setOpenFaq(isOpen ? null : realIdx)}
