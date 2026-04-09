@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="doc-category" content="Strategie">
+  <meta name="doc-title" content="Systeme LinkedIn 3 Couches">
+  <meta name="doc-color" content="#0a66c2">
+  <title>Systeme LinkedIn 3 Couches — Aissa Belkoussa</title>
+  <style>
+    :root {
+      --fg: #1a1a1a;
+      --muted: #737373;
+      --border: #e5e5e5;
+      --accent: #0a66c2;
+      --bg: #fafafa;
+      --red: #dc2626;
+      --green: #16a34a;
+      --amber: #d97706;
+      --surface: #fff;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Geist', 'Inter', system-ui, -apple-system, sans-serif;
+      color: var(--fg);
+      background: var(--bg);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 860px; margin: 0 auto; padding: 48px 32px; }
+    .back { display: inline-block; font-size: 13px; font-weight: 500; color: var(--muted); text-decoration: none; margin-bottom: 32px; transition: color 0.2s; }
+    .back:hover { color: var(--accent); }
+    h1 { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 4px; }
+    .subtitle { font-size: 14px; color: var(--muted); margin-bottom: 10px; font-style: italic; }
+    .badge-line { margin-bottom: 24px; }
+    h2 { font-size: 17px; font-weight: 700; margin-top: 40px; margin-bottom: 12px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+    h3 { font-size: 14px; font-weight: 700; margin-top: 24px; margin-bottom: 8px; }
+    p { margin-bottom: 1rem; font-size: 14px; }
+    ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; font-size: 14px; }
+    li { margin-bottom: 4px; }
+    strong { font-weight: 600; }
+
+    /* Alerts */
+    .alert { padding: 12px 16px; border-radius: 8px; margin: 16px 0; font-size: 13px; }
+    .a-red { background: #fef2f2; border-left: 4px solid var(--red); }
+    .a-green { background: #f0fdf4; border-left: 4px solid var(--green); }
+    .a-blue { background: #eff6ff; border-left: 4px solid var(--accent); }
+    .a-amber { background: #fffbeb; border-left: 4px solid var(--amber); }
+
+    /* Cards */
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; margin: 12px 0; }
+    .card-dark { background: #0a0a0a; color: #fafafa; border-radius: 8px; padding: 16px 20px; margin: 12px 0; }
+    .card-dark pre { background: none; margin: 0; padding: 0; color: #a3a3a3; }
+    .card-dark code { color: #fafafa; background: none; }
+
+    /* Badges / tags */
+    .tag { display: inline-block; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 2px 8px; border-radius: 10px; margin-right: 4px; }
+    .t-blue { background: #eff6ff; color: var(--accent); }
+    .t-green { background: #f0fdf4; color: var(--green); }
+    .t-amber { background: #fffbeb; color: var(--amber); }
+    .t-red { background: #fef2f2; color: var(--red); }
+
+    /* 3-column diagram */
+    .arch { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin: 20px 0; }
+    .arch-col { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 16px; text-align: center; }
+    .arch-col h4 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
+    .arch-col p { font-size: 13px; margin-bottom: 6px; }
+    .arch-col .note { font-size: 11px; color: var(--muted); }
+
+    /* Tables */
+    table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 16px; }
+    thead { background: #f5f5f5; }
+    th { text-align: left; padding: 10px 12px; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); border-bottom: 2px solid var(--border); }
+    td { padding: 10px 12px; border-bottom: 1px solid #f0f0f0; vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    td a { color: var(--accent); text-decoration: none; font-weight: 500; }
+    td a:hover { text-decoration: underline; }
+
+    /* Code blocks */
+    pre { background: #f8f8f8; color: var(--fg); border-radius: 6px; padding: 12px 14px; overflow-x: auto; font-size: 12.5px; line-height: 1.6; margin: 0; }
+    pre code { background: none; padding: 0; font-family: 'Geist Mono', 'Fira Code', monospace; }
+    code { font-family: 'Geist Mono', 'Fira Code', monospace; background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-size: 0.875em; }
+
+    /* Checklist */
+    .checklist { list-style: none; padding-left: 0; }
+    .checklist-item { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
+    .checklist-item:last-child { border-bottom: none; }
+    .checklist-item input[type="checkbox"] { margin-top: 3px; flex-shrink: 0; width: 15px; height: 15px; cursor: pointer; accent-color: var(--accent); }
+    .checklist-item label { cursor: pointer; line-height: 1.5; }
+    .checklist-item.done label { text-decoration: line-through; color: var(--muted); }
+    .checklist-section { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 16px 20px; margin: 12px 0; }
+    .checklist-section h3 { margin-top: 0; font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; }
+    .reset-btn { display: inline-block; margin-top: 16px; padding: 7px 16px; background: #f5f5f5; border: 1px solid var(--border); border-radius: 6px; font-size: 12px; font-weight: 600; color: var(--muted); cursor: pointer; transition: all 0.15s; }
+    .reset-btn:hover { background: #e5e5e5; color: var(--fg); }
+
+    /* Footer */
+    .footer { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 11px; color: #a3a3a3; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .page { padding: 24px 16px; }
+      .arch { grid-template-columns: 1fr; }
+      table { font-size: 12px; display: block; overflow-x: auto; }
+      th, td { padding: 8px; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <a href="../index.html" class="back">&larr; Retour</a>
+
+  <!-- ======================== SECTION 1 — HEADER ======================== -->
+  <h1>Systeme LinkedIn 3 Couches</h1>
+  <p class="subtitle">Le contenu attire. Le DM ouvre. Le suivi ferme.</p>
+  <div class="badge-line">
+    <span class="tag t-blue">Framework Skaale &mdash; Alexis Vidal</span>
+  </div>
+
+  <div class="alert a-red">
+    <strong>90% des dirigeants</strong> qui postent sur LinkedIn commettent la meme erreur : ils publient regulierement mais attendent que les prospects viennent, n'envoient pas de DM, et ne relancent pas. <strong>Resultat : des vues, 0 RDV.</strong>
+  </div>
+
+  <!-- ======================== SECTION 2 — DIAGRAMME 3 COUCHES ======================== -->
+  <h2>Vue d'ensemble — 3 couches</h2>
+
+  <div class="arch">
+    <div class="arch-col">
+      <h4 style="color: var(--accent)">Couche 1 &mdash; Attirer</h4>
+      <p><strong>1.</strong> Perspective<br><strong>2.</strong> Preuve<br><strong>3.</strong> Promo</p>
+      <p class="note">Resultats : visites profil, connexions, abonnes</p>
+    </div>
+    <div class="arch-col">
+      <h4 style="color: var(--amber)">Couche 2 &mdash; Convertir</h4>
+      <p><strong>1.</strong> Signaux a suivre<br><strong>2.</strong> Structure du DM<br><strong>3.</strong> Organisation leads</p>
+      <p class="note">CRM : tracker + Notion/Sheets</p>
+    </div>
+    <div class="arch-col">
+      <h4 style="color: var(--red)">Couche 3 &mdash; Fermer</h4>
+      <p><strong>1.</strong> Timeline relance<br><strong>2.</strong> KPI (80% apres 3 msg)<br><strong>3.</strong> Erreurs a eviter</p>
+      <p class="note">90% abandonnent trop tot</p>
+    </div>
+  </div>
+
+  <!-- ======================== SECTION 3 — COUCHE 1 : ATTIRER ======================== -->
+  <h2>Couche 1 &mdash; Attirer</h2>
+
+  <p>Alterner 3 types de contenu sur un rythme Lundi / Mercredi / Vendredi :</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Role</th>
+        <th>Exemples BTP</th>
+        <th>Exemples B2B</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="tag t-blue">Perspective</span></td>
+        <td>Montrer l'expertise</td>
+        <td>Comment j'ai automatise les devis d'un plombier a Albi</td>
+        <td>Pourquoi 80% des tunnels de vente B2B ne convertissent pas</td>
+      </tr>
+      <tr>
+        <td><span class="tag t-green">Preuve</span></td>
+        <td>Creer la confiance</td>
+        <td>De 0 a 15 demandes de devis/mois &mdash; cas artisan du Tarn</td>
+        <td>10h/semaine recuperees &mdash; avant/apres automatisation</td>
+      </tr>
+      <tr>
+        <td><span class="tag t-amber">Promo</span></td>
+        <td>Convertir l'attention</td>
+        <td>Votre site ne genere aucun appel ? Diagnostic gratuit 2 min</td>
+        <td>3 automatisations qui changent la vie d'un consultant</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="alert a-green">
+    <strong>Regle :</strong> Alterner Lundi=Perspective, Mercredi=Preuve, Vendredi=Promo. Repeter pendant 3 mois minimum.<br>
+    <strong>Lien :</strong> &rarr; <a href="../linkedin/plan-linkedin.html">plan-linkedin.html</a>
+  </div>
+
+  <!-- ======================== SECTION 4 — COUCHE 2 : CONVERTIR ======================== -->
+  <h2>Couche 2 &mdash; Convertir</h2>
+
+  <h3>3 signaux a surveiller chaque jour</h3>
+  <ol>
+    <li>Visiteurs de profil &rarr; DM dans les 24h</li>
+    <li>Nouvelles connexions acceptees &rarr; DM de bienvenue dans les 48h</li>
+    <li>Likes/commentaires sur tes posts &rarr; DM personnalise dans les 24h</li>
+  </ol>
+
+  <h3>Structure du DM Skaale (4 parties)</h3>
+  <div class="card-dark">
+    <pre><code>CONTEXTE   → "J'ai vu [element precis]"
+DOULEUR    → "Ca me dit que [probleme identifie]"
+PREUVE     → "On a aide [client similaire] a [resultat chiffre]"
+INVITATION → "On en parle 15 min ?"</code></pre>
+  </div>
+
+  <h3>6 scripts DM prets a copier-coller</h3>
+
+  <h3>Script 1 &mdash; BTP petit artisan (&le;5 salaries)</h3>
+  <div class="card">
+    <pre><code>Bonjour [Prenom],
+
+J'ai vu votre activite en [specialite] a [ville] -- [detail specifique vu sur le profil ou le site].
+
+Ca me dit que vous gerez probablement les devis, les relances et la compta en plus des chantiers. C'est le pattern que je vois chez 90% des artisans qui n'ont pas encore automatise.
+
+J'ai aide un plombier de 8 salaries a Albi a recuperer 10h/semaine en automatisant la prise de RDV et les devis. En 10 jours, c'etait operationnel.
+
+Si c'est un sujet pour vous, 15 minutes suffisent pour voir ce qui est automatisable chez [entreprise].</code></pre>
+  </div>
+
+  <h3>Script 2 &mdash; BTP artisan structure (5-20 salaries)</h3>
+  <div class="card">
+    <pre><code>Bonjour [Prenom],
+
+J'ai regarde [entreprise] -- [detail specifique : nombre de salaries, specialisation, zone geographique]. Belle croissance.
+
+A cette taille, le vrai frein c'est souvent l'administratif qui ne scale pas : devis, relances, suivi chantier, coordination equipe. C'est du temps dirigeant qui vaut cher.
+
+J'ai construit un systeme complet pour une entreprise BTP similaire -- site pro + automatisation devis + CRM -- qui a libere 10h/semaine au dirigeant. ROI en 4 semaines.
+
+Ca vous interesse d'en discuter 15 min ?</code></pre>
+  </div>
+
+  <h3>Script 3 &mdash; B2B consultant solo</h3>
+  <div class="card">
+    <pre><code>Bonjour [Prenom],
+
+J'ai vu votre expertise en [domaine] -- [detail specifique du profil ou d'un post recent].
+
+Question honnete : votre pipeline de clients depend principalement du reseau et du bouche-a-oreille ? C'est le pattern que je vois chez la majorite des consultants : expertise pointue, mais aucun systeme qui genere des leads en automatique.
+
+J'ai construit des tunnels de conversion pour des prestataires B2B qui transforment des visiteurs en prospects qualifies -- du premier clic au RDV pris. Le systeme tourne 24/7.
+
+15 min pour voir si ca s'applique a votre situation ?</code></pre>
+  </div>
+
+  <h3>Script 4 &mdash; B2B cabinet structure</h3>
+  <div class="card">
+    <pre><code>Bonjour [Prenom],
+
+J'ai regarde [cabinet/entreprise] -- [detail : nombre de consultants, secteur, offres]. Positionnement solide.
+
+Avec une equipe de [X], le defi c'est souvent de systematiser l'acquisition : que chaque consultant ne depende pas de son propre reseau. Un tunnel centralise + CRM automatise change la donne.
+
+J'ai aide un cabinet de conseil a passer de 100% bouche-a-oreille a 3 sources d'acquisition mesurees -- avec un ROI de 25% sur le taux de conversion en 2 mois.
+
+Si c'est un enjeu chez vous, on en parle 15 min ?</code></pre>
+  </div>
+
+  <h3>Script 5 &mdash; Formation IA (dirigeant PME)</h3>
+  <div class="card">
+    <pre><code>Bonjour [Prenom],
+
+J'ai vu que [entreprise] est en [secteur/activite] -- [detail specifique].
+
+Question directe : vos equipes utilisent l'IA au quotidien ? A partir d'aout 2026, la reglementation europeenne impose un niveau minimum de competences IA.
+
+Je forme les equipes des TPE/PME a l'utilisation concrete de l'IA dans leur metier -- pas de theorie, des outils operationnels des le lendemain. Financable a 100% par votre OPCO.
+
+Ca vous interesse d'en savoir plus ?</code></pre>
+  </div>
+
+  <h3>Script 6 &mdash; Formation IA (organisme de formation)</h3>
+  <div class="card">
+    <pre><code>Bonjour [Prenom],
+
+J'ai vu le catalogue de [organisme] -- [detail specifique : certifications, secteurs couverts].
+
+La demande en formation IA explose en 2026, mais les formateurs qui codent en live et montrent des cas d'usage reels sont rares. C'est exactement ce que je propose.
+
+Je peux intervenir comme formateur IA externe pour vos sessions -- catalogue pret a l'emploi, format 1 ou 2 jours, compatible Qualiopi, financement OPCO EP facilite.
+
+On en discute 15 min pour voir si ca colle avec vos besoins ?</code></pre>
+  </div>
+
+  <h3>Organisation des leads (4 statuts)</h3>
+  <table>
+    <thead>
+      <tr><th>Statut</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><span class="tag t-red">Prospect chaud</span></td><td>Echange actif, interet exprime</td></tr>
+      <tr><td><span class="tag t-amber">En discussion</span></td><td>A repondu mais pas encore qualifie</td></tr>
+      <tr><td><span class="tag t-green">Client</span></td><td>Signe</td></tr>
+      <tr><td><span class="tag t-blue">En attente</span></td><td>Pas le bon timing, a re-contacter plus tard</td></tr>
+    </tbody>
+  </table>
+
+  <div class="alert a-blue">
+    <strong>Lien :</strong> &rarr; <a href="../prospection/cold-outreach-templates.html">cold-outreach-templates.html</a> pour les templates email + personnalisation par prospect.
+  </div>
+
+  <!-- ======================== SECTION 5 — COUCHE 3 : FERMER ======================== -->
+  <h2>Couche 3 &mdash; Fermer</h2>
+
+  <table>
+    <thead>
+      <tr><th>Timing</th><th>Action</th><th>Ton</th><th>Objectif</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>J+3</strong></td><td>Apporter de la valeur</td><td>Genereux</td><td>Rappeler qu'on existe sans demander</td></tr>
+      <tr><td><strong>J+7</strong></td><td>Partager un cas client</td><td>Credible</td><td>Prouver par l'exemple</td></tr>
+      <tr><td><strong>J+14</strong></td><td>Message court</td><td>Direct</td><td>Derniere chance, pas insistant</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Relance J+3 (valeur)</h3>
+  <div class="card">
+    <pre><code>[Prenom], je suis tombe sur [article/stat/outil] qui pourrait vous interesser vu votre activite en [domaine]. [Lien ou resume en 2 lignes].
+
+Pas de pression -- si le sujet de [automatisation/site/formation] revient, je suis la.</code></pre>
+  </div>
+
+  <h3>Relance J+7 (cas client)</h3>
+  <div class="card">
+    <pre><code>[Prenom], je voulais partager un cas recent : [client similaire] avait exactement le meme enjeu que vous ([douleur identifiee dans le DM initial]). En [delai], on a [resultat concret].
+
+Si ca parle a votre situation, je suis disponible pour un echange rapide.</code></pre>
+  </div>
+
+  <h3>Relance J+14 (message court)</h3>
+  <div class="card">
+    <pre><code>[Prenom], juste un dernier mot -- si [probleme initial] est toujours un sujet, je suis disponible. Sinon, pas de souci, et bonne continuation avec [entreprise].</code></pre>
+  </div>
+
+  <h3>Erreurs a eviter</h3>
+  <ul>
+    <li>Relancer avec le meme message (varier le contenu)</li>
+    <li>Pitcher directement des le premier DM</li>
+    <li>Envoyer des messages trop longs (max 4-5 lignes)</li>
+    <li>Abandonner apres 1 seul message</li>
+  </ul>
+
+  <div class="alert a-amber">
+    <strong>KPIs cles :</strong> 80% des deals se closent apres 3 messages minimum. 90% des gens abandonnent trop tot &rarr; la relance EST le systeme.
+  </div>
+
+  <!-- ======================== SECTION 6 — CHECKLIST QUOTIDIENNE ======================== -->
+  <h2>Checklist quotidienne &mdash; 45 min/jour</h2>
+
+  <div class="alert a-red"><strong>Total : 45 min/jour. C'est non negociable.</strong></div>
+
+  <div class="checklist-section">
+    <h3>Matin &mdash; 15 min (8h30-8h45)</h3>
+    <ul class="checklist" id="checklist-matin">
+      <li class="checklist-item" id="item-m1">
+        <input type="checkbox" id="cb-m1">
+        <label for="cb-m1">Verifier &laquo;&nbsp;Qui a vu votre profil&nbsp;&raquo; sur LinkedIn</label>
+      </li>
+      <li class="checklist-item" id="item-m2">
+        <input type="checkbox" id="cb-m2">
+        <label for="cb-m2">Verifier les nouvelles connexions acceptees</label>
+      </li>
+      <li class="checklist-item" id="item-m3">
+        <input type="checkbox" id="cb-m3">
+        <label for="cb-m3">Verifier les likes/commentaires sur le dernier post</label>
+      </li>
+      <li class="checklist-item" id="item-m4">
+        <input type="checkbox" id="cb-m4">
+        <label for="cb-m4">Noter les signaux dans le tracker (colonne &laquo;&nbsp;Source du signal&nbsp;&raquo;)</label>
+      </li>
+    </ul>
+  </div>
+
+  <div class="checklist-section">
+    <h3>Midi &mdash; 20 min (12h30-12h50)</h3>
+    <ul class="checklist" id="checklist-midi">
+      <li class="checklist-item" id="item-mi1">
+        <input type="checkbox" id="cb-mi1">
+        <label for="cb-mi1">Envoyer 3-5 DM personnalises (signaux du matin + cold)</label>
+      </li>
+      <li class="checklist-item" id="item-mi2">
+        <input type="checkbox" id="cb-mi2">
+        <label for="cb-mi2">Commenter 10 posts dans la cible (artisans, consultants, formateurs Occitanie)</label>
+      </li>
+      <li class="checklist-item" id="item-mi3">
+        <input type="checkbox" id="cb-mi3">
+        <label for="cb-mi3">Publier le post du jour si c'est un jour de publication (Lun/Mer/Ven)</label>
+      </li>
+    </ul>
+  </div>
+
+  <div class="checklist-section">
+    <h3>Soir &mdash; 10 min (18h00-18h10)</h3>
+    <ul class="checklist" id="checklist-soir">
+      <li class="checklist-item" id="item-s1">
+        <input type="checkbox" id="cb-s1">
+        <label for="cb-s1">Verifier les reponses aux DM du jour</label>
+      </li>
+      <li class="checklist-item" id="item-s2">
+        <input type="checkbox" id="cb-s2">
+        <label for="cb-s2">Faire les relances J+3/J+7/J+14 dues</label>
+      </li>
+      <li class="checklist-item" id="item-s3">
+        <input type="checkbox" id="cb-s3">
+        <label for="cb-s3">Mettre a jour le tracker (statuts + notes)</label>
+      </li>
+      <li class="checklist-item" id="item-s4">
+        <input type="checkbox" id="cb-s4">
+        <label for="cb-s4">Preparer les DM du lendemain si besoin</label>
+      </li>
+    </ul>
+  </div>
+
+  <button class="reset-btn" id="reset-btn">Reinitialiser la checklist</button>
+
+  <!-- ======================== SECTION 7 — MATRICE CRM ======================== -->
+  <h2>Matrice outils CRM</h2>
+
+  <table>
+    <thead>
+      <tr><th>Outil</th><th>Prix</th><th>Pour qui</th><th>Avantages</th><th>Limites</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Tracker HTML</strong> (existant)</td>
+        <td>0 &euro;</td>
+        <td>&lt;20 prospects</td>
+        <td>Deja en place, simple, offline</td>
+        <td>Pas de pipeline visuel</td>
+      </tr>
+      <tr>
+        <td><strong>Notion</strong></td>
+        <td>0 &euro;</td>
+        <td>20-50 prospects</td>
+        <td>Pipeline kanban, vues filtrees</td>
+        <td>Saisie manuelle</td>
+      </tr>
+      <tr>
+        <td><strong>Google Sheets</strong></td>
+        <td>0 &euro;</td>
+        <td>20-50 prospects</td>
+        <td>Formules de rappel relance</td>
+        <td>Pas de kanban</td>
+      </tr>
+      <tr>
+        <td><strong>Waalaxy</strong></td>
+        <td>~60 &euro;/mois</td>
+        <td>50+ prospects/mois</td>
+        <td>Automatise sequences DM LinkedIn</td>
+        <td>Risque LinkedIn, cout</td>
+      </tr>
+      <tr>
+        <td><strong>Lemlist</strong></td>
+        <td>~59 &euro;/mois</td>
+        <td>Volume email + LinkedIn</td>
+        <td>Sequences multicanal, analytics</td>
+        <td>Courbe d'apprentissage</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="alert a-green">
+    <strong>Recommandation progressive :</strong><br>
+    1. Maintenant (0-20 prospects) : tracker HTML enrichi<br>
+    2. A 30 jours (20-50 prospects) : Notion ou Sheets pour le pipeline visuel<br>
+    3. A 90 jours (50+ prospects/mois) : Waalaxy si le volume LinkedIn le justifie
+  </div>
+
+  <!-- ======================== SECTION 8 — KPIs ======================== -->
+  <h2>KPIs du systeme complet</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Couche</th>
+        <th>Metrique</th>
+        <th>Cible J30</th>
+        <th>Cible J60</th>
+        <th>Cible J90</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td rowspan="3"><strong>Attirer</strong></td>
+        <td>Vues profil/semaine</td>
+        <td>50</td><td>150</td><td>300+</td>
+      </tr>
+      <tr>
+        <td>Nouvelles connexions/semaine</td>
+        <td>15</td><td>30</td><td>50</td>
+      </tr>
+      <tr>
+        <td>Taux engagement posts</td>
+        <td>2%</td><td>4%</td><td>5%+</td>
+      </tr>
+      <tr>
+        <td rowspan="4"><strong>Convertir</strong></td>
+        <td>DM envoyes/semaine</td>
+        <td>15</td><td>20</td><td>25</td>
+      </tr>
+      <tr>
+        <td>Taux reponse DM (warm)</td>
+        <td>25%</td><td>30%</td><td>35%</td>
+      </tr>
+      <tr>
+        <td>Taux reponse DM (cold)</td>
+        <td>8%</td><td>12%</td><td>15%</td>
+      </tr>
+      <tr>
+        <td>Leads qualifies/semaine</td>
+        <td>1</td><td>3</td><td>5</td>
+      </tr>
+      <tr>
+        <td rowspan="3"><strong>Fermer</strong></td>
+        <td>Relances effectuees/semaine</td>
+        <td>5</td><td>10</td><td>15</td>
+      </tr>
+      <tr>
+        <td>Taux conversion relance &rarr; RDV</td>
+        <td>10%</td><td>15%</td><td>20%</td>
+      </tr>
+      <tr>
+        <td>Delai moyen signal &rarr; closing</td>
+        <td>21j</td><td>18j</td><td>14j</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <span>Framework Skaale &mdash; Alexis Vidal</span>
+    <span>9 avril 2026</span>
+  </div>
+
+</div><!-- /.page -->
+
+<script>
+  (function () {
+    var STORAGE_KEY = 'skaale-checklist';
+
+    function getState() {
+      try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch (e) { return {}; }
+    }
+
+    function saveState(state) {
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+    }
+
+    function applyState(state) {
+      document.querySelectorAll('.checklist-item input[type="checkbox"]').forEach(function (cb) {
+        var checked = !!state[cb.id];
+        cb.checked = checked;
+        cb.closest('.checklist-item').classList.toggle('done', checked);
+      });
+    }
+
+    // Restore on load
+    applyState(getState());
+
+    // Save on change
+    document.querySelectorAll('.checklist-item input[type="checkbox"]').forEach(function (cb) {
+      cb.addEventListener('change', function () {
+        var state = getState();
+        state[cb.id] = cb.checked;
+        saveState(state);
+        cb.closest('.checklist-item').classList.toggle('done', cb.checked);
+      });
+    });
+
+    // Reset button
+    document.getElementById('reset-btn').addEventListener('click', function () {
+      localStorage.removeItem(STORAGE_KEY);
+      applyState({});
+    });
+  })();
+</script>
+</body>
+</html>
