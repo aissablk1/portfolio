@@ -1495,25 +1495,21 @@ export default function ServicesPage() {
               </motion.p>
             </div>
 
-            {/* FAQ cards — 2 columns */}
-            {(() => {
-              const left = t.faq.filter((_, i) => i % 2 === 0);
-              const right = t.faq.filter((_, i) => i % 2 === 1);
-
-              const renderCard = (
-                item: (typeof t.faq)[0],
-                realIdx: number,
-                delayIdx: number
-              ) => {
+            {/* FAQ cards — 2-col grid, open item spans 2 rows */}
+            <div
+              className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5"
+              style={{ gridAutoFlow: "column", gridTemplateRows: `repeat(${Math.ceil(t.faq.length / 2)}, auto)` }}
+            >
+              {t.faq.map((item, realIdx) => {
                 const isOpen = openFaq === realIdx;
                 return (
                   <motion.div
                     key={realIdx}
-                    {...fadeUpSmall(delayIdx * 0.06)}
+                    {...fadeUpSmall(realIdx * 0.04)}
                     className={cn(
                       "group border rounded-2xl overflow-hidden transition-colors duration-300",
                       isOpen
-                        ? "border-site-accent bg-site-accent/[0.02] shadow-sm"
+                        ? "border-site-accent bg-site-accent/[0.02] shadow-sm md:[grid-row:span_2]"
                         : "border-site-border hover:border-site-accent/30"
                     )}
                   >
@@ -1570,19 +1566,8 @@ export default function ServicesPage() {
                     </AnimatePresence>
                   </motion.div>
                 );
-              };
-
-              return (
-                <div className="flex flex-col md:flex-row gap-4 md:gap-5">
-                  <div className="flex-1 flex flex-col gap-4 md:gap-5">
-                    {left.map((item, i) => renderCard(item, i * 2, i))}
-                  </div>
-                  <div className="flex-1 flex flex-col gap-4 md:gap-5">
-                    {right.map((item, i) => renderCard(item, i * 2 + 1, i))}
-                  </div>
-                </div>
-              );
-            })()}
+              })}
+            </div>
           </div>
         </section>
 
