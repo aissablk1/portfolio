@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="doc-category" content="Specs">
+<meta name="doc-title" content="Systeme LinkedIn 3 Couches — Design">
+<meta name="doc-color" content="#0a66c2">
+<title>Systeme LinkedIn 3 Couches — Design Spec</title>
+<style>
+:root{--fg:#1a1a1a;--muted:#737373;--border:#e5e5e5;--accent:#0a66c2;--bg:#fafafa;--red:#dc2626;--green:#16a34a;--amber:#d97706;--surface:#fff}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Geist','Inter',system-ui,-apple-system,sans-serif;color:var(--fg);background:var(--bg);line-height:1.7;padding:2rem 1rem}
+.container{max-width:860px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.back{display:inline-block;margin-bottom:2rem;font-size:.875rem;color:var(--muted)}
+.back:hover{color:var(--accent)}
+h1{font-size:1.75rem;font-weight:700;margin-bottom:.5rem;line-height:1.3}
+h2{font-size:1.375rem;font-weight:700;margin-top:2.5rem;margin-bottom:.75rem;padding-bottom:.375rem;border-bottom:1px solid var(--border)}
+h3{font-size:1.125rem;font-weight:600;margin-top:1.75rem;margin-bottom:.5rem}
+h4{font-size:.75rem;font-weight:600;margin-top:1.25rem;margin-bottom:.375rem;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+p{margin-bottom:1rem}
+ul,ol{margin-bottom:1rem;padding-left:1.5rem}
+li{margin-bottom:.375rem}
+li>ul,li>ol{margin-top:.375rem;margin-bottom:0}
+strong{font-weight:600}
+code{font-family:'Geist Mono','Fira Code',monospace;background:#f0f0f0;padding:.125rem .375rem;border-radius:3px;font-size:.875em}
+pre{background:#1a1a1a;color:#fafafa;padding:1rem 1.25rem;border-radius:8px;overflow-x:auto;margin-bottom:1.5rem;font-size:.8125rem;line-height:1.6}
+pre code{background:none;padding:0;color:inherit}
+hr{border:none;border-top:1px solid var(--border);margin:2rem 0}
+table{width:100%;border-collapse:collapse;margin-bottom:1.5rem;font-size:.875rem}
+th,td{padding:.5rem .75rem;border:1px solid var(--border);text-align:left}
+th{background:#f0f0f0;font-weight:600}
+tr:nth-child(even){background:#f9f9f9}
+.alert{padding:1rem 1.25rem;border-radius:8px;margin:1.5rem 0;font-size:.875rem}
+.a-red{background:#fef2f2;border-left:4px solid var(--red)}
+.a-green{background:#f0fdf4;border-left:4px solid var(--green)}
+.a-blue{background:#eff6ff;border-left:4px solid var(--accent)}
+.a-amber{background:#fffbeb;border-left:4px solid var(--amber)}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1.25rem;margin:1rem 0}
+.card-dark{background:#0a0a0a;color:#fafafa;border-radius:8px;padding:1.25rem;margin:1rem 0}
+.card-dark p,.card-dark li,.card-dark code{color:#a3a3a3}
+.card-dark strong{color:#fafafa}
+.tag{display:inline-block;font-size:.625rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:2px 8px;border-radius:10px;margin-right:4px}
+.t-blue{background:#eff6ff;color:var(--accent)}
+.t-green{background:#f0fdf4;color:var(--green)}
+.t-amber{background:#fffbeb;color:var(--amber)}
+.t-red{background:#fef2f2;color:var(--red)}
+.arch{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:1.5rem 0}
+.arch-col{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1rem;text-align:center}
+.arch-col h4{margin-top:0}
+.checklist{list-style:none;padding-left:0}
+.checklist li{padding:.375rem 0;border-bottom:1px solid var(--border)}
+.checklist li:last-child{border-bottom:none}
+@media(max-width:600px){body{padding:1rem .75rem}h1{font-size:1.375rem}h2{font-size:1.1875rem}table{font-size:.8125rem}th,td{padding:.375rem .5rem}.arch{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="container">
+<a href="../../index.html" class="back">&larr; Retour a l'index</a>
+
+<h1>Systeme LinkedIn 3 Couches &mdash; Design Spec</h1>
+
+<p><strong>Date :</strong> 9 avril 2026 &middot; <strong>Statut :</strong> Design valide, en attente d'implementation<br>
+<strong>Source :</strong> Framework Skaale (Alexis Vidal) &mdash; <em>&laquo; Le contenu attire. Le DM ouvre. Le suivi ferme. &raquo;</em></p>
+
+<hr>
+
+<!-- ================================================================ -->
+<h2>0 &mdash; Convention fichiers</h2>
+
+<p>Tous les livrables sont en <code>.html</code> avec les balises meta requises par <code>docs/index.html</code> :</p>
+
+<pre><code>&lt;meta name="doc-category" content="..."&gt;
+&lt;meta name="doc-title" content="..."&gt;
+&lt;meta name="doc-color" content="..."&gt;</code></pre>
+
+<p>Chaque nouveau fichier doit aussi etre ajoute dans :</p>
+<ul>
+<li><code>docs/index.html</code> &rarr; tableau <code>CATEGORIES</code> (section JavaScript)</li>
+<li><code>docs/manifest.json</code> &rarr; tableau JSON</li>
+</ul>
+
+<hr>
+
+<!-- ================================================================ -->
+<h2>1 &mdash; Contexte et objectif</h2>
+
+<h3>Le probleme</h3>
+
+<div class="alert a-red">
+<strong>90% des dirigeants</strong> qui postent sur LinkedIn commettent la meme erreur : ils publient regulierement mais attendent que les prospects viennent, n'envoient pas de DM, et ne relancent pas. <strong>Resultat : des vues, 0 RDV.</strong>
+</div>
+
+<p>La strategie LinkedIn actuelle d'Aissa couvre partiellement la Couche 1 (contenu) mais manque de structure sur les Couches 2 (DM bases sur des signaux) et 3 (relance systematique).</p>
+
+<h3>L'objectif</h3>
+
+<p>Integrer le framework Skaale &laquo; 3 Couches &raquo; dans l'ecosysteme documentaire existant pour transformer LinkedIn d'un canal de visibilite en un <strong>systeme d'acquisition complet</strong> :</p>
+<ul>
+<li><strong>Couche 1 :</strong> Contenu structure Perspective/Preuve/Promo &rarr; attire</li>
+<li><strong>Couche 2 :</strong> DM declenches par des signaux &rarr; convertit</li>
+<li><strong>Couche 3 :</strong> Relances J+3/J+7/J+14 &rarr; ferme</li>
+</ul>
+
+<h3>Perimetre</h3>
+<ul>
+<li>1 document hub operationnel (nouveau)</li>
+<li>4 documents satellites enrichis (existants)</li>
+<li>Zero outil payant requis (recommandations incluses pour quand le volume augmente)</li>
+</ul>
+
+<hr>
+
+<!-- ================================================================ -->
+<h2>2 &mdash; Architecture &mdash; Hub + Satellites enrichis</h2>
+
+<div class="card-dark">
+<pre style="background:none;margin:0;padding:0"><code>strategie/systeme-linkedin-3-couches.html    &larr; HUB (nouveau)
+    |
+    |-- linkedin/plan-linkedin.html              &larr; Satellite 1 (enrichi)
+    |-- prospection/cold-outreach-templates.html  &larr; Satellite 2 (enrichi)
+    |-- prospection/tracker-prospection.html      &larr; Satellite 3 (enrichi)
+    '-- strategie/playbook-commercial.html        &larr; Satellite 4 (enrichi)</code></pre>
+</div>
+
+<p>Le hub est le document qu'on ouvre chaque matin. Les satellites sont les sources de verite de chaque domaine.</p>
+
+<hr>
+
+<!-- ================================================================ -->
+<h2>3 &mdash; Document Hub</h2>
+
+<p><code>docs/strategie/systeme-linkedin-3-couches.html</code></p>
+
+<h3>3.1 &mdash; Format et style</h3>
+
+<ul>
+<li>Page HTML autonome, meme design system que les docs existants</li>
+<li>Responsive, imprimable</li>
+<li>JavaScript minimal (checklist interactive uniquement)</li>
+</ul>
+
+<h4>Balises meta</h4>
+<pre><code>&lt;meta name="doc-category" content="Strategie"&gt;
+&lt;meta name="doc-title" content="Systeme LinkedIn 3 Couches"&gt;
+&lt;meta name="doc-color" content="#0a66c2"&gt;</code></pre>
+
+<h4>Entree index.html (categorie Strategie)</h4>
+<pre><code>{ name: "Systeme LinkedIn 3 Couches", path: "strategie/systeme-linkedin-3-couches.html" }</code></pre>
+
+<h4>Entree manifest.json</h4>
+<pre><code>"strategie/systeme-linkedin-3-couches.html"</code></pre>
+
+<h3>3.2 &mdash; Structure du document</h3>
+
+<h4>Section 1 &mdash; Header</h4>
+<ul>
+<li>Titre : &laquo; Systeme LinkedIn 3 Couches &raquo;</li>
+<li>Sous-titre : <em>Le contenu attire. Le DM ouvre. Le suivi ferme.</em></li>
+<li>Badge : <span class="tag t-blue">Framework Skaale &mdash; Alexis Vidal</span></li>
+</ul>
+
+<h4>Section 2 &mdash; Diagramme 3 couches</h4>
+
+<div class="arch">
+<div class="arch-col">
+<h4 style="color:var(--accent)">Couche 1 &mdash; Attirer</h4>
+<p><strong>1.</strong> Perspective<br><strong>2.</strong> Preuve<br><strong>3.</strong> Promo</p>
+<p style="font-size:.75rem;color:var(--muted)">Resultats : visites profil, connexions, abonnes</p>
+</div>
+<div class="arch-col">
+<h4 style="color:var(--amber)">Couche 2 &mdash; Convertir</h4>
+<p><strong>1.</strong> Signaux a suivre<br><strong>2.</strong> Structure du DM<br><strong>3.</strong> Organisation leads</p>
+<p style="font-size:.75rem;color:var(--muted)">CRM : tracker + Notion/Sheets</p>
+</div>
+<div class="arch-col">
+<h4 style="color:var(--red)">Couche 3 &mdash; Fermer</h4>
+<p><strong>1.</strong> Timeline relance<br><strong>2.</strong> KPI (80% apres 3 msg)<br><strong>3.</strong> Erreurs a eviter</p>
+<p style="font-size:.75rem;color:var(--muted)">90% abandonnent trop tot</p>
+</div>
+</div>
+
+<h4>Section 3 &mdash; Couche 1 : Attirer</h4>
+
+<table>
+<thead><tr><th>Type</th><th>Role</th><th>Exemples BTP</th><th>Exemples B2B</th></tr></thead>
+<tbody>
+<tr><td><span class="tag t-blue">Perspective</span></td><td>Montrer l'expertise</td><td>Comment j'ai automatise les devis d'un plombier a Albi</td><td>Pourquoi 80% des tunnels de vente B2B ne convertissent pas</td></tr>
+<tr><td><span class="tag t-green">Preuve</span></td><td>Creer la confiance</td><td>De 0 a 15 demandes de devis/mois &mdash; cas artisan du Tarn</td><td>10h/semaine recuperees &mdash; avant/apres automatisation</td></tr>
+<tr><td><span class="tag t-amber">Promo</span></td><td>Convertir l'attention</td><td>Votre site ne genere aucun appel ? Diagnostic gratuit 2 min</td><td>3 automatisations qui changent la vie d'un consultant</td></tr>
+</tbody>
+</table>
+
+<div class="alert a-green"><strong>Regle :</strong> Alterner Lundi=Perspective, Mercredi=Preuve, Vendredi=Promo. Repeter pendant 3 mois minimum.<br>
+<strong>Lien :</strong> &rarr; <a href="../linkedin/plan-linkedin.html">plan-linkedin.html</a></div>
+
+<h4>Section 4 &mdash; Couche 2 : Convertir</h4>
+
+<p><strong>3 signaux a surveiller chaque jour :</strong></p>
+<ol>
+<li>Visiteurs de profil &rarr; DM dans les 24h</li>
+<li>Nouvelles connexions acceptees &rarr; DM de bienvenue dans les 48h</li>
+<li>Likes/commentaires sur tes posts &rarr; DM personnalise dans les 24h</li>
+</ol>
+
+<p><strong>Structure du DM Skaale (4 parties) :</strong></p>
+<div class="card-dark">
+<pre style="background:none;margin:0;padding:0"><code>CONTEXTE   &rarr; "J'ai vu [element precis]"
+DOULEUR    &rarr; "Ca me dit que [probleme identifie]"
+PREUVE     &rarr; "On a aide [client similaire] a [resultat chiffre]"
+INVITATION &rarr; "On en parle 15 min ?"</code></pre>
+</div>
+
+<p><strong>6 scripts DM prets a copier-coller :</strong></p>
+
+<h3>Script 1 &mdash; BTP petit artisan (&le;5 salaries)</h3>
+<div class="card">
+<pre style="background:#f8f8f8;color:var(--fg);margin:0"><code>Bonjour [Prenom],
+
+J'ai vu votre activite en [specialite] a [ville] -- [detail specifique vu sur le profil ou le site].
+
+Ca me dit que vous gerez probablement les devis, les relances et la compta en plus des chantiers. C'est le pattern que je vois chez 90% des artisans qui n'ont pas encore automatise.
+
+J'ai aide un plombier de 8 salaries a Albi a recuperer 10h/semaine en automatisant la prise de RDV et les devis. En 10 jours, c'etait operationnel.
+
+Si c'est un sujet pour vous, 15 minutes suffisent pour voir ce qui est automatisable chez [entreprise].</code></pre>
+</div>
+
+<h3>Script 2 &mdash; BTP artisan structure (5-20 salaries)</h3>
+<div class="card">
+<pre style="background:#f8f8f8;color:var(--fg);margin:0"><code>Bonjour [Prenom],
+
+J'ai regarde [entreprise] -- [detail specifique : nombre de salaries, specialisation, zone geographique]. Belle croissance.
+
+A cette taille, le vrai frein c'est souvent l'administratif qui ne scale pas : devis, relances, suivi chantier, coordination equipe. C'est du temps dirigeant qui vaut cher.
+
+J'ai construit un systeme complet pour une entreprise BTP similaire -- site pro + automatisation devis + CRM -- qui a libere 10h/semaine au dirigeant. ROI en 4 semaines.
+
+Ca vous interesse d'en discuter 15 min ?</code></pre>
+</div>
+
+<h3>Script 3 &mdash; B2B consultant solo</h3>
+<div class="card">
+<pre style="background:#f8f8f8;color:var(--fg);margin:0"><code>Bonjour [Prenom],
+
+J'ai vu votre expertise en [domaine] -- [detail specifique du profil ou d'un post recent].
+
+Question honnete : votre pipeline de clients depend principalement du reseau et du bouche-a-oreille ? C'est le pattern que je vois chez la majorite des consultants : expertise pointue, mais aucun systeme qui genere des leads en automatique.
+
+J'ai construit des tunnels de conversion pour des prestataires B2B qui transforment des visiteurs en prospects qualifies -- du premier clic au RDV pris. Le systeme tourne 24/7.
+
+15 min pour voir si ca s'applique a votre situation ?</code></pre>
+</div>
+
+<h3>Script 4 &mdash; B2B cabinet structure</h3>
+<div class="card">
+<pre style="background:#f8f8f8;color:var(--fg);margin:0"><code>Bonjour [Prenom],
+
+J'ai regarde [cabinet/entreprise] -- [detail : nombre de consultants, secteur, offres]. Positionnement solide.
+
+Avec une equipe de [X], le defi c'est souvent de systematiser l'acquisition : que chaque consultant ne depende pas de son propre reseau. Un tunnel centralise + CRM automatise change la donne.
+
+J'ai aide un cabinet de conseil a passer de 100% bouche-a-oreille a 3 sources d'acquisition mesurees -- avec un ROI de 25% sur le taux de conversion en 2 mois.
+
+Si c'est un enjeu chez vous, on en parle 15 min ?</code></pre>
+</div>
+
+<h3>Script 5 &mdash; Formation IA (dirigeant PME)</h3>
+<div class="card">
+<pre style="background:#f8f8f8;color:var(--fg);margin:0"><code>Bonjour [Prenom],
+
+J'ai vu que [entreprise] est en [secteur/activite] -- [detail specifique].
+
+Question directe : vos equipes utilisent l'IA au quotidien ? A partir d'aout 2026, la reglementation europeenne impose un niveau minimum de competences IA.
+
+Je forme les equipes des TPE/PME a l'utilisation concrete de l'IA dans leur metier -- pas de theorie, des outils operationnels des le lendemain. Financable a 100% par votre OPCO.
+
+Ca vous interesse d'en savoir plus ?</code></pre>
+</div>
+
+<h3>Script 6 &mdash; Formation IA (organisme de formation)</h3>
+<div class="card">
+<pre style="background:#f8f8f8;color:var(--fg);margin:0"><code>Bonjour [Prenom],
+
+J'ai vu le catalogue de [organisme] -- [detail specifique : certifications, secteurs couverts].
+
+La demande en formation IA explose en 2026, mais les formateurs qui codent en live et montrent des cas d'usage reels sont rares. C'est exactement ce que je propose.
+
+Je peux intervenir comme formateur IA externe pour vos sessions -- catalogue pret a l'emploi, format 1 ou 2 jours, compatible Qualiopi, financement OPCO EP facilite.
+
+On en discute 15 min pour voir si ca colle avec vos besoins ?</code></pre>
+</div>
+
+<h4>Organisation des leads (4 statuts)</h4>
+<table>
+<thead><tr><th>Statut</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td><span class="tag t-red">Prospect chaud</span></td><td>Echange actif, interet exprime</td></tr>
+<tr><td><span class="tag t-amber">En discussion</span></td><td>A repondu mais pas encore qualifie</td></tr>
+<tr><td><span class="tag t-green">Client</span></td><td>Signe</td></tr>
+<tr><td><span class="tag t-blue">En attente</span></td><td>Pas le bon timing, a re-contacter plus tard</td></tr>
+</tbody>
+</table>
+
+<div class="alert a-blue"><strong>Lien :</strong> &rarr; <a href="../prospection/cold-outreach-templates.html">cold-outreach-templates.html</a> pour les templates email + personnalisation par prospect.</div>
+
+<h4>Section 5 &mdash; Couche 3 : Fermer</h4>
+
+<table>
+<thead><tr><th>Timing</th><th>Action</th><th>Ton</th><th>Objectif</th></tr></thead>
+<tbody>
+<tr><td><strong>J+3</strong></td><td>Apporter de la valeur</td><td>Genereux</td><td>Rappeler qu'on existe sans demander</td></tr>
+<tr><td><strong>J+7</strong></td><td>Partager un cas client</td><td>Credible</td><td>Prouver par l'exemple</td></tr>
+<tr><td><strong>J+14</strong></td><td>Message court</td><td>Direct</td><td>Derniere chance, pas insistant</td></tr>
+</tbody>
+</table>
+
+<h3>Relance J+3 (valeur)</h3>
+<div class="card">
+<pre style="background:#f8f8f8;color:var(--fg);margin:0"><code>[Prenom], je suis tombe sur [article/stat/outil] qui pourrait vous interesser vu votre activite en [domaine]. [Lien ou resume en 2 lignes].
+
+Pas de pression -- si le sujet de [automatisation/site/formation] revient, je suis la.</code></pre>
+</div>
+
+<h3>Relance J+7 (cas client)</h3>
+<div class="card">
+<pre style="background:#f8f8f8;color:var(--fg);margin:0"><code>[Prenom], je voulais partager un cas recent : [client similaire] avait exactement le meme enjeu que vous ([douleur identifiee dans le DM initial]). En [delai], on a [resultat concret].
+
+Si ca parle a votre situation, je suis disponible pour un echange rapide.</code></pre>
+</div>
+
+<h3>Relance J+14 (message court)</h3>
+<div class="card">
+<pre style="background:#f8f8f8;color:var(--fg);margin:0"><code>[Prenom], juste un dernier mot -- si [probleme initial] est toujours un sujet, je suis disponible. Sinon, pas de souci, et bonne continuation avec [entreprise].</code></pre>
+</div>
+
+<p><strong>Erreurs a eviter :</strong></p>
+<ul>
+<li>Relancer avec le meme message (varier le contenu)</li>
+<li>Pitcher directement des le premier DM</li>
+<li>Envoyer des messages trop longs (max 4-5 lignes)</li>
+<li>Abandonner apres 1 seul message</li>
+</ul>
+
+<div class="alert a-amber"><strong>KPIs cles :</strong> 80% des deals se closent apres 3 messages minimum. 90% des gens abandonnent trop tot &rarr; la relance EST le systeme.</div>
+
+<h4>Section 6 &mdash; Checklist quotidienne</h4>
+
+<h3>Matin &mdash; 15 min (8h30-8h45)</h3>
+<ul class="checklist">
+<li>Verifier &laquo; Qui a vu votre profil &raquo; sur LinkedIn</li>
+<li>Verifier les nouvelles connexions acceptees</li>
+<li>Verifier les likes/commentaires sur le dernier post</li>
+<li>Noter les signaux dans le tracker (colonne &laquo; Source du signal &raquo;)</li>
+</ul>
+
+<h3>Midi &mdash; 20 min (12h30-12h50)</h3>
+<ul class="checklist">
+<li>Envoyer 3-5 DM personnalises (signaux du matin + cold)</li>
+<li>Commenter 10 posts dans la cible (artisans, consultants, formateurs Occitanie)</li>
+<li>Publier le post du jour si c'est un jour de publication (Lun/Mer/Ven)</li>
+</ul>
+
+<h3>Soir &mdash; 10 min (18h00-18h10)</h3>
+<ul class="checklist">
+<li>Verifier les reponses aux DM du jour</li>
+<li>Faire les relances J+3/J+7/J+14 dues</li>
+<li>Mettre a jour le tracker (statuts + notes)</li>
+<li>Preparer les DM du lendemain si besoin</li>
+</ul>
+
+<div class="alert a-red"><strong>Total : 45 min/jour. C'est non negociable.</strong></div>
+
+<h4>Section 7 &mdash; Matrice outils CRM</h4>
+
+<table>
+<thead><tr><th>Outil</th><th>Prix</th><th>Pour qui</th><th>Avantages</th><th>Limites</th></tr></thead>
+<tbody>
+<tr><td><strong>Tracker HTML</strong> (existant)</td><td>0 &euro;</td><td>&lt;20 prospects</td><td>Deja en place, simple, offline</td><td>Pas de pipeline visuel</td></tr>
+<tr><td><strong>Notion</strong></td><td>0 &euro;</td><td>20-50 prospects</td><td>Pipeline kanban, vues filtrees</td><td>Saisie manuelle</td></tr>
+<tr><td><strong>Google Sheets</strong></td><td>0 &euro;</td><td>20-50 prospects</td><td>Formules de rappel relance</td><td>Pas de kanban</td></tr>
+<tr><td><strong>Waalaxy</strong></td><td>~60 &euro;/mois</td><td>50+ prospects/mois</td><td>Automatise sequences DM LinkedIn</td><td>Risque LinkedIn, cout</td></tr>
+<tr><td><strong>Lemlist</strong></td><td>~59 &euro;/mois</td><td>Volume email + LinkedIn</td><td>Sequences multicanal, analytics</td><td>Courbe d'apprentissage</td></tr>
+</tbody>
+</table>
+
+<div class="alert a-green">
+<strong>Recommandation progressive :</strong><br>
+1. Maintenant (0-20 prospects) : tracker HTML enrichi<br>
+2. A 30 jours (20-50 prospects) : Notion ou Sheets pour le pipeline visuel<br>
+3. A 90 jours (50+ prospects/mois) : Waalaxy si le volume LinkedIn le justifie
+</div>
+
+<h4>Section 8 &mdash; KPIs du systeme complet</h4>
+
+<table>
+<thead><tr><th>Couche</th><th>Metrique</th><th>Cible J30</th><th>Cible J60</th><th>Cible J90</th></tr></thead>
+<tbody>
+<tr><td rowspan="3"><strong>Attirer</strong></td><td>Vues profil/semaine</td><td>50</td><td>150</td><td>300+</td></tr>
+<tr><td>Nouvelles connexions/semaine</td><td>15</td><td>30</td><td>50</td></tr>
+<tr><td>Taux engagement posts</td><td>2%</td><td>4%</td><td>5%+</td></tr>
+<tr><td rowspan="4"><strong>Convertir</strong></td><td>DM envoyes/semaine</td><td>15</td><td>20</td><td>25</td></tr>
+<tr><td>Taux reponse DM (warm)</td><td>25%</td><td>30%</td><td>35%</td></tr>
+<tr><td>Taux reponse DM (cold)</td><td>8%</td><td>12%</td><td>15%</td></tr>
+<tr><td>Leads qualifies/semaine</td><td>1</td><td>3</td><td>5</td></tr>
+<tr><td rowspan="3"><strong>Fermer</strong></td><td>Relances effectuees/semaine</td><td>5</td><td>10</td><td>15</td></tr>
+<tr><td>Taux conversion relance &rarr; RDV</td><td>10%</td><td>15%</td><td>20%</td></tr>
+<tr><td>Delai moyen signal &rarr; closing</td><td>21j</td><td>18j</td><td>14j</td></tr>
+</tbody>
+</table>
+
+<hr>
+
+<!-- ================================================================ -->
+<h2>4 &mdash; Modifications des documents satellites</h2>
+
+<h3>4.1 &mdash; <code>linkedin/plan-linkedin.html</code></h3>
+
+<p><strong>Fichier :</strong> existant, a modifier.</p>
+<ol>
+<li>Ajouter un encart en haut de la section contenu (section 07) avec le framework Perspective/Preuve/Promo et lien vers le hub</li>
+<li>Restructurer le tableau calendrier 4 semaines avec une colonne &laquo; Type Skaale &raquo; :
+<span class="tag t-blue">Perspective</span> (lundi) &middot;
+<span class="tag t-green">Preuve</span> (mercredi) &middot;
+<span class="tag t-amber">Promo</span> (vendredi)</li>
+<li>Reclassifier les posts existants (pas de reecriture, juste le tag)</li>
+<li>Ajouter la regle &laquo; 3 mois minimum de regularite &raquo; en encart vert</li>
+</ol>
+
+<h3>4.2 &mdash; <code>prospection/cold-outreach-templates.html</code></h3>
+
+<p><strong>Fichier :</strong> existant, a modifier. Balises meta deja en place.</p>
+<ol>
+<li>Ajouter section &laquo; Templates DM &mdash; Format Skaale (Warm Outreach) &raquo;</li>
+<li>Inclure les 6 scripts DM du hub</li>
+<li>Ajouter sous-section &laquo; Signaux declencheurs &raquo;</li>
+<li>Ajouter sous-section &laquo; Scripts de relance J+3/J+7/J+14 &raquo;</li>
+<li>Templates existants (cold outreach) intacts &mdash; separes Cold vs Warm</li>
+</ol>
+
+<h3>4.3 &mdash; <code>prospection/tracker-prospection.html</code></h3>
+
+<p><strong>Fichier :</strong> existant, a modifier.</p>
+<ol>
+<li>Enrichir statuts JS : ajouter <code>signal</code>, <code>dm_sent</code>, <code>hot</code>, <code>nurture</code></li>
+<li>Ajouter colonne &laquo; Source &raquo; (visite profil / connexion / like / commentaire / cold)</li>
+<li>Ajouter colonne &laquo; Relance &raquo; avec calcul automatique J+3/J+7/J+14</li>
+<li>Enrichir stats header : ajouter &laquo; Signaux &raquo; et &laquo; Taux reponse &raquo;</li>
+<li>Integrer les 30 prospects BTP Tarn dans le tableau</li>
+</ol>
+
+<h3>4.4 &mdash; <code>strategie/playbook-commercial.html</code></h3>
+
+<p><strong>Fichier :</strong> existant, a modifier. Balises meta deja en place.</p>
+<ol>
+<li>Section 5.1 (LinkedIn) : ajouter paragraphe &laquo; Systeme 3 couches &raquo; avec renvoi hub</li>
+<li>Section 5.3 (Cold outreach) : ajouter sous-section &laquo; Warm outreach (signal-based) &raquo;</li>
+<li>Section 5.5 (Metriques) : ajouter KPIs Skaale</li>
+</ol>
+
+<hr>
+
+<!-- ================================================================ -->
+<h2>5 &mdash; Hors perimetre</h2>
+
+<ul>
+<li>Reecriture des posts LinkedIn existants (reclassification uniquement)</li>
+<li>Creation de comptes Notion/Waalaxy/Lemlist</li>
+<li>Modifications du systeme de retention client (emails post-vente)</li>
+<li>Modifications du site portfolio ou des landing pages</li>
+<li>Reecriture des templates email (seuls les DM LinkedIn sont ajoutes)</li>
+</ul>
+
+<hr>
+
+<!-- ================================================================ -->
+<h2>6 &mdash; Ordre d'implementation</h2>
+
+<table>
+<thead><tr><th>#</th><th>Fichier</th><th>Action</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><code>strategie/systeme-linkedin-3-couches.html</code></td><td>Creer le document hub central</td></tr>
+<tr><td>2</td><td><code>prospection/tracker-prospection.html</code></td><td>Enrichir statuts + colonnes + 30 prospects BTP</td></tr>
+<tr><td>3</td><td><code>prospection/cold-outreach-templates.html</code></td><td>Ajouter section Skaale warm outreach</td></tr>
+<tr><td>4</td><td><code>linkedin/plan-linkedin.html</code></td><td>Restructurer calendrier Perspective/Preuve/Promo</td></tr>
+<tr><td>5</td><td><code>strategie/playbook-commercial.html</code></td><td>Enrichir sections 5.1, 5.3, 5.5</td></tr>
+<tr><td>6</td><td><code>index.html</code></td><td>Ajouter entree dans CATEGORIES.Strategie</td></tr>
+<tr><td>7</td><td><code>manifest.json</code></td><td>Ajouter le chemin du hub</td></tr>
+</tbody>
+</table>
+
+<hr>
+
+<!-- ================================================================ -->
+<h2>7 &mdash; Criteres de succes</h2>
+
+<ul>
+<li>Tous les fichiers en <code>.html</code> avec balises meta <code>doc-category</code>, <code>doc-title</code>, <code>doc-color</code></li>
+<li>Le hub apparait dans <code>index.html</code> (categorie Strategie) et dans <code>manifest.json</code></li>
+<li>Le hub est utilisable comme checklist quotidienne des le premier jour</li>
+<li>Les 6 scripts DM sont prets a copier-coller</li>
+<li>Le tracker affiche automatiquement les relances J+3/J+7/J+14 dues</li>
+<li>Le calendrier de contenu LinkedIn est restructure en Perspective/Preuve/Promo</li>
+<li>Le playbook commercial est coherent avec le nouveau framework</li>
+<li>Aucune duplication inutile entre le hub et les satellites</li>
+<li>Tous les fichiers HTML s'ouvrent en <code>file://</code> (zero fetch externe sauf Google Fonts)</li>
+</ul>
+
+</div>
+</body>
+</html>

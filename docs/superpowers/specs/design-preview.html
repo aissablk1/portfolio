@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sprint Contenu + Business — Design Spec</title>
+<style>
+  :root { --bg: #fafaf9; --fg: #1a1a1a; --muted: #737373; --accent: #e11d48; --border: #e5e5e5; --card: #fff; --tag-bg: #f5f5f4; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Geist', -apple-system, system-ui, sans-serif; background: var(--bg); color: var(--fg); line-height: 1.6; }
+  .container { max-width: 860px; margin: 0 auto; padding: 64px 24px 96px; }
+  .badge { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; border: 1px solid var(--border); border-radius: 999px; padding: 4px 14px; color: var(--muted); margin-bottom: 20px; }
+  h1 { font-size: 36px; font-weight: 600; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 12px; }
+  .subtitle { font-size: 16px; color: var(--muted); margin-bottom: 48px; max-width: 600px; }
+  .section { margin-bottom: 56px; }
+  .section-num { font-size: 11px; font-weight: 700; color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; }
+  h2 { font-size: 22px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 16px; }
+  p { color: var(--muted); font-size: 15px; margin-bottom: 12px; }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 28px; margin-bottom: 16px; }
+  .card h3 { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
+  .card p { font-size: 14px; margin-bottom: 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 16px 0; }
+  th { text-align: left; font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); padding: 10px 12px; border-bottom: 2px solid var(--fg); }
+  td { padding: 10px 12px; border-bottom: 1px solid var(--border); color: var(--fg); }
+  tr:last-child td { border-bottom: none; }
+  .tag { display: inline-block; font-size: 11px; font-weight: 600; background: var(--tag-bg); border-radius: 6px; padding: 3px 10px; margin: 2px 4px 2px 0; color: var(--muted); }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .highlight { background: linear-gradient(135deg, #fff1f2, #fef2f2); border-color: #fecdd3; }
+  .stat { text-align: center; padding: 20px; }
+  .stat-num { font-size: 32px; font-weight: 700; letter-spacing: -0.03em; color: var(--fg); }
+  .stat-label { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .divider { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+  .flow { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: 16px 0; }
+  .flow-step { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 10px 16px; font-size: 13px; font-weight: 500; }
+  .flow-arrow { color: var(--muted); font-size: 18px; }
+  .repartition { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 20px; }
+  .repartition-col h4 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 12px; }
+  .repartition-col.claude h4 { color: var(--accent); }
+  .repartition-col ul { list-style: none; padding: 0; }
+  .repartition-col li { font-size: 14px; color: var(--muted); padding: 6px 0; border-bottom: 1px solid var(--border); }
+  .repartition-col li:last-child { border-bottom: none; }
+  .repartition-col li::before { content: ""; display: inline-block; width: 6px; height: 6px; border-radius: 50%; margin-right: 10px; vertical-align: middle; }
+  .repartition-col.claude li::before { background: var(--accent); }
+  .repartition-col.aissa li::before { background: var(--fg); }
+  .niche-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 16px 0; }
+  .niche { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 12px; text-align: center; font-size: 12px; font-weight: 500; }
+  .niche.priority { border-color: var(--accent); background: #fff1f2; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <span class="badge">Design Spec</span>
+  <h1>Sprint Contenu + Business</h1>
+  <p class="subtitle">9 &rarr; 17 avril 2026. Passer de 7 a 15 articles, lancer la distribution LinkedIn, preparer la prospection BTP Albi.</p>
+
+  <div class="grid-2" style="margin-bottom: 48px;">
+    <div class="card stat">
+      <div class="stat-num">7 &rarr; 15</div>
+      <div class="stat-label">Articles blog</div>
+    </div>
+    <div class="card stat">
+      <div class="stat-num">5 &rarr; 13</div>
+      <div class="stat-label">Posts LinkedIn</div>
+    </div>
+    <div class="card stat">
+      <div class="stat-num">0 &rarr; 1</div>
+      <div class="stat-label">Calendly actif</div>
+    </div>
+    <div class="card stat">
+      <div class="stat-num">0 &rarr; 30</div>
+      <div class="stat-label">Prospects BTP listes</div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- SECTION 1 -->
+  <div class="section">
+    <div class="section-num">Section 01</div>
+    <h2>Batch 8 articles blog bilingues</h2>
+    <p>8 nouveaux articles FR + EN (16 fichiers MDX), intent achat fort, couvrant les niches Phase 1 prioritaires. Chaque article : 800-1200 mots, tableaux prix reels, FAQ structuree, CTA /services ou /audit.</p>
+
+    <h3 style="font-size: 14px; font-weight: 600; margin: 20px 0 12px;">Niches ciblees</h3>
+    <div class="niche-grid">
+      <div class="niche priority">BTP / Artisans</div>
+      <div class="niche priority">BTP / Artisans</div>
+      <div class="niche priority">Immobilier</div>
+      <div class="niche">Prof. liberales</div>
+      <div class="niche">Commerce proximite</div>
+      <div class="niche">IA entreprises</div>
+      <div class="niche">Formation</div>
+      <div class="niche">Restauration</div>
+    </div>
+    <p style="font-size: 12px;"><span style="color: var(--accent);">&#9679;</span> = niche prioritaire locale Albi/Tarn</p>
+
+    <h3 style="font-size: 14px; font-weight: 600; margin: 20px 0 12px;">Calendrier de publication</h3>
+    <table>
+      <thead><tr><th>Date</th><th>08h00</th><th>14h00</th></tr></thead>
+      <tbody>
+        <tr><td>10 avril (jeu)</td><td>Art. 8 &mdash; Artisan BTP : Google Maps</td><td>Art. 9 &mdash; Immobilier : chatbot visite</td></tr>
+        <tr><td>11 avril (ven)</td><td>Art. 10 &mdash; Restaurant : reservations IA</td><td>Art. 11 &mdash; Comptable : automatiser relances</td></tr>
+        <tr><td>12 avril (sam)</td><td>Art. 12 &mdash; Commerce : site e-commerce local</td><td>&mdash;</td></tr>
+        <tr><td>13 avril (dim)</td><td>Art. 13 &mdash; IA : ROI reel pour TPE</td><td>&mdash;</td></tr>
+        <tr><td>14 avril (lun)</td><td>Art. 14 &mdash; BTP : planning chantier automatise</td><td>Art. 15 &mdash; Coach : tunnel vente formation</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr class="divider">
+
+  <!-- SECTION 2 -->
+  <div class="section">
+    <div class="section-num">Section 02</div>
+    <h2>Posts LinkedIn (8 nouveaux)</h2>
+    <p>1 post par article. Publie a 10h00 CET (peak engagement). Format : hook stop-scroll, 3-4 points de valeur standalone, CTA article, 5 hashtags max. Commentaire auto avec lien.</p>
+
+    <div class="flow">
+      <div class="flow-step">Article publie</div>
+      <span class="flow-arrow">&rarr;</span>
+      <div class="flow-step">Post redige dans post.py</div>
+      <span class="flow-arrow">&rarr;</span>
+      <div class="flow-step">python post.py --post N</div>
+      <span class="flow-arrow">&rarr;</span>
+      <div class="flow-step">LinkedIn + commentaire lien</div>
+    </div>
+
+    <table>
+      <thead><tr><th>Post</th><th>Date LinkedIn</th><th>Article associe</th></tr></thead>
+      <tbody>
+        <tr><td>#6</td><td>10 avril 10h</td><td>Artisan BTP : Google Maps</td></tr>
+        <tr><td>#7</td><td>11 avril 10h</td><td>Immobilier : chatbot visite</td></tr>
+        <tr><td>#8</td><td>12 avril 12h</td><td>Restaurant : reservations IA</td></tr>
+        <tr><td>#9</td><td>14 avril 10h</td><td>Comptable : automatiser relances</td></tr>
+        <tr><td>#10</td><td>15 avril 10h</td><td>Commerce : site e-commerce local</td></tr>
+        <tr><td>#11</td><td>16 avril 10h</td><td>IA : ROI reel pour TPE</td></tr>
+        <tr><td>#12</td><td>17 avril 10h</td><td>BTP : planning chantier</td></tr>
+        <tr><td>#13</td><td>18 avril 10h</td><td>Coach : tunnel vente formation</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr class="divider">
+
+  <!-- SECTION 3 -->
+  <div class="section">
+    <div class="section-num">Section 03</div>
+    <h2>Calendly + mise a jour CTA</h2>
+    <p>Ajouter un bouton "Reserver un appel" a cote du formulaire de contact existant. Le lien Calendly est cree par Aissa manuellement, puis je mets a jour le code.</p>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>Avant</h3>
+        <p>CTA unique : "Recevoir ma proposition en 48h" &rarr; formulaire contact</p>
+      </div>
+      <div class="card highlight">
+        <h3>Apres</h3>
+        <p>CTA principal : "Recevoir ma proposition en 48h" &rarr; formulaire<br>CTA secondaire : "Reserver un appel" &rarr; Calendly</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- SECTION 4 -->
+  <div class="section">
+    <div class="section-num">Section 04</div>
+    <h2>Liste 30 prospects BTP Albi/Tarn</h2>
+    <p>Document structure dans docs/prospection/ avec les entreprises BTP du Tarn sans presence web ou avec un site obsolete. Score de priorite base sur l'absence de site.</p>
+
+    <div class="card">
+      <h3>Structure du document</h3>
+      <table>
+        <thead><tr><th>Champ</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>Entreprise</td><td>Nom commercial</td></tr>
+          <tr><td>Activite</td><td>Maconnerie, electricite, plomberie...</td></tr>
+          <tr><td>Ville</td><td>Albi, Castres, Gaillac, Carmaux...</td></tr>
+          <tr><td>Site web</td><td>URL ou "aucun"</td></tr>
+          <tr><td>LinkedIn</td><td>Profil du dirigeant si disponible</td></tr>
+          <tr><td>Priorite</td><td>Haute (pas de site) / Moyenne (site obsolete) / Basse</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Les templates DMs existent deja dans docs/cold-outreach-templates. Ils seront personnalises avec les articles blog comme preuve de credibilite.</p>
+  </div>
+
+  <hr class="divider">
+
+  <!-- REPARTITION -->
+  <div class="section">
+    <div class="section-num">Repartition</div>
+    <h2>Qui fait quoi</h2>
+
+    <div class="repartition">
+      <div class="repartition-col claude">
+        <h4>Claude (moi)</h4>
+        <ul>
+          <li>8 articles blog FR + EN (16 fichiers MDX)</li>
+          <li>8 posts LinkedIn dans post.py</li>
+          <li>Mise a jour CTA site (apres Calendly)</li>
+          <li>Document 30 prospects BTP</li>
+          <li>Mise a jour scheduler LinkedIn</li>
+        </ul>
+      </div>
+      <div class="repartition-col aissa">
+        <h4>Aissa (toi)</h4>
+        <ul>
+          <li>Creer le Calendly</li>
+          <li>Publier les posts via python post.py</li>
+          <li>Envoyer les DMs aux prospects</li>
+          <li>DYNABUY demain &mdash; Alexandre en personne</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

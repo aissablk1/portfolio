@@ -1,0 +1,1000 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="doc-category" content="Prospection">
+  <meta name="doc-title" content="Systeme de retention client">
+  <meta name="doc-color" content="#2563eb">
+  <title>Systeme de Retention Client Automatise — Aïssa Belkoussa</title>
+  <style>
+    :root {
+      --fg: #1a1a1a;
+      --muted: #737373;
+      --border: #e5e5e5;
+      --accent: #2563eb;
+      --bg: #fafafa;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: #fff;
+      color: var(--fg);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      font-size: .875rem;
+      color: var(--muted);
+      text-decoration: none;
+      margin-bottom: 2rem;
+      transition: color .2s;
+    }
+    .back-link:hover { color: var(--accent); }
+    .back-link svg { width: 16px; height: 16px; }
+
+    h1 { font-size: 2rem; font-weight: 700; letter-spacing: -.02em; margin-bottom: .5rem; line-height: 1.25; }
+    h2 { font-size: 1.45rem; font-weight: 650; margin-top: 2.5rem; margin-bottom: .75rem; letter-spacing: -.01em; padding-bottom: .4rem; border-bottom: 1px solid var(--border); }
+    h3 { font-size: 1.15rem; font-weight: 600; margin-top: 2rem; margin-bottom: .5rem; }
+    h4 { font-size: 1.05rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: .4rem; }
+    h5 { font-size: .95rem; font-weight: 600; margin-top: 1.25rem; margin-bottom: .35rem; }
+    h6 { font-size: .875rem; font-weight: 600; margin-top: 1rem; margin-bottom: .3rem; color: var(--muted); }
+
+    p { margin-bottom: 1rem; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    strong { font-weight: 600; }
+    em { font-style: italic; }
+
+    blockquote {
+      border-left: 3px solid var(--accent);
+      padding: .75rem 1rem;
+      margin: 1.25rem 0;
+      background: var(--bg);
+      border-radius: 0 6px 6px 0;
+      color: var(--muted);
+    }
+    blockquote p { margin-bottom: .4rem; }
+    blockquote p:last-child { margin-bottom: 0; }
+
+    ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+    li { margin-bottom: .35rem; }
+    li::marker { color: var(--muted); }
+
+    hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+
+    code {
+      font-family: 'Geist Mono', 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, monospace;
+      font-size: .875em;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: .15em .35em;
+    }
+    pre {
+      background: #1a1a1a;
+      color: #e5e5e5;
+      padding: 1.25rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 1.25rem 0;
+      font-size: .85rem;
+      line-height: 1.6;
+    }
+    pre code {
+      background: none;
+      border: none;
+      padding: 0;
+      color: inherit;
+      font-size: inherit;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin: 1.25rem 0;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .9rem;
+    }
+    th, td {
+      text-align: left;
+      padding: .65rem .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    th {
+      background: var(--bg);
+      font-weight: 600;
+      font-size: .8rem;
+      text-transform: uppercase;
+      letter-spacing: .03em;
+      color: var(--muted);
+    }
+    tbody tr:nth-child(even) { background: var(--bg); }
+    tbody tr:last-child td { border-bottom: none; }
+
+    @media (max-width: 640px) {
+      .container { padding: 1.25rem 1rem 3rem; }
+      h1 { font-size: 1.6rem; }
+      h2 { font-size: 1.25rem; }
+      table { font-size: .8rem; }
+      th, td { padding: .5rem .6rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="../index.html" class="back-link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+      Retour a l'index
+    </a>
+<h1 id="systeme-de-retention-client-automatise">Systeme de Retention Client Automatise</h1>
+<blockquote>
+<p>Freelance vendant des systemes digitaux (sites, apps, automatisations) avec 3 mois de maintenance inclus.</p>
+<p>Transition critique : mois 3 vers mois 4 (debut facturation mensuelle).</p>
+<p>Plans : Essentiel (490 EUR/mois) | Pro (1 900 EUR/mois)</p>
+<p>Cibles : artisans BTP + prestataires B2B</p>
+</blockquote>
+<hr>
+<h2 id="1-sequence-email-automatisee-complete-jour-0-a-mois-6">1. Sequence Email Automatisee Complete (Jour 0 a Mois 6)</h2>
+<h3 id="philosophie-appliquee">Philosophie appliquee</h3>
+<p>Chaque email a un seul objectif (skill email-sequence : "One Email, One Job"). La valeur precede toujours la demande (skill marketing-psychology : Value Before Ask). Les biais psychologiques sont deployes ethiquement selon le scoring PLFS du skill marketing-psychology.</p>
+<h3 id="phase-1-onboarding-et-premiere-valeur-semaines-1-4">Phase 1 — Onboarding et Premiere Valeur (Semaines 1-4)</h3>
+<hr>
+<h4 id="email-1-bienvenue-et-acces">Email 1 : Bienvenue et acces</h4>
+<ul>
+<li><strong>Quand :</strong> Jour 0 (livraison du projet)</li>
+<li><strong>Objet :</strong> Votre systeme est en ligne — voici vos acces</li>
+<li><strong>Contenu :</strong> Felicitations, le systeme est deploye. Voici vos identifiants, le lien d'acces, et un guide de demarrage rapide en 3 etapes. Pendant les 3 prochains mois, je surveille, optimise et ajuste tout pour vous — vous n'avez rien a faire.</li>
+<li><strong>CTA :</strong> Acceder a mon systeme</li>
+<li><strong>Biais :</strong> Endowment Effect (PLFS 14) — Le client prend possession de "son" systeme. Le fait de recevoir les acces cree un sentiment de propriete psychologique immediat.</li>
+</ul>
+<hr>
+<h4 id="email-2-premier-quick-win">Email 2 : Premier quick win</h4>
+<ul>
+<li><strong>Quand :</strong> Jour 3</li>
+<li><strong>Objet :</strong> Votre premiere optimisation est deja en place</li>
+<li><strong>Contenu :</strong> J'ai realise [action concrete : compression images, configuration SEO locale, connexion Google Business Profile]. Voici la capture avant/apres. C'est le type d'ajustement que je fais en continu pendant votre periode de maintenance.</li>
+<li><strong>CTA :</strong> Voir le detail de l'optimisation</li>
+<li><strong>Biais :</strong> IKEA Effect (PLFS 13) — Le client voit du travail concret investi dans SON systeme, ce qui augmente la valeur percue. Reciprocite : on donne avant de demander.</li>
+</ul>
+<hr>
+<h4 id="email-3-configuration-google-et-visibilite-locale">Email 3 : Configuration Google et visibilite locale</h4>
+<ul>
+<li><strong>Quand :</strong> Jour 7</li>
+<li><strong>Objet :</strong> Votre fiche Google est maintenant optimisee</li>
+<li><strong>Contenu :</strong> J'ai configure/optimise votre fiche Google Business Profile avec les bons mots-cles, photos, et categories. En moyenne, les artisans qui optimisent leur fiche voient +40% d'appels entrants en 30 jours. Je vous montrerai les resultats dans votre premier rapport.</li>
+<li><strong>CTA :</strong> Verifier ma fiche Google</li>
+<li><strong>Biais :</strong> Anchoring (PLFS 12) — On ancre une attente chiffree (+40% d'appels) qui rend les resultats futurs mesurables et attendus.</li>
+</ul>
+<hr>
+<h4 id="email-4-votre-systeme-travaille-pour-vous">Email 4 : Votre systeme travaille pour vous</h4>
+<ul>
+<li><strong>Quand :</strong> Jour 14</li>
+<li><strong>Objet :</strong> 47 visiteurs cette semaine — voici d'ou ils viennent</li>
+<li><strong>Contenu :</strong> Mini-rapport de la deuxieme semaine avec les premieres metriques reelles (visites, sources, premiers formulaires). On est en phase de montee en puissance. Le vrai potentiel se revele a partir du mois 2.</li>
+<li><strong>CTA :</strong> Voir mon mini-rapport</li>
+<li><strong>Biais :</strong> Curiosity Gap (PLFS 11) — Le chiffre precis dans l'objet force l'ouverture. Le teasing du "vrai potentiel mois 2" cree une boucle d'anticipation.</li>
+</ul>
+<hr>
+<h3 id="phase-2-demonstration-de-valeur-semaines-5-8">Phase 2 — Demonstration de Valeur (Semaines 5-8)</h3>
+<hr>
+<h4 id="email-5-premier-rapport-mensuel-complet">Email 5 : Premier rapport mensuel complet</h4>
+<ul>
+<li><strong>Quand :</strong> Jour 30 (fin du mois 1)</li>
+<li><strong>Objet :</strong> Rapport mois 1 — [X] visiteurs, [Y] demandes de contact</li>
+<li><strong>Contenu :</strong> Rapport complet avec metriques cles (cf. section 2). Comparaison avec les moyennes du secteur. Deux optimisations prevues pour le mois prochain. "Votre systeme commence a peine a travailler — le SEO prend de la vitesse."</li>
+<li><strong>CTA :</strong> Consulter mon rapport complet</li>
+<li><strong>Biais :</strong> Social Proof implicite (PLFS 13) — La comparaison avec les moyennes du secteur positionne le client dans un contexte normatif. Loss Aversion : sous-entendu que ces chiffres ont besoin de continuer a etre nourris.</li>
+</ul>
+<hr>
+<h4 id="email-6-etude-de-cas-client-similaire">Email 6 : Etude de cas client similaire</h4>
+<ul>
+<li><strong>Quand :</strong> Jour 38</li>
+<li><strong>Objet :</strong> Comment [prenom client similaire] a genere [X] demandes en 3 mois</li>
+<li><strong>Contenu :</strong> Etude de cas courte d'un client du meme secteur (artisan BTP ou prestataire B2B selon le segment). Avant/apres. Chiffres reels. "Son systeme est identique au votre. La difference ? 3 mois de maintenance continue."</li>
+<li><strong>CTA :</strong> Lire l'etude de cas complete</li>
+<li><strong>Biais :</strong> Social Proof (PLFS 14) — Un pair credible avec des resultats tangibles. Authority Bias : le freelance demontre son expertise via les resultats d'un autre client.</li>
+</ul>
+<hr>
+<h4 id="email-7-fonctionnalite-sous-exploitee">Email 7 : Fonctionnalite sous-exploitee</h4>
+<ul>
+<li><strong>Quand :</strong> Jour 45</li>
+<li><strong>Objet :</strong> Vous n'utilisez pas encore [fonctionnalite] — voici pourquoi vous devriez</li>
+<li><strong>Contenu :</strong> Identifier via analytics une fonctionnalite non utilisee (ex : formulaire de devis, page projets, blog). Expliquer la valeur avec un exemple concret et des chiffres. Proposer un RDV rapide de 10 min pour la configurer ensemble.</li>
+<li><strong>CTA :</strong> Reserver un creneau de 10 min</li>
+<li><strong>Biais :</strong> Loss Aversion (PLFS 13) — Le client realise qu'il "perd" de la valeur en n'utilisant pas une fonctionnalite qu'il a deja payee. Zero Risk Bias : le RDV est court et gratuit.</li>
+</ul>
+<hr>
+<h3 id="phase-3-ancrage-de-la-valeur-semaines-9-12">Phase 3 — Ancrage de la Valeur (Semaines 9-12)</h3>
+<hr>
+<h4 id="email-8-rapport-mois-2-avec-tendances">Email 8 : Rapport mois 2 avec tendances</h4>
+<ul>
+<li><strong>Quand :</strong> Jour 60 (fin du mois 2)</li>
+<li><strong>Objet :</strong> Mois 2 : +[X]% de visites, la courbe accelere</li>
+<li><strong>Contenu :</strong> Rapport mois 2 avec evolution mois 1 vs mois 2. Mise en avant de la trajectoire ascendante. Graphiques de progression. "Le mois 3 est celui ou la plupart de mes clients voient le decollage."</li>
+<li><strong>CTA :</strong> Consulter mon rapport complet</li>
+<li><strong>Biais :</strong> Momentum Effect / Sunk Cost (PLFS 12) — La trajectoire ascendante rend l'arret psychologiquement couteux. On a deja "investi" 2 mois de donnees et d'optimisations.</li>
+</ul>
+<hr>
+<h4 id="email-9-teasing-de-la-transition-pre-appel">Email 9 : Teasing de la transition (pre-appel)</h4>
+<ul>
+<li><strong>Quand :</strong> Jour 70</li>
+<li><strong>Objet :</strong> Dans 3 semaines, votre maintenance gratuite se termine</li>
+<li><strong>Contenu :</strong> Rappel transparent de la fin des 3 mois gratuits. Resume des resultats obtenus jusqu'ici. Annonce de l'appel bilan de 15 min. "Je vous appelle pour faire le point ensemble et voir ce qui a le plus de sens pour la suite."</li>
+<li><strong>CTA :</strong> Choisir mon creneau pour l'appel bilan</li>
+<li><strong>Biais :</strong> Transparency + Status-Quo Bias (PLFS 13) — Pas de surprise, pas de pression. Le fait de proposer un bilan (pas un appel de vente) active le Status-Quo Bias : le client s'habitue a la situation actuelle et ne veut pas la changer.</li>
+</ul>
+<hr>
+<h4 id="email-10-rapport-mois-3-le-rapport-decisif">Email 10 : Rapport mois 3 — le rapport decisif</h4>
+<ul>
+<li><strong>Quand :</strong> Jour 85</li>
+<li><strong>Objet :</strong> Bilan 3 mois : [ROI chiffre] — les chiffres parlent</li>
+<li><strong>Contenu :</strong> Rapport le plus complet des 3. Recapitulatif total : toutes les optimisations, tous les resultats, ROI estime. Projection a 6 mois si la maintenance continue vs si elle s'arrete. "Le systeme a atteint sa vitesse de croisiere. Le laisser sans maintenance maintenant, c'est comme arreter d'arroser un jardin qui vient de germer."</li>
+<li><strong>CTA :</strong> Consulter mon bilan complet de 3 mois</li>
+<li><strong>Biais :</strong> Loss Aversion (PLFS 14) — La projection "avec vs sans maintenance" rend la perte tangible et chiffree. Metaphore du jardin : facile a comprendre, emotionnellement impactante.</li>
+</ul>
+<hr>
+<h3 id="phase-4-transition-et-retention-semaines-12-16">Phase 4 — Transition et Retention (Semaines 12-16)</h3>
+<hr>
+<h4 id="email-11-post-appel-recapitulatif-et-offre">Email 11 : Post-appel — recapitulatif et offre</h4>
+<ul>
+<li><strong>Quand :</strong> Jour 88-90 (apres l'appel bilan)</li>
+<li><strong>Objet :</strong> Suite a notre appel — voici le recapitulatif</li>
+<li><strong>Contenu :</strong> Resume des points discutes lors de l'appel. Le plan recommande (Essentiel ou Pro) avec justification personnalisee. Comparatif des 2 formules avec ce qui est pertinent pour le client. Offre de lancement : -10% les 3 premiers mois factures OU 1 optimisation bonus.</li>
+<li><strong>CTA :</strong> Activer ma maintenance [Plan recommande]</li>
+<li><strong>Biais :</strong> Reciprocity (PLFS 14) — 3 mois de travail gratuit creent une dette psychologique. Decoy Effect : le comparatif des 2 plans oriente naturellement vers le choix recommande. Urgence douce : l'offre de lancement est limitee dans le temps.</li>
+</ul>
+<hr>
+<h4 id="email-12-relance-douce-si-pas-de-reponse">Email 12 : Relance douce (si pas de reponse)</h4>
+<ul>
+<li><strong>Quand :</strong> Jour 93 (J+3 apres email 11)</li>
+<li><strong>Objet :</strong> Une question sur la suite ?</li>
+<li><strong>Contenu :</strong> Court et humain. "Je comprends que c'est une decision importante. Si vous avez des questions ou hesitations, je suis disponible. Voici aussi ce que perdent en moyenne les systemes non maintenus dans les 6 mois : [2-3 stats]."</li>
+<li><strong>CTA :</strong> Repondre a cet email / Reserver un appel de 10 min</li>
+<li><strong>Biais :</strong> Fear of Missing Out inversee (PLFS 11) — Pas de pression, mais rappel factuel des consequences de l'inaction. Le ton empatique desactive la resistance.</li>
+</ul>
+<hr>
+<h4 id="email-13-derniere-chance-avant-coupure">Email 13 : Derniere chance avant coupure</h4>
+<ul>
+<li><strong>Quand :</strong> Jour 97 (J+7 apres email 11)</li>
+<li><strong>Objet :</strong> Votre maintenance gratuite s'arrete vendredi</li>
+<li><strong>Contenu :</strong> Factuel et direct. Rappel de la date exacte de fin. Ce qui continue (le site reste en ligne) et ce qui s'arrete (mises a jour, SEO, securite, support). Proposition finale avec l'offre de lancement. "Aucune pression — si vous voulez reprendre plus tard, la porte est ouverte."</li>
+<li><strong>CTA :</strong> Activer ma maintenance maintenant</li>
+<li><strong>Biais :</strong> Deadline Effect (PLFS 12) — La date precise cree une urgence reelle (pas artificielle). Le ton "pas de pression" est paradoxalement plus persuasif qu'un countdown agressif.</li>
+</ul>
+<hr>
+<h3 id="phase-5-retention-active-mois-4-6-clients-convertis">Phase 5 — Retention Active (Mois 4-6, clients convertis)</h3>
+<hr>
+<h4 id="email-14-bienvenue-dans-la-maintenance">Email 14 : Bienvenue dans la maintenance</h4>
+<ul>
+<li><strong>Quand :</strong> Jour 100 (debut mois 4 si converti)</li>
+<li><strong>Objet :</strong> C'est parti — voici mon plan d'action pour ce mois</li>
+<li><strong>Contenu :</strong> Remerciement. Plan d'action du mois 4 avec les optimisations prevues. Rappel des canaux de communication (email, espace client). "Les 3 prochains mois vont transformer vos resultats."</li>
+<li><strong>CTA :</strong> Acceder a mon espace client</li>
+<li><strong>Biais :</strong> Commitment/Consistency (PLFS 13) — Renforcer la decision d'achat immediatement apres pour eviter le regret. Projection positive.</li>
+</ul>
+<hr>
+<h4 id="email-15-rapport-mois-4">Email 15 : Rapport mois 4</h4>
+<ul>
+<li><strong>Quand :</strong> Jour 130</li>
+<li><strong>Objet :</strong> Mois 4 : [metrique phare] — votre systeme accelere</li>
+<li><strong>Contenu :</strong> Rapport mensuel complet. Mise en valeur de la progression depuis le debut. Introduction d'une metrique ROI concrete (cout maintenance vs valeur des leads generes).</li>
+<li><strong>CTA :</strong> Consulter mon rapport mensuel</li>
+<li><strong>Biais :</strong> Endowment Effect (PLFS 14) — Chaque rapport renforce l'attachement au systeme et a ses performances. Le ROI rend la depense invisible face aux gains.</li>
+</ul>
+<hr>
+<h4 id="email-16-demande-de-temoignage">Email 16 : Demande de temoignage</h4>
+<ul>
+<li><strong>Quand :</strong> Jour 140</li>
+<li><strong>Objet :</strong> Votre avis compte — 2 minutes pour aider d'autres [artisans/entrepreneurs]</li>
+<li><strong>Contenu :</strong> Demande de temoignage court (3-4 questions guidees). Expliquer que leur retour aide d'autres professionnels comme eux a prendre la bonne decision. Proposer un format simple (repondre a l'email ou formulaire rapide).</li>
+<li><strong>CTA :</strong> Donner mon temoignage (2 min)</li>
+<li><strong>Biais :</strong> Social Identity (PLFS 11) — Le client se positionne comme un pair qui aide d'autres professionnels de son secteur. Reciprocite : apres 4 mois de valeur recue, donner 2 minutes semble naturel.</li>
+</ul>
+<hr>
+<h4 id="email-17-rapport-mois-5-teasing-upsell">Email 17 : Rapport mois 5 + teasing upsell</h4>
+<ul>
+<li><strong>Quand :</strong> Jour 160</li>
+<li><strong>Objet :</strong> Mois 5 : votre systeme est pret pour le niveau superieur</li>
+<li><strong>Contenu :</strong> Rapport mensuel. Introduction subtile des possibilites du plan superieur : "Certains clients a ce stade commencent a automatiser [processus X] ou lancent du contenu SEO hebdomadaire — le plan Pro inclut ca."</li>
+<li><strong>CTA :</strong> Consulter mon rapport / En savoir plus sur le plan Pro</li>
+<li><strong>Biais :</strong> Mere Exposure (PLFS 11) — Premiere mention du plan superieur, pas de vente. Juste une graine plantee. Aspiration : le client se voit dans la categorie superieure.</li>
+</ul>
+<hr>
+<h4 id="email-18-rapport-mois-6-proposition-annuelle">Email 18 : Rapport mois 6 + proposition annuelle</h4>
+<ul>
+<li><strong>Quand :</strong> Jour 190</li>
+<li><strong>Objet :</strong> 6 mois de resultats — et si on securisait tout ca ?</li>
+<li><strong>Contenu :</strong> Bilan complet des 6 mois (3 gratuits + 3 factures). ROI total. Proposition de passage a l'engagement annuel avec reduction de 25% (3 mois gratuits sur 12). "Vous economisez [montant] et vous verrouillez votre positionnement."</li>
+<li><strong>CTA :</strong> Passer a l'annuel (-25%)</li>
+<li><strong>Biais :</strong> Sunk Cost + Lock-in (PLFS 13) — 6 mois d'historique et de progression rendent la decision evidente. Framing : "economiser" plutot que "depenser". Anchoring : le prix annuel est presente apres le bilan de valeur.</li>
+</ul>
+<hr>
+<h3 id="phase-parallele-clients-non-convertis-mois-4-6">Phase Parallele — Clients Non Convertis (Mois 4-6)</h3>
+<hr>
+<h4 id="email-nc-1-check-in-sincere">Email NC-1 : Check-in sincere</h4>
+<ul>
+<li><strong>Quand :</strong> Jour 120 (1 mois apres fin gratuite)</li>
+<li><strong>Objet :</strong> Comment se passe votre site depuis 1 mois ?</li>
+<li><strong>Contenu :</strong> Aucune tentative de vente. Question sincere. Partage de 2 stats generiques sur la degradation des sites non maintenus. Proposition d'un audit gratuit de 15 min.</li>
+<li><strong>CTA :</strong> Reserver un audit gratuit</li>
+<li><strong>Biais :</strong> Genuine Concern (PLFS 12) — L'absence de pitch commercial desactive les defenses. Le client se sent respecte et non harcele.</li>
+</ul>
+<hr>
+<h4 id="email-nc-2-rapport-fantome">Email NC-2 : Rapport fantome</h4>
+<ul>
+<li><strong>Quand :</strong> Jour 150</li>
+<li><strong>Objet :</strong> Votre site a perdu [X] positions Google ce mois</li>
+<li><strong>Contenu :</strong> Rapport automatise des metriques publiques du site (position Google, vitesse, erreurs techniques). "Je continue a surveiller vos metriques par habitude. Voici ce que j'observe." Aucune tentative de vente directe.</li>
+<li><strong>CTA :</strong> Voir mon rapport de sante</li>
+<li><strong>Biais :</strong> Loss Aversion (PLFS 14) — Le client voit la degradation en temps reel. Le fait que le freelance surveille "par habitude" cree de la valeur sans demander de contrepartie.</li>
+</ul>
+<hr>
+<h4 id="email-nc-3-offre-de-retour">Email NC-3 : Offre de retour</h4>
+<ul>
+<li><strong>Quand :</strong> Jour 180</li>
+<li><strong>Objet :</strong> On repart ensemble ? Offre speciale anciens clients</li>
+<li><strong>Contenu :</strong> Proposition de retour avec remise de bienvenue (-15% pendant 3 mois). Rappel de ce qui a ete construit ensemble. "Votre systeme est toujours la, mais il a besoin d'etre remis en forme."</li>
+<li><strong>CTA :</strong> Reactiver ma maintenance</li>
+<li><strong>Biais :</strong> Endowment Effect + Win-Back (PLFS 12) — Le client a deja construit quelque chose. La remise reduit la friction du retour. La metaphore de "remise en forme" est motivante sans etre culpabilisante.</li>
+</ul>
+<hr>
+<h2 id="2-rapport-mensuel-de-performance">2. Rapport Mensuel de Performance</h2>
+<h3 id="philosophie">Philosophie</h3>
+<p>Le rapport n'est pas un document administratif. C'est un outil de retention. Il doit rendre le client "addict" au prochain rapport (skill free-tool-strategy : "Curiosity-driven, personalized insights, creates awareness").</p>
+<h3 id="format-recommande">Format recommande</h3>
+<p><strong>Email + PDF joint + lien vers dashboard en ligne</strong></p>
+<ul>
+<li>L'email contient les 3 chiffres cles avec fleches de progression (teaser)</li>
+<li>Le PDF contient le rapport complet (le client peut le montrer a son associe, son banquier)</li>
+<li>Le dashboard en ligne est accessible 24/7 pour les clients Pro</li>
+</ul>
+<h3 id="metriques-pour-artisan-btp">Metriques pour Artisan BTP</h3>
+<div class="table-wrap"><table>
+<thead><tr>
+<th>Categorie</th>
+<th>Metrique</th>
+<th>Pourquoi</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Trafic</td>
+<td>Visiteurs uniques mensuels</td>
+<td>Volume brut de visibilite</td>
+</tr>
+<tr>
+<td>Trafic</td>
+<td>Source du trafic (Google, direct, reseaux)</td>
+<td>Savoir d'ou viennent les clients</td>
+</tr>
+<tr>
+<td>Trafic</td>
+<td>Pages les plus vues</td>
+<td>Ce qui interesse les prospects</td>
+</tr>
+<tr>
+<td>Leads</td>
+<td>Nombre de formulaires recus</td>
+<td>Mesure directe du business</td>
+</tr>
+<tr>
+<td>Leads</td>
+<td>Nombre d'appels depuis le site</td>
+<td>Conversion telephone (crucial BTP)</td>
+</tr>
+<tr>
+<td>Leads</td>
+<td>Demandes de devis</td>
+<td>Pipeline commercial concret</td>
+</tr>
+<tr>
+<td>SEO local</td>
+<td>Position Google Maps sur 5 mots-cles</td>
+<td>Visibilite locale mesurable</td>
+</tr>
+<tr>
+<td>SEO local</td>
+<td>Nombre d'avis Google + note moyenne</td>
+<td>Reputation locale</td>
+</tr>
+<tr>
+<td>SEO local</td>
+<td>Vues de la fiche Google Business</td>
+<td>Portee locale gratuite</td>
+</tr>
+<tr>
+<td>Performance</td>
+<td>Vitesse de chargement (mobile)</td>
+<td>Impact direct sur le SEO</td>
+</tr>
+<tr>
+<td>Performance</td>
+<td>Score Core Web Vitals</td>
+<td>Conformite Google</td>
+</tr>
+<tr>
+<td>ROI</td>
+<td>Cout par lead estime</td>
+<td>Maintenance / nombre de leads</td>
+</tr>
+<tr>
+<td>ROI</td>
+<td>Valeur estimee des leads</td>
+<td>Chiffre d'affaires potentiel</td>
+</tr>
+</tbody></table></div>
+<p><strong>Metriques specifiques BTP :</strong></p>
+<ul>
+<li>Mots-cles geolocalisees : "plombier Albi", "electricien Tarn", etc.</li>
+<li>Taux de conversion formulaire de devis</li>
+<li>Jours de la semaine et heures de pic de trafic (utile pour planifier sa disponibilite)</li>
+</ul>
+<h3 id="metriques-pour-prestataire-b2b">Metriques pour Prestataire B2B</h3>
+<div class="table-wrap"><table>
+<thead><tr>
+<th>Categorie</th>
+<th>Metrique</th>
+<th>Pourquoi</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Trafic</td>
+<td>Visiteurs uniques mensuels</td>
+<td>Volume</td>
+</tr>
+<tr>
+<td>Trafic</td>
+<td>Visiteurs par page de service</td>
+<td>Interet par offre</td>
+</tr>
+<tr>
+<td>Trafic</td>
+<td>Trafic organique vs payant vs referral</td>
+<td>Qualite de l'acquisition</td>
+</tr>
+<tr>
+<td>Leads</td>
+<td>Formulaires de contact completes</td>
+<td>Pipeline</td>
+</tr>
+<tr>
+<td>Leads</td>
+<td>Telechargements de ressources (PDF, etude de cas)</td>
+<td>Leads qualifies</td>
+</tr>
+<tr>
+<td>Leads</td>
+<td>Inscriptions newsletter / lead magnets</td>
+<td>Nurturing</td>
+</tr>
+<tr>
+<td>SEO</td>
+<td>Positions sur 10 mots-cles strategiques</td>
+<td>Visibilite sectorielle</td>
+</tr>
+<tr>
+<td>SEO</td>
+<td>Nombre de backlinks acquis</td>
+<td>Autorite de domaine</td>
+</tr>
+<tr>
+<td>SEO</td>
+<td>Trafic depuis les articles de blog</td>
+<td>ROI du contenu</td>
+</tr>
+<tr>
+<td>Engagement</td>
+<td>Temps moyen sur les pages de service</td>
+<td>Interet qualitatif</td>
+</tr>
+<tr>
+<td>Engagement</td>
+<td>Taux de rebond par page</td>
+<td>Detection de problemes</td>
+</tr>
+<tr>
+<td>Engagement</td>
+<td>Pages vues par session</td>
+<td>Profondeur d'exploration</td>
+</tr>
+<tr>
+<td>Conversion</td>
+<td>Taux de conversion par source</td>
+<td>ROI par canal</td>
+</tr>
+<tr>
+<td>Conversion</td>
+<td>Cout par lead qualifie</td>
+<td>Efficacite financiere</td>
+</tr>
+<tr>
+<td>ROI</td>
+<td>Pipeline genere estime</td>
+<td>Valeur business tangible</td>
+</tr>
+<tr>
+<td>ROI</td>
+<td>Ratio cout maintenance / valeur leads</td>
+<td>Justification de la depense</td>
+</tr>
+</tbody></table></div>
+<h3 id="rendre-le-rapport-addictif">Rendre le rapport "addictif"</h3>
+<ol>
+<li><strong>Le chiffre mystere</strong> : Chaque rapport se termine par un teaser : "Le mois prochain, je vous revele [metrique inedite ou nouvelle fonctionnalite en cours]." Cela cree une boucle d'anticipation (Zeigarnik Effect : les taches inachevees restent en memoire).</li>
+</ol>
+<ol>
+<li><strong>Le score de sante</strong> : Note sur 100 du systeme (comme un bilan de sante). Le client veut voir cette note monter. Gamification subtile.</li>
+</ol>
+<ol>
+<li><strong>Le comparatif sectoriel</strong> : "Votre site est dans le top 20% des artisans plombiers de la region." Social comparison positive.</li>
+</ol>
+<ol>
+<li><strong>Le "saviez-vous"</strong> : Un fait surprenant lie au secteur du client. "67% des prospects en BTP appellent dans les 24h apres avoir visite un site. Votre formulaire de rappel a capture [X] d'entre eux."</li>
+</ol>
+<ol>
+<li><strong>La prochaine action</strong> : Chaque rapport se termine par une action concrete que le freelance va realiser le mois suivant. Le client attend la resolution.</li>
+</ol>
+<ol>
+<li><strong>Le format narratif</strong> : Le rapport n'est pas un tableau de chiffres. C'est une histoire : "En janvier, votre site etait invisible. Aujourd'hui, 150 personnes par mois trouvent votre entreprise sur Google."</li>
+</ol>
+<ol>
+<li><strong>La date de publication fixe</strong> : Toujours envoye le meme jour du mois (ex : le 5). Le client finit par l'attendre comme une newsletter favorite.</li>
+</ol>
+<hr>
+<h2 id="3-signaux-dalerte-de-churn">3. Signaux d'Alerte de Churn</h2>
+<h3 id="signaux-comportementaux-et-actions-automatiques">Signaux Comportementaux et Actions Automatiques</h3>
+<div class="table-wrap"><table>
+<thead><tr>
+<th>Signal</th>
+<th>Gravite</th>
+<th>Detection</th>
+<th>Action automatique</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><strong>Client n'ouvre plus les emails</strong> depuis 2 semaines</td>
+<td>Moyenne</td>
+<td>Email tracking (opens)</td>
+<td>Changer le canal : SMS ou appel automatise. Objet email different : question directe personnalisee.</td>
+</tr>
+<tr>
+<td><strong>Aucune connexion a l'espace client</strong> depuis 30 jours</td>
+<td>Haute</td>
+<td>Analytics dashboard</td>
+<td>Email automatique : "Votre systeme a genere [X] leads ce mois — voici le resume." Rappeler la valeur sans exiger de connexion.</td>
+</tr>
+<tr>
+<td><strong>Pas de reponse a l'email rapport mensuel</strong> pendant 2 mois</td>
+<td>Haute</td>
+<td>CRM tracking</td>
+<td>Declenchement d'un appel du freelance dans les 48h. Pas un email, un vrai appel humain.</td>
+</tr>
+<tr>
+<td><strong>Client pose des questions sur le contrat ou les CGV</strong></td>
+<td>Haute</td>
+<td>Detection mots-cles dans les reponses email</td>
+<td>Notification immediate au freelance. Appel dans les 24h avec posture d'ecoute (pas de defense).</td>
+</tr>
+<tr>
+<td><strong>Client reduit son budget ou mentionne "trop cher"</strong></td>
+<td>Critique</td>
+<td>Detection mots-cles</td>
+<td>Proposer automatiquement un downgrade temporaire plutot qu'une annulation. Email : "On peut adapter le plan pendant 2-3 mois."</td>
+</tr>
+<tr>
+<td><strong>Client ne repond pas a la proposition de transition (mois 3)</strong></td>
+<td>Critique</td>
+<td>CRM / absence de clic sur l'offre</td>
+<td>Declenchement du script NC-1/NC-2/NC-3 (sequence non convertis). Appel humain sous 48h.</td>
+</tr>
+<tr>
+<td><strong>Baisse significative du trafic ou des leads</strong></td>
+<td>Haute</td>
+<td>Analytics automatisees</td>
+<td>Email proactif : "J'ai detecte une baisse — voici ce que je mets en place." Le client voit que le freelance veille activement.</td>
+</tr>
+<tr>
+<td><strong>Client mentionne un concurrent ou une alternative</strong></td>
+<td>Critique</td>
+<td>Detection dans les echanges</td>
+<td>Appel immediat. Ecoute active. Preparation d'un comparatif factuel montrant la valeur deja construite.</td>
+</tr>
+<tr>
+<td><strong>Retard de paiement de plus de 7 jours</strong></td>
+<td>Moyenne</td>
+<td>Stripe/factures</td>
+<td>Email automatique amical : "Votre facture du [date] est en attente — besoin d'un delai ?" Humain, pas menacant.</td>
+</tr>
+<tr>
+<td><strong>Client demande l'export de ses donnees</strong></td>
+<td>Critique</td>
+<td>Demande via email ou support</td>
+<td>Notification urgente au freelance. Fournir l'export immediatement (transparence) + appel pour comprendre.</td>
+</tr>
+</tbody></table></div>
+<h3 id="score-de-sante-client-automatisable-dans-n8n">Score de Sante Client (automatisable dans n8n)</h3>
+<p>Calculer un score sur 100 mis a jour chaque semaine :</p>
+<div class="table-wrap"><table>
+<thead><tr>
+<th>Facteur</th>
+<th>Points</th>
+<th>Max</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Ouvre les emails du mois</td>
+<td>+20</td>
+<td>20</td>
+</tr>
+<tr>
+<td>Clique dans les emails</td>
+<td>+15</td>
+<td>15</td>
+</tr>
+<tr>
+<td>Se connecte au dashboard</td>
+<td>+15</td>
+<td>15</td>
+</tr>
+<tr>
+<td>Repond aux messages</td>
+<td>+20</td>
+<td>20</td>
+</tr>
+<tr>
+<td>Trafic du site en hausse</td>
+<td>+10</td>
+<td>10</td>
+</tr>
+<tr>
+<td>Leads du mois en hausse</td>
+<td>+10</td>
+<td>10</td>
+</tr>
+<tr>
+<td>Paiement a jour</td>
+<td>+10</td>
+<td>10</td>
+</tr>
+</tbody></table></div>
+<p><strong>Seuils :</strong></p>
+<ul>
+<li>80-100 : Client sain, continuer normalement</li>
+<li>60-79 : Vigilance, intensifier la communication</li>
+<li>40-59 : Alerte, appel humain dans les 48h</li>
+<li>0-39 : Risque critique, intervention immediate du freelance</li>
+</ul>
+<hr>
+<h2 id="4-upsell-triggers-essentiel-490-eur-vers-pro-1-900-eur">4. Upsell Triggers (Essentiel 490 EUR vers Pro 1 900 EUR)</h2>
+<h3 id="signaux-dupsell-et-sequence-de-montee-en-gamme">Signaux d'upsell et sequence de montee en gamme</h3>
+<div class="table-wrap"><table>
+<thead><tr>
+<th>Signal</th>
+<th>Pourquoi c'est un signal</th>
+<th>Quand reagir</th>
+<th>Message a envoyer</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><strong>Le client genere plus de 20 leads/mois</strong></td>
+<td>Le volume justifie un systeme plus pousse (nurturing, CRM, automatisation)</td>
+<td>Des que le seuil est atteint 2 mois de suite</td>
+<td>"Vous recevez [X] demandes par mois. Avec le plan Pro, on automatise le suivi et la relance — vous ne perdez plus aucun prospect."</td>
+</tr>
+<tr>
+<td><strong>Le client demande des fonctionnalites Pro</strong> (blog, automatisation, A/B test)</td>
+<td>Il a besoin de plus que ce que le plan Essentiel offre</td>
+<td>A la premiere demande</td>
+<td>"Bonne nouvelle : c'est exactement ce qu'on fait dans le plan Pro. Voici ce que ca changerait concretement pour vous."</td>
+</tr>
+<tr>
+<td><strong>Le trafic depasse 500 visiteurs/mois</strong></td>
+<td>Le site a atteint une masse critique qui justifie du contenu et du SEO avance</td>
+<td>Dans le rapport mensuel</td>
+<td>"Votre trafic a depasse les 500 visiteurs mensuels. C'est le moment ideal pour accelerer avec du contenu SEO hebdomadaire — le plan Pro inclut ca."</td>
+</tr>
+<tr>
+<td><strong>Le client a un pic saisonnier previsible</strong></td>
+<td>Il a besoin de maximiser une periode (printemps BTP, Q4 B2B)</td>
+<td>6-8 semaines avant le pic</td>
+<td>"Votre haute saison approche. Le plan Pro inclut [landing pages, campagnes, automatisations] pour maximiser cette periode."</td>
+</tr>
+<tr>
+<td><strong>Le client mentionne qu'il embauche ou grandit</strong></td>
+<td>La croissance de l'entreprise necessite un systeme plus robuste</td>
+<td>Lors de l'echange ou detection dans les communications</td>
+<td>"Felicitations pour la croissance. Votre systeme actuel est dimensionne pour [X]. Le plan Pro accompagne les equipes qui grandissent."</td>
+</tr>
+<tr>
+<td><strong>Le score de sante est a 90+ depuis 3 mois</strong></td>
+<td>Client tres engage, satisfait, pret a investir plus</td>
+<td>Rapport mensuel ou appel trimestriel</td>
+<td>"Vos resultats sont excellents et reguliers. Beaucoup de mes clients a ce stade passent au Pro pour debloquer [fonctionnalite specifique]."</td>
+</tr>
+</tbody></table></div>
+<h3 id="structure-de-lemail-dupsell">Structure de l'email d'upsell</h3>
+<pre><code>Objet : [Prenom], votre systeme est pret pour [benefice specifique]
+
+[Prenom],
+
+Depuis [X] mois, votre systeme genere [metrique concrete].
+
+C'est un excellent signe — ca signifie que vous avez depasse
+le stade ou le plan Essentiel suffit.
+
+Le plan Pro ajoute :
+- [Benefice 1 specifique au client]
+- [Benefice 2 specifique au client]
+- [Benefice 3 specifique au client]
+
+Pour des clients dans votre situation, ca se traduit
+generalement par [resultat chiffre].
+
+Si ca vous interesse, on peut en parler 15 min
+cette semaine.
+
+[CTA : Reserver un appel de 15 min]
+
+Aissa</code></pre>
+<h3 id="regles-dupsell">Regles d'upsell</h3>
+<ul>
+<li>Ne jamais proposer l'upsell avant le mois 4 (laisser le client s'installer)</li>
+<li>Maximum 1 mention d'upsell par mois (pas de harcellement)</li>
+<li>Toujours lier l'upsell a une metrique ou un evenement concret du client</li>
+<li>Si le client decline, ne pas relancer pendant 60 jours minimum</li>
+<li>Toujours laisser la porte ouverte : "Quand le moment sera bon, je suis la"</li>
+</ul>
+<hr>
+<h2 id="5-script-dappel-mois-3-appel-bilan-15-min">5. Script d'Appel Mois 3 — Appel Bilan (15 min)</h2>
+<h3 id="contexte">Contexte</h3>
+<p>Cet appel est LE moment qui determine si le client continue ou part. Il doit etre percu comme un moment de valeur, pas comme un appel commercial. Le client doit raccrocher en se disant : "Cette personne s'interesse vraiment a mon business."</p>
+<h3 id="preparation-avant-lappel">Preparation (avant l'appel)</h3>
+<ul>
+<li>[ ] Relire le rapport mois 3 du client</li>
+<li>[ ] Identifier la metrique la plus impressionnante (celle qui va ouvrir l'appel)</li>
+<li>[ ] Identifier un point d'amelioration realiste pour le mois 4</li>
+<li>[ ] Avoir la fiche client sous les yeux (secteur, offres, objectifs initiaux)</li>
+<li>[ ] Connaitre le plan recommande (Essentiel ou Pro) et pourquoi</li>
+</ul>
+<h3 id="structure-de-lappel">Structure de l'appel</h3>
+<h4 id="minute-0-1-ouverture-chaleureuse-pas-de-small-talk-force">Minute 0-1 : Ouverture chaleureuse (pas de small talk force)</h4>
+<p><strong>Dire :</strong></p>
+<blockquote>
+<p>"Salut [prenom], merci d'avoir pris le temps. L'idee de cet appel c'est simple : on fait le point sur les 3 mois, je te montre les resultats concrets, et on voit ensemble ce qui a le plus de sens pour la suite. Ca te va ?"</p>
+</blockquote>
+<p><strong>Ne PAS dire :</strong></p>
+<ul>
+<li>"Alors, tu as recu mon email sur les offres de maintenance ?"</li>
+<li>"On arrive a la fin de la periode gratuite..."</li>
+<li>Tout ce qui positionne l'appel comme une vente</li>
+</ul>
+<h4 id="minute-1-5-le-bilan-factuel-la-valeur-livree">Minute 1-5 : Le bilan factuel (la valeur livree)</h4>
+<p><strong>Dire :</strong></p>
+<blockquote>
+<p>"En 3 mois, voici ce qu'on a accompli ensemble : [reciter les 3-5 optimisations majeures]. En termes de resultats, ton site est passe de [metrique avant] a [metrique apres]. Le chiffre qui m'a le plus frappe, c'est [metrique phare]."</p>
+</blockquote>
+<p><strong>Technique :</strong> Laisser le client reagir. S'il dit "ah oui, c'est pas mal", rebondir : "Et ca, c'est juste le debut — le SEO prend vraiment sa vitesse de croisiere a partir du mois 4-5."</p>
+<p><strong>Ne PAS dire :</strong></p>
+<ul>
+<li>"Tout ca, c'etait gratuit"</li>
+<li>"Imagine si on arrete maintenant"</li>
+<li>Rien qui sonne comme de la culpabilisation</li>
+</ul>
+<h4 id="minute-5-8-les-questions-dexploration-ecoute-active">Minute 5-8 : Les questions d'exploration (ecoute active)</h4>
+<p><strong>Poser ces questions dans l'ordre :</strong></p>
+<ol>
+<li>> "Cote business, comment ca se passe en ce moment ? Tu as senti un impact du site sur ton activite ?"</li>
+</ol>
+<ol>
+<li>> "Il y a des choses que tu aimerais que le site fasse mieux ou differemment ?"</li>
+</ol>
+<ol>
+<li>> "C'est quoi ton objectif pour les 6 prochains mois cote business ?"</li>
+</ol>
+<p><strong>Technique :</strong> ECOUTER. Ne pas interrompre. Prendre des notes. Le client va reveler ses besoins et ses hesitations. Chaque reponse est un argument pour la suite.</p>
+<p><strong>Ne PAS dire :</strong></p>
+<ul>
+<li>"Tu as pense a ce que tu veux faire apres les 3 mois gratuits ?"</li>
+<li>Rien qui brusque la transition</li>
+</ul>
+<h4 id="minute-8-11-la-projection-le-futur-avec-la-maintenance">Minute 8-11 : La projection (le futur avec la maintenance)</h4>
+<p><strong>Dire :</strong></p>
+<blockquote>
+<p>"Vu ce que tu me dis sur [objectif du client], voici ce que je prevois pour les prochains mois : [2-3 actions concretes adaptees aux reponses du client]. Par exemple, [action specifique] pourrait te permettre de [resultat chiffre]."</p>
+</blockquote>
+<p><strong>Technique :</strong> Relier chaque action prevue a un objectif que le client a exprime dans les minutes precedentes. Il doit sentir que le plan est fait SUR MESURE pour lui.</p>
+<p><strong>Ne PAS dire :</strong></p>
+<ul>
+<li>"Pour ca, il faudra passer au plan payant"</li>
+<li>Rien sur l'argent encore</li>
+</ul>
+<h4 id="minute-11-13-la-transition-naturelle">Minute 11-13 : La transition naturelle</h4>
+<p><strong>Dire :</strong></p>
+<blockquote>
+<p>"Concretement, pour mettre tout ca en place, le format qui colle le mieux a ta situation c'est [le plan recommande]. Ca couvre [lister 2-3 elements specifiques au client]. C'est [prix]/mois, sans engagement — tu peux arreter quand tu veux. Et comme on a deja tout l'historique et les donnees, on continue exactement sur la lancee."</p>
+</blockquote>
+<p><strong>Si le client hesite :</strong></p>
+<blockquote>
+<p>"Je comprends tout a fait. Prends le temps d'y reflechir. Je t'envoie un recapitulatif par email avec les details. Si tu as des questions entre-temps, tu me contactes."</p>
+</blockquote>
+<p><strong>Si le client demande du temps :</strong></p>
+<blockquote>
+<p>"Bien sur. La seule chose que je te signale, c'est que sans maintenance, le site continue de tourner mais les optimisations SEO et securite s'arretent. Je te laisse une semaine, et je t'envoie un email de rappel vendredi. Ca te va ?"</p>
+</blockquote>
+<p><strong>Ne PAS dire :</strong></p>
+<ul>
+<li>"Si tu n'actives pas maintenant, tu perds..."</li>
+<li>"C'est une offre limitee"</li>
+<li>"Les autres clients ont tous choisi de continuer"</li>
+<li>Rien qui cree de la pression artificielle</li>
+</ul>
+<h4 id="minute-13-15-la-cloture">Minute 13-15 : La cloture</h4>
+<p><strong>Si le client dit oui :</strong></p>
+<blockquote>
+<p>"Parfait, je t'envoie le recapitulatif et le lien d'activation par email dans l'heure. On demarre officiellement le [date]. Merci pour ta confiance, [prenom]."</p>
+</blockquote>
+<p><strong>Si le client hesite ou dit non :</strong></p>
+<blockquote>
+<p>"Aucun souci, [prenom]. Ton site reste en ligne et fonctionnel. Si dans 1-2 mois tu vois que quelque chose se degrade ou que tu veux relancer, la porte est grande ouverte. Je reste joignable. Bonne continuation !"</p>
+</blockquote>
+<p><strong>Ne PAS dire :</strong></p>
+<ul>
+<li>"Tu es sur ?"</li>
+<li>"Tu sais, la plupart de mes clients..."</li>
+<li>Rien qui prolonge l'inconfort</li>
+</ul>
+<h3 id="regles-absolues-de-lappel">Regles absolues de l'appel</h3>
+<ol>
+<li><strong>Ne jamais prononcer les mots "gratuit" ou "offert" en parlant des 3 mois passes.</strong> Cela ancre l'idee que la valeur est gratuite. Dire plutot "les 3 premiers mois" ou "la phase d'optimisation initiale".</li>
+</ol>
+<ol>
+<li><strong>Ne jamais comparer les plans pendant l'appel.</strong> Recommander UN plan. Le comparatif sera dans l'email post-appel.</li>
+</ol>
+<ol>
+<li><strong>Ne jamais depasser 15 minutes.</strong> Si le client veut parler plus longtemps, c'est un bon signe — proposer un second appel dedie.</li>
+</ol>
+<ol>
+<li><strong>Ne jamais terminer sans une prochaine etape claire.</strong> Soit une date d'activation, soit un email de suivi, soit un second appel.</li>
+</ol>
+<ol>
+<li><strong>Ratio ecoute/parole : 60/40 en faveur du client.</strong> Si le freelance parle plus que le client, l'appel est rate.</li>
+</ol>
+<hr>
+<h2 id="6-architecture-dautomatisation-n8n-make">6. Architecture d'Automatisation (n8n / Make)</h2>
+<h3 id="workflows-a-creer">Workflows a creer</h3>
+<div class="table-wrap"><table>
+<thead><tr>
+<th>Workflow</th>
+<th>Declencheur</th>
+<th>Actions</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><strong>Sequence onboarding</strong></td>
+<td>Webhook depuis Stripe/formulaire a la livraison</td>
+<td>Demarrer la sequence email (18 emails + 3 NC) avec delais programmes</td>
+</tr>
+<tr>
+<td><strong>Rapports mensuels</strong></td>
+<td>Cron le 5 de chaque mois</td>
+<td>Aggreger les metriques (GA4, Search Console, formulaires), generer PDF, envoyer email</td>
+</tr>
+<tr>
+<td><strong>Score de sante</strong></td>
+<td>Cron hebdomadaire</td>
+<td>Calculer le score, mettre a jour le CRM, declencher alertes si score < 60</td>
+</tr>
+<tr>
+<td><strong>Detection churn</strong></td>
+<td>Webhook sur evenements (non-ouverture, non-paiement, mots-cles)</td>
+<td>Envoyer notification Slack/email au freelance + declencher action automatique</td>
+</tr>
+<tr>
+<td><strong>Upsell triggers</strong></td>
+<td>Cron mensuel (analyse des metriques)</td>
+<td>Si seuils depasses, inserer dans la sequence upsell</td>
+</tr>
+<tr>
+<td><strong>Rappel appel mois 3</strong></td>
+<td>Cron a J+68 du projet</td>
+<td>Envoyer notification + lien Calendly + preparer la fiche client</td>
+</tr>
+<tr>
+<td><strong>Relance non-convertis</strong></td>
+<td>Webhook sur non-conversion a J+97</td>
+<td>Basculer vers la sequence NC (3 emails sur 3 mois)</td>
+</tr>
+<tr>
+<td><strong>Win-back J+180</strong></td>
+<td>Cron 6 mois apres fin de contrat</td>
+<td>Email de retour avec offre speciale</td>
+</tr>
+</tbody></table></div>
+<h3 id="stack-technique-recommandee">Stack technique recommandee</h3>
+<ul>
+<li><strong>Emails :</strong> Resend ou Loops (emails transactionnels + sequences)</li>
+<li><strong>CRM :</strong> Notion ou Airtable (suivi clients + score de sante)</li>
+<li><strong>Analytics :</strong> Google Analytics 4 + Search Console (API)</li>
+<li><strong>Paiements :</strong> Stripe (webhooks pour detection retard, activation, annulation)</li>
+<li><strong>Automatisation :</strong> n8n self-hosted (workflows illimites, gratuit)</li>
+<li><strong>Planning :</strong> Calendly ou Cal.com (reservation appel bilan)</li>
+<li><strong>Notifications :</strong> Slack (alertes internes)</li>
+<li><strong>Rapports PDF :</strong> Puppeteer ou template HTML vers PDF dans n8n</li>
+</ul>
+<hr>
+<h2 id="7-kpi-du-systeme-de-retention">7. KPI du Systeme de Retention</h2>
+<div class="table-wrap"><table>
+<thead><tr>
+<th>Metrique</th>
+<th>Objectif</th>
+<th>Mesure</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Taux de conversion mois 3 vers mois 4</td>
+<td>> 70%</td>
+<td>Clients convertis / clients arrives a J+90</td>
+</tr>
+<tr>
+<td>Taux de retention mois 4-12</td>
+<td>> 85%</td>
+<td>Clients encore actifs a M12 / clients actifs a M4</td>
+</tr>
+<tr>
+<td>Taux d'ouverture emails sequence</td>
+<td>> 50%</td>
+<td>Opens / envois</td>
+</tr>
+<tr>
+<td>Taux de clic emails sequence</td>
+<td>> 10%</td>
+<td>Clics / opens</td>
+</tr>
+<tr>
+<td>Taux de reponse appel bilan</td>
+<td>> 90%</td>
+<td>Appels realises / appels programmes</td>
+</tr>
+<tr>
+<td>Taux d'upsell Essentiel vers Pro</td>
+<td>> 15% (annuel)</td>
+<td>Upgrades / clients Essentiel actifs</td>
+</tr>
+<tr>
+<td>Delai moyen de conversion post-appel</td>
+<td>< 7 jours</td>
+<td>Jours entre appel bilan et activation</td>
+</tr>
+<tr>
+<td>Taux de win-back (non convertis)</td>
+<td>> 20%</td>
+<td>Clients recuperes / clients non convertis</td>
+</tr>
+<tr>
+<td>Score de sante moyen du portefeuille</td>
+<td>> 75/100</td>
+<td>Moyenne des scores hebdomadaires</td>
+</tr>
+<tr>
+<td>Revenu recurrent mensuel (MRR)</td>
+<td>Croissant chaque mois</td>
+<td>Somme des abonnements actifs</td>
+</tr>
+</tbody></table></div>
+
+  </div>
+</body>
+</html>

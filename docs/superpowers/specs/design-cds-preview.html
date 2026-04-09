@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Methode CDS — Design Spec</title>
+<style>
+  :root { --bg: #fafaf9; --fg: #1a1a1a; --muted: #737373; --accent: #ea580c; --accent-light: #fed7aa; --border: #e5e5e5; --card: #fff; --tag-bg: #f5f5f4; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Geist', -apple-system, system-ui, sans-serif; background: var(--bg); color: var(--fg); line-height: 1.6; }
+  .container { max-width: 860px; margin: 0 auto; padding: 64px 24px 96px; }
+  .badge { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; border: 1px solid var(--accent); border-radius: 999px; padding: 4px 14px; color: var(--accent); margin-bottom: 20px; }
+  h1 { font-size: 36px; font-weight: 600; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 12px; }
+  .subtitle { font-size: 16px; color: var(--muted); margin-bottom: 48px; max-width: 620px; }
+  .section { margin-bottom: 56px; }
+  .section-num { font-size: 11px; font-weight: 700; color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; }
+  h2 { font-size: 22px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 16px; }
+  h3 { font-size: 15px; font-weight: 600; margin: 20px 0 12px; }
+  p { color: var(--muted); font-size: 15px; margin-bottom: 12px; }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 28px; margin-bottom: 16px; }
+  .card h3 { margin-top: 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 16px 0; }
+  th { text-align: left; font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); padding: 10px 12px; border-bottom: 2px solid var(--fg); }
+  td { padding: 10px 12px; border-bottom: 1px solid var(--border); color: var(--fg); }
+  tr:last-child td { border-bottom: none; }
+  .divider { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .cds-card { text-align: center; padding: 24px 16px; }
+  .cds-letter { font-size: 48px; font-weight: 800; color: var(--accent); line-height: 1; margin-bottom: 8px; }
+  .cds-title { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+  .cds-desc { font-size: 12px; color: var(--muted); }
+  .template-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 12px; position: relative; }
+  .template-badge { position: absolute; top: 16px; right: 16px; font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 6px; text-transform: uppercase; letter-spacing: 0.06em; }
+  .template-badge.j3 { background: #dcfce7; color: #166534; }
+  .template-badge.j7 { background: #fef3c7; color: #92400e; }
+  .template-badge.j14 { background: #fee2e2; color: #991b1b; }
+  .template-msg { font-size: 13px; color: var(--fg); line-height: 1.7; font-style: italic; background: var(--tag-bg); border-radius: 8px; padding: 16px; margin-top: 12px; }
+  code { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 13px; background: var(--fg); color: var(--bg); padding: 2px 8px; border-radius: 4px; }
+  .cli-block { background: var(--fg); color: #e5e5e5; border-radius: 12px; padding: 20px 24px; font-family: 'SF Mono', monospace; font-size: 13px; line-height: 1.8; margin: 16px 0; overflow-x: auto; }
+  .cli-block .cmd { color: #fbbf24; }
+  .cli-block .comment { color: #6b7280; }
+  .flow { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 16px 0; }
+  .flow-step { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 8px 14px; font-size: 12px; font-weight: 500; }
+  .flow-step.active { border-color: var(--accent); background: #fff7ed; }
+  .flow-arrow { color: var(--muted); font-size: 16px; }
+  .stat { text-align: center; padding: 20px; }
+  .stat-num { font-size: 32px; font-weight: 700; letter-spacing: -0.03em; }
+  .stat-label { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .files-list { list-style: none; padding: 0; }
+  .files-list li { font-size: 13px; padding: 8px 0; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
+  .files-list li:last-child { border-bottom: none; }
+  .file-badge { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 4px; text-transform: uppercase; }
+  .file-badge.create { background: #dcfce7; color: #166534; }
+  .file-badge.existing { background: #e0e7ff; color: #3730a3; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <span class="badge">Design Spec</span>
+  <h1>Methode CDS : systeme de suivi prospection</h1>
+  <p class="subtitle">Script CLI pour appliquer la methode CDS (Contenu / DM / Suivi) sur les 30 prospects BTP. Relances automatiques J+3, J+7, J+14 avec messages personnalises.</p>
+
+  <div class="grid-3" style="margin-bottom: 48px;">
+    <div class="card cds-card">
+      <div class="cds-letter">C</div>
+      <div class="cds-title">Contenu</div>
+      <div class="cds-desc">15 articles + 13 posts LinkedIn<br><strong style="color: #166534;">FAIT</strong></div>
+    </div>
+    <div class="card cds-card">
+      <div class="cds-letter">D</div>
+      <div class="cds-title">DM</div>
+      <div class="cds-desc">Templates existants dans cold-outreach-templates<br><strong style="color: #166534;">FAIT</strong></div>
+    </div>
+    <div class="card cds-card" style="border-color: var(--accent);">
+      <div class="cds-letter">S</div>
+      <div class="cds-title">Suivi</div>
+      <div class="cds-desc">Sequences J+3 / J+7 / J+14<br><strong style="color: var(--accent);">A CONSTRUIRE</strong></div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- SECTION 1 -->
+  <div class="section">
+    <div class="section-num">Section 01</div>
+    <h2>Structure des donnees</h2>
+    <p>Fichier <code>prospects.json</code> — chaque prospect est un objet avec ses infos et son statut dans le funnel CDS.</p>
+
+    <div class="flow">
+      <div class="flow-step">a_contacter</div>
+      <span class="flow-arrow">&rarr;</span>
+      <div class="flow-step active">dm_envoye</div>
+      <span class="flow-arrow">&rarr;</span>
+      <div class="flow-step">relance_j3</div>
+      <span class="flow-arrow">&rarr;</span>
+      <div class="flow-step">relance_j7</div>
+      <span class="flow-arrow">&rarr;</span>
+      <div class="flow-step">relance_j14</div>
+      <span class="flow-arrow">&rarr;</span>
+      <div class="flow-step" style="border-color: #166534; background: #dcfce7;">rdv_pris</div>
+    </div>
+    <p style="font-size: 12px; margin-top: 8px;">Sorties possibles a tout moment : <code>rdv_pris</code>, <code>pas_interesse</code>, <code>pas_de_reponse</code></p>
+
+    <table>
+      <thead><tr><th>Champ</th><th>Type</th><th>Exemple</th></tr></thead>
+      <tbody>
+        <tr><td>id</td><td>int</td><td>1</td></tr>
+        <tr><td>nom</td><td>string</td><td>Stefan Vaysse</td></tr>
+        <tr><td>entreprise</td><td>string</td><td>Vaysse Plomberie</td></tr>
+        <tr><td>ville</td><td>string</td><td>Puygouzon</td></tr>
+        <tr><td>niche</td><td>string</td><td>BTP</td></tr>
+        <tr><td>canal</td><td>string</td><td>linkedin</td></tr>
+        <tr><td>premier_dm</td><td>date</td><td>2026-04-10</td></tr>
+        <tr><td>statut</td><td>enum</td><td>dm_envoye</td></tr>
+        <tr><td>notes</td><td>string</td><td>Specialiste pompes a chaleur</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr class="divider">
+
+  <!-- SECTION 2 -->
+  <div class="section">
+    <div class="section-num">Section 02</div>
+    <h2>Templates de relance CDS</h2>
+    <p>3 niveaux de relance, chacun avec une approche differente. Messages personnalises dynamiquement avec les donnees du prospect.</p>
+
+    <div class="template-card">
+      <span class="template-badge j3">J+3 — Valeur</span>
+      <h3>Partager un insight ou article pertinent</h3>
+      <div class="template-msg">[Prenom], en passant — j'ai ecrit un guide sur [sujet lie a leur metier]. Ca pourrait vous faire gagner du temps sur [douleur identifiee].<br><br>[lien article blog]<br><br>— Aissa</div>
+    </div>
+
+    <div class="template-card">
+      <span class="template-badge j7">J+7 — Preuve sociale</span>
+      <h3>Cas client similaire a leur situation</h3>
+      <div class="template-msg">[Prenom], rapide retour : j'ai fini un projet pour [type entreprise similaire] a [ville proche]. [Resultat concret en 1 phrase].<br><br>Si c'est un sujet pour [entreprise], je suis dispo cette semaine pour en discuter.<br><br>— Aissa</div>
+    </div>
+
+    <div class="template-card">
+      <span class="template-badge j14">J+14 — Porte de sortie</span>
+      <h3>Message court, derniere relance respectueuse</h3>
+      <div class="template-msg">[Prenom], je ne veux pas insister — si le timing n'est pas bon, aucun souci.<br><br>Si jamais le sujet revient, le diagnostic gratuit est toujours la : aissabelkoussa.fr/diagnostic<br><br>— Aissa</div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- SECTION 3 -->
+  <div class="section">
+    <div class="section-num">Section 03</div>
+    <h2>Script CLI</h2>
+    <p>Interface en ligne de commande pour gerer le funnel de prospection au quotidien.</p>
+
+    <div class="cli-block">
+      <span class="comment"># Relances du jour — le matin</span><br>
+      <span class="cmd">python follow-up.py</span><br><br>
+      <span class="comment"># Ajouter un prospect</span><br>
+      <span class="cmd">python follow-up.py --add</span><br><br>
+      <span class="comment"># Mettre a jour un statut</span><br>
+      <span class="cmd">python follow-up.py --status 3 rdv_pris</span><br><br>
+      <span class="comment"># Voir tous les prospects</span><br>
+      <span class="cmd">python follow-up.py --list</span><br><br>
+      <span class="comment"># Stats funnel</span><br>
+      <span class="cmd">python follow-up.py --stats</span><br><br>
+      <span class="comment"># Importer les 30 prospects BTP</span><br>
+      <span class="cmd">python follow-up.py --import-html</span>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- SECTION 4 -->
+  <div class="section">
+    <div class="section-num">Section 04</div>
+    <h2>Mapping article par niche</h2>
+    <p>Le script choisit automatiquement l'article a partager en J+3 selon la niche du prospect.</p>
+
+    <table>
+      <thead><tr><th>Niche</th><th>Article partage (J+3)</th></tr></thead>
+      <tbody>
+        <tr><td>BTP / Artisans</td><td>artisan-btp-fiche-google-maps-2026</td></tr>
+        <tr><td>Immobilier</td><td>agent-immobilier-chatbot-visite-ia</td></tr>
+        <tr><td>Restaurant</td><td>restaurant-reservations-automatiques-ia</td></tr>
+        <tr><td>Comptable</td><td>comptable-automatiser-relances-impayees</td></tr>
+        <tr><td>Commerce</td><td>commerce-proximite-site-ecommerce-local</td></tr>
+        <tr><td>Autre / Defaut</td><td>roi-intelligence-artificielle-tpe-2026</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr class="divider">
+
+  <!-- SECTION 5 -->
+  <div class="section">
+    <div class="section-num">Section 05</div>
+    <h2>Fichiers</h2>
+
+    <ul class="files-list">
+      <li><span class="file-badge create">Creer</span> <code>scripts/prospection/follow-up.py</code> — script CLI principal</li>
+      <li><span class="file-badge create">Creer</span> <code>scripts/prospection/templates.py</code> — templates de relance CDS</li>
+      <li><span class="file-badge create">Creer</span> <code>scripts/prospection/prospects.json</code> — donnees prospects</li>
+      <li><span class="file-badge existing">Existant</span> <code>docs/prospection/prospects-btp-tarn.html</code> — source pour import</li>
+      <li><span class="file-badge existing">Existant</span> <code>docs/prospection/cold-outreach-templates</code> — templates DM initial</li>
+    </ul>
+
+    <p style="margin-top: 16px;"><strong>Zero dependance externe</strong> — Python standard (json, datetime, argparse).</p>
+  </div>
+
+</div>
+</body>
+</html>

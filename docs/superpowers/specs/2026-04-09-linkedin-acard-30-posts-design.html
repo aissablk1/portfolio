@@ -1,0 +1,927 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="doc-category" content="Specs">
+<meta name="doc-title" content="LinkedIn ACARD — 30 Posts (8 semaines)">
+<meta name="doc-color" content="#e11d48">
+<title>LinkedIn ACARD — 30 Posts — Design Spec</title>
+<style>
+:root{--fg:#1a1a1a;--muted:#737373;--border:#e5e5e5;--accent:#2563eb;--bg:#fafafa;--red:#dc2626;--green:#16a34a;--amber:#d97706;--li:#0a66c2}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Geist','Inter',system-ui,-apple-system,sans-serif;color:var(--fg);background:var(--bg);line-height:1.7;padding:2rem 1rem}
+.container{max-width:900px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+.back{display:inline-block;margin-bottom:2rem;font-size:.875rem;color:var(--muted)}.back:hover{color:var(--accent)}
+h1{font-size:1.75rem;font-weight:700;margin-bottom:.5rem;line-height:1.3}
+h2{font-size:1.375rem;font-weight:700;margin-top:2.5rem;margin-bottom:.75rem;padding-bottom:.375rem;border-bottom:1px solid var(--border)}
+h3{font-size:1.125rem;font-weight:600;margin-top:1.75rem;margin-bottom:.5rem}
+h4{font-size:.9375rem;font-weight:600;margin-top:1.25rem;margin-bottom:.375rem;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;font-size:.75rem}
+p{margin-bottom:1rem}
+ul,ol{margin-bottom:1rem;padding-left:1.5rem}
+li{margin-bottom:.375rem}
+strong{font-weight:600}
+code{font-family:'Geist Mono','Fira Code',monospace;background:#f0f0f0;padding:.125rem .375rem;border-radius:3px;font-size:.875em}
+hr{border:none;border-top:1px solid var(--border);margin:2rem 0}
+table{width:100%;border-collapse:collapse;margin-bottom:1.5rem;font-size:.8125rem}
+th,td{padding:.5rem .75rem;border:1px solid var(--border);text-align:left}
+th{background:#f0f0f0;font-weight:600;font-size:.75rem;text-transform:uppercase;letter-spacing:.3px}
+tr:nth-child(even){background:#f9f9f9}
+blockquote{border-left:3px solid var(--accent);padding:.75rem 1rem;margin-bottom:1rem;background:#f8fafc;font-style:italic;color:#525252}
+.meta{font-size:.875rem;color:var(--muted);margin-bottom:2rem}
+.badge{display:inline-block;font-size:.625rem;font-weight:700;text-transform:uppercase;letter-spacing:.75px;padding:3px 8px;border-radius:12px}
+.b-audience{background:#eff6ff;color:var(--accent)}
+.b-blog{background:#f0fdf4;color:var(--green)}
+.b-leads{background:#fef2f2;color:var(--red)}
+.b-terrain{background:#fffbeb;color:var(--amber)}
+.b-expert{background:#f5f3ff;color:#7c3aed}
+.post-block{background:#fff;border:1px solid var(--border);border-radius:10px;padding:1.5rem;margin:1.25rem 0}
+.post-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem;flex-wrap:wrap;gap:.5rem}
+.post-title{font-weight:700;font-size:.9375rem}
+.post-text{white-space:pre-line;font-size:.8125rem;line-height:1.8;color:#333}
+.post-comment{margin-top:.75rem;padding-top:.75rem;border-top:1px dashed var(--border);font-size:.75rem;color:var(--muted)}
+.acard-ref{font-size:.6875rem;color:var(--muted);font-family:'Geist Mono','Fira Code',monospace}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.card{background:#fff;border:1px solid var(--border);border-radius:8px;padding:1rem}
+.card h4{margin-top:0}
+.alert{padding:1rem;border-radius:6px;margin-bottom:1.5rem;font-size:.875rem}
+.alert-blue{background:#eff6ff;border-left:4px solid var(--accent)}
+.alert-green{background:#f0fdf4;border-left:4px solid var(--green)}
+@media(max-width:600px){body{padding:1rem .75rem}h1{font-size:1.375rem}.grid-2{grid-template-columns:1fr}table{font-size:.75rem}th,td{padding:.375rem .5rem}}
+@media print{body{padding:1rem}.post-block{break-inside:avoid}h2{break-before:page}}
+</style>
+</head>
+<body>
+<div class="container">
+<a href="../../index.html" class="back">&larr; Retour a l'index</a>
+
+<h1>LinkedIn ACARD &mdash; 30 Posts sur 8 semaines</h1>
+<p class="meta"><strong>Date :</strong> 9 avril 2026 &middot; <strong>Framework :</strong> ACARD (Maxime Lamy / Skaale) &middot; <strong>Cible :</strong> 14 avril &rarr; 20 juin 2026</p>
+
+<div class="alert alert-blue">
+<strong>Livrables :</strong> Matrice ACARD personnalis&eacute;e (11 664 combinaisons) + Calendrier 30 posts + 15 posts r&eacute;dig&eacute;s pr&ecirc;ts &agrave; publier + R&egrave;gles de publication + M&eacute;triques de suivi.
+</div>
+
+<!-- ================================================================ -->
+<h2>1. Framework ACARD &mdash; R&eacute;sum&eacute;</h2>
+
+<p><strong>A</strong>ccroche &rarr; <strong>C</strong>ontexte &rarr; <strong>A</strong>ction &rarr; <strong>R</strong>&eacute;sultat &rarr; <strong>D</strong>&eacute;clencheur</p>
+<p>Chaque bloc offre 3 types de variantes (Lamy original). Ce plan &eacute;tend &agrave; 6-9 variantes personnalis&eacute;es pour l'ICP d'A&iuml;ssa, soit <strong>11 664 combinaisons uniques</strong>.</p>
+
+<!-- ================================================================ -->
+<h2>2. Approche retenue &mdash; Rotation par objectif</h2>
+
+<p>3 posts/semaine avec objectif tournant :</p>
+<table>
+<thead><tr><th>Jour</th><th>Objectif</th><th>D&eacute;clencheur ACARD</th><th>Format</th></tr></thead>
+<tbody>
+<tr><td>Mardi</td><td><span class="badge b-audience">Audience</span></td><td>Engager &mdash; question ouverte</td><td>Pas de lien, con&ccedil;u pour les commentaires</td></tr>
+<tr><td>Jeudi</td><td><span class="badge b-blog">Blog</span></td><td>Suivre &mdash; renvoie vers article</td><td>Lien article en 1er commentaire</td></tr>
+<tr><td>Samedi</td><td><span class="badge b-leads">Leads</span></td><td>Acheter &mdash; CTA direct</td><td>Diagnostic/DM en 1er commentaire</td></tr>
+</tbody>
+</table>
+
+<p><strong>Progression tonale :</strong></p>
+<ul>
+<li>Semaines 1-4 : <span class="badge b-terrain">Terrain / brut</span> &mdash; langage artisan, douleurs concr&egrave;tes</li>
+<li>Semaines 5-8 : <span class="badge b-expert">Expert accessible</span> &mdash; comparatifs, GEO/SEO, bilans chiffr&eacute;s</li>
+</ul>
+
+<!-- ================================================================ -->
+<h2>3. Matrice ACARD personnalis&eacute;e</h2>
+
+<h3>A &mdash; Accroche (9 variantes)</h3>
+<table>
+<thead><tr><th>#</th><th>Type</th><th>Template</th></tr></thead>
+<tbody>
+<tr><td>A1</td><td>Douleur</td><td>Tu perds X heures/semaine sur [t&acirc;che manuelle]. Pas parce que t'es mal organis&eacute;. Parce que personne t'a montr&eacute; l'alternative.</td></tr>
+<tr><td>A2</td><td>Douleur</td><td>Ton site te co&ucirc;te [X]&euro;/an. Et il ne t'a pas rapport&eacute; un seul chantier.</td></tr>
+<tr><td>A3</td><td>Douleur</td><td>Tu r&eacute;ponds aux m&ecirc;mes 10 questions par t&eacute;l&eacute;phone, chaque jour. Pendant que tes concurrents dorment et leurs syst&egrave;mes bossent.</td></tr>
+<tr><td>A4</td><td>Mythe</td><td>Les experts te disent de poster tous les jours sur LinkedIn. C'est le meilleur moyen de t'&eacute;puiser pour rien.</td></tr>
+<tr><td>A5</td><td>Mythe</td><td>Un bon site web, &ccedil;a co&ucirc;te 10 000&euro; minimum. Faux.</td></tr>
+<tr><td>A6</td><td>Mythe</td><td>L'IA, c'est pour les grandes entreprises. J'entends &ccedil;a 3 fois par semaine.</td></tr>
+<tr><td>A7</td><td>Id&eacute;e re&ccedil;ue</td><td>La plupart des artisans pensent que LinkedIn, c'est pour les cols blancs.</td></tr>
+<tr><td>A8</td><td>Id&eacute;e re&ccedil;ue</td><td>Un site vitrine suffit. Sauf que &laquo; vitrine &raquo; veut dire : personne n'entre dans le magasin.</td></tr>
+<tr><td>A9</td><td>Id&eacute;e re&ccedil;ue</td><td>Automatiser, &ccedil;a veut dire d&eacute;shumaniser. C'est l'inverse.</td></tr>
+</tbody>
+</table>
+
+<h3>C &mdash; Contexte (6 variantes)</h3>
+<table>
+<thead><tr><th>#</th><th>Type</th><th>Template</th></tr></thead>
+<tbody>
+<tr><td>C1</td><td>Bases</td><td>Ce que la plupart font mal : [erreur courante] vs ce qui marche vraiment : [bonne pratique]</td></tr>
+<tr><td>C2</td><td>Bases</td><td>80% des sites d'artisans BTP n'ont pas de formulaire de devis. Le prospect arrive, ne trouve rien, et appelle le concurrent.</td></tr>
+<tr><td>C3</td><td>Histoire client</td><td>Un [m&eacute;tier] de [X] salari&eacute;s &agrave; [ville]. Son probl&egrave;me : [douleur concr&egrave;te].</td></tr>
+<tr><td>C4</td><td>Histoire client</td><td>DK Building avait un site qui ne disait rien. Pas de services clairs. Un prospect repartait aussi vite.</td></tr>
+<tr><td>C5</td><td>Agitation</td><td>Si tu ne fais rien : dans 6 mois, ton concurrent aura un chatbot qui r&eacute;pond &agrave; 23h. Toi, tu seras encore au t&eacute;l&eacute;phone.</td></tr>
+<tr><td>C6</td><td>Agitation</td><td>Chaque semaine sans syst&egrave;me automatis&eacute; = X devis perdus, X heures gaspill&eacute;es, X&euro; &eacute;vapor&eacute;s.</td></tr>
+</tbody>
+</table>
+
+<h3>A &mdash; Action (6 variantes)</h3>
+<table>
+<thead><tr><th>#</th><th>Type</th><th>Template</th></tr></thead>
+<tbody>
+<tr><td>AC1</td><td>Solution</td><td>En [X] jours, j'ai construit : [liste syst&egrave;me]. R&eacute;sultat concret.</td></tr>
+<tr><td>AC2</td><td>Solution</td><td>On a remplac&eacute; [process manuel] par [syst&egrave;me auto]. Le client ne touche plus &agrave; rien.</td></tr>
+<tr><td>AC3</td><td>Mini-guide</td><td>Comment [r&eacute;soudre micro-probl&egrave;me] en 3 &eacute;tapes, sans coder, sans budget.</td></tr>
+<tr><td>AC4</td><td>Mini-guide</td><td>V&eacute;rifie ces 3 choses sur ton site en 2 minutes. Si une manque, tu perds des clients.</td></tr>
+<tr><td>AC5</td><td>&Eacute;tapes</td><td>5 &eacute;tapes pour [objectif ICP] : 1. ... 2. ... 3. ...</td></tr>
+<tr><td>AC6</td><td>&Eacute;tapes</td><td>3 signaux que ton site est une vitrine morte : [liste actionnable]</td></tr>
+</tbody>
+</table>
+
+<h3>R &mdash; R&eacute;sultat (6 variantes)</h3>
+<table>
+<thead><tr><th>#</th><th>Type</th><th>Template</th></tr></thead>
+<tbody>
+<tr><td>R1</td><td>Preuves</td><td>10h r&eacute;cup&eacute;r&eacute;es/semaine. Rentabilis&eacute; en 4 semaines. [Chiffre concret]</td></tr>
+<tr><td>R2</td><td>Preuves</td><td>Livr&eacute; en [X] jours. [X] RDV g&eacute;n&eacute;r&eacute;s le premier mois. Co&ucirc;t : [X]&euro;.</td></tr>
+<tr><td>R3</td><td>Coulisses</td><td>J'ai 96 projets dans mes dossiers et z&eacute;ro client au nouveau tarif. Voil&agrave; ce que j'ai chang&eacute;.</td></tr>
+<tr><td>R4</td><td>Coulisses</td><td>Ce que j'ai appris en [p&eacute;riode] : [le&ccedil;on terrain]. L'erreur que je ne referai pas.</td></tr>
+<tr><td>R5</td><td>Tests</td><td>J'ai test&eacute; [outil/m&eacute;thode] pendant [dur&eacute;e]. Voil&agrave; ce qui marche et ce qui ne marche pas.</td></tr>
+<tr><td>R6</td><td>Tests</td><td>n8n vs Make vs Zapier &mdash; j'ai automatis&eacute; le m&ecirc;me process avec les 3. Verdict.</td></tr>
+</tbody>
+</table>
+
+<h3>D &mdash; D&eacute;clencheur (6 variantes)</h3>
+<table>
+<thead><tr><th>#</th><th>Type</th><th>CTA</th></tr></thead>
+<tbody>
+<tr><td>D1</td><td>Engager</td><td>Comment tu g&egrave;res &ccedil;a de ton c&ocirc;t&eacute; ?</td></tr>
+<tr><td>D2</td><td>Engager</td><td>Tu te reconnais dans une de ces erreurs ?</td></tr>
+<tr><td>D3</td><td>Suivre</td><td>Je partage un cas concret chaque semaine. Follow si &ccedil;a t'int&eacute;resse.</td></tr>
+<tr><td>D4</td><td>Suivre</td><td>Prochain post : [teaser]. Suis-moi pour ne pas le rater.</td></tr>
+<tr><td>D5</td><td>Acheter</td><td>Si tu es [ICP] et que tu veux [objectif] &rarr; &eacute;cris-moi en DM ou aissabelkoussa.fr/go</td></tr>
+<tr><td>D6</td><td>Acheter</td><td>Diagnostic gratuit en 2 min &rarr; lien en commentaire.</td></tr>
+</tbody>
+</table>
+
+<!-- ================================================================ -->
+<h2>4. Calendrier 30 posts &mdash; 8 semaines</h2>
+
+<h3>Semaines 1-4 <span class="badge b-terrain">Terrain / brut</span></h3>
+<table>
+<thead><tr><th>#</th><th>Date</th><th>Obj.</th><th>Sujet</th><th>Combo</th><th>Article blog</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Mar 14/04</td><td><span class="badge b-audience">Audience</span></td><td>Le plombier qui perd 10h/semaine au t&eacute;l</td><td class="acard-ref">A1+C3+AC1+R1+D1</td><td>automatiser-devis-artisan-btp</td></tr>
+<tr><td>2</td><td>Jeu 16/04</td><td><span class="badge b-blog">Blog</span></td><td>Ton site te co&ucirc;te de l'argent &mdash; 3 signaux</td><td class="acard-ref">A2+C2+AC6+R1+D3</td><td>site-web-coute-argent-3-signaux</td></tr>
+<tr><td>3</td><td>Sam 18/04</td><td><span class="badge b-leads">Leads</span></td><td>L'IA c'est pas pour les grandes entreprises</td><td class="acard-ref">A6+C5+AC1+R2+D5</td><td>roi-intelligence-artificielle-tpe-2026</td></tr>
+<tr><td>4</td><td>Mar 21/04</td><td><span class="badge b-audience">Audience</span></td><td>&laquo; Un bon site &ccedil;a co&ucirc;te 10 000&euro; &raquo; &mdash; Faux</td><td class="acard-ref">A5+C1+AC5+R2+D2</td><td>&mdash;</td></tr>
+<tr><td>5</td><td>Jeu 23/04</td><td><span class="badge b-blog">Blog</span></td><td>Fiche Google Maps : le truc que 90% ratent</td><td class="acard-ref">A3+C2+AC3+R1+D3</td><td>artisan-btp-fiche-google-maps-2026</td></tr>
+<tr><td>6</td><td>Sam 25/04</td><td><span class="badge b-leads">Leads</span></td><td>Cas DK Building &mdash; vitrine morte &agrave; machine &agrave; devis</td><td class="acard-ref">A8+C4+AC2+R2+D6</td><td>&mdash;</td></tr>
+<tr><td>7</td><td>Mar 28/04</td><td><span class="badge b-audience">Audience</span></td><td>LinkedIn c'est pour les cols blancs ?</td><td class="acard-ref">A7+C1+AC5+R4+D1</td><td>&mdash;</td></tr>
+<tr><td>8</td><td>Jeu 30/04</td><td><span class="badge b-blog">Blog</span></td><td>Formulaire de contact : tu perds des chantiers</td><td class="acard-ref">A1+C6+AC4+R1+D3</td><td>artisan-btp-formulaire-contact-perd-chantiers</td></tr>
+<tr><td>9</td><td>Sam 02/05</td><td><span class="badge b-leads">Leads</span></td><td>Planning chantier automatis&eacute; &mdash; cas r&eacute;el</td><td class="acard-ref">A3+C3+AC1+R2+D5</td><td>artisan-btp-planning-chantier-automatise</td></tr>
+<tr><td>10</td><td>Mar 05/05</td><td><span class="badge b-audience">Audience</span></td><td>96 projets, z&eacute;ro client (coulisses)</td><td class="acard-ref">A2+C5+AC5+R3+D2</td><td>&mdash;</td></tr>
+<tr><td>11</td><td>Jeu 07/05</td><td><span class="badge b-blog">Blog</span></td><td>Chatbot IA : combien &ccedil;a co&ucirc;te en 2026</td><td class="acard-ref">A5+C1+AC3+R5+D4</td><td>combien-coute-chatbot-ia-2026</td></tr>
+<tr><td>12</td><td>Sam 09/05</td><td><span class="badge b-leads">Leads</span></td><td>&laquo; Automatiser = d&eacute;shumaniser &raquo; &mdash; C'est l'inverse</td><td class="acard-ref">A9+C3+AC2+R1+D6</td><td>&mdash;</td></tr>
+</tbody>
+</table>
+
+<h3>Semaines 5-8 <span class="badge b-expert">Expert accessible</span></h3>
+<table>
+<thead><tr><th>#</th><th>Date</th><th>Obj.</th><th>Sujet</th><th>Combo</th><th>Article blog</th></tr></thead>
+<tbody>
+<tr><td>13</td><td>Mar 12/05</td><td><span class="badge b-audience">Audience</span></td><td>n8n vs Make vs Zapier &mdash; j'ai test&eacute; les 3</td><td class="acard-ref">A4+C1+AC5+R6+D1</td><td>n8n-vs-make-vs-zapier-comparatif-2026</td></tr>
+<tr><td>14</td><td>Jeu 14/05</td><td><span class="badge b-blog">Blog</span></td><td>SEO vs GEO : la nouvelle visibilit&eacute; IA</td><td class="acard-ref">A6+C5+AC5+R5+D3</td><td>seo-vs-geo-visibilite-ia-2026</td></tr>
+<tr><td>15</td><td>Sam 16/05</td><td><span class="badge b-leads">Leads</span></td><td>Restaurant : r&eacute;servations automatiques 24/7</td><td class="acard-ref">A3+C3+AC1+R2+D5</td><td>restaurant-reservations-automatiques-ia</td></tr>
+<tr><td>16</td><td>Mar 19/05</td><td><span class="badge b-audience">Audience</span></td><td>Agent immobilier : appara&icirc;tre dans ChatGPT</td><td class="acard-ref">A6+C5+AC3+R5+D1</td><td>agent-immobilier-apparaitre-chatgpt</td></tr>
+<tr><td>17</td><td>Jeu 21/05</td><td><span class="badge b-blog">Blog</span></td><td>Coach : tunnel de vente formation en ligne</td><td class="acard-ref">A1+C3+AC2+R2+D4</td><td>coach-tunnel-vente-formation-en-ligne</td></tr>
+<tr><td>18</td><td>Sam 23/05</td><td><span class="badge b-leads">Leads</span></td><td>6 mois de freelance IA &agrave; Albi &mdash; bilan</td><td class="acard-ref">A8+C1+AC5+R3+D6</td><td>&mdash;</td></tr>
+<tr><td>19</td><td>Mar 26/05</td><td><span class="badge b-audience">Audience</span></td><td>Commerce de proximit&eacute; : site e-commerce local</td><td class="acard-ref">A5+C6+AC3+R1+D2</td><td>commerce-proximite-site-ecommerce-local</td></tr>
+<tr><td>20</td><td>Jeu 28/05</td><td><span class="badge b-blog">Blog</span></td><td>Comptable : automatiser les relances impay&eacute;es</td><td class="acard-ref">A3+C3+AC2+R1+D3</td><td>comptable-automatiser-relances-impayees</td></tr>
+<tr><td>21</td><td>Sam 30/05</td><td><span class="badge b-leads">Leads</span></td><td>Chatbot visite immobili&egrave;re &mdash; cas r&eacute;el</td><td class="acard-ref">A9+C3+AC1+R2+D5</td><td>agent-immobilier-chatbot-visite-ia</td></tr>
+<tr><td>22</td><td>Mar 02/06</td><td><span class="badge b-audience">Audience</span></td><td>4 ans de design, 80 projets, le jour o&ugrave; j'ai compris</td><td class="acard-ref">A8+C1+AC5+R4+D1</td><td>&mdash;</td></tr>
+<tr><td>23</td><td>Jeu 04/06</td><td><span class="badge b-blog">Blog</span></td><td>ROI de l'IA pour les TPE &mdash; chiffres 2026</td><td class="acard-ref">A6+C2+AC5+R5+D4</td><td>roi-intelligence-artificielle-tpe-2026</td></tr>
+<tr><td>24</td><td>Sam 06/06</td><td><span class="badge b-leads">Leads</span></td><td>3 cat&eacute;gories, 3 probl&egrave;mes, 3 solutions</td><td class="acard-ref">A2+C6+AC1+R2+D6</td><td>&mdash;</td></tr>
+<tr><td>25</td><td>Mar 09/06</td><td><span class="badge b-audience">Audience</span></td><td>&laquo; Poste tous les jours &raquo; &mdash; le mythe qui tue</td><td class="acard-ref">A4+C1+AC4+R5+D2</td><td>&mdash;</td></tr>
+<tr><td>26</td><td>Jeu 11/06</td><td><span class="badge b-blog">Blog</span></td><td>Artisan BTP : devis automatis&eacute;s en 5 min</td><td class="acard-ref">A1+C2+AC2+R1+D3</td><td>automatiser-devis-artisan-btp</td></tr>
+<tr><td>27</td><td>Sam 13/06</td><td><span class="badge b-leads">Leads</span></td><td>Bilan mois 1 LinkedIn &mdash; les vrais chiffres</td><td class="acard-ref">A8+C1+AC5+R3+D5</td><td>&mdash;</td></tr>
+<tr><td>28</td><td>Mar 16/06</td><td><span class="badge b-audience">Audience</span></td><td>Ton concurrent dort. Son chatbot non.</td><td class="acard-ref">A3+C5+AC3+R5+D1</td><td>&mdash;</td></tr>
+<tr><td>29</td><td>Jeu 18/06</td><td><span class="badge b-blog">Blog</span></td><td>Fiche Google Maps BTP &mdash; le guide pas-&agrave;-pas</td><td class="acard-ref">A1+C2+AC5+R1+D4</td><td>artisan-btp-fiche-google-maps-2026</td></tr>
+<tr><td>30</td><td>Sam 20/06</td><td><span class="badge b-leads">Leads</span></td><td>Diagnostic gratuit : 2 min pour savoir</td><td class="acard-ref">A2+C6+AC4+R2+D6</td><td>&mdash;</td></tr>
+</tbody>
+</table>
+
+<!-- ================================================================ -->
+<h2>5. Les 15 posts pr&ecirc;ts &agrave; publier</h2>
+
+<!-- POST 1 -->
+<div class="post-block">
+<div class="post-header">
+<span class="post-title">POST 1 &mdash; Mar 14/04</span>
+<span><span class="badge b-audience">Audience</span> <span class="acard-ref">A1+C3+AC1+R1+D1</span></span>
+</div>
+<div class="post-text">Un plombier de 8 salari&eacute;s perd 10 heures par semaine au t&eacute;l&eacute;phone.
+
+Pas parce qu'il aime &ccedil;a.
+Parce qu'il n'a pas d'autre solution.
+
+---
+
+Les clients appellent pour demander un devis.
+Il d&eacute;croche entre deux chantiers.
+Il note sur un bout de papier.
+Le soir, il rentre et tape les devis &agrave; la main.
+
+Certains clients rappellent. D'autres disparaissent.
+
+10 heures par semaine.
+520 heures par an.
+L'&eacute;quivalent de 3 mois de travail. Perdus.
+
+---
+
+En 8 jours, on a mis en place :
+&rarr; Un formulaire de devis automatis&eacute; sur son site
+&rarr; Des relances clients automatiques par SMS
+&rarr; Une prise de RDV en ligne
+
+Les clients prennent rendez-vous seuls.
+Les devis partent en 5 minutes au lieu de 3 heures.
+Les relances tournent toutes seules.
+
+10 heures r&eacute;cup&eacute;r&eacute;es. Chaque semaine.
+Le syst&egrave;me s'est rentabilis&eacute; en 4 semaines.
+
+---
+
+Et toi, c'est quoi la t&acirc;che qui te bouffe le plus de temps chaque semaine ?
+
+#artisans #BTP #automatisation #PME #Albi</div>
+<div class="post-comment"><strong>1er commentaire :</strong> Je construis ce type de syst&egrave;mes pour les artisans et PME. Si tu veux voir comment &rarr; aissabelkoussa.fr</div>
+</div>
+
+<!-- POST 2 -->
+<div class="post-block">
+<div class="post-header">
+<span class="post-title">POST 2 &mdash; Jeu 16/04</span>
+<span><span class="badge b-blog">Blog</span> <span class="acard-ref">A2+C2+AC6+R1+D3</span></span>
+</div>
+<div class="post-text">Ton site te co&ucirc;te de l'argent.
+Mais est-ce qu'il en rapporte ?
+
+---
+
+3 signaux que ton site est une vitrine morte :
+
+1. Pas de prise de RDV en ligne.
+&rarr; Le client veut r&eacute;server &agrave; 22h. Tu dors. Il appelle ton concurrent demain matin.
+
+2. Tes devis partent par mail, &agrave; la main.
+&rarr; 3 heures pour un devis que tu pourrais envoyer en 5 min avec un formulaire intelligent.
+
+3. Tu ne relances pas tes prospects.
+&rarr; 80% des clients signent apr&egrave;s la 2e ou 3e relance. Si tu ne relances pas, quelqu'un d'autre le fait.
+
+---
+
+Le pire : ces 3 probl&egrave;mes se corrigent en 10 jours.
+
+Pas en 3 mois. Pas avec une agence &agrave; 15 000&euro;.
+Avec un syst&egrave;me automatis&eacute; qui tourne 24/7.
+
+J'ai &eacute;crit un article complet qui d&eacute;taille chaque signal et comment le corriger.
+
+&rarr; Lien en commentaire.
+
+Je partage un cas concret chaque semaine. Follow si &ccedil;a t'int&eacute;resse.
+
+#SiteWeb #PME #digital #BTP #conversion</div>
+<div class="post-comment"><strong>1er commentaire :</strong> L'article complet &rarr; [lien article site-web-coute-argent-3-signaux]</div>
+</div>
+
+<!-- POST 3 -->
+<div class="post-block">
+<div class="post-header">
+<span class="post-title">POST 3 &mdash; Sam 18/04</span>
+<span><span class="badge b-leads">Leads</span> <span class="acard-ref">A6+C5+AC1+R2+D5</span></span>
+</div>
+<div class="post-text">&laquo; L'IA, c'est pour les grandes entreprises. &raquo;
+
+J'entends &ccedil;a 3 fois par semaine.
+
+---
+
+Pendant ce temps :
+&rarr; Un &eacute;lectricien &agrave; Toulouse a un chatbot qui r&eacute;pond &agrave; ses clients &agrave; 23h
+&rarr; Un plombier &agrave; Albi envoie ses devis en 5 minutes au lieu de 3 heures
+&rarr; Un ma&ccedil;on a un dashboard qui lui dit en temps r&eacute;el s'il est rentable ce mois-ci
+
+Aucun d'eux n'a une &eacute;quipe tech.
+Aucun n'a lev&eacute; de fonds.
+Aucun ne sait coder.
+
+Ils ont juste un syst&egrave;me. Construit une fois. Qui tourne tout seul.
+
+---
+
+Ce que j'ai livr&eacute; pour un artisan BTP de 12 salari&eacute;s :
+&rarr; Site avec prise de RDV en ligne
+&rarr; Devis automatis&eacute; par formulaire intelligent
+&rarr; Relances SMS automatiques
+
+Livr&eacute; en 8 jours. Rentabilis&eacute; en 1 mois.
+
+---
+
+Si tu es artisan, dirigeant de PME, ou prestataire B2B &mdash; et que tu veux un syst&egrave;me qui bosse pendant que tu es sur le terrain :
+
+&Eacute;cris-moi en DM. On regarde ensemble en 15 minutes ce qui peut &ecirc;tre automatis&eacute; chez toi.
+
+#IA #artisans #automatisation #PME #BTP</div>
+</div>
+
+<!-- POST 4 -->
+<div class="post-block">
+<div class="post-header">
+<span class="post-title">POST 4 &mdash; Mar 21/04</span>
+<span><span class="badge b-audience">Audience</span> <span class="acard-ref">A5+C1+AC5+R2+D2</span></span>
+</div>
+<div class="post-text">&laquo; Un bon site, &ccedil;a co&ucirc;te minimum 10 000&euro;. &raquo;
+
+Non.
+
+Un bon site, c'est un site qui rapporte plus qu'il co&ucirc;te.
+Et la plupart des sites &agrave; 10 000&euro; que je vois ne rapportent rien.
+
+---
+
+Ce que la plupart font mal :
+&rarr; Payer une agence au temps pass&eacute; (plus c'est long, plus c'est cher)
+&rarr; Demander un &laquo; site design &raquo; sans strat&eacute;gie de conversion
+&rarr; Attendre 3 mois de va-et-vient pour un r&eacute;sultat ti&egrave;de
+
+Ce qui marche vraiment :
+&rarr; Un brief clair de 1h
+&rarr; Un syst&egrave;me construit pour convertir, pas pour &ecirc;tre joli
+&rarr; Une livraison en 5-10 jours, pas en 3 mois
+
+---
+
+5 choses que ton site doit avoir pour te rapporter :
+
+1. Un message clair en 5 secondes (ce que tu fais + pour qui)
+2. Un formulaire de devis ou prise de RDV visible partout
+3. Des preuves (photos chantiers, avis clients, chiffres)
+4. Un temps de chargement sous 3 secondes sur mobile
+5. Un SEO local qui te fait appara&icirc;tre sur Google Maps
+
+C'est tout. Le reste, c'est du d&eacute;cor.
+
+---
+
+Tu te reconnais ? Ton site actuel coche combien de ces 5 points ?
+
+#SiteWeb #PME #digital #WebDesign #conversion</div>
+</div>
+
+<!-- POST 5 -->
+<div class="post-block">
+<div class="post-header">
+<span class="post-title">POST 5 &mdash; Jeu 23/04</span>
+<span><span class="badge b-blog">Blog</span> <span class="acard-ref">A3+C2+AC3+R1+D3</span></span>
+</div>
+<div class="post-text">Tu r&eacute;ponds au t&eacute;l&eacute;phone entre deux chantiers.
+Ton concurrent, lui, appara&icirc;t en premier sur Google Maps.
+
+Pas parce qu'il est meilleur.
+Parce qu'il a une fiche Google compl&egrave;te. Et toi non.
+
+---
+
+90% des artisans BTP n'ont pas de fiche Google Business optimis&eacute;e.
+
+Le probl&egrave;me : quand un particulier cherche &laquo; plombier Albi &raquo; ou &laquo; ma&ccedil;on Tarn &raquo;, Google affiche 3 r&eacute;sultats. Trois. Si tu n'y es pas, tu n'existes pas.
+
+---
+
+Comment v&eacute;rifier ta fiche en 2 minutes :
+
+1. Tape le nom de ton entreprise sur Google
+&rarr; Si rien n'appara&icirc;t &agrave; droite : ta fiche n'existe pas ou n'est pas revendiqu&eacute;e
+
+2. V&eacute;rifie tes horaires, ton num&eacute;ro, ton adresse
+&rarr; Si c'est faux ou vide : chaque client potentiel tombe dans le vide
+
+3. Compte tes avis Google
+&rarr; Moins de 10 avis ? Tu es invisible face &agrave; un concurrent qui en a 40
+
+---
+
+J'ai &eacute;crit un guide pas-&agrave;-pas pour optimiser &ccedil;a en 1 heure.
+
+&rarr; Lien en commentaire
+
+Je poste un guide pratique chaque semaine. Follow pour ne rien rater.
+
+#GoogleMaps #BTP #artisans #SEOlocal #PME</div>
+<div class="post-comment"><strong>1er commentaire :</strong> Le guide complet &rarr; [lien article artisan-btp-fiche-google-maps-2026]</div>
+</div>
+
+<!-- POST 6 -->
+<div class="post-block">
+<div class="post-header">
+<span class="post-title">POST 6 &mdash; Sam 25/04</span>
+<span><span class="badge b-leads">Leads</span> <span class="acard-ref">A8+C4+AC2+R2+D6</span></span>
+</div>
+<div class="post-text">&laquo; Un site vitrine, &ccedil;a suffit. &raquo;
+
+&Ccedil;a suffit pour quoi exactement ?
+Pour que tes prospects arrivent, ne trouvent rien, et appellent le concurrent ?
+
+---
+
+DK Building. Entreprise BTP. Chantiers, &eacute;quipes terrain, gros &oelig;uvre.
+
+Leur site disait : &laquo; Bienvenue chez DK Building. &raquo;
+Et c'est &agrave; peu pr&egrave;s tout.
+
+Pas de services clairs.
+Pas de photos de chantiers.
+Pas de formulaire de contact visible.
+
+Un prospect arrivait dessus et repartait en 8 secondes.
+
+---
+
+Ce qu'on a construit ensemble en 8 jours :
+
+&rarr; Page d'accueil qui explique en 5 secondes ce qu'ils font
+&rarr; Pages services structur&eacute;es pour &ecirc;tre lues en 30 secondes
+&rarr; Formulaire de devis simple &mdash; 4 champs, pas 12
+&rarr; Section r&eacute;alisations avec de vraies photos de chantiers
+&rarr; Site rapide sur mobile (l&agrave; o&ugrave; 80% des visiteurs arrivent)
+
+---
+
+Le site n'est plus une brochure.
+C'est un commercial disponible 24h/24.
+
+---
+
+Fais le test en 2 min : est-ce que TON site donne envie d'appeler ?
+
+&rarr; Diagnostic gratuit en commentaire
+
+#BTP #SiteWeb #artisans #construction #digital</div>
+<div class="post-comment"><strong>1er commentaire :</strong> Diagnostic gratuit &mdash; 2 min pour savoir ce que ton site te co&ucirc;te : aissabelkoussa.fr/diagnostic</div>
+</div>
+
+<!-- POST 7 -->
+<div class="post-block">
+<div class="post-header">
+<span class="post-title">POST 7 &mdash; Mar 28/04</span>
+<span><span class="badge b-audience">Audience</span> <span class="acard-ref">A7+C1+AC5+R4+D1</span></span>
+</div>
+<div class="post-text">&laquo; LinkedIn, c'est pour les cols blancs. &raquo;
+
+Un artisan m'a dit &ccedil;a la semaine derni&egrave;re.
+Je comprends pourquoi il pense &ccedil;a.
+
+---
+
+Quand tu scrolles LinkedIn, tu vois :
+&rarr; Des consultants qui parlent de &laquo; synergies &raquo;
+&rarr; Des posts avec 47 emojis fus&eacute;e
+&rarr; Des gens qui se f&eacute;licitent d'avoir chang&eacute; de job
+
+Normal de se dire : &laquo; C'est pas mon monde. &raquo;
+
+---
+
+Sauf que :
+&rarr; Les architectes sont sur LinkedIn
+&rarr; Les ma&icirc;tres d'ouvrage sont sur LinkedIn
+&rarr; Les directeurs de travaux sont sur LinkedIn
+&rarr; Les promoteurs immobiliers sont sur LinkedIn
+
+Tes prescripteurs. Tes donneurs d'ordre. Tes futurs clients B2B.
+
+Ils ne sont pas sur Instagram. Ils ne sont pas sur TikTok.
+Ils sont ici.
+
+---
+
+5 choses qu'un artisan peut faire sur LinkedIn sans jouer au consultant :
+
+1. Poster une photo de chantier fini (avant/apr&egrave;s)
+2. Raconter un probl&egrave;me r&eacute;solu pour un client
+3. Donner un conseil m&eacute;tier que tout le monde ignore
+4. Partager un chiffre concret (d&eacute;lai, &eacute;conomie, r&eacute;sultat)
+5. Poser une question &agrave; sa communaut&eacute;
+
+Pas besoin de jargon. Pas besoin de storytelling format&eacute;.
+Juste du terrain.
+
+---
+
+Et toi, tu utilises LinkedIn pour ton activit&eacute; ou pas du tout ?
+
+#LinkedIn #BTP #artisans #r&eacute;seaupro #PME</div>
+</div>
+
+<!-- POST 8 -->
+<div class="post-block">
+<div class="post-header">
+<span class="post-title">POST 8 &mdash; Jeu 30/04</span>
+<span><span class="badge b-blog">Blog</span> <span class="acard-ref">A1+C6+AC4+R1+D3</span></span>
+</div>
+<div class="post-text">Tu as un formulaire de contact sur ton site.
+Bravo.
+
+Maintenant, est-ce que quelqu'un l'utilise ?
+
+---
+
+La r&eacute;alit&eacute; :
+&rarr; La plupart des formulaires d'artisans BTP demandent nom, email, t&eacute;l&eacute;phone, message
+&rarr; Le prospect remplit &ccedil;a &agrave; 21h sur son canap&eacute;
+&rarr; Tu re&ccedil;ois un mail &agrave; 8h le lendemain... si tu penses &agrave; v&eacute;rifier
+&rarr; Tu rappelles &agrave; 14h, entre deux chantiers
+&rarr; Le prospect a d&eacute;j&agrave; appel&eacute; 3 concurrents
+
+Chaque jour sans r&eacute;ponse rapide = un chantier perdu.
+
+---
+
+V&eacute;rifie ces 3 choses en 2 minutes :
+
+1. Ton formulaire est-il visible sans scroller ?
+&rarr; Si le visiteur doit chercher le bouton &laquo; Contact &raquo;, il ne le fera pas.
+
+2. As-tu une r&eacute;ponse automatique ?
+&rarr; Un simple &laquo; Merci, je vous rappelle sous 2h &raquo; change tout.
+
+3. Re&ccedil;ois-tu une alerte SMS quand quelqu'un remplit le formulaire ?
+&rarr; Si tu ne vois le message que le soir, c'est trop tard.
+
+---
+
+J'ai d&eacute;taill&eacute; les 5 erreurs les plus courantes dans un article complet.
+
+&rarr; Lien en commentaire
+
+#formulaire #BTP #artisans #SiteWeb #leads</div>
+<div class="post-comment"><strong>1er commentaire :</strong> L'article complet &rarr; [lien article artisan-btp-formulaire-contact-perd-chantiers]</div>
+</div>
+
+<!-- POST 9 -->
+<div class="post-block">
+<div class="post-header">
+<span class="post-title">POST 9 &mdash; Mar 05/05</span>
+<span><span class="badge b-audience">Audience</span> <span class="acard-ref">A2+C5+AC5+R3+D2</span></span>
+</div>
+<div class="post-text">J'ai 96 projets dans mes dossiers.
+Et z&eacute;ro client payant au nouveau tarif.
+
+---
+
+La v&eacute;rit&eacute; :
+J'ai pass&eacute; des mois &agrave; construire l'infrastructure parfaite.
+
+Le portfolio. Les CGV. Le pricing. Le one-pager.
+La page d'offres. Les automatisations. Les emails.
+Le blog. Le SEO. Les analytics.
+
+Tout est pr&ecirc;t.
+Sauf la seule chose qui compte : un client qui paye.
+
+---
+
+Si je ne change rien :
+&rarr; Dans 3 mois, j'ai un site parfait et un compte en banque vide
+&rarr; Mon portfolio impressionne mais personne ne le voit
+&rarr; Mes comp&eacute;tences rouillent parce que je ne livre pas
+
+---
+
+Ce que j'ai d&eacute;cid&eacute; de changer :
+
+1. Arr&ecirc;ter d'optimiser ce qui marche d&eacute;j&agrave;
+2. Identifier 30 entreprises concr&egrave;tes dans le Tarn
+3. &Eacute;crire un message personnalis&eacute; pour chacune
+4. Contacter une par une. Pas de mass mailing.
+5. Poster sur LinkedIn 3 fois par semaine
+
+Pas de hack magique. Du travail direct.
+
+---
+
+T'as d&eacute;j&agrave; v&eacute;cu &ccedil;a ? Tout pr&eacute;parer et gal&eacute;rer &agrave; lancer la machine ?
+
+#freelance #entrepreneuriat #transparence #Albi #ind&eacute;pendant</div>
+</div>
+
+<!-- POST 10 -->
+<div class="post-block">
+<div class="post-header">
+<span class="post-title">POST 10 &mdash; Sam 09/05</span>
+<span><span class="badge b-leads">Leads</span> <span class="acard-ref">A9+C3+AC2+R1+D6</span></span>
+</div>
+<div class="post-text">&laquo; Automatiser, &ccedil;a veut dire d&eacute;shumaniser. &raquo;
+
+C'est l'inverse.
+
+---
+
+Un g&eacute;rant de PME dans le b&acirc;timent. 15 salari&eacute;s.
+
+Son probl&egrave;me : il passait ses soir&eacute;es &agrave; envoyer des devis.
+Ses week-ends &agrave; relancer les clients.
+Ses matin&eacute;es &agrave; r&eacute;pondre aux m&ecirc;mes questions par t&eacute;l&eacute;phone.
+
+Il n'avait plus de temps pour ses chantiers.
+Plus de temps pour ses &eacute;quipes.
+Plus de temps pour sa famille.
+
+C'est &ccedil;a, la d&eacute;shumanisation. Pas l'automatisation.
+
+---
+
+Ce qu'on a automatis&eacute; :
+&rarr; Les devis partent automatiquement depuis un formulaire web
+&rarr; Les relances se font par SMS &agrave; J+3, J+7, J+14
+&rarr; Les questions fr&eacute;quentes sont trait&eacute;es par un chatbot 24/7
+
+Ce qui est rest&eacute; humain :
+&rarr; L'appel de qualification avec le client
+&rarr; La visite technique sur site
+&rarr; La n&eacute;gociation et la signature
+
+---
+
+R&eacute;sultat : 12h/semaine r&eacute;cup&eacute;r&eacute;es.
+Il rentre chez lui &agrave; 18h30 au lieu de 21h.
+
+&Ccedil;a, c'est humaniser.
+
+&rarr; Diagnostic gratuit en commentaire
+
+#automatisation #BTP #PME #IA #artisans</div>
+<div class="post-comment"><strong>1er commentaire :</strong> Tu veux savoir ce qui peut &ecirc;tre automatis&eacute; chez toi ? Diagnostic gratuit 2 min &rarr; aissabelkoussa.fr/diagnostic</div>
+</div>
+
+<!-- POST 11 -->
+<div class="post-block">
+<div class="post-header">
+<span class="post-title">POST 11 &mdash; Mar 12/05</span>
+<span><span class="badge b-audience">Audience</span> <span class="acard-ref">A4+C1+AC5+R6+D1</span></span>
+</div>
+<div class="post-text">&laquo; Il faut automatiser avec Zapier. &raquo;
+&laquo; Non, Make c'est mieux. &raquo;
+&laquo; Non, n8n c'est gratuit et open-source. &raquo;
+
+J'ai test&eacute; les 3.
+Sur le m&ecirc;me process.
+Voil&agrave; ce que j'en pense.
+
+---
+
+Le test : automatiser l'envoi d'un email de bienvenue + ajout dans un CRM + notification Slack quand un prospect remplit un formulaire.
+
+Zapier :
+&rarr; En place en 10 min. Interface claire.
+&rarr; Mais : limit&eacute; &agrave; 100 t&acirc;ches/mois en gratuit. &Ccedil;a monte vite en prix.
+&rarr; Verdict : parfait pour tester. Cher pour scaler.
+
+Make :
+&rarr; Plus puissant que Zapier. Sc&eacute;narios visuels.
+&rarr; Mais : courbe d'apprentissage plus raide.
+&rarr; Verdict : bon rapport puissance/prix pour les PME.
+
+n8n :
+&rarr; Open-source. Self-hosted. Aucune limite de t&acirc;ches.
+&rarr; Mais : il faut savoir le d&eacute;ployer. Pas de support client.
+&rarr; Verdict : le meilleur si tu as un d&eacute;veloppeur. Sinon, fuis.
+
+---
+
+Mon choix pour les PME/artisans : Make pour commencer, n8n quand le volume grossit.
+
+---
+
+Tu utilises un de ces outils ? Lequel et pourquoi ?
+
+#automatisation #n8n #Make #Zapier #nocode</div>
+</div>
+
+<!-- POST 12 -->
+<div class="post-block">
+<div class="post-header">
+<span class="post-title">POST 12 &mdash; Jeu 14/05</span>
+<span><span class="badge b-blog">Blog</span> <span class="acard-ref">A6+C5+AC5+R5+D3</span></span>
+</div>
+<div class="post-text">&laquo; Il faut &ecirc;tre premier sur Google. &raquo;
+
+En 2026, &ccedil;a ne suffit plus.
+
+---
+
+Tes clients ne cherchent plus seulement sur Google.
+Ils demandent &agrave; ChatGPT.
+Ils demandent &agrave; Perplexity.
+Ils demandent &agrave; Gemini.
+
+&laquo; Trouve-moi un plombier fiable &agrave; Albi. &raquo;
+&laquo; Quel outil pour automatiser mes devis ? &raquo;
+&laquo; Compare les agences web pour artisans dans le Tarn. &raquo;
+
+Si ton nom n'appara&icirc;t pas dans ces r&eacute;ponses, tu es invisible pour toute une g&eacute;n&eacute;ration de d&eacute;cideurs.
+
+---
+
+SEO = optimiser pour Google (les liens bleus)
+GEO = optimiser pour les r&eacute;ponses IA (les r&eacute;ponses g&eacute;n&eacute;r&eacute;es)
+
+Les deux comptent. Mais la plupart des PME ne connaissent m&ecirc;me pas le GEO.
+
+---
+
+5 actions concr&egrave;tes pour appara&icirc;tre dans les r&eacute;ponses IA :
+
+1. Avoir un site structur&eacute; avec des donn&eacute;es claires (prix, services, zone)
+2. &Ecirc;tre cit&eacute; sur d'autres sites (annuaires pro, articles, partenaires)
+3. Avoir du contenu qui r&eacute;pond &agrave; des questions pr&eacute;cises
+4. Mettre &agrave; jour sa fiche Google Business r&eacute;guli&egrave;rement
+5. Publier du contenu expert (blog, LinkedIn) sur ses sujets
+
+---
+
+J'ai &eacute;crit un comparatif complet SEO vs GEO avec les strat&eacute;gies d&eacute;taill&eacute;es.
+
+&rarr; Lien en commentaire
+
+#SEO #GEO #IA #visibilit&eacute; #PME</div>
+<div class="post-comment"><strong>1er commentaire :</strong> L'article complet SEO vs GEO &rarr; [lien article seo-vs-geo-visibilite-ia-2026]</div>
+</div>
+
+<!-- POST 13 -->
+<div class="post-block">
+<div class="post-header">
+<span class="post-title">POST 13 &mdash; Sam 16/05</span>
+<span><span class="badge b-leads">Leads</span> <span class="acard-ref">A3+C3+AC1+R2+D5</span></span>
+</div>
+<div class="post-text">Un restaurateur passe 45 minutes par jour &agrave; g&eacute;rer les r&eacute;servations par t&eacute;l&eacute;phone.
+
+Pendant le service.
+
+Le cuisinier attend une validation.
+Le serveur d&eacute;croche entre deux tables.
+Le client en face attend pendant que le client au t&eacute;l&eacute;phone h&eacute;site entre vendredi et samedi.
+
+45 minutes/jour &times; 6 jours = 4h30/semaine.
+234 heures/an. Perdues &agrave; dire &laquo; oui on a de la place vendredi &agrave; 20h. &raquo;
+
+---
+
+Ce qu'on a mis en place :
+&rarr; R&eacute;servation en ligne sur le site (widget int&eacute;gr&eacute;)
+&rarr; Confirmation automatique par SMS
+&rarr; Rappel J-1 automatique (r&eacute;duit les no-shows de 40%)
+&rarr; Chatbot qui r&eacute;pond aux questions fr&eacute;quentes (horaires, menu, allerg&egrave;nes)
+
+Le t&eacute;l&eacute;phone sonne encore. Mais seulement pour les vraies questions.
+
+---
+
+Livr&eacute; en 6 jours. Co&ucirc;t : une fraction de ce que les no-shows co&ucirc;taient chaque mois.
+
+---
+
+Si tu g&egrave;res un restaurant, un salon, un cabinet &mdash; tout business avec des RDV :
+
+&Eacute;cris-moi en DM. 15 min pour voir ce qu'on peut automatiser chez toi.
+
+#restaurant #automatisation #r&eacute;servation #PME #IA</div>
+</div>
+
+<!-- POST 14 -->
+<div class="post-block">
+<div class="post-header">
+<span class="post-title">POST 14 &mdash; Sam 23/05</span>
+<span><span class="badge b-leads">Leads</span> <span class="acard-ref">A8+C1+AC5+R3+D6</span></span>
+</div>
+<div class="post-text">&laquo; Freelance d&eacute;veloppeur IA &agrave; Albi. &raquo;
+
+Quand je dis &ccedil;a, les gens entendent :
+&rarr; Un geek dans sa chambre
+&rarr; Des robots qui remplacent les emplois
+&rarr; Un truc qui ne concerne pas les PME
+
+La r&eacute;alit&eacute; de mes 6 derniers mois :
+
+---
+
+Ce que je fais vraiment :
+&rarr; Je construis des sites web qui rapportent des clients aux artisans
+&rarr; J'automatise les t&acirc;ches r&eacute;p&eacute;titives pour que les g&eacute;rants rentrent chez eux plus t&ocirc;t
+&rarr; Je cr&eacute;e des dashboards pour que les dirigeants voient leurs chiffres en temps r&eacute;el
+
+Mes clients ne sont pas des startups de la Silicon Valley.
+Ce sont des entreprises de 3 &agrave; 50 salari&eacute;s. Dans le BTP. L'&eacute;v&eacute;nementiel. Le B2B.
+
+---
+
+Ce que j'ai appris en 6 mois :
+
+1. Les PME n'ont pas besoin d'IA. Elles ont besoin de syst&egrave;mes qui marchent.
+2. &laquo; Livr&eacute; en 10 jours &raquo; est plus convaincant que n'importe quelle techno
+3. Le bouche-&agrave;-oreille bat tous les tunnels de vente
+4. Montrer un r&eacute;sultat concret &gt; expliquer une technologie
+5. Albi est petit, mais les PME du Tarn ont les m&ecirc;mes probl&egrave;mes que partout
+
+---
+
+Si tu veux voir concr&egrave;tement ce que &ccedil;a donne &rarr; aissabelkoussa.fr
+
+Diagnostic gratuit en commentaire.
+
+#freelance #IA #Albi #PME #ind&eacute;pendant</div>
+<div class="post-comment"><strong>1er commentaire :</strong> Diagnostic gratuit 2 min &rarr; aissabelkoussa.fr/diagnostic</div>
+</div>
+
+<!-- POST 15 -->
+<div class="post-block">
+<div class="post-header">
+<span class="post-title">POST 15 &mdash; Sam 06/06</span>
+<span><span class="badge b-leads">Leads</span> <span class="acard-ref">A2+C6+AC1+R2+D6</span></span>
+</div>
+<div class="post-text">Tu payes un site web.
+Tu payes un comptable.
+Tu payes un t&eacute;l&eacute;phone pro.
+
+Mais est-ce que ces outils travaillent ensemble ?
+
+---
+
+Ce que je vois chez 90% des PME que je rencontre :
+&rarr; Le site ne g&eacute;n&egrave;re aucun lead
+&rarr; Les devis sont envoy&eacute;s &agrave; la main depuis Gmail
+&rarr; Les relances n'existent pas
+&rarr; Le g&eacute;rant d&eacute;couvre ses chiffres quand le comptable les envoie. Tous les 3 mois.
+
+Chaque mois qui passe comme &ccedil;a :
+&rarr; Des prospects perdus parce que personne n'a r&eacute;pondu &agrave; temps
+&rarr; Des heures gaspill&eacute;es sur des t&acirc;ches qu'un syst&egrave;me fait en 5 secondes
+&rarr; Des d&eacute;cisions prises &agrave; l'aveugle
+
+---
+
+Je construis 3 types de syst&egrave;mes :
+
+1. Sites qui convertissent &mdash; pas des vitrines, des machines &agrave; devis
+2. Automatisations &mdash; devis, relances, notifications, tout ce qui est r&eacute;p&eacute;titif
+3. Dashboards &mdash; tes vrais chiffres, en temps r&eacute;el, sur ton t&eacute;l&eacute;phone
+
+Le tout livr&eacute; en 5 &agrave; 10 jours. Prix fixe. Z&eacute;ro surprise.
+
+---
+
+&rarr; Diagnostic gratuit en commentaire &mdash; 2 min pour savoir ce qui te manque.
+
+#PME #digital #automatisation #BTP #artisans</div>
+<div class="post-comment"><strong>1er commentaire :</strong> Fais le diagnostic &rarr; aissabelkoussa.fr/diagnostic</div>
+</div>
+
+<!-- ================================================================ -->
+<h2>6. R&egrave;gles de publication</h2>
+
+<ol>
+<li><strong>1 post tous les 2-3 jours</strong> (Ma/Je/Sa) &mdash; r&eacute;gularit&eacute; &gt; fr&eacute;quence</li>
+<li><strong>Commenter 5-10 posts d'autres personnes AVANT de publier</strong> &mdash; boost la visibilit&eacute;</li>
+<li><strong>Horaire optimal</strong> : 8h00-8h30 ou 17h00-17h30</li>
+<li><strong>Lien en 1er commentaire</strong>, jamais dans le corps du post &mdash; LinkedIn p&eacute;nalise les liens</li>
+<li><strong>R&eacute;pondre &agrave; CHAQUE commentaire</strong> dans l'heure</li>
+<li><strong>Ne jamais supprimer un post qui ne performe pas</strong> &mdash; laisser tourner 48h minimum</li>
+<li><strong>Hashtags</strong> : 3-5 par post, mix niche (#BTP, #artisans) + large (#PME, #digital)</li>
+</ol>
+
+<!-- ================================================================ -->
+<h2>7. M&eacute;triques de suivi</h2>
+
+<table>
+<thead><tr><th>M&eacute;trique</th><th>Objectif S1-4</th><th>Objectif S5-8</th></tr></thead>
+<tbody>
+<tr><td>Impressions/post</td><td>200-500</td><td>500-2 000</td></tr>
+<tr><td>Engagement rate</td><td>3-5%</td><td>5-8%</td></tr>
+<tr><td>Nouvelles connexions/semaine</td><td>15-25</td><td>25-50</td></tr>
+<tr><td>DM re&ccedil;us/semaine</td><td>1-2</td><td>3-5</td></tr>
+<tr><td>Clics vers site/semaine</td><td>5-10</td><td>15-30</td></tr>
+<tr><td>RDV book&eacute;s/mois</td><td>1-2</td><td>3-5</td></tr>
+</tbody>
+</table>
+
+<!-- ================================================================ -->
+<h2>8. Livrables</h2>
+
+<div class="alert alert-green">
+<strong>Tout est complet :</strong> Matrice ACARD (9+6+6+6+6 variantes) &bull; Calendrier 30 posts &bull; 15 posts r&eacute;dig&eacute;s &bull; Mapping articles blog &bull; R&egrave;gles de publication &bull; M&eacute;triques de suivi.
+</div>
+
+</div>
+</body>
+</html>

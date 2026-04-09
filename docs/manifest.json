@@ -18,6 +18,7 @@
   "linkedin/linkedin-copier-coller.html",
   "linkedin/linkedin-banner.html",
   "linkedin/linkedin-photo-profil.html",
+  "linkedin/linkedin-acard-30-posts.html",
   "commercial/one-pager-offres.html",
   "commercial/modele-devis.html",
   "commercial/modele-facture.html",
@@ -34,5 +35,8 @@
   "technique/seo-geo.html",
   "technique/infrastructure.html",
   "sessions/2026-03-25_portfolio-refonte-complete.html",
-  "superpowers/specs/2026-04-09-sprint-contenu-business-design.html"
+  "superpowers/specs/2026-04-09-sprint-contenu-business-design.html",
+  "superpowers/specs/2026-04-09-linkedin-acard-30-posts-design.html",
+  "superpowers/specs/2026-04-09-systeme-linkedin-3-couches-design.html",
+  "superpowers/specs/2026-04-09-methode-cds-suivi-prospection-design.html"
 ]

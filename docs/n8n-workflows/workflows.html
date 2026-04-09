@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Workflows n8n — Automatisation business</title>
+<style>:root{--fg:#1a1a1a;--muted:#737373;--border:#e5e5e5;--accent:#2563eb;--bg:#fafafa}*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}body{font-family:"Geist","Inter",system-ui,-apple-system,sans-serif;color:var(--fg);background:var(--bg);line-height:1.7;padding:2rem 1rem}.container{max-width:860px;margin:0 auto}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}.back{display:inline-block;margin-bottom:2rem;font-size:.875rem;color:var(--muted)}.back:hover{color:var(--accent)}h1{font-size:1.75rem;font-weight:700;margin-bottom:.5rem;line-height:1.3}h2{font-size:1.375rem;font-weight:700;margin-top:2.5rem;margin-bottom:.75rem;padding-bottom:.375rem;border-bottom:1px solid var(--border)}h3{font-size:1.125rem;font-weight:600;margin-top:1.75rem;margin-bottom:.5rem}h4{font-size:1rem;font-weight:600;margin-top:1.5rem;margin-bottom:.5rem}p{margin-bottom:1rem}ul,ol{margin-bottom:1rem;padding-left:1.5rem}li{margin-bottom:.375rem}li>ul,li>ol{margin-top:.375rem;margin-bottom:0}blockquote{border-left:3px solid var(--accent);padding:.75rem 1rem;margin-bottom:1rem;background:#f5f5f5;color:var(--muted);font-style:italic}blockquote p:last-child{margin-bottom:0}strong{font-weight:600}code{font-family:"Geist Mono","Fira Code",monospace;background:#f0f0f0;padding:.125rem .375rem;border-radius:3px;font-size:.875em}pre{background:#1a1a1a;color:#e5e5e5;padding:1rem;border-radius:6px;overflow-x:auto;margin-bottom:1rem;font-size:.8125rem;line-height:1.6}pre code{background:none;padding:0;color:inherit}hr{border:none;border-top:1px solid var(--border);margin:2rem 0}table{width:100%;border-collapse:collapse;margin-bottom:1.5rem;font-size:.875rem}th,td{padding:.5rem .75rem;border:1px solid var(--border);text-align:left}th{background:#f0f0f0;font-weight:600}tr:nth-child(even){background:#f9f9f9}.check{color:#16a34a}.uncheck{color:var(--muted)}@media(max-width:600px){body{padding:1rem .75rem}h1{font-size:1.375rem}h2{font-size:1.1875rem}table{font-size:.8125rem}th,td{padding:.375rem .5rem}pre{font-size:.75rem}}</style>
+</head>
+<body>
+<div class="container">
+<a href="../index.html" class="back">&larr; Retour a l'index</a>
+<h1>Workflows n8n — Automatisation business</h1>
+<h2>Vue d'ensemble</h2>
+<pre><code>LEAD ARRIVE (formulaire / diagnostic / WhatsApp)
+        |
+        v
+  +-------------+
+  |  WEBHOOK     | &lt;- Resend webhook ou API contact
+  |  n8n         |
+  +------+------+
+         |
+    +----+----+
+    v         v
+  CHAUD     TIEDE/FROID
+    |         |
+    v         v
+  Notif     Email auto
+  WhatsApp  sequence
+  immediate nurturing
+    |
+    v
+  Notion/Airtable
+  Pipeline CRM</code></pre>
+<h2>Workflows a creer</h2>
+<h3>1. <code>lead-intake.json</code> — Reception et scoring</h3>
+<ul><li><strong>Trigger</strong> : Webhook (POST depuis l'API contact Next.js)</li><li><strong>Actions</strong> : Parser le payload, creer entree Notion/Airtable, notification WhatsApp si CHAUD, email nurturing si TIEDE/FROID</li></ul>
+<h3>2. <code>sequence-nurturing.json</code> — Sequence email automatique</h3>
+<ul><li><strong>Trigger</strong> : Cron quotidien</li><li>J+1 : Email "Votre diagnostic"</li><li>J+3 : Email "3 questions pour cadrer votre projet"</li><li>J+7 : Email "Etude de cas : plombier +10h/semaine"</li><li>J+14 : Email "Derniere chance — creneau disponible"</li></ul>
+<h3>3. <code>maintenance-transition.json</code> — Transition mois 3</h3>
+<ul><li><strong>Trigger</strong> : Cron (clients dont la periode se termine dans 15 jours)</li><li>Envoyer template avec metriques, planifier appel, relance WhatsApp si pas de reponse</li></ul>
+<h3>4. <code>monthly-report.json</code> — Rapport mensuel</h3>
+<ul><li><strong>Trigger</strong> : Cron (1er de chaque mois)</li><li>Fetcher metriques Vercel/UptimeRobot, generer rapport, envoyer aux clients actifs</li></ul>
+<h3>5. <code>whatsapp-notif.json</code> — Notification lead chaud</h3>
+<ul><li><strong>Trigger</strong> : Appele par <code>lead-intake</code> quand score >= 55</li><li>Message WhatsApp + rappel calendrier</li></ul>
+<h2>Stack technique recommandee</h2>
+<ul><li><strong>n8n</strong> : self-hosted ou cloud</li><li><strong>Resend</strong> : emails transactionnels (deja configure)</li><li><strong>Notion/Airtable</strong> : CRM pipeline</li><li><strong>UptimeRobot</strong> : monitoring uptime (gratuit)</li><li><strong>WhatsApp Business API</strong> : ou Twilio</li></ul>
+<h2>Variables d'environnement n8n</h2>
+<pre><code>RESEND_API_KEY=re_xxx
+NOTION_API_KEY=ntn_xxx
+WHATSAPP_PHONE=33782721406
+SITE_URL=https://www.aissabelkoussa.fr
+BACKEND_URL=https://portfolio-api-72tq.onrender.com</code></pre>
+</div>
+</body>
+</html>

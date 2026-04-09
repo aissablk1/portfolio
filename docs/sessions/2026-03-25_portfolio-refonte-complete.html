@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="doc-category" content="Sessions">
+<meta name="doc-title" content="25 mars — Refonte complete portfolio">
+<meta name="doc-color" content="#475569">
+<title>Session 25 mars 2026 — Refonte complete du portfolio</title>
+<style>
+:root{--fg:#1a1a1a;--muted:#737373;--border:#e5e5e5;--accent:#2563eb;--bg:#fafafa}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Geist','Inter',system-ui,-apple-system,sans-serif;color:var(--fg);background:var(--bg);line-height:1.7;padding:2rem 1rem}
+.container{max-width:860px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.back{display:inline-block;margin-bottom:2rem;font-size:.875rem;color:var(--muted)}
+.back:hover{color:var(--accent)}
+h1{font-size:1.75rem;font-weight:700;margin-bottom:.5rem;line-height:1.3}
+h2{font-size:1.375rem;font-weight:700;margin-top:2.5rem;margin-bottom:.75rem;padding-bottom:.375rem;border-bottom:1px solid var(--border)}
+h3{font-size:1.125rem;font-weight:600;margin-top:1.75rem;margin-bottom:.5rem}
+p{margin-bottom:1rem}
+ul,ol{margin-bottom:1rem;padding-left:1.5rem}
+li{margin-bottom:.375rem}
+li>ul,li>ol{margin-top:.375rem;margin-bottom:0}
+blockquote{border-left:3px solid var(--accent);padding:.75rem 1rem;margin-bottom:1rem;background:#f5f5f5;color:var(--muted);font-style:italic}
+blockquote p:last-child{margin-bottom:0}
+strong{font-weight:600}
+code{font-family:'Geist Mono','Fira Code',monospace;background:#f0f0f0;padding:.125rem .375rem;border-radius:3px;font-size:.875em}
+pre{background:#1a1a1a;color:#e5e5e5;padding:1rem;border-radius:6px;overflow-x:auto;margin-bottom:1rem;font-size:.8125rem;line-height:1.6}
+pre code{background:none;padding:0;color:inherit}
+hr{border:none;border-top:1px solid var(--border);margin:2rem 0}
+table{width:100%;border-collapse:collapse;margin-bottom:1.5rem;font-size:.875rem}
+th,td{padding:.5rem .75rem;border:1px solid var(--border);text-align:left}
+th{background:#f0f0f0;font-weight:600}
+tr:nth-child(even){background:#f9f9f9}
+.check{color:#16a34a}
+.uncheck{color:var(--muted)}
+@media(max-width:600px){body{padding:1rem .75rem}h1{font-size:1.375rem}h2{font-size:1.1875rem}table{font-size:.8125rem}th,td{padding:.375rem .5rem}}
+</style>
+</head>
+<body>
+<div class="container">
+<a href="../index.html" class="back">&larr; Retour a l'index</a>
+
+<h1>Session 25 mars 2026 — Refonte complete du portfolio</h1>
+
+<h2>Contexte</h2>
+<p>Le portfolio (aissabelkoussa.fr) etait en etat "preliminaire" : faux projets, liens morts, formulaire non fonctionnel, zero SEO/GEO, pas de meta OG. Cette session a tout corrige et pousse le site en etat production-ready.</p>
+
+<hr>
+
+<h2>1. Projets — Remplacement du contenu fictif</h2>
+<p><strong>Fichier :</strong> <code>src/components/LanguageContext.tsx</code></p>
+<p>Les deux faux projets (NEXUS CORE, QUANTUM FLOW) ont ete remplaces par des projets reels. DK BUILDING avait une description erronee ("Real Estate Ecosystem" au lieu de construction metallique).</p>
+
+<h3>Projets integres (FR + EN)</h3>
+<table>
+<thead><tr><th>Projet</th><th>Tagline</th><th>Stack</th></tr></thead>
+<tbody>
+<tr><td><strong>DK BUILDING</strong></td><td>Site corporate &amp; CMS sur-mesure — BTP, Albi</td><td>React 19, Node.js, Vercel, Turso DB, Cloudinary, GSAP</td></tr>
+<tr><td><strong>JOLANANAS</strong></td><td>Storefront e-commerce premium — Mode artisanale francaise</td><td>Next.js, TypeScript, Shopify GraphQL, Prisma, PostgreSQL, Framer Motion</td></tr>
+<tr><td><strong>ALBI RP</strong></td><td>Ecosysteme jeu + bot + site — Roblox RP francophone</td><td>Lua/Luau, TypeScript, Discord.js, Vercel, Tailwind, Zod</td></tr>
+</tbody>
+</table>
+
+<h3>Donnees des projets (recherchees depuis les repos)</h3>
+<ul>
+<li><strong>DK BUILDING</strong> : Monorepo React 19 + Node.js/Express, 50 composants, 7 routes API, JWT sha512, Turso DB, Cloudinary, Resend. Deploye sur dkbuilding.fr</li>
+<li><strong>JOLANANAS</strong> : Next.js 16 + Shopify Storefront API GraphQL, 380+ fichiers TS, 80+ composants, 26+ pages. Deploye sur jolananas.vercel.app</li>
+<li><strong>ALBI RP</strong> : Jeu Roblox (222 fichiers Lua) + Bot Discord (11 packages TS) + Site landing + API. 401 MB code + assets, 10+ langues</li>
+</ul>
+
+<p><strong>Fichier :</strong> <code>src/components/sections/Systems.tsx</code> — Ajout de l'affichage des stack tags en pills sous chaque card projet + champ <code>stack: string[]</code> au type Dictionary</p>
+
+<hr>
+
+<h2>2. Footer — Nettoyage</h2>
+<p><strong>Fichier :</strong> <code>src/components/Footer.tsx</code></p>
+<ul>
+<li>"Version preliminaire" retiree (bloc supprime)</li>
+<li>Liens sociaux mis a jour avec les vraies URLs :
+  <ul>
+    <li>LinkedIn : linkedin.com/in/aissabelkoussa</li>
+    <li>GitHub : github.com/aissablk1</li>
+    <li>Telegram : t.me/investwithaissa</li>
+  </ul>
+</li>
+<li><code>target="_blank" rel="noopener noreferrer"</code> ajoute sur tous les liens externes</li>
+</ul>
+
+<hr>
+
+<h2>3. SEO — Metadata &amp; Open Graph</h2>
+<p><strong>Fichier :</strong> <code>src/app/layout.tsx</code></p>
+<ul>
+<li>Metadata complete : title template, description, keywords longue traine, authors, creator, publisher</li>
+<li>Open Graph : type, locale, siteName, images</li>
+<li>Twitter Card : summary_large_image</li>
+<li>Viewport : responsive + themeColor adaptatif dark/light</li>
+<li>robots : googleBot avec max-image-preview large, max-snippet -1</li>
+<li>3 schemas JSON-LD injectes (Person, Organization, WebSite) depuis la librairie</li>
+</ul>
+<p><strong>Note :</strong> L'image OG actuelle (AISSABELKOUSSA.png) est en portrait 1242x2208. Une image 1200x630 paysage est recommandee pour LinkedIn.</p>
+
+<hr>
+
+<h2>4. Schema.org — Librairie complete</h2>
+<p><strong>Fichier cree :</strong> <code>src/lib/schemas.ts</code></p>
+<p>Schemas disponibles :</p>
+<ul>
+<li><code>personSchema</code> — identite complete avec @id, sameAs, knowsAbout, adresse Albi</li>
+<li><code>organizationSchema</code> — ProfessionalService + LocalBusiness, taxID, OfferCatalog avec 3 services</li>
+<li><code>websiteSchema</code> — lie au Person via @id</li>
+<li><code>createProjectSchema()</code> — generateur pour les pages projets (CreativeWork)</li>
+<li><code>createBreadcrumbSchema()</code> — generateur de fil d'Ariane</li>
+<li><code>faqSchema</code> — 5 questions/reponses pre-redigees pour la future page FAQ</li>
+</ul>
+
+<hr>
+
+<h2>5. SEO Technique — Fichiers crees</h2>
+
+<h3><code>next.config.ts</code> (nouveau)</h3>
+<ul>
+<li>Security headers : X-Content-Type-Options, X-Frame-Options, Referrer-Policy, Permissions-Policy</li>
+<li>Image optimization : AVIF + WebP, deviceSizes, cache 1 an</li>
+<li><code>optimizeCss: true</code>, <code>optimizePackageImports</code> pour framer-motion et lucide</li>
+<li><code>poweredByHeader: false</code></li>
+</ul>
+
+<h3><code>src/app/robots.ts</code> (nouveau)</h3>
+<ul>
+<li>Autorise tous les crawlers + specifiquement GPTBot, Claude-Web, PerplexityBot, GoogleOther</li>
+<li>Pointe vers le sitemap</li>
+</ul>
+
+<h3><code>src/app/sitemap.ts</code> (nouveau)</h3>
+<ul>
+<li>5 URLs : home (1.0), contact (0.8), 3 projets (0.9)</li>
+<li><code>lastModified: new Date()</code> pour fraicheur</li>
+</ul>
+
+<hr>
+
+<h2>6. GEO — Generative Engine Optimization</h2>
+
+<h3><code>public/llms.txt</code> (nouveau)</h3>
+<p>Fiche d'identite pour les LLMs (ChatGPT, Perplexity, Claude) :</p>
+<ul>
+<li>Identite professionnelle</li>
+<li>Competences techniques verifiees (par categorie)</li>
+<li>3 projets avec contexte, probleme, solution, stack, metriques</li>
+<li>Services proposes</li>
+<li>Liens et contact</li>
+<li>Informations legales (SIREN, SIRET, NAF, TVA)</li>
+</ul>
+
+<hr>
+
+<h2>7. Formulaire de contact — Systeme complet</h2>
+
+<h3>Avant</h3>
+<ul>
+<li><code>handleSubmit</code> faisait juste <code>setIsSubmitted(true)</code> — aucun email envoye</li>
+<li>Pas de champ email — impossible de repondre au prospect</li>
+<li>Template hardcode en francais</li>
+</ul>
+
+<h3>Apres</h3>
+<p><strong>Fichier :</strong> <code>src/components/ContactForm.tsx</code></p>
+<ul>
+<li>Champ email ajoute (type email, validation regex)</li>
+<li>Honeypot anti-spam (champ invisible, bots le remplissent → rejet silencieux)</li>
+<li>Envoi reel via POST <code>/api/contact</code></li>
+<li>Loading state bilingue ("Envoi..." / "Sending...")</li>
+<li>Message d'erreur bilingue avec fallback LinkedIn</li>
+<li>Langue envoyee dans le payload</li>
+</ul>
+
+<p><strong>Fichier cree :</strong> <code>src/app/api/contact/route.ts</code></p>
+<ul>
+<li>Validation complete du payload (nom, email regex, message, budget, langue)</li>
+<li>Honeypot check — si rempli, renvoie <code>{ success: true }</code> sans envoyer</li>
+<li>Rate limiting in-memory : 3 requetes max par IP par 15 minutes → 429</li>
+<li><strong>Double email en parallele (Promise.all) :</strong>
+  <ol>
+    <li><strong>Email admin</strong> (theme dark) — nom, email cliquable, entreprise, besoin en badge, budget, message, timestamp, badge langue, bouton "Repondre maintenant" (mailto pre-rempli)</li>
+    <li><strong>Email confirmation prospect</strong> (theme light) — salutation personnalisee (prenom), recap de la demande, promesse 48h, signature avec liens site/LinkedIn/GitHub</li>
+  </ol>
+</li>
+<li>Labels entierement bilingues (FR/EN) via objet <code>labels</code></li>
+<li><code>reply_to</code> pointe vers l'email du prospect</li>
+<li>Utilise <code>fetch()</code> direct vers l'API Resend (pas de SDK, zero dependance supplementaire)</li>
+</ul>
+
+<h3>Configuration Resend</h3>
+<ul>
+<li><strong>Domaine verifie</strong> : aissabelkoussa.fr (DKIM via resend._domainkey TXT)</li>
+<li><strong>From</strong> : <code>Aissa Belkoussa &lt;contact@aissabelkoussa.fr&gt;</code></li>
+<li><strong>Cle API</strong> dans <code>.env.local</code> (gitignore)</li>
+</ul>
+
+<h3>DNS (OVHcloud) — Etat actuel</h3>
+<pre><code>A       aissabelkoussa.fr       → 216.198.79.1 (Vercel)
+MX      aissabelkoussa.fr       → mx01/mx02.mail.icloud.com (iCloud Mail)
+TXT     aissabelkoussa.fr       → apple-domain=VUJnQBRyJarxRmJD
+SPF     aissabelkoussa.fr       → v=spf1 include:icloud.com ~all
+TXT     resend._domainkey       → [DKIM Resend]
+CNAME   sig1._domainkey         → sig1.dkim.aissabelkoussa.fr.at.icloudmailadmin.com
+CNAME   www                     → f1f0ec239b0fc4a4.vercel-dns-017.com</code></pre>
+
+<p><strong>A FAIRE :</strong> Modifier le SPF dans OVHcloud : ajouter <code>include:amazonses.com</code></p>
+
+<hr>
+
+<h2>8. Packages installes</h2>
+<ul>
+<li><code>resend</code> — SDK Resend (non utilise directement, fetch() prefere)</li>
+<li><code>@react-email/components</code> — disponible pour futurs templates React Email</li>
+</ul>
+
+<hr>
+
+<h2>9. Espace disque</h2>
+<p>Le volume <code>/Volumes/Professionnel/</code> etait a 100% (32 Mo restants sur 122 Go). Actions prises :</p>
+<ul>
+<li>Suppression <code>.next/</code> (453 Mo liberes)</li>
+<li><code>pnpm store prune</code> (3.2 Go liberes — 175 000 fichiers, 3 882 packages)</li>
+<li>Suppression node_modules de 4 projets inactifs (remparq 1 Go, ParleCitoyen 2.9 Go, _backup 28 Mo, liquidgl-react 44 Mo)</li>
+<li>Execution de <code>clean.sh</code> sur <code>/Volumes/Professionnel/Projets/Developpement/Concepts/</code> (7.8 Go liberes)</li>
+</ul>
+
+<hr>
+
+<h2>10. Fichiers modifies / crees — Recapitulatif</h2>
+
+<h3>Modifies</h3>
+<table>
+<thead><tr><th>Fichier</th><th>Changement</th></tr></thead>
+<tbody>
+<tr><td><code>src/components/LanguageContext.tsx</code></td><td>3 vrais projets + stack + champ email dans Dictionary</td></tr>
+<tr><td><code>src/components/sections/Systems.tsx</code></td><td>Stack tags en pills</td></tr>
+<tr><td><code>src/components/Footer.tsx</code></td><td>Liens sociaux reels, "Version preliminaire" retiree</td></tr>
+<tr><td><code>src/components/ContactForm.tsx</code></td><td>Champ email, honeypot, POST reel, bilingue, loading/error</td></tr>
+<tr><td><code>src/app/layout.tsx</code></td><td>Metadata complete, viewport, OG, Twitter, JSON-LD schemas</td></tr>
+</tbody>
+</table>
+
+<h3>Crees</h3>
+<table>
+<thead><tr><th>Fichier</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td><code>next.config.ts</code></td><td>Security headers, image optimization, compression</td></tr>
+<tr><td><code>src/lib/schemas.ts</code></td><td>Person, Organization, WebSite, FAQ, Project, Breadcrumb schemas</td></tr>
+<tr><td><code>src/app/robots.ts</code></td><td>Crawlers + bots IA autorises</td></tr>
+<tr><td><code>src/app/sitemap.ts</code></td><td>5 URLs avec priorites</td></tr>
+<tr><td><code>src/app/api/contact/route.ts</code></td><td>API contact : validation, rate limit, honeypot, double email bilingue</td></tr>
+<tr><td><code>public/llms.txt</code></td><td>Fiche GEO pour LLMs</td></tr>
+<tr><td><code>.env.local</code></td><td>Cle API Resend (gitignore)</td></tr>
+</tbody>
+</table>
+
+<hr>
+
+<h2>11. A faire — Prochaines actions</h2>
+
+<h3>Immediat</h3>
+<ul>
+<li><span class="uncheck">&#9744;</span> Modifier SPF dans OVHcloud : ajouter <code>include:amazonses.com</code></li>
+<li><span class="uncheck">&#9744;</span> Ajouter <code>RESEND_API_KEY</code> dans les variables d'environnement Vercel</li>
+<li><span class="uncheck">&#9744;</span> Creer une image OG 1200x630 (fond dark + nom + tagline)</li>
+<li><span class="uncheck">&#9744;</span> Commit + push → deploiement Vercel automatique</li>
+</ul>
+
+<h3>Semaine 1</h3>
+<ul>
+<li><span class="uncheck">&#9744;</span> Brancher Google Search Console + soumettre sitemap</li>
+<li><span class="uncheck">&#9744;</span> Brancher GA4 avec evenements conversion (formulaire contact)</li>
+<li><span class="uncheck">&#9744;</span> Optimiser profil LinkedIn (bio, banniere, URL perso)</li>
+<li><span class="uncheck">&#9744;</span> 1er post LinkedIn sur DK Building</li>
+</ul>
+
+<h3>Semaine 2-3</h3>
+<ul>
+<li><span class="uncheck">&#9744;</span> Creer page <code>/faq</code> avec schema FAQPage (deja pret dans schemas.ts)</li>
+<li><span class="uncheck">&#9744;</span> Retirer domaines morts dans iCloud Mail (aissabelkoussa.com, creativeaissa.com)</li>
+<li><span class="uncheck">&#9744;</span> Finaliser iCloud Mail pour aissabelkoussa.fr</li>
+<li><span class="uncheck">&#9744;</span> Articles blog : cas DK Building, Shopify/Next.js</li>
+</ul>
+
+<h3>Mois 2+</h3>
+<ul>
+<li><span class="uncheck">&#9744;</span> Google Business Profile (Albi)</li>
+<li><span class="uncheck">&#9744;</span> Profils Malt, Dev.to, Hashnode</li>
+<li><span class="uncheck">&#9744;</span> Page <code>/services</code> avec schemas Service</li>
+</ul>
+
+</div>
+</body>
+</html>

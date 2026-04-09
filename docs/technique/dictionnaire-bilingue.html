@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="doc-category" content="Technique">
+  <meta name="doc-title" content="Dictionnaire bilingue FR/EN">
+  <meta name="doc-color" content="#64748b">
+  <title>Dictionnaire bilingue (LanguageContext) — Aïssa Belkoussa</title>
+  <style>
+    :root {
+      --fg: #1a1a1a;
+      --muted: #737373;
+      --border: #e5e5e5;
+      --accent: #2563eb;
+      --bg: #fafafa;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: #fff;
+      color: var(--fg);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      font-size: .875rem;
+      color: var(--muted);
+      text-decoration: none;
+      margin-bottom: 2rem;
+      transition: color .2s;
+    }
+    .back-link:hover { color: var(--accent); }
+    .back-link svg { width: 16px; height: 16px; }
+
+    h1 { font-size: 2rem; font-weight: 700; letter-spacing: -.02em; margin-bottom: .5rem; line-height: 1.25; }
+    h2 { font-size: 1.45rem; font-weight: 650; margin-top: 2.5rem; margin-bottom: .75rem; letter-spacing: -.01em; padding-bottom: .4rem; border-bottom: 1px solid var(--border); }
+    h3 { font-size: 1.15rem; font-weight: 600; margin-top: 2rem; margin-bottom: .5rem; }
+    h4 { font-size: 1.05rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: .4rem; }
+    h5 { font-size: .95rem; font-weight: 600; margin-top: 1.25rem; margin-bottom: .35rem; }
+    h6 { font-size: .875rem; font-weight: 600; margin-top: 1rem; margin-bottom: .3rem; color: var(--muted); }
+
+    p { margin-bottom: 1rem; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    strong { font-weight: 600; }
+    em { font-style: italic; }
+
+    blockquote {
+      border-left: 3px solid var(--accent);
+      padding: .75rem 1rem;
+      margin: 1.25rem 0;
+      background: var(--bg);
+      border-radius: 0 6px 6px 0;
+      color: var(--muted);
+    }
+    blockquote p { margin-bottom: .4rem; }
+    blockquote p:last-child { margin-bottom: 0; }
+
+    ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+    li { margin-bottom: .35rem; }
+    li::marker { color: var(--muted); }
+
+    hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+
+    code {
+      font-family: 'Geist Mono', 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, monospace;
+      font-size: .875em;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: .15em .35em;
+    }
+    pre {
+      background: #1a1a1a;
+      color: #e5e5e5;
+      padding: 1.25rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 1.25rem 0;
+      font-size: .85rem;
+      line-height: 1.6;
+    }
+    pre code {
+      background: none;
+      border: none;
+      padding: 0;
+      color: inherit;
+      font-size: inherit;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin: 1.25rem 0;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .9rem;
+    }
+    th, td {
+      text-align: left;
+      padding: .65rem .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    th {
+      background: var(--bg);
+      font-weight: 600;
+      font-size: .8rem;
+      text-transform: uppercase;
+      letter-spacing: .03em;
+      color: var(--muted);
+    }
+    tbody tr:nth-child(even) { background: var(--bg); }
+    tbody tr:last-child td { border-bottom: none; }
+
+    @media (max-width: 640px) {
+      .container { padding: 1.25rem 1rem 3rem; }
+      h1 { font-size: 1.6rem; }
+      h2 { font-size: 1.25rem; }
+      table { font-size: .8rem; }
+      th, td { padding: .5rem .6rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="../index.html" class="back-link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+      Retour a l'index
+    </a>
+<h1 id="dictionnaire-bilingue-languagecontext">Dictionnaire bilingue (LanguageContext)</h1>
+<h2 id="vue-densemble">Vue d'ensemble</h2>
+<p>Systeme i18n maison base sur React Context. Tout le contenu textuel du site est centralise dans un dictionnaire FR/EN type-safe.</p>
+<p><strong>Fichier :</strong> <code>src/components/LanguageContext.tsx</code></p>
+<hr>
+<h2 id="architecture">Architecture</h2>
+<h3 id="languageprovider">LanguageProvider</h3>
+<p>Composant wrapper qui fournit le contexte langue a toute l'application.</p>
+<ul>
+<li>Stocke la langue courante dans <code>useState</code></li>
+<li>Persiste le choix dans <code>localStorage</code> (cle : <code>lang</code>)</li>
+<li>Charge la preference au montage via <code>useEffect</code></li>
+</ul>
+<h3 id="uselanguage">useLanguage()</h3>
+<p>Hook qui expose :</p>
+<ul>
+<li><code>language</code> : <code>"fr" | "en"</code> — langue active</li>
+<li><code>setLanguage(lang)</code> : change la langue + persiste dans localStorage</li>
+<li><code>dict</code> : l'objet dictionnaire complet pour la langue active</li>
+</ul>
+<hr>
+<h2 id="structure-du-dictionnaire-type-dictionary">Structure du dictionnaire (type Dictionary)</h2>
+<pre><code>warning          → banniere d'alerte phishing
+nav              → labels de navigation (6 liens)
+hero             → titre, sous-titre, 2 CTAs
+offers           → titre section + 3 piliers (titre + description)
+approach         → titre, intro, bio, subtitle, 4 piliers (titre + contenu)
+expertises       → titre + 8 items (titre, description, microcopy)
+systems          → titre, intro + 3 items projet (id, slug, title, sub, desc, color, stack[])
+about            → contenu bio + localisation
+contact          → titre, sous-titre, CTA
+footer           → jobTitle, industry, systemsStrategy, title, baseline, credits, reserved, legal links
+funnel           → formulaire multi-etapes :
+  steps.identity → title, nameLabel, namePlaceholder, emailLabel, emailPlaceholder, contextLabel, contextPlaceholder
+  steps.needs    → title, 6 options (id, label, template)
+  steps.details  → title, messageLabel, budgetLabel, customMessage, useTemplate
+  cta            → next, prev, submit
+  success        → title, message</code></pre>
+<hr>
+<h2 id="sections-du-site-qui-consomment-le-dictionnaire">Sections du site qui consomment le dictionnaire</h2>
+<div class="table-wrap"><table>
+<thead><tr>
+<th>Section</th>
+<th>Cle dict</th>
+<th>Composant</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Navigation</td>
+<td><code>nav</code></td>
+<td>Header.tsx, SideNav.tsx, Footer.tsx</td>
+</tr>
+<tr>
+<td>Hero</td>
+<td><code>hero</code></td>
+<td>Hero.tsx</td>
+</tr>
+<tr>
+<td>Offres</td>
+<td><code>offers</code></td>
+<td>Offers.tsx</td>
+</tr>
+<tr>
+<td>Approche</td>
+<td><code>approach</code></td>
+<td>Approach.tsx</td>
+</tr>
+<tr>
+<td>Expertises</td>
+<td><code>expertises</code></td>
+<td>Expertises.tsx</td>
+</tr>
+<tr>
+<td>Systemes/Projets</td>
+<td><code>systems</code></td>
+<td>Systems.tsx</td>
+</tr>
+<tr>
+<td>A propos</td>
+<td><code>about</code></td>
+<td>About.tsx</td>
+</tr>
+<tr>
+<td>Contact</td>
+<td><code>contact</code></td>
+<td>Contact.tsx</td>
+</tr>
+<tr>
+<td>Formulaire</td>
+<td><code>funnel</code></td>
+<td>ContactForm.tsx</td>
+</tr>
+<tr>
+<td>Footer</td>
+<td><code>footer</code></td>
+<td>Footer.tsx</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2 id="ajouter-du-contenu">Ajouter du contenu</h2>
+<ol>
+<li>Ajouter le champ dans l'interface <code>Dictionary</code></li>
+<li>Ajouter la valeur FR dans <code>dictionaries.fr</code></li>
+<li>Ajouter la valeur EN dans <code>dictionaries.en</code></li>
+<li>TypeScript verifiera que les deux langues ont la meme structure</li>
+</ol>
+
+  </div>
+</body>
+</html>

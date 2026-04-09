@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="doc-category" content="Technique">
+  <meta name="doc-title" content="Infrastructure — Stack et hebergement">
+  <meta name="doc-color" content="#64748b">
+  <title>Infrastructure & Deploiement — Aïssa Belkoussa</title>
+  <style>
+    :root {
+      --fg: #1a1a1a;
+      --muted: #737373;
+      --border: #e5e5e5;
+      --accent: #2563eb;
+      --bg: #fafafa;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: #fff;
+      color: var(--fg);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      font-size: .875rem;
+      color: var(--muted);
+      text-decoration: none;
+      margin-bottom: 2rem;
+      transition: color .2s;
+    }
+    .back-link:hover { color: var(--accent); }
+    .back-link svg { width: 16px; height: 16px; }
+
+    h1 { font-size: 2rem; font-weight: 700; letter-spacing: -.02em; margin-bottom: .5rem; line-height: 1.25; }
+    h2 { font-size: 1.45rem; font-weight: 650; margin-top: 2.5rem; margin-bottom: .75rem; letter-spacing: -.01em; padding-bottom: .4rem; border-bottom: 1px solid var(--border); }
+    h3 { font-size: 1.15rem; font-weight: 600; margin-top: 2rem; margin-bottom: .5rem; }
+    h4 { font-size: 1.05rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: .4rem; }
+    h5 { font-size: .95rem; font-weight: 600; margin-top: 1.25rem; margin-bottom: .35rem; }
+    h6 { font-size: .875rem; font-weight: 600; margin-top: 1rem; margin-bottom: .3rem; color: var(--muted); }
+
+    p { margin-bottom: 1rem; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    strong { font-weight: 600; }
+    em { font-style: italic; }
+
+    blockquote {
+      border-left: 3px solid var(--accent);
+      padding: .75rem 1rem;
+      margin: 1.25rem 0;
+      background: var(--bg);
+      border-radius: 0 6px 6px 0;
+      color: var(--muted);
+    }
+    blockquote p { margin-bottom: .4rem; }
+    blockquote p:last-child { margin-bottom: 0; }
+
+    ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+    li { margin-bottom: .35rem; }
+    li::marker { color: var(--muted); }
+
+    hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+
+    code {
+      font-family: 'Geist Mono', 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, monospace;
+      font-size: .875em;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: .15em .35em;
+    }
+    pre {
+      background: #1a1a1a;
+      color: #e5e5e5;
+      padding: 1.25rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 1.25rem 0;
+      font-size: .85rem;
+      line-height: 1.6;
+    }
+    pre code {
+      background: none;
+      border: none;
+      padding: 0;
+      color: inherit;
+      font-size: inherit;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin: 1.25rem 0;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .9rem;
+    }
+    th, td {
+      text-align: left;
+      padding: .65rem .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    th {
+      background: var(--bg);
+      font-weight: 600;
+      font-size: .8rem;
+      text-transform: uppercase;
+      letter-spacing: .03em;
+      color: var(--muted);
+    }
+    tbody tr:nth-child(even) { background: var(--bg); }
+    tbody tr:last-child td { border-bottom: none; }
+
+    @media (max-width: 640px) {
+      .container { padding: 1.25rem 1rem 3rem; }
+      h1 { font-size: 1.6rem; }
+      h2 { font-size: 1.25rem; }
+      table { font-size: .8rem; }
+      th, td { padding: .5rem .6rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="../index.html" class="back-link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+      Retour a l'index
+    </a>
+<h1 id="infrastructure-deploiement">Infrastructure & Deploiement</h1>
+<h2 id="stack-technique">Stack technique</h2>
+<div class="table-wrap"><table>
+<thead><tr>
+<th>Couche</th>
+<th>Technologie</th>
+<th>Version</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>Framework</td>
+<td>Next.js</td>
+<td>16.1.6</td>
+</tr>
+<tr>
+<td>Runtime</td>
+<td>React</td>
+<td>19.2.4</td>
+</tr>
+<tr>
+<td>Langage</td>
+<td>TypeScript</td>
+<td>strict</td>
+</tr>
+<tr>
+<td>CSS</td>
+<td>Tailwind CSS</td>
+<td>4.2.1</td>
+</tr>
+<tr>
+<td>Animations</td>
+<td>Framer Motion</td>
+<td>12.36.0</td>
+</tr>
+<tr>
+<td>3D</td>
+<td>Cobe (globe)</td>
+<td>0.6.5</td>
+</tr>
+<tr>
+<td>Icons</td>
+<td>Lucide React</td>
+<td>0.577.0</td>
+</tr>
+<tr>
+<td>Email</td>
+<td>Resend (via fetch)</td>
+<td>API REST</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2 id="hebergement">Hebergement</h2>
+<h3 id="vercel">Vercel</h3>
+<ul>
+<li>Deploiement automatique sur push vers <code>main</code></li>
+<li>Domaine principal : <code>www.aissabelkoussa.fr</code></li>
+<li>Redirect 308 : <code>aissabelkoussa.fr</code> → <code>www.aissabelkoussa.fr</code></li>
+<li>Domaine secondaire : <code>aissabelkoussa.me</code> → redirect vers <code>.fr</code></li>
+<li>Serverless functions pour l'API route <code>/api/contact</code></li>
+</ul>
+<h3 id="dns-ovhcloud">DNS (OVHcloud)</h3>
+<pre><code>A       @               → 216.198.79.1 (Vercel)
+MX      @               → mx01.mail.icloud.com (priorite 10)
+MX      @               → mx02.mail.icloud.com (priorite 10)
+TXT     @               → apple-domain=VUJnQBRyJarxRmJD
+SPF     @               → v=spf1 include:icloud.com ~all
+TXT     resend._domainkey → [DKIM Resend]
+CNAME   sig1._domainkey  → sig1.dkim.aissabelkoussa.fr.at.icloudmailadmin.com
+CNAME   www             → f1f0ec239b0fc4a4.vercel-dns-017.com</code></pre>
+<hr>
+<h2 id="variables-denvironnement">Variables d'environnement</h2>
+<div class="table-wrap"><table>
+<thead><tr>
+<th>Variable</th>
+<th>Emplacement</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>RESEND_API_KEY</code></td>
+<td><code>.env.local</code> + Vercel</td>
+<td>Cle API Resend pour envoi emails</td>
+</tr>
+</tbody></table></div>
+<p><code>.env.local</code> est dans <code>.gitignore</code> — la cle n'est jamais commitee.</p>
+<hr>
+<h2 id="email">Email</h2>
+<h3 id="resend">Resend</h3>
+<ul>
+<li>Domaine verifie : aissabelkoussa.fr</li>
+<li>From : <code>Aïssa Belkoussa <contact@aissabelkoussa.fr></code></li>
+<li>Free tier : 100 emails/jour, 3 000/mois</li>
+<li>Region : Ireland (eu-west-1)</li>
+<li>Pas de SDK installe — utilisation directe de l'API REST via fetch()</li>
+</ul>
+<h3 id="icloud-mail">iCloud Mail</h3>
+<ul>
+<li>Emails entrants sur <code>@aissabelkoussa.fr</code> via iCloud Mail</li>
+<li>MX records configurees dans OVHcloud</li>
+</ul>
+<hr>
+<h2 id="securite">Securite</h2>
+<h3 id="headers-http-nextconfigts">Headers HTTP (next.config.ts)</h3>
+<ul>
+<li><code>X-Content-Type-Options: nosniff</code> — empeche le MIME sniffing</li>
+<li><code>X-Frame-Options: DENY</code> — empeche l'embedding en iframe</li>
+<li><code>Referrer-Policy: strict-origin-when-cross-origin</code> — limite les donnees referrer</li>
+<li><code>Permissions-Policy: camera=(), microphone=(), geolocation=()</code> — desactive les APIs sensibles</li>
+</ul>
+<h3 id="api-contact">API Contact</h3>
+<ul>
+<li>Rate limiting : 3 req/IP/15 min</li>
+<li>Honeypot anti-spam</li>
+<li>Validation stricte + escaping HTML</li>
+<li>Cle API cote serveur uniquement (pas de NEXT_PUBLIC_)</li>
+</ul>
+<hr>
+<h2 id="scripts">Scripts</h2>
+<pre><code>npm run dev     # Serveur de developpement (Turbopack)
+npm run build   # Build de production
+npm run start   # Serveur de production
+npm run lint    # ESLint</code></pre>
+<hr>
+<h2 id="structure-du-projet">Structure du projet</h2>
+<pre><code>apps/frontend/
+├── public/
+│   ├── assets/images/       # Images statiques
+│   ├── assets/videos/       # Videos (glitch-red)
+│   └── llms.txt             # Fiche GEO pour LLMs
+├── src/
+│   ├── app/
+│   │   ├── layout.tsx       # Layout racine (metadata, schemas, fonts)
+│   │   ├── page.tsx         # Page d'accueil
+│   │   ├── robots.ts        # Generation robots.txt
+│   │   ├── sitemap.ts       # Generation sitemap.xml
+│   │   ├── contact/         # Page contact
+│   │   └── api/contact/     # API route email
+│   ├── components/
+│   │   ├── LanguageContext.tsx  # i18n (dictionnaire FR/EN)
+│   │   ├── ContactForm.tsx     # Formulaire multi-etapes
+│   │   ├── Header.tsx
+│   │   ├── Footer.tsx
+│   │   ├── SideNav.tsx
+│   │   ├── ScrollIndicator.tsx
+│   │   ├── sections/        # Sections de la page d'accueil
+│   │   └── ui/              # Composants primitifs
+│   ├── lib/
+│   │   └── schemas.ts       # Schemas JSON-LD
+│   └── utils/
+│       └── cn.ts            # Utilitaire classes CSS
+├── next.config.ts           # Config Next.js
+├── tsconfig.json            # Config TypeScript (strict, alias @/*)
+├── .env.local               # Variables d'environnement (gitignore)
+└── package.json</code></pre>
+
+  </div>
+</body>
+</html>

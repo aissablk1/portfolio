@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="doc-category" content="Technique">
+  <meta name="doc-title" content="Systeme de contact — Formulaire + API">
+  <meta name="doc-color" content="#64748b">
+  <title>Systeme de contact — Aïssa Belkoussa</title>
+  <style>
+    :root {
+      --fg: #1a1a1a;
+      --muted: #737373;
+      --border: #e5e5e5;
+      --accent: #2563eb;
+      --bg: #fafafa;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: #fff;
+      color: var(--fg);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      font-size: .875rem;
+      color: var(--muted);
+      text-decoration: none;
+      margin-bottom: 2rem;
+      transition: color .2s;
+    }
+    .back-link:hover { color: var(--accent); }
+    .back-link svg { width: 16px; height: 16px; }
+
+    h1 { font-size: 2rem; font-weight: 700; letter-spacing: -.02em; margin-bottom: .5rem; line-height: 1.25; }
+    h2 { font-size: 1.45rem; font-weight: 650; margin-top: 2.5rem; margin-bottom: .75rem; letter-spacing: -.01em; padding-bottom: .4rem; border-bottom: 1px solid var(--border); }
+    h3 { font-size: 1.15rem; font-weight: 600; margin-top: 2rem; margin-bottom: .5rem; }
+    h4 { font-size: 1.05rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: .4rem; }
+    h5 { font-size: .95rem; font-weight: 600; margin-top: 1.25rem; margin-bottom: .35rem; }
+    h6 { font-size: .875rem; font-weight: 600; margin-top: 1rem; margin-bottom: .3rem; color: var(--muted); }
+
+    p { margin-bottom: 1rem; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    strong { font-weight: 600; }
+    em { font-style: italic; }
+
+    blockquote {
+      border-left: 3px solid var(--accent);
+      padding: .75rem 1rem;
+      margin: 1.25rem 0;
+      background: var(--bg);
+      border-radius: 0 6px 6px 0;
+      color: var(--muted);
+    }
+    blockquote p { margin-bottom: .4rem; }
+    blockquote p:last-child { margin-bottom: 0; }
+
+    ul, ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+    li { margin-bottom: .35rem; }
+    li::marker { color: var(--muted); }
+
+    hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+
+    code {
+      font-family: 'Geist Mono', 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, monospace;
+      font-size: .875em;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: .15em .35em;
+    }
+    pre {
+      background: #1a1a1a;
+      color: #e5e5e5;
+      padding: 1.25rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 1.25rem 0;
+      font-size: .85rem;
+      line-height: 1.6;
+    }
+    pre code {
+      background: none;
+      border: none;
+      padding: 0;
+      color: inherit;
+      font-size: inherit;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin: 1.25rem 0;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .9rem;
+    }
+    th, td {
+      text-align: left;
+      padding: .65rem .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    th {
+      background: var(--bg);
+      font-weight: 600;
+      font-size: .8rem;
+      text-transform: uppercase;
+      letter-spacing: .03em;
+      color: var(--muted);
+    }
+    tbody tr:nth-child(even) { background: var(--bg); }
+    tbody tr:last-child td { border-bottom: none; }
+
+    @media (max-width: 640px) {
+      .container { padding: 1.25rem 1rem 3rem; }
+      h1 { font-size: 1.6rem; }
+      h2 { font-size: 1.25rem; }
+      table { font-size: .8rem; }
+      th, td { padding: .5rem .6rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="../index.html" class="back-link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+      Retour a l'index
+    </a>
+<h1 id="systeme-de-contact">Systeme de contact</h1>
+<h2 id="vue-densemble">Vue d'ensemble</h2>
+<p>Formulaire multi-etapes connecte a Resend pour l'envoi d'emails transactionnels bilingues (FR/EN). Envoie deux emails en parallele : notification admin + confirmation prospect.</p>
+<hr>
+<h2 id="composants">Composants</h2>
+<h3 id="contactformtsx">ContactForm.tsx</h3>
+<p><code>src/components/ContactForm.tsx</code></p>
+<p>Formulaire en 3 etapes avec animations Framer Motion.</p>
+<p><strong>Etape 0 — Identite</strong></p>
+<ul>
+<li>Nom complet (requis, min 3 caracteres)</li>
+<li>Email (requis, validation regex)</li>
+<li>Entreprise / Projet (optionnel)</li>
+<li>Champ honeypot invisible (anti-spam)</li>
+</ul>
+<p><strong>Etape 1 — Besoin</strong></p>
+<ul>
+<li>6 options selectionnables en grid : Design, Apps, Chatbots IA, IA Telephonique, Workflows, Systeme Complet</li>
+<li>Selection unique avec animation layoutId</li>
+</ul>
+<p><strong>Etape 2 — Details</strong></p>
+<ul>
+<li>Toggle template pre-rempli / message personnalise</li>
+<li>Textarea message (requis, min 5 caracteres)</li>
+<li>Selection budget : < 10k, 10k-30k, 30k-100k, 100k+</li>
+</ul>
+<p><strong>Etats</strong></p>
+<ul>
+<li><code>isSubmitting</code> : desactive le bouton, affiche "Envoi..." / "Sending..."</li>
+<li><code>isSubmitted</code> : affiche ecran de confirmation avec checkmark</li>
+<li><code>submitError</code> : message d'erreur bilingue avec fallback LinkedIn</li>
+</ul>
+<p><strong>Payload envoye</strong></p>
+<pre><code>{
+  "name": "string",
+  "email": "string",
+  "context": "string",
+  "need": "string",
+  "message": "string",
+  "budget": "string",
+  "lang": "fr | en",
+  "_honey": "string (vide si humain)"
+}</code></pre>
+<hr>
+<h3 id="api-route-apicontact">API Route — /api/contact</h3>
+<p><code>src/app/api/contact/route.ts</code></p>
+<p><strong>Methode :</strong> POST uniquement</p>
+<p><strong>Securite :</strong></p>
+<ol>
+<li>Rate limiting in-memory : 3 requetes max par IP / 15 min → 429</li>
+<li>Honeypot : si <code>_honey</code> non vide → renvoie <code>{ success: true }</code> sans envoyer (leurre bot)</li>
+<li>Validation stricte : tous les champs verifies (types, longueurs, regex email, langue)</li>
+<li>Escaping HTML (XSS) sur toutes les donnees avant injection dans le template</li>
+</ol>
+<p><strong>Flux :</strong></p>
+<ol>
+<li>Verifier cle API Resend</li>
+<li>Extraire IP (x-forwarded-for ou x-real-ip)</li>
+<li>Verifier rate limit</li>
+<li>Parser JSON</li>
+<li>Verifier honeypot</li>
+<li>Valider payload</li>
+<li>Envoyer 2 emails en parallele (Promise.all)</li>
+<li>Retourner succes ou erreur</li>
+</ol>
+<p><strong>Email 1 — Notification admin</strong> (theme dark #0a0a0a)</p>
+<ul>
+<li>Destinataire : contact@aissabelkoussa.fr</li>
+<li>Reply-to : email du prospect</li>
+<li>Contenu : tableau 2 colonnes (nom, email cliquable, entreprise, langue badge, besoin badge, budget, message)</li>
+<li>Bouton "Repondre maintenant" (mailto pre-rempli avec sujet)</li>
+<li>Timestamp formate (Europe/Paris)</li>
+</ul>
+<p><strong>Email 2 — Confirmation prospect</strong> (theme light #fafafa)</p>
+<ul>
+<li>Destinataire : email du prospect</li>
+<li>Contenu : salutation personnalisee (prenom), texte de confirmation, recap demande (besoin, budget, entreprise), promesse 48h, signature avec liens</li>
+</ul>
+<p><strong>Labels bilingues :</strong></p>
+<p>Objet <code>labels</code> avec toutes les traductions FR/EN pour les deux templates.</p>
+<hr>
+<h2 id="configuration">Configuration</h2>
+<h3 id="variables-denvironnement">Variables d'environnement</h3>
+<pre><code>RESEND_API_KEY=re_XXXXXXXXX  (.env.local, gitignore)</code></pre>
+<h3 id="dns-requis-ovhcloud">DNS requis (OVHcloud)</h3>
+<ul>
+<li>TXT <code>resend._domainkey</code> → cle DKIM Resend</li>
+<li>SPF : <code>v=spf1 include:icloud.com include:amazonses.com ~all</code></li>
+</ul>
+<h3 id="resend">Resend</h3>
+<ul>
+<li>Domaine : aissabelkoussa.fr (verifie)</li>
+<li>From : <code>Aïssa Belkoussa <contact@aissabelkoussa.fr></code></li>
+<li>Free tier : 100 emails/jour, 3000/mois</li>
+</ul>
+
+  </div>
+</body>
+</html>

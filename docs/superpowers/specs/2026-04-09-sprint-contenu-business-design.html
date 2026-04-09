@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="doc-category" content="Specs">
+<meta name="doc-title" content="Sprint Contenu + Business (9-17 avril)">
+<meta name="doc-color" content="#e11d48">
+<title>Sprint Contenu + Business — Design Spec</title>
+<style>
+:root{--fg:#1a1a1a;--muted:#737373;--border:#e5e5e5;--accent:#2563eb;--bg:#fafafa}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Geist','Inter',system-ui,-apple-system,sans-serif;color:var(--fg);background:var(--bg);line-height:1.7;padding:2rem 1rem}
+.container{max-width:860px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.back{display:inline-block;margin-bottom:2rem;font-size:.875rem;color:var(--muted)}
+.back:hover{color:var(--accent)}
+h1{font-size:1.75rem;font-weight:700;margin-bottom:.5rem;line-height:1.3}
+h2{font-size:1.375rem;font-weight:700;margin-top:2.5rem;margin-bottom:.75rem;padding-bottom:.375rem;border-bottom:1px solid var(--border)}
+h3{font-size:1.125rem;font-weight:600;margin-top:1.75rem;margin-bottom:.5rem}
+p{margin-bottom:1rem}
+ul,ol{margin-bottom:1rem;padding-left:1.5rem}
+li{margin-bottom:.375rem}
+li>ul,li>ol{margin-top:.375rem;margin-bottom:0}
+strong{font-weight:600}
+code{font-family:'Geist Mono','Fira Code',monospace;background:#f0f0f0;padding:.125rem .375rem;border-radius:3px;font-size:.875em}
+hr{border:none;border-top:1px solid var(--border);margin:2rem 0}
+table{width:100%;border-collapse:collapse;margin-bottom:1.5rem;font-size:.875rem}
+th,td{padding:.5rem .75rem;border:1px solid var(--border);text-align:left}
+th{background:#f0f0f0;font-weight:600}
+tr:nth-child(even){background:#f9f9f9}
+@media(max-width:600px){body{padding:1rem .75rem}h1{font-size:1.375rem}h2{font-size:1.1875rem}table{font-size:.8125rem}th,td{padding:.375rem .5rem}}
+</style>
+</head>
+<body>
+<div class="container">
+<a href="../../index.html" class="back">&larr; Retour a l'index</a>
+
+<h1>Sprint Contenu + Business — Design Spec</h1>
+
+<p><strong>Date :</strong> 9 avril 2026 &middot; <strong>Scope :</strong> 9 → 17 avril 2026<br>
+<strong>Objectif :</strong> Passer de 7 a 15 articles blog, lancer la distribution LinkedIn, preparer la prospection BTP Albi.</p>
+
+<h2>Metriques cibles</h2>
+<table>
+<thead><tr><th>Metrique</th><th>Avant</th><th>Apres</th></tr></thead>
+<tbody>
+<tr><td>Articles blog</td><td>7</td><td>15</td></tr>
+<tr><td>Posts LinkedIn</td><td>5</td><td>13</td></tr>
+<tr><td>Prospects BTP listes</td><td>0</td><td>30</td></tr>
+</tbody>
+</table>
+
+<hr>
+
+<h2>Section 1 — Batch 8 articles blog bilingues</h2>
+
+<h3>Format</h3>
+<ul>
+<li>Fichiers MDX bilingues : <code>{slug}.fr.mdx</code> + <code>{slug}.en.mdx</code></li>
+<li>Frontmatter : title, description, date, publishAt, updatedAt, author, tags, category, image, imageAlt, published, featured</li>
+<li>Contenu : 800-1200 mots, tableaux prix reels, FAQ structuree, CTA vers /services ou /audit</li>
+<li>Images : placeholder <code>/assets/blog/{slug}/cover.jpg</code> (meme pattern que les existants)</li>
+</ul>
+
+<h3>Sujets et niches</h3>
+<table>
+<thead><tr><th>#</th><th>Slug</th><th>Niche</th><th>Sujet FR</th></tr></thead>
+<tbody>
+<tr><td>8</td><td>artisan-btp-fiche-google-maps-2026</td><td>BTP</td><td>Comment apparaitre en premier sur Google Maps quand on est artisan</td></tr>
+<tr><td>9</td><td>agent-immobilier-chatbot-visite-ia</td><td>Immobilier</td><td>Chatbot IA pour qualifier les visites immobilieres</td></tr>
+<tr><td>10</td><td>restaurant-reservations-automatiques-ia</td><td>Restauration</td><td>Automatiser les reservations de restaurant avec l'IA</td></tr>
+<tr><td>11</td><td>comptable-automatiser-relances-impayees</td><td>Prof. liberales</td><td>Comment un comptable automatise ses relances d'impayes</td></tr>
+<tr><td>12</td><td>commerce-proximite-site-ecommerce-local</td><td>Commerce</td><td>Creer un site e-commerce local pour un commerce de proximite</td></tr>
+<tr><td>13</td><td>roi-intelligence-artificielle-tpe-2026</td><td>IA entreprises</td><td>Quel ROI attendre de l'IA quand on est TPE en 2026</td></tr>
+<tr><td>14</td><td>artisan-btp-planning-chantier-automatise</td><td>BTP</td><td>Automatiser le planning de chantier pour artisan BTP</td></tr>
+<tr><td>15</td><td>coach-tunnel-vente-formation-en-ligne</td><td>Formation</td><td>Construire un tunnel de vente pour vendre une formation en ligne</td></tr>
+</tbody>
+</table>
+
+<h3>Calendrier publishAt</h3>
+<table>
+<thead><tr><th>Date</th><th>08h00</th><th>14h00</th></tr></thead>
+<tbody>
+<tr><td>10 avril (jeu)</td><td>#8 Google Maps BTP</td><td>#9 Chatbot immobilier</td></tr>
+<tr><td>11 avril (ven)</td><td>#10 Restaurant IA</td><td>#11 Comptable relances</td></tr>
+<tr><td>12 avril (sam)</td><td>#12 Commerce local</td><td>—</td></tr>
+<tr><td>13 avril (dim)</td><td>#13 ROI IA TPE</td><td>—</td></tr>
+<tr><td>14 avril (lun)</td><td>#14 Planning chantier BTP</td><td>#15 Coach tunnel vente</td></tr>
+</tbody>
+</table>
+
+<hr>
+
+<h2>Section 2 — Posts LinkedIn (8 nouveaux)</h2>
+
+<h3>Format</h3>
+<ul>
+<li>Ajoutes dans <code>scripts/linkedin/post.py</code> (array POSTS, ids 6-13)</li>
+<li>Structure : id, title, date_prevue, hashtags, content, comment_link</li>
+<li>Content : hook stop-scroll, 3-4 points valeur standalone, CTA article, 5 hashtags max</li>
+<li>Commentaire auto : lien vers l'article blog</li>
+</ul>
+
+<h3>Calendrier</h3>
+<table>
+<thead><tr><th>Post</th><th>Date LinkedIn</th><th>Article associe</th></tr></thead>
+<tbody>
+<tr><td>#6</td><td>10 avril 10h</td><td>#8 Google Maps BTP</td></tr>
+<tr><td>#7</td><td>11 avril 10h</td><td>#9 Chatbot immobilier</td></tr>
+<tr><td>#8</td><td>12 avril 12h</td><td>#10 Restaurant IA</td></tr>
+<tr><td>#9</td><td>14 avril 10h</td><td>#11 Comptable relances</td></tr>
+<tr><td>#10</td><td>15 avril 10h</td><td>#12 Commerce local</td></tr>
+<tr><td>#11</td><td>16 avril 10h</td><td>#13 ROI IA TPE</td></tr>
+<tr><td>#12</td><td>17 avril 10h</td><td>#14 Planning chantier BTP</td></tr>
+<tr><td>#13</td><td>18 avril 10h</td><td>#15 Coach tunnel vente</td></tr>
+</tbody>
+</table>
+
+<p>Publication : Aissa execute <code>python post.py --post N</code> le jour J.</p>
+
+<hr>
+
+<h2>Section 3 — Liste 30 prospects BTP Albi/Tarn</h2>
+
+<h3>Document</h3>
+<p>Fichier : <code>docs/prospection/prospects-btp-tarn.md</code></p>
+
+<h3>Structure par prospect</h3>
+<table>
+<thead><tr><th>Champ</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td>Entreprise</td><td>Nom commercial</td></tr>
+<tr><td>Activite</td><td>Maconnerie, electricite, plomberie, charpente...</td></tr>
+<tr><td>Ville</td><td>Albi, Castres, Gaillac, Carmaux, Mazamet...</td></tr>
+<tr><td>Site web</td><td>URL ou "aucun"</td></tr>
+<tr><td>LinkedIn</td><td>Profil dirigeant si disponible</td></tr>
+<tr><td>Priorite</td><td>Haute (pas de site) / Moyenne (site obsolete) / Basse</td></tr>
+</tbody>
+</table>
+
+<h3>Sourcing</h3>
+<p>Recherche web : Pages Jaunes, Google Maps, societe.com, LinkedIn — artisans BTP dans le Tarn (81).</p>
+
+<h3>Exploitation</h3>
+<p>Templates DMs existants dans <code>docs/prospection/cold-outreach-templates.html</code>. Personnalises avec les articles blog comme preuve de credibilite.</p>
+
+<hr>
+
+<h2>Repartition</h2>
+
+<h3>Claude</h3>
+<ul>
+<li>8 articles blog FR + EN (16 fichiers MDX)</li>
+<li>8 posts LinkedIn dans post.py</li>
+<li>Document 30 prospects BTP</li>
+<li>Mise a jour scheduler LinkedIn</li>
+</ul>
+
+<h3>Aissa</h3>
+<ul>
+<li>Publier les posts via <code>python post.py --post N</code></li>
+<li>Envoyer les DMs aux prospects</li>
+<li>DYNABUY le 10 avril — Alexandre en personne</li>
+</ul>
+
+<hr>
+
+<h2>Hors scope</h2>
+<ul>
+<li>Calendly : deja en place et lie au site</li>
+<li>Refonte design : pas dans ce sprint</li>
+<li>Backend/API : pas de modifications</li>
+</ul>
+
+</div>
+</body>
+</html>
