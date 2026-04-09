@@ -145,14 +145,14 @@ export const organizationSchema = {
         itemListElement: [
           {
             "@type": "Offer",
-            name: "Autonome",
-            price: "3900",
+            name: "Starter — Pilote Automatique",
+            price: "1500",
             priceCurrency: "EUR",
             itemOffered: {
               "@type": "Service",
-              name: "Autonome — Projet seul",
+              name: "Starter — Pilote Automatique",
               description:
-                "Systeme livre cle en main avec documentation technique renforcee et formation autonomie. Pour ceux qui ont une equipe technique.",
+                "1 automatisation cle en main (chatbot, emails ou prise de RDV). Brief + configuration sur-mesure, formation 1h incluse. Livre en 5 jours.",
             },
           },
           {
