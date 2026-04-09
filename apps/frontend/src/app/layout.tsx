@@ -15,7 +15,7 @@ import JsonLd from "@/components/JsonLd";
 import { Analytics } from "@vercel/analytics/next";
 import { TrackingBeacon } from "@/components/TrackingBeacon";
 import WhatsAppButton from "@/components/WhatsAppButton";
-import Script from "next/script";
+import CookieConsent from "@/components/CookieConsent";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -164,27 +164,7 @@ export default function RootLayout({
         </LanguageProvider>
         <Analytics />
         <TrackingBeacon />
-        {/* Google Analytics (gtag.js) */}
-        <Script
-          id="ga-script"
-          strategy="afterInteractive"
-          src="https://www.googletagmanager.com/gtag/js?id=G-ZJSFF5X6SZ"
-        />
-        <Script id="ga-init" strategy="afterInteractive">
-          {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZJSFF5X6SZ');`}
-        </Script>
-        {/* Google Tag Manager */}
-        <Script id="gtm-init" strategy="afterInteractive">
-          {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-523FWBK6');`}
-        </Script>
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-523FWBK6"
-            height="0"
-            width="0"
-            style={{ display: "none", visibility: "hidden" }}
-          />
-        </noscript>
+        <CookieConsent />
       </body>
     </html>
   );
