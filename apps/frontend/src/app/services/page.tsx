@@ -1505,7 +1505,9 @@ export default function ServicesPage() {
                 return (
                   <motion.div
                     key={realIdx}
+                    layout
                     {...fadeUpSmall(realIdx * 0.04)}
+                    transition={{ layout: { duration: 0.35, ease: [0.23, 1, 0.32, 1] } }}
                     className={cn(
                       "group border rounded-2xl overflow-hidden transition-colors duration-300",
                       isOpen
