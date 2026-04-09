@@ -1151,10 +1151,10 @@ const dictionaries: Record<Language, Dictionary> = {
       learnMore: "En savoir +",
       viewPricing: "Voir les tarifs",
       redirecting: "Redirection...",
-      cookieMessage: "Ce site utilise des cookies d'analyse (Google Analytics) pour mesurer l'audience et ameliorer l'experience. Aucune donnee personnelle n'est partagee a des fins publicitaires.",
+      cookieMessage: "Ce site utilise des cookies d'analyse (Google Analytics) pour mesurer l'audience et améliorer l'expérience. Aucune donnée personnelle n'est partagée à des fins publicitaires.",
       cookieAccept: "Accepter",
       cookieDecline: "Refuser",
-      cookiePolicy: "Politique de confidentialite",
+      cookiePolicy: "Politique de confidentialité",
     },
     checkout: {
       verifying: "Vérification du paiement...",
