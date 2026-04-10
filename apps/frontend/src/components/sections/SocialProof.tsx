@@ -3,6 +3,7 @@
 import React from "react";
 import { useLanguage } from "../LanguageContext";
 import { motion } from "framer-motion";
+import { Quote } from "lucide-react";
 
 const SocialProof = () => {
   const { dict } = useLanguage();
@@ -58,6 +59,44 @@ const SocialProof = () => {
                 </p>
               </motion.div>
             ))}
+          </div>
+
+          {/* Testimonials */}
+          <div className="mb-16">
+            <div className="flex items-center gap-4 mb-10">
+              <div className="w-2 h-2 rounded-full bg-site-accent" />
+              <span className="text-xs font-bold uppercase tracking-widest text-site-accent">
+                {s.testimonialsBadge}
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {s.testimonials.map((t, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 0.8,
+                    delay: idx * 0.15,
+                    ease: [0.25, 1, 0.5, 1],
+                  }}
+                  className="relative p-8 rounded-2xl border border-site-border"
+                >
+                  <Quote size={20} className="text-site-border mb-4" />
+                  <p className="text-sm text-site-text-light leading-relaxed mb-6">
+                    {t.text}
+                  </p>
+                  <div>
+                    <div className="text-sm font-medium">{t.name}</div>
+                    <div className="text-[11px] text-site-text-light">
+                      {t.role} — {t.company}
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
 
           {/* Stats */}

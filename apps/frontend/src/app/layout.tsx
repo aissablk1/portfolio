@@ -10,6 +10,7 @@ import {
   organizationSchema,
   websiteSchema,
   breadcrumbs,
+  reviewsSchema,
 } from "@/lib/schemas";
 import JsonLd from "@/components/JsonLd";
 import { Analytics } from "@vercel/analytics/next";
@@ -135,7 +136,7 @@ export const metadata: Metadata = {
   category: "technology",
 };
 
-const schemas = [personSchema, organizationSchema, websiteSchema, breadcrumbs.home];
+const schemas = [personSchema, organizationSchema, websiteSchema, breadcrumbs.home, reviewsSchema];
 
 export default function RootLayout({
   children,

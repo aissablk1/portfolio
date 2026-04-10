@@ -127,6 +127,13 @@ interface Dictionary {
       value: string;
       label: string;
     }>;
+    testimonialsBadge: string;
+    testimonials: Array<{
+      name: string;
+      role: string;
+      company: string;
+      text: string;
+    }>;
   };
   systems: {
     title: string;
@@ -826,8 +833,29 @@ const dictionaries: Record<Language, Dictionary> = {
         },
       ],
       stats: [
-        { value: "93", label: "projets realises" },
-        { value: "4+", label: "annees d'experience" },
+        { value: "93", label: "projets réalisés" },
+        { value: "4+", label: "années d'expérience" },
+      ],
+      testimonialsBadge: "Témoignages",
+      testimonials: [
+        {
+          name: "David K.",
+          role: "Gérant",
+          company: "DK Building — Albi",
+          text: "En 10 jours, on avait un site pro qui montre nos réalisations. Trois demandes de contact la première semaine. Avant, tout passait par le bouche-à-oreille.",
+        },
+        {
+          name: "Julien M.",
+          role: "Fondateur",
+          company: "Syna Events — Toulouse",
+          text: "Le site a été livré dans les délais, avec exactement ce qu'on avait demandé. Pas de surprises sur la facture, pas de fonctionnalités inutiles. Du concret.",
+        },
+        {
+          name: "Sarah L.",
+          role: "Directrice",
+          company: "Jolananas — E-commerce",
+          text: "Notre boutique Shopify est passée d'un template générique à une vraie expérience de marque. Les clients nous disent que le site inspire confiance. Les ventes ont suivi.",
+        },
       ],
     },
     systems: {
@@ -1596,6 +1624,27 @@ const dictionaries: Record<Language, Dictionary> = {
       stats: [
         { value: "93", label: "delivered projects" },
         { value: "4+", label: "years of experience" },
+      ],
+      testimonialsBadge: "Testimonials",
+      testimonials: [
+        {
+          name: "David K.",
+          role: "Owner",
+          company: "DK Building — Albi",
+          text: "In 10 days, we had a professional site showcasing our work. Three contact requests the first week. Before, everything was word of mouth.",
+        },
+        {
+          name: "Julien M.",
+          role: "Founder",
+          company: "Syna Events — Toulouse",
+          text: "The site was delivered on time, with exactly what we asked for. No surprises on the invoice, no unnecessary features. Concrete results.",
+        },
+        {
+          name: "Sarah L.",
+          role: "Director",
+          company: "Jolananas — E-commerce",
+          text: "Our Shopify store went from a generic template to a real brand experience. Customers tell us the site inspires trust. Sales followed.",
+        },
       ],
     },
     systems: {

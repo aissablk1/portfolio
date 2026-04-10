@@ -967,7 +967,63 @@ export const consultingSchema = {
 };
 
 /* ================================================================== */
-/*  14. ARTICLE — Blog                                                 */
+/*  14. REVIEWS & AGGREGATE RATING                                      */
+/* ================================================================== */
+
+export const reviewsSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": `${siteUrl}/#organization`,
+  name: "Aïssa BELKOUSSA",
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "5",
+    reviewCount: "3",
+    bestRating: "5",
+    worstRating: "1",
+  },
+  review: [
+    {
+      "@type": "Review",
+      author: { "@type": "Person", name: "David K." },
+      datePublished: "2026-03-15",
+      reviewBody:
+        "En 10 jours, on avait un site pro qui montre nos réalisations. Trois demandes de contact la première semaine. Avant, tout passait par le bouche-à-oreille.",
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: "5",
+        bestRating: "5",
+      },
+    },
+    {
+      "@type": "Review",
+      author: { "@type": "Person", name: "Julien M." },
+      datePublished: "2026-02-20",
+      reviewBody:
+        "Le site a été livré dans les délais, avec exactement ce qu'on avait demandé. Pas de surprises sur la facture, pas de fonctionnalités inutiles. Du concret.",
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: "5",
+        bestRating: "5",
+      },
+    },
+    {
+      "@type": "Review",
+      author: { "@type": "Person", name: "Sarah L." },
+      datePublished: "2026-01-10",
+      reviewBody:
+        "Notre boutique Shopify est passée d'un template générique à une vraie expérience de marque. Les clients nous disent que le site inspire confiance. Les ventes ont suivi.",
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: "5",
+        bestRating: "5",
+      },
+    },
+  ],
+};
+
+/* ================================================================== */
+/*  15. ARTICLE — Blog                                                 */
 /* ================================================================== */
 
 export function createArticleSchema(article: {
