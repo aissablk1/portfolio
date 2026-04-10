@@ -11,12 +11,33 @@ import { AnimatePresence, motion } from "framer-motion";
 const Header = () => {
   const { language, setLanguage, dict } = useLanguage();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isOverDark, setIsOverDark] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
+
+      // Detect if header is over a dark section
+      const probe = document.elementFromPoint(window.innerWidth / 2, 60);
+      if (probe) {
+        let el: HTMLElement | null = probe as HTMLElement;
+        let dark = false;
+        while (el && el !== document.body) {
+          const bg = getComputedStyle(el).backgroundColor;
+          if (bg && bg !== "rgba(0, 0, 0, 0)" && bg !== "transparent") {
+            const match = bg.match(/\d+/g);
+            if (match) {
+              const [r, g, b] = match.map(Number);
+              dark = (r + g + b) / 3 < 80;
+            }
+            break;
+          }
+          el = el.parentElement;
+        }
+        setIsOverDark(dark);
+      }
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
@@ -94,7 +115,12 @@ const Header = () => {
           className={cn(
             "mx-auto flex items-center justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
             isScrolled
-              ? "max-w-3xl bg-site-bg/70 backdrop-blur-2xl backdrop-saturate-200 rounded-full border border-site-border/50 px-6 py-3 shadow-[0_4px_30px_rgba(0,0,0,0.06)]"
+              ? cn(
+                  "max-w-3xl backdrop-blur-2xl backdrop-saturate-200 rounded-full px-6 py-3",
+                  isOverDark
+                    ? "bg-[#0a0a0a]/60 border border-white/15 shadow-[0_4px_30px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.08)]"
+                    : "bg-site-bg/70 border border-site-border/50 shadow-[0_4px_30px_rgba(0,0,0,0.06)]"
+                )
               : "max-w-7xl border border-transparent"
           )}
         >
@@ -107,7 +133,10 @@ const Header = () => {
               }
               setMenuOpen(false);
             }}
-            className="font-display text-xl font-semibold tracking-tighter"
+            className={cn(
+              "font-display text-xl font-semibold tracking-tighter transition-colors duration-500",
+              isScrolled && isOverDark ? "text-white" : "text-site-text"
+            )}
           >
             AÏSSA BELKOUSSA
           </Link>
@@ -116,7 +145,12 @@ const Header = () => {
             {/* Diagnostic CTA — soft entry point */}
             <Link
               href="/diagnostic"
-              className="hidden md:inline-flex items-center px-5 py-2 text-[10px] font-bold uppercase tracking-widest border border-site-border text-site-text-light rounded-full hover:border-site-accent hover:text-site-accent transition-all"
+              className={cn(
+                "hidden md:inline-flex items-center px-5 py-2 text-[10px] font-bold uppercase tracking-widest rounded-full transition-all duration-500",
+                isScrolled && isOverDark
+                  ? "border border-white/25 text-white/70 hover:border-white/50 hover:text-white"
+                  : "border border-site-border text-site-text-light hover:border-site-accent hover:text-site-accent"
+              )}
             >
               {dict.ui.diagnosticFree}
             </Link>
@@ -124,18 +158,28 @@ const Header = () => {
             {/* Services CTA — always visible, filled */}
             <Link
               href="/services"
-              className="hidden md:inline-flex items-center px-5 py-2 text-[10px] font-bold uppercase tracking-widest bg-site-accent text-white rounded-full hover:bg-site-accent/85 transition-all"
+              className={cn(
+                "hidden md:inline-flex items-center px-5 py-2 text-[10px] font-bold uppercase tracking-widest rounded-full transition-all duration-500",
+                isScrolled && isOverDark
+                  ? "bg-white text-[#0a0a0a] hover:bg-white/90"
+                  : "bg-site-accent text-white hover:bg-site-accent/85"
+              )}
             >
               {dict.ui.pricing}
             </Link>
 
             {/* Language toggle */}
-            <div className="flex items-center bg-site-border/50 rounded-full p-1">
+            <div className={cn(
+              "flex items-center rounded-full p-1 transition-colors duration-500",
+              isScrolled && isOverDark ? "bg-white/10" : "bg-site-border/50"
+            )}>
               <button
                 onClick={() => setLanguage("fr")}
                 className={cn(
                   "px-3 py-1 text-xs font-bold rounded-full transition-all",
-                  language === "fr" ? "bg-site-accent text-white" : "text-site-text-light hover:text-site-text"
+                  language === "fr"
+                    ? isScrolled && isOverDark ? "bg-white text-[#0a0a0a]" : "bg-site-accent text-white"
+                    : isScrolled && isOverDark ? "text-white/50 hover:text-white" : "text-site-text-light hover:text-site-text"
                 )}
               >
                 FR
@@ -144,7 +188,9 @@ const Header = () => {
                 onClick={() => setLanguage("en")}
                 className={cn(
                   "px-3 py-1 text-xs font-bold rounded-full transition-all",
-                  language === "en" ? "bg-site-accent text-white" : "text-site-text-light hover:text-site-text"
+                  language === "en"
+                    ? isScrolled && isOverDark ? "bg-white text-[#0a0a0a]" : "bg-site-accent text-white"
+                    : isScrolled && isOverDark ? "text-white/50 hover:text-white" : "text-site-text-light hover:text-site-text"
                 )}
               >
                 EN
@@ -160,13 +206,15 @@ const Header = () => {
             >
               <span
                 className={cn(
-                  "block w-5 h-0.5 bg-site-text transition-all duration-300 origin-center",
+                  "block w-5 h-0.5 transition-all duration-300 origin-center",
+                  isScrolled && isOverDark ? "bg-white" : "bg-site-text",
                   menuOpen && "rotate-45 translate-y-1"
                 )}
               />
               <span
                 className={cn(
-                  "block w-5 h-0.5 bg-site-text transition-all duration-300 origin-center",
+                  "block w-5 h-0.5 transition-all duration-300 origin-center",
+                  isScrolled && isOverDark ? "bg-white" : "bg-site-text",
                   menuOpen && "-rotate-45 -translate-y-1"
                 )}
               />
