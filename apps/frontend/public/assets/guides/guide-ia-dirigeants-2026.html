@@ -1,0 +1,1411 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>L'IA pour les dirigeants — Ce qui marche vraiment en 2026 | Aïssa Belkoussa</title>
+  <meta name="description" content="Guide gratuit de 15 pages pour les dirigeants de PME : découvrez ce que l'IA fait concrètement pour votre entreprise en 2026.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #fdfdfd;
+      --text: #1a1a1a;
+      --accent: #000000;
+      --light: #666666;
+      --border: #eeeeee;
+    }
+
+    @page {
+      size: A4 portrait;
+      margin: 15mm;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 11pt;
+      line-height: 1.6;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      padding: 15mm;
+      margin: 0 auto;
+      position: relative;
+      page-break-after: always;
+      break-after: page;
+    }
+
+    .page:last-child {
+      page-break-after: avoid;
+      break-after: avoid;
+    }
+
+    /* ── Couverture ── */
+    .cover {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      min-height: calc(297mm - 30mm);
+    }
+
+    .cover-tag {
+      font-size: 9pt;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--light);
+      margin-bottom: 40px;
+    }
+
+    .cover h1 {
+      font-size: 36pt;
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .cover-subtitle {
+      font-size: 16pt;
+      font-weight: 400;
+      color: var(--light);
+      margin-bottom: 60px;
+    }
+
+    .cover-pages {
+      font-size: 10pt;
+      font-weight: 500;
+      color: var(--light);
+      border: 1px solid var(--border);
+      padding: 8px 24px;
+      border-radius: 4px;
+      margin-bottom: 80px;
+    }
+
+    .cover-author {
+      font-size: 14pt;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .cover-role {
+      font-size: 10pt;
+      color: var(--light);
+      margin-bottom: 4px;
+    }
+
+    .cover-url {
+      font-size: 10pt;
+      color: var(--light);
+      font-weight: 500;
+    }
+
+    .cover-line {
+      width: 60px;
+      height: 2px;
+      background: var(--accent);
+      margin: 24px auto;
+    }
+
+    /* ── Sommaire ── */
+    .toc-title {
+      font-size: 22pt;
+      font-weight: 800;
+      margin-bottom: 40px;
+      color: var(--accent);
+    }
+
+    .toc-list {
+      list-style: none;
+    }
+
+    .toc-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .toc-item:last-child {
+      border-bottom: none;
+    }
+
+    .toc-number {
+      font-weight: 700;
+      font-size: 12pt;
+      color: var(--accent);
+      margin-right: 16px;
+      min-width: 24px;
+    }
+
+    .toc-label {
+      flex: 1;
+      font-size: 12pt;
+      font-weight: 500;
+    }
+
+    .toc-page {
+      font-size: 11pt;
+      font-weight: 600;
+      color: var(--light);
+      margin-left: 16px;
+    }
+
+    .toc-dots {
+      flex: 1;
+      border-bottom: 1px dotted var(--border);
+      margin: 0 12px;
+      min-width: 40px;
+    }
+
+    /* ── Chapitres ── */
+    .chapter-number {
+      font-size: 9pt;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--light);
+      margin-bottom: 8px;
+    }
+
+    .chapter-title {
+      font-size: 22pt;
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+
+    .chapter-separator {
+      width: 40px;
+      height: 2px;
+      background: var(--accent);
+      margin-bottom: 28px;
+    }
+
+    h3 {
+      font-size: 13pt;
+      font-weight: 700;
+      color: var(--accent);
+      margin-top: 24px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+
+    .text-light {
+      color: var(--light);
+    }
+
+    .highlight-box {
+      background: #f5f5f5;
+      border-left: 3px solid var(--accent);
+      padding: 16px 20px;
+      margin: 20px 0;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .highlight-box p {
+      margin-bottom: 0;
+      font-weight: 500;
+    }
+
+    .stat-big {
+      font-size: 28pt;
+      font-weight: 900;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    /* ── Listes ── */
+    .task-list {
+      list-style: none;
+      margin: 16px 0;
+    }
+
+    .task-list li {
+      padding: 8px 0;
+      padding-left: 28px;
+      position: relative;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .task-list li:last-child {
+      border-bottom: none;
+    }
+
+    .task-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .task-time {
+      float: right;
+      font-size: 9pt;
+      font-weight: 600;
+      color: var(--light);
+      background: #f0f0f0;
+      padding: 2px 10px;
+      border-radius: 3px;
+    }
+
+    /* ── Tableaux ── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 9.5pt;
+    }
+
+    thead th {
+      background: var(--accent);
+      color: #ffffff;
+      font-weight: 600;
+      text-align: left;
+      padding: 10px 12px;
+      font-size: 9pt;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    tbody td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    tbody tr:nth-child(even) {
+      background: #fafafa;
+    }
+
+    .sector-label {
+      font-weight: 700;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    /* ── Comparatif prix ── */
+    .price-table thead th {
+      background: var(--accent);
+    }
+
+    .price-highlight {
+      background: #f5f5f5 !important;
+      font-weight: 600;
+    }
+
+    /* ── Étapes ── */
+    .step {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 20px;
+      align-items: flex-start;
+    }
+
+    .step-number {
+      width: 36px;
+      height: 36px;
+      min-width: 36px;
+      background: var(--accent);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 14pt;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+
+    .step-content {
+      flex: 1;
+    }
+
+    .step-content h4 {
+      font-weight: 700;
+      margin-bottom: 4px;
+      font-size: 11pt;
+    }
+
+    .step-content p {
+      font-size: 10pt;
+      color: var(--light);
+      margin-bottom: 0;
+    }
+
+    /* ── Checklist ── */
+    .checklist-category {
+      font-size: 12pt;
+      font-weight: 700;
+      color: var(--accent);
+      margin-top: 24px;
+      margin-bottom: 12px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid var(--accent);
+    }
+
+    .checklist {
+      list-style: none;
+      margin-bottom: 8px;
+    }
+
+    .checklist li {
+      padding: 6px 0;
+      padding-left: 28px;
+      position: relative;
+      font-size: 10pt;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .checklist li::before {
+      content: "□";
+      position: absolute;
+      left: 0;
+      font-size: 14pt;
+      line-height: 1.2;
+      color: var(--light);
+    }
+
+    /* ── Score ── */
+    .score-grid {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .score-card {
+      flex: 1;
+      border: 1px solid var(--border);
+      padding: 16px;
+      text-align: center;
+      border-radius: 4px;
+    }
+
+    .score-range {
+      font-size: 16pt;
+      font-weight: 800;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .score-label {
+      font-size: 10pt;
+      font-weight: 600;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .score-desc {
+      font-size: 8.5pt;
+      color: var(--light);
+    }
+
+    /* ── CTA ── */
+    .cta-block {
+      border: 2px solid var(--accent);
+      padding: 24px;
+      margin-bottom: 20px;
+      border-radius: 4px;
+    }
+
+    .cta-block h3 {
+      margin-top: 0;
+      font-size: 14pt;
+    }
+
+    .cta-url {
+      font-size: 11pt;
+      font-weight: 600;
+      color: var(--accent);
+      display: block;
+      margin-top: 8px;
+    }
+
+    .cta-block p {
+      color: var(--light);
+      font-size: 10pt;
+      margin-bottom: 0;
+    }
+
+    /* ── À propos ── */
+    .about-layout {
+      display: flex;
+      gap: 32px;
+      align-items: flex-start;
+      margin-top: 32px;
+    }
+
+    .about-photo {
+      width: 120px;
+      height: 120px;
+      min-width: 120px;
+      background: #e8e8e8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28pt;
+      font-weight: 800;
+      color: var(--light);
+      border-radius: 4px;
+    }
+
+    .about-content h3 {
+      margin-top: 0;
+      font-size: 16pt;
+    }
+
+    .about-role {
+      font-size: 11pt;
+      color: var(--light);
+      margin-bottom: 4px;
+    }
+
+    .about-location {
+      font-size: 10pt;
+      color: var(--light);
+      margin-bottom: 16px;
+    }
+
+    .about-stat {
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .about-specialties {
+      list-style: none;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 16px 0;
+    }
+
+    .about-specialties li {
+      font-size: 9pt;
+      font-weight: 500;
+      background: #f0f0f0;
+      padding: 4px 12px;
+      border-radius: 3px;
+    }
+
+    .about-quote {
+      font-size: 14pt;
+      font-weight: 700;
+      font-style: italic;
+      color: var(--accent);
+      margin: 24px 0;
+      padding-left: 20px;
+      border-left: 3px solid var(--accent);
+    }
+
+    .about-contact {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .about-contact p {
+      font-size: 10pt;
+      margin-bottom: 4px;
+    }
+
+    .about-contact strong {
+      display: inline-block;
+      width: 80px;
+      color: var(--light);
+    }
+
+    /* ── Footer ── */
+    .page-footer {
+      position: absolute;
+      bottom: 15mm;
+      left: 15mm;
+      right: 15mm;
+      display: flex;
+      justify-content: space-between;
+      font-size: 7.5pt;
+      color: #bbbbbb;
+      border-top: 1px solid var(--border);
+      padding-top: 8px;
+    }
+
+    /* ── Conclusion box ── */
+    .conclusion-box {
+      background: var(--accent);
+      color: #ffffff;
+      padding: 20px 24px;
+      margin-top: 20px;
+      border-radius: 4px;
+    }
+
+    .conclusion-box p {
+      color: #ffffff;
+      margin-bottom: 0;
+      font-weight: 500;
+    }
+
+    /* ── Formule ── */
+    .formula {
+      background: #f5f5f5;
+      border: 1px solid var(--border);
+      padding: 16px 20px;
+      text-align: center;
+      font-size: 12pt;
+      font-weight: 600;
+      margin: 16px 0;
+      border-radius: 4px;
+      font-family: 'Inter', monospace;
+    }
+
+    /* ── Tools list ── */
+    .tools-list {
+      display: flex;
+      gap: 12px;
+      margin: 12px 0;
+    }
+
+    .tool-card {
+      flex: 1;
+      border: 1px solid var(--border);
+      padding: 12px;
+      border-radius: 4px;
+      text-align: center;
+    }
+
+    .tool-name {
+      font-weight: 700;
+      font-size: 11pt;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .tool-desc {
+      font-size: 8.5pt;
+      color: var(--light);
+    }
+
+    /* ── Action page ── */
+    .action-intro {
+      font-size: 16pt;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 32px;
+      text-align: center;
+    }
+
+    /* ── Print ── */
+    @media print {
+      body {
+        background: white;
+      }
+
+      .page {
+        width: auto;
+        min-height: auto;
+        padding: 0;
+        margin: 0;
+      }
+
+      .page-footer {
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+
+      thead th {
+        background: var(--accent) !important;
+        color: #ffffff !important;
+      }
+
+      .step-number {
+        background: var(--accent) !important;
+        color: #ffffff !important;
+      }
+
+      .conclusion-box {
+        background: var(--accent) !important;
+        color: #ffffff !important;
+      }
+
+      .conclusion-box p {
+        color: #ffffff !important;
+      }
+
+      .highlight-box {
+        background: #f5f5f5 !important;
+      }
+
+      tbody tr:nth-child(even) {
+        background: #fafafa !important;
+      }
+
+      .score-card {
+        border: 1px solid var(--border) !important;
+      }
+
+      .about-photo {
+        background: #e8e8e8 !important;
+      }
+
+      .about-specialties li {
+        background: #f0f0f0 !important;
+      }
+
+      .task-time {
+        background: #f0f0f0 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- PAGE 1 — COUVERTURE -->
+<!-- ════════════════════════════════════════════════════════════ -->
+<div class="page">
+  <div class="cover">
+    <p class="cover-tag">Guide pratique</p>
+    <h1>L'IA pour les dirigeants</h1>
+    <p class="cover-subtitle">Ce qui marche vraiment en 2026</p>
+    <p class="cover-pages">Guide gratuit — 15 pages</p>
+    <div class="cover-line"></div>
+    <p class="cover-author">Aïssa Belkoussa</p>
+    <p class="cover-role">Consultant IA — Albi, Tarn</p>
+    <p class="cover-url">aissabelkoussa.fr</p>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- PAGE 2 — SOMMAIRE -->
+<!-- ════════════════════════════════════════════════════════════ -->
+<div class="page">
+  <p class="toc-title">Sommaire</p>
+  <ul class="toc-list">
+    <li class="toc-item">
+      <span class="toc-number">1</span>
+      <span class="toc-label">L'IA en 2026, au-delà du buzz</span>
+      <span class="toc-dots"></span>
+      <span class="toc-page">3</span>
+    </li>
+    <li class="toc-item">
+      <span class="toc-number">2</span>
+      <span class="toc-label">Ce que l'IA fait concrètement pour une PME</span>
+      <span class="toc-dots"></span>
+      <span class="toc-page">4</span>
+    </li>
+    <li class="toc-item">
+      <span class="toc-number">3</span>
+      <span class="toc-label">5 cas d'usage par secteur</span>
+      <span class="toc-dots"></span>
+      <span class="toc-page">6</span>
+    </li>
+    <li class="toc-item">
+      <span class="toc-number">4</span>
+      <span class="toc-label">Les vrais prix — SaaS vs sur-mesure</span>
+      <span class="toc-dots"></span>
+      <span class="toc-page">8</span>
+    </li>
+    <li class="toc-item">
+      <span class="toc-number">5</span>
+      <span class="toc-label">Comment démarrer sans compétence technique</span>
+      <span class="toc-dots"></span>
+      <span class="toc-page">10</span>
+    </li>
+    <li class="toc-item">
+      <span class="toc-number">6</span>
+      <span class="toc-label">Checklist — Votre entreprise est-elle prête pour l'IA ?</span>
+      <span class="toc-dots"></span>
+      <span class="toc-page">11</span>
+    </li>
+    <li class="toc-item">
+      <span class="toc-number">7</span>
+      <span class="toc-label">Prochaine étape</span>
+      <span class="toc-dots"></span>
+      <span class="toc-page">14</span>
+    </li>
+  </ul>
+  <div class="page-footer">
+    <span>L'IA pour les dirigeants — Aïssa Belkoussa</span>
+    <span>2</span>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- PAGE 3 — CHAPITRE 1 -->
+<!-- ════════════════════════════════════════════════════════════ -->
+<div class="page">
+  <p class="chapter-number">Chapitre 1</p>
+  <h2 class="chapter-title">L'IA en 2026, au-delà du buzz</h2>
+  <div class="chapter-separator"></div>
+
+  <h3>Ce qui a changé depuis ChatGPT (2022-2026)</h3>
+  <p>En novembre 2022, ChatGPT a démocratisé l'intelligence artificielle auprès du grand public. Quatre ans plus tard, l'IA n'est plus une curiosité technologique : c'est un outil de travail quotidien pour des millions de professionnels. Les modèles sont devenus plus rapides, plus fiables et surtout beaucoup moins chers. Ce qui coûtait 10 000 € en développement sur-mesure en 2023 se fait aujourd'hui pour 1 500 €.</p>
+
+  <h3>L'IA n'est plus réservée aux grandes entreprises</h3>
+  <p>Le mythe de l'IA accessible uniquement aux entreprises du CAC 40 est révolu. Les outils SaaS permettent à un artisan seul de mettre en place un chatbot de qualification en une journée. Les APIs sont devenues abordables : un assistant IA qui répond à vos clients 24 heures sur 24 coûte entre 30 et 100 € par mois. C'est moins cher qu'un standard téléphonique.</p>
+
+  <h3>Les 3 types d'IA utiles pour une PME</h3>
+  <p><strong>Assistants conversationnels</strong> — Chatbots, FAQ intelligentes, qualification de prospects. Ils répondent aux questions récurrentes de vos clients, filtrent les demandes et vous libèrent du temps.</p>
+  <p><strong>Automatisation de workflows</strong> — Relances d'impayés, envoi de devis, prise de rendez-vous, synchronisation d'outils. L'IA connecte vos logiciels entre eux et supprime les tâches répétitives.</p>
+  <p><strong>Analyse de données</strong> — Tableaux de bord en temps réel, prévisions de trésorerie, scoring de prospects. L'IA transforme vos données brutes en décisions concrètes.</p>
+
+  <div class="highlight-box">
+    <p><span class="stat-big">73 %</span>des PME qui adoptent l'IA voient un retour sur investissement positif en moins de 6 mois.</p>
+  </div>
+
+  <div class="page-footer">
+    <span>L'IA pour les dirigeants — Aïssa Belkoussa</span>
+    <span>3</span>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- PAGE 4 — CHAPITRE 2 (1/2) -->
+<!-- ════════════════════════════════════════════════════════════ -->
+<div class="page">
+  <p class="chapter-number">Chapitre 2</p>
+  <h2 class="chapter-title">Ce que l'IA fait concrètement pour une PME</h2>
+  <div class="chapter-separator"></div>
+
+  <p>Voici 10 tâches que vous pouvez automatiser immédiatement, avec le temps gagné estimé par semaine :</p>
+
+  <ul class="task-list">
+    <li>
+      <span class="task-time">3h / semaine</span>
+      Relances d'impayés automatiques — envoi progressif à J+3, J+15 et J+30 avec messages personnalisés
+    </li>
+    <li>
+      <span class="task-time">4h / semaine</span>
+      Saisie comptable par OCR — les factures fournisseurs sont lues, extraites et pré-saisies automatiquement
+    </li>
+    <li>
+      <span class="task-time">5h / semaine</span>
+      Chatbot de qualification prospects 24/7 — les visiteurs de votre site sont qualifiés avant même de vous contacter
+    </li>
+    <li>
+      <span class="task-time">2h / semaine</span>
+      Prise de rendez-vous en ligne automatisée — fini les allers-retours par email ou téléphone
+    </li>
+    <li>
+      <span class="task-time">3h / semaine</span>
+      Devis automatisés — un devis professionnel généré en 15 minutes au lieu de 3 heures
+    </li>
+  </ul>
+
+  <div class="page-footer">
+    <span>L'IA pour les dirigeants — Aïssa Belkoussa</span>
+    <span>4</span>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- PAGE 5 — CHAPITRE 2 (2/2) -->
+<!-- ════════════════════════════════════════════════════════════ -->
+<div class="page">
+  <p class="chapter-number">Chapitre 2 — suite</p>
+  <h2 class="chapter-title">Ce que l'IA fait concrètement pour une PME</h2>
+  <div class="chapter-separator"></div>
+
+  <ul class="task-list">
+    <li>
+      <span class="task-time">2h / semaine</span>
+      Reporting client auto-généré — vos clients reçoivent un rapport d'avancement sans que vous leviez le petit doigt
+    </li>
+    <li>
+      <span class="task-time">4h / semaine</span>
+      Suivi de chantier temps réel — photos, avancement et alertes synchronisés pour toute l'équipe
+    </li>
+    <li>
+      <span class="task-time">3h / semaine</span>
+      Email marketing personnalisé — séquences d'emails adaptées au comportement de chaque prospect
+    </li>
+    <li>
+      <span class="task-time">2h / semaine</span>
+      FAQ intelligente — vos clients trouvent la réponse avant de vous appeler
+    </li>
+    <li>
+      <span class="task-time">2h / semaine</span>
+      Tri et routage des demandes entrantes — chaque email, formulaire ou message arrive directement à la bonne personne
+    </li>
+  </ul>
+
+  <div class="highlight-box">
+    <p><strong>Total estimé : 30 heures gagnées par semaine.</strong> À 50 € de l'heure, cela représente 1 500 € par semaine, soit plus de 70 000 € par an réinvestis dans la croissance de votre entreprise.</p>
+  </div>
+
+  <div class="page-footer">
+    <span>L'IA pour les dirigeants — Aïssa Belkoussa</span>
+    <span>5</span>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- PAGE 6 — CHAPITRE 3 (1/2) -->
+<!-- ════════════════════════════════════════════════════════════ -->
+<div class="page">
+  <p class="chapter-number">Chapitre 3</p>
+  <h2 class="chapter-title">5 cas d'usage par secteur</h2>
+  <div class="chapter-separator"></div>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 18%;">Secteur</th>
+        <th style="width: 36%;">Problème</th>
+        <th style="width: 46%;">Solution IA</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="sector-label" rowspan="3">BTP / Artisanat</td>
+        <td>Devis manuels, longs et approximatifs</td>
+        <td>Devis automatisés : 3 heures → 15 minutes</td>
+      </tr>
+      <tr>
+        <td>Planning sur post-it, désynchronisé</td>
+        <td>Planning synchronisé temps réel, partagé entre bureau et chantier</td>
+      </tr>
+      <tr>
+        <td>Zéro présence web, invisible localement</td>
+        <td>Site professionnel + Google Maps optimisé en 10 jours</td>
+      </tr>
+      <tr>
+        <td class="sector-label" rowspan="3">Comptabilité / Finance</td>
+        <td>Relances à J+45, trésorerie tendue</td>
+        <td>Relances automatiques J+3, J+15 et J+30 avec escalade progressive</td>
+      </tr>
+      <tr>
+        <td>Saisie manuelle, erreurs fréquentes</td>
+        <td>OCR avec 95 % de précision, pré-saisie automatique</td>
+      </tr>
+      <tr>
+        <td>Reporting manuel, chronophage</td>
+        <td>Rapports auto-générés chaque semaine ou mois</td>
+      </tr>
+      <tr>
+        <td class="sector-label" rowspan="3">Immobilier</td>
+        <td>Site vitrine statique, pas de leads</td>
+        <td>Site avec estimation en ligne + chatbot de qualification</td>
+      </tr>
+      <tr>
+        <td>Visites non qualifiées, temps perdu</td>
+        <td>Qualification automatique : seuls les prospects sérieux passent</td>
+      </tr>
+      <tr>
+        <td>Invisible sur Google</td>
+        <td>SEO local + GEO (optimisation pour les réponses IA)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="page-footer">
+    <span>L'IA pour les dirigeants — Aïssa Belkoussa</span>
+    <span>6</span>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- PAGE 7 — CHAPITRE 3 (2/2) -->
+<!-- ════════════════════════════════════════════════════════════ -->
+<div class="page">
+  <p class="chapter-number">Chapitre 3 — suite</p>
+  <h2 class="chapter-title">5 cas d'usage par secteur</h2>
+  <div class="chapter-separator"></div>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 18%;">Secteur</th>
+        <th style="width: 36%;">Problème</th>
+        <th style="width: 46%;">Solution IA</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="sector-label" rowspan="3">Courtage / Assurance</td>
+        <td>60 % du temps perdu en qualification</td>
+        <td>Chatbot + scoring automatique des prospects</td>
+      </tr>
+      <tr>
+        <td>Rendez-vous non qualifiés</td>
+        <td>Prise de rendez-vous conditionnelle (questions de pré-qualification)</td>
+      </tr>
+      <tr>
+        <td>Suivi client 100 % manuel</td>
+        <td>CRM automatisé avec relances et alertes intelligentes</td>
+      </tr>
+      <tr>
+        <td class="sector-label" rowspan="3">Commerce / Retail</td>
+        <td>Pas de site ou site mort</td>
+        <td>E-commerce avec click &amp; collect en 10 jours</td>
+      </tr>
+      <tr>
+        <td>Pas d'avis Google, pas de confiance</td>
+        <td>Stratégie avis automatisée : demande post-achat + suivi</td>
+      </tr>
+      <tr>
+        <td>Stock géré au doigt mouillé</td>
+        <td>Alertes de réapprovisionnement + prévisions de vente</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="conclusion-box">
+    <p>Quel que soit votre secteur, l'IA ne remplace pas votre expertise. Elle supprime les tâches répétitives pour que vous puissiez vous concentrer sur ce qui compte : votre métier, vos clients et votre croissance.</p>
+  </div>
+
+  <div class="page-footer">
+    <span>L'IA pour les dirigeants — Aïssa Belkoussa</span>
+    <span>7</span>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- PAGE 8 — CHAPITRE 4 (1/2) -->
+<!-- ════════════════════════════════════════════════════════════ -->
+<div class="page">
+  <p class="chapter-number">Chapitre 4</p>
+  <h2 class="chapter-title">Les vrais prix — SaaS vs sur-mesure</h2>
+  <div class="chapter-separator"></div>
+
+  <p>L'une des premières questions de chaque dirigeant : <strong>combien ça coûte ?</strong> Voici une comparaison honnête des trois options disponibles en 2026.</p>
+
+  <table class="price-table">
+    <thead>
+      <tr>
+        <th>Solution</th>
+        <th>Coût</th>
+        <th>Pour qui</th>
+        <th>Avantage</th>
+        <th>Limite</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>SaaS</strong><br><span class="text-light" style="font-size:8.5pt">Tidio, Crisp, Make…</span></td>
+        <td>30 – 300 €<br>/mois</td>
+        <td>Solo / TPE</td>
+        <td>Rapide à mettre en place, pas de code</td>
+        <td>Personnalisation limitée, dépendance éditeur</td>
+      </tr>
+      <tr class="price-highlight">
+        <td><strong>Freelance sur-mesure</strong></td>
+        <td>1 500 – 6 900 €<br>(une fois)</td>
+        <td>PME de 2 à 50 personnes</td>
+        <td>100 % adapté à votre métier, vous le possédez</td>
+        <td>Délai de 5 à 10 jours ouvrés</td>
+      </tr>
+      <tr>
+        <td><strong>Agence parisienne</strong></td>
+        <td>1 500 – 3 000 €<br>/mois</td>
+        <td>Grandes PME / ETI</td>
+        <td>Équipe dédiée, support continu</td>
+        <td>Coût élevé, délai long, décalage terrain</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Exemple concret : automatiser vos relances d'impayés</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Option</th>
+        <th>Coût</th>
+        <th>Délai</th>
+        <th>Résultat</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>SaaS (Pennylane, Axonaut)</td>
+        <td>50 – 150 €/mois</td>
+        <td>1 jour</td>
+        <td>Relances génériques, peu personnalisables</td>
+      </tr>
+      <tr>
+        <td>Freelance sur-mesure</td>
+        <td>1 500 € (une fois)</td>
+        <td>5 jours</td>
+        <td>Relances personnalisées, ton adapté, escalade progressive</td>
+      </tr>
+      <tr>
+        <td>Agence</td>
+        <td>2 000 €/mois</td>
+        <td>3-6 semaines</td>
+        <td>Solution complète mais surdimensionnée pour ce besoin</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="page-footer">
+    <span>L'IA pour les dirigeants — Aïssa Belkoussa</span>
+    <span>8</span>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- PAGE 9 — CHAPITRE 4 (2/2) -->
+<!-- ════════════════════════════════════════════════════════════ -->
+<div class="page">
+  <p class="chapter-number">Chapitre 4 — suite</p>
+  <h2 class="chapter-title">Les vrais prix — SaaS vs sur-mesure</h2>
+  <div class="chapter-separator"></div>
+
+  <h3>Le vrai calcul : coût vs coût du statu quo</h3>
+
+  <p>La question n'est pas « combien coûte l'IA ? » mais « combien vous coûte le fait de ne rien faire ? »</p>
+
+  <div class="highlight-box">
+    <p><strong>Prenons un exemple :</strong> un artisan passe 3 heures par semaine à faire ses devis manuellement. À 50 € de l'heure, c'est 150 € par semaine, soit 7 050 € par an. L'automatisation coûte 2 900 € une seule fois et dure des années.</p>
+  </div>
+
+  <h3>Retour sur investissement par offre</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Offre</th>
+        <th>Investissement</th>
+        <th>Économie annuelle estimée</th>
+        <th>ROI</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Autonome</strong> — site web professionnel</td>
+        <td>1 500 €</td>
+        <td>3 000 – 8 000 € (leads supplémentaires)</td>
+        <td>Positif dès le 3ᵉ mois</td>
+      </tr>
+      <tr>
+        <td><strong>Accélérateur</strong> — automatisation workflows</td>
+        <td>2 900 €</td>
+        <td>15 000 – 35 000 € (temps + erreurs évitées)</td>
+        <td>Positif dès le 2ᵉ mois</td>
+      </tr>
+      <tr>
+        <td><strong>Partenaire</strong> — système complet + IA</td>
+        <td>6 900 €</td>
+        <td>40 000 – 70 000 € (transformation complète)</td>
+        <td>Positif dès le 2ᵉ mois</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="conclusion-box">
+    <p>Pour la majorité des PME, le sur-mesure freelance offre le meilleur retour sur investissement : pas d'abonnement mensuel, solution 100 % adaptée à votre métier, et un interlocuteur unique qui connaît votre réalité terrain.</p>
+  </div>
+
+  <div class="page-footer">
+    <span>L'IA pour les dirigeants — Aïssa Belkoussa</span>
+    <span>9</span>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- PAGE 10 — CHAPITRE 5 -->
+<!-- ════════════════════════════════════════════════════════════ -->
+<div class="page">
+  <p class="chapter-number">Chapitre 5</p>
+  <h2 class="chapter-title">Comment démarrer sans compétence technique</h2>
+  <div class="chapter-separator"></div>
+
+  <p>Vous n'avez pas besoin de savoir coder. Suivez ces 5 étapes dans l'ordre.</p>
+
+  <div class="step">
+    <div class="step-number">1</div>
+    <div class="step-content">
+      <h4>Identifiez vos 3 tâches les plus chronophages</h4>
+      <p>Pendant une semaine, notez chaque tâche répétitive et le temps passé. Classez-les par nombre d'heures. Les 3 premières sont vos cibles prioritaires.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-number">2</div>
+    <div class="step-content">
+      <h4>Chiffrez le coût du temps perdu</h4>
+      <p>Utilisez cette formule simple pour calculer le coût annuel de chaque tâche :</p>
+    </div>
+  </div>
+
+  <div class="formula">
+    Heures par semaine × Coût horaire × 47 semaines = Coût annuel
+  </div>
+
+  <p class="text-light" style="text-align:center; font-size:9pt; margin-bottom:24px;">Exemple : 3h × 50 € × 47 = 7 050 € par an perdus sur une seule tâche.</p>
+
+  <div class="step">
+    <div class="step-number">3</div>
+    <div class="step-content">
+      <h4>Testez un outil SaaS pendant 30 jours</h4>
+      <p>Commencez par un outil gratuit pour voir si l'automatisation fonctionne pour vous :</p>
+    </div>
+  </div>
+
+  <div class="tools-list">
+    <div class="tool-card">
+      <span class="tool-name">Make.com</span>
+      <span class="tool-desc">Automatisation de workflows — plan gratuit disponible</span>
+    </div>
+    <div class="tool-card">
+      <span class="tool-name">Tidio</span>
+      <span class="tool-desc">Chatbot pour site web — gratuit jusqu'à 100 conversations</span>
+    </div>
+    <div class="tool-card">
+      <span class="tool-name">Calendly</span>
+      <span class="tool-desc">Prise de RDV en ligne — version gratuite suffisante</span>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-number">4</div>
+    <div class="step-content">
+      <h4>Si le SaaS ne suffit pas → passez au sur-mesure</h4>
+      <p>Le SaaS a ses limites : personnalisation faible, intégration partielle avec vos outils existants, dépendance à l'éditeur. Le sur-mesure résout ces problèmes pour un coût unique et maîtrisé.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-number">5</div>
+    <div class="step-content">
+      <h4>Mesurez le ROI après 90 jours</h4>
+      <p>Comparez le temps passé avant et après. Calculez les économies réelles. Si le ROI est positif (et il le sera), passez à la tâche suivante.</p>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>L'IA pour les dirigeants — Aïssa Belkoussa</span>
+    <span>10</span>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- PAGE 11 — CHAPITRE 6 (1/3) -->
+<!-- ════════════════════════════════════════════════════════════ -->
+<div class="page">
+  <p class="chapter-number">Chapitre 6</p>
+  <h2 class="chapter-title">Checklist — Votre entreprise est-elle prête pour l'IA ?</h2>
+  <div class="chapter-separator"></div>
+
+  <p>Cochez chaque affirmation qui s'applique à votre entreprise. Comptez vos points à la fin.</p>
+
+  <p class="checklist-category">Présence en ligne</p>
+  <ul class="checklist">
+    <li>Avez-vous un site web professionnel ?</li>
+    <li>Votre site apparaît-il sur la première page de Google pour votre métier + ville ?</li>
+    <li>Avez-vous un Google Business Profile optimisé ?</li>
+    <li>Avez-vous plus de 10 avis Google ?</li>
+    <li>Votre site est-il adapté au mobile ?</li>
+    <li>ChatGPT vous recommande-t-il quand on lui demande votre métier + votre ville ?</li>
+  </ul>
+
+  <p class="checklist-category">Automatisation</p>
+  <ul class="checklist">
+    <li>Vos relances d'impayés partent-elles automatiquement ?</li>
+    <li>Vos devis sont-ils générés en moins de 10 minutes ?</li>
+    <li>Vos emails de suivi client sont-ils automatisés ?</li>
+    <li>Avez-vous un chatbot ou une FAQ intelligente ?</li>
+    <li>Vos outils sont-ils connectés entre eux ?</li>
+    <li>Avez-vous automatisé votre prise de rendez-vous ?</li>
+  </ul>
+
+  <div class="page-footer">
+    <span>L'IA pour les dirigeants — Aïssa Belkoussa</span>
+    <span>11</span>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- PAGE 12 — CHAPITRE 6 (2/3) -->
+<!-- ════════════════════════════════════════════════════════════ -->
+<div class="page">
+  <p class="chapter-number">Chapitre 6 — suite</p>
+  <h2 class="chapter-title">Checklist — Votre entreprise est-elle prête pour l'IA ?</h2>
+  <div class="chapter-separator"></div>
+
+  <p class="checklist-category">Données et pilotage</p>
+  <ul class="checklist">
+    <li>Connaissez-vous votre coût d'acquisition client ?</li>
+    <li>Avez-vous un dashboard temps réel ?</li>
+    <li>Recevez-vous des alertes automatiques sur vos KPI ?</li>
+    <li>Vos rapports sont-ils générés automatiquement ?</li>
+    <li>Savez-vous quels sont vos 3 meilleurs canaux d'acquisition ?</li>
+    <li>Mesurez-vous le ROI de vos actions marketing ?</li>
+  </ul>
+
+  <p class="checklist-category">Compétences</p>
+  <ul class="checklist">
+    <li>Au moins un membre de l'équipe utilise l'IA régulièrement ?</li>
+    <li>Avez-vous testé ChatGPT ou un outil équivalent ?</li>
+    <li>Connaissez-vous la différence entre IA générative et automatisation ?</li>
+    <li>Avez-vous identifié les tâches automatisables dans votre entreprise ?</li>
+    <li>Avez-vous un budget dédié à la transformation digitale ?</li>
+    <li>Avez-vous consulté un expert IA dans les 12 derniers mois ?</li>
+  </ul>
+
+  <div class="page-footer">
+    <span>L'IA pour les dirigeants — Aïssa Belkoussa</span>
+    <span>12</span>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- PAGE 13 — CHAPITRE 6 (3/3) -->
+<!-- ════════════════════════════════════════════════════════════ -->
+<div class="page">
+  <p class="chapter-number">Chapitre 6 — suite</p>
+  <h2 class="chapter-title">Checklist — Votre entreprise est-elle prête pour l'IA ?</h2>
+  <div class="chapter-separator"></div>
+
+  <p class="checklist-category">Stratégie</p>
+  <ul class="checklist">
+    <li>Avez-vous un plan de transformation digitale ?</li>
+    <li>Vos concurrents utilisent-ils l'IA ?</li>
+    <li>Vos clients vous trouvent-ils facilement en ligne ?</li>
+    <li>Votre processus de vente est-il documenté ?</li>
+    <li>Avez-vous une stratégie de contenu (blog, LinkedIn) ?</li>
+    <li>Mesurez-vous la satisfaction client régulièrement ?</li>
+  </ul>
+
+  <h3 style="margin-top: 40px;">Votre score</h3>
+
+  <div class="score-grid">
+    <div class="score-card">
+      <span class="score-range">0 – 10</span>
+      <span class="score-label">Débutant</span>
+      <p class="score-desc">Tout est à construire. Commencez par le diagnostic gratuit pour identifier vos priorités.</p>
+    </div>
+    <div class="score-card">
+      <span class="score-range">11 – 20</span>
+      <span class="score-label">En progression</span>
+      <p class="score-desc">Les fondations sont là. Les quick wins sont à portée de main : automatisez vos 3 tâches les plus chronophages.</p>
+    </div>
+    <div class="score-card">
+      <span class="score-range">21 – 30</span>
+      <span class="score-label">Avancé</span>
+      <p class="score-desc">Vous êtes en avance sur 90 % des PME. Passez au sur-mesure pour maximiser votre ROI.</p>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>L'IA pour les dirigeants — Aïssa Belkoussa</span>
+    <span>13</span>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- PAGE 14 — CHAPITRE 7 -->
+<!-- ════════════════════════════════════════════════════════════ -->
+<div class="page">
+  <p class="chapter-number">Chapitre 7</p>
+  <h2 class="chapter-title">Prochaine étape</h2>
+  <div class="chapter-separator"></div>
+
+  <p class="action-intro">Vous avez lu ce guide. Maintenant, passez à l'action.</p>
+
+  <div class="cta-block">
+    <h3>Diagnostic digital gratuit</h3>
+    <p>En 2 minutes, obtenez une analyse complète de votre présence en ligne et de votre potentiel d'automatisation. Résultat immédiat, zéro engagement.</p>
+    <span class="cta-url">aissabelkoussa.fr/diagnostic</span>
+  </div>
+
+  <div class="cta-block">
+    <h3>Calculateur ROI</h3>
+    <p>Combien l'automatisation vous rapporterait-elle concrètement ? Entrez vos chiffres, obtenez une estimation réaliste du retour sur investissement pour votre entreprise.</p>
+    <span class="cta-url">aissabelkoussa.fr/calculateur-roi</span>
+  </div>
+
+  <div class="cta-block">
+    <h3>Premier échange gratuit</h3>
+    <p>30 minutes en visioconférence pour analyser votre situation et identifier les 3 actions prioritaires. Zéro engagement, zéro jargon technique, 100 % concret.</p>
+    <span class="cta-url">aissabelkoussa.fr/contact</span>
+  </div>
+
+  <div class="highlight-box" style="margin-top: 32px;">
+    <p><strong>Pourquoi agir maintenant ?</strong> Vos concurrents n'attendent pas. Chaque mois sans automatisation, c'est du chiffre d'affaires qui s'évapore en tâches répétitives. Le meilleur moment pour commencer, c'est aujourd'hui.</p>
+  </div>
+
+  <div class="page-footer">
+    <span>L'IA pour les dirigeants — Aïssa Belkoussa</span>
+    <span>14</span>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- PAGE 15 — À PROPOS -->
+<!-- ════════════════════════════════════════════════════════════ -->
+<div class="page">
+  <p class="chapter-number">À propos</p>
+  <h2 class="chapter-title">L'auteur de ce guide</h2>
+  <div class="chapter-separator"></div>
+
+  <div class="about-layout">
+    <div class="about-photo">AB</div>
+    <div class="about-content">
+      <h3>Aïssa Belkoussa</h3>
+      <p class="about-role">Consultant IA &amp; Architecte de systèmes digitaux</p>
+      <p class="about-location">Basé à Albi, Tarn — Occitanie</p>
+
+      <p><span class="about-stat">93 projets livrés en 4 ans</span> pour des PME, artisans, professions libérales et collectivités dans le Tarn et au-delà.</p>
+
+      <ul class="about-specialties">
+        <li>Automatisation</li>
+        <li>Chatbots IA</li>
+        <li>Sites web</li>
+        <li>Dashboards</li>
+        <li>SEO / GEO</li>
+        <li>Intégrations API</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="about-quote">« Je ne conseille pas l'IA. Je la construis. »</p>
+
+  <p>Mon approche : comprendre votre métier avant de toucher au code. Chaque solution est construite sur-mesure, testée en conditions réelles et livrée avec 3 mois de support inclus. Pas de jargon, pas de PowerPoint de 80 pages — des résultats mesurables.</p>
+
+  <div class="about-contact">
+    <p><strong>Email</strong> contact@aissabelkoussa.fr</p>
+    <p><strong>Site</strong> aissabelkoussa.fr</p>
+    <p><strong>LinkedIn</strong> linkedin.com/in/aissabelkoussa</p>
+  </div>
+
+  <div class="conclusion-box" style="margin-top: 32px;">
+    <p>Ce guide est la propriété d'Aïssa Belkoussa. Vous pouvez le partager librement à condition de ne pas le modifier et de citer l'auteur. © 2026 — Tous droits réservés.</p>
+  </div>
+
+  <div class="page-footer">
+    <span>L'IA pour les dirigeants — Aïssa Belkoussa</span>
+    <span>15</span>
+  </div>
+</div>
+
+</body>
+</html>
