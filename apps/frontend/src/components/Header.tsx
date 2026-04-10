@@ -79,14 +79,25 @@ const Header = () => {
       <header
         data-layer="Header"
         className={cn(
-          "fixed top-[28px] left-0 right-0 z-50 transition-all duration-300 px-container py-6",
-          isScrolled ? "bg-site-bg/80 backdrop-blur-md py-4 top-0" : "bg-transparent"
+          "fixed left-0 right-0 z-50 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
+          isScrolled
+            ? "top-4 px-4 md:px-6 py-0"
+            : "top-[28px] px-container py-6"
         )}
       >
-        {/* Background Grid Pattern */}
-        <div className="absolute inset-0 bg-size-8 bg-[radial-gradient(var(--color-site-border)_1px,transparent_1px)] mask-[radial-gradient(ellipse_at_center,black,transparent_80%)] -z-10" />
+        {/* Background Grid Pattern — only when not scrolled */}
+        {!isScrolled && (
+          <div className="absolute inset-0 bg-size-8 bg-[radial-gradient(var(--color-site-border)_1px,transparent_1px)] mask-[radial-gradient(ellipse_at_center,black,transparent_80%)] -z-10" />
+        )}
 
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
+        <div
+          className={cn(
+            "mx-auto flex items-center justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
+            isScrolled
+              ? "max-w-3xl bg-site-bg/70 backdrop-blur-2xl backdrop-saturate-200 rounded-full border border-site-border/60 px-6 py-3 shadow-[0_4px_30px_rgba(0,0,0,0.06)]"
+              : "max-w-7xl"
+          )}
+        >
           <Link
             href="/"
             onClick={(e) => {
