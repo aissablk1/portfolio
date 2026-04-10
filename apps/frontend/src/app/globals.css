@@ -96,6 +96,19 @@
   80% { transform: translateX(4px); }
 }
 
+/* Print styles — clean PDF export for scan */
+@media print {
+  body { background: white !important; }
+  header, footer, .print\\:hidden { display: none !important; }
+  main { padding-top: 1rem !important; }
+  * { animation: none !important; transition: none !important; }
+  .rounded-2xl { border-radius: 8px; }
+  @page {
+    margin: 1.5cm;
+    size: A4;
+  }
+}
+
 /* Accessibility — respect user preference for reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

@@ -7,15 +7,20 @@ const LOGO_TEXT = "AÏSSA BELKOUSSA";
 const DURATION = 1200; // total preloader duration in ms
 
 export default function Preloader({ children }: { children: React.ReactNode }) {
+  const [mounted, setMounted] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [phase, setPhase] = useState<"letters" | "exit">("letters");
 
+  // Delay mount to avoid SSR hydration mismatch on Framer Motion transforms
+  useEffect(() => { setMounted(true); }, []);
+
   useEffect(() => {
+    if (!mounted) return;
     const t1 = setTimeout(() => setPhase("exit"), 800);
     const t2 = setTimeout(() => setIsLoading(false), 1200);
 
     return () => { clearTimeout(t1); clearTimeout(t2); };
-  }, []);
+  }, [mounted]);
 
   // Block scroll during preloader
   useEffect(() => {
@@ -30,7 +35,7 @@ export default function Preloader({ children }: { children: React.ReactNode }) {
   return (
     <>
       <AnimatePresence>
-        {isLoading && (
+        {mounted && isLoading && (
           <motion.div
             key="preloader"
             exit={{ opacity: 0 }}
@@ -48,7 +53,7 @@ export default function Preloader({ children }: { children: React.ReactNode }) {
                       key={i}
                       initial={{
                         opacity: 0,
-                        y: 60 + Math.random() * 30,
+                        y: 60 + ((i * 7 + 13) % 30),
                       }}
                       animate={
                         phase === "letters"
