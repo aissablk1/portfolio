@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import JsonLd from "@/components/JsonLd";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { createBreadcrumbSchema } from "@/lib/schemas";
 
 const siteUrl = "https://www.aissabelkoussa.fr";
@@ -33,6 +34,7 @@ export default function RessourcesLayout({
   return (
     <>
       <JsonLd data={[breadcrumb]} />
+      <Breadcrumbs items={[{ label: "Accueil", href: "/" }, { label: "Ressources" }]} />
       {children}
     </>
   );

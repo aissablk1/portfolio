@@ -147,6 +147,7 @@ const Footer = () => {
                   <Link href="/confidentialite" className="text-sm hover:underline">{dict.footer.privacyPolicy}</Link>
                   <Link href="/cgu" className="text-sm hover:underline">{dict.footer.termsOfService}</Link>
                   <Link href="/cgv" className="text-sm hover:underline">{dict.footer.termsAndConditions}</Link>
+                  <Link href="/accessibilite" className="text-sm hover:underline">{dict.footer.accessibility}</Link>
               </div>
           </div>
         </div>

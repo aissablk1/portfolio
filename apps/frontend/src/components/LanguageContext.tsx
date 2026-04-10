@@ -189,6 +189,7 @@ interface Dictionary {
     privacyPolicy: string;
     termsOfService: string;
     termsAndConditions: string;
+    accessibility: string;
     explore: string;
     architecture: string;
     legal: string;
@@ -461,6 +462,12 @@ interface Dictionary {
     featured: string;
     cta: string;
     viewOffers: string;
+    searchPlaceholder: string;
+    noResults: string;
+    allCategories: string;
+    categoryTitle: string;
+    backToBlog: string;
+    categoryEmpty: string;
   };
   article: {
     backToBlog: string;
@@ -974,6 +981,7 @@ const dictionaries: Record<Language, Dictionary> = {
       privacyPolicy: "Politique de confidentialité",
       termsOfService: "Conditions générales d'utilisation",
       termsAndConditions: "Conditions générales de vente",
+      accessibility: "Accessibilité",
       explore: "Explorer",
       architecture: "Architecture",
       legal: "Légal",
@@ -1254,6 +1262,12 @@ const dictionaries: Record<Language, Dictionary> = {
       featured: "À la une",
       cta: "Tu veux un système qui tourne pour toi ?",
       viewOffers: "Voir les offres",
+      searchPlaceholder: "Rechercher un article...",
+      noResults: "Aucun article ne correspond à votre recherche.",
+      allCategories: "Toutes les catégories",
+      categoryTitle: "Articles — {category}",
+      backToBlog: "Retour au blog",
+      categoryEmpty: "Aucun article dans cette catégorie pour le moment.",
     },
     article: {
       backToBlog: "Retour au blog",
@@ -1800,6 +1814,7 @@ const dictionaries: Record<Language, Dictionary> = {
       privacyPolicy: "Privacy policy",
       termsOfService: "Terms of service",
       termsAndConditions: "Terms and conditions",
+      accessibility: "Accessibility",
       explore: "Explore",
       architecture: "Architecture",
       legal: "Legal",
@@ -2080,6 +2095,12 @@ const dictionaries: Record<Language, Dictionary> = {
       featured: "Featured",
       cta: "Want a system that runs for you?",
       viewOffers: "View offers",
+      searchPlaceholder: "Search articles...",
+      noResults: "No articles match your search.",
+      allCategories: "All categories",
+      categoryTitle: "Articles — {category}",
+      backToBlog: "Back to blog",
+      categoryEmpty: "No articles in this category yet.",
     },
     article: {
       backToBlog: "Back to blog",

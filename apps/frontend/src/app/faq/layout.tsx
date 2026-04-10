@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import JsonLd from "@/components/JsonLd";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { createBreadcrumbSchema } from "@/lib/schemas";
 
 const siteUrl = "https://www.aissabelkoussa.fr";
@@ -111,6 +112,7 @@ export default function FaqLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <JsonLd data={[faqPageSchema, breadcrumb]} />
+      <Breadcrumbs items={[{ label: "Accueil", href: "/" }, { label: "FAQ" }]} />
       {children}
     </>
   );

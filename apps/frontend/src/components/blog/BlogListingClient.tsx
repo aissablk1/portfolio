@@ -1,12 +1,12 @@
 "use client";
 
-import React from "react";
+import React, { useState, useMemo } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useLanguage } from "../LanguageContext";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowUpRight, Calendar, Clock } from "lucide-react";
+import { ArrowUpRight, Calendar, Clock, Search } from "lucide-react";
 
 interface BlogPost {
   slug: string;
@@ -21,8 +21,28 @@ interface BlogPost {
 
 export default function BlogListingClient({ postsFr, postsEn }: { postsFr: BlogPost[]; postsEn: BlogPost[] }) {
   const { language, dict } = useLanguage();
-  const posts = language === "en" ? postsEn : postsFr;
+  const allPosts = language === "en" ? postsEn : postsFr;
   const dateLocale = language === "fr" ? "fr-FR" : "en-GB";
+  const [search, setSearch] = useState("");
+
+  const categories = useMemo(() => {
+    const cats = new Set<string>();
+    for (const p of allPosts) {
+      if (p.category) cats.add(p.category);
+    }
+    return Array.from(cats).sort();
+  }, [allPosts]);
+
+  const posts = useMemo(() => {
+    if (!search.trim()) return allPosts;
+    const q = search.toLowerCase().trim();
+    return allPosts.filter(
+      (p) =>
+        p.title.toLowerCase().includes(q) ||
+        p.description.toLowerCase().includes(q) ||
+        p.tags.some((t) => t.toLowerCase().includes(q))
+    );
+  }, [allPosts, search]);
 
   return (
     <div className="bg-site-bg min-h-screen">
@@ -52,9 +72,40 @@ export default function BlogListingClient({ postsFr, postsEn }: { postsFr: BlogP
               </p>
             </motion.div>
 
+            {/* Search */}
+            <div className="mb-8">
+              <div className="relative max-w-md">
+                <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-site-text-light/40" />
+                <input
+                  type="text"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  placeholder={dict.blog.searchPlaceholder}
+                  className="w-full pl-11 pr-4 py-3 rounded-full border border-site-border bg-site-bg text-sm text-site-text placeholder:text-site-text-light/40 focus:border-site-accent focus:outline-none transition-colors"
+                />
+              </div>
+            </div>
+
+            {/* Categories */}
+            {categories.length > 0 && (
+              <div className="flex flex-wrap gap-2 mb-10">
+                {categories.map((cat) => (
+                  <Link
+                    key={cat}
+                    href={`/blog/categorie/${cat}`}
+                    className="text-[10px] font-bold uppercase tracking-widest text-site-text-light/60 border border-site-border px-3 py-1.5 rounded-full hover:border-site-accent/30 hover:text-site-accent transition-colors"
+                  >
+                    {cat}
+                  </Link>
+                ))}
+              </div>
+            )}
+
             {/* Posts grid */}
-            {posts.length === 0 ? (
+            {allPosts.length === 0 ? (
               <p className="text-site-text-light text-sm">{dict.blog.empty}</p>
+            ) : posts.length === 0 ? (
+              <p className="text-site-text-light text-sm">{dict.blog.noResults}</p>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {posts.map((post, idx) => (

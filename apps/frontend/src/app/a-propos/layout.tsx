@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import JsonLd from "@/components/JsonLd";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { personSchema, createBreadcrumbSchema } from "@/lib/schemas";
 
 const siteUrl = "https://www.aissabelkoussa.fr";
@@ -33,6 +34,7 @@ export default function AProposLayout({
   return (
     <>
       <JsonLd data={[personSchema, breadcrumb]} />
+      <Breadcrumbs items={[{ label: "Accueil", href: "/" }, { label: "À propos" }]} />
       {children}
     </>
   );

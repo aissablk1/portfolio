@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import JsonLd from "@/components/JsonLd";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { createBreadcrumbSchema } from "@/lib/schemas";
 
 const siteUrl = "https://www.aissabelkoussa.fr";
@@ -168,6 +169,7 @@ export default function ConsultantIALayout({
   return (
     <>
       <JsonLd data={[localServiceSchema, faqSchema, breadcrumb]} />
+      <Breadcrumbs items={[{ label: "Accueil", href: "/" }, { label: "Consultant IA Albi" }]} />
       {children}
     </>
   );

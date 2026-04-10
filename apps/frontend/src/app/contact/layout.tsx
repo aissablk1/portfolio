@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import JsonLd from "@/components/JsonLd";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { contactPageSchema, breadcrumbs } from "@/lib/schemas";
 
 const siteUrl = "https://www.aissabelkoussa.fr";
@@ -28,6 +29,7 @@ export default function ContactLayout({
   return (
     <>
       <JsonLd data={[contactPageSchema, breadcrumbs.contact]} />
+      <Breadcrumbs items={[{ label: "Accueil", href: "/" }, { label: "Contact" }]} />
       {children}
     </>
   );

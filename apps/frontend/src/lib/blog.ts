@@ -94,3 +94,12 @@ export function getRelatedPosts(currentSlug: string, tags: string[], limit = 3, 
     .filter((p) => p.slug !== currentSlug && p.tags.some((t) => tags.includes(t)))
     .slice(0, limit);
 }
+
+export function getAllCategories(lang: Lang = "fr"): string[] {
+  const posts = getAllPosts(lang);
+  const categories = new Set<string>();
+  for (const post of posts) {
+    if (post.category) categories.add(post.category);
+  }
+  return Array.from(categories).sort();
+}

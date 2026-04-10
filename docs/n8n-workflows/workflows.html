@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="container">
-<a href="../index.html" class="back">&larr; Retour a l'index</a>
+<a href="../index.html" class="back">&larr; Retour à l'index</a>
 <h1>Workflows n8n — Automatisation business</h1>
 <h2>Vue d'ensemble</h2>
 <pre><code>LEAD ARRIVE (formulaire / diagnostic / WhatsApp)
@@ -31,19 +31,19 @@
     v
   Notion/Airtable
   Pipeline CRM</code></pre>
-<h2>Workflows a creer</h2>
-<h3>1. <code>lead-intake.json</code> — Reception et scoring</h3>
-<ul><li><strong>Trigger</strong> : Webhook (POST depuis l'API contact Next.js)</li><li><strong>Actions</strong> : Parser le payload, creer entree Notion/Airtable, notification WhatsApp si CHAUD, email nurturing si TIEDE/FROID</li></ul>
-<h3>2. <code>sequence-nurturing.json</code> — Sequence email automatique</h3>
-<ul><li><strong>Trigger</strong> : Cron quotidien</li><li>J+1 : Email "Votre diagnostic"</li><li>J+3 : Email "3 questions pour cadrer votre projet"</li><li>J+7 : Email "Etude de cas : plombier +10h/semaine"</li><li>J+14 : Email "Derniere chance — creneau disponible"</li></ul>
+<h2>Workflows à créer</h2>
+<h3>1. <code>lead-intake.json</code> — Réception et scoring</h3>
+<ul><li><strong>Trigger</strong> : Webhook (POST depuis l'API contact Next.js)</li><li><strong>Actions</strong> : Parser le payload, créer entrée Notion/Airtable, notification WhatsApp si CHAUD, email nurturing si TIÈDE/FROID</li></ul>
+<h3>2. <code>sequence-nurturing.json</code> — Séquence email automatique</h3>
+<ul><li><strong>Trigger</strong> : Cron quotidien</li><li>J+1 : Email "Votre diagnostic"</li><li>J+3 : Email "3 questions pour cadrer votre projet"</li><li>J+7 : Email "Étude de cas : plombier +10h/semaine"</li><li>J+14 : Email "Dernière chance — créneau disponible"</li></ul>
 <h3>3. <code>maintenance-transition.json</code> — Transition mois 3</h3>
-<ul><li><strong>Trigger</strong> : Cron (clients dont la periode se termine dans 15 jours)</li><li>Envoyer template avec metriques, planifier appel, relance WhatsApp si pas de reponse</li></ul>
+<ul><li><strong>Trigger</strong> : Cron (clients dont la période se termine dans 15 jours)</li><li>Envoyer template avec métriques, planifier appel, relance WhatsApp si pas de réponse</li></ul>
 <h3>4. <code>monthly-report.json</code> — Rapport mensuel</h3>
-<ul><li><strong>Trigger</strong> : Cron (1er de chaque mois)</li><li>Fetcher metriques Vercel/UptimeRobot, generer rapport, envoyer aux clients actifs</li></ul>
+<ul><li><strong>Trigger</strong> : Cron (1er de chaque mois)</li><li>Fetcher métriques Vercel/UptimeRobot, générer rapport, envoyer aux clients actifs</li></ul>
 <h3>5. <code>whatsapp-notif.json</code> — Notification lead chaud</h3>
-<ul><li><strong>Trigger</strong> : Appele par <code>lead-intake</code> quand score >= 55</li><li>Message WhatsApp + rappel calendrier</li></ul>
-<h2>Stack technique recommandee</h2>
-<ul><li><strong>n8n</strong> : self-hosted ou cloud</li><li><strong>Resend</strong> : emails transactionnels (deja configure)</li><li><strong>Notion/Airtable</strong> : CRM pipeline</li><li><strong>UptimeRobot</strong> : monitoring uptime (gratuit)</li><li><strong>WhatsApp Business API</strong> : ou Twilio</li></ul>
+<ul><li><strong>Trigger</strong> : Appelé par <code>lead-intake</code> quand score >= 55</li><li>Message WhatsApp + rappel calendrier</li></ul>
+<h2>Stack technique recommandée</h2>
+<ul><li><strong>n8n</strong> : self-hosted ou cloud</li><li><strong>Resend</strong> : emails transactionnels (déjà configuré)</li><li><strong>Notion/Airtable</strong> : CRM pipeline</li><li><strong>UptimeRobot</strong> : monitoring uptime (gratuit)</li><li><strong>WhatsApp Business API</strong> : ou Twilio</li></ul>
 <h2>Variables d'environnement n8n</h2>
 <pre><code>RESEND_API_KEY=re_xxx
 NOTION_API_KEY=ntn_xxx

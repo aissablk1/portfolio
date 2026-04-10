@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import JsonLd from "@/components/JsonLd";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import {
   servicesPageSchema,
   faqSchema,
@@ -34,6 +35,7 @@ export default function ServicesLayout({
   return (
     <>
       <JsonLd data={[servicesPageSchema, faqSchema, ...formationSchemas, consultingSchema, breadcrumbs.services]} />
+      <Breadcrumbs items={[{ label: "Accueil", href: "/" }, { label: "Tarifs & Services" }]} />
       {children}
     </>
   );

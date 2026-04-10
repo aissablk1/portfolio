@@ -131,7 +131,7 @@ def import_html():
     raw_prospects = parser.get_prospects()
 
     if not raw_prospects:
-        print("Aucun prospect trouve dans le HTML.")
+        print("Aucun prospect trouvé dans le HTML.")
         return
 
     existing = load_prospects()
@@ -164,7 +164,7 @@ def import_html():
         added += 1
 
     save_prospects(existing)
-    print(f"{added} prospects BTP importes ({len(existing)} total).")
+    print(f"{added} prospects BTP importés ({len(existing)} total).")
 
 
 # ---------------------------------------------------------------------------
@@ -205,7 +205,7 @@ def add_prospect():
     prospects = load_prospects()
     prospects.append(prospect)
     save_prospects(prospects)
-    print(f"\nProspect ajoute : {entreprise} [{prospect['id']}]")
+    print(f"\nProspect ajouté : {entreprise} [{prospect['id']}]")
 
 
 # ---------------------------------------------------------------------------
@@ -213,7 +213,7 @@ def add_prospect():
 # ---------------------------------------------------------------------------
 
 def update_status(prospect_id: str, new_status: str):
-    """Met a jour le statut d'un prospect."""
+    """Met à jour le statut d'un prospect."""
     if new_status not in STATUTS:
         print(f"Statut invalide. Valeurs possibles : {', '.join(STATUTS)}")
         return
@@ -243,11 +243,11 @@ def update_status(prospect_id: str, new_status: str):
 # ---------------------------------------------------------------------------
 
 def list_prospects():
-    """Affiche tous les prospects groupes par statut."""
+    """Affiche tous les prospects groupés par statut."""
     prospects = load_prospects()
 
     if not prospects:
-        print("Aucun prospect enregistre.")
+        print("Aucun prospect enregistré.")
         return
 
     by_status = {}
@@ -277,7 +277,7 @@ def show_stats():
     total = len(prospects)
 
     if total == 0:
-        print("Aucun prospect enregistre.")
+        print("Aucun prospect enregistré.")
         return
 
     counts = {}
@@ -303,7 +303,7 @@ def show_stats():
         if s != "a_contacter"
     )
     rdv = counts.get("rdv_pris", 0)
-    print(f"\n  Contactes : {contacted}/{total}")
+    print(f"\n  Contactés : {contacted}/{total}")
     if contacted > 0:
         print(f"  Taux RDV  : {rdv}/{contacted} ({rdv / contacted * 100:.1f}%)")
 
@@ -313,7 +313,7 @@ def show_stats():
 # ---------------------------------------------------------------------------
 
 def show_followups():
-    """Affiche les relances a faire aujourd'hui."""
+    """Affiche les relances à faire aujourd'hui."""
     prospects = load_prospects()
     today = date.today()
     pending = []
@@ -332,7 +332,7 @@ def show_followups():
             pending.append((p, rule))
 
     if not pending:
-        print("\nAucune relance a faire aujourd'hui.")
+        print("\nAucune relance à faire aujourd'hui.")
         total_active = sum(
             1 for p in prospects
             if p["statut"] in ("dm_envoye", "relance_j3", "relance_j7")
@@ -342,7 +342,7 @@ def show_followups():
 
     print(f"\n{'=' * 50}")
     print(f"  RELANCES DU JOUR — {today.isoformat()}")
-    print(f"  {len(pending)} relance(s) a envoyer")
+    print(f"  {len(pending)} relance(s) à envoyer")
     print(f"{'=' * 50}")
 
     modified = False
@@ -354,7 +354,7 @@ def show_followups():
         print(f"\n{'─' * 50}")
         print(f"  {rule['label']} | {p['entreprise']} ({p.get('ville', '')})")
         print(f"  Niche: {p.get('niche', 'N/A')} | Canal: {p.get('canal', 'N/A')}")
-        print(f"  DM envoye le {p['premier_dm']} (il y a {delta} jours)")
+        print(f"  DM envoyé le {p['premier_dm']} (il y a {delta} jours)")
         if p.get("notes"):
             print(f"  Notes: {p['notes']}")
         print(f"{'─' * 50}")
@@ -362,17 +362,17 @@ def show_followups():
         message = rule["template"](p)
         print(f"\n{message}\n")
 
-        reponse = input(f"Relance envoyee ? (o/n) : ").strip().lower()
+        reponse = input(f"Relance envoyée ? (o/n) : ").strip().lower()
         if reponse == "o":
             p["statut"] = rule["next"]
-            print(f"  -> Statut mis a jour : {rule['next']}")
+            print(f"  -> Statut mis à jour : {rule['next']}")
             modified = True
         else:
             print(f"  -> Statut inchange : {p['statut']}")
 
     if modified:
         save_prospects(prospects)
-        print("\nProspects sauvegardes.")
+        print("\nProspects sauvegardés.")
 
 
 # ---------------------------------------------------------------------------

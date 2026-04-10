@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import JsonLd from "@/components/JsonLd";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { diagnosticPageSchema, breadcrumbs } from "@/lib/schemas";
 
 export const metadata: Metadata = {
@@ -34,6 +35,7 @@ export default function DiagnosticLayout({
   return (
     <>
       <JsonLd data={[...diagnosticPageSchema, breadcrumbs.diagnostic]} />
+      <Breadcrumbs items={[{ label: "Accueil", href: "/" }, { label: "Diagnostic" }]} />
       {children}
     </>
   );

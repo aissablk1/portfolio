@@ -1,0 +1,124 @@
+---
+title: "Claude Code: how to never hit the token limit again"
+description: "My Claude Max subscription was hitting the limit in 4 days instead of 7. Here's the full audit of my configuration and the optimizations that gave me 40% more headroom — applicable to any power user."
+date: "2026-04-10"
+publishAt: "2026-04-10T14:00:00+02:00"
+updatedAt: "2026-04-10"
+author: "Aïssa BELKOUSSA"
+tags: ["Claude Code", "AI", "productivity", "tokens", "optimization"]
+category: "AI"
+image: "/assets/blog/optimiser-claude-code/cover.jpg"
+imageAlt: "Claude Code token consumption dashboard with usage gauge"
+published: true
+featured: true
+---
+
+My Claude Max subscription at $200/month was hitting the limit in 4 days instead of 7.
+
+Not because I was coding too much. Because my configuration was burning tokens **without me noticing**.
+
+After a full audit of my setup, I identified 4 sources of silent waste and recovered **40% headroom**. Here's exactly what I did — and how you can do the same.
+
+## The problem: 23% of the weekly quota in a single day
+
+Here are my stats on a regular Tuesday morning:
+
+```
+5h limit  : 4%    |  7d limit : 23%
+Disk      : 92%   |  10 GB
+Tokens    : 6.4k  |  (469 in / 5.9k out)
+```
+
+At that rate, I would hit the wall by Thursday evening. Two working days lost. And no way to spin up an emergency MVP over the weekend.
+
+The problem wasn't my usage. It was my configuration.
+
+## The 4 waste sources nobody talks about
+
+### 1. Effort level permanently set to "high"
+
+Claude Code offers three effort levels: `low`, `medium`, `high`. The `high` mode activates extended reasoning on **every message** — even for a simple `git status`.
+
+**The real cost:** 25 to 30% more tokens per message.
+
+The natural instinct is to set everything to `high` for the best answers. In practice, `medium` produces the same result for 80% of daily tasks (searches, commits, installations, simple refactoring).
+
+**The rule:** `medium` by default, `high` only for architecture and complex features.
+
+### 2. Plugins stacked without curation
+
+My setup had **23 plugins enabled** at all times. Each plugin injects its instructions into every message's context, even when not used.
+
+Among those 23, here's what I found:
+- **2 style plugins** active simultaneously (explanatory + learning) — each injecting conflicting instructions
+- **6 one-time plugins** that stayed enabled permanently (claude-code-setup, claude-md-management, skill-creator, agent-sdk-dev, mcp-server-dev, autofix-bot)
+- **1 redundant plugin** overlapping with security rules already in CLAUDE.md (security-guidance)
+
+**Result after cleanup:** 23 → 13 plugins. About 15% less context per message.
+
+### 3. Duplicated hooks
+
+Hooks are scripts that run on every event (tool called, message sent, session started). My setup had **48 across 14 events**.
+
+The problem: two scripts did exactly the same thing — `claude-island-state-fast.sh` (fast bash version) and `claude-island-state.py` (full Python version). Both ran on every event.
+
+On each tool call, 3 to 4 hooks fired. Over a 50-tool-call session, that's 150 to 200 script executions. Each hook response = tokens injected into context.
+
+**Result after deduplication:** 48 → 35 hooks. ~27% fewer executions.
+
+### 4. File history never cleaned
+
+The `file-history/` folder weighed **91 MB** — a log of all file modifications. 66 folders were over 7 days old. This volume contributed to disk pressure (92% used) and general slowdown.
+
+**After cleanup:** 91 MB → 46 MB. The disk breathes again.
+
+## The weekly rationing plan
+
+Optimizing configuration isn't enough. You also need to **budget your usage** to keep an emergency reserve.
+
+### 7-day distribution
+
+| Period | Budget/day | Total |
+|--------|-----------|-------|
+| Monday to Friday | 13% max | 65% |
+| Saturday and Sunday | 10% max | 20% |
+| **Emergency MVP reserve** | — | **15%** |
+| **Total** | | **100%** |
+
+The 15% reserve equals roughly one full heavy day. If a client calls on Friday with an urgent need, I have the margin to build an MVP in 24 hours without hitting limits.
+
+### Usage modes by task type
+
+| Task | Mode | Effort |
+|------|------|--------|
+| Search, commits, installations | `/fast` | `low` |
+| Edits, refactoring, simple debug | Normal | `medium` |
+| Architecture, complex features, multi-agents | Normal | `high` |
+
+## Results summary
+
+| Optimization | Estimated gain |
+|-------------|---------------|
+| Effort `medium` by default | ~25-30% tokens |
+| Plugins 23 → 13 | ~15% context |
+| Hooks 48 → 35 | ~27% executions |
+| file-history cleanup | 45 MB disk |
+| Budget tracker + alerts | Overshoot prevention |
+
+**Total estimated gain: about 40% headroom recovered.** Enough to go from 4 days to a full 7 days — with an emergency reserve.
+
+## Key takeaways
+
+1. **The default configuration isn't optimal.** Claude Code is designed to be extensible. But every extension has a token cost. Audit your setup regularly.
+
+2. **Effort level is the most powerful lever.** One parameter, 25 to 30% difference. Use `high` like a turbo, not as a default.
+
+3. **Plugins and hooks accumulate silently.** Nobody thinks to disable a plugin after installing it. Do it.
+
+4. **Budget your AI like you budget your time.** A weekly quota without a distribution plan is a budget without accounting.
+
+5. **Always keep a reserve.** The day you need to spin up an emergency MVP is the day the limit hits. Plan ahead.
+
+---
+
+*Using Claude Code intensively and hitting limits? I can audit your configuration in 30 minutes. [Contact me](/contact).*

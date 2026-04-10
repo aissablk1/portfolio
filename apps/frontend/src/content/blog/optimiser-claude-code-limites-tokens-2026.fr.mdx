@@ -1,0 +1,141 @@
+---
+title: "Claude Code : comment ne plus jamais atteindre la limite de tokens"
+description: "Mon abonnement Claude Max atteignait la limite en 4 jours au lieu de 7. Voici l'audit complet de ma configuration et les optimisations qui m'ont fait gagner 40% de marge — applicable à tout utilisateur intensif."
+date: "2026-04-10"
+publishAt: "2026-04-10T14:00:00+02:00"
+updatedAt: "2026-04-10"
+author: "Aïssa BELKOUSSA"
+tags: ["Claude Code", "IA", "productivite", "tokens", "optimisation"]
+category: "IA"
+image: "/assets/blog/optimiser-claude-code/cover.jpg"
+imageAlt: "Dashboard de consommation de tokens Claude Code avec jauge d'utilisation"
+published: true
+featured: true
+---
+
+Mon abonnement Claude Max à 200 €/mois atteignait la limite en 4 jours au lieu de 7.
+
+Pas parce que je codais trop. Parce que ma configuration consommait des tokens **sans que je m'en rende compte**.
+
+Après un audit complet de mon setup, j'ai identifié les 4 sources de gaspillage silencieux et récupéré **40 % de marge**. Voici exactement ce que j'ai fait — et comment vous pouvez faire pareil.
+
+## Le problème : 23 % du quota hebdomadaire en une seule journée
+
+Voici mes stats un mardi matin ordinaire :
+
+```
+Limite 5h : 4%    |  Limite 7j : 23%
+Disque    : 92%   |  10 Go
+Tokens    : 6.4k  |  (469 in / 5.9k out)
+```
+
+À ce rythme, j'allais atteindre la limite le jeudi soir. Deux jours de travail perdus. Et impossible de lancer un MVP en urgence le week-end.
+
+Le problème n'était pas mon usage. C'était ma configuration.
+
+## Les 4 sources de gaspillage que personne ne mentionne
+
+### 1. Le effort level en « high » permanent
+
+Claude Code propose trois niveaux d'effort : `low`, `medium`, `high`. Le mode `high` active le raisonnement étendu sur **chaque message** — même pour un simple `git status`.
+
+**Le coût réel :** 25 à 30 % de tokens supplémentaires par message.
+
+Le réflexe naturel est de tout mettre en `high` pour avoir les meilleures réponses. En pratique, `medium` produit le même résultat pour 80 % des tâches quotidiennes (recherches, commits, installations, refactoring simple).
+
+**La règle :** `medium` par défaut, `high` uniquement pour l'architecture et les features complexes.
+
+### 2. Les plugins empilés sans tri
+
+Mon setup comptait **23 plugins activés** en permanence. Chaque plugin injecte ses instructions dans le contexte de chaque message, même quand il n'est pas utilisé.
+
+Parmi ces 23, voici ce que j'ai trouvé :
+- **2 plugins de style** activés en même temps (explanatory + learning) — chacun injecte des instructions conflictuelles
+- **6 plugins ponctuels** qui restaient activés en permanence (claude-code-setup, claude-md-management, skill-creator, agent-sdk-dev, mcp-server-dev, autofix-bot)
+- **1 plugin redondant** avec mes règles de sécurité déjà dans CLAUDE.md (security-guidance)
+
+**Résultat après tri :** 23 → 13 plugins. Environ 15 % de contexte en moins par message.
+
+### 3. Les hooks dupliqués
+
+Les hooks sont des scripts qui s'exécutent à chaque événement (outil appelé, message envoyé, session démarrée). Mon setup en comptait **48 sur 14 événements**.
+
+Le problème : deux scripts faisaient exactement la même chose — `claude-island-state-fast.sh` (version rapide en bash) et `claude-island-state.py` (version complète en Python). Les deux tournaient sur chaque événement.
+
+À chaque tool call, 3 à 4 hooks se déclenchaient. Sur une session de 50 tool calls, ça représentait 150 à 200 exécutions de scripts. Chaque retour de hook = tokens injectés dans le contexte.
+
+**Résultat après déduplication :** 48 → 35 hooks. ~27 % d'exécutions en moins.
+
+### 4. L'historique de fichiers jamais nettoyé
+
+Le dossier `file-history/` pesait **91 Mo** — un historique de toutes les modifications de fichiers. 66 dossiers dataient de plus de 7 jours. Ce volume contribuait à la pression disque (92 % utilisés) et au ralentissement général.
+
+**Après nettoyage :** 91 Mo → 46 Mo. Le disque respire.
+
+## Le plan de rationnement hebdomadaire
+
+Optimiser la configuration ne suffit pas. Il faut aussi **budgéter son usage** pour garder une réserve d'urgence.
+
+### Répartition sur 7 jours
+
+| Période | Budget/jour | Total |
+|---------|-------------|-------|
+| Lundi à vendredi | 13 % max | 65 % |
+| Samedi et dimanche | 10 % max | 20 % |
+| **Réserve MVP urgence** | — | **15 %** |
+| **Total** | | **100 %** |
+
+La réserve de 15 % représente l'équivalent d'une grosse journée complète. Si un client appelle le vendredi avec un besoin urgent, j'ai la marge pour monter un MVP en 24 heures sans être bloqué par les limites.
+
+### Modes d'utilisation par type de tâche
+
+| Tâche | Mode | Effort |
+|-------|------|--------|
+| Recherche, commits, installations | `/fast` | `low` |
+| Éditions, refactoring, debug simple | Normal | `medium` |
+| Architecture, features complexes, multi-agents | Normal | `high` |
+
+### Le facteur horaire
+
+Anthropic réduit les limites effectives aux heures de pointe (journée EU/US). Les sessions lourdes le soir ou tôt le matin consomment moins de quota effectif.
+
+## Le système d'alerte automatique
+
+J'ai mis en place un budget tracker qui se déclenche à chaque nouvelle session Claude Code :
+
+- **6 sessions/jour** : alerte jaune — ralentir si pas urgent
+- **10 sessions/jour** : alerte orange — budget jour dépassé, passer en `/fast`
+- **16 sessions/jour** : alerte rouge — réserve MVP entamée, notification macOS
+
+Couplé à 3 rappels dans Calendar :
+- **9h** : budget du jour et rappel des bonnes pratiques
+- **14h** : checkpoint mi-journée, vérifier la consommation
+- **Vendredi 17h** : bilan hebdomadaire, nettoyage, planification de la semaine suivante
+
+## Récapitulatif des gains
+
+| Optimisation | Gain estimé |
+|-------------|-------------|
+| Effort `medium` par défaut | ~25-30 % tokens |
+| Plugins 23 → 13 | ~15 % contexte |
+| Hooks 48 → 35 | ~27 % exécutions |
+| Nettoyage file-history | 45 Mo disque |
+| Budget tracker + alertes | Prévention des dépassements |
+
+**Gain total estimé : environ 40 % de marge récupérée.** Assez pour passer de 4 jours à 7 jours complets — avec une réserve d'urgence.
+
+## Les enseignements
+
+1. **La configuration par défaut n'est pas optimale.** Claude Code est conçu pour être extensible. Mais chaque extension a un coût en tokens. Auditez votre setup régulièrement.
+
+2. **Le effort level est le levier le plus puissant.** Un seul paramètre, 25 à 30 % de différence. Utilisez `high` comme un turbo, pas comme un mode par défaut.
+
+3. **Les plugins et hooks s'accumulent silencieusement.** Personne ne pense à désactiver un plugin après l'avoir installé. Faites-le.
+
+4. **Budgétez votre IA comme vous budgétez votre temps.** Un quota hebdomadaire sans plan de répartition, c'est un budget sans comptabilité.
+
+5. **Gardez toujours une réserve.** Le jour où vous avez besoin de monter un MVP en urgence, c'est le jour où la limite tombe. Anticipez.
+
+---
+
+*Vous utilisez Claude Code intensivement et vous atteignez les limites ? Je peux auditer votre configuration en 30 minutes. [Contactez-moi](/contact).*

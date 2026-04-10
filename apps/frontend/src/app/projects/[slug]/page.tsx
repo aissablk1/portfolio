@@ -110,6 +110,27 @@ const ProjectPage = () => {
                         </p>
                     </div>
                 </div>
+
+                {/* Metrics ROI */}
+                {project.metrics && project.metrics.length > 0 && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.5 }}
+                    className="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-site-border"
+                  >
+                    {project.metrics.map((m, i) => (
+                      <div key={i}>
+                        <div className="text-2xl md:text-3xl font-display font-medium tracking-tight text-site-accent">
+                          {m.value}
+                        </div>
+                        <div className="text-xs text-site-text-light uppercase tracking-wider mt-1">
+                          {m.label}
+                        </div>
+                      </div>
+                    ))}
+                  </motion.div>
+                )}
             </motion.div>
 
             <motion.div

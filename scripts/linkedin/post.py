@@ -60,7 +60,7 @@ Tapez le nom de votre entreprise sur Google. Vous apparaissez ? Dites-moi en com
     },
     {
         "id": 2,
-        "title": "Post verite / transparence",
+        "title": "Post vérité / transparence",
         "date_prevue": "10 avril 2026",
         "hashtags": "#entrepreneuriat #freelance #transparence #IA #automatisation",
         "content": """J'ai 96 projets dans mes dossiers.
@@ -96,7 +96,7 @@ La perfection technique ne paie pas les factures. Les conversations, oui.
     },
     {
         "id": 5,
-        "title": "Article blog — 3 signaux site web couteux",
+        "title": "Article blog — 3 signaux site web coûteux",
         "date_prevue": "7 avril 2026",
         "hashtags": "#siteweb #PME #artisans #digital #TPE",
         "content": """Vous payez un hébergement.
@@ -127,7 +127,7 @@ Si vous cochez 2 sur 3, faites le diagnostic gratuit (2 min) sur mon site. Résu
     },
     {
         "id": 3,
-        "title": "Post educatif : 3 signaux site mort",
+        "title": "Post éducatif : 3 signaux site mort",
         "date_prevue": "14 avril 2026",
         "hashtags": "#siteweb #PME #digital #artisans #ROI",
         "content": """3 signaux que votre site web est une vitrine morte :
@@ -158,7 +158,7 @@ Faites le diagnostic gratuit (2 minutes) et voyez ce que vous perdez chaque sema
     },
     {
         "id": 4,
-        "title": "SEO vs GEO — visibilite IA",
+        "title": "SEO vs GEO — visibilité IA",
         "date_prevue": "6 avril 2026",
         "hashtags": "#SEO #GEO #IA #VisibiliteDigitale #MarketingDigital #Freelance",
         "content": """Le SEO ne suffit plus.
@@ -206,38 +206,38 @@ MP ou commentaire pour faire le point sur votre visibilité.
         "id": 6,
         "title": "Artisan BTP : votre fiche Google est invisible",
         "date_prevue": "10 avril 2026",
-        "hashtags": "#BTP #artisans #GoogleMaps #Tarn #referencement",
+        "hashtags": "#BTP #artisans #GoogleMaps #Tarn #référencement",
         "content": """Votre fiche Google Business existe.
 Mais personne ne vous trouve.
 
-87% des clients cherchent un artisan local sur Google avant de decrocher leur telephone. Si votre fiche n'apparait pas dans les 3 premiers resultats du pack local, vous etes invisible pour la majorite de vos prospects.
+87% des clients cherchent un artisan local sur Google avant de décrocher leur téléphone. Si votre fiche n'apparaît pas dans les 3 premiers résultats du pack local, vous êtes invisible pour la majorité de vos prospects.
 
-J'ai audite des dizaines de fiches d'artisans dans le Tarn. Les 3 erreurs reviennent systematiquement :
+J'ai audité des dizaines de fiches d'artisans dans le Tarn. Les 3 erreurs reviennent systématiquement :
 
 1. Aucune photo de chantier.
-Google favorise les fiches actives. Une fiche sans photo recente, c'est une fiche que l'algorithme enterre. Les fiches avec plus de 10 photos recoivent 35% de clics supplementaires par rapport a celles qui n'en ont pas.
+Google favorise les fiches actives. Une fiche sans photo récente, c'est une fiche que l'algorithme enterre. Les fiches avec plus de 10 photos reçoivent 35% de clics supplémentaires par rapport à celles qui n'en ont pas.
 
-2. Zero avis client.
-Un artisan avec 0 avis face a un concurrent qui en a 15, c'est un match perdu d'avance. 72% des consommateurs ne contactent pas une entreprise avec moins de 3 avis.
+2. Zéro avis client.
+Un artisan avec 0 avis face à un concurrent qui en a 15, c'est un match perdu d'avance. 72% des consommateurs ne contactent pas une entreprise avec moins de 3 avis.
 
-3. Categories mal choisies.
-"Construction" au lieu de "Constructeur de maisons individuelles". Google est literal. Si votre categorie est vague, il vous classe derriere ceux qui sont precis.
+3. Catégories mal choisies.
+"Construction" au lieu de "Constructeur de maisons individuelles". Google est littéral. Si votre catégorie est vague, il vous classe derrière ceux qui sont précis.
 
-3 actions a faire cette semaine :
-- Ajoutez 5 photos de vos derniers chantiers (avant/apres)
-- Envoyez un SMS a vos 3 derniers clients satisfaits pour leur demander un avis
-- Verifiez votre categorie principale sur business.google.com
+3 actions à faire cette semaine :
+- Ajoutez 5 photos de vos derniers chantiers (avant/après)
+- Envoyez un SMS à vos 3 derniers clients satisfaits pour leur demander un avis
+- Vérifiez votre catégorie principale sur business.google.com
 
-J'ai ecrit un guide complet avec les 7 etapes concretes pour passer de invisible a premier resultat local. Le lien est en commentaire.
+J'ai écrit un guide complet avec les 7 étapes concrètes pour passer de invisible à premier résultat local. Le lien est en commentaire.
 
-Si vous voulez un diagnostic gratuit de votre fiche Google, le lien est aussi en commentaire. Ca prend 2 minutes.
+Si vous voulez un diagnostic gratuit de votre fiche Google, le lien est aussi en commentaire. Ça prend 2 minutes.
 
-#BTP #artisans #GoogleMaps #Tarn #referencement""",
-        "comment_link": "Le guide complet (7 etapes) : https://www.aissabelkoussa.fr/blog/artisan-btp-fiche-google-maps-2026\n\nDiagnostic gratuit de votre presence en ligne (2 minutes) : https://www.aissabelkoussa.fr/diagnostic",
+#BTP #artisans #GoogleMaps #Tarn #référencement""",
+        "comment_link": "Le guide complet (7 étapes) : https://www.aissabelkoussa.fr/blog/artisan-btp-fiche-google-maps-2026\n\nDiagnostic gratuit de votre présence en ligne (2 minutes) : https://www.aissabelkoussa.fr/diagnostic",
     },
     {
         "id": 7,
-        "title": "Agent immobilier : arretez les visites inutiles",
+        "title": "Agent immobilier : arrêtez les visites inutiles",
         "date_prevue": "11 avril 2026",
         "hashtags": "#immobilier #chatbot #IA #qualification #leads",
         "content": """Un agent immobilier fait en moyenne 12 visites pour signer 1 mandat.
