@@ -161,6 +161,7 @@ interface Dictionary {
       desc: string;
       color: string;
       stack: string[];
+      metrics?: Array<{ value: string; label: string }>;
     }>;
   };
   about: {
@@ -191,6 +192,14 @@ interface Dictionary {
     explore: string;
     architecture: string;
     legal: string;
+    resources: string;
+    training: string;
+    aboutLink: string;
+    newsletterTitle: string;
+    newsletterDesc: string;
+    newsletterPlaceholder: string;
+    newsletterSuccess: string;
+    newsletterError: string;
   };
   funnel: {
     steps: {
@@ -884,7 +893,26 @@ const dictionaries: Record<Language, Dictionary> = {
           sub: "Site corporate & CMS sur-mesure — BTP, Albi",
           desc: "PME de construction métallique sans présence web. Résultat : un site corporate complet avec CMS intégré, panneau admin sécurisé et galerie de réalisations — déployé en production sur dkbuilding.fr.",
           color: "#0F172A",
-          stack: ["React 19", "Node.js", "Vercel", "Turso DB", "Cloudinary", "GSAP"]
+          stack: ["React 19", "Node.js", "Vercel", "Turso DB", "Cloudinary", "GSAP"],
+          metrics: [
+            { value: "3 contacts", label: "première semaine" },
+            { value: "10 jours", label: "de livraison" },
+            { value: "0 €", label: "de maintenance la 1ère année" },
+          ]
+        },
+        {
+          id: "syna-events",
+          slug: "syna-events",
+          title: "SYNA EVENTS",
+          sub: "Site événementiel professionnel — Événementiel, Toulouse",
+          desc: "Une agence événementielle toulousaine avait besoin d'un site à la hauteur de ses prestations. Résultat : un site événementiel complet, responsive et déployé en production — livré dans les délais, sans surprise.",
+          color: "#1A1A2E",
+          stack: ["Next.js", "TypeScript", "Tailwind", "Framer Motion", "Vercel"],
+          metrics: [
+            { value: "100%", label: "des fonctionnalités livrées" },
+            { value: "5 jours", label: "de livraison" },
+            { value: "Mobile-first", label: "responsive design" },
+          ]
         },
         {
           id: "jolananas",
@@ -893,7 +921,12 @@ const dictionaries: Record<Language, Dictionary> = {
           sub: "Storefront e-commerce premium — Mode artisanale française",
           desc: "Une boutique Shopify standard ne rendait pas justice à la marque. Résultat : une storefront sur-mesure Next.js connectée à Shopify via GraphQL — catalogue, panier persistant, compte client, blog et conformité RGPD complète.",
           color: "#1E293B",
-          stack: ["Next.js", "TypeScript", "Shopify GraphQL", "Prisma", "PostgreSQL", "Framer Motion"]
+          stack: ["Next.js", "TypeScript", "Shopify GraphQL", "Prisma", "PostgreSQL", "Framer Motion"],
+          metrics: [
+            { value: "GraphQL", label: "API Shopify" },
+            { value: "< 2s", label: "temps de chargement" },
+            { value: "100%", label: "personnalisé" },
+          ]
         },
         {
           id: "albi-rp",
@@ -902,7 +935,12 @@ const dictionaries: Record<Language, Dictionary> = {
           sub: "Écosystème jeu + bot + site — Roblox RP francophone",
           desc: "Aucun serveur RP sérieux dans l'écosystème Roblox francophone. Résultat : un écosystème complet — jeu Roblox, bot Discord synchronisé en temps réel, site web et API — construit de zéro, en production active.",
           color: "#334155",
-          stack: ["Lua/Luau", "TypeScript", "Discord.js", "Vercel", "Tailwind", "Zod"]
+          stack: ["Lua/Luau", "TypeScript", "Discord.js", "Vercel", "Tailwind", "Zod"],
+          metrics: [
+            { value: "4 briques", label: "jeu + bot + site + API" },
+            { value: "500+", label: "joueurs actifs" },
+            { value: "24/7", label: "bot Discord opérationnel" },
+          ]
         }
       ]
     },
@@ -939,6 +977,14 @@ const dictionaries: Record<Language, Dictionary> = {
       explore: "Explorer",
       architecture: "Architecture",
       legal: "Légal",
+      resources: "Ressources",
+      training: "Formations",
+      aboutLink: "À propos",
+      newsletterTitle: "Newsletter",
+      newsletterDesc: "Un article par semaine sur l'IA, l'automatisation et la visibilité digitale. Zéro spam.",
+      newsletterPlaceholder: "Votre email",
+      newsletterSuccess: "Inscrit ! À très vite.",
+      newsletterError: "Erreur. Réessayez ou contactez-moi directement.",
     },
     funnel: {
       steps: {
@@ -1673,7 +1719,26 @@ const dictionaries: Record<Language, Dictionary> = {
           sub: "Corporate site & custom CMS — Construction, Albi",
           desc: "A steel construction SME with no web presence. Result: a complete corporate site with built-in CMS, secure admin panel and project gallery — deployed in production on dkbuilding.fr.",
           color: "#0F172A",
-          stack: ["React 19", "Node.js", "Vercel", "Turso DB", "Cloudinary", "GSAP"]
+          stack: ["React 19", "Node.js", "Vercel", "Turso DB", "Cloudinary", "GSAP"],
+          metrics: [
+            { value: "3 contacts", label: "first week" },
+            { value: "10 days", label: "delivery time" },
+            { value: "€0", label: "maintenance cost year 1" },
+          ]
+        },
+        {
+          id: "syna-events",
+          slug: "syna-events",
+          title: "SYNA EVENTS",
+          sub: "Professional event website — Events, Toulouse",
+          desc: "A Toulouse-based event agency needed a website matching the quality of their services. Result: a complete, responsive event website deployed in production — delivered on time, no surprises.",
+          color: "#1A1A2E",
+          stack: ["Next.js", "TypeScript", "Tailwind", "Framer Motion", "Vercel"],
+          metrics: [
+            { value: "100%", label: "features delivered" },
+            { value: "5 days", label: "delivery time" },
+            { value: "Mobile-first", label: "responsive design" },
+          ]
         },
         {
           id: "jolananas",
@@ -1682,7 +1747,12 @@ const dictionaries: Record<Language, Dictionary> = {
           sub: "Premium e-commerce storefront — French artisan fashion",
           desc: "A standard Shopify theme couldn't do the brand justice. Result: a custom Next.js storefront connected to Shopify via GraphQL — catalog, persistent cart, customer accounts, blog and full GDPR compliance.",
           color: "#1E293B",
-          stack: ["Next.js", "TypeScript", "Shopify GraphQL", "Prisma", "PostgreSQL", "Framer Motion"]
+          stack: ["Next.js", "TypeScript", "Shopify GraphQL", "Prisma", "PostgreSQL", "Framer Motion"],
+          metrics: [
+            { value: "GraphQL", label: "Shopify API" },
+            { value: "< 2s", label: "load time" },
+            { value: "100%", label: "custom-built" },
+          ]
         },
         {
           id: "albi-rp",
@@ -1691,7 +1761,12 @@ const dictionaries: Record<Language, Dictionary> = {
           sub: "Game + bot + site ecosystem — French Roblox RP",
           desc: "No serious RP server in the French Roblox ecosystem. Result: a complete ecosystem — Roblox game, real-time synced Discord bot, website and API — built from scratch, actively in production.",
           color: "#334155",
-          stack: ["Lua/Luau", "TypeScript", "Discord.js", "Vercel", "Tailwind", "Zod"]
+          stack: ["Lua/Luau", "TypeScript", "Discord.js", "Vercel", "Tailwind", "Zod"],
+          metrics: [
+            { value: "4 modules", label: "game + bot + site + API" },
+            { value: "500+", label: "active players" },
+            { value: "24/7", label: "Discord bot uptime" },
+          ]
         }
       ]
     },
@@ -1728,6 +1803,14 @@ const dictionaries: Record<Language, Dictionary> = {
       explore: "Explore",
       architecture: "Architecture",
       legal: "Legal",
+      resources: "Resources",
+      training: "Training",
+      aboutLink: "About",
+      newsletterTitle: "Newsletter",
+      newsletterDesc: "One article per week on AI, automation and digital visibility. Zero spam.",
+      newsletterPlaceholder: "Your email",
+      newsletterSuccess: "Subscribed! See you soon.",
+      newsletterError: "Error. Try again or contact me directly.",
     },
     funnel: {
       steps: {

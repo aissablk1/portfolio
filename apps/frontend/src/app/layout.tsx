@@ -17,6 +17,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { TrackingBeacon } from "@/components/TrackingBeacon";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import CookieConsent from "@/components/CookieConsent";
+import TawkChat from "@/components/TawkChat";
 import Script from "next/script";
 
 const inter = Inter({
@@ -164,6 +165,7 @@ export default function RootLayout({
             <WhatsAppButton />
           </Preloader>
           <CookieConsent />
+          <TawkChat />
         </LanguageProvider>
         <Analytics />
         <TrackingBeacon />

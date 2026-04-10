@@ -1,13 +1,37 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { useLanguage } from "./LanguageContext";
 import { ScrollVelocityContainer, ScrollVelocityRow } from "./ui/scroll-based-velocity";
+import { ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
 
 
 const Footer = () => {
   const { dict } = useLanguage();
+  const [email, setEmail] = useState("");
+  const [nlState, setNlState] = useState<"idle" | "sending" | "done" | "error">("idle");
+
+  const handleNewsletter = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email.includes("@") || nlState === "sending") return;
+    setNlState("sending");
+    try {
+      const res = await fetch("/api/lead-magnet/capture", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, source: "newsletter-footer" }),
+      });
+      if (res.ok) {
+        setNlState("done");
+        setEmail("");
+      } else {
+        setNlState("error");
+      }
+    } catch {
+      setNlState("error");
+    }
+  };
 
   return (
     <footer data-layer="Footer" className="pt-0 py-20 border-t border-site-border mt-20 overflow-hidden">
@@ -52,10 +76,49 @@ const Footer = () => {
                 {dict.footer.title}
               </span>
             </div>
-            <div className="flex gap-6">
+            <div className="flex gap-6 mb-10">
               <a href="https://www.linkedin.com/in/aissabelkoussa" target="_blank" rel="noopener noreferrer" className="text-sm font-bold uppercase tracking-widest hover:text-site-text transition-colors">LinkedIn</a>
               <a href="https://github.com/aissablk1" target="_blank" rel="noopener noreferrer" className="text-sm font-bold uppercase tracking-widest hover:text-site-text transition-colors">GitHub</a>
               <a href="https://t.me/investwithaissa" target="_blank" rel="noopener noreferrer" className="text-sm font-bold uppercase tracking-widest hover:text-site-text transition-colors">Telegram</a>
+            </div>
+
+            {/* Newsletter */}
+            <div className="max-w-sm">
+              <p className="text-xs font-bold uppercase tracking-widest text-site-text-light mb-3">
+                {dict.footer.newsletterTitle}
+              </p>
+              <p className="text-sm text-site-text-light mb-4">
+                {dict.footer.newsletterDesc}
+              </p>
+              {nlState === "done" ? (
+                <div className="flex items-center gap-2 text-sm text-green-600">
+                  <CheckCircle2 size={16} />
+                  {dict.footer.newsletterSuccess}
+                </div>
+              ) : (
+                <form onSubmit={handleNewsletter} className="flex gap-2">
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => { setEmail(e.target.value); if (nlState === "error") setNlState("idle"); }}
+                    placeholder={dict.footer.newsletterPlaceholder}
+                    required
+                    className="flex-1 px-4 py-2.5 text-sm bg-site-bg border border-site-border rounded-full focus:outline-none focus:border-site-accent transition-colors"
+                  />
+                  <button
+                    type="submit"
+                    disabled={nlState === "sending"}
+                    className="inline-flex items-center justify-center w-10 h-10 bg-site-accent text-white rounded-full hover:bg-site-accent/85 transition-colors disabled:opacity-50"
+                  >
+                    {nlState === "sending" ? <Loader2 size={16} className="animate-spin" /> : <ArrowRight size={16} />}
+                  </button>
+                </form>
+              )}
+              {nlState === "error" && (
+                <p className="text-xs text-red-500 mt-2">
+                  {dict.footer.newsletterError}
+                </p>
+              )}
             </div>
           </div>
 
@@ -66,13 +129,16 @@ const Footer = () => {
                   <Link href="/#approach" className="text-sm hover:underline">{dict.nav.approach}</Link>
                   <Link href="/#expertise" className="text-sm hover:underline">{dict.nav.expertise}</Link>
                   <Link href="/blog" className="text-sm hover:underline">Blog</Link>
+                  <Link href="/ressources" className="text-sm hover:underline">{dict.footer.resources}</Link>
               </div>
               <div className="flex flex-col gap-4">
                   <span className="text-xs font-bold uppercase tracking-widest text-site-text-light">{dict.footer.architecture}</span>
                   <Link href="/#systems" className="text-sm hover:underline">{dict.nav.systems}</Link>
                   <Link href="/services" className="text-sm hover:underline">{dict.nav.services}</Link>
+                  <Link href="/formation" className="text-sm hover:underline">{dict.footer.training}</Link>
                   <Link href="/diagnostic" className="text-sm hover:underline">{dict.ui.diagnosticFree}</Link>
-                  <Link href="/#about" className="text-sm hover:underline">{dict.nav.about}</Link>
+                  <Link href="/a-propos" className="text-sm hover:underline">{dict.footer.aboutLink}</Link>
+                  <Link href="/faq" className="text-sm hover:underline">FAQ</Link>
                   <Link href="/contact" className="text-sm hover:underline">{dict.nav.contact}</Link>
               </div>
               <div className="flex flex-col gap-4 col-span-2 md:col-span-1">
