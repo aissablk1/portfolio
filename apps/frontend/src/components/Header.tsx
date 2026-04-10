@@ -94,8 +94,8 @@ const Header = () => {
           className={cn(
             "mx-auto flex items-center justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
             isScrolled
-              ? "max-w-3xl bg-site-bg/70 backdrop-blur-2xl backdrop-saturate-200 rounded-full border border-site-border/60 px-6 py-3 shadow-[0_4px_30px_rgba(0,0,0,0.06)]"
-              : "max-w-7xl"
+              ? "max-w-3xl bg-site-bg/70 backdrop-blur-2xl backdrop-saturate-200 rounded-full border border-site-border/50 px-6 py-3 shadow-[0_4px_30px_rgba(0,0,0,0.06)]"
+              : "max-w-7xl border border-transparent"
           )}
         >
           <Link
