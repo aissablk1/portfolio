@@ -99,7 +99,7 @@
 /* Print styles — clean PDF export for scan */
 @media print {
   body { background: white !important; }
-  header, footer, .print\\:hidden { display: none !important; }
+  header, footer, .print\:hidden { display: none !important; }
   main { padding-top: 1rem !important; }
   * { animation: none !important; transition: none !important; }
   .rounded-2xl { border-radius: 8px; }
