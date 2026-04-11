@@ -476,6 +476,18 @@ interface Dictionary {
     cookieDecline: string;
     cookiePolicy: string;
   };
+  claudeArchitect: {
+    navLabel: string;
+    eyebrow: string;
+    titleBefore: string;
+    titleAccent: string;
+    description: string;
+    domains: Array<{ label: string; weight: string }>;
+    ctaPrimary: string;
+    ctaSecondary: string;
+    footnote: string;
+    closeLabel: string;
+  };
   checkout: {
     verifying: string;
     confirmed: string;
@@ -1288,6 +1300,26 @@ const dictionaries: Record<Language, Dictionary> = {
       cookieAccept: "Accepter",
       cookieDecline: "Refuser",
       cookiePolicy: "Politique de confidentialité",
+    },
+    claudeArchitect: {
+      navLabel: "Claude",
+      eyebrow: "Claude Certified Architect",
+      titleBefore: "Livrer Claude en production,",
+      titleAccent: "pas en démo.",
+      description:
+        "J'ai lancé un micro-site dédié à mon positionnement d'architecte Claude. Audits, implémentations Claude Code, formations et guide de préparation à la certification CCA-F d'Anthropic. Découvrez-le.",
+      domains: [
+        { label: "Architecture agentique & orchestration", weight: "27\u00a0%" },
+        { label: "Claude Code & workflows CI/CD", weight: "20\u00a0%" },
+        { label: "Prompt engineering & outputs structurés", weight: "20\u00a0%" },
+        { label: "Conception d'outils & intégration MCP", weight: "18\u00a0%" },
+        { label: "Gestion de contexte & fiabilité", weight: "15\u00a0%" },
+      ],
+      ctaPrimary: "Voir claude-architect.fr",
+      ctaSecondary: "Rejoindre la liste d'attente",
+      footnote:
+        "Anthropic a lancé cette certification le 12\u00a0mars\u00a02026. Je passe l'examen le 25\u00a0avril.",
+      closeLabel: "Fermer",
     },
     checkout: {
       verifying: "Vérification du paiement...",
@@ -2493,6 +2525,26 @@ const dictionaries: Record<Language, Dictionary> = {
       cookieAccept: "Accept",
       cookieDecline: "Decline",
       cookiePolicy: "Privacy policy",
+    },
+    claudeArchitect: {
+      navLabel: "Claude",
+      eyebrow: "Claude Certified Architect",
+      titleBefore: "Ship Claude in production,",
+      titleAccent: "not in demos.",
+      description:
+        "I've launched a dedicated micro-site for my Claude solutions architect practice. Audits, Claude Code implementations, training and a preparation guide for Anthropic's CCA-F certification. Take a look.",
+      domains: [
+        { label: "Agentic architecture & orchestration", weight: "27%" },
+        { label: "Claude Code & CI/CD workflows", weight: "20%" },
+        { label: "Prompt engineering & structured outputs", weight: "20%" },
+        { label: "Tool design & MCP integration", weight: "18%" },
+        { label: "Context management & reliability", weight: "15%" },
+      ],
+      ctaPrimary: "Visit claude-architect.fr",
+      ctaSecondary: "Join the waitlist",
+      footnote:
+        "Anthropic launched this certification on March 12, 2026. I'm taking the exam on April 25.",
+      closeLabel: "Close",
     },
     checkout: {
       verifying: "Verifying payment...",
