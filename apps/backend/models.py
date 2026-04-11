@@ -8,7 +8,9 @@ class ContactFormData(BaseModel):
     email: EmailStr
     subject: str = Field(..., min_length=5, max_length=200)
     message: str = Field(..., min_length=10, max_length=2000)
-    
+    cf_turnstile_token: Optional[str] = Field(default=None, max_length=2048)
+
+
 class ContactSubmission(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     name: str
