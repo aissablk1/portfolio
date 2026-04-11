@@ -25,19 +25,19 @@ export function newsletterAdminTemplate(
   <div style="max-width:560px;margin:0 auto;padding:40px 24px;">
 
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:28px;">
-      <div style="width:8px;height:8px;border-radius:50%;background:#16a34a;box-shadow:0 0 0 4px #16a34a20;"></div>
-      <span style="color:#16a34a;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;">Nouvel abonné newsletter</span>
+      <div style="width:8px;height:8px;border-radius:50%;background:#fafafa;box-shadow:0 0 0 4px #ffffff20;"></div>
+      <span style="color:#fafafa;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;">Nouvel abonné newsletter</span>
     </div>
 
-    <div style="background:linear-gradient(135deg,#16a34a10,#0a0a0a);border:1px solid #16a34a30;border-radius:16px;padding:28px;margin-bottom:24px;">
+    <div style="background:linear-gradient(135deg,#ffffff08,#0a0a0a);border:1px solid #2a2a2a;border-radius:16px;padding:28px;margin-bottom:24px;">
       <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px;">
-        <div style="width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#16a34a,#0ea5e9);display:flex;align-items:center;justify-content:center;color:#fff;font-size:22px;font-weight:700;">${esc(initial)}</div>
+        <div style="width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#ffffff,#888888);display:flex;align-items:center;justify-content:center;color:#0a0a0a;font-size:22px;font-weight:700;">${esc(initial)}</div>
         <div>
           <p style="margin:0;color:#fff;font-size:17px;font-weight:600;word-break:break-all;">${safeEmail}</p>
           <p style="margin:4px 0 0;color:#888;font-size:12px;">${esc(domain)}</p>
         </div>
       </div>
-      <a href="mailto:${safeEmail}" style="display:inline-block;background:#16a34a;color:#fff;padding:10px 20px;border-radius:8px;text-decoration:none;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;">Répondre &rarr;</a>
+      <a href="mailto:${safeEmail}" style="display:inline-block;background:#ffffff;color:#0a0a0a;padding:10px 20px;border-radius:8px;text-decoration:none;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;">Répondre &rarr;</a>
     </div>
 
     <table style="width:100%;border-collapse:collapse;">

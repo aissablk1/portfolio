@@ -23,8 +23,8 @@ export function contactConfirmTemplate(
         : `Your project is a perfect fit for what I do. I'll get back to you <strong>within the next few hours</strong> with a concrete proposal.`
       : lead.label === "TIEDE"
         ? isFr
-          ? `${t.confirmBody} Pour mieux préparer notre échange, vous pouvez aussi <a href="https://www.aissabelkoussa.fr/diagnostic" style="color:#16a34a;font-weight:600;">faire le diagnostic gratuit</a> — ça me permettra de vous proposer la meilleure approche.`
-          : `${t.confirmBody} To better prepare our exchange, you can also <a href="https://www.aissabelkoussa.fr/diagnostic" style="color:#16a34a;font-weight:600;">take the free diagnostic</a> — it will help me propose the best approach.`
+          ? `${t.confirmBody} Pour mieux préparer notre échange, vous pouvez aussi <a href="https://www.aissabelkoussa.fr/diagnostic" style="color:#0a0a0a;font-weight:600;">faire le diagnostic gratuit</a> — ça me permettra de vous proposer la meilleure approche.`
+          : `${t.confirmBody} To better prepare our exchange, you can also <a href="https://www.aissabelkoussa.fr/diagnostic" style="color:#0a0a0a;font-weight:600;">take the free diagnostic</a> — it will help me propose the best approach.`
         : t.confirmBody;
 
   const smartPromise =
@@ -80,11 +80,11 @@ export function contactConfirmTemplate(
     </div>
 
     <div style="border-top:1px solid #e5e5e5;padding-top:20px;text-align:center;">
-      <a href="https://www.aissabelkoussa.fr" style="color:#16a34a;font-size:12px;text-decoration:none;font-weight:600;">${t.confirmSite}</a>
+      <a href="https://www.aissabelkoussa.fr" style="color:#0a0a0a;font-size:12px;text-decoration:none;font-weight:600;">${t.confirmSite}</a>
       <span style="color:#ccc;margin:0 8px;">&bull;</span>
-      <a href="https://www.linkedin.com/in/aissabelkoussa" style="color:#16a34a;font-size:12px;text-decoration:none;">LinkedIn</a>
+      <a href="https://www.linkedin.com/in/aissabelkoussa" style="color:#0a0a0a;font-size:12px;text-decoration:none;">LinkedIn</a>
       <span style="color:#ccc;margin:0 8px;">&bull;</span>
-      <a href="https://github.com/aissablk1" style="color:#16a34a;font-size:12px;text-decoration:none;">GitHub</a>
+      <a href="https://github.com/aissablk1" style="color:#0a0a0a;font-size:12px;text-decoration:none;">GitHub</a>
     </div>
   </div>
 </body>

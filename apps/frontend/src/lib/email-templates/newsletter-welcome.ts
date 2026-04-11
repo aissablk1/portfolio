@@ -25,7 +25,7 @@ export function newsletterWelcomeTemplate(
   <div style="max-width:560px;margin:0 auto;padding:48px 24px;">
 
     <div style="margin-bottom:8px;">
-      <span style="display:inline-block;padding:4px 12px;background:#16a34a15;color:#16a34a;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;border-radius:20px;">Inscription confirmée</span>
+      <span style="display:inline-block;padding:4px 12px;background:#0a0a0a;color:#ffffff;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;border-radius:20px;">Inscription confirmée</span>
     </div>
 
     <h1 style="color:#0a0a0a;font-size:28px;line-height:1.2;margin:16px 0 12px;font-weight:800;letter-spacing:-0.02em;">
@@ -39,15 +39,15 @@ export function newsletterWelcomeTemplate(
       <p style="margin:0 0 16px;color:#888;font-size:11px;text-transform:uppercase;letter-spacing:0.15em;font-weight:700;">Ce que vous allez recevoir</p>
       <table style="width:100%;border-collapse:collapse;">
         <tr>
-          <td style="padding:10px 0;vertical-align:top;width:32px;"><span style="color:#16a34a;font-size:18px;font-weight:700;">&bull;</span></td>
+          <td style="padding:10px 0;vertical-align:top;width:32px;"><span style="color:#0a0a0a;font-size:18px;font-weight:700;">&bull;</span></td>
           <td style="padding:10px 0;color:#333;font-size:14px;line-height:1.6;"><strong style="color:#0a0a0a;">1 article par semaine</strong> — études de cas réels et playbooks opérationnels.</td>
         </tr>
         <tr>
-          <td style="padding:10px 0;vertical-align:top;"><span style="color:#16a34a;font-size:18px;font-weight:700;">&bull;</span></td>
+          <td style="padding:10px 0;vertical-align:top;"><span style="color:#0a0a0a;font-size:18px;font-weight:700;">&bull;</span></td>
           <td style="padding:10px 0;color:#333;font-size:14px;line-height:1.6;"><strong style="color:#0a0a0a;">Zéro spam, zéro pub.</strong> Que du contenu utile que vous pouvez appliquer.</td>
         </tr>
         <tr>
-          <td style="padding:10px 0;vertical-align:top;"><span style="color:#16a34a;font-size:18px;font-weight:700;">&bull;</span></td>
+          <td style="padding:10px 0;vertical-align:top;"><span style="color:#0a0a0a;font-size:18px;font-weight:700;">&bull;</span></td>
           <td style="padding:10px 0;color:#333;font-size:14px;line-height:1.6;"><strong style="color:#0a0a0a;">Désinscription en 1 clic</strong> — à tout moment, sans question.</td>
         </tr>
       </table>
