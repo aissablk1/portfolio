@@ -503,6 +503,10 @@ interface Dictionary {
     searchPlaceholder: string;
     noResults: string;
     allCategories: string;
+    allCategoriesTitle: string;
+    allCategoriesSubtitle: string;
+    articleCountOne: string;
+    articleCountOther: string;
     categoryTitle: string;
     backToBlog: string;
     categoryEmpty: string;
@@ -555,7 +559,7 @@ interface Dictionary {
     summary: (weeksToROI: number, weeklySaved: string) => string;
     placeholder: string;
   };
-  legal?: {
+  legal: {
     mentionsLegales: LegalPageDict;
     confidentialite: LegalPageDict;
     cgu: LegalPageDict;
@@ -1312,6 +1316,10 @@ const dictionaries: Record<Language, Dictionary> = {
       searchPlaceholder: "Rechercher un article...",
       noResults: "Aucun article ne correspond à votre recherche.",
       allCategories: "Toutes les catégories",
+      allCategoriesTitle: "Explorer le blog par catégorie",
+      allCategoriesSubtitle: "Tous les articles classés par thématique : IA, automatisation, sites web, conversion. Choisissez la catégorie qui correspond à votre besoin.",
+      articleCountOne: "1 article",
+      articleCountOther: "{count} articles",
       categoryTitle: "Articles — {category}",
       backToBlog: "Retour au blog",
       categoryEmpty: "Aucun article dans cette catégorie pour le moment.",
@@ -2513,6 +2521,10 @@ const dictionaries: Record<Language, Dictionary> = {
       searchPlaceholder: "Search articles...",
       noResults: "No articles match your search.",
       allCategories: "All categories",
+      allCategoriesTitle: "Explore the blog by category",
+      allCategoriesSubtitle: "All articles organised by topic: AI, automation, websites, conversion. Pick the category that matches your need.",
+      articleCountOne: "1 article",
+      articleCountOther: "{count} articles",
       categoryTitle: "Articles — {category}",
       backToBlog: "Back to blog",
       categoryEmpty: "No articles in this category yet.",
@@ -2599,6 +2611,373 @@ const dictionaries: Record<Language, Dictionary> = {
       submit: "Get the resource",
       ready: "Your resource is ready.",
       download: "Download",
+    },
+    legal: {
+      mentionsLegales: {
+        badge: "Legal Notice",
+        title: "Legal Notice",
+        lastUpdated: "April 3, 2026",
+        sections: [
+          {
+            title: "Website publisher",
+            html: `<p>The website <strong>aissabelkoussa.fr</strong> is published by:</p><p><strong>Aïssa BELKOUSSA</strong><br/>Sole proprietor (French micro-enterprise)<br/>SIREN: 937 690 592<br/>SIRET: 937 690 592 00012<br/>NAF code: 5911B<br/>Address: Albi, 81000 — Occitanie, France<br/>Email: <a href="mailto:contact@aissabelkoussa.fr" class="text-site-accent hover:underline">contact@aissabelkoussa.fr</a></p><p>VAT not applicable — article 293 B of the French General Tax Code.</p>`,
+          },
+          {
+            title: "Publication director",
+            html: `<p>The publication director is <strong>Aïssa BELKOUSSA</strong>, acting as publisher of the website.</p>`,
+          },
+          {
+            title: "Hosting",
+            html: `<p>The website is hosted by:</p><p><strong>Vercel Inc.</strong><br/>440 N Barranca Ave #4133<br/>Covina, CA 91723, United States<br/>Website: <a href="https://vercel.com" target="_blank" rel="noopener noreferrer" class="text-site-accent hover:underline">vercel.com</a></p>`,
+          },
+          {
+            title: "Domain name",
+            html: `<p>The domain name <strong>aissabelkoussa.fr</strong> is registered with:</p><p><strong>OVHcloud</strong><br/>2 rue Kellermann, 59100 Roubaix, France<br/>RCS Lille Métropole 424 761 419<br/>Website: <a href="https://www.ovhcloud.com" target="_blank" rel="noopener noreferrer" class="text-site-accent hover:underline">ovhcloud.com</a></p>`,
+          },
+          {
+            title: "Intellectual property",
+            html: `<p>All content on the website (texts, images, source code, mockups, logos, animations, videos, architecture) is protected by intellectual property law and remains the exclusive property of Aïssa BELKOUSSA, unless otherwise stated.</p><p>Any reproduction, representation, modification, publication or adaptation of all or part of the website's elements, by any means or process, is prohibited without prior written authorization from Aïssa BELKOUSSA.</p><p>Any unauthorized use of the website or any of its elements will be considered as infringement and prosecuted in accordance with articles L.335-2 and following of the French Intellectual Property Code.</p>`,
+          },
+          {
+            title: "Personal data",
+            html: `<p>Personal data collected via the contact form is processed in accordance with the General Data Protection Regulation (GDPR). For more information, see the <a href="/confidentialite" class="text-site-accent hover:underline">privacy policy</a>.</p>`,
+          },
+          {
+            title: "Cookies and trackers",
+            html: `<p>The website uses cookies and trackers strictly necessary for its operation as well as anonymized analytics trackers (Vercel Analytics, internal beacon). No advertising, retargeting or profiling cookies are used.</p><p>Local storage (localStorage) is used to remember the user's language preference (French or English), strictly necessary for the operation of the site (art. 5.3 ePrivacy directive).</p><p>Fonts are loaded from Google Fonts. Links to third-party services (Calendly, WhatsApp, LinkedIn, GitHub, Telegram) are subject to the cookie policies of their respective publishers.</p><p>For more details, see the <a href="/confidentialite" class="text-site-accent hover:underline">privacy policy</a>.</p>`,
+          },
+          {
+            title: "Liability",
+            html: `<p>The publisher strives to provide information as accurate as possible on the website. However, the publisher cannot be held responsible for omissions, inaccuracies or failures in updating, whether caused by itself or by third-party partners who provide this information.</p><p>The publisher cannot be held responsible for direct or indirect damage caused to the user's equipment when accessing the website, resulting either from the use of equipment not meeting the required technical specifications, or from the appearance of a bug or incompatibility.</p>`,
+          },
+          {
+            title: "Hypertext links",
+            html: `<p>The website may contain hypertext links to other websites. The publisher exercises no control over the content of these third-party sites and disclaims any responsibility for their content or any damage that may result from their use.</p>`,
+          },
+          {
+            title: "Applicable law",
+            html: `<p>This legal notice is governed by French law. In the event of a dispute, the French courts shall have exclusive jurisdiction.</p>`,
+          },
+        ],
+      },
+      confidentialite: {
+        badge: "Privacy",
+        title: "Privacy Policy",
+        lastUpdated: "April 3, 2026",
+        sections: [
+          {
+            title: "Data controller",
+            html: `<p>The controller of personal data processing is:</p><p><strong>Aïssa BELKOUSSA</strong><br/>Sole proprietor (French micro-enterprise)<br/>SIRET: 937 690 592 00012<br/>Address: Albi, 81000 — Occitanie, France<br/>Email: <a href="mailto:contact@aissabelkoussa.fr" class="text-site-accent hover:underline">contact@aissabelkoussa.fr</a></p>`,
+          },
+          {
+            title: "Data collected",
+            html: `<p>The following data may be collected when using the website:</p><p><strong>Via the contact form:</strong></p><ul><li>Full name</li><li>Email address</li><li>Selected type of need</li><li>Free-form message (optional)</li><li>Selected plan, if applicable</li><li>Navigation language (French or English)</li></ul><p><strong>Via site navigation (anonymized data):</strong></p><ul><li>Pages visited and navigation path</li><li>Referrer (origin page)</li><li>Screen width (resolution)</li><li>Browser language</li><li>Web performance metrics (Core Web Vitals) via Vercel Analytics</li></ul><p>This navigation data is collected anonymously, without personal identification, and is used exclusively to improve user experience and site performance.</p>`,
+          },
+          {
+            title: "Processing purposes",
+            html: `<p>The data collected is used for the following purposes:</p><ul><li>Responding to contact and quote requests (legal basis: pre-contractual measures, art. 6.1.b GDPR)</li><li>Sending an automatic confirmation email to the requester (legal basis: legitimate interest, art. 6.1.f GDPR)</li><li>Measuring audience and site performance anonymously (legal basis: legitimate interest, art. 6.1.f GDPR)</li></ul><p>The data is never used for commercial prospecting, profiling or resale to third parties.</p>`,
+          },
+          {
+            title: "Cookies and trackers",
+            html: `<p>The website uses a limited number of cookies and local storage technologies, strictly necessary for its operation and to improve user experience.</p><p><strong>Strictly necessary cookies (exempt from consent — art. 5.3 ePrivacy directive):</strong></p><ul><li><strong>Language preference</strong> (localStorage) — stores the language choice (French/English) to ensure navigation continuity. No personal data is concerned.</li></ul><p><strong>Anonymized analytics cookies (legitimate interest — art. 6.1.f GDPR):</strong></p><ul><li><strong>Vercel Analytics</strong> — anonymized audience measurement and performance metrics (Core Web Vitals). Vercel Analytics does not collect any personally identifiable information (no stored IP address, no fingerprinting, no cross-site tracking cookie). This data is used exclusively to optimize site performance. Provider: Vercel Inc., compliant with the EU-US Data Privacy Framework.</li><li><strong>Navigation beacon</strong> — internal measurement system recording pages visited, referrer, screen width and browser language. No personally identifiable information is collected. This beacon respects the browser's Do Not Track signal: if enabled, no data is sent.</li></ul><p><strong>Cookies set by third-party services when using external links:</strong></p><ul><li><strong>Calendly</strong> — when you click on the booking link, you are redirected to calendly.com which sets its own cookies (operation, session, preferences). Calendly's cookie policy applies on their domain: <a href="https://calendly.com/privacy" target="_blank" rel="noopener noreferrer" class="text-site-accent hover:underline">calendly.com/privacy</a>.</li><li><strong>WhatsApp</strong> — the WhatsApp contact link redirects to wa.me / web.whatsapp.com, subject to Meta's privacy policy: <a href="https://www.whatsapp.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer" class="text-site-accent hover:underline">whatsapp.com/legal/privacy-policy</a>.</li></ul><p><strong>Fonts:</strong></p><ul><li><strong>Google Fonts</strong> — the Inter and Outfit fonts are loaded from Google's servers (fonts.googleapis.com / fonts.gstatic.com). Google may collect the visitor's IP address when loading fonts. No other data is transmitted. Privacy policy: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" class="text-site-accent hover:underline">policies.google.com/privacy</a>.</li></ul><p><strong>Automatic acceptance.</strong> In accordance with article 5.3 of the ePrivacy directive and the guidelines of the CNIL (French Data Protection Authority), strictly necessary cookies and anonymized trackers that require no personal identification are enabled by default, without a consent banner. By continuing to browse this site, you accept the use of these technologies as described above. Similarly, by clicking on links to third-party services (Calendly, WhatsApp, LinkedIn, GitHub, Telegram), you accept the respective cookie and privacy policies of these services.</p><p>The site does not use any advertising cookies, retargeting tools, tracking pixels (Facebook Pixel, Google Ads, etc.) or profiling cookies.</p>`,
+          },
+          {
+            title: "Client data processed in the context of services",
+            html: `<p>In addition to the data collected via the website (described above), the service provider may need to access and process sensitive data belonging to the client in the context of service performance (website creation, automation, integration, maintenance). This data may include:</p><ul><li>Banking details and financial information (IBAN, account numbers)</li><li>Technical credentials and access (passwords, API keys, server access)</li><li>Client's customer data (customer files, contacts, histories)</li><li>Confidential business data (revenue, pricing, strategy)</li></ul><p>Processing of this data is governed by the service contract and the general terms and conditions of sale. The service provider undertakes to:</p><ul><li>Access the data only to the extent strictly necessary for the mission</li><li>Apply appropriate security measures (encryption, restricted access, strong authentication)</li><li>Never disclose confidential data to third parties</li><li>Delete or return all data and access at the end of the mission</li></ul><p><strong>The service provider is bound by an obligation of means regarding data protection and cannot be held responsible for leaks, losses or unauthorized access resulting from failures of the client's systems, third-party services, or cyberattacks beyond its direct control.</strong></p><p>For full details of responsibilities and obligations of each party, see the <a href="/cgv" class="text-site-accent hover:underline">general terms and conditions of sale</a>, section "Confidentiality and sensitive client data".</p>`,
+          },
+          {
+            title: "Processors and recipients",
+            html: `<p>Data is transmitted only to the following technical processors, strictly within the scope of their mission:</p><ul><li><strong>Vercel Inc.</strong> (website hosting and analytics) — compliant with the EU-US Data Privacy Framework (standard contractual clauses). Headquarters: Covina, CA 91723, United States.</li><li><strong>Resend</strong> (transactional email sending) — servers in the European Union (Ireland). Data transits through Resend for sending notification and confirmation emails, without durable storage.</li><li><strong>Render</strong> (backend API hosting) — host of the internal tracking system and contact API. Anonymized navigation data is stored in a hosted MongoDB database.</li><li><strong>Google LLC</strong> (fonts) — the Inter and Outfit fonts are served via Google Fonts. Only the visitor's IP address may be collected during loading.</li><li><strong>OVHcloud</strong> (domain name registrar) — 2 rue Kellermann, 59100 Roubaix, France.</li></ul><p>No data is sold, rented or transferred to a third party for commercial purposes.</p>`,
+          },
+          {
+            title: "Transfers outside the European Union",
+            html: `<p>Some processors are located in the United States. Data transfers to these providers are governed by:</p><ul><li>The <strong>EU-US Data Privacy Framework</strong> (European Commission adequacy decision of July 10, 2023) for Vercel Inc. and Google LLC</li><li><strong>Standard contractual clauses</strong> (SCC) adopted by the European Commission, where applicable</li></ul><p>These mechanisms guarantee a level of data protection equivalent to that of the GDPR.</p>`,
+          },
+          {
+            title: "Retention period",
+            html: `<ul><li><strong>Contact form data</strong>: retained in the data controller's email inbox for the duration necessary to process the request, then archived for a maximum of 3 years from the last contact, in accordance with CNIL recommendations.</li><li><strong>Anonymized navigation data</strong>: retained for a maximum of 25 months in accordance with CNIL recommendations.</li><li><strong>Language preference</strong> (localStorage): retained indefinitely in the user's browser. The user can delete it at any time via their browser settings.</li></ul>`,
+          },
+          {
+            title: "Data security",
+            html: `<p>Appropriate technical and organizational measures are implemented to protect personal data:</p><ul><li>Encryption of communications via HTTPS (SSL/TLS certificate)</li><li>Resend API key stored exclusively server-side (never exposed client-side)</li><li>Rate limiting on the contact form (3 requests per IP every 15 minutes)</li><li>Anti-spam protection via honeypot field</li><li>Validation and escaping of all data before processing</li><li>HTTP security headers: Strict-Transport-Security, X-Content-Type-Options, X-Frame-Options, Referrer-Policy, Permissions-Policy, Content-Security-Policy</li><li>Respect for the Do Not Track signal for the internal tracking system</li></ul>`,
+          },
+          {
+            title: "Your rights",
+            html: `<p>In accordance with the GDPR (articles 15 to 22) and the French Data Protection Act, you have the following rights regarding your personal data:</p><ul><li><strong>Right of access</strong>: obtain confirmation that your data is being processed and obtain a copy</li><li><strong>Right of rectification</strong>: have inaccurate or incomplete data corrected</li><li><strong>Right to erasure</strong>: request the deletion of your data</li><li><strong>Right to restriction</strong>: request the suspension of processing</li><li><strong>Right to portability</strong>: receive your data in a structured and readable format</li><li><strong>Right to object</strong>: object to the processing of your data, including analytics tracking (you can enable the Do Not Track signal in your browser)</li></ul><p>To exercise these rights in practice, visit our dedicated <a href="/rgpd" class="text-site-accent hover:underline">Exercise your GDPR rights</a> page.</p><p>For any questions, contact: <a href="mailto:contact@aissabelkoussa.fr" class="text-site-accent hover:underline">contact@aissabelkoussa.fr</a>. A response will be provided within one month in accordance with article 12 of the GDPR.</p>`,
+          },
+          {
+            title: "Complaint",
+            html: `<p>If you believe that the processing of your personal data constitutes a violation of the GDPR, you have the right to lodge a complaint with the CNIL (French Data Protection Authority): <a href="https://www.cnil.fr" target="_blank" rel="noopener noreferrer" class="text-site-accent hover:underline">www.cnil.fr</a>.</p>`,
+          },
+          {
+            title: "Modifications",
+            html: `<p>This privacy policy may be modified at any time. Changes take effect upon publication on this page. The last update date is indicated at the top of this document. In case of substantial modification, a visible notice will be displayed on the site.</p>`,
+          },
+        ],
+      },
+      cgu: {
+        badge: "Terms of Service",
+        title: "Terms of Service",
+        lastUpdated: "April 3, 2026",
+        sections: [
+          {
+            title: "Purpose",
+            html: `<p>These general terms of use (Terms of Service) define the terms of access and use of the website <strong>aissabelkoussa.fr</strong> (hereinafter "the Site"), published by Aïssa BELKOUSSA. Access to and use of the Site implies full and unreserved acceptance of these Terms.</p>`,
+          },
+          {
+            title: "Access to the site",
+            html: `<p>The Site is freely accessible to any user with Internet access. The publisher implements reasonable means to ensure continuous access to the Site, but cannot guarantee permanent availability.</p><p>Access to the Site may be interrupted at any time, without notice or compensation, in particular for maintenance, updates, security reasons or in case of force majeure.</p>`,
+          },
+          {
+            title: "Cookies, trackers and third-party services",
+            html: `<p>By accessing the Site and continuing your navigation, you accept the following conditions regarding cookies and third-party services:</p><p><strong>Services integrated into the Site:</strong></p><ul><li><strong>Vercel Analytics &amp; Web Vitals</strong> — anonymized audience measurement and performance metrics. These trackers are enabled by default as they do not collect any personally identifiable data and meet a legitimate interest in improving the site (art. 6.1.f GDPR).</li><li><strong>Internal tracking system</strong> — anonymized recording of pages visited for statistical analysis. This system respects the browser's Do Not Track signal.</li><li><strong>Google Fonts</strong> — loading of fonts (Inter, Outfit) from Google's servers. The visitor's IP address may be collected by Google during loading.</li><li><strong>Local storage</strong> (localStorage) — recording of language preference. Strictly necessary for operation (art. 5.3 ePrivacy directive).</li></ul><p><strong>Third-party services accessible via external links:</strong></p><ul><li><strong>Calendly</strong> — by clicking on the booking link, you are redirected to calendly.com. You then accept Calendly's terms of use and privacy policy, which sets its own cookies (session, operation, preferences).</li><li><strong>WhatsApp</strong> — by clicking on the WhatsApp contact link, you are redirected to wa.me / web.whatsapp.com. You then accept the privacy policy of Meta Platforms.</li><li><strong>LinkedIn, GitHub, Telegram</strong> — links to these platforms are provided for informational purposes. Each platform applies its own terms of use and cookie policy.</li></ul><p><strong>Automatic acceptance.</strong> The cookies and trackers described above are enabled by default in accordance with the exemptions provided by the ePrivacy directive (strictly necessary cookies) and on the basis of legitimate interest (anonymized analytics cookies without personal data). By continuing your navigation, you acknowledge having read these technologies and accept their use. For third-party services (Calendly, WhatsApp, etc.), acceptance of their cookies is effective at the time you click on the redirect link.</p><p>The Site does not use any advertising cookies, tracking pixels (Facebook Pixel, Google Ads, etc.), retargeting tools or profiling cookies.</p><p>For more details, see the <a href="/confidentialite" class="text-site-accent hover:underline">privacy policy</a>.</p>`,
+          },
+          {
+            title: "Intellectual property",
+            html: `<p>All elements composing the Site (texts, images, videos, source code, mockups, logos, animations, architecture, design) are protected by intellectual property law and remain the exclusive property of Aïssa BELKOUSSA, unless otherwise stated.</p><p>Any reproduction, representation, modification, distribution or exploitation of all or part of the Site's content, by any means whatsoever, without the prior written authorization of the publisher, is strictly prohibited and constitutes an infringement punishable by articles L.335-2 and following of the French Intellectual Property Code.</p>`,
+          },
+          {
+            title: "Use of the contact form",
+            html: `<p>The Site provides a contact form allowing users to send inquiries or quote requests. By using this form, the user undertakes to:</p><ul><li>Provide accurate, complete and up-to-date information</li><li>Not use the form for abusive, fraudulent or illegal purposes</li><li>Not transmit abusive, defamatory, discriminatory content or content contrary to public order</li><li>Not attempt to disrupt the functioning of the Site (spam, injection, scraping, etc.)</li></ul><p>The publisher reserves the right not to respond to any request that it considers abusive or contrary to these Terms.</p>`,
+          },
+          {
+            title: "Use of the booking service",
+            html: `<p>The Site offers a link to the Calendly platform to book a free 30-minute discovery call. By using this service:</p><ul><li>You are redirected to calendly.com, a third-party service not controlled by the publisher</li><li>Data entered on Calendly (name, email, chosen slot) is subject to Calendly Inc.'s terms of use and privacy policy</li><li>The publisher receives only the booking information (name, email, date/time of the slot) to organize the meeting</li><li>The meeting is free and non-binding</li></ul>`,
+          },
+          {
+            title: "Personal data",
+            html: `<p>Personal data collected on the Site is processed in accordance with the General Data Protection Regulation (GDPR). For more information, see the <a href="/confidentialite" class="text-site-accent hover:underline">privacy policy</a>.</p><p>As part of service provision, the provider may handle sensitive client data (banking details, credentials, business data). Processing of this data is governed by the <a href="/cgv" class="text-site-accent hover:underline">general terms and conditions of sale</a>, which specify the commitments of each party and the limitations of liability regarding data protection.</p>`,
+          },
+          {
+            title: "Hypertext links",
+            html: `<p>The Site contains links to third-party sites and services, including:</p><ul><li>LinkedIn (professional profile)</li><li>GitHub (open source projects)</li><li>Telegram (community)</li><li>Calendly (booking)</li><li>WhatsApp (messaging)</li></ul><p>These links are provided for informational purposes. The publisher exercises no control over these sites and disclaims any responsibility for their content, availability, terms of use, cookie policies or damages that may result from their use.</p>`,
+          },
+          {
+            title: "Limitation of liability",
+            html: `<p>The publisher strives to provide reliable and up-to-date information on the Site, but does not guarantee the accuracy, completeness or exhaustiveness of the information published.</p><p>The publisher may under no circumstances be held responsible for:</p><ul><li>Direct or indirect damages resulting from the use or inability to use the Site</li><li>Interruptions or malfunctions of the Site, whatever the cause</li><li>The use made by third parties of the information present on the Site</li><li>Viruses or harmful elements that could infect the user's computer equipment</li><li>The content, availability or operation of third-party services accessible via the Site's links (Calendly, WhatsApp, LinkedIn, etc.)</li></ul>`,
+          },
+          {
+            title: "Modification of Terms",
+            html: `<p>The publisher reserves the right to modify these Terms at any time. Changes take effect upon publication on this page. The user is invited to consult this page regularly. The last update date is indicated at the top of this document.</p>`,
+          },
+          {
+            title: "Applicable law and jurisdiction",
+            html: `<p>These Terms are governed by French law. In the event of a dispute relating to the interpretation or execution of these terms, and in the absence of amicable resolution, the French courts shall have exclusive jurisdiction.</p>`,
+          },
+        ],
+      },
+      cgv: {
+        badge: "Terms of Sale",
+        title: "General Terms and Conditions of Sale",
+        lastUpdated: "April 3, 2026",
+        sections: [
+          {
+            title: "Payment terms",
+            html: `<p>Payment upon receipt of invoice, by check or bank transfer. When the quote provides for a deposit, it is payable upon order. The order is only considered firm and definitive after the deposit has been received. The balance is due upon the site going live or upon delivery of the agreed deliverables. In the event of cancellation of the order at the client's initiative after payment of the deposit, the deposit remains acquired by the service provider as flat-rate compensation, unless otherwise agreed in writing between the parties.</p>`,
+          },
+          {
+            title: "Late payment penalties",
+            html: `<p>In the event of late payment, penalties will be applied automatically, without prior formal notice, at a rate of 3 times the current legal interest rate, as well as a flat-rate recovery fee of EUR 40 (art. L441-10 of the French Commercial Code).</p>`,
+          },
+          {
+            title: "VAT",
+            html: `<p>VAT not applicable, article 293 B of the French General Tax Code. Total excl. VAT = Total incl. VAT.</p>`,
+          },
+          {
+            title: "Validity of proposals",
+            html: `<p>Unless otherwise stated, any quote or commercial proposal is valid for 30 days from its date of issue. After this period, rates and conditions may be revised. When the quote provides for staggered payment (in 2 or 3 installments), the due dates and amounts are specified in the quote and form an integral part of the contractual conditions.</p>`,
+          },
+          {
+            title: "Client obligations",
+            html: `<p>The client undertakes to provide the service provider with all elements necessary for the realization of the project (content, texts, visuals, technical access, brief, graphic charter, etc.) within a reasonable time and at the latest within 10 working days following the service provider's request.</p><p>The client undertakes to validate intermediate stages (mockups, prototypes, partial deliverables) within 5 working days of their availability. After this period and without the client's feedback, the submitted deliverables are deemed validated.</p><p>Any delay or failure to provide elements by the client results in an equivalent shift in the schedule, without the service provider's liability being engaged. In case of prolonged client inactivity (absence of response for more than 30 calendar days despite two written reminders), the service provider reserves the right to consider the project as abandoned. Amounts paid remain acquired and any outstanding balance becomes immediately due.</p>`,
+          },
+          {
+            title: "Intellectual property and license of use",
+            html: `<p><strong>Ownership.</strong> Intellectual property rights on all deliverables (source code, mockups, algorithms, configurations, visuals, original content) remain the exclusive property of the service provider.</p><p><strong>License of use.</strong> After full payment of the project price, the client benefits from a license of use:</p><ul><li><strong>Non-exclusive</strong>: the service provider retains the right to freely reuse all or part of the deliverables (code, design, components, methods, architecture) for any other project or client, without restriction;</li><li>Unlimited in time;</li><li>Covering the exploitation of the project as defined in the quote;</li><li>Transferable in the context of a transfer or transmission of the business.</li></ul><p>The license does not cover: resale, sub-licensing to third parties, modification of the source code outside the scope defined in the quote, or extraction of software bricks for use independent of the delivered project.</p><p><strong>Effect of stopping maintenance.</strong> In the event of termination of the maintenance subscription: (a) the site/system remains online and functional; (b) the license of use remains valid without time limitation; (c) the client retains access to the delivered source code; (d) the service provider is no longer bound to updates, bug fixes, monitoring or support; (e) hosting on the service provider's infrastructure is maintained for 90 days after the end of the subscription (see Hosting section).</p><p><strong>Code delivery.</strong> Upon written request, the service provider undertakes to deliver to the client all the source code, technical documentation and access necessary for migration within 15 working days.</p><p>Before full payment, the service provider remains the full and entire owner of the creations and reserves the right to suspend the service in case of non-payment.</p><p>The service provider reserves the right to make minor technical or aesthetic adjustments to the project, without prior agreement from the client, when these adjustments are necessary for reasons of security, performance, compatibility or continuous service improvement.</p><p><strong>Collection of usage data.</strong> The service provider reserves the right to collect anonymized usage data from the operation of delivered systems (traffic statistics, technical performance, browsing behaviors, conversion rates, interaction data). This data, devoid of any personally identifiable information, is used for purposes of continuous service improvement, performance optimization, research and development, and commercial benchmarking. The client is informed of this collection and may object by written request. This collection complies with the GDPR and the privacy policy accessible on the service provider's website.</p><p>Unless expressly opposed by the client, the service provider is authorized to mention the client's name and logo as well as to present the completed project as commercial references (portfolio, website, social networks, presentation documents). The service provider is also authorized to communicate, for commercial purposes, on the results obtained and performance metrics of the project, in anonymous or nominative form unless opposed by the client, while respecting the confidentiality of sensitive data.</p>`,
+          },
+          {
+            title: "Delivery times",
+            html: `<p>Delivery times are estimated in the quote and constitute a commitment by the service provider, subject to the client's compliance with their own obligations (provision of content, validations within deadlines, technical access). Any delay attributable to the client shifts the schedule accordingly.</p><p>In case of delay exclusively attributable to the service provider exceeding 10 working days compared to the agreed schedule, a discount of 5% of the total service amount will be applied per additional 10 working days of delay, up to a limit of 20% of the total amount.</p><p>In the event of force majeure within the meaning of French law, the service provider's obligations may be suspended without its liability being engaged.</p>`,
+          },
+          {
+            title: "Acceptance",
+            html: `<p>Upon project delivery (acceptance), the client has 10 calendar days to formulate reservations in writing. After this period, the deliverables will be deemed compliant and accepted. In case of founded reservations consistent with the validated brief, the service provider undertakes to make the necessary corrections at no additional cost within a reasonable time.</p>`,
+          },
+          {
+            title: "Included launch period",
+            html: `<p>The project price includes a launch period of three (3) months from the date of the acceptance report or, in the absence of reservations formulated within 10 days, from the date of project availability.</p><p>During this period, the client benefits from maintenance services corresponding to the subscribed plan (Essential or Premium), without additional billing. This launch period is an integral part of the project service. It is neither a trial period nor a commitment to subscribe to the maintenance plan.</p><p>At the end of the launch period, the client may: (a) continue the maintenance subscription at the current rate, without duration commitment — billing starts automatically unless otherwise notified by the client; (b) not continue, in which case maintenance services cease automatically without formality. The service provider informs the client by email fifteen (15) days before the end of the launch period.</p><p>The launch period applies only to the Accélérateur and Partenaire plans. The Autonome plan does not include any launch period or maintenance service.</p>`,
+          },
+          {
+            title: "Liability",
+            html: `<p>The service provider's liability, for all causes combined, is strictly limited to the amount excl. VAT actually paid by the client for the service concerned.</p><p>In no event may the service provider be held responsible for indirect damages, including: loss of revenue, loss of data, loss of clientele, damage to image or reputation, loss of earnings, commercial or financial damage of any kind, including those resulting from a leak, loss or unauthorized access to client data (see "Confidentiality and sensitive client data" section).</p><p>The service provider is bound by an obligation of means. It implements reasonable security measures in accordance with industry best practices, but does not guarantee the inviolability of the client's or third parties' systems, networks or services.</p>`,
+          },
+          {
+            title: "Contract termination",
+            html: `<p><strong>Termination for breach.</strong> Each party may terminate the contract in the event of serious breach by the other party of its obligations, after formal notice remaining ineffective for 15 calendar days sent by registered letter with acknowledgment of receipt or by email with read confirmation.</p><p><strong>Termination of the project at the client's initiative.</strong> In the event of termination at the client's initiative outside of a breach by the service provider, amounts paid remain acquired by the service provider in proportion to the work performed. The service provider will provide a detailed progress report and deliver the deliverables produced up to the date of termination.</p><p><strong>Termination of the project at the service provider's initiative.</strong> In the event of termination at the service provider's initiative outside of a breach by the client, the service provider will refund amounts corresponding to services not yet performed.</p><p><strong>Termination of the maintenance subscription.</strong> Termination conditions specific to the maintenance subscription are detailed in the "Maintenance and evolution subscriptions" section.</p>`,
+          },
+          {
+            title: "Hosting and infrastructure",
+            html: `<p>Unless otherwise stated in the quote, the project is hosted on the technical infrastructure managed by the service provider (servers, cloud platforms, domain names). Hosting fees are included in the maintenance subscription if applicable, or billed separately according to the terms specified in the quote.</p><p>In the absence of an active subscription and when the project is hosted on the service provider's infrastructure, the latter undertakes to maintain hosting for 90 days following the end of the subscription or project delivery. After this period, the service provider may suspend hosting after 30 days' prior notice to the client. The service provider undertakes to provide the client, upon request, with a copy of the data and files necessary for migrating the project to another host.</p><p>When the project is hosted on the client's infrastructure, the service provider is not responsible for the availability, security or performance of the hosting.</p>`,
+          },
+          {
+            title: "Maintenance and evolution subscriptions",
+            html: `<p><strong>Subscription and duration.</strong> The maintenance subscription takes effect automatically at the end of the three (3) month launch period, i.e. on the 91st day following the project acceptance date. The service provider sends a monthly invoice to the client, payable by bank transfer or SEPA direct debit within fifteen (15) days following the date of issue. The subscription is tacitly renewable each month.</p><p><strong>Service levels (SLA).</strong></p><p><em>Essential plan (EUR 490/month):</em> 24/7 monitoring (target availability: 99.5%); critical bug fixes: 48 working hours; minor bug fixes: 10 working days; security updates: applied within 72h; 1h of monthly support included; monthly performance report.</p><p><em>Premium plan (EUR 1,900/month):</em> 24/7 monitoring (target availability: 99.9%); critical bug fixes: 24 working hours; minor bug fixes: 5 working days; security updates: applied within 24h; up to 10h/month of evolutions (non-transferable); priority support 24h; monthly strategic follow-up meeting; monthly performance report.</p><p>Service levels apply to working days (Monday-Friday, excluding French public holidays), except for automated monitoring which operates continuously. Any service exceeding the subscription scope will be subject to an additional quote.</p><p><strong>Termination by the client.</strong> The client may terminate their subscription at any time, by email with acknowledgment of receipt or registered letter, with thirty (30) days' notice before the next monthly due date. Termination takes effect at the end of the calendar month following receipt of the notification.</p><p><strong>Termination by the service provider.</strong> The service provider may terminate the subscription with sixty (60) days' notice, in particular in the event of cessation of activity or technical impossibility of maintaining the service.</p><p><strong>Termination for non-payment.</strong> In case of non-payment of an installment despite a reminder that has remained ineffective for fifteen (15) days, the service provider may suspend maintenance services and terminate the subscription automatically.</p><p><strong>Work in progress.</strong> In the event of termination, maintenance work in progress at the time of notification is completed. No new services will be undertaken.</p><p><strong>Reversibility clause.</strong> Within thirty (30) days following the effective date of termination, the service provider undertakes to: (a) deliver to the client all up-to-date source code; (b) provide technical documentation and necessary access (hosting, DNS, third-party accounts, database); (c) ensure reasonable knowledge transfer (1 hour of videoconference) to facilitate takeover by another service provider; (d) delete client data from its systems within 60 days, unless legally required to retain it.</p><p><strong>Annual commitment.</strong> The client may opt for an annual commitment benefiting from a 25% discount (equivalent to 3 months free out of 12). The annual commitment is billed in one payment on the subscription date. In case of early termination of an annual commitment, the remaining monthly payments are not refunded.</p><p><strong>Price revision.</strong> Subscription prices are revisable once a year, on the contract anniversary date, within the limit of the Syntec index or 5% (whichever is lower). The service provider notifies any price revision sixty (60) days before it takes effect. In case of refusal, the client may terminate without penalty within 30 days following notification.</p>`,
+          },
+          {
+            title: "Personal data (GDPR)",
+            html: `<p>As part of the mission, personal data (name, telephone, email, project-related information, etc.) may be collected via the site, online forms, quote requests, as well as by any other means of communication used with the service provider (email, telephone, messaging, etc.) on behalf of the client.</p><p>The client is responsible for compliance with applicable regulations (in particular the GDPR) vis-à-vis its own clients. The service provider acts as a technical processor and undertakes to implement appropriate security measures for the management of this data.</p><p>For more details, see the <a href="/confidentialite" class="text-site-accent hover:underline">privacy policy</a>.</p>`,
+          },
+          {
+            title: "Confidentiality and sensitive client data",
+            html: `<p>In the course of performing the services (website creation, automation, systems integration, maintenance), the service provider may be required to access, handle or process sensitive data belonging to the client or its own clients, in particular:</p><ul><li>Banking details and financial information (IBAN, account numbers)</li><li>Technical credentials and access (passwords, API keys, server access, administration panels)</li><li>Client's customer data (customer files, contacts, order history, invoices)</li><li>Confidential business data (revenue, margins, commercial strategy, pricing)</li><li>Any other document or information communicated by the client in the context of the mission</li></ul><p><strong>Service provider commitments (obligation of means):</strong></p><ul><li>Implement reasonable security measures in accordance with industry best practices (encryption, restricted access, strong authentication)</li><li>Access client data only to the extent strictly necessary for the performance of the service</li><li>Not disclose any confidential data to third parties, except legal obligation or written authorization from the client</li><li>Delete or return all client data, access and credentials at the end of the mission or on request</li><li>Report to the client any security breach or incident detected as soon as possible</li></ul><p><strong>Limitation of liability regarding data.</strong> The service provider undertakes an <strong>obligation of means</strong> regarding data protection, and not an obligation of result. In no case may the service provider be held responsible for:</p><ul><li>Leaks, losses, alterations or unauthorized access to data resulting from a failure of the infrastructure, systems or services of the client or third-party providers chosen by the client</li><li>Security incidents caused by cyberattacks (hacking, phishing, ransomware, social engineering) targeting the client's systems, third-party services or the technical environment outside the direct control of the service provider</li><li>Data loss related to the absence of backups made by the client on its own systems</li><li>The client's use of weak passwords, sharing credentials through unsecured channels, or non-compliance with the security recommendations made by the service provider</li><li>Consequences related to the voluntary transmission by the client of sensitive data (banking details, credentials, etc.) via unencrypted or unsecured channels (unencrypted email, mainstream instant messaging, etc.)</li><li>Indirect or consequential damages such as loss of clientele, damage to reputation, loss of earnings or commercial damage resulting from a data leak</li></ul><p><strong>Client obligations:</strong></p><ul><li>Make a complete backup of its data and systems before communicating any access to the service provider</li><li>Transmit credentials and sensitive data exclusively through secure channels (shared password manager, encrypted transfer, dedicated secure space)</li><li>Inform the service provider of the sensitive nature of the data to which it grants access, and of any specific applicable regulations (PCI-DSS, health data, etc.)</li><li>Revoke access granted to the service provider at the end of the mission or as soon as it is no longer necessary</li><li>Ensure regulatory compliance (GDPR, CNIL) of the processing of personal data of its own clients</li></ul><p>This confidentiality clause survives the end of the contract for a period of two (2) years.</p>`,
+          },
+          {
+            title: "Mediation and disputes",
+            html: `<p>In the event of a dispute relating to the execution or interpretation of these terms, the parties undertake to seek an amicable solution before any legal action. Failing an amicable agreement within 30 days, the dispute may be submitted to a consumer mediator in accordance with articles L611-1 and following of the French Consumer Code.</p><p>Failing resolution by mediation, the dispute will be brought before the competent courts of the service provider's registered office (Tribunal judiciaire d'Albi), notwithstanding plurality of defendants or warranty claim.</p><p>These terms are governed by French law.</p>`,
+          },
+          {
+            title: "Right of withdrawal",
+            html: `<p>In accordance with article L221-28 of the French Consumer Code, the right of withdrawal cannot be exercised for contracts for the supply of digital content not provided on a material medium whose execution has begun with the consumer's prior express agreement and express waiver of their right of withdrawal.</p><p>The client acknowledges and accepts that the execution of the service begins upon signing the quote and payment of the deposit, and expressly waives their right of withdrawal from that moment.</p>`,
+          },
+          {
+            title: "Non-solicitation",
+            html: `<p>During the term of the contract and the twelve (12) months following its end, the client undertakes not to solicit, directly or indirectly, the subcontractors, service providers or collaborators introduced by the service provider in the context of the mission, except with prior written agreement. This clause does not prevent the client's right to freely contract with any service provider of its choice for needs unrelated to the mission.</p>`,
+          },
+          {
+            title: "Acceptance of terms",
+            html: `<p>Any contractual document (quote, contract, purchase order, commercial proposal, amendment, mission letter, and any other document issued by the service provider) signed with the mention "Bon pour accord" or "Lu et approuvé" constitutes a firm commitment and implies full and unreserved acceptance of these general terms and conditions of sale.</p>`,
+          },
+        ],
+      },
+      accessibilite: {
+        badge: "Accessibility",
+        title: "Accessibility Statement",
+        lastUpdated: "April 10, 2026",
+        sections: [
+          {
+            title: "Commitment",
+            html: `<p><strong>Aïssa BELKOUSSA</strong> is committed to making the <strong>aissabelkoussa.fr</strong> website accessible in accordance with article 47 of French law no. 2005-102 of February 11, 2005.</p><p>This accessibility statement applies to the <strong>www.aissabelkoussa.fr</strong> website.</p>`,
+          },
+          {
+            title: "Target standard and compliance status",
+            html: `<p><strong>Target standard:</strong> WCAG 2.1 level AA (Web Content Accessibility Guidelines).</p><p><strong>Compliance status:</strong> partially compliant. The site has not yet undergone a complete compliance audit. The measures described below are implemented in good faith to improve accessibility.</p>`,
+          },
+          {
+            title: "Non-accessible content",
+            html: `<p>The following content is not yet fully accessible:</p><ul><li><strong>Framer Motion animations:</strong> certain transition and entrance animations may pose difficulties for users sensitive to motion, despite respecting <code>prefers-reduced-motion</code> in GSAP animations.</li><li><strong>Preloader:</strong> the initial loading screen does not have a text alternative for screen readers. Users of assistive technologies may not be informed of the loading state.</li><li><strong>Color contrast:</strong> some text using the <code>text-site-text-light</code> class may not reach the minimum contrast ratio of 4.5:1 required by level AA, particularly on light backgrounds.</li></ul>`,
+          },
+          {
+            title: "Measures taken",
+            html: `<p>The following measures are in place to improve the accessibility of the site:</p><ul><li><strong>Skip link:</strong> a "Skip to content" link allows direct access to the main content without going through the navigation.</li><li><strong>Semantic HTML:</strong> systematic use of <code>&lt;header&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;footer&gt;</code>, <code>&lt;nav&gt;</code> tags and hierarchical heading levels.</li><li><strong>Alternative text:</strong> images have a descriptive <code>alt</code> attribute. Decorative elements are marked <code>aria-hidden="true"</code>.</li><li><strong>Visible focus:</strong> interactive elements (links, buttons, form fields) have a visible focus indicator.</li><li><strong>Reduced motion:</strong> GSAP animations respect the <code>prefers-reduced-motion</code> user preference and are disabled or simplified when this option is enabled.</li><li><strong>Keyboard navigation:</strong> the entire site is navigable by keyboard.</li></ul>`,
+          },
+          {
+            title: "Technologies used",
+            html: `<ul><li>HTML5</li><li>CSS3 (Tailwind CSS)</li><li>JavaScript / TypeScript</li><li>React (Next.js)</li><li>GSAP (animations)</li><li>Framer Motion (transitions)</li></ul>`,
+          },
+          {
+            title: "Feedback and contact",
+            html: `<p>If you encounter an accessibility defect that prevents you from accessing content or functionality of the site, you can contact us:</p><p><strong>Email:</strong> <a href="mailto:contact@aissabelkoussa.fr" class="text-site-accent hover:underline">contact@aissabelkoussa.fr</a></p><p>We undertake to respond within 7 working days and to find a solution within a reasonable time.</p>`,
+          },
+          {
+            title: "Remedies",
+            html: `<p>If you find an accessibility defect and do not receive a satisfactory response, you can:</p><ul><li>Write a message to the <a href="https://formulaire.defenseurdesdroits.fr/" target="_blank" rel="noopener noreferrer" class="text-site-accent hover:underline">Défenseur des droits</a> (French Rights Defender)</li><li>Contact the regional delegate of the Défenseur des droits in your area</li><li>Send a letter by post (free): Défenseur des droits, Libre réponse 71120, 75342 Paris CEDEX 07</li></ul>`,
+          },
+          {
+            title: "Date of the statement",
+            html: `<p>This statement was established on <strong>April 10, 2026</strong>.</p>`,
+          },
+        ],
+      },
+      rgpd: {
+        badge: "GDPR",
+        title: "Exercise your GDPR rights",
+        lastUpdated: "April 11, 2026",
+        intro: {
+          title: "What is this page for?",
+          html: `<p>This page allows you to concretely exercise your rights over the personal data we process. To understand <strong>what data</strong> is collected, <strong>why</strong> and <strong>for how long</strong> it is kept, see the <a href="/confidentialite" class="text-site-accent hover:underline">privacy policy</a>.</p><p>In accordance with articles 15 to 22 of the <strong>General Data Protection Regulation (GDPR)</strong> and the French Data Protection Act of January 6, 1978 as amended, you have several rights over your personal data, exercisable <strong>free of charge</strong> and at any time.</p>`,
+        },
+        rightsSectionTitle: "Your rights, in one click",
+        rightsSectionIntro: "Each button below opens your mail client with a pre-filled request. You only need to complete the fields in brackets and send.",
+        ctaButton: "Exercise this right",
+        rights: [
+          {
+            code: "acces",
+            title: "Right of access",
+            article: "art. 15 GDPR",
+            description: "Obtain confirmation that your data is being processed, and a copy of all data concerning you (purposes, recipients, retention period).",
+            subject: "Request for access to my data (art. 15 GDPR)",
+            body: "Hello,\n\nUnder article 15 of the GDPR, I wish to exercise my right of access and obtain:\n- Confirmation that data concerning me is being processed\n- A copy of all this data\n- The purposes, categories of data, recipients and retention period\n\nMy identifiers (email used on the site, name):\n[to complete]\n\nBest regards,",
+          },
+          {
+            code: "rectification",
+            title: "Right of rectification",
+            article: "art. 16 GDPR",
+            description: "Correct inaccurate data or complete incomplete data concerning you.",
+            subject: "Request for rectification of my data (art. 16 GDPR)",
+            body: "Hello,\n\nUnder article 16 of the GDPR, I wish to rectify the following data concerning me:\n\nData to be corrected: [to complete]\nCurrent value: [to complete]\nCorrect value: [to complete]\n\nMy identifiers (email used on the site):\n[to complete]\n\nBest regards,",
+          },
+          {
+            code: "effacement",
+            title: "Right to erasure (\"right to be forgotten\")",
+            article: "art. 17 GDPR",
+            description: "Obtain the deletion of your data, subject to legal retention obligations (accounting, invoicing, etc.).",
+            subject: "Request for erasure of my data (art. 17 GDPR)",
+            body: "Hello,\n\nUnder article 17 of the GDPR, I wish to exercise my right to erasure and request the deletion of all data concerning me, subject to legal retention obligations.\n\nMy identifiers (email used on the site, name):\n[to complete]\n\nBest regards,",
+          },
+          {
+            code: "limitation",
+            title: "Right to restriction of processing",
+            article: "art. 18 GDPR",
+            description: "Temporarily freeze the processing of your data (for example in case of contestation of its accuracy).",
+            subject: "Request for restriction of processing (art. 18 GDPR)",
+            body: "Hello,\n\nUnder article 18 of the GDPR, I wish to obtain the restriction of processing of data concerning me.\n\nReason:\n[to complete]\n\nMy identifiers (email used on the site):\n[to complete]\n\nBest regards,",
+          },
+          {
+            code: "portabilite",
+            title: "Right to portability",
+            article: "art. 20 GDPR",
+            description: "Receive your data in a structured, commonly used and machine-readable format (JSON, CSV), to transmit it to another data controller.",
+            subject: "Request for portability of my data (art. 20 GDPR)",
+            body: "Hello,\n\nUnder article 20 of the GDPR, I wish to exercise my right to portability and receive all data concerning me in a structured and machine-readable format (JSON or CSV).\n\nMy identifiers (email used on the site):\n[to complete]\n\nBest regards,",
+          },
+          {
+            code: "opposition",
+            title: "Right to object",
+            article: "art. 21 GDPR",
+            description: "Object, at any time and for reasons relating to your particular situation, to the processing of your data based on legitimate interest or for prospecting purposes.",
+            subject: "Objection to processing (art. 21 GDPR)",
+            body: "Hello,\n\nUnder article 21 of the GDPR, I object to the processing of data concerning me.\n\nReason (if processing based on legitimate interest):\n[to complete]\n\nMy identifiers (email used on the site):\n[to complete]\n\nBest regards,",
+          },
+          {
+            code: "directives",
+            title: "Post-mortem directives",
+            article: "art. 85 French Data Protection Act",
+            description: "Define directives concerning the retention, deletion and communication of your data after your death.",
+            subject: "Post-mortem directives (art. 85 French Data Protection Act)",
+            body: "Hello,\n\nIn accordance with article 85 of the French Data Protection Act, I wish to define the following directives concerning my data after my death:\n\n[to complete]\n\nMy identifiers (email used on the site):\n[to complete]\n\nBest regards,",
+          },
+        ],
+        alternativeSection: {
+          title: "How to exercise your rights otherwise",
+          html: `<p>If you prefer not to use the buttons above, you can exercise your rights by one of the following means:</p><ul><li>By <strong>email</strong> to <a href="mailto:contact@aissabelkoussa.fr" class="text-site-accent hover:underline">contact@aissabelkoussa.fr</a></li><li>Via the <a href="/contact" class="text-site-accent hover:underline">contact form</a>, specifying the subject "GDPR request"</li><li>By <strong>postal mail</strong>: Aïssa BELKOUSSA, Albi 81000, France</li></ul><p>For access, erasure and portability requests, please specify the <strong>email address</strong> you used on the site to allow identification of the data concerning you.</p>`,
+        },
+        identitySection: {
+          title: "Identity verification",
+          html: `<p>In principle, no proof of identity is required: the email address used for the request is considered sufficient when it corresponds to the one registered in our processing.</p><p>In case of <strong>reasonable doubt</strong> about your identity (different email address, unusual request), we may ask you, in accordance with article 12.6 of the GDPR, for additional proof of identity. This proof will be deleted as soon as the request has been processed.</p>`,
+        },
+        delaySection: {
+          title: "Response time",
+          html: `<p>In accordance with article 12.3 of the GDPR, we undertake to respond to you <strong>within a maximum of one month</strong> from the receipt of your request.</p><p>This period may be extended by two additional months if the request is particularly complex or if we receive a large number of requests. In this case, we will inform you of this extension and its reasons within one month of receiving your request.</p><p>The exercise of your rights is <strong>free of charge</strong>. However, in case of manifestly unfounded or excessive requests (in particular due to their repetitive nature), we reserve the right to demand payment of reasonable fees or to refuse to act, in accordance with article 12.5 of the GDPR.</p>`,
+        },
+        limitsSection: {
+          title: "Limits to your rights",
+          html: `<p>Some data may be retained beyond your erasure request when the law requires it, in particular:</p><ul><li><strong>Invoices</strong> and accounting documents (legal retention of 10 years — art. L123-22 French Commercial Code)</li><li>Data necessary for the exercise or defense of legal claims</li><li>Data whose retention is required by a legal or regulatory obligation</li></ul><p>In these cases, the data concerned will be <strong>blocked</strong> (restricted access) rather than deleted, and will only be used for the legal purposes that impose their retention.</p>`,
+        },
+        cnilSection: {
+          title: "Complaint to the CNIL",
+          html: `<p>If you believe, after contacting us, that your rights over your data are not being respected, you have the right to lodge a <strong>complaint</strong> with the Commission Nationale de l'Informatique et des Libertés (CNIL, French Data Protection Authority), the French supervisory authority for personal data protection.</p><p><strong>CNIL</strong><br/>3 Place de Fontenoy — TSA 80715<br/>75334 Paris Cedex 07<br/>Phone: +33 1 53 73 22 22<br/><a href="https://www.cnil.fr/fr/plaintes" target="_blank" rel="noopener noreferrer" class="text-site-accent hover:underline">www.cnil.fr/fr/plaintes →</a></p><p>However, we invite you to contact us first: most requests can be processed quickly and directly.</p>`,
+        },
+      },
     },
   },
 };
