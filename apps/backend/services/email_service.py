@@ -190,16 +190,32 @@ class EmailService:
             return False
 
     def send_contact_notification(self, submission_data: dict) -> bool:
-        """Send email notification for new contact form submission using SMTP or HTTP fallback"""
-        # Prefer SMTP if credentials are present
+        """Send email notification for new contact form submission.
+
+        Chaîne : Resend → SMTP Gmail → formsubmit.co → mailthis.to.
+        """
+        # 1. Tentative Resend (canal principal)
+        resend = self._get_resend()
+        if resend.available and self.recipient_email:
+            result = resend.send_email(
+                to=self.recipient_email,
+                subject=f"🔔 Nouveau contact portfolio - {submission_data['subject']}",
+                html=self._render_html_body(submission_data),
+                reply_to=submission_data.get('email'),
+                tags=[{"name": "type", "value": "contact-notification"}],
+            )
+            if result is not None:
+                logger.info(f"Contact notification sent via Resend to {self.recipient_email}")
+                return True
+            logger.warning("Resend a échoué pour la notif contact, fallback SMTP")
+
+        # 2. Chaîne legacy (SMTP → formsubmit → mailthis) — INCHANGÉE
         if self.email_user and self.email_password and self.recipient_email:
             return self._send_via_smtp(submission_data)
 
-        # HTTP fallback providers (no credentials required)
         if self.recipient_email:
             if self.fallback_provider == 'mailthis':
                 return self._send_via_mailthis(submission_data)
-            # default: formsubmit
             return self._send_via_formsubmit(submission_data)
 
         logger.warning("No recipient configured; skipping email notification")
