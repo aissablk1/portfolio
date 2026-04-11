@@ -19,6 +19,7 @@ cryptography>=42.0.8
 # ─── Email & Notifications ──────────────────
 email-validator>=2.2.0
 requests>=2.31.0
+html2text>=2024.2.26
 
 # ─── Utils ──────────────────────────────────
 tzdata>=2024.2
