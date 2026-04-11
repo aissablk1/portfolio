@@ -2,8 +2,8 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <div className="bg-site-bg min-h-screen relative">
-      <main id="main-content" className="relative z-10 pt-40 pb-32 px-container">
+    <div className="bg-site-bg min-h-screen relative flex items-center justify-center">
+      <main id="main-content" className="relative z-10 py-16 px-container w-full">
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-xs font-bold uppercase tracking-[0.3em] text-site-accent mb-8">
             404
