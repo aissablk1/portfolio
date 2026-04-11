@@ -3,9 +3,12 @@
 import React, { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
+import { Turnstile } from "@marsidev/react-turnstile";
 import { useLanguage } from "./LanguageContext";
 import { cn } from "@/utils/cn";
 import { Check, Send, Rocket, Zap, Handshake, Shield, ArrowUpRight, Bot } from "lucide-react";
+
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
 type FormState = {
   name: string;
@@ -32,7 +35,8 @@ const ContactForm = () => {
   const plan = selectedPlan && planDetails[selectedPlan] ? planDetails[selectedPlan] : null;
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitError, setSubmitError] = useState<false | "generic" | "rate">(false);
+  const [submitError, setSubmitError] = useState<false | "generic" | "rate" | "captcha">(false);
+  const [cfToken, setCfToken] = useState<string | null>(null);
   const [formData, setFormData] = useState<FormState>({
     name: "",
     email: "",
@@ -54,12 +58,23 @@ const ContactForm = () => {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData, lang: language, plan: selectedPlan || "" }),
+        body: JSON.stringify({
+          ...formData,
+          lang: language,
+          plan: selectedPlan || "",
+          cf_turnstile_token: cfToken,
+        }),
       });
-      if (!res.ok) throw new Error(res.status === 429 ? "rate" : "generic");
+      if (!res.ok) {
+        if (res.status === 429) throw new Error("rate");
+        if (res.status === 403) throw new Error("captcha");
+        throw new Error("generic");
+      }
       setIsSubmitted(true);
     } catch (err) {
-      setSubmitError(err instanceof Error && err.message === "rate" ? "rate" : "generic");
+      if (err instanceof Error && err.message === "rate") setSubmitError("rate");
+      else if (err instanceof Error && err.message === "captcha") setSubmitError("captcha");
+      else setSubmitError("generic");
     } finally {
       setIsSubmitting(false);
     }
@@ -231,9 +246,26 @@ const ContactForm = () => {
         />
       </div>
 
+      {/* Cloudflare Turnstile (anti-bot) — affiché seulement si la site key est configurée */}
+      {TURNSTILE_SITE_KEY && (
+        <div className="flex justify-center pt-2">
+          <Turnstile
+            siteKey={TURNSTILE_SITE_KEY}
+            onSuccess={(token) => setCfToken(token)}
+            onError={() => setCfToken(null)}
+            onExpire={() => setCfToken(null)}
+            options={{ theme: "dark", size: "flexible" }}
+          />
+        </div>
+      )}
+
       {submitError && (
         <p className="text-sm text-red-500 text-center">
-          {submitError === "rate" ? dict.funnel.errors.rate : dict.funnel.errors.generic}
+          {submitError === "rate"
+            ? dict.funnel.errors.rate
+            : submitError === "captcha"
+            ? "Vérification anti-robot échouée. Veuillez réessayer."
+            : dict.funnel.errors.generic}
         </p>
       )}
 
