@@ -10,6 +10,7 @@ import { ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
 const Footer = () => {
   const { dict } = useLanguage();
   const [email, setEmail] = useState("");
+  const [honey, setHoney] = useState("");
   const [nlState, setNlState] = useState<"idle" | "sending" | "done" | "error">("idle");
 
   const handleNewsletter = async (e: React.FormEvent) => {
@@ -20,7 +21,7 @@ const Footer = () => {
       const res = await fetch("/api/newsletter", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, source: "newsletter-footer" }),
+        body: JSON.stringify({ email, source: "newsletter-footer", _honey: honey }),
       });
       if (res.ok) {
         setNlState("done");
@@ -104,6 +105,23 @@ const Footer = () => {
                     placeholder={dict.footer.newsletterPlaceholder}
                     required
                     className="flex-1 px-4 py-2.5 text-sm bg-site-bg border border-site-border rounded-full focus:outline-none focus:border-site-accent transition-colors"
+                  />
+                  <input
+                    type="text"
+                    name="_honey"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                    value={honey}
+                    onChange={(e) => setHoney(e.target.value)}
+                    style={{
+                      position: "absolute",
+                      left: "-9999px",
+                      width: "1px",
+                      height: "1px",
+                      opacity: 0,
+                      pointerEvents: "none",
+                    }}
                   />
                   <button
                     type="submit"
