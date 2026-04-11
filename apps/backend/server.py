@@ -12,6 +12,7 @@ from services.notification_service import NotificationService
 from services.storage_service import StorageService
 from services.resend_service import ResendService
 from services.sequence_service import SequenceService
+from services.turnstile_service import TurnstileService
 from admin_routes import admin_router
 from sequence_routes import sequence_router, init_sequence_routes
 from services.auth_service import create_admin_user, load_blacklisted_tokens, hash_password
@@ -37,6 +38,7 @@ notification_service = NotificationService()
 storage_service = StorageService()
 resend_service = ResendService()
 sequence_service = SequenceService(resend_service)
+turnstile_service = TurnstileService()
 
 # Create the main app without a prefix
 app = FastAPI(title="AÏSSA BELKOUSSA Portfolio API", version="1.0.0")
@@ -99,7 +101,16 @@ async def submit_contact_form(
         user_agent = get_user_agent(request)
         
         logger.info(f"Contact form submission from {ip_address}: {form_data.name} <{form_data.email}>")
-        
+
+        # Turnstile verification (bot filter upstream of custom spam check)
+        ts_success, ts_error = turnstile_service.verify(form_data.cf_turnstile_token, ip_address)
+        if not ts_success:
+            logger.warning(f"Turnstile rejected submission from {ip_address}: {ts_error}")
+            raise HTTPException(
+                status_code=403,
+                detail="Vérification anti-robot échouée. Veuillez réessayer.",
+            )
+
         # Rate limiting check
         if not spam_protection.check_rate_limit(ip_address):
             logger.warning(f"Rate limit exceeded for IP: {ip_address}")
