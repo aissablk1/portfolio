@@ -41,7 +41,7 @@ export function contactAdminTemplate(data: ContactAdminData): TemplateResult {
 
     <!-- Reply button -->
     <div style="margin-bottom:32px;">
-      <a href="mailto:${esc(data.email)}?subject=Re: ${esc(data.need)}" style="display:inline-block;background:#6366f1;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;">
+      <a href="mailto:${esc(data.email)}?subject=Re: ${esc(data.need)}" style="display:inline-block;background:#16a34a;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;">
         ${t.replyNow} &rarr;
       </a>
     </div>
@@ -55,7 +55,7 @@ export function contactAdminTemplate(data: ContactAdminData): TemplateResult {
         <td style="padding:16px 0;border-bottom:1px solid #1a1a1a;vertical-align:top;width:50%;">
           <span style="color:#666;font-size:10px;text-transform:uppercase;letter-spacing:0.15em;">${t.email}</span>
           <p style="color:#fff;font-size:16px;margin:6px 0 0;">
-            <a href="mailto:${esc(data.email)}" style="color:#6366f1;text-decoration:none;">${esc(data.email)}</a>
+            <a href="mailto:${esc(data.email)}" style="color:#16a34a;text-decoration:none;">${esc(data.email)}</a>
           </p>
         </td>
       </tr>
