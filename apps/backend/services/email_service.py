@@ -252,38 +252,7 @@ class EmailService:
             msg['To'] = submission_data['email']
             msg['Subject'] = f"✅ Message reçu - {submission_data['subject']}"  # Subject header (not HTML, no escape needed)
 
-            # Auto-reply body — kept inline as the legacy SMTP path used to build it
-            safe_name = html_escape(str(submission_data['name']))
-            safe_subject = html_escape(str(submission_data['subject']))
-            whatsapp_number = os.getenv("ADMIN_WHATSAPP_NUMBER", "")
-            inner_body = f"""
-<h2 style="color:#fff;font-size:20px;margin:0 0 24px;">Merci pour votre message, {safe_name} !</h2>
-
-<p>Bonjour <strong style="color:#fff;">{safe_name}</strong>,</p>
-<p>Merci d'avoir pris le temps de me contacter via mon portfolio. J'ai bien re&ccedil;u votre message concernant &laquo;&nbsp;<em style="color:#8b5cf6;">{safe_subject}</em>&nbsp;&raquo;.</p>
-
-<div style="background:#161616;padding:20px;border-radius:8px;margin:24px 0;border:1px solid #222;">
-  <p style="color:#fff;font-size:16px;margin:0 0 12px;font-weight:600;">Prochaines &eacute;tapes</p>
-  <p style="margin:0 0 12px;">Je reviendrai vers vous dans les <strong style="color:#fff;">24-48h</strong> pour &eacute;tudier votre demande en d&eacute;tail.</p>
-  <p style="margin:0 0 16px;">Pour une r&eacute;ponse plus rapide, n'h&eacute;sitez pas &agrave; me contacter directement sur WhatsApp :</p>
-  <p style="text-align:center;margin:0;">
-    <a href="https://wa.me/{whatsapp_number}" style="background:#25d366;color:#fff;padding:12px 24px;text-decoration:none;border-radius:8px;display:inline-block;font-weight:600;">Discuter sur WhatsApp</a>
-  </p>
-</div>
-
-<div style="background:#161616;padding:20px;border-radius:8px;margin:24px 0;border-left:3px solid #8b5cf6;">
-  <p style="color:#fff;font-size:16px;margin:0 0 12px;font-weight:600;">En attendant</p>
-  <p style="margin:0;">N'h&eacute;sitez pas &agrave; :</p>
-  <ul style="padding-left:20px;margin:8px 0 0;">
-    <li style="margin:4px 0;"><a href="https://github.com/aissablk1" style="color:#8b5cf6;text-decoration:none;">Consulter mes r&eacute;alisations sur GitHub</a></li>
-    <li style="margin:4px 0;"><a href="https://t.me/investwithaissa" style="color:#8b5cf6;text-decoration:none;">Suivre mon actualit&eacute; sur Telegram</a></li>
-    <li style="margin:4px 0;"><a href="https://linkedin.com/in/aissabelkoussa" style="color:#8b5cf6;text-decoration:none;">Me retrouver sur LinkedIn</a></li>
-  </ul>
-</div>
-
-<p style="text-align:center;color:#999;margin-top:24px;">&Agrave; tr&egrave;s bient&ocirc;t,<br><strong style="color:#fff;">A&Iuml;SSA BELKOUSSA</strong><br><span style="font-style:italic;font-size:13px;">Entrepreneur &bull; D&eacute;veloppeur &bull; Cr&eacute;ateur</span></p>"""
-            body = _branded_email(f"Message recu - {submission_data['subject']}", inner_body)
-
+            body = self._render_auto_reply_html(submission_data)
             msg.attach(MIMEText(body, 'html'))
             
             # Send auto-reply
