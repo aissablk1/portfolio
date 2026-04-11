@@ -222,19 +222,37 @@ class EmailService:
         return False
     
     def send_auto_reply(self, submission_data: dict) -> bool:
-        """Send automatic reply to the person who submitted the form"""
+        """Send automatic reply to the person who submitted the form.
+
+        Chaîne : Resend → SMTP Gmail. Aucun fallback HTTP car formsubmit/mailthis
+        ne sont pas conçus pour envoyer vers une adresse arbitraire.
+        """
+        # 1. Tentative Resend (canal principal)
+        resend = self._get_resend()
+        if resend.available:
+            result = resend.send_email(
+                to=submission_data['email'],
+                subject=f"✅ Message reçu - {submission_data['subject']}",
+                html=self._render_auto_reply_html(submission_data),
+                tags=[{"name": "type", "value": "auto-reply"}],
+            )
+            if result is not None:
+                logger.info(f"Auto-reply sent via Resend to {submission_data['email']}")
+                return True
+            logger.warning("Resend a échoué pour l'auto-reply, fallback SMTP")
+
+        # 2. Branche SMTP existante
         try:
             if not all([self.email_user, self.email_password]):
                 logger.warning("Email configuration missing. Cannot send auto-reply.")
                 return False
-                
-            # Create message
+
             msg = MIMEMultipart()
             msg['From'] = self.email_user
             msg['To'] = submission_data['email']
             msg['Subject'] = f"✅ Message reçu - {submission_data['subject']}"  # Subject header (not HTML, no escape needed)
-            
-            # Auto-reply body
+
+            # Auto-reply body — kept inline as the legacy SMTP path used to build it
             safe_name = html_escape(str(submission_data['name']))
             safe_subject = html_escape(str(submission_data['subject']))
             whatsapp_number = os.getenv("ADMIN_WHATSAPP_NUMBER", "")
