@@ -192,24 +192,14 @@ class EmailService:
     def send_contact_notification(self, submission_data: dict) -> bool:
         """Send email notification for new contact form submission.
 
-        Chaîne : Resend → SMTP Gmail → formsubmit.co → mailthis.to.
+        ⚠️ Le formulaire de contact passe par la Vercel Function
+        apps/frontend/src/app/api/contact/route.ts qui envoie déjà les
+        emails admin + confirm via Resend (tags contact-admin / contact-confirm).
+        Ce backend FastAPI ne fait que le storage MongoDB + lead tracking.
+        Cette méthode est conservée pour les usages legacy / scripts internes
+        mais ne doit PAS appeler Resend (sinon double email).
         """
-        # 1. Tentative Resend (canal principal)
-        resend = self._get_resend()
-        if resend.available and self.recipient_email:
-            result = resend.send_email(
-                to=self.recipient_email,
-                subject=f"🔔 Nouveau contact portfolio - {submission_data['subject']}",
-                html=self._render_html_body(submission_data),
-                reply_to=submission_data.get('email'),
-                tags=[{"name": "type", "value": "contact-notification"}],
-            )
-            if result is not None:
-                logger.info(f"Contact notification sent via Resend to {self.recipient_email}")
-                return True
-            logger.warning("Resend a échoué pour la notif contact, fallback SMTP")
-
-        # 2. Chaîne legacy (SMTP → formsubmit → mailthis) — INCHANGÉE
+        # Chaîne legacy (SMTP → formsubmit → mailthis) — INCHANGÉE
         if self.email_user and self.email_password and self.recipient_email:
             return self._send_via_smtp(submission_data)
 
@@ -224,24 +214,10 @@ class EmailService:
     def send_auto_reply(self, submission_data: dict) -> bool:
         """Send automatic reply to the person who submitted the form.
 
-        Chaîne : Resend → SMTP Gmail. Aucun fallback HTTP car formsubmit/mailthis
-        ne sont pas conçus pour envoyer vers une adresse arbitraire.
+        ⚠️ Idem send_contact_notification : la Vercel Function envoie déjà
+        l'auto-reply (tag contact-confirm). Cette méthode reste sur SMTP
+        pour les usages legacy uniquement. Ne PAS appeler Resend ici.
         """
-        # 1. Tentative Resend (canal principal)
-        resend = self._get_resend()
-        if resend.available:
-            result = resend.send_email(
-                to=submission_data['email'],
-                subject=f"✅ Message reçu - {submission_data['subject']}",
-                html=self._render_auto_reply_html(submission_data),
-                tags=[{"name": "type", "value": "auto-reply"}],
-            )
-            if result is not None:
-                logger.info(f"Auto-reply sent via Resend to {submission_data['email']}")
-                return True
-            logger.warning("Resend a échoué pour l'auto-reply, fallback SMTP")
-
-        # 2. Branche SMTP existante
         try:
             if not all([self.email_user, self.email_password]):
                 logger.warning("Email configuration missing. Cannot send auto-reply.")

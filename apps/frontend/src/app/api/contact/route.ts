@@ -27,6 +27,48 @@ function isRateLimited(ip: string): boolean {
   return entry.count > RATE_LIMIT;
 }
 
+// --- Cloudflare Turnstile verification (server-side) ---
+// Bypass automatique si TURNSTILE_SECRET_KEY absent (mode dev local).
+// Fail-open sur timeout/erreur réseau pour ne pas bloquer le formulaire.
+async function verifyTurnstile(
+  token: string | null | undefined,
+  ip: string
+): Promise<{ success: boolean; error?: string }> {
+  const secret = process.env.TURNSTILE_SECRET_KEY;
+  if (!secret) return { success: true }; // bypass dev
+
+  if (!token) return { success: false, error: "missing-token" };
+
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 10_000);
+    const res = await fetch(
+      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({ secret, response: token, remoteip: ip }),
+        signal: controller.signal,
+      }
+    );
+    clearTimeout(timeout);
+    if (!res.ok) {
+      console.warn("[turnstile] non-200 from siteverify, fail-open:", res.status);
+      return { success: true, error: "fail-open" };
+    }
+    const data = (await res.json()) as {
+      success: boolean;
+      "error-codes"?: string[];
+    };
+    if (data.success) return { success: true };
+    const code = data["error-codes"]?.[0] || "unknown";
+    return { success: false, error: code };
+  } catch (err) {
+    console.warn("[turnstile] verify exception, fail-open:", err);
+    return { success: true, error: "fail-open" };
+  }
+}
+
 // --- Lead scoring (domain logic, stays here) ---
 function scorelead(data: {
   budget?: string;
@@ -140,6 +182,20 @@ export async function POST(request: Request) {
     body = await request.json();
   } catch {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
+  }
+
+  // Cloudflare Turnstile (anti-bot) — placé avant validation pour économiser CPU sur les bots
+  const cfToken =
+    body && typeof body === "object"
+      ? ((body as Record<string, unknown>).cf_turnstile_token as string | null | undefined)
+      : null;
+  const tsResult = await verifyTurnstile(cfToken, ip);
+  if (!tsResult.success) {
+    console.warn("[contact] Turnstile rejected:", tsResult.error, "ip:", ip);
+    return NextResponse.json(
+      { error: "Captcha verification failed" },
+      { status: 403 }
+    );
   }
 
   // Honeypot — silent accept
