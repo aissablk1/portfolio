@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useLanguage } from "./LanguageContext";
 import { cn } from "@/utils/cn";
-import { AlertTriangle, Sparkles } from "lucide-react";
+import { AlertTriangle } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import ClaudeArchitectModal from "./ClaudeArchitectModal";
@@ -153,10 +153,21 @@ const Header = () => {
                 "hidden md:inline-flex items-center gap-1.5 px-3 py-2 text-[10px] font-bold uppercase tracking-widest rounded-full transition-all duration-500",
                 isScrolled && isOverDark
                   ? "border border-[#e98152]/50 text-[#e98152] hover:border-[#e98152] hover:bg-[#e98152]/10"
-                  : "border border-[#b04918]/40 text-[#b04918] hover:border-[#b04918] hover:bg-[#b04918]/5"
+                  : "border border-[#C15F3C]/40 text-[#a04e30] hover:border-[#C15F3C] hover:bg-[#C15F3C]/5"
               )}
             >
-              <Sparkles size={12} strokeWidth={2.5} />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={
+                  isScrolled && isOverDark
+                    ? "/icons/claude-light.svg"
+                    : "/icons/claude.svg"
+                }
+                alt=""
+                width="12"
+                height="12"
+                aria-hidden="true"
+              />
               {dict.claudeArchitect.navLabel}
             </button>
 
@@ -306,9 +317,16 @@ const Header = () => {
                     setMenuOpen(false);
                     setClaudeModalOpen(true);
                   }}
-                  className="inline-flex items-center justify-center gap-2 text-lg font-display font-medium tracking-tight border border-[#b04918]/40 text-[#b04918] px-8 py-4 rounded-full hover:border-[#b04918] hover:bg-[#b04918]/5 transition-colors text-center w-64"
+                  className="inline-flex items-center justify-center gap-2 text-lg font-display font-medium tracking-tight border border-[#C15F3C]/40 text-[#a04e30] px-8 py-4 rounded-full hover:border-[#C15F3C] hover:bg-[#C15F3C]/5 transition-colors text-center w-64"
                 >
-                  <Sparkles size={16} strokeWidth={2.5} />
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/icons/claude.svg"
+                    alt=""
+                    width="16"
+                    height="16"
+                    aria-hidden="true"
+                  />
                   {dict.claudeArchitect.eyebrow}
                 </button>
                 <Link

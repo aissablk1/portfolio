@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Sparkles, ArrowUpRight, X } from "lucide-react";
+import { ArrowUpRight, X } from "lucide-react";
 import { useLanguage } from "./LanguageContext";
 
 interface Props {
@@ -103,9 +103,16 @@ export default function ClaudeArchitectModal({ open, onClose }: Props) {
                 {/* Eyebrow */}
                 <div
                   className="mb-5 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.2em]"
-                  style={{ color: "#8a3414" }}
+                  style={{ color: "#7a3a22" }}
                 >
-                  <Sparkles size={13} strokeWidth={2.2} />
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/icons/claude.svg"
+                    alt=""
+                    width="14"
+                    height="14"
+                    aria-hidden="true"
+                  />
                   <span>{t.eyebrow}</span>
                 </div>
 
