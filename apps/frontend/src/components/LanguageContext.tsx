@@ -272,7 +272,7 @@ interface Dictionary {
       backHome: string;
     };
     plan: { selectedLabel: string };
-    errors: { generic: string; rate: string };
+    errors: { generic: string; rate: string; captcha: string };
   };
   contactPage: {
     badge: string;
@@ -1102,6 +1102,7 @@ const dictionaries: Record<Language, Dictionary> = {
       errors: {
         generic: "Une erreur est survenue. Réessayez ou contactez-moi sur LinkedIn.",
         rate: "Trop de demandes. Réessayez dans quelques minutes.",
+        captcha: "Vérification anti-robot échouée. Veuillez réessayer.",
       },
     },
     contactPage: {
@@ -2327,6 +2328,7 @@ const dictionaries: Record<Language, Dictionary> = {
       errors: {
         generic: "Something went wrong. Please try again or reach out on LinkedIn.",
         rate: "Too many requests. Please try again in a few minutes.",
+        captcha: "Captcha verification failed. Please try again.",
       },
     },
     contactPage: {

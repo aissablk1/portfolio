@@ -264,7 +264,7 @@ const ContactForm = () => {
           {submitError === "rate"
             ? dict.funnel.errors.rate
             : submitError === "captcha"
-            ? "Vérification anti-robot échouée. Veuillez réessayer."
+            ? dict.funnel.errors.captcha
             : dict.funnel.errors.generic}
         </p>
       )}
