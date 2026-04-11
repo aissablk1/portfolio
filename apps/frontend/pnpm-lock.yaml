@@ -44,12 +44,18 @@ importers:
       critters:
         specifier: ^0.0.23
         version: 0.0.23
+      disposable-email-domains:
+        specifier: ^1.0.62
+        version: 1.0.62
       framer-motion:
         specifier: ^12.36.0
         version: 12.36.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       gray-matter:
         specifier: ^4.0.3
         version: 4.0.3
+      html-to-text:
+        specifier: ^9.0.5
+        version: 9.0.5
       lucide-react:
         specifier: ^0.577.0
         version: 0.577.0(react@19.2.4)
@@ -95,6 +101,10 @@ importers:
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
+    devDependencies:
+      '@types/html-to-text':
+        specifier: ^9.0.4
+        version: 9.0.4
 
 packages:
 
@@ -627,6 +637,9 @@ packages:
   '@types/hast@3.0.4':
     resolution: {integrity: sha512-WPs+bbQw5aCj+x6laNGWLH3wviHtoCv/P3+otBhbOhJgG8qtpdAMlTCxLtsTWA7LH1Oh/bFCHsBn0TPS5m30EQ==}
 
+  '@types/html-to-text@9.0.4':
+    resolution: {integrity: sha512-pUY3cKH/Nm2yYrEmDlPR1mR7yszjGx4DrwPjQ702C4/D5CwHuZTgZdIdwPkRbcuhs7BAh2L5rg3CL5cbRiGTCQ==}
+
   '@types/mdast@4.0.4':
     resolution: {integrity: sha512-kGaNbPh1k7AFzgpud/gMdvIm5xuECykRR+JnWKQno9TAXVa6WIVCGTPvYGekIDL4uwCZQSYbUxNBSb1aUo79oA==}
 
@@ -818,6 +831,9 @@ packages:
 
   devlop@1.1.0:
     resolution: {integrity: sha512-RWmIqhcFf1lRYBvNmr7qTNuyCt/7/ns2jbpp1+PalgE/rDQcBT0fioSMUpJ93irlUhC5hrg4cYqe6U+0ImW0rA==}
+
+  disposable-email-domains@1.0.62:
+    resolution: {integrity: sha512-LBQvhRw7mznQTPoyZbsmYeNOZt1pN5aCsx4BAU/3siVFuiM9f2oyKzUaB8v1jbxFjE3aYqYiMo63kAL4pHgfWQ==}
 
   dom-serializer@2.0.0:
     resolution: {integrity: sha512-wIkAryiqt/nV5EQKqQpo3SToSOV9J0DnbJqwK7Wv/Trc92zIAYZ4FlMu+JPFW1DfGFt81ZTCGgDEabffXeLyJg==}
@@ -1976,6 +1992,8 @@ snapshots:
     dependencies:
       '@types/unist': 3.0.3
 
+  '@types/html-to-text@9.0.4': {}
+
   '@types/mdast@4.0.4':
     dependencies:
       '@types/unist': 3.0.3
@@ -2122,6 +2140,8 @@ snapshots:
   devlop@1.1.0:
     dependencies:
       dequal: 2.0.3
+
+  disposable-email-domains@1.0.62: {}
 
   dom-serializer@2.0.0:
     dependencies:
