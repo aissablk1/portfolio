@@ -59,7 +59,7 @@ const content = {
       "Pas juste du SEO. 6 dimensions analysées en profondeur : visibilité IA, performance, accessibilité, sécurité, crédibilité. Le diagnostic qu'un consultant IA ferait en 30 secondes.",
     placeholder: "votre-domaine.fr",
     cta: "Lancer l'audit",
-    trust: "Gratuit — 6 dimensions — Resultats en 30 secondes",
+    trust: "Gratuit — 6 dimensions — Résultats en 30 secondes",
     dimensions: {
       seo: "SEO technique",
       performance: "Performance",
@@ -90,22 +90,67 @@ const content = {
       },
       freeLabel: "Gratuit",
       gatedLabel: "Premium",
-      unlockTitle: "Debloquez 3 dimensions supplementaires",
+      unlockTitle: "Débloquez 3 dimensions supplémentaires",
       unlockBody: "Entrez votre email pour révéler la visibilité IA, la sécurité et la crédibilité.",
-      unlockCta: "Debloquer l'audit complet",
+      unlockCta: "Débloquer l'audit complet",
       unlockEmailPlaceholder: "email@entreprise.fr",
-      unlocking: "Verification...",
-      unlocked: "Debloque !",
+      unlocking: "Vérification...",
+      unlocked: "Débloqué !",
       share: "Partager",
       shareCopied: "Lien copié !",
       exportPdf: "Exporter PDF",
-      sharing: "Creation...",
+      sharing: "Création...",
       ctaTitle: "Transformez votre score en stratégie",
       ctaBody:
         "Les scores faibles révèlent des chantiers. Les scores forts indiquent des leviers. Dans les deux cas, la question est : comment transformer ce diagnostic en avantage compétitif ?",
       ctaButton: "Réserver un appel stratégique",
       ctaFree: "Gratuit — 30 minutes — Sans engagement",
       rescan: "Auditer un autre domaine",
+      checks: "checks",
+      showChecks: "voir",
+      hideChecks: "masquer",
+    },
+    checkLabels: {
+      "meta-description": "Meta description",
+      "title-tag": "Balise title",
+      "h1-structure": "Structure H1",
+      "sitemap": "Sitemap XML",
+      "ttfb": "Temps de réponse serveur",
+      "html-size": "Taille du HTML",
+      "script-count": "Scripts externes",
+      "lazy-images": "Lazy loading des images",
+      "preconnect": "Preconnect / DNS prefetch",
+      "lang-attr": "Attribut lang",
+      "alt-images": "Attributs alt sur les images",
+      "heading-hierarchy": "Hiérarchie des titres",
+      "landmarks": "Landmarks sémantiques",
+      "form-labels": "Labels de formulaire",
+      "skip-link": "Skip link (navigation clavier)",
+      "llms-txt": "Fichier llms.txt",
+      "schema-entity": "Entités structurées (Schema.org)",
+      "faq-schema": "FAQ structurée",
+      "qa-format": "Format question/réponse",
+      "ai-crawlers": "Accès des crawlers IA",
+      "https": "HTTPS",
+      "hsts": "Strict-Transport-Security (HSTS)",
+      "csp": "Content-Security-Policy",
+      "frame-options": "Protection clickjacking",
+      "referrer-policy": "Referrer-Policy",
+      "permissions-policy": "Permissions-Policy",
+      "legal": "Mentions légales",
+      "privacy": "Politique de confidentialité",
+      "contact": "Moyen de contact",
+      "social-proof": "Présence sociale",
+      "copyright": "Copyright à jour",
+      "testimonials": "Témoignages / avis",
+    },
+    summaries: {
+      seo: { good: "Bons fondamentaux SEO", warning: "SEO partiel", critical: "SEO insuffisant" },
+      performance: { good: "Site rapide", warning: "Performance moyenne", critical: "Site lent" },
+      accessibility: { good: "Bonnes bases WCAG", warning: "Accessibilité incomplète", critical: "Accessibilité critique" },
+      geo: { good: "Site bien positionné pour les IA", warning: "Quelques signaux manquants", critical: "Invisible pour les IA" },
+      security: { good: "Headers de sécurité bien configurés", warning: "Quelques headers manquants", critical: "Site exposé aux attaques courantes" },
+      credibility: { good: "Site inspire confiance", warning: "Signaux de confiance incomplets", critical: "Manque de crédibilité" },
     },
   },
   en: {
@@ -163,6 +208,51 @@ const content = {
       ctaButton: "Book a strategy call",
       ctaFree: "Free — 30 minutes — No strings attached",
       rescan: "Audit another domain",
+      checks: "checks",
+      showChecks: "show",
+      hideChecks: "hide",
+    },
+    checkLabels: {
+      "meta-description": "Meta description",
+      "title-tag": "Title tag",
+      "h1-structure": "H1 structure",
+      "sitemap": "XML Sitemap",
+      "ttfb": "Server response time",
+      "html-size": "HTML size",
+      "script-count": "External scripts",
+      "lazy-images": "Lazy loading images",
+      "preconnect": "Preconnect / DNS prefetch",
+      "lang-attr": "Lang attribute",
+      "alt-images": "Image alt attributes",
+      "heading-hierarchy": "Heading hierarchy",
+      "landmarks": "Semantic landmarks",
+      "form-labels": "Form labels",
+      "skip-link": "Skip link (keyboard nav)",
+      "llms-txt": "llms.txt file",
+      "schema-entity": "Structured entities (Schema.org)",
+      "faq-schema": "Structured FAQ",
+      "qa-format": "Q&A format",
+      "ai-crawlers": "AI crawler access",
+      "https": "HTTPS",
+      "hsts": "Strict-Transport-Security (HSTS)",
+      "csp": "Content-Security-Policy",
+      "frame-options": "Clickjacking protection",
+      "referrer-policy": "Referrer-Policy",
+      "permissions-policy": "Permissions-Policy",
+      "legal": "Legal notice",
+      "privacy": "Privacy policy",
+      "contact": "Contact method",
+      "social-proof": "Social presence",
+      "copyright": "Up-to-date copyright",
+      "testimonials": "Testimonials / reviews",
+    },
+    summaries: {
+      seo: { good: "Good SEO fundamentals", warning: "Partial SEO", critical: "Insufficient SEO" },
+      performance: { good: "Fast site", warning: "Average performance", critical: "Slow site" },
+      accessibility: { good: "Good WCAG basics", warning: "Incomplete accessibility", critical: "Critical accessibility issues" },
+      geo: { good: "Well positioned for AI", warning: "Some signals missing", critical: "Invisible to AI" },
+      security: { good: "Security headers well configured", warning: "Some headers missing", critical: "Exposed to common attacks" },
+      credibility: { good: "Site inspires trust", warning: "Incomplete trust signals", critical: "Lacks credibility" },
     },
   },
 };
@@ -684,7 +774,7 @@ export default function AuditPage() {
                         </div>
                       </div>
 
-                      <p className="text-xs text-site-text-light mb-4">{dim.summary}</p>
+                      <p className="text-xs text-site-text-light mb-4">{t.summaries[dim.id]?.[dim.verdict] ?? dim.summary}</p>
 
                       <div className="h-1 w-full bg-site-border rounded-full overflow-hidden mb-4">
                         <motion.div
@@ -700,7 +790,7 @@ export default function AuditPage() {
 
                       <details className="group">
                         <summary className="text-[10px] font-bold uppercase tracking-[0.12em] text-site-text-light/40 cursor-pointer hover:text-site-text-light transition-colors">
-                          {dim.checks.length} checks ·  <span className="group-open:hidden">voir</span><span className="hidden group-open:inline">masquer</span>
+                          {dim.checks.length} {t.results.checks} ·  <span className="group-open:hidden">{t.results.showChecks}</span><span className="hidden group-open:inline">{t.results.hideChecks}</span>
                         </summary>
                         <div className="mt-3 space-y-2">
                           {dim.checks.map((c) => {
@@ -710,7 +800,7 @@ export default function AuditPage() {
                               <div key={c.id} className="flex items-start gap-2 text-xs">
                                 <Icon size={12} className={cn(color, "mt-0.5 shrink-0")} />
                                 <div className="flex-1 min-w-0">
-                                  <p className="font-medium">{c.label}</p>
+                                  <p className="font-medium">{t.checkLabels[c.id] ?? c.label}</p>
                                   <p className="text-site-text-light/50">{c.detail}</p>
                                 </div>
                                 <span className="text-[10px] text-site-text-light/40 tabular-nums">{c.points}/{c.maxPoints}</span>

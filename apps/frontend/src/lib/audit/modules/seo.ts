@@ -23,7 +23,7 @@ export async function analyzeSeo(domain: string, homepage: FetchedPage | null): 
     detail: metaLen === 0
       ? "Aucune meta description"
       : metaGood
-        ? `Presente (${metaLen} caracteres)`
+        ? `Présente (${metaLen} caractères)`
         : `Trop ${metaLen < 80 ? "courte" : "longue"} (${metaLen} car.)`,
     points: metaGood ? 25 : metaLen > 0 ? 12 : 0,
     maxPoints: 25,
@@ -41,7 +41,7 @@ export async function analyzeSeo(domain: string, homepage: FetchedPage | null): 
     detail: titleLen === 0
       ? "Aucune balise title"
       : titleGood
-        ? `Presente (${titleLen} car.)`
+        ? `Présente (${titleLen} car.)`
         : `${titleLen < 30 ? "Trop courte" : "Trop longue"} (${titleLen} car.)`,
     points: titleGood ? 25 : titleLen > 0 ? 12 : 0,
     maxPoints: 25,
@@ -59,7 +59,7 @@ export async function analyzeSeo(domain: string, homepage: FetchedPage | null): 
       ? "Aucun H1"
       : h1Good
         ? "Un H1 unique"
-        : `${h1Count} H1 (devrait etre 1)`,
+        : `${h1Count} H1 (devrait être 1)`,
     points: h1Good ? 20 : h1Count > 0 ? 10 : 0,
     maxPoints: 20,
   });

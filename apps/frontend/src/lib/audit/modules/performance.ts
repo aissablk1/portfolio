@@ -14,7 +14,7 @@ export async function analyzePerformance(domain: string, homepage: FetchedPage |
   const ttfbOk = ttfbMs >= 800 && ttfbMs < 1800;
   checks.push({
     id: "ttfb",
-    label: "Temps de reponse serveur",
+    label: "Temps de réponse serveur",
     status: ttfbGood ? "pass" : ttfbOk ? "warn" : "fail",
     detail: ttfbMs > 0
       ? `${ttfbMs} ms ${ttfbGood ? "(excellent)" : ttfbOk ? "(acceptable)" : "(trop lent)"}`
@@ -31,7 +31,7 @@ export async function analyzePerformance(domain: string, homepage: FetchedPage |
     id: "html-size",
     label: "Taille du HTML",
     status: sizeGood ? "pass" : sizeOk ? "warn" : "fail",
-    detail: htmlKb === 0 ? "Page vide" : `${htmlKb} Ko ${sizeGood ? "(leger)" : sizeOk ? "(moyen)" : "(lourd)"}`,
+    detail: htmlKb === 0 ? "Page vide" : `${htmlKb} Ko ${sizeGood ? "(léger)" : sizeOk ? "(moyen)" : "(lourd)"}`,
     points: sizeGood ? 20 : sizeOk ? 10 : 0,
     maxPoints: 20,
   });
@@ -74,7 +74,7 @@ export async function analyzePerformance(domain: string, homepage: FetchedPage |
     label: "Preconnect / DNS prefetch",
     status: hasPreconnect ? "pass" : "warn",
     detail: hasPreconnect
-      ? "Connexions externes optimisees"
+      ? "Connexions externes optimisées"
       : "Pas de preconnect (performance sous-optimale)",
     points: hasPreconnect ? 20 : 0,
     maxPoints: 20,
@@ -92,7 +92,7 @@ export async function analyzePerformance(domain: string, homepage: FetchedPage |
     maxScore,
     verdict: pct >= 0.7 ? "good" : pct >= 0.4 ? "warning" : "critical",
     summary: pct >= 0.7
-      ? "Site rapide et optimise"
+      ? "Site rapide et optimisé"
       : pct >= 0.4
         ? "Performance moyenne"
         : "Performance critique",

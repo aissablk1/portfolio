@@ -2,7 +2,7 @@ import type { DimensionResult, Check } from "../types";
 import { fetchText, type FetchedPage } from "../fetch-html";
 
 /* ────────────────────────────────────────────────
-   Module GEO — Visibilite dans les reponses IA
+   Module GEO — Visibilité dans les réponses IA
    ──────────────────────────────────────────────── */
 
 export async function analyzeGeo(domain: string, homepage: FetchedPage | null): Promise<DimensionResult> {
@@ -18,7 +18,7 @@ export async function analyzeGeo(domain: string, homepage: FetchedPage | null): 
     label: "Fichier llms.txt",
     status: hasLlms ? "pass" : "fail",
     detail: hasLlms
-      ? "llms.txt present — guide les IA"
+      ? "llms.txt présent — guide les IA"
       : "Pas de llms.txt — les IA n'ont pas de guide",
     points: hasLlms ? 25 : 0,
     maxPoints: 25,
@@ -32,11 +32,11 @@ export async function analyzeGeo(domain: string, homepage: FetchedPage | null): 
   const schemaScore = [hasOrg, hasService].filter(Boolean).length;
   checks.push({
     id: "schema-entity",
-    label: "Entites structurees (Schema.org)",
+    label: "Entités structurées (Schema.org)",
     status: schemaScore === 2 ? "pass" : schemaScore === 1 ? "warn" : "fail",
     detail: schemaScore === 0
-      ? "Aucune entite structuree"
-      : `Entites presentes : ${[hasOrg && "Organization", hasService && "Service"].filter(Boolean).join(", ")}`,
+      ? "Aucune entité structurée"
+      : `Entités présentes : ${[hasOrg && "Organization", hasService && "Service"].filter(Boolean).join(", ")}`,
     points: schemaScore === 2 ? 20 : schemaScore === 1 ? 10 : 0,
     maxPoints: 20,
   });
@@ -45,10 +45,10 @@ export async function analyzeGeo(domain: string, homepage: FetchedPage | null): 
   const hasFaqSchema = /"@type"\s*:\s*"FAQPage"/i.test(allSchemas);
   checks.push({
     id: "faq-schema",
-    label: "FAQ structuree",
+    label: "FAQ structurée",
     status: hasFaqSchema ? "pass" : "warn",
     detail: hasFaqSchema
-      ? "FAQPage schema detecte — les IA adorent ce format"
+      ? "FAQPage schema détecté — les IA adorent ce format"
       : "Pas de FAQPage schema",
     points: hasFaqSchema ? 15 : 0,
     maxPoints: 15,
@@ -61,9 +61,9 @@ export async function analyzeGeo(domain: string, homepage: FetchedPage | null): 
   const hasQA = questionH2s.length >= 2;
   checks.push({
     id: "qa-format",
-    label: "Format question/reponse",
+    label: "Format question/réponse",
     status: hasQA ? "pass" : questionH2s.length === 1 ? "warn" : "fail",
-    detail: `${questionH2s.length} titre(s) au format question detecte(s)`,
+    detail: `${questionH2s.length} titre(s) au format question détecté(s)`,
     points: hasQA ? 15 : questionH2s.length === 1 ? 7 : 0,
     maxPoints: 15,
   });
@@ -77,11 +77,11 @@ export async function analyzeGeo(domain: string, homepage: FetchedPage | null): 
   const aiBlocked = blocksGptBot || blocksClaudeBot || blocksPerplexity;
   checks.push({
     id: "ai-crawlers",
-    label: "Acces des crawlers IA",
+    label: "Accès des crawlers IA",
     status: aiBlocked ? "fail" : "pass",
     detail: aiBlocked
-      ? "Des bots IA sont bloques dans robots.txt"
-      : "Tous les crawlers IA peuvent acceder au site",
+      ? "Des bots IA sont bloqués dans robots.txt"
+      : "Tous les crawlers IA peuvent accéder au site",
     points: aiBlocked ? 0 : 25,
     maxPoints: 25,
   });
@@ -98,7 +98,7 @@ export async function analyzeGeo(domain: string, homepage: FetchedPage | null): 
     maxScore,
     verdict: pct >= 0.7 ? "good" : pct >= 0.4 ? "warning" : "critical",
     summary: pct >= 0.7
-      ? "Site bien positionne pour les IA"
+      ? "Site bien positionné pour les IA"
       : pct >= 0.4
         ? "Quelques signaux manquants"
         : "Invisible pour les IA",

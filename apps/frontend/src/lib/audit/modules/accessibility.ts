@@ -2,7 +2,7 @@ import type { DimensionResult, Check } from "../types";
 import type { FetchedPage } from "../fetch-html";
 
 /* ────────────────────────────────────────────────
-   Module Accessibilite — heuristiques WCAG AA
+   Module Accessibilité — heuristiques WCAG AA
    ──────────────────────────────────────────────── */
 
 export async function analyzeAccessibility(domain: string, homepage: FetchedPage | null): Promise<DimensionResult> {
@@ -37,24 +37,24 @@ export async function analyzeAccessibility(domain: string, homepage: FetchedPage
     maxPoints: 20,
   });
 
-  // 3. Hierarchie des titres (presence de H1 + H2)
+  // 3. Hiérarchie des titres (présence de H1 + H2)
   const hasH1 = /<h1[^>]*>/i.test(html);
   const hasH2 = /<h2[^>]*>/i.test(html);
   const headingGood = hasH1 && hasH2;
   checks.push({
     id: "heading-hierarchy",
-    label: "Hierarchie des titres",
+    label: "Hiérarchie des titres",
     status: headingGood ? "pass" : hasH1 ? "warn" : "fail",
     detail: !hasH1
       ? "Aucun H1"
       : !hasH2
-        ? "H1 present mais pas de H2 (hierarchie plate)"
-        : "H1 + H2 presents",
+        ? "H1 présent mais pas de H2 (hiérarchie plate)"
+        : "H1 + H2 présents",
     points: headingGood ? 15 : hasH1 ? 7 : 0,
     maxPoints: 15,
   });
 
-  // 4. Landmarks ARIA / semantique HTML5
+  // 4. Landmarks ARIA / sémantique HTML5
   const hasMain = /<main\b/i.test(html) || /role=["']main["']/i.test(html);
   const hasNav = /<nav\b/i.test(html) || /role=["']navigation["']/i.test(html);
   const hasFooter = /<footer\b/i.test(html) || /role=["']contentinfo["']/i.test(html);
@@ -62,7 +62,7 @@ export async function analyzeAccessibility(domain: string, homepage: FetchedPage
   const landmarksGood = landmarksCount === 3;
   checks.push({
     id: "landmarks",
-    label: "Landmarks semantiques",
+    label: "Landmarks sémantiques",
     status: landmarksGood ? "pass" : landmarksCount >= 2 ? "warn" : "fail",
     detail: `${landmarksCount}/3 landmarks (main, nav, footer)`,
     points: landmarksGood ? 20 : landmarksCount >= 2 ? 10 : 0,
@@ -91,7 +91,7 @@ export async function analyzeAccessibility(domain: string, homepage: FetchedPage
     id: "skip-link",
     label: "Skip link (navigation clavier)",
     status: hasSkipLink ? "pass" : "warn",
-    detail: hasSkipLink ? "Skip link present" : "Pas de skip link detecte",
+    detail: hasSkipLink ? "Skip link présent" : "Pas de skip link détecté",
     points: hasSkipLink ? 15 : 0,
     maxPoints: 15,
   });

@@ -2,7 +2,7 @@ import type { DimensionResult, Check } from "../types";
 import type { FetchedPage } from "../fetch-html";
 
 /* ────────────────────────────────────────────────
-   Module Securite — headers HTTP
+   Module Sécurité — headers HTTP
    ──────────────────────────────────────────────── */
 
 export async function analyzeSecurity(domain: string, homepage: FetchedPage | null): Promise<DimensionResult> {
@@ -27,7 +27,7 @@ export async function analyzeSecurity(domain: string, homepage: FetchedPage | nu
     id: "hsts",
     label: "Strict-Transport-Security (HSTS)",
     status: hasHsts ? "pass" : "fail",
-    detail: hasHsts ? `Header present : ${hsts.slice(0, 60)}` : "Header HSTS absent",
+    detail: hasHsts ? `Header présent : ${hsts.slice(0, 60)}` : "Header HSTS absent",
     points: hasHsts ? 15 : 0,
     maxPoints: 15,
   });
@@ -39,7 +39,7 @@ export async function analyzeSecurity(domain: string, homepage: FetchedPage | nu
     id: "csp",
     label: "Content-Security-Policy",
     status: hasCsp ? "pass" : "fail",
-    detail: hasCsp ? "CSP configuree" : "Pas de CSP — protection XSS manquante",
+    detail: hasCsp ? "CSP configurée" : "Pas de CSP — protection XSS manquante",
     points: hasCsp ? 20 : 0,
     maxPoints: 20,
   });
@@ -54,7 +54,7 @@ export async function analyzeSecurity(domain: string, homepage: FetchedPage | nu
     status: hasAntiClickjack ? "pass" : "fail",
     detail: hasAntiClickjack
       ? `Protection active (${xfo || "frame-ancestors"})`
-      : "Site vulnerable au clickjacking",
+      : "Site vulnérable au clickjacking",
     points: hasAntiClickjack ? 15 : 0,
     maxPoints: 15,
   });
@@ -66,7 +66,7 @@ export async function analyzeSecurity(domain: string, homepage: FetchedPage | nu
     id: "referrer-policy",
     label: "Referrer-Policy",
     status: hasReferrerPolicy ? "pass" : "warn",
-    detail: hasReferrerPolicy ? `Configuree : ${referrerPolicy}` : "Header absent (default navigateur)",
+    detail: hasReferrerPolicy ? `Configurée : ${referrerPolicy}` : "Header absent (default navigateur)",
     points: hasReferrerPolicy ? 15 : 0,
     maxPoints: 15,
   });
@@ -79,7 +79,7 @@ export async function analyzeSecurity(domain: string, homepage: FetchedPage | nu
     label: "Permissions-Policy",
     status: hasPermissionsPolicy ? "pass" : "warn",
     detail: hasPermissionsPolicy
-      ? "Permissions limitees"
+      ? "Permissions limitées"
       : "Header absent (APIs non restreintes)",
     points: hasPermissionsPolicy ? 15 : 0,
     maxPoints: 15,
@@ -97,10 +97,10 @@ export async function analyzeSecurity(domain: string, homepage: FetchedPage | nu
     maxScore,
     verdict: pct >= 0.7 ? "good" : pct >= 0.4 ? "warning" : "critical",
     summary: pct >= 0.7
-      ? "Headers de securite bien configures"
+      ? "Headers de sécurité bien configurés"
       : pct >= 0.4
         ? "Quelques headers manquants"
-        : "Site expose aux attaques courantes",
+        : "Site exposé aux attaques courantes",
     checks,
   };
 }
