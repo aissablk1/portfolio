@@ -3,9 +3,9 @@ import JsonLd from "@/components/JsonLd";
 import { legalPages, breadcrumbs } from "@/lib/schemas";
 
 export const metadata: Metadata = {
-  title: "Conditions generales de vente",
+  title: "Conditions générales de vente",
   description:
-    "Conditions generales de vente des prestations d'Aïssa BELKOUSSA — reglement, propriete intellectuelle, responsabilite, RGPD.",
+    "Conditions générales de vente des prestations d'Aïssa BELKOUSSA — règlement, propriété intellectuelle, responsabilité, RGPD.",
   robots: { index: true, follow: true },
   alternates: {
     canonical: "https://www.aissabelkoussa.fr/cgv",

@@ -28,7 +28,7 @@ import Footer from "@/components/Footer";
 import { useLanguage } from "@/components/LanguageContext";
 
 /* ────────────────────────────────────────────────
-   Scanner IA — Visibilite IA de votre entreprise
+   Scanner IA — Visibilité IA de votre entreprise
    ──────────────────────────────────────────────── */
 
 const spring = { type: "spring" as const, stiffness: 100, damping: 20 };
@@ -50,24 +50,24 @@ const content = {
       steps: [
         { id: "dns", label: "Verification du domaine", detail: "Resolution DNS et verification HTTPS..." },
         { id: "html", label: "Analyse de la page d'accueil", detail: "Meta tags, titres, structure HTML..." },
-        { id: "schema", label: "Donnees structurees", detail: "Detection Schema.org et JSON-LD..." },
+        { id: "schema", label: "Données structurées", detail: "Détection Schema.org et JSON-LD..." },
         { id: "crawl", label: "Fichiers d'indexation", detail: "robots.txt, sitemap.xml, llms.txt..." },
         { id: "social", label: "Signaux sociaux", detail: "Open Graph, partage social..." },
         { id: "score", label: "Calcul du score", detail: "Ponderation et verdict final..." },
       ],
     },
     results: {
-      scoreLabel: "Score de visibilite IA",
+      scoreLabel: "Score de visibilité IA",
       verdicts: {
         critical: { label: "Critique", desc: "Les IA ne vous connaissent pas. Vos concurrents captent ces clients." },
         warning: { label: "Insuffisant", desc: "Quelques signaux existent, mais les IA preferent vos concurrents." },
         good: { label: "Bon niveau", desc: "Votre site envoie les bons signaux. Quelques optimisations restent possibles." },
       },
       checksTitle: "Detail du diagnostic",
-      ctaTitle: "Passez de invisible a recommande",
+      ctaTitle: "Passez de invisible à recommandé",
       ctaBody:
         "Je vous accompagne pour optimiser chaque signal et faire de votre entreprise la reponse par defaut des IA dans votre secteur.",
-      ctaButton: "Reserver un appel strategique",
+      ctaButton: "Réserver un appel stratégique",
       ctaFree: "Gratuit — 30 minutes — Sans engagement",
       rescan: "Scanner un autre domaine",
       share: "Partager",

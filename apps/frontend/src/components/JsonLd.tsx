@@ -1,9 +1,9 @@
 /**
- * JsonLd — Composant reutilisable pour injecter des donnees structurees Schema.org
+ * JsonLd — Composant réutilisable pour injecter des données structurées Schema.org
  *
- * Securite : le contenu est exclusivement genere cote serveur a partir de
- * constantes statiques definies dans @/lib/schemas. Aucune donnee utilisateur
- * n'est interpolee — pas de risque XSS.
+ * Sécurité : le contenu est exclusivement généré côté serveur à partir de
+ * constantes statiques définies dans @/lib/schemas. Aucune donnée utilisateur
+ * n'est interpolée — pas de risque XSS.
  *
  * Usage :
  *   <JsonLd data={personSchema} />

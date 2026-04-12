@@ -1221,7 +1221,7 @@ const dictionaries: Record<Language, Dictionary> = {
     phishing: {
       alreadyHere: "Vous y êtes déjà",
       domainLabel: "Domaine",
-      holderLabel: "Detenteur",
+      holderLabel: "Détenteur",
       registrarLabel: "Registrar",
       registeredLabel: "Enregistre le",
       expiresLabel: "Expire le",
@@ -1234,7 +1234,7 @@ const dictionaries: Record<Language, Dictionary> = {
     },
     domainLegit: {
       badge: "Domaine officiel verifie",
-      title: "aissabelkoussa.fr — vous etes au bon endroit.",
+      title: "aissabelkoussa.fr — vous êtes au bon endroit.",
       subtitle: "Ce domaine est le seul que je possede et controle. C'est mon espace officiel sur le web.",
       ownership: {
         title: "Propriété du domaine",
@@ -1265,7 +1265,7 @@ const dictionaries: Record<Language, Dictionary> = {
       usurpation: {
         title: "Alerte sur aissabelkoussa.com",
         description: "Le domaine aissabelkoussa.com a été enregistré par « Team AG Internet » le 26 mai 2025 sans mon consentement. Ce détenteur a depuis masqué son identité via WHOIS privacy. Des signalements ont été déposés.",
-        cta: "Voir le detail de l'usurpation",
+        cta: "Voir le détail de l'usurpation",
       },
     },
     exitIntent: {

@@ -3,9 +3,9 @@ import JsonLd from "@/components/JsonLd";
 import { legalPages, breadcrumbs } from "@/lib/schemas";
 
 export const metadata: Metadata = {
-  title: "Conditions generales d'utilisation",
+  title: "Conditions générales d'utilisation",
   description:
-    "Conditions generales d'utilisation du site aissabelkoussa.fr — acces, propriete intellectuelle, responsabilite et droit applicable.",
+    "Conditions générales d'utilisation du site aissabelkoussa.fr — accès, propriété intellectuelle, responsabilité et droit applicable.",
   robots: { index: true, follow: true },
   alternates: {
     canonical: "https://www.aissabelkoussa.fr/cgu",

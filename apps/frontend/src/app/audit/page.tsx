@@ -56,7 +56,7 @@ const content = {
     headline: "L'audit complet de",
     headlineAccent: "votre écosystème digital",
     subtitle:
-      "Pas juste du SEO. 6 dimensions analysees en profondeur : visibilite IA, performance, accessibilite, securite, credibilite. Le diagnostic qu'un consultant IA ferait en 30 secondes.",
+      "Pas juste du SEO. 6 dimensions analysées en profondeur : visibilité IA, performance, accessibilité, sécurité, crédibilité. Le diagnostic qu'un consultant IA ferait en 30 secondes.",
     placeholder: "votre-domaine.fr",
     cta: "Lancer l'audit",
     trust: "Gratuit — 6 dimensions — Resultats en 30 secondes",
@@ -91,7 +91,7 @@ const content = {
       freeLabel: "Gratuit",
       gatedLabel: "Premium",
       unlockTitle: "Debloquez 3 dimensions supplementaires",
-      unlockBody: "Entrez votre email pour reveler la visibilite IA, la securite et la credibilite.",
+      unlockBody: "Entrez votre email pour révéler la visibilité IA, la sécurité et la crédibilité.",
       unlockCta: "Debloquer l'audit complet",
       unlockEmailPlaceholder: "email@entreprise.fr",
       unlocking: "Verification...",
