@@ -168,7 +168,7 @@ const Header = () => {
                 height="12"
                 aria-hidden="true"
               />
-              {dict.claudeArchitect.navLabel}
+              <span className="hidden md:inline">{dict.claudeArchitect.navLabel}</span>
             </button>
 
             {/* Diagnostic CTA — soft entry point */}
