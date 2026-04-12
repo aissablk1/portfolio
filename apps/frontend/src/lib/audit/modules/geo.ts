@@ -92,7 +92,7 @@ export async function analyzeGeo(domain: string, homepage: FetchedPage | null): 
 
   return {
     id: "geo",
-    label: "Visibilite IA (GEO)",
+    label: "Visibilité IA (GEO)",
     tier: "gated",
     score,
     maxScore,

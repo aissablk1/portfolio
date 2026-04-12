@@ -107,7 +107,7 @@ export async function analyzeCredibility(domain: string, homepage: FetchedPage |
 
   return {
     id: "credibility",
-    label: "Credibilite",
+    label: "Crédibilité",
     tier: "gated",
     score,
     maxScore,

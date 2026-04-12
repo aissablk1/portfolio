@@ -102,7 +102,7 @@ export async function analyzeAccessibility(domain: string, homepage: FetchedPage
 
   return {
     id: "accessibility",
-    label: "Accessibilite (WCAG)",
+    label: "Accessibilité (WCAG)",
     tier: "free",
     score,
     maxScore,
@@ -110,8 +110,8 @@ export async function analyzeAccessibility(domain: string, homepage: FetchedPage
     summary: pct >= 0.7
       ? "Bonnes bases WCAG"
       : pct >= 0.4
-        ? "Accessibilite incomplete"
-        : "Accessibilite critique",
+        ? "Accessibilité incomplète"
+        : "Accessibilité critique",
     checks,
   };
 }

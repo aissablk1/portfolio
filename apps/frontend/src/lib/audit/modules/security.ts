@@ -91,7 +91,7 @@ export async function analyzeSecurity(domain: string, homepage: FetchedPage | nu
 
   return {
     id: "security",
-    label: "Securite",
+    label: "Sécurité",
     tier: "gated",
     score,
     maxScore,
