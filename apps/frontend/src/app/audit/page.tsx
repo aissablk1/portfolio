@@ -774,7 +774,7 @@ export default function AuditPage() {
                         </div>
                       </div>
 
-                      <p className="text-xs text-site-text-light mb-4">{t.summaries[dim.id]?.[dim.verdict] ?? dim.summary}</p>
+                      <p className="text-xs text-site-text-light mb-4">{(t.summaries as Record<string, Record<string, string>>)[dim.id]?.[dim.verdict] ?? dim.summary}</p>
 
                       <div className="h-1 w-full bg-site-border rounded-full overflow-hidden mb-4">
                         <motion.div
@@ -800,7 +800,7 @@ export default function AuditPage() {
                               <div key={c.id} className="flex items-start gap-2 text-xs">
                                 <Icon size={12} className={cn(color, "mt-0.5 shrink-0")} />
                                 <div className="flex-1 min-w-0">
-                                  <p className="font-medium">{t.checkLabels[c.id] ?? c.label}</p>
+                                  <p className="font-medium">{(t.checkLabels as Record<string, string>)[c.id] ?? c.label}</p>
                                   <p className="text-site-text-light/50">{c.detail}</p>
                                 </div>
                                 <span className="text-[10px] text-site-text-light/40 tabular-nums">{c.points}/{c.maxPoints}</span>
