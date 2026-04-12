@@ -515,8 +515,8 @@ export default function DashboardPage() {
               >
                 <defs>
                   <linearGradient id="gViews" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="#8b5cf6" stopOpacity={0.3} />
-                    <stop offset="100%" stopColor="#8b5cf6" stopOpacity={0} />
+                    <stop offset="0%" stopColor="#666666" stopOpacity={0.3} />
+                    <stop offset="100%" stopColor="#666666" stopOpacity={0} />
                   </linearGradient>
                   <linearGradient id="gContacts" x1="0" y1="0" x2="0" y2="1">
                     <stop
@@ -564,7 +564,7 @@ export default function DashboardPage() {
                 <Area
                   type="monotone"
                   dataKey="views"
-                  stroke="#8b5cf6"
+                  stroke="#666666"
                   strokeWidth={2}
                   fill="url(#gViews)"
                 />
@@ -644,7 +644,7 @@ export default function DashboardPage() {
                   className="flex items-start gap-3 py-3 border-b border-[var(--color-border)] last:border-0"
                 >
                   <div className="relative mt-1.5">
-                    <div className="h-2.5 w-2.5 rounded-full bg-violet-500" />
+                    <div className="h-2.5 w-2.5 rounded-full bg-[var(--color-text-primary)]" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm text-[var(--color-text-primary)] truncate">
@@ -963,7 +963,7 @@ export default function DashboardPage() {
                           delay: i * 0.05,
                           ease: [0.22, 1, 0.36, 1],
                         }}
-                        className="h-full rounded-full bg-violet-500"
+                        className="h-full rounded-full bg-[var(--color-text-primary)]"
                       />
                     </div>
                   </div>

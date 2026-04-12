@@ -54,7 +54,7 @@ interface PipelineStats {
 const stages = [
   { id: "lead", label: "Leads", color: "var(--color-accent)", emoji: "🎯" },
   { id: "contacted", label: "Contacté", color: "#f59e0b", emoji: "📨" },
-  { id: "call", label: "Appel", color: "#8b5cf6", emoji: "📞" },
+  { id: "call", label: "Appel", color: "#6b7280", emoji: "📞" },
   { id: "proposal", label: "Devis", color: "#3b82f6", emoji: "📄" },
   { id: "signed", label: "Signé", color: "#22c55e", emoji: "✅" },
   { id: "delivered", label: "Livré", color: "#14b8a6", emoji: "🚀" },

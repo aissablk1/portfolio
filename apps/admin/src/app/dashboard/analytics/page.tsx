@@ -54,7 +54,7 @@ const chartColors = {
   spamFill: "rgba(239, 68, 68, 0.15)",
 };
 
-const SUBJECT_COLORS = ["#3b82f6", "#8b5cf6", "#06b6d4", "#22c55e", "#f59e0b"];
+const SUBJECT_COLORS = ["#3b82f6", "#666666", "#06b6d4", "#22c55e", "#f59e0b"];
 
 // ─── Periods ─────────────────────────────────────────
 const periods = [
@@ -332,7 +332,7 @@ export default function AnalyticsPage() {
 
       {/* ═══ VISITEURS SECTION ═══ */}
       <div className="flex items-center gap-2">
-        <Eye className="h-5 w-5 text-violet-500" />
+        <Eye className="h-5 w-5 text-[var(--color-text-secondary)]" />
         <h2 className="text-lg font-semibold text-[var(--color-text-primary)]">Visiteurs</h2>
       </div>
 
@@ -366,8 +366,8 @@ export default function AnalyticsPage() {
             >
               <defs>
                 <linearGradient id="fillViews" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#8b5cf6" stopOpacity={0.3} />
-                  <stop offset="100%" stopColor="#8b5cf6" stopOpacity={0} />
+                  <stop offset="0%" stopColor="#666666" stopOpacity={0.3} />
+                  <stop offset="100%" stopColor="#666666" stopOpacity={0} />
                 </linearGradient>
               </defs>
               <CartesianGrid strokeDasharray="3 3" stroke={chartColors.grid} />
@@ -388,7 +388,7 @@ export default function AnalyticsPage() {
                 type="monotone"
                 dataKey="count"
                 name="Visiteurs"
-                stroke="#8b5cf6"
+                stroke="#666666"
                 fill="url(#fillViews)"
                 strokeWidth={2}
               />
@@ -434,7 +434,7 @@ export default function AnalyticsPage() {
                             initial={{ width: 0 }}
                             animate={{ width: `${pct}%` }}
                             transition={{ duration: 0.6, delay: i * 0.05 }}
-                            className="h-full rounded-full bg-violet-500"
+                            className="h-full rounded-full bg-[var(--color-text-primary)]"
                           />
                         </div>
                       </div>
