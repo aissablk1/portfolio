@@ -14,14 +14,14 @@ const siteUrl = "https://www.aissabelkoussa.fr";
 export const metadata: Metadata = {
   title: "Tarifs & Services",
   description:
-    "Systemes digitaux livres en 5-10 jours avec 3 mois de maintenance inclus. Autonome (3 900 EUR), Accelerateur (2 900 EUR + 490 EUR/mois), Partenaire (6 900 EUR + 1 900 EUR/mois). Prix fixe, licence d'usage incluse, zero intermediaire.",
+    "Systèmes digitaux livrés en 5-10 jours avec 3 mois de maintenance inclus. Autonome (3 900 EUR), Accelerateur (2 900 EUR + 490 EUR/mois), Partenaire (6 900 EUR + 1 900 EUR/mois). Prix fixe, licence d'usage incluse, zero intermediaire.",
   alternates: {
     canonical: `${siteUrl}/services`,
   },
   openGraph: {
     title: "Tarifs & Services — Aïssa BELKOUSSA",
     description:
-      "Votre systeme digital concu, livre et maintenu. 3 mois de maintenance offerts. A partir de 2 900 EUR.",
+      "Votre système digital conçu, livre et maintenu. 3 mois de maintenance offerts. A partir de 2 900 EUR.",
     url: `${siteUrl}/services`,
     type: "website",
   },

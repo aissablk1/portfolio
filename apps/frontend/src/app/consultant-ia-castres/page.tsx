@@ -23,9 +23,9 @@ import {
 import { cn } from "@/utils/cn";
 
 const stats = [
-  { value: "93", label: "projets livres" },
-  { value: "4+", label: "ans d'experience" },
-  { value: "10j", label: "delai moyen" },
+  { value: "93", label: "projets livrés" },
+  { value: "4+", label: "ans d'expérience" },
+  { value: "10j", label: "délai moyen" },
   { value: "800\u20ac", label: "TJM consulting" },
 ];
 
@@ -33,22 +33,22 @@ const services = [
   {
     icon: Zap,
     title: "Automatisation & Process",
-    desc: "Devis, relances, suivi chantier, gestion de stock — vos taches repetitives tournent toutes seules. 10 a 15h/semaine liberees.",
+    desc: "Devis, relances, suivi chantier, gestion de stock — vos tâches répétitives tournent toutes seules. 10 à 15h/semaine libérées.",
   },
   {
     icon: Bot,
     title: "Chatbot IA sur-mesure",
-    desc: "Un assistant qui qualifie vos prospects, repond aux FAQ et prend les RDV. 24/7, sans pause.",
+    desc: "Un assistant qui qualifie vos prospects, répond aux FAQ et prend les RDV. 24/7, sans pause.",
   },
   {
     icon: Globe,
     title: "Site web SEO + GEO",
-    desc: "Visible sur Google ET recommande par ChatGPT. Donnees structurees, contenu expert, referencement local Sud Tarn.",
+    desc: "Visible sur Google ET recommandé par ChatGPT. Données structurées, contenu expert, référencement local Sud Tarn.",
   },
   {
     icon: BarChart3,
-    title: "Dashboard decisionnel",
-    desc: "Vos chiffres cles en temps reel. Suivi de production, alertes intelligentes, rapports auto-generes.",
+    title: "Dashboard décisionnel",
+    desc: "Vos chiffres clés en temps réel. Suivi de production, alertes intelligentes, rapports auto-générés.",
   },
 ];
 
@@ -56,18 +56,18 @@ const pricing = [
   {
     name: "Starter",
     price: "1 500",
-    desc: "1 automatisation cle en main",
-    features: ["Chatbot OU emails OU RDV", "Livre en 5 jours", "Formation 1h incluse"],
+    desc: "1 automatisation clé en main",
+    features: ["Chatbot OU emails OU RDV", "Livré en 5 jours", "Formation 1h incluse"],
     highlight: false,
   },
   {
-    name: "Accelerateur",
+    name: "Accélérateur",
     price: "2 900",
-    desc: "Systeme complet + maintenance",
+    desc: "Système complet + maintenance",
     features: [
-      "1 systeme livre cle en main",
+      "1 système livré clé en main",
       "3 mois maintenance offerts",
-      "Bugs corriges sous 48h",
+      "Bugs corrigés sous 48h",
       "Rapport mensuel",
     ],
     highlight: true,
@@ -75,12 +75,12 @@ const pricing = [
   {
     name: "Partenaire",
     price: "6 900",
-    desc: "Infrastructure IA + partenaire dedie",
+    desc: "Infrastructure IA + partenaire dédié",
     features: [
-      "Systeme multi-briques (site + IA + data)",
-      "3 mois evolution + support Premium",
-      "Evolutions 10h/mois",
-      "Reunion strategique mensuelle",
+      "Système multi-briques (site + IA + data)",
+      "3 mois évolution + support Premium",
+      "Évolutions 10h/mois",
+      "Réunion stratégique mensuelle",
     ],
     highlight: false,
   },
@@ -89,33 +89,33 @@ const pricing = [
 const faqs = [
   {
     q: "L'IA peut-elle aider les entreprises textiles et pharmaceutiques de Castres ?",
-    a: "Oui. L'IA automatise le suivi de production, la gestion de stock, les controles qualite et les rapports reglementaires. Pour le textile, elle optimise la planification et les commandes fournisseurs. Pour la pharmacie, elle automatise la documentation et le suivi de conformite.",
+    a: "Oui. L'IA automatise le suivi de production, la gestion de stock, les contrôles qualité et les rapports réglementaires. Pour le textile, elle optimise la planification et les commandes fournisseurs. Pour la pharmacie, elle automatise la documentation et le suivi de conformité.",
   },
   {
     q: "Est-ce que les aides OPCO couvrent les projets d'automatisation IA ?",
-    a: "Oui, pour les entreprises de moins de 50 salaries. L'OPCO peut prendre en charge jusqu'a 100% du volet formation. Les aides OCCAL (70%, plafond 23 000 \u20ac) et Pass Occitanie (50%, plafond 10 000 \u20ac) couvrent aussi les projets numeriques.",
+    a: "Oui, pour les entreprises de moins de 50 salariés. L'OPCO peut prendre en charge jusqu'à 100% du volet formation. Les aides OCCAL (70%, plafond 23 000 \u20ac) et Pass Occitanie (50%, plafond 10 000 \u20ac) couvrent aussi les projets numériques.",
   },
   {
-    q: "Pourquoi choisir un consultant local plutot qu'une agence de Toulouse ?",
-    a: "Je connais le tissu economique du bassin Castres-Mazamet, les specificites des PME et artisans du Sud Tarn, et les aides regionales Occitanie. Mes tarifs sont adaptes a l'economie locale, sans compromettre la qualite technique.",
+    q: "Pourquoi choisir un consultant local plutôt qu'une agence de Toulouse ?",
+    a: "Je connais le tissu économique du bassin Castres-Mazamet, les spécificités des PME et artisans du Sud Tarn, et les aides régionales Occitanie. Mes tarifs sont adaptés à l'économie locale, sans compromettre la qualité technique.",
   },
   {
-    q: "Vous deplacez-vous a Castres pour des reunions en personne ?",
-    a: "Oui. Base a Albi, a 40 minutes de Castres, je me deplace regulierement pour les reunions, ateliers de cadrage et formations. Les echanges courants se font en visio pour plus d'efficacite.",
+    q: "Vous déplacez-vous à Castres pour des réunions en personne ?",
+    a: "Oui. Basé à Albi, à 40 minutes de Castres, je me déplace régulièrement pour les réunions, ateliers de cadrage et formations. Les échanges courants se font en visio pour plus d'efficacité.",
   },
   {
-    q: "Combien de temps faut-il pour voir des resultats ?",
-    a: "Les systemes sont livres en 5 a 10 jours ouvres. Les premiers resultats (leads, temps gagne, visibilite) arrivent sous 2 a 4 semaines. Le ROI complet est generalement atteint en 4 a 6 semaines.",
+    q: "Combien de temps faut-il pour voir des résultats ?",
+    a: "Les systèmes sont livrés en 5 à 10 jours ouvrés. Les premiers résultats (leads, temps gagné, visibilité) arrivent sous 2 à 4 semaines. Le ROI complet est généralement atteint en 4 à 6 semaines.",
   },
 ];
 
 const comparisonRows = [
-  { label: "Prix journee", agence: "1 500 - 3 000 \u20ac", freelance: "800 \u20ac" },
-  { label: "Delai de livraison", agence: "2 - 6 mois", freelance: "5 - 10 jours" },
-  { label: "Interlocuteur", agence: "Chef de projet (pas technique)", freelance: "Le developpeur qui code" },
+  { label: "Prix journée", agence: "1 500 - 3 000 \u20ac", freelance: "800 \u20ac" },
+  { label: "Délai de livraison", agence: "2 - 6 mois", freelance: "5 - 10 jours" },
+  { label: "Interlocuteur", agence: "Chef de projet (pas technique)", freelance: "Le développeur qui code" },
   { label: "Connaissance locale", agence: "Aucune", freelance: "Bassin Castres-Mazamet" },
-  { label: "Aides regionales", agence: "Pas de montage", freelance: "OPCO, OCCAL, Pass Occitanie" },
-  { label: "Apres la livraison", agence: "Ticket de support payant", freelance: "3 mois maintenance offerts" },
+  { label: "Aides régionales", agence: "Pas de montage", freelance: "OPCO, OCCAL, Pass Occitanie" },
+  { label: "Après la livraison", agence: "Ticket de support payant", freelance: "3 mois maintenance offerts" },
 ];
 
 export default function ConsultantIACastresPage() {
@@ -148,7 +148,7 @@ export default function ConsultantIACastresPage() {
               transition={{ duration: 0.8, delay: 0.1 }}
               className="text-4xl md:text-6xl font-display font-medium tracking-tight leading-[1.1] mb-6"
             >
-              Consultant IA a Castres
+              Consultant IA à Castres
               <br />
               <span className="text-site-text-light">
                 pour PME et industries du Sud Tarn
@@ -161,10 +161,10 @@ export default function ConsultantIACastresPage() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-lg text-site-text-light leading-relaxed max-w-2xl mb-10"
             >
-              Automatisation, chatbot IA, sites web, dashboards — je concois et
-              livre des systemes digitaux cle en main pour les entreprises du
+              Automatisation, chatbot IA, sites web, dashboards — je conçois et
+              livre des systèmes digitaux clé en main pour les entreprises du
               bassin Castres-Mazamet. Textile, pharmacie, BTP, artisanat. Prix
-              fixe, resultat garanti, livre en 10 jours.
+              fixe, résultat garanti, livré en 10 jours.
             </motion.p>
 
             <motion.div
@@ -216,12 +216,12 @@ export default function ConsultantIACastresPage() {
               Ce qu'un consultant IA fait
               <br />
               <span className="text-site-text-light">
-                concretement pour votre entreprise a Castres
+                concrètement pour votre entreprise à Castres
               </span>
             </h2>
             <p className="text-site-text-light mb-10 max-w-xl">
-              Pas de theorie, pas de slides. Des systemes qui tournent et qui
-              rapportent — adaptes aux PME du bassin Castres-Mazamet.
+              Pas de théorie, pas de slides. Des systèmes qui tournent et qui
+              rapportent — adaptés aux PME du bassin Castres-Mazamet.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -257,7 +257,7 @@ export default function ConsultantIACastresPage() {
               Agence toulousaine vs consultant local
             </h2>
             <p className="text-site-text-light mb-8 max-w-xl">
-              Meme expertise technique, 3x moins cher, 10x plus rapide.
+              Même expertise technique, 3x moins cher, 10x plus rapide.
             </p>
 
             <div className="overflow-x-auto">
@@ -265,13 +265,13 @@ export default function ConsultantIACastresPage() {
                 <thead>
                   <tr className="border-b-2 border-site-text">
                     <th className="text-left py-3 pr-4 font-display font-medium text-xs uppercase tracking-wider text-site-text-light">
-                      Critere
+                      Critère
                     </th>
                     <th className="text-left py-3 px-4 font-display font-medium text-xs uppercase tracking-wider text-red-600/70">
                       Agence / ESN
                     </th>
                     <th className="text-left py-3 pl-4 font-display font-medium text-xs uppercase tracking-wider text-site-accent">
-                      Aissa Belkoussa (Castres)
+                      Aïssa Belkoussa (Castres)
                     </th>
                   </tr>
                 </thead>
@@ -300,10 +300,10 @@ export default function ConsultantIACastresPage() {
         <section className="px-6 mb-24">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-2xl md:text-3xl font-display font-medium tracking-tight mb-4">
-              Tarifs — prix fixe, zero surprise
+              Tarifs — prix fixe, zéro surprise
             </h2>
             <p className="text-site-text-light mb-10 max-w-xl">
-              Le prix annonce est le prix paye. Satisfait ou retravaille.
+              Le prix annoncé est le prix payé. Satisfait ou retravaillé.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -319,7 +319,7 @@ export default function ConsultantIACastresPage() {
                 >
                   {p.highlight && (
                     <span className="inline-block text-[10px] font-bold uppercase tracking-[0.2em] text-site-accent mb-3">
-                      Recommande
+                      Recommandé
                     </span>
                   )}
                   <h3 className="text-lg font-display font-medium">
@@ -356,7 +356,7 @@ export default function ConsultantIACastresPage() {
               <div className="flex items-center justify-center gap-2 mb-1">
                 <Landmark size={14} className="text-site-accent" />
                 <span className="text-xs font-bold uppercase tracking-wider text-site-accent">
-                  Financable OPCO jusqu'a 100%
+                  Finançable OPCO jusqu'à 100%
                 </span>
               </div>
               <p className="text-xs text-site-text-light">
@@ -374,17 +374,17 @@ export default function ConsultantIACastresPage() {
               <div className="flex items-center gap-2 mb-4">
                 <Users size={14} className="text-site-accent" />
                 <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-site-accent">
-                  Exemple concret — entreprise textile a Castres, 15 salaries
+                  Exemple concret — entreprise textile à Castres, 15 salariés
                 </span>
               </div>
               <h3 className="text-xl font-display font-medium mb-3">
-                Accelerateur a 2 900 {"\u20ac"} : gestion de stock + commandes
+                Accélérateur à 2 900 {"\u20ac"} : gestion de stock + commandes
                 fournisseurs + suivi production + 3 mois maintenance
               </h3>
               <p className="text-sm text-white/60 leading-relaxed mb-6">
-                Le gerant perd 10h/semaine a suivre les stocks sur Excel, relancer
+                Le gérant perd 10h/semaine à suivre les stocks sur Excel, relancer
                 les fournisseurs par email et compiler les rapports de production.
-                L'Accelerateur automatise tout et maintient le systeme.
+                L'Accélérateur automatise tout et maintient le système.
               </p>
               <div className="grid grid-cols-3 gap-6">
                 <div className="text-center">
@@ -392,7 +392,7 @@ export default function ConsultantIACastresPage() {
                     10h
                   </div>
                   <div className="text-[10px] text-white/50 uppercase tracking-wider mt-1">
-                    liberees / semaine
+                    libérées / semaine
                   </div>
                 </div>
                 <div className="text-center">
@@ -420,7 +420,7 @@ export default function ConsultantIACastresPage() {
         <section className="px-6 mb-24">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-2xl md:text-3xl font-display font-medium tracking-tight mb-8">
-              Questions frequentes
+              Questions fréquentes
             </h2>
 
             <div className="space-y-2">
@@ -460,11 +460,11 @@ export default function ConsultantIACastresPage() {
           <div className="max-w-4xl mx-auto">
             <div className="p-8 md:p-12 rounded-2xl border border-site-accent bg-site-accent text-white text-center">
               <h2 className="text-2xl md:text-3xl font-display font-medium mb-4">
-                Premier echange gratuit — 30 min, zero engagement
+                Premier échange gratuit — 30 min, zéro engagement
               </h2>
               <p className="text-white/70 mb-8 max-w-lg mx-auto">
-                On regarde ensemble ou l'IA peut vous faire gagner du temps et
-                de l'argent. Pas de jargon, pas de vente forcee.
+                On regarde ensemble où l'IA peut vous faire gagner du temps et
+                de l'argent. Pas de jargon, pas de vente forcée.
               </p>
               <div className="flex items-center justify-center gap-4 flex-wrap">
                 <Link

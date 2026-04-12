@@ -6,9 +6,9 @@ import { createBreadcrumbSchema } from "@/lib/schemas";
 const siteUrl = "https://www.aissabelkoussa.fr";
 
 export const metadata: Metadata = {
-  title: "Consultant IA a Toulouse — Expert intelligence artificielle Haute-Garonne",
+  title: "Consultant IA à Toulouse — Expert intelligence artificielle Haute-Garonne",
   description:
-    "Consultant IA freelance a Toulouse, Haute-Garonne. Automatisation, chatbot IA, sites web et dashboards pour PME, startups et ETI. Prix fixe des 1 500 EUR, livre en 10 jours. Financable OPCO.",
+    "Consultant IA freelance à Toulouse, Haute-Garonne. Automatisation, chatbot IA, sites web et dashboards pour PME, startups et ETI. Prix fixe dès 1 500 EUR, livré en 10 jours. Finançable OPCO.",
   keywords: [
     "consultant IA Toulouse",
     "expert intelligence artificielle Haute-Garonne",
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     "consultant IA freelance Toulouse",
     "consultant digital PME Toulouse",
     "chatbot IA entreprise Toulouse",
-    "developpeur IA Toulouse Occitanie",
+    "développeur IA Toulouse Occitanie",
     "consultant IA startups Toulouse",
     "expert IA Aerospace Valley",
     "intelligence artificielle Toulouse Occitanie",
@@ -25,9 +25,9 @@ export const metadata: Metadata = {
     canonical: `${siteUrl}/consultant-ia-toulouse`,
   },
   openGraph: {
-    title: "Consultant IA a Toulouse — Expert intelligence artificielle Haute-Garonne",
+    title: "Consultant IA à Toulouse — Expert intelligence artificielle Haute-Garonne",
     description:
-      "Automatisation, chatbot IA, sites web pour PME et startups. Prix fixe, livre en 10 jours.",
+      "Automatisation, chatbot IA, sites web pour PME et startups. Prix fixe, livré en 10 jours.",
     url: `${siteUrl}/consultant-ia-toulouse`,
     type: "website",
   },
@@ -37,9 +37,9 @@ const localServiceSchema = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   "@id": `${siteUrl}/consultant-ia-toulouse/#service`,
-  name: "Consultant IA a Toulouse — Aissa BELKOUSSA",
+  name: "Consultant IA à Toulouse — Aïssa BELKOUSSA",
   description:
-    "Consultant intelligence artificielle freelance a Toulouse (Haute-Garonne). Automatisation, chatbot IA, sites web, dashboards pour PME, startups et ETI. Ecosysteme Aerospace Valley, capitale tech Occitanie.",
+    "Consultant intelligence artificielle freelance à Toulouse (Haute-Garonne). Automatisation, chatbot IA, sites web, dashboards pour PME, startups et ETI. Écosystème Aerospace Valley, capitale tech Occitanie.",
   url: `${siteUrl}/consultant-ia-toulouse`,
   provider: { "@id": `${siteUrl}/#person` },
   areaServed: [
@@ -64,9 +64,9 @@ const localServiceSchema = {
   serviceType: [
     "Consultant intelligence artificielle",
     "Automatisation de workflows",
-    "Developpement de chatbot IA",
-    "Creation de site web professionnel",
-    "Dashboard decisionnel",
+    "Développement de chatbot IA",
+    "Création de site web professionnel",
+    "Dashboard décisionnel",
     "SEO local et GEO",
   ],
   hasOfferCatalog: {
@@ -78,21 +78,21 @@ const localServiceSchema = {
         name: "Starter — Pilote Automatique",
         price: "1500",
         priceCurrency: "EUR",
-        description: "1 automatisation cle en main. Livre en 5 jours.",
+        description: "1 automatisation clé en main. Livré en 5 jours.",
       },
       {
         "@type": "Offer",
-        name: "Accelerateur",
+        name: "Accélérateur",
         price: "2900",
         priceCurrency: "EUR",
-        description: "Systeme complet + 3 mois maintenance offerts.",
+        description: "Système complet + 3 mois maintenance offerts.",
       },
       {
         "@type": "Offer",
         name: "Partenaire",
         price: "6900",
         priceCurrency: "EUR",
-        description: "Infrastructure IA complete + partenaire technique dedie.",
+        description: "Infrastructure IA complète + partenaire technique dédié.",
       },
     ],
   },
@@ -116,42 +116,42 @@ const faqSchema = {
   mainEntity: [
     {
       "@type": "Question",
-      name: "Combien coute un consultant IA a Toulouse ?",
+      name: "Combien coûte un consultant IA à Toulouse ?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Un consultant IA freelance a Toulouse facture 800 EUR/jour en TJM, ou propose des forfaits projet : Starter a 1 500 EUR, Accelerateur a 2 900 EUR, Partenaire a 6 900 EUR. C'est 2 a 3 fois moins cher qu'une agence parisienne, avec la meme expertise technique.",
+        text: "Un consultant IA freelance à Toulouse facture 800 EUR/jour en TJM, ou propose des forfaits projet : Starter à 1 500 EUR, Accélérateur à 2 900 EUR, Partenaire à 6 900 EUR. C'est 2 à 3 fois moins cher qu'une agence parisienne, avec la même expertise technique.",
       },
     },
     {
       "@type": "Question",
-      name: "Quels secteurs a Toulouse beneficient le plus de l'IA ?",
+      name: "Quels secteurs à Toulouse bénéficient le plus de l'IA ?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "L'aeronautique (sous-traitants Airbus, Aerospace Valley), les startups tech (Toulouse est le 2e pole numerique francais), le BTP, la sante (CHU, cliniques), et les PME industrielles du bassin toulousain. L'IA automatise les process, les devis, la relation client et le suivi de production.",
+        text: "L'aéronautique (sous-traitants Airbus, Aerospace Valley), les startups tech (Toulouse est le 2e pôle numérique français), le BTP, la santé (CHU, cliniques), et les PME industrielles du bassin toulousain. L'IA automatise les process, les devis, la relation client et le suivi de production.",
       },
     },
     {
       "@type": "Question",
-      name: "Un consultant IA local est-il disponible pour des reunions en personne a Toulouse ?",
+      name: "Un consultant IA local est-il disponible pour des réunions en personne à Toulouse ?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Oui. Base a Albi, a 1h de Toulouse, je me deplace regulierement pour les reunions en personne, ateliers de cadrage et formations. Les echanges courants se font en visio pour plus d'efficacite.",
+        text: "Oui. Basé à Albi, à 1h de Toulouse, je me déplace régulièrement pour les réunions en personne, ateliers de cadrage et formations. Les échanges courants se font en visio pour plus d'efficacité.",
       },
     },
     {
       "@type": "Question",
-      name: "Quelles aides financieres pour un projet IA en Haute-Garonne ?",
+      name: "Quelles aides financières pour un projet IA en Haute-Garonne ?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Trois aides sont mobilisables : OPCO (100% pour les entreprises de moins de 50 salaries), OCCAL (70%, plafond 23 000 EUR), Pass Occitanie (50%, plafond 10 000 EUR). BPI France propose aussi des financements pour les startups innovantes de la region.",
+        text: "Trois aides sont mobilisables : OPCO (100% pour les entreprises de moins de 50 salariés), OCCAL (70%, plafond 23 000 EUR), Pass Occitanie (50%, plafond 10 000 EUR). BPI France propose aussi des financements pour les startups innovantes de la région.",
       },
     },
     {
       "@type": "Question",
-      name: "Quelle difference entre un consultant IA freelance et une ESN toulousaine ?",
+      name: "Quelle différence entre un consultant IA freelance et une ESN toulousaine ?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Une ESN facture 1 500 a 2 500 EUR/jour avec des equipes qui tournent. Un consultant freelance facture 800 EUR/jour, vous travaillez directement avec l'expert qui code, et le projet est livre en 5 a 10 jours au lieu de 2 a 6 mois.",
+        text: "Une ESN facture 1 500 à 2 500 EUR/jour avec des équipes qui tournent. Un consultant freelance facture 800 EUR/jour, vous travaillez directement avec l'expert qui code, et le projet est livré en 5 à 10 jours au lieu de 2 à 6 mois.",
       },
     },
   ],

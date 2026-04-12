@@ -23,9 +23,9 @@ import {
 import { cn } from "@/utils/cn";
 
 const stats = [
-  { value: "93", label: "projets livres" },
-  { value: "4+", label: "ans d'experience" },
-  { value: "10j", label: "delai moyen" },
+  { value: "93", label: "projets livrés" },
+  { value: "4+", label: "ans d'expérience" },
+  { value: "10j", label: "délai moyen" },
   { value: "800\u20ac", label: "TJM consulting" },
 ];
 
@@ -33,22 +33,22 @@ const services = [
   {
     icon: Zap,
     title: "Automatisation & Process",
-    desc: "Emails, relances, devis, CRM — vos taches repetitives tournent toutes seules. 10 a 15h/semaine liberees.",
+    desc: "Emails, relances, devis, CRM — vos tâches répétitives tournent toutes seules. 10 à 15h/semaine libérées.",
   },
   {
     icon: Bot,
     title: "Chatbot IA sur-mesure",
-    desc: "Un assistant qui qualifie vos prospects, repond aux FAQ et prend les RDV. 24/7, sans pause.",
+    desc: "Un assistant qui qualifie vos prospects, répond aux FAQ et prend les RDV. 24/7, sans pause.",
   },
   {
     icon: Globe,
     title: "Site web SEO + GEO",
-    desc: "Visible sur Google ET recommande par ChatGPT. Donnees structurees, contenu expert, referencement local.",
+    desc: "Visible sur Google ET recommandé par ChatGPT. Données structurées, contenu expert, référencement local.",
   },
   {
     icon: BarChart3,
-    title: "Dashboard decisionnel",
-    desc: "Vos chiffres cles en temps reel. Alertes intelligentes, rapports auto-generes, decisions en 30 secondes.",
+    title: "Dashboard décisionnel",
+    desc: "Vos chiffres clés en temps réel. Alertes intelligentes, rapports auto-générés, décisions en 30 secondes.",
   },
 ];
 
@@ -56,18 +56,18 @@ const pricing = [
   {
     name: "Starter",
     price: "1 500",
-    desc: "1 automatisation cle en main",
-    features: ["Chatbot OU emails OU RDV", "Livre en 5 jours", "Formation 1h incluse"],
+    desc: "1 automatisation clé en main",
+    features: ["Chatbot OU emails OU RDV", "Livré en 5 jours", "Formation 1h incluse"],
     highlight: false,
   },
   {
-    name: "Accelerateur",
+    name: "Accélérateur",
     price: "2 900",
-    desc: "Systeme complet + maintenance",
+    desc: "Système complet + maintenance",
     features: [
-      "1 systeme livre cle en main",
+      "1 système livré clé en main",
       "3 mois maintenance offerts",
-      "Bugs corriges sous 48h",
+      "Bugs corrigés sous 48h",
       "Rapport mensuel",
     ],
     highlight: true,
@@ -75,12 +75,12 @@ const pricing = [
   {
     name: "Partenaire",
     price: "6 900",
-    desc: "Infrastructure IA + partenaire dedie",
+    desc: "Infrastructure IA + partenaire dédié",
     features: [
-      "Systeme multi-briques (site + IA + data)",
-      "3 mois evolution + support Premium",
-      "Evolutions 10h/mois",
-      "Reunion strategique mensuelle",
+      "Système multi-briques (site + IA + data)",
+      "3 mois évolution + support Premium",
+      "Évolutions 10h/mois",
+      "Réunion stratégique mensuelle",
     ],
     highlight: false,
   },
@@ -88,34 +88,34 @@ const pricing = [
 
 const faqs = [
   {
-    q: "Quels secteurs a Toulouse beneficient le plus de l'IA ?",
-    a: "L'aeronautique (sous-traitants Airbus, Aerospace Valley), les startups tech, le BTP, la sante et les PME industrielles du bassin toulousain. L'IA automatise les process, les devis, la relation client et le suivi de production.",
+    q: "Quels secteurs à Toulouse bénéficient le plus de l'IA ?",
+    a: "L'aéronautique (sous-traitants Airbus, Aerospace Valley), les startups tech, le BTP, la santé et les PME industrielles du bassin toulousain. L'IA automatise les process, les devis, la relation client et le suivi de production.",
   },
   {
     q: "Est-ce que les aides OPCO couvrent les projets d'automatisation IA ?",
-    a: "Oui, pour les entreprises de moins de 50 salaries. L'OPCO peut prendre en charge jusqu'a 100% du volet formation. Les aides OCCAL (70%, plafond 23 000 \u20ac) et Pass Occitanie (50%, plafond 10 000 \u20ac) couvrent aussi les projets numeriques. BPI France finance egalement les startups innovantes.",
+    a: "Oui, pour les entreprises de moins de 50 salariés. L'OPCO peut prendre en charge jusqu'à 100% du volet formation. Les aides OCCAL (70%, plafond 23 000 \u20ac) et Pass Occitanie (50%, plafond 10 000 \u20ac) couvrent aussi les projets numériques. BPI France finance également les startups innovantes.",
   },
   {
-    q: "Quelle difference entre un consultant IA freelance et une ESN toulousaine ?",
-    a: "Une ESN facture 1 500 a 2 500 \u20ac/jour avec des equipes qui tournent. En freelance, vous travaillez directement avec l'expert qui code a 800 \u20ac/jour, et le projet est livre en 5 a 10 jours au lieu de 2 a 6 mois.",
+    q: "Quelle différence entre un consultant IA freelance et une ESN toulousaine ?",
+    a: "Une ESN facture 1 500 à 2 500 \u20ac/jour avec des équipes qui tournent. En freelance, vous travaillez directement avec l'expert qui code à 800 \u20ac/jour, et le projet est livré en 5 à 10 jours au lieu de 2 à 6 mois.",
   },
   {
-    q: "Vous deplacez-vous a Toulouse pour des reunions en personne ?",
-    a: "Oui. Base a Albi, a 1h de Toulouse, je me deplace regulierement pour les reunions, ateliers de cadrage et formations. Les echanges courants se font en visio pour plus d'efficacite.",
+    q: "Vous déplacez-vous à Toulouse pour des réunions en personne ?",
+    a: "Oui. Basé à Albi, à 1h de Toulouse, je me déplace régulièrement pour les réunions, ateliers de cadrage et formations. Les échanges courants se font en visio pour plus d'efficacité.",
   },
   {
-    q: "Combien de temps faut-il pour voir des resultats ?",
-    a: "Les systemes sont livres en 5 a 10 jours ouvres. Les premiers resultats (leads, temps gagne, visibilite) arrivent sous 2 a 4 semaines. Le ROI complet est generalement atteint en 4 a 6 semaines.",
+    q: "Combien de temps faut-il pour voir des résultats ?",
+    a: "Les systèmes sont livrés en 5 à 10 jours ouvrés. Les premiers résultats (leads, temps gagné, visibilité) arrivent sous 2 à 4 semaines. Le ROI complet est généralement atteint en 4 à 6 semaines.",
   },
 ];
 
 const comparisonRows = [
-  { label: "Prix journee", agence: "1 500 - 3 000 \u20ac", freelance: "800 \u20ac" },
-  { label: "Delai de livraison", agence: "2 - 6 mois", freelance: "5 - 10 jours" },
-  { label: "Interlocuteur", agence: "Chef de projet (pas technique)", freelance: "Le developpeur qui code" },
-  { label: "Connaissance locale", agence: "Aucune", freelance: "Ecosysteme Toulouse + Occitanie" },
-  { label: "Aides regionales", agence: "Pas de montage", freelance: "OPCO, OCCAL, Pass Occitanie, BPI" },
-  { label: "Apres la livraison", agence: "Ticket de support payant", freelance: "3 mois maintenance offerts" },
+  { label: "Prix journée", agence: "1 500 - 3 000 \u20ac", freelance: "800 \u20ac" },
+  { label: "Délai de livraison", agence: "2 - 6 mois", freelance: "5 - 10 jours" },
+  { label: "Interlocuteur", agence: "Chef de projet (pas technique)", freelance: "Le développeur qui code" },
+  { label: "Connaissance locale", agence: "Aucune", freelance: "Écosystème Toulouse + Occitanie" },
+  { label: "Aides régionales", agence: "Pas de montage", freelance: "OPCO, OCCAL, Pass Occitanie, BPI" },
+  { label: "Après la livraison", agence: "Ticket de support payant", freelance: "3 mois maintenance offerts" },
 ];
 
 export default function ConsultantIAToulousePage() {
@@ -148,7 +148,7 @@ export default function ConsultantIAToulousePage() {
               transition={{ duration: 0.8, delay: 0.1 }}
               className="text-4xl md:text-6xl font-display font-medium tracking-tight leading-[1.1] mb-6"
             >
-              Consultant IA a Toulouse
+              Consultant IA à Toulouse
               <br />
               <span className="text-site-text-light">
                 pour PME, startups et ETI
@@ -161,11 +161,11 @@ export default function ConsultantIAToulousePage() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-lg text-site-text-light leading-relaxed max-w-2xl mb-10"
             >
-              Automatisation, chatbot IA, sites web, dashboards — je concois et
-              livre des systemes digitaux cle en main pour les entreprises
-              toulousaines. Capitale tech d'Occitanie, ecosysteme Aerospace
-              Valley, 2e pole numerique francais. Prix fixe, resultat garanti,
-              livre en 10 jours.
+              Automatisation, chatbot IA, sites web, dashboards — je conçois et
+              livre des systèmes digitaux clé en main pour les entreprises
+              toulousaines. Capitale tech d'Occitanie, écosystème Aerospace
+              Valley, 2e pôle numérique français. Prix fixe, résultat garanti,
+              livré en 10 jours.
             </motion.p>
 
             <motion.div
@@ -217,12 +217,12 @@ export default function ConsultantIAToulousePage() {
               Ce qu'un consultant IA fait
               <br />
               <span className="text-site-text-light">
-                concretement pour votre entreprise a Toulouse
+                concrètement pour votre entreprise à Toulouse
               </span>
             </h2>
             <p className="text-site-text-light mb-10 max-w-xl">
-              Pas de theorie, pas de slides. Des systemes qui tournent et qui
-              rapportent — adaptes a l'ecosysteme toulousain.
+              Pas de théorie, pas de slides. Des systèmes qui tournent et qui
+              rapportent — adaptés à l'écosystème toulousain.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -258,7 +258,7 @@ export default function ConsultantIAToulousePage() {
               ESN toulousaine vs consultant freelance
             </h2>
             <p className="text-site-text-light mb-8 max-w-xl">
-              Meme expertise technique, 3x moins cher, 10x plus rapide.
+              Même expertise technique, 3x moins cher, 10x plus rapide.
             </p>
 
             <div className="overflow-x-auto">
@@ -266,7 +266,7 @@ export default function ConsultantIAToulousePage() {
                 <thead>
                   <tr className="border-b-2 border-site-text">
                     <th className="text-left py-3 pr-4 font-display font-medium text-xs uppercase tracking-wider text-site-text-light">
-                      Critere
+                      Critère
                     </th>
                     <th className="text-left py-3 px-4 font-display font-medium text-xs uppercase tracking-wider text-red-600/70">
                       ESN / Agence
@@ -301,10 +301,10 @@ export default function ConsultantIAToulousePage() {
         <section className="px-6 mb-24">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-2xl md:text-3xl font-display font-medium tracking-tight mb-4">
-              Tarifs — prix fixe, zero surprise
+              Tarifs — prix fixe, zéro surprise
             </h2>
             <p className="text-site-text-light mb-10 max-w-xl">
-              Le prix annonce est le prix paye. Satisfait ou retravaille.
+              Le prix annoncé est le prix payé. Satisfait ou retravaillé.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -320,7 +320,7 @@ export default function ConsultantIAToulousePage() {
                 >
                   {p.highlight && (
                     <span className="inline-block text-[10px] font-bold uppercase tracking-[0.2em] text-site-accent mb-3">
-                      Recommande
+                      Recommandé
                     </span>
                   )}
                   <h3 className="text-lg font-display font-medium">
@@ -357,7 +357,7 @@ export default function ConsultantIAToulousePage() {
               <div className="flex items-center justify-center gap-2 mb-1">
                 <Landmark size={14} className="text-site-accent" />
                 <span className="text-xs font-bold uppercase tracking-wider text-site-accent">
-                  Financable OPCO jusqu'a 100%
+                  Finançable OPCO jusqu'à 100%
                 </span>
               </div>
               <p className="text-xs text-site-text-light">
@@ -375,17 +375,17 @@ export default function ConsultantIAToulousePage() {
               <div className="flex items-center gap-2 mb-4">
                 <Users size={14} className="text-site-accent" />
                 <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-site-accent">
-                  Exemple concret — sous-traitant aeronautique a Toulouse, 25 salaries
+                  Exemple concret — sous-traitant aéronautique à Toulouse, 25 salariés
                 </span>
               </div>
               <h3 className="text-xl font-display font-medium mb-3">
-                Accelerateur a 2 900 {"\u20ac"} : automatisation devis + suivi
-                production + dashboard temps reel + 3 mois maintenance
+                Accélérateur à 2 900 {"\u20ac"} : automatisation devis + suivi
+                production + dashboard temps réel + 3 mois maintenance
               </h3>
               <p className="text-sm text-white/60 leading-relaxed mb-6">
-                Le dirigeant perd 12h/semaine a compiler des tableaux Excel, relancer
-                les fournisseurs et generer des rapports manuels. L'Accelerateur
-                automatise tout et maintient le systeme.
+                Le dirigeant perd 12h/semaine à compiler des tableaux Excel, relancer
+                les fournisseurs et générer des rapports manuels. L'Accélérateur
+                automatise tout et maintient le système.
               </p>
               <div className="grid grid-cols-3 gap-6">
                 <div className="text-center">
@@ -393,7 +393,7 @@ export default function ConsultantIAToulousePage() {
                     12h
                   </div>
                   <div className="text-[10px] text-white/50 uppercase tracking-wider mt-1">
-                    liberees / semaine
+                    libérées / semaine
                   </div>
                 </div>
                 <div className="text-center">
@@ -421,7 +421,7 @@ export default function ConsultantIAToulousePage() {
         <section className="px-6 mb-24">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-2xl md:text-3xl font-display font-medium tracking-tight mb-8">
-              Questions frequentes
+              Questions fréquentes
             </h2>
 
             <div className="space-y-2">
@@ -461,11 +461,11 @@ export default function ConsultantIAToulousePage() {
           <div className="max-w-4xl mx-auto">
             <div className="p-8 md:p-12 rounded-2xl border border-site-accent bg-site-accent text-white text-center">
               <h2 className="text-2xl md:text-3xl font-display font-medium mb-4">
-                Premier echange gratuit — 30 min, zero engagement
+                Premier échange gratuit — 30 min, zéro engagement
               </h2>
               <p className="text-white/70 mb-8 max-w-lg mx-auto">
-                On regarde ensemble ou l'IA peut vous faire gagner du temps et
-                de l'argent. Pas de jargon, pas de vente forcee.
+                On regarde ensemble où l'IA peut vous faire gagner du temps et
+                de l'argent. Pas de jargon, pas de vente forcée.
               </p>
               <div className="flex items-center justify-center gap-4 flex-wrap">
                 <Link

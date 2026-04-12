@@ -23,9 +23,9 @@ import {
 import { cn } from "@/utils/cn";
 
 const stats = [
-  { value: "93", label: "projets livres" },
-  { value: "4+", label: "ans d'experience" },
-  { value: "10j", label: "delai moyen" },
+  { value: "93", label: "projets livrés" },
+  { value: "4+", label: "ans d'expérience" },
+  { value: "10j", label: "délai moyen" },
   { value: "800\u20ac", label: "TJM consulting" },
 ];
 
@@ -33,22 +33,22 @@ const services = [
   {
     icon: Zap,
     title: "Automatisation & Process",
-    desc: "Emails, relances, devis, CRM — vos taches repetitives tournent toutes seules. 10 a 15h/semaine liberees.",
+    desc: "Emails, relances, devis, CRM — vos tâches répétitives tournent toutes seules. 10 à 15h/semaine libérées.",
   },
   {
     icon: Bot,
     title: "Chatbot IA sur-mesure",
-    desc: "Un assistant qui qualifie vos prospects, repond aux FAQ et prend les RDV. 24/7, sans pause.",
+    desc: "Un assistant qui qualifie vos prospects, répond aux FAQ et prend les RDV. 24/7, sans pause.",
   },
   {
     icon: Globe,
     title: "Site web SEO + GEO",
-    desc: "Visible sur Google ET recommande par ChatGPT. Donnees structurees, contenu expert, referencement regional Occitanie.",
+    desc: "Visible sur Google ET recommandé par ChatGPT. Données structurées, contenu expert, référencement régional Occitanie.",
   },
   {
     icon: BarChart3,
-    title: "Dashboard decisionnel",
-    desc: "Vos chiffres cles en temps reel. Alertes intelligentes, rapports auto-generes, decisions en 30 secondes.",
+    title: "Dashboard décisionnel",
+    desc: "Vos chiffres clés en temps réel. Alertes intelligentes, rapports auto-générés, décisions en 30 secondes.",
   },
 ];
 
@@ -56,18 +56,18 @@ const pricing = [
   {
     name: "Starter",
     price: "1 500",
-    desc: "1 automatisation cle en main",
-    features: ["Chatbot OU emails OU RDV", "Livre en 5 jours", "Formation 1h incluse"],
+    desc: "1 automatisation clé en main",
+    features: ["Chatbot OU emails OU RDV", "Livré en 5 jours", "Formation 1h incluse"],
     highlight: false,
   },
   {
-    name: "Accelerateur",
+    name: "Accélérateur",
     price: "2 900",
-    desc: "Systeme complet + maintenance",
+    desc: "Système complet + maintenance",
     features: [
-      "1 systeme livre cle en main",
+      "1 système livré clé en main",
       "3 mois maintenance offerts",
-      "Bugs corriges sous 48h",
+      "Bugs corrigés sous 48h",
       "Rapport mensuel",
     ],
     highlight: true,
@@ -75,12 +75,12 @@ const pricing = [
   {
     name: "Partenaire",
     price: "6 900",
-    desc: "Infrastructure IA + partenaire dedie",
+    desc: "Infrastructure IA + partenaire dédié",
     features: [
-      "Systeme multi-briques (site + IA + data)",
-      "3 mois evolution + support Premium",
-      "Evolutions 10h/mois",
-      "Reunion strategique mensuelle",
+      "Système multi-briques (site + IA + data)",
+      "3 mois évolution + support Premium",
+      "Évolutions 10h/mois",
+      "Réunion stratégique mensuelle",
     ],
     highlight: false,
   },
@@ -89,33 +89,33 @@ const pricing = [
 const faqs = [
   {
     q: "Quelles villes d'Occitanie couvrez-vous ?",
-    a: "Toute la region Occitanie : Albi, Toulouse, Castres, Montpellier, Perpignan, Nimes, Tarbes, Rodez, Cahors, et toutes les villes intermediaires. Base a Albi, je me deplace pour les reunions en personne et travaille en visio pour les echanges courants.",
+    a: "Toute la région Occitanie : Albi, Toulouse, Castres, Montpellier, Perpignan, Nîmes, Tarbes, Rodez, Cahors, et toutes les villes intermédiaires. Basé à Albi, je me déplace pour les réunions en personne et travaille en visio pour les échanges courants.",
   },
   {
-    q: "Quels secteurs economiques en Occitanie beneficient le plus de l'IA ?",
-    a: "L'aeronautique (Toulouse, Aerospace Valley), le BTP (toute la region), le textile (Castres-Mazamet), la viticulture (Herault, Gaillac), le tourisme (Lourdes, littoral), l'agroalimentaire et les PME industrielles. L'IA automatise les process, les devis, la relation client et le suivi de production.",
+    q: "Quels secteurs économiques en Occitanie bénéficient le plus de l'IA ?",
+    a: "L'aéronautique (Toulouse, Aerospace Valley), le BTP (toute la région), le textile (Castres-Mazamet), la viticulture (Hérault, Gaillac), le tourisme (Lourdes, littoral), l'agroalimentaire et les PME industrielles. L'IA automatise les process, les devis, la relation client et le suivi de production.",
   },
   {
     q: "Est-ce que les aides regionales Occitanie couvrent les projets IA ?",
-    a: "Oui. OPCO prend en charge jusqu'a 100% du volet formation pour les entreprises de moins de 50 salaries. OCCAL finance 70% (plafond 23 000 \u20ac) et Pass Occitanie 50% (plafond 10 000 \u20ac). BPI France finance egalement les startups innovantes de la region.",
+    a: "Oui. OPCO prend en charge jusqu'à 100% du volet formation pour les entreprises de moins de 50 salariés. OCCAL finance 70% (plafond 23 000 \u20ac) et Pass Occitanie 50% (plafond 10 000 \u20ac). BPI France finance également les startups innovantes de la région.",
   },
   {
-    q: "Pourquoi choisir un expert IA local plutot qu'une agence parisienne ?",
-    a: "Je connais le tissu economique regional, les aides Occitanie, les specificites de chaque bassin economique, et je me deplace pour des reunions en personne. Mes tarifs sont 2 a 3 fois inferieurs a Paris, sans compromettre la qualite technique.",
+    q: "Pourquoi choisir un expert IA local plutôt qu'une agence parisienne ?",
+    a: "Je connais le tissu économique régional, les aides Occitanie, les spécificités de chaque bassin économique, et je me déplace pour des réunions en personne. Mes tarifs sont 2 à 3 fois inférieurs à Paris, sans compromettre la qualité technique.",
   },
   {
-    q: "Combien de temps faut-il pour voir des resultats ?",
-    a: "Les systemes sont livres en 5 a 10 jours ouvres. Les premiers resultats (leads, temps gagne, visibilite) arrivent sous 2 a 4 semaines. Le ROI complet est generalement atteint en 4 a 6 semaines.",
+    q: "Combien de temps faut-il pour voir des résultats ?",
+    a: "Les systèmes sont livrés en 5 à 10 jours ouvrés. Les premiers résultats (leads, temps gagné, visibilité) arrivent sous 2 à 4 semaines. Le ROI complet est généralement atteint en 4 à 6 semaines.",
   },
 ];
 
 const comparisonRows = [
-  { label: "Prix journee", agence: "1 500 - 3 000 \u20ac", freelance: "800 \u20ac" },
-  { label: "Delai de livraison", agence: "2 - 6 mois", freelance: "5 - 10 jours" },
-  { label: "Interlocuteur", agence: "Chef de projet (pas technique)", freelance: "Le developpeur qui code" },
-  { label: "Connaissance locale", agence: "Aucune", freelance: "13 departements Occitanie" },
-  { label: "Aides regionales", agence: "Pas de montage", freelance: "OPCO, OCCAL, Pass Occitanie, BPI" },
-  { label: "Apres la livraison", agence: "Ticket de support payant", freelance: "3 mois maintenance offerts" },
+  { label: "Prix journée", agence: "1 500 - 3 000 \u20ac", freelance: "800 \u20ac" },
+  { label: "Délai de livraison", agence: "2 - 6 mois", freelance: "5 - 10 jours" },
+  { label: "Interlocuteur", agence: "Chef de projet (pas technique)", freelance: "Le développeur qui code" },
+  { label: "Connaissance locale", agence: "Aucune", freelance: "13 départements Occitanie" },
+  { label: "Aides régionales", agence: "Pas de montage", freelance: "OPCO, OCCAL, Pass Occitanie, BPI" },
+  { label: "Après la livraison", agence: "Ticket de support payant", freelance: "3 mois maintenance offerts" },
 ];
 
 const cities = [
@@ -144,7 +144,7 @@ export default function ExpertIAOccitaniePage() {
             >
               <MapPin size={14} className="text-site-accent" />
               <span className="text-xs font-bold uppercase tracking-[0.3em] text-site-accent">
-                Occitanie — 13 departements
+                Occitanie — 13 départements
               </span>
             </motion.div>
 
@@ -157,7 +157,7 @@ export default function ExpertIAOccitaniePage() {
               Expert IA en Occitanie
               <br />
               <span className="text-site-text-light">
-                pour PME et ETI de toute la region
+                pour PME et ETI de toute la région
               </span>
             </motion.h1>
 
@@ -167,11 +167,11 @@ export default function ExpertIAOccitaniePage() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-lg text-site-text-light leading-relaxed max-w-2xl mb-10"
             >
-              Automatisation, chatbot IA, sites web, dashboards — je concois et
-              livre des systemes digitaux cle en main pour les entreprises
-              d'Occitanie. D'Albi a Montpellier, de Toulouse a Perpignan.
-              Aeronautique, BTP, textile, viticulture, tourisme. Prix fixe,
-              resultat garanti, livre en 10 jours.
+              Automatisation, chatbot IA, sites web, dashboards — je conçois et
+              livre des systèmes digitaux clé en main pour les entreprises
+              d'Occitanie. D'Albi à Montpellier, de Toulouse à Perpignan.
+              Aéronautique, BTP, textile, viticulture, tourisme. Prix fixe,
+              résultat garanti, livré en 10 jours.
             </motion.p>
 
             <motion.div
@@ -220,15 +220,15 @@ export default function ExpertIAOccitaniePage() {
         <section className="px-6 mb-24">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-2xl md:text-3xl font-display font-medium tracking-tight mb-4">
-              Couverture regionale
+              Couverture régionale
               <br />
               <span className="text-site-text-light">
-                13 departements, toute l'Occitanie
+                13 départements, toute l'Occitanie
               </span>
             </h2>
             <p className="text-site-text-light mb-8 max-w-xl">
-              Base a Albi, je me deplace sur toute la region pour les reunions
-              en personne. Visio pour les echanges courants.
+              Basé à Albi, je me déplace sur toute la région pour les réunions
+              en personne. Visio pour les échanges courants.
             </p>
 
             <div className="flex flex-wrap gap-2">
@@ -251,12 +251,12 @@ export default function ExpertIAOccitaniePage() {
               Ce qu'un expert IA fait
               <br />
               <span className="text-site-text-light">
-                concretement pour votre entreprise en Occitanie
+                concrètement pour votre entreprise en Occitanie
               </span>
             </h2>
             <p className="text-site-text-light mb-10 max-w-xl">
-              Pas de theorie, pas de slides. Des systemes qui tournent et qui
-              rapportent — adaptes a l'economie regionale.
+              Pas de théorie, pas de slides. Des systèmes qui tournent et qui
+              rapportent — adaptés à l'économie régionale.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -292,7 +292,7 @@ export default function ExpertIAOccitaniePage() {
               Agence parisienne vs expert local Occitanie
             </h2>
             <p className="text-site-text-light mb-8 max-w-xl">
-              Meme expertise technique, 3x moins cher, 10x plus rapide.
+              Même expertise technique, 3x moins cher, 10x plus rapide.
             </p>
 
             <div className="overflow-x-auto">
@@ -300,7 +300,7 @@ export default function ExpertIAOccitaniePage() {
                 <thead>
                   <tr className="border-b-2 border-site-text">
                     <th className="text-left py-3 pr-4 font-display font-medium text-xs uppercase tracking-wider text-site-text-light">
-                      Critere
+                      Critère
                     </th>
                     <th className="text-left py-3 px-4 font-display font-medium text-xs uppercase tracking-wider text-red-600/70">
                       Agence parisienne
@@ -335,10 +335,10 @@ export default function ExpertIAOccitaniePage() {
         <section className="px-6 mb-24">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-2xl md:text-3xl font-display font-medium tracking-tight mb-4">
-              Tarifs — prix fixe, zero surprise
+              Tarifs — prix fixe, zéro surprise
             </h2>
             <p className="text-site-text-light mb-10 max-w-xl">
-              Le prix annonce est le prix paye. Satisfait ou retravaille.
+              Le prix annoncé est le prix payé. Satisfait ou retravaillé.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -354,7 +354,7 @@ export default function ExpertIAOccitaniePage() {
                 >
                   {p.highlight && (
                     <span className="inline-block text-[10px] font-bold uppercase tracking-[0.2em] text-site-accent mb-3">
-                      Recommande
+                      Recommandé
                     </span>
                   )}
                   <h3 className="text-lg font-display font-medium">
@@ -391,7 +391,7 @@ export default function ExpertIAOccitaniePage() {
               <div className="flex items-center justify-center gap-2 mb-1">
                 <Landmark size={14} className="text-site-accent" />
                 <span className="text-xs font-bold uppercase tracking-wider text-site-accent">
-                  Financable OPCO jusqu'a 100%
+                  Finançable OPCO jusqu'à 100%
                 </span>
               </div>
               <p className="text-xs text-site-text-light">
@@ -409,17 +409,17 @@ export default function ExpertIAOccitaniePage() {
               <div className="flex items-center gap-2 mb-4">
                 <Users size={14} className="text-site-accent" />
                 <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-site-accent">
-                  Exemple concret — entreprise BTP en Occitanie, 20 salaries
+                  Exemple concret — entreprise BTP en Occitanie, 20 salariés
                 </span>
               </div>
               <h3 className="text-xl font-display font-medium mb-3">
-                Accelerateur a 2 900 {"\u20ac"} : site pro + prise de RDV + devis
-                automatise + suivi chantier + 3 mois maintenance
+                Accélérateur à 2 900 {"\u20ac"} : site pro + prise de RDV + devis
+                automatisé + suivi chantier + 3 mois maintenance
               </h3>
               <p className="text-sm text-white/60 leading-relaxed mb-6">
-                Le dirigeant perd 12h/semaine a repondre au telephone, generer
+                Le dirigeant perd 12h/semaine à répondre au téléphone, générer
                 des devis manuels et suivre l'avancement des chantiers sur
-                Excel. L'Accelerateur automatise tout et maintient le systeme.
+                Excel. L'Accélérateur automatise tout et maintient le système.
               </p>
               <div className="grid grid-cols-3 gap-6">
                 <div className="text-center">
@@ -427,7 +427,7 @@ export default function ExpertIAOccitaniePage() {
                     12h
                   </div>
                   <div className="text-[10px] text-white/50 uppercase tracking-wider mt-1">
-                    liberees / semaine
+                    libérées / semaine
                   </div>
                 </div>
                 <div className="text-center">
@@ -455,7 +455,7 @@ export default function ExpertIAOccitaniePage() {
         <section className="px-6 mb-24">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-2xl md:text-3xl font-display font-medium tracking-tight mb-8">
-              Questions frequentes
+              Questions fréquentes
             </h2>
 
             <div className="space-y-2">
@@ -495,11 +495,11 @@ export default function ExpertIAOccitaniePage() {
           <div className="max-w-4xl mx-auto">
             <div className="p-8 md:p-12 rounded-2xl border border-site-accent bg-site-accent text-white text-center">
               <h2 className="text-2xl md:text-3xl font-display font-medium mb-4">
-                Premier echange gratuit — 30 min, zero engagement
+                Premier échange gratuit — 30 min, zéro engagement
               </h2>
               <p className="text-white/70 mb-8 max-w-lg mx-auto">
-                On regarde ensemble ou l'IA peut vous faire gagner du temps et
-                de l'argent. Pas de jargon, pas de vente forcee.
+                On regarde ensemble où l'IA peut vous faire gagner du temps et
+                de l'argent. Pas de jargon, pas de vente forcée.
               </p>
               <div className="flex items-center justify-center gap-4 flex-wrap">
                 <Link

@@ -54,7 +54,7 @@ const content = {
   fr: {
     badge: "Audit 360°",
     headline: "L'audit complet de",
-    headlineAccent: "votre ecosysteme digital",
+    headlineAccent: "votre écosystème digital",
     subtitle:
       "Pas juste du SEO. 6 dimensions analysees en profondeur : visibilite IA, performance, accessibilite, securite, credibilite. Le diagnostic qu'un consultant IA ferait en 30 secondes.",
     placeholder: "votre-domaine.fr",
@@ -85,7 +85,7 @@ const content = {
       globalLabel: "Score global 360°",
       verdicts: {
         critical: "Critique",
-        warning: "A ameliorer",
+        warning: "À améliorer",
         good: "Bon niveau",
       },
       freeLabel: "Gratuit",
@@ -97,13 +97,13 @@ const content = {
       unlocking: "Verification...",
       unlocked: "Debloque !",
       share: "Partager",
-      shareCopied: "Lien copie !",
+      shareCopied: "Lien copié !",
       exportPdf: "Exporter PDF",
       sharing: "Creation...",
-      ctaTitle: "Transformez votre score en strategie",
+      ctaTitle: "Transformez votre score en stratégie",
       ctaBody:
-        "Les scores faibles revelent des chantiers. Les scores forts indiquent des leviers. Dans les deux cas, la question est : comment transformer ce diagnostic en avantage competitif ?",
-      ctaButton: "Reserver un appel strategique",
+        "Les scores faibles révèlent des chantiers. Les scores forts indiquent des leviers. Dans les deux cas, la question est : comment transformer ce diagnostic en avantage compétitif ?",
+      ctaButton: "Réserver un appel stratégique",
       ctaFree: "Gratuit — 30 minutes — Sans engagement",
       rescan: "Auditer un autre domaine",
     },

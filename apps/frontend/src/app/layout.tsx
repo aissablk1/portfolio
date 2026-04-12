@@ -73,7 +73,7 @@ export const metadata: Metadata = {
     "automatisation IA artisan",
     "consultant digital PME Albi",
     "chatbot IA entreprise",
-    "GEO referencement IA",
+    "GEO référencement IA",
     "SEO local Albi",
   ],
 

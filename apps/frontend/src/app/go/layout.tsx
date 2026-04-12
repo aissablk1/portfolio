@@ -5,14 +5,14 @@ import { goPageSchema, formationSchemas, breadcrumbs } from "@/lib/schemas";
 const siteUrl = "https://www.aissabelkoussa.fr";
 
 export const metadata: Metadata = {
-  title: "Votre systeme devrait deja tourner — Offres & Resultats",
+  title: "Votre système devrait déjà tourner — Offres & Résultats",
   description:
-    "Systemes digitaux pour artisans BTP et prestataires B2B. Accelerateur : 2 900 EUR + 3 mois maintenance offerts. Livre en 5-10 jours. Prix fixe, licence d'usage incluse.",
+    "Systèmes digitaux pour artisans BTP et prestataires B2B. Accelerateur : 2 900 EUR + 3 mois maintenance offerts. Livre en 5-10 jours. Prix fixe, licence d'usage incluse.",
   alternates: {
     canonical: `${siteUrl}/go`,
   },
   openGraph: {
-    title: "Votre systeme devrait deja tourner — Aïssa BELKOUSSA",
+    title: "Votre système devrait déjà tourner — Aïssa BELKOUSSA",
     description:
       "Sites, automatisations IA, dashboards — livres en 5-10 jours avec 3 mois de maintenance inclus. A partir de 2 900 EUR.",
     url: `${siteUrl}/go`,
