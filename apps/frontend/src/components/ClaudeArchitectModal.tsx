@@ -68,6 +68,7 @@ export default function ClaudeArchitectModal({ open, onClose }: Props) {
             exit={{ opacity: 0, y: 24, scale: 0.96 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
             className="fixed inset-0 z-[71] flex items-center justify-center px-4 py-10"
+            onClick={onClose}
           >
             <div
               className="relative w-full max-w-xl overflow-hidden rounded-3xl shadow-2xl"
