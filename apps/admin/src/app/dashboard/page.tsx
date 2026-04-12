@@ -402,7 +402,7 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
@@ -644,7 +644,7 @@ export default function DashboardPage() {
                   className="flex items-start gap-3 py-3 border-b border-[var(--color-border)] last:border-0"
                 >
                   <div className="relative mt-1.5">
-                    <div className="h-2.5 w-2.5 rounded-full bg-[#8b5cf6]" />
+                    <div className="h-2.5 w-2.5 rounded-full bg-violet-500" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm text-[var(--color-text-primary)] truncate">
@@ -963,7 +963,7 @@ export default function DashboardPage() {
                           delay: i * 0.05,
                           ease: [0.22, 1, 0.36, 1],
                         }}
-                        className="h-full rounded-full bg-[#8b5cf6]"
+                        className="h-full rounded-full bg-violet-500"
                       />
                     </div>
                   </div>

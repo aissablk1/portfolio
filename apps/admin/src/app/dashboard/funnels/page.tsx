@@ -18,6 +18,7 @@ import { api, ApiError } from "@/lib/api-client";
 import { toast } from "sonner";
 import type { EmailSequence, SequenceStats, FunnelStats } from "@/lib/types";
 import { cn } from "@/lib/utils";
+import { StatusBadge } from "@/components/ui/status-badge";
 
 const TYPE_LABELS: Record<string, string> = {
   post_diagnostic: "Post-diagnostic",
@@ -26,11 +27,11 @@ const TYPE_LABELS: Record<string, string> = {
   lead_magnet: "Lead magnet",
 };
 
-const STATUS_COLORS: Record<string, string> = {
-  active: "text-emerald-500 bg-emerald-500/10 border-emerald-500/20",
-  completed: "text-blue-500 bg-blue-500/10 border-blue-500/20",
-  cancelled: "text-red-500 bg-red-500/10 border-red-500/20",
-  paused: "text-amber-500 bg-amber-500/10 border-amber-500/20",
+const STATUS_LABELS: Record<string, string> = {
+  active: "Active",
+  completed: "Terminée",
+  cancelled: "Annulée",
+  paused: "En pause",
 };
 
 export default function FunnelsPage() {
@@ -73,7 +74,7 @@ export default function FunnelsPage() {
   const handleAction = async (id: string, action: string) => {
     try {
       await api.updateSequence(id, action);
-      toast.success(`Sequence ${action === "pause" ? "mise en pause" : action === "resume" ? "reprise" : "annulee"}`);
+      toast.success(`Séquence ${action === "pause" ? "mise en pause" : action === "resume" ? "reprise" : "annulée"}`);
       fetchData();
     } catch (err) {
       if (err instanceof ApiError) toast.error(err.message);
@@ -82,7 +83,7 @@ export default function FunnelsPage() {
 
   if (loading && !seqStats) {
     return (
-      <div className="p-8">
+      <div>
         <div className="animate-pulse space-y-4">
           <div className="h-8 w-48 rounded bg-[var(--color-bg-hover)]" />
           <div className="grid grid-cols-4 gap-4">
@@ -96,28 +97,39 @@ export default function FunnelsPage() {
   }
 
   return (
-    <div className="space-y-6 p-6 lg:p-8">
+    <div className="space-y-6">
       {/* Header */}
       <div>
         <h1 className="text-2xl font-bold tracking-tight text-[var(--color-text-primary)]">
           Funnels
         </h1>
         <p className="text-sm text-[var(--color-text-muted)]">
-          Sequences email, conversions et performance des funnels
+          Séquences email, conversions et performance des funnels
         </p>
       </div>
 
       {/* KPI Cards */}
       {seqStats && (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          <StatCard icon={Mail} label="Sequences actives" value={seqStats.total_active} />
-          <StatCard icon={Zap} label="Emails envoyes (24h)" value={seqStats.emails_sent_today} />
+          <StatCard icon={Mail} label="Séquences actives" value={seqStats.total_active} />
+          <StatCard icon={Zap} label="Emails envoyés (24h)" value={seqStats.emails_sent_today} />
           <StatCard icon={Clock} label="Emails en attente" value={seqStats.emails_pending} />
-          <StatCard icon={XCircle} label="Taux desabonnement" value={`${seqStats.unsubscribe_rate}%`} />
+          <StatCard icon={XCircle} label="Taux désabonnement" value={`${seqStats.unsubscribe_rate}%`} />
         </div>
       )}
 
       {/* Funnel Conversion */}
+      {!funnelStats && !loading && (
+        <div className="border border-[var(--color-border)] rounded-xl p-6">
+          <div className="flex flex-col items-center justify-center py-8 text-center">
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--color-bg-hover)]">
+              <BarChart3 className="h-5 w-5 text-[var(--color-text-muted)]" />
+            </div>
+            <p className="mt-3 text-sm font-medium text-[var(--color-text-primary)]">Aucune donnée de conversion</p>
+            <p className="mt-1 text-xs text-[var(--color-text-muted)]">Les statistiques de funnel apparaîtront ici une fois les premières conversions enregistrées.</p>
+          </div>
+        </div>
+      )}
       {funnelStats && (
         <div className="border border-[var(--color-border)] rounded-xl p-6">
           <h2 className="text-sm font-semibold text-[var(--color-text-primary)] mb-4 flex items-center gap-2">
@@ -171,8 +183,8 @@ export default function FunnelsPage() {
         >
           <option value="">Tous les statuts</option>
           <option value="active">Active</option>
-          <option value="completed">Terminee</option>
-          <option value="cancelled">Annulee</option>
+          <option value="completed">Terminée</option>
+          <option value="cancelled">Annulée</option>
           <option value="paused">En pause</option>
         </select>
         <select
@@ -208,7 +220,7 @@ export default function FunnelsPage() {
             {sequences.length === 0 ? (
               <tr>
                 <td colSpan={6} className="px-4 py-12 text-center text-[var(--color-text-muted)]">
-                  Aucune sequence{statusFilter || typeFilter ? " avec ces filtres" : ""}
+                  Aucune séquence{statusFilter || typeFilter ? " avec ces filtres" : ""}
                 </td>
               </tr>
             ) : (
@@ -240,9 +252,7 @@ export default function FunnelsPage() {
                     </div>
                   </td>
                   <td className="px-4 py-3">
-                    <span className={cn("inline-flex px-2 py-0.5 rounded-full text-[10px] font-bold uppercase border", STATUS_COLORS[seq.status] || "")}>
-                      {seq.status}
-                    </span>
+                    <StatusBadge status={seq.status} label={STATUS_LABELS[seq.status] || seq.status} />
                   </td>
                   <td className="px-4 py-3 text-xs text-[var(--color-text-muted)]">
                     {new Date(seq.created_at).toLocaleDateString("fr-FR")}
@@ -300,7 +310,7 @@ export default function FunnelsPage() {
             onClick={() => setPage((p) => p - 1)}
             className="px-3 py-1.5 text-sm border border-[var(--color-border)] rounded-lg disabled:opacity-30"
           >
-            Precedent
+            Précédent
           </button>
           <span className="text-sm text-[var(--color-text-muted)]">
             Page {page}

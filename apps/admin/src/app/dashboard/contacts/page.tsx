@@ -569,7 +569,7 @@ export default function ContactsPage() {
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
-      toast.success(`Export ${format.toUpperCase()} telecharge`);
+      toast.success(`Export ${format.toUpperCase()} téléchargé`);
     } catch (err) {
       toast.error(
         err instanceof Error ? err.message : "Erreur lors de l'export"

@@ -71,6 +71,10 @@ export function getStatusColor(status: string): string {
     degraded: "text-[var(--color-warning)] bg-[var(--color-warning-soft)]",
     down: "text-[var(--color-error)] bg-[var(--color-error-soft)]",
     success: "text-[var(--color-success)] bg-[var(--color-success-soft)]",
+    active: "text-[var(--color-success)] bg-[var(--color-success-soft)]",
+    completed: "text-[var(--color-info)] bg-[var(--color-info-soft)]",
+    cancelled: "text-[var(--color-error)] bg-[var(--color-error-soft)]",
+    paused: "text-[var(--color-warning)] bg-[var(--color-warning-soft)]",
   };
   return colors[status] ?? "text-[var(--color-text-secondary)] bg-[var(--color-bg-hover)]";
 }

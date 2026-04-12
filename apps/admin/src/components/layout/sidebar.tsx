@@ -124,7 +124,7 @@ export function Sidebar() {
             whileTap={{ scale: 0.95 }}
             onClick={() => logout()}
             className="rounded-[var(--radius-sm)] p-1.5 text-[var(--color-text-muted)] transition-colors hover:bg-[var(--color-bg-hover)] hover:text-[var(--color-error)]"
-            aria-label="Se deconnecter"
+            aria-label="Se déconnecter"
           >
             <LogOut className="h-4 w-4" />
           </motion.button>

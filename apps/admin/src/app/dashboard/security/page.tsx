@@ -230,7 +230,7 @@ export default function SecurityPage() {
           ? { ip_address: data.value, reason: data.reason }
           : { email_domain: data.value, reason: data.reason };
       await api.addToBlacklist(payload);
-      toast.success("Entree ajoutee a la liste noire");
+      toast.success("Entrée ajoutée à la liste noire");
       blacklistForm.reset();
       setShowAddBlacklist(false);
       loadData();
@@ -244,7 +244,7 @@ export default function SecurityPage() {
     setDeletingId(id);
     try {
       await api.removeFromBlacklist(id);
-      toast.success("Entree supprimee de la liste noire");
+      toast.success("Entrée supprimée de la liste noire");
       loadData();
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Erreur");
@@ -299,7 +299,7 @@ export default function SecurityPage() {
         {[
           {
             icon: ShieldAlert,
-            label: "Spam bloque",
+            label: "Spam bloqué",
             value: `${todaySpam} / ${spamTotal}`,
             sub: "aujourd'hui / total",
             color: "error" as const,
@@ -445,8 +445,12 @@ export default function SecurityPage() {
             )}
           </>
         ) : (
-          <div className="flex h-32 items-center justify-center text-sm text-[var(--color-text-tertiary)]">
-            Aucun spam enregistre
+          <div className="flex flex-col items-center justify-center py-12 text-center">
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--color-bg-hover)]">
+              <ShieldAlert className="h-5 w-5 text-[var(--color-text-muted)]" />
+            </div>
+            <p className="mt-3 text-sm font-medium text-[var(--color-text-primary)]">Aucun spam detecte</p>
+            <p className="mt-1 text-xs text-[var(--color-text-muted)]">Les tentatives de spam apparaîtront ici lorsqu&apos;elles seront bloquées.</p>
           </div>
         )}
       </motion.div>
@@ -514,7 +518,7 @@ export default function SecurityPage() {
                             : "bg-[var(--color-success-soft)] text-[var(--color-success)]"
                         )}
                       >
-                        {entry.blocked ? "Bloque" : "Actif"}
+                        {entry.blocked ? "Bloqué" : "Actif"}
                       </span>
                     </td>
                   </tr>
@@ -770,7 +774,7 @@ export default function SecurityPage() {
           </>
         ) : (
           <div className="flex h-32 items-center justify-center text-sm text-[var(--color-text-tertiary)]">
-            Aucune action enregistree
+            Aucune action enregistrée
           </div>
         )}
       </motion.div>

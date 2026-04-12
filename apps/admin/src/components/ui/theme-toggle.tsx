@@ -7,7 +7,7 @@ import { Sun, Moon, Monitor } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const themes = [
-  { value: "system", icon: Monitor, label: "Systeme" },
+  { value: "system", icon: Monitor, label: "Système" },
   { value: "light", icon: Sun, label: "Clair" },
   { value: "dark", icon: Moon, label: "Sombre" },
 ] as const;

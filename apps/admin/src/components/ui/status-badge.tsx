@@ -14,7 +14,7 @@ const statusLabels: Record<string, string> = {
   spam: "Spam",
   error: "Erreur",
   archived: "Archive",
-  sent: "Envoye",
+  sent: "Envoyé",
   delivered: "Délivré",
   failed: "Échoué",
   bounced: "Rejeté",
@@ -22,6 +22,10 @@ const statusLabels: Record<string, string> = {
   degraded: "Dégradé",
   down: "Hors service",
   success: "Succès",
+  active: "Active",
+  completed: "Terminée",
+  cancelled: "Annulée",
+  paused: "En pause",
 };
 
 export function StatusBadge({ status, label, className }: StatusBadgeProps) {

@@ -12,7 +12,7 @@ export function DashboardShell({ children }: { children: ReactNode }) {
       {/* Contenu principal */}
       <div className="lg:pl-[var(--spacing-sidebar)]">
         <Header />
-        <main className="p-6 lg:p-8">{children}</main>
+        <main className="p-6">{children}</main>
       </div>
     </div>
   );

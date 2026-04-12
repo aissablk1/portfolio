@@ -332,7 +332,7 @@ export default function AnalyticsPage() {
 
       {/* ═══ VISITEURS SECTION ═══ */}
       <div className="flex items-center gap-2">
-        <Eye className="h-5 w-5 text-[#8b5cf6]" />
+        <Eye className="h-5 w-5 text-violet-500" />
         <h2 className="text-lg font-semibold text-[var(--color-text-primary)]">Visiteurs</h2>
       </div>
 
@@ -409,7 +409,7 @@ export default function AnalyticsPage() {
               className="rounded-[var(--radius-lg)] border border-[var(--color-glass-border)] bg-[var(--color-glass)] p-6 backdrop-blur-xl"
             >
               <h2 className="mb-4 text-lg font-semibold text-[var(--color-text-primary)]">
-                Pages les plus visitees
+                Pages les plus visitées
               </h2>
               <div className="space-y-3">
                 {pageviews.top_pages.slice(0, 8).map((p, i) => {
@@ -434,7 +434,7 @@ export default function AnalyticsPage() {
                             initial={{ width: 0 }}
                             animate={{ width: `${pct}%` }}
                             transition={{ duration: 0.6, delay: i * 0.05 }}
-                            className="h-full rounded-full bg-[#8b5cf6]"
+                            className="h-full rounded-full bg-violet-500"
                           />
                         </div>
                       </div>
@@ -518,13 +518,13 @@ export default function AnalyticsPage() {
           />
           <KpiCard
             icon={ShieldAlert}
-            label="Spam bloque"
+            label="Spam bloqué"
             value={overview.spam_blocked}
             delay={0.1}
           />
           <KpiCard
             icon={MessageSquare}
-            label="Taux de reponse"
+            label="Taux de réponse"
             value={`${overview.response_rate}%`}
             delay={0.15}
           />
@@ -574,7 +574,7 @@ export default function AnalyticsPage() {
               <Area
                 type="monotone"
                 dataKey="count"
-                name="Legitimes"
+                name="Légitimes"
                 stroke={chartColors.stroke}
                 fill="url(#fillLegit)"
                 strokeWidth={2}
@@ -591,7 +591,7 @@ export default function AnalyticsPage() {
           </ResponsiveContainer>
         ) : (
           <div className="flex h-64 items-center justify-center text-sm text-[var(--color-text-tertiary)]">
-            Aucune donnee pour cette periode
+            Aucune donnée pour cette période
           </div>
         )}
       </motion.div>
@@ -606,7 +606,7 @@ export default function AnalyticsPage() {
           className="rounded-[var(--radius-lg)] border border-[var(--color-glass-border)] bg-[var(--color-glass)] p-6 backdrop-blur-xl"
         >
           <h2 className="mb-4 text-lg font-semibold text-[var(--color-text-primary)]">
-            Repartition par sujet
+            Répartition par sujet
           </h2>
           {subjects.length > 0 ? (
             <div className="flex flex-col gap-6 lg:flex-row lg:items-center">
@@ -650,7 +650,7 @@ export default function AnalyticsPage() {
             </div>
           ) : (
             <div className="flex h-48 items-center justify-center text-sm text-[var(--color-text-tertiary)]">
-              Aucune donnee
+              Aucune donnée
             </div>
           )}
         </motion.div>
@@ -707,7 +707,7 @@ export default function AnalyticsPage() {
             </ResponsiveContainer>
           ) : (
             <div className="flex h-48 items-center justify-center text-sm text-[var(--color-text-tertiary)]">
-              Aucune donnee
+              Aucune donnée
             </div>
           )}
         </motion.div>
@@ -723,7 +723,7 @@ export default function AnalyticsPage() {
         <div className="mb-4 flex items-center gap-2">
           <Globe className="h-5 w-5 text-[var(--color-text-tertiary)]" />
           <h2 className="text-lg font-semibold text-[var(--color-text-primary)]">
-            Distribution geographique
+            Distribution géographique
           </h2>
         </div>
         {geo.length > 0 ? (
@@ -763,7 +763,7 @@ export default function AnalyticsPage() {
           </div>
         ) : (
           <div className="flex h-32 items-center justify-center text-sm text-[var(--color-text-tertiary)]">
-            Aucune donnee geographique
+            Aucune donnée géographique
           </div>
         )}
       </motion.div>
@@ -779,7 +779,7 @@ export default function AnalyticsPage() {
           >
             <div className="flex items-center gap-2 text-sm text-[var(--color-text-secondary)]">
               <BarChart3 className="h-4 w-4" />
-              Cette semaine vs la semaine derniere
+              Cette semaine vs la semaine dernière
             </div>
             <div className="mt-3 flex items-end gap-4">
               <span className="text-3xl font-bold text-[var(--color-text-primary)]">

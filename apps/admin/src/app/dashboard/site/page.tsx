@@ -567,7 +567,7 @@ export default function SiteControlPage() {
             className="flex items-center gap-2 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-bg-elevated)] px-4 py-2.5 text-sm font-medium text-[var(--color-text-primary)] hover:bg-[var(--color-bg-hover)] transition-colors"
           >
             <Search className="h-4 w-4 text-[var(--color-success)]" />
-            Verifier le SEO
+            Vérifier le SEO
             <ExternalLink className="h-3 w-3 text-[var(--color-text-muted)]" />
           </a>
           <button
@@ -575,7 +575,7 @@ export default function SiteControlPage() {
               toast.info("Purge du cache en cours...");
               // Trigger a health check as a cache-like action
               await refreshHealth();
-              toast.success("Cache purge avec succes");
+              toast.success("Cache purgé avec succès");
             }}
             className="flex items-center gap-2 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-bg-elevated)] px-4 py-2.5 text-sm font-medium text-[var(--color-text-primary)] hover:bg-[var(--color-bg-hover)] transition-colors"
           >

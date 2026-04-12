@@ -186,7 +186,7 @@ export default function NotificationsPage() {
     try {
       const res = await api.testNotification(channel);
       if (res.success) {
-        toast.success(`Notification de test envoyee via ${getChannelConfig(channel).label}`);
+        toast.success(`Notification de test envoyée via ${getChannelConfig(channel).label}`);
       } else {
         toast.error(`Echec de l'envoi via ${getChannelConfig(channel).label}`);
       }
@@ -240,7 +240,7 @@ export default function NotificationsPage() {
       </motion.div>
 
       {/* Channel Status Cards */}
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {channels.map((ch, i) => {
           const stats = channelStats[ch.key];
           const successRate = stats.total > 0 ? Math.round((stats.success / stats.total) * 100) : 0;
@@ -279,7 +279,7 @@ export default function NotificationsPage() {
               </p>
               <div className="mt-2 space-y-1">
                 <div className="flex justify-between text-xs">
-                  <span className="text-[var(--color-text-tertiary)]">Taux de succes</span>
+                  <span className="text-[var(--color-text-tertiary)]">Taux de succès</span>
                   <span className="font-medium text-[var(--color-text-secondary)]">
                     {stats.total > 0 ? `${successRate}%` : "—"}
                   </span>
@@ -312,7 +312,7 @@ export default function NotificationsPage() {
           </h2>
         </div>
         <p className="mb-4 text-sm text-[var(--color-text-secondary)]">
-          Envoyez une notification de test a chaque canal pour verifier la configuration.
+          Envoyez une notification de test à chaque canal pour vérifier la configuration.
         </p>
         <div className="flex flex-wrap gap-3">
           {channels.map((ch) => {
@@ -440,7 +440,7 @@ export default function NotificationsPage() {
             >
               <option value="">Tous les statuts</option>
               <option value="success">Succes</option>
-              <option value="failed">Echoue</option>
+              <option value="failed">Échoué</option>
               <option value="pending">En attente</option>
             </select>
           </div>
@@ -469,7 +469,7 @@ export default function NotificationsPage() {
                         </span>
                         <span className={cn("inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-medium", getStatusColor(log.status))}>
                           <StatusIcon className="h-3 w-3" />
-                          {log.status === "success" ? "Envoye" : log.status === "failed" ? "Echoue" : "En attente"}
+                          {log.status === "success" ? "Envoyé" : log.status === "failed" ? "Échoué" : "En attente"}
                         </span>
                       </div>
                       <p className="mt-0.5 text-xs text-[var(--color-text-tertiary)] truncate">
@@ -493,7 +493,7 @@ export default function NotificationsPage() {
             {logsTotalPages > 1 && (
               <div className="mt-4 flex items-center justify-between">
                 <span className="text-xs text-[var(--color-text-tertiary)]">
-                  Page {logsPage} sur {logsTotalPages} ({logsTotal} resultats)
+                  Page {logsPage} sur {logsTotalPages} ({logsTotal} résultats)
                 </span>
                 <div className="flex gap-1">
                   <button
@@ -516,7 +516,7 @@ export default function NotificationsPage() {
           </>
         ) : (
           <div className="flex h-32 items-center justify-center text-sm text-[var(--color-text-tertiary)]">
-            Aucune notification enregistree
+            Aucune notification enregistrée
           </div>
         )}
       </motion.div>

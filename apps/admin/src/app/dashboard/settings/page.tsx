@@ -274,7 +274,7 @@ export default function SettingsPage() {
     setSavingSection(section);
     try {
       await api.updateSettings(data);
-      toast.success("Parametres enregistres");
+      toast.success("Paramètres enregistrés");
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Erreur lors de la sauvegarde");
     } finally {
@@ -295,7 +295,7 @@ export default function SettingsPage() {
       if (adminEmail) {
         await api.updateSettings({ admin_email: adminEmail });
       }
-      toast.success("Profil enregistre");
+      toast.success("Profil enregistré");
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Erreur lors de la sauvegarde du profil");
     } finally {
@@ -346,7 +346,7 @@ export default function SettingsPage() {
           new: data.new_password,
         },
       });
-      toast.success("Mot de passe modifie");
+      toast.success("Mot de passe modifié");
       passwordForm.reset();
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Erreur");
@@ -371,7 +371,7 @@ export default function SettingsPage() {
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
         setLastBackup(new Date().toISOString());
-        toast.success("Backup cree et telecharge avec succes");
+        toast.success("Backup créé et téléchargé avec succès");
       }
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Erreur lors du backup");
@@ -385,7 +385,7 @@ export default function SettingsPage() {
     setSavingSection("reset");
     try {
       await api.updateSettings({ reset: true });
-      toast.success("Parametres reinitialises");
+      toast.success("Paramètres réinitialisés");
       setShowResetConfirm(false);
       loadData();
     } catch (err) {
@@ -427,7 +427,7 @@ export default function SettingsPage() {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.4 }}
       >
-        <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">Parametres</h1>
+        <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">Paramètres</h1>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
           Configuration de l&apos;application et du compte
         </p>
@@ -584,7 +584,7 @@ export default function SettingsPage() {
         transition={{ duration: 0.4, delay: 0.1 }}
         className="rounded-[var(--radius-lg)] border border-[var(--color-glass-border)] bg-[var(--color-glass)] p-6 backdrop-blur-xl"
       >
-        <SectionHeader icon={Mail} title="Configuration email" description="Fournisseur et parametres d'envoi" />
+        <SectionHeader icon={Mail} title="Configuration email" description="Fournisseur et paramètres d'envoi" />
         <div className="space-y-4">
           <div>
             <label className="mb-1.5 block text-xs font-medium text-[var(--color-text-secondary)]">
@@ -641,7 +641,7 @@ export default function SettingsPage() {
 
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-[var(--color-text-primary)]">Reponse automatique</p>
+              <p className="text-sm text-[var(--color-text-primary)]">Réponse automatique</p>
               <p className="text-xs text-[var(--color-text-tertiary)]">
                 Envoyer une confirmation automatique aux contacts
               </p>
@@ -786,7 +786,7 @@ export default function SettingsPage() {
             <div>
               <p className="text-sm text-[var(--color-text-primary)]">Auto-blacklist</p>
               <p className="text-xs text-[var(--color-text-tertiary)]">
-                Bloquer automatiquement les IPs avec un score de spam eleve
+                Bloquer automatiquement les IPs avec un score de spam élevé
               </p>
             </div>
             <Toggle enabled={autoBlacklist} onChange={setAutoBlacklist} />
@@ -802,7 +802,7 @@ export default function SettingsPage() {
             ) : (
               <Save className="h-4 w-4" />
             )}
-            Enregistrer la securite
+            Enregistrer la sécurité
           </button>
         </div>
       </motion.div>
@@ -814,7 +814,7 @@ export default function SettingsPage() {
         transition={{ duration: 0.4, delay: 0.25 }}
         className="rounded-[var(--radius-lg)] border border-[var(--color-glass-border)] bg-[var(--color-glass)] p-6 backdrop-blur-xl"
       >
-        <SectionHeader icon={HardDrive} title="Sauvegarde" description="Backups de la base de donnees" />
+        <SectionHeader icon={HardDrive} title="Sauvegarde" description="Backups de la base de données" />
         <div className="space-y-4">
           <div className="flex flex-wrap items-center gap-4">
             <button
@@ -829,7 +829,7 @@ export default function SettingsPage() {
               )}
               Creer un backup
             </button>
-            {/* Le backup se telecharge automatiquement */}
+            {/* Le backup se télécharge automatiquement */}
           </div>
           {lastBackup && (
             <p className="text-xs text-[var(--color-text-tertiary)]">
@@ -855,10 +855,10 @@ export default function SettingsPage() {
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <p className="text-sm font-medium text-[var(--color-text-primary)]">
-                Reinitialiser les parametres
+                Réinitialiser les paramètres
               </p>
               <p className="text-xs text-[var(--color-text-tertiary)]">
-                Restaurer tous les parametres a leurs valeurs par defaut
+                Restaurer tous les paramètres à leurs valeurs par défaut
               </p>
             </div>
             <button
@@ -875,7 +875,7 @@ export default function SettingsPage() {
                 Vider le cache
               </p>
               <p className="text-xs text-[var(--color-text-tertiary)]">
-                Supprimer toutes les donnees en cache
+                Supprimer toutes les données en cache
               </p>
             </div>
             <button
@@ -883,7 +883,7 @@ export default function SettingsPage() {
                 toast.info("Vidage du cache...");
                 try {
                   await api.updateSettings({ clear_cache: true });
-                  toast.success("Cache vide avec succes");
+                  toast.success("Cache vidé avec succès");
                 } catch (err) {
                   toast.error(err instanceof Error ? err.message : "Erreur");
                 }
@@ -924,7 +924,7 @@ export default function SettingsPage() {
                   </h3>
                 </div>
                 <p className="mb-6 text-sm text-[var(--color-text-secondary)]">
-                  Cette action va reinitialiser tous les parametres a leurs valeurs par defaut.
+                  Cette action va reinitialiser tous les paramètres à leurs valeurs par défaut.
                   Cette operation est irreversible.
                 </p>
                 <div className="flex justify-end gap-3">
