@@ -150,7 +150,7 @@ const Header = () => {
               onClick={() => setClaudeModalOpen(true)}
               aria-label={dict.claudeArchitect.eyebrow}
               className={cn(
-                "hidden md:inline-flex items-center gap-1.5 px-3 py-2 text-[10px] font-bold uppercase tracking-widest rounded-full transition-all duration-500",
+                "inline-flex items-center gap-1.5 px-3 py-2 text-[10px] font-bold uppercase tracking-widest rounded-full transition-all duration-500",
                 isScrolled && isOverDark
                   ? "border border-[#e98152]/50 text-[#e98152] hover:border-[#e98152] hover:bg-[#e98152]/10"
                   : "border border-[#C15F3C]/40 text-[#a04e30] hover:border-[#C15F3C] hover:bg-[#C15F3C]/5"
