@@ -2086,7 +2086,17 @@ async def get_github_profile(request: Request):
         raise
     except Exception as e:
         logger.error(f"Erreur GitHub : {str(e)}")
-        raise HTTPException(status_code=500, detail="Erreur lors de la récupération des données GitHub.")
+        # Retourner un résultat vide plutôt qu'un 500
+        # (le dashboard peut fonctionner sans les stats GitHub)
+        return _ok({
+            "profile": {"login": GITHUB_USERNAME, "name": None, "bio": None, "public_repos": 0, "followers": 0, "avatar_url": None, "html_url": f"https://github.com/{GITHUB_USERNAME}"},
+            "repos": [],
+            "languages": {},
+            "total_stars": 0,
+            "recent_activity": [],
+            "cached_at": datetime.now(timezone.utc).isoformat(),
+            "error": str(e),
+        })
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
