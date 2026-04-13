@@ -58,7 +58,7 @@ export function Header() {
       {/* Droite : date, notifications, avatar */}
       <div className="flex items-center gap-4">
         {/* Date courante */}
-        <span className="hidden text-xs text-[var(--color-text-tertiary)] capitalize md:block">
+        <span className="hidden text-xs text-[var(--color-text-tertiary)] capitalize md:block" suppressHydrationWarning>
           {currentDate}
         </span>
 
