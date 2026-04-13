@@ -34,7 +34,7 @@ import { toast } from "sonner";
 const passwordSchema = z
   .object({
     current_password: z.string().min(1, "Mot de passe actuel requis"),
-    new_password: z.string().min(8, "Minimum 8 caracteres"),
+    new_password: z.string().min(8, "Minimum 8 caractères"),
     confirm_password: z.string(),
   })
   .refine((data) => data.new_password === data.confirm_password, {
@@ -502,6 +502,7 @@ export default function SettingsPage() {
             onSubmit={passwordForm.handleSubmit(handleChangePassword)}
             className="space-y-3"
           >
+            <input type="text" autoComplete="username" className="hidden" aria-hidden="true" tabIndex={-1} />
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
               <div>
                 <label className="mb-1.5 block text-xs font-medium text-[var(--color-text-secondary)]">
